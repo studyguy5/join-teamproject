@@ -26,10 +26,10 @@ body{
 }
 
 .profile_help-aria{
-    
+    width:100px;
     margin-right:44px;
     display:flex;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
     background-color: rgb(97, 109, 97);
 }

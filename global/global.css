@@ -22,7 +22,7 @@ body{
     display:flex;
     flex-direction: column;
     font-family: 'inter-Regular';
-    
+    margin: 0;
 }
 
 .header-fullsize{

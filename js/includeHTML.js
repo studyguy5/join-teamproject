@@ -1,4 +1,4 @@
-// let links = ['summary', 'board', 'add-task', 'contacts', 'impressum'];
+let links = ['summary', 'board', 'add-task', 'contacts', 'impressum'];
 // let images = ['summary.svg', 'board.svg', 'add-task.svg', 'contacts.svg', 'impressum.svg'];
 // so könnten wir mittels loop die navbar rendern - also die hard gecodete navigation.html meine ich
 // können wir ja besprechen
@@ -19,3 +19,18 @@ async function includeHTML() {
         }
     }
 }
+
+// function renderLinks(){
+//     let links = document.getElementById('nav')
+//     links.innerHTML= ''
+//     for (let i = 0; i < links.length; i++) {
+//         links.innerHTML=`<li id="summary">
+//             <a href="../html/${}.html">
+//                 <img src="../img/icons/summary.svg"/>
+//                 <span>Summary</span>
+//             </a>
+//         </li>
+//         `
+        
+//     }
+// }

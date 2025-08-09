@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>global elements</title>
 
-    <link rel="stylesheet" href="global.css">
-    <link rel="stylesheet" href="templates.css">
+    <link rel="stylesheet" href="/global/global.css">
+    <link rel="stylesheet" href="/global/templates.css">
 
-    <script src="/js/includeHTML.js"></script>
+    <script src="/global/includeHTML.js" defer></script>
 </head>
+
 <body onload="init()">
     <header class="header-fullsize">
         <section class="header-content">
@@ -21,7 +23,11 @@
         </section>
     </header>
 
-    <nav w3-include-html="../templates/navigation.html"></nav>
-    
+    <nav id="nav-container">
+        <a class="desktop-logo-hide" href="/summary/summary.html">
+            <img src="/img/icons/join-logo-white.svg" class="join-logo-desktop"></a>
+    </nav>
+
 </body>
+
 </html>

@@ -1,4 +1,4 @@
-let links = ['summary', 'board', 'add-task', 'contacts', 'impressum'];
+let links = ['summary', 'board', 'add-task', 'contacts'];
 // let images = ['summary.svg', 'board.svg', 'add-task.svg', 'contacts.svg', 'impressum.svg'];
 // so könnten wir mittels loop die navbar rendern - also die hard gecodete navigation.html meine ich
 // können wir ja besprechen
@@ -21,6 +21,7 @@ function includeNavLinks() {
     console.log('arbeitet', links)
 }
 
-// function renderLinks() {
-
-// }
+function showProfile(){
+    let profileInfo = document.getElementById('#')
+    profileInfo
+}

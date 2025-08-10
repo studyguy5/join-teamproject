@@ -22,11 +22,12 @@ body{
     display:flex;
     flex-direction: column;
     font-family: 'inter-Regular';
-    margin: 0;
+    margin: 0 auto;
 }
 
 .header-fullsize{
     width:100%;
+    max-width:100%;
     height:96px;
     
 }

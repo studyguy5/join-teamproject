@@ -8,7 +8,6 @@ function init() {
 
 function includeNavLinks() {
     let includeElements = document.getElementById('nav-container');
-    includeElements.innerHTML = '';
     for (let i = 0; i < links.length; i++) {
         includeElements.innerHTML += `<ul class="nav-elements">
         <li id="${links[i]}">

@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded',async () =>{
     markSection('contacts')
 })
 
-async function markSection(idTrue) {
+ function markSection(idTrue) {
     document.querySelectorAll('li').forEach(listElement =>{
         listElement.classList.remove('sectionActive')
     })

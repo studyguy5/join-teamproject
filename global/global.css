@@ -44,13 +44,51 @@ body{
     background-color: rgb(238, 226, 226);
     box-shadow: 0px 5px 8px  rgb(146, 150, 140);
 }
+
+.headerProfileCircle{
+    width:56px;
+    height:56px;
+    color:#29ABE2;
+    border: 2px solid black;
+    border-radius: 50%;
+}
 .headline{
     margin-left:348px;
 }
 
 .profile_help-aria{
+    display:flex;
     margin-right:40px;
+    gap:16px;
 }
+
+.profile_help-aria>img{
+    cursor: pointer;
+}
+
+.headerProfileCircle>h2 {
+    display: flex;
+    justify-content: center;
+    margin-top:14px;
+    cursor: pointer;
+}
+
+.profileMenu{
+    position:absolute;
+    top: 20px;
+    right:0px;
+    opacity: 0;
+    width:150px;
+    height:158px;
+    border: 2px solid red;
+    animation: slideIn 0.5s ease-in;
+}
+
+@keyframes slideIn {
+    from{right:0px;}
+    to{right:30;}
+}
+
 
 .nav-contentsize{
     width:100%;
@@ -134,7 +172,15 @@ nav {
     cursor: pointer;
     color:white;
     text-decoration: none;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    &:hover{
+       background-color: #091931; 
+    }
 }
+
+
 
 .privacy-legal-section>a>h4{
     margin:8px 0px;

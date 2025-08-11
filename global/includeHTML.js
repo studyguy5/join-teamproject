@@ -4,6 +4,7 @@ let links = ['summary', 'board', 'add-task', 'contacts'];
 // können wir ja besprechen
 function init() {
     includeNavLinks();
+    renderUserInitials();
 }
 
 function includeNavLinks() {
@@ -21,7 +22,12 @@ function includeNavLinks() {
     console.log('arbeitet', links)
 }
 
-function showProfile(){
-    let profileInfo = document.getElementById('#')
-    profileInfo
+// muss noch aufgerufen werden
+function renderUserInitials(){
+    let profileInfo = document.getElementById('userInitials')
+    profileInfo.innerHTML = `<h2>RG</h2>`
+}
+
+function openMenu(){
+    
 }

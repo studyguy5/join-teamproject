@@ -17,29 +17,67 @@
             <h2 class="headline">Kanban Projekt Management Tool</h2>
             <div class="profile_help-aria">
                 <img src="/img/icons/help.svg">
-                <div onclick="renderUserInitials(); openMenu()" id="userInitials"  class="headerProfileCircle">
+                <div onclick="renderUserInitials(); openMenu()" id="userInitials" class="headerProfileCircle">
                 </div>
             </div>
         </section>
         <div class="profileMenu"></div>
     </header>
-    <main class="main-fullsize">
-        <div class="nav-contentsize">
-            <nav id="nav-container" class="nav-container">
-                <a class="desktop-logo-hide" href="/summary/summary.html">
-                    <img src="/img/icons/join-logo-white.svg" class="join-logo-desktop"></a>
-            
-            </nav>
-            <section class="privacy-legal-section">
-                <a href="/privacy-policy/privacy-policy.html"><h4>Privacy Policy</h4></a>
-                <a href="/legal-Notice/legal-notice.html"><h4>Legal notice</h4></a>
-            </section>
-            
+    <main class="main-fullsize flex-content-size">
+        <div class="nav-contentsize flex-content-size">
+            <div>
+                <nav id="nav-container" class="nav-container">
+                    <a class="desktop-logo-hide" href="/summary/summary.html">
+                        <img src="/img/icons/join-logo-white.svg" class="join-logo-desktop"></a>
+
+                </nav>
+                <section class="privacy-legal-section">
+                    <a href="/privacy-policy/privacy-policy.html">
+                        <h4>Privacy Policy</h4>
+                    </a>
+                    <a href="/legal-Notice/legal-notice.html">
+                        <h4>Legal notice</h4>
+                    </a>
+                </section>
+            </div>
+            <div>
+                <div class="content-body">
+                    <div class="contact-body-list">
+                        <div class="add-new-contact-button" id="addNewContact"
+                            onclick="overlayShow(),getAddOverlayContent(targetID='overlay-content')">
+                            <b>Add new Contact</b>
+                            <img src="icon-img/person_add.svg" alt="">
+                        </div>
+                        <div id="contactList" class="contact-list"></div>
+                    </div>
+                    <div class="contact-body-detail">
+                        <div class="detail-header">
+                            <div class="header-title">Contacts</div>
+                            <div class="separator-box"></div>
+                            <div class="header-sub-title">Better with a Team</div>
+                        </div>
+                        <div class="detail-body" id="detailBody"></div>
+                        <div class="add-contact-success-box" id="add-contact-success-box">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overlay">
+                <div class="overlay-content" id="overlay-content">
+                </div>
+            </div>
         </div>
+
+
     </main>
 
 
 
+
 </body>
-<script src="contact-script.js"></script>
+<script src="contact-overall-script.js"></script>
+<script src="contact-script/contact- database.js"></script>
+<script src="contact-script/contact-animation.js"></script>
+<script src="contact-script/contact-template.js"></script>
+
 </html>

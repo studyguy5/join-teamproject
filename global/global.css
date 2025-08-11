@@ -58,12 +58,14 @@ body{
 
 .profile_help-aria{
     display:flex;
+    align-items: center;
     margin-right:40px;
     gap:16px;
 }
 
 .profile_help-aria>img{
     cursor: pointer;
+
 }
 
 .headerProfileCircle>h2 {
@@ -74,23 +76,54 @@ body{
 }
 
 .profileMenu{
-    position:absolute;
-    top: 20px;
-    right:0px;
+    
     opacity: 0;
     width:150px;
     height:158px;
-    border: 2px solid red;
-    animation: slideIn 0.5s ease-in;
+    
+    border-radius: 15px;
+    background-color: #2a3647;;
+    border: 2px solid rgb(31, 25, 25);
+    animation: slideIn 0.5s ease-in forwards;
 }
 
 @keyframes slideIn {
-    from{right:0px;}
-    to{right:30;}
+    from{left:1420px;}
+    to{left:1280px;}
+    from{opacity: 0;}
+    to{opacity: 1;}
+}
+
+@keyframes slideback {
+    from{left:1280px;}
+    to{left:1420px;}
+    from{opacity: 1;}
+    to{opacity: 0;}
+}
+
+.slideback{
+    
+    animation: slideback 0.5s ease-in forwards;
+}
+.profileMenu a{
+    color:white;
+    text-decoration: none;
+}
+
+.profileMenu h4{
+    margin:15px 20px;
+    color:white;
+    text-decoration: none;
+}
+
+.dontShow{
+    display:none;
 }
 
 
 .nav-contentsize{
+    display:flex;
+    justify-content: space-between;
     width:100%;
     height:100vh;
     max-width:1440px;
@@ -118,7 +151,7 @@ nav {
     position: relative;
     top: -96px;
     z-index: 1;
-    /* padding-bottom:114.02px; */
+    height:1024px;
 }
 .nav-elements {
     display: flex;
@@ -162,8 +195,7 @@ nav {
     align-items: center;
     background-color:#2a3647;
     color:gray;
-    position:relative;
-    top: -114px;
+        
     padding-bottom: 64px;
     gap:4px;
 }

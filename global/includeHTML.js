@@ -1,16 +1,19 @@
 let links = ['summary', 'board', 'add-task', 'contacts'];
-// let images = ['summary.svg', 'board.svg', 'add-task.svg', 'contacts.svg', 'impressum.svg'];
-// so könnten wir mittels loop die navbar rendern - also die hard gecodete navigation.html meine ich
-// können wir ja besprechen
+
+
+
 function init() {
     includeNavLinks();
+    includePrivacyLinks();
     renderUserInitials();
 }
 
 function includeNavLinks() {
     let includeElements = document.getElementById('nav-container');
     for (let i = 0; i < links.length; i++) {
-        includeElements.innerHTML += `<ul class="nav-elements">
+        includeElements.innerHTML += `
+        
+        <ul class="nav-elements">
         <li id="${links[i]}">
             <a href="/${links[i]}/${links[i]}.html">
                 <img src="/img/icons/${links[i]}.svg"/>
@@ -22,12 +25,34 @@ function includeNavLinks() {
     console.log('arbeitet', links)
 }
 
+function includePrivacyLinks() {
+    let include = document.getElementById('nav-container')
+    include.innerHTML += `
+    <section class="privacy-legal-section">
+                <a href="/privacy-policy/privacy-policy.html"><h4>Privacy Policy</h4></a>
+                <a href="/legal-Notice/legal-notice.html"><h4>Legal notice</h4></a>
+            </section>
+    `
+}
+
 // muss noch aufgerufen werden
-function renderUserInitials(){
+function renderUserInitials() {
     let profileInfo = document.getElementById('userInitials')
     profileInfo.innerHTML = `<h2>RG</h2>`
 }
 
-function openMenu(){
-    
+
+let isOpen = false;
+function openMenu() {
+    let menu = document.getElementById('profileMenu')
+    if (!isOpen) {
+        menu.classList.remove('dontShow', 'slideback')
+        menu.classList.add('profileMenu')
+        isOpen = true;
+    } else if (isOpen) {
+        menu.classList.add('slideback')
+        setTimeout(() => { menu.classList.add('dontShow') }, 500)
+        isOpen = false;
+    }
+
 }

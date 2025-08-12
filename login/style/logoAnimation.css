@@ -18,6 +18,16 @@
     animation: pulsate 1.5s ease-in-out;
 }
 
+
+
+.main-content {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+.main-content.visible {
+    opacity: 1;
+}
 @keyframes pulsate {
     0% {
         transform: scale(0.8);
@@ -31,13 +41,4 @@
         transform: scale(1);
         opacity: 1;
     }
-}
-
-.main-content {
-    opacity: 0;
-    transition: opacity 0.5s ease-in;
-}
-
-.main-content.visible {
-    opacity: 1;
 }

@@ -1,0 +1,22 @@
+.mainTextAria{
+    display: flex;
+    flex-direction: column;
+    margin-left:96px;
+    margin-top:110px;
+    width:100%;
+    max-width:1014px;
+}
+
+.headlineHelpSite{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top:20px;
+    width:100%;
+    z-index: 0;
+    
+}
+
+.headlineHelpSite>p{
+    font-size: 61px;
+}

@@ -20,25 +20,43 @@
                 <div onclick="renderUserInitials(); openMenu()" id="userInitials" class="headerProfileCircle">
                 </div>
             </div>
-            <div id="profileMenu" class="dontShow">
-                <a href="">
-                    <h4 class="userOptions">Privacy-Policy</h4>
-                </a><a href="">
-                    <h4 class="userOptions">Legal-Notice</h4>
-                </a><a href="">
-                    <h4 class="userOptions">Log out</h4>
-                </a>
-            </div>
         </section>
-
+        <div class="profileMenu"></div>
     </header>
-    <main class="main-fullsize">
-        <div class="nav-contentsize">
-            <nav id="nav-container" class="nav-container">
-                <a class="desktop-logo-hide" href="/summary/summary.html">
-                    <img src="/img/icons/join-logo-white.svg" class="join-logo-desktop"></a>
-
-            </nav>
+    <main class="main-fullsize flex-content-size">
+        <div class="nav-contentsize flex-content-size">
+            <div>
+                <nav id="nav-container" class="nav-container">
+                    <a class="desktop-logo-hide" href="/summary/summary.html">
+                        <img src="/img/icons/join-logo-white.svg" class="join-logo-desktop"></a>
+                </nav>
+            </div>
+            <div>
+                <div class="content-body">
+                    <div class="contact-body-list">
+                        <div class="add-new-contact-button" id="addNewContact"
+                            onclick="overlayShow(),getAddOverlayContent(targetID='overlay-content')">
+                            <b>Add new Contact</b>
+                            <img src="icon-img/person_add.svg" alt="">
+                        </div>
+                        <div id="contactList" class="contact-list"></div>
+                    </div>
+                    <div class="contact-body-detail">
+                        <div class="detail-header">
+                            <div class="header-title">Contacts</div>
+                            <div class="separator-box"></div>
+                            <div class="header-sub-title">Better with a Team</div>
+                        </div>
+                        <div class="detail-body" id="detailBody"></div>
+                        <div class="add-contact-success-box" id="add-contact-success-box">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overlay">
+                <div class="overlay-content" id="overlay-content">
+                </div>
+            </div>
         </div>
     </main>
 
@@ -50,7 +68,5 @@
 <script src="contact-script/contact- database.js"></script>
 <script src="contact-script/contact-animation.js"></script>
 <script src="contact-script/contact-template.js"></script>
-
-<!-- <script src="contact-script.js"></script> -->
 
 </html>

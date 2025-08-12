@@ -11,10 +11,11 @@
 
 
 
-.flex-content-size{
+.flex-content-size {
     display: flex;
     height: 87vh !important;
     position: relative;
+    justify-content: left !important;
 }
 
 p {
@@ -179,7 +180,7 @@ h1 {
     padding-top: 16px;
     border-right: 2px solid rgba(0, 0, 0, 0.214);
     width: 456px;
-    max-height: 760px;
+    max-height: 888px;
     gap: 10px;
     padding-bottom: 16px;
 
@@ -209,11 +210,12 @@ h1 {
     transition: all 100ms ease-in-out;
 }
 
-.add-contact-success-box{
+.add-contact-success-box {
     height: max-content;
     width: max-content;
     padding-left: 32px;
 }
+
 .add-contact-success {
     background-color: #2A3647;
     width: 252px;
@@ -228,7 +230,7 @@ h1 {
     transition: all 100ms ease-in-out;
 }
 
-.add-contact-success p{
+.add-contact-success p {
     width: 100%;
     height: max-content;
     display: flex;
@@ -237,7 +239,7 @@ h1 {
     padding: 16px;
 }
 
-.flex-success{
+.flex-success {
     display: flex;
 }
 

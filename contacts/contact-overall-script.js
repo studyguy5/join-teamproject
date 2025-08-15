@@ -1,7 +1,7 @@
 let contacts;
 let contactsArray;
 document.addEventListener('DOMContentLoaded', async () => {
-    init()
+    init() 
     sectionCheck('contacts')
     contacts = await getObject(path = '/contacts')
     contactsArray = objectToArray(contacts)

@@ -6,6 +6,7 @@ function init() {
     includeNavLinks();
     includePrivacyLinks();
     renderUserInitials();
+    console.log('wird aufgerufen')
 }
 
 function includeNavLinks() {

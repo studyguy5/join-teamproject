@@ -1,4 +1,4 @@
-let links = ['summary', 'board', 'add-task', 'contacts'];
+let links = ['summary', 'add-task', 'board', 'contacts'];
 
 
 

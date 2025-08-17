@@ -24,6 +24,7 @@ body {
     flex-direction: column;
     font-family: 'inter-Regular';
     margin: 0 auto;
+    overflow-y: hidden;
 }
 
 .header-fullsize {
@@ -43,7 +44,8 @@ body {
     width: 100%;
     max-width: 1440px;
     height: 96px;
-    background-color: rgb(238, 226, 226);
+    background-color:  #FFFFFF;
+
     box-shadow: 0px 5px 8px rgb(146, 150, 140);
 }
 
@@ -53,6 +55,10 @@ body {
     color: #29ABE2;
     border: 2px solid black;
     border-radius: 50%;
+    cursor: pointer;
+}
+.headerProfileCircle:hover{
+    background-color: #e7e4e4;
 }
 
 .headline {
@@ -62,13 +68,19 @@ body {
 .profile_help-aria {
     display: flex;
     align-items: center;
+    width:104px;
+    height:56px;
     margin-right: 40px;
     gap: 16px;
 }
 
-.profile_help-aria>img {
+.profile_help-aria img {
     cursor: pointer;
-
+    width:32px;
+    height:32px;
+}
+.profile_help-aria img:hover{
+    transform:scale(1.2)
 }
 
 .headerProfileCircle>h2 {
@@ -83,14 +95,14 @@ body {
     /* orientiert sich jetzt an header-content */
     top: 100px;
     /* direkt unter dem Header platzieren */
-    right: 50px;
+    right: 40px;
     /* rechtsbündig am Header */
     z-index: 999;
     opacity: 0;
     width: 150px;
     height: 158px;
     /* z-index: 1; */
-    border-radius: 15px;
+    border-radius: 15px 0px 15px 15px;
     background-color: #2a3647;
     ;
     border: 2px solid rgb(31, 25, 25);
@@ -98,9 +110,9 @@ body {
 }
 
 @keyframes slideIn {
-
-    /* from{left:1420px;}
-    to{left:1280px;} */
+/* 
+    from{left:1420px;}
+    to{left:1320px;} */
     from {
         opacity: 0;
     }
@@ -112,7 +124,7 @@ body {
 
 @keyframes slideback {
 
-    /* from{left:1280px;}
+    /* from{left:1320px;}
     to{left:1420px;} */
     from {
         opacity: 1;
@@ -134,7 +146,7 @@ body {
 }
 
 .profileMenu h4 {
-    margin: 15px 20px;
+    margin: 23px 20px;
     color: white;
     text-decoration: none;
 }
@@ -200,7 +212,11 @@ nav {
     width: 100%;
     padding: 8px 0px 8px 53px;
     cursor: pointer;
+
+    
 }
+
+
 
 .nav-elements>li>a>img {
     width: 25px;
@@ -220,7 +236,7 @@ nav {
     align-items: center;
     background-color: #2a3647;
     color: gray;
-
+    padding-top:114.02px;
     padding-bottom: 64px;
     gap: 4px;
 }

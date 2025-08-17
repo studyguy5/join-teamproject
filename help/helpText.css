@@ -17,6 +17,16 @@
     
 }
 
+.headlineHelpSite img{
+    width:37px;
+    height:37px;
+    
+}
+
+.headlineHelpSite img:hover{
+    transform:scale(1.4);
+}
+
 .headlineHelpSite>p{
     font-size: 61px;
 }

@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/global/global.css">
     <link rel="stylesheet" href="/global/templates.css">
+    <link rel="stylesheet" href="board.css">
     <script src="/global/includeHTML.js"></script>
 </head>
+
 <body onload="init()">
     <header class="header-fullsize">
         <section class="header-content">
@@ -16,6 +19,15 @@
                 <a href="/help/help.html"><img src="/img/icons/help.svg"></a>
                 <div onclick="renderUserInitials(); openMenu()" id="userInitials" class="headerProfileCircle">
                 </div>
+            </div>
+            <div id="profileMenu" class="dontShow">
+                <a href="">
+                    <h4 class="userOptions">Privacy-Policy</h4>
+                </a><a href="">
+                    <h4 class="userOptions">Legal-Notice</h4>
+                </a><a href="">
+                    <h4 class="userOptions">Log out</h4>
+                </a>
             </div>
         </section>
 
@@ -27,17 +39,30 @@
                     <img src="/img/icons/join-logo-white.svg" class="join-logo-desktop"></a>
 
             </nav>
-            
-            <div id="profileMenu" class="dontShow">
-                <a href="">
-                    <h4 class="userOptions">Privacy-Policy</h4>
-                </a><a href="">
-                    <h4 class="userOptions">Legal-Notice</h4>
-                </a><a href="">
-                    <h4 class="userOptions">Log out</h4>
-                </a>
-            </div>
+            <section class="mainAria">
+                <div class="headline_searchAddTask">
+                    <p class="mainArea-headline">Board</p>
+                    <div class="searchInputField">
+                        <div class="inputBorder">
+                            <input type="text" class="searchTasks" min="2" placeholder="Find Task">
+                            <hr>
+                            <img src="/img/icons/search.svg" alt="search Symbol" class="searchSymbol">
+                        </div>
+                        <button class="addTaskButton"> AddTask +</button>
+
+                    </div>
+
+                </div>
+                <div class="categorys">
+                    <div class="TodoHeadline"><p>To do</p><img src="/img/icons/plus-button.svg" alt="plusButton img"></div>
+                    <div class="InprogressHeadline"><p>In progress</p><img src="/img/icons/plus-button.svg" alt="plusButton img"></div>
+                    <div class="AwaitfeedbackHeadline"><p>Await feedback</p><img src="/img/icons/plus-button.svg" alt="plusButton img"></div>
+                    <div class="DoneHeadline"><p>Done</p><img src="/img/icons/plus-button.svg" alt="plusButton img"></div>
+                </div>
+            </section>
+
         </div>
     </main>
 </body>
+
 </html>

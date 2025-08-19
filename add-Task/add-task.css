@@ -1,0 +1,241 @@
+
+
+/* main{
+    width: 100%;
+    max-width: 1920px;
+    height: 100%;
+    position: relative;
+    margin-left: 232px;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+} */
+main h1{
+    font-size: 61px;
+    margin-left: 80px;
+}
+main input,
+main select{
+    max-width: 1920px;
+    border-radius: 7px;
+    border: 1px solid #c8c8c8;
+    padding: 12px 21px;
+    font-size: 20px;
+}
+main input,
+main select:hover{
+    cursor: pointer;
+}
+main input,
+main select:focus{
+    border-color: #29ABE2;
+}
+main textarea{
+    max-width: 1920px;
+    height: 100px;
+    border-radius: 7px;
+    border: 1px solid #c8c8c8;
+    padding: 12px 21px;
+    font-size: 20px;
+    font-family: arial, sans-serif;
+    resize: none;
+}
+main textarea:hover{
+    cursor: pointer;
+}
+main textarea:focus{
+    border-color: #29ABE2;
+}
+
+
+.input-container{
+    width: 100%;
+    max-width: 1920px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.input-section-left{
+    display: flex;
+    flex-direction: column;
+    margin-left: 70px;
+    width: 367px;
+    height: 367px;
+}
+.input-section-left label{
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 4px;
+}
+.line{
+    margin-top: 40px;
+    background-color: #c8c8c8;
+    height: 300px;
+    width: 2px;
+}
+
+.input-section-right{
+    display: flex;
+    flex-direction: column;
+    width: 367px;
+    height: 367px;
+    
+}
+.input-section-right label{
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 4px;
+}
+
+
+
+.priority-section{
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+.priority-section button{
+    width: 110px;
+    height: 40px;
+    border: none;
+    border-radius: 7px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 16px 10px;
+}
+.priority-section button:hover{
+    box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.requiredStar{
+    color: orangered;
+}
+
+.footer{
+    gap: 375px;
+    width: 100%;
+    max-width: 1920px;
+    margin-left: 80px;
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+}
+.footer p{
+    font-size: 16px;
+}
+.footer-left{
+    display: flex;
+}
+
+
+.footer-buttons-section{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.create-task-btn{
+    width: 140px;
+    height: 40px;
+    border-radius: 7px;
+    background-color:#2A3647;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: none;
+}
+.create-task-btn:hover{
+    background-color: #29ABE2;
+}
+.footer-buttons-section img{
+    width: 10px;
+    height: 10px;
+}
+.clear-btn{
+    width: 110px;
+    height: 40px;
+    border-radius: 7px;
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: 1px solid #2A3647;
+}
+.clear-btn:hover{
+    color: #29ABE2;
+    border: 1px solid #29ABE2;
+}
+.clear-btn:hover img {
+  filter: brightness(0) saturate(100%) invert(58%) sepia(87%) 
+          saturate(2735%) hue-rotate(168deg) brightness(94%) contrast(92%);
+}
+
+.priority-section button.urgent {
+    background-color: #FF3D00;
+    color: white;
+}
+.priority-section button.medium {
+    background-color: #FFA800;
+    color: white;
+}
+.priority-section button.low {
+    background-color: #7AE229;
+    color: white;
+}
+.priority-section button.urgent img,
+.priority-section button.medium img,
+.priority-section button.low img {
+  filter: brightness(0) invert(1);
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+textarea:focus::placeholder {
+  color: transparent;
+}
+
+
+.report {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color:#2A3647;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 10px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+
+    width: 326;
+    height: 74;
+    opacity: 1;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    font-size: 20px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+    .report.show {
+      bottom: 50%;
+      opacity: 1;
+      transform: translate(-50%, 50%);
+    }
+    .report img {
+      width: 30px;
+      height: 30px;
+    }

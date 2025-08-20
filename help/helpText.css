@@ -5,6 +5,9 @@
     margin-top:110px;
     width:100%;
     max-width:1014px;
+    height:calc(1024px - 206px);
+    overflow-y: scroll;
+
 }
 
 .headlineHelpSite{

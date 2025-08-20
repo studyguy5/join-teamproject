@@ -252,14 +252,24 @@ nav {
     width: 100%;
     display: flex;
     justify-content: center;
+    font-weight: normal;
+}
 
+.privacy-legal-section a:hover {
+    color: rgba(41, 171, 226, 1);
+    /* transform:scaleX(+1.1); */
+    
 }
 
 
 
 .privacy-legal-section>a>h4 {
     margin: 8px 0px;
-
+   
+}
+.privacy-legal-section>a>h4:hover{
+    font-weight: bold;
+    font-size: 18px;
 }
 
 

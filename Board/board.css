@@ -46,6 +46,9 @@
     border:none;
     padding-left:16px;
 }
+.inputBorder input:focus{
+    outline:none;
+}
 
 hr{
     height:30px;
@@ -80,12 +83,13 @@ text-align:start;
     background-color: #29ABE2;
     cursor: pointer;
 }
+
 .categorys{
     display: flex;
     justify-content: space-evenly;
     height:24px;
     width:100%; 
-    
+    max-width:1208px;
 }
 
 .categorys img{
@@ -128,4 +132,9 @@ text-align:start;
     align-items: center;
     max-width:244px;
     width:100%;
+}
+
+.TodoHeadline img, .InprogressHeadline img,
+.AwaitfeedbackHeadline img, .DoneHeadline img{
+    cursor: pointer;
 }

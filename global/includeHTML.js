@@ -1,3 +1,5 @@
+
+
 let links = ['summary', 'add-task', 'board', 'contacts'];
 
 
@@ -6,6 +8,7 @@ function init() {
     includeNavLinks();
     includePrivacyLinks();
     renderUserInitials();
+    // setActive(i);
     console.log('wird aufgerufen')
 }
 
@@ -14,8 +17,8 @@ function includeNavLinks() {
     for (let i = 0; i < links.length; i++) {
         includeElements.innerHTML += `
         
-        <ul class="nav-elements">
-        <li id="${links[i]}">
+        <ul id="${links[i]}" class="nav-elements ${links[i]}">
+        <li>
             <a href="/${links[i]}/${links[i]}.html">
                 <img src="/img/icons/${links[i]}.svg"/>
                 <span>${links[i]}</span>
@@ -38,8 +41,10 @@ function includePrivacyLinks() {
 
 // muss noch aufgerufen werden
 function renderUserInitials() {
-    let profileInfo = document.getElementById('userInitials')
-    profileInfo.innerHTML = `<h2>RG</h2>`
+    if (window.location.pathname !== "/privacy-policy/privacy-policy.html" || "/legal-notice/legal-notice.html") {
+        let profileInfo = document.getElementById('userInitials')
+        profileInfo.innerHTML = `<h2>RG</h2>`
+    } else {}
 }
 
 
@@ -57,3 +62,19 @@ function openMenu() {
     }
 
 }
+
+// function setActive(links, i) {
+//     console.log('active Funktion arbeitet', links)
+//     let active = document.getElementById(`'${links[i]}'`)
+    
+//     active.classList.add('active')
+    
+// };
+
+// document.addEventListener('DOMContentLoaded', async () => {
+ 
+//     sectionCheck('contacts')
+
+// function sectionCheck(idsecTrue) {
+//     document.getElementById(idsecTrue).classList.add('active')
+// }}

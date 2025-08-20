@@ -46,7 +46,7 @@ body {
     height: 96px;
     background-color:  #FFFFFF;
 
-    box-shadow: 0px 5px 8px rgb(146, 150, 140);
+    box-shadow: 0px 4px 4px 0px rgb(0, 0, 0, 0.1);
 }
 
 .headerProfileCircle {
@@ -58,7 +58,7 @@ body {
     cursor: pointer;
 }
 .headerProfileCircle:hover{
-    background-color: #e7e4e4;
+    background-color:rgb(12, 46, 98, 0.12);
 }
 
 .headline {
@@ -104,7 +104,7 @@ body {
     /* z-index: 1; */
     border-radius: 15px 0px 15px 15px;
     background-color: #2a3647;
-    ;
+    
     border: 2px solid rgb(31, 25, 25);
     animation: slideIn 0.5s ease-in forwards;
 }
@@ -122,7 +122,7 @@ body {
     }
 }
 
-@keyframes slideback {
+/* @keyframes slideback {
 
     /* from{left:1320px;}
     to{left:1420px;} */
@@ -133,12 +133,12 @@ body {
     to {
         opacity: 0;
     }
-}
+/* } */ 
 
-.slideback {
+/* .slideback {
 
     animation: slideback 0.5s ease-in forwards;
-}
+} */
 
 .profileMenu a {
     color: white;
@@ -156,7 +156,7 @@ body {
 }
 
 
-.nav-contentsize {
+.main-Contentsize {
     display: flex;
     justify-content: flex-start;
     width: 100%;
@@ -182,13 +182,16 @@ nav {
     gap: 15px;
     background: #2a3647;
     width: 232px;
-    overflow: hidden;
+    /* overflow: hidden; */
     position: relative;
     top: -96px;
     z-index: 0;
     height: 1024px;
 }
 
+.active {
+    background-color: #091931;
+}
 .nav-elements {
     display: flex;
     flex-direction: column;
@@ -208,7 +211,7 @@ nav {
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 8px;
     width: 100%;
     padding: 8px 0px 8px 53px;
     cursor: pointer;
@@ -219,12 +222,13 @@ nav {
 
 
 .nav-elements>li>a>img {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
 }
 
 .nav-elements>li:hover {
-    background: #091931;
+    background: rgba(42, 61, 89, 1);
+
 }
 
 .privacy-legal-section {
@@ -243,15 +247,12 @@ nav {
 
 .privacy-legal-section a {
     cursor: pointer;
-    color: white;
+    color: rgb(168, 168, 168, 1);
     text-decoration: none;
     width: 100%;
     display: flex;
     justify-content: center;
 
-    &:hover {
-        background-color: #091931;
-    }
 }
 
 

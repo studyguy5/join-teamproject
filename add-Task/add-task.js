@@ -6,17 +6,19 @@ function sectionCheck(idsecTrue) {
     document.getElementById(idsecTrue).classList.add('active')
 }})
 
-const buttons = document.querySelectorAll(".priority-section button");
+// const buttons = document.querySelectorAll(".priority-section button");
 
-  buttons.forEach(button => {
-    button.addEventListener("click", () => {
-      
-      buttons.forEach(b => b.classList.remove("urgent", "medium", "low"));
-      
-      const priority = button.dataset.priority;
-      button.classList.add(priority);
+ 
+    const buttons = document.querySelectorAll(".priority-section button");
+    
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        buttons.forEach(b => b.classList.remove("urgent", "medium", "low"));
+        const priority = button.dataset.priority;
+        button.classList.add(priority);
+      console.log('event works')});
     });
-  });
+  
 
 
   function showReportAddedTask() {

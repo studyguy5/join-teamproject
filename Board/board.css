@@ -54,6 +54,23 @@ hr{
     height:30px;
 }
 
+.priority-section button.urgent {
+    background-color: #FF3D00;
+    color: white;
+}
+.priority-section button.medium {
+    background-color: #FFA800;
+    color: white;
+}
+.priority-section button.low {
+    background-color: #7AE229;
+    color: white;
+}
+.priority-section button.urgent img,
+.priority-section button.medium img,
+.priority-section button.low img {
+  filter: brightness(0) invert(1);
+}
 
 .inputBorder img{
     width:17.58px;
@@ -88,8 +105,10 @@ text-align:start;
     display: flex;
     justify-content: space-evenly;
     height:24px;
-    width:100%; 
-    max-width:1208px;
+    width:100%;
+    gap: 34.67px;
+    max-width:1080px;
+    padding: 0px 64px 0px 64px;
 }
 
 .categorys img{

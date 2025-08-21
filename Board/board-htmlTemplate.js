@@ -1,5 +1,5 @@
-function renderHTMLOfBoard() {
-    return `
+function renderHTMLOfPopup() {  //Zeile 47 select Contacts
+  return `
     <main>
         <div class="popup-header">
           <h1>Add Task</h1>
@@ -8,32 +8,23 @@ function renderHTMLOfBoard() {
 
         <div class="input-container">
           <section class="input-section-left">
-            <label for="task-title"
-              >Title<span class="requiredStar">*</span></label
-            >
-            <input type="text" placeholder="Enter a title" />
+            <label for="task-title">Title<span class="requiredStar">*</span></label>
+            <input id="title" type="text" placeholder="Enter a title" />
             <label for="">Description</label>
-            <textarea
-              rows="5"
-              id="task-description"
-              placeholder="Enter a description"
-            ></textarea>
-            <label for="date"
-              >Due Date<span class="requiredStar">*</span></label
-            >
-            <input type="date" />
-          </section>
+            <textarea rows="5" id="task-description" placeholder="Enter a description"></textarea>
+            <label for="date">Due Date<span class="requiredStar">*</span></label>
+            <input id="dueDate" type="date"></section>
 
           <div class="line"></div>
 
           <div class="input-section-right">
             <label for="prio">Priority</label>
             <section class="priority-section">
-              <button data-priority="urgent" type="button">
+              <button  data-priority="urgent"  type="button">
                 Urgent<img src="/img/icons/urgent.svg" />
               </button>
 
-              <button data-priority="medium" type="button">
+              <button  data-priority="medium" type="button">
                 Medium<img src="/img/icons/medium.svg" />
               </button>
 
@@ -44,14 +35,12 @@ function renderHTMLOfBoard() {
 
             <label for="contactSelection">Assigned to</label>
             <select required tabindex="0">
-              <option value="" disabled selected hidden>
+              <option value="" disabled selected hidden>  
                 Select contacts to assign
               </option>
             </select>
 
-            <label for="category"
-              >Category<span class="requiredStar">*</span></label
-            >
+            <label for="category">Category<span class="requiredStar">*</span></label>
             <select required tabindex="0">
               <option value="" disabled selected hidden>
                 Select Task Category
@@ -61,7 +50,7 @@ function renderHTMLOfBoard() {
             </select>
 
             <label for="subtask">Subtask</label>
-            <input type="text" placeholder="Enter new subtask" />
+            <input id="subtask" type="text" placeholder="Enter new subtask" />
           </div>
         </div>
 
@@ -75,7 +64,7 @@ function renderHTMLOfBoard() {
             <button class="clear-btn" type="reset">
               Clear<img src="../img/x.svg" />
             </button>
-            <button onclick="createTaskTemplate()" class="create-task-btn">
+            <button onclick="createTaskTemplate(); getTaskInformation()" class="create-task-btn">
               Create Task<img src="../img/doneSymbol.svg" />
             </button>
           </div>

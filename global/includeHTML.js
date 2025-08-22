@@ -8,8 +8,6 @@ function init() {
     includeNavLinks();
     includePrivacyLinks();
     renderUserInitials();
-    // setActive(i);
-    console.log('wird aufgerufen')
 }
 
 function includeNavLinks() {
@@ -26,7 +24,6 @@ function includeNavLinks() {
         </li></ul>
         `
     }
-    console.log('arbeitet', links)
 }
 
 function includePrivacyLinks() {

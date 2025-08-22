@@ -1,23 +1,15 @@
 
-function showReportAddedTask() {
-    const popup = document.getElementById("report");
-    popup.classList.add("show");
-
-    setTimeout(() => {
-        window.location.href = "../board/board.html";
-    }, 900);
-
-    setTimeout(() => {
-        popup.classList.remove("show");
-    }, 1000);
-}
-
-
 
 document.addEventListener('DOMContentLoaded', async () => {
     init();
     createaddTaskPopup();
-    sectionCheck('board')
+    sectionCheck('board');
+    filterAndShowTasks();
+    contacts = await getObject(path = '/contacts')
+    console.log(contacts);
+    contactsArray = objectToArray(contacts)
+    console.log(contactsArray);
+    // renderMiniContactList(arraySorting(contactsArray), targetID = 'contactList') hier logik für das rendern der Mini-Contacte einbauen
 
     function sectionCheck(idsecTrue) {
         document.getElementById(idsecTrue).classList.add('active')
@@ -34,6 +26,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         })
     };
 })
+
+function showReportAddedTask() {
+    const popup = document.getElementById("report");
+    popup.classList.add("show");
+
+    setTimeout(() => {
+        window.location.href = "../board/board.html";
+    }, 900);
+
+    setTimeout(() => {
+        popup.classList.remove("show");
+    }, 1000);
+}
 
 function createaddTaskPopup() {
     let taskpopup = document.getElementById('add-task-popup')
@@ -70,4 +75,33 @@ function showReportAddedTaskTemplate() {
         popup.classList.remove("show");
         closePopup();
     }, 1000);
+}
+
+const BASE_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app"
+
+async function getObject(path = '') {
+  let response = await fetch(BASE_URL + path + ".json")
+  return responseToJson = await response.json()
+}
+
+function objectToArray(contacts) {          
+    const object = Object.entries(contacts) 
+        console.log(object);
+    const arrayObject = object.map((member) => {
+        return {
+            id: member[0],
+            ...member[1]
+        }
+    })
+    console.log(arrayObject);
+
+    return arrayObject;
+}
+
+function arraySorting(array) {
+    const sortedArray = array
+    sortedArray.sort((memberA, memberB) => {
+        return memberA.name.localeCompare(memberB.name)
+    })
+    return sortedArray
 }

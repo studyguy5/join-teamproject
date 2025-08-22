@@ -53,13 +53,23 @@ let currentDraggedElement;
 
 function getTaskInformation() {
     let title = document.getElementById('title').value
-    tasks
+    
     let description = document.getElementById('task-description').value
     
     let dueDate = document.getElementById('dueDate').value
     
-        let priority = document.getElementsByName('prio').value
-        console.log(priority);
+    let prio = document.getElementsByClassName('button')
+    // filter the class active from html collection out
+    console.log(prio);    
+    
+    
+};
+
+    // contacts = getObject(path = '/contacts')      //hier bekommt man die Kontakte - in template einfügen
+    // contactsArray = objectToArray(contacts)             //eventuell Umwandlung von Json in Array
+    // renderContactList(arraySorting(contactsArray), targetID = 'contactList')        // render Contacts in html
+
+function filterAndShowTasks(){
     document.getElementById('Todo').innerHTML= '';
 
     let Todo = tasks.filter(td => td.category == 'Todo')
@@ -75,7 +85,24 @@ function getTaskInformation() {
         const element = Inprogress[index];
         document.getElementById('Inprogress').innerHTML += renderTaskintoBoard(element);
     }
-    
+
+    document.getElementById('AwaitFeedback').innerHTML= '';
+
+    let AwaitFeedback = tasks.filter(af => af.category == 'AwaitFeedback')
+    for (let index = 0; index < AwaitFeedback.length; index++) {
+        const element = AwaitFeedback[index];
+        console.log(element);
+       document.getElementById('AwaitFeedback').innerHTML+= renderTaskintoBoard(element);
+    }
+
+    document.getElementById('Done').innerHTML= '';
+
+    let Done = tasks.filter(td => td.category == 'Done')
+    for (let index = 0; index < Done.length; index++) {
+        const element = Done[index];
+        console.log(element);
+       document.getElementById('Done').innerHTML+= renderTaskintoBoard(element);
+    }
 }
 
 function renderTaskintoBoard(element) {

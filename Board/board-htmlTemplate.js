@@ -20,23 +20,29 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
           <div class="input-section-right">
             <label for="prio">Priority</label>
             <section class="priority-section">
-              <button  data-priority="urgent"  type="button">
+              <button class="button" data-priority="urgent"  type="button">
                 Urgent<img src="/img/icons/urgent.svg" />
               </button>
 
-              <button  data-priority="medium" type="button">
+              <button class="button" data-priority="medium" type="button">
                 Medium<img src="/img/icons/medium.svg" />
               </button>
 
-              <button data-priority="low" type="button">
+              <button class="button" data-priority="low" type="button">
                 Low<img src="/img/icons/low.svg" />
               </button>
             </section>
 
             <label for="contactSelection">Assigned to</label>
             <select required tabindex="0">
-              <option value="" disabled selected hidden>  
-                Select contacts to assign
+              <option value="">  
+                Select your Contacts
+              </option>
+              <option value="Hans Peter">  
+                Hans Peter
+              </option>
+              <option id="testIdForContacts value="Hans Peter">  
+                Hans Peter
               </option>
             </select>
 

@@ -3,7 +3,7 @@ let contactsArray;
 document.addEventListener('DOMContentLoaded', async () => {
     init() 
     sectionCheck('contacts')
-    contacts = await getObject(path = '/contacts')
+    contacts = await getObject(path = '/contacts')  
     contactsArray = objectToArray(contacts)
     renderContactList(arraySorting(contactsArray), targetID = 'contactList')
 })
@@ -121,15 +121,18 @@ async function showSuccessMessage(showIntervall, hideIntervall) {
 }
 
 
-//data in general functions
-function objectToArray(targetObject) {
-    const object = Object.entries(targetObject)
+//data in general functions     targetObject = let contacts in Zeile 1
+function objectToArray(contacts) {          
+    const object = Object.entries(contacts) 
+        console.log(object);
     const arrayObject = object.map((member) => {
         return {
             id: member[0],
             ...member[1]
         }
     })
+    console.log(arrayObject);
+
     return arrayObject;
 }
 
@@ -185,7 +188,7 @@ async function setTimer(time) {
 
 //API and DOM connections functions
 function getObjectFromContactForm(nameId, emailId, phoneNumberId) {
-    const name = document.getElementById(nameId).value.trim()
+    const name = document.getElementById(nameId).value.trim()   // method removes whitespace from both sides of a string.
     const email = document.getElementById(emailId).value.trim()
     const phoneNumber = document.getElementById(phoneNumberId).value.trim()
     let formJson = {

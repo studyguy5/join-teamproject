@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact-Site</title>
     <link rel="stylesheet" href="/global/global.css">
-    <link rel="stylesheet" href="/global/templates.css">
+    <!-- <link rel="stylesheet" href="/global/templates.css"> -->
     <script src="/global/includeHTML.js"></script>
     <link rel="stylesheet" href="contact.css">
 </head>
@@ -16,12 +16,11 @@
         <section class="header-content">
             <h2 class="headline">Kanban Projekt Management Tool</h2>
             <div class="profile_help-aria">
-                <img src="/img/icons/help.svg">
+                <a href="/help/help.html"><img src="/img/icons/help.svg"></a>
                 <div onclick="renderUserInitials(); openMenu()" id="userInitials" class="headerProfileCircle">
                 </div>
             </div>
-        </section>
-        <div id="profileMenu" class="dontShow">
+            <div id="profileMenu" class="dontShow">
                 <a href="">
                     <h4 class="userOptions">Privacy-Policy</h4>
                 </a><a href="">
@@ -30,9 +29,11 @@
                     <h4 class="userOptions">Log out</h4>
                 </a>
             </div>
+        </section>
+        
     </header>
     <main class="main-fullsize flex-content-size">
-        <div class="nav-contentsize flex-content-size">
+        <div class="main-Contentsize flex-content-size">
             <div>
                 <nav id="nav-container" class="nav-container">
                     <a class="desktop-logo-hide" href="/summary/summary.html">

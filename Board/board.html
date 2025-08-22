@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/global/global.css">
-    <link rel="stylesheet" href="/global/templates.css">
+    <link rel="stylesheet" href="/Board/popupTemplate.css">
+    <link rel="stylesheet" href="board.css">
+    <!-- <link rel="stylesheet" href="add-task.css"> -->
+    <link rel="stylesheet" href="boardDragAndDrop.css">
     <script src="/global/includeHTML.js"></script>
+    <script src="board-addTaskWindow.js" defer></script>
+    <script src="board-dragdrop.js"></script>
+    <script src="board-htmlTemplate.js"></script>
+    <!-- <script src="/add-Task/add-task.js"></script> -->
 </head>
-<body onload="init()">
+
+<body>
     <header class="header-fullsize">
         <section class="header-content">
             <h2 class="headline">Kanban Projekt Management Tool</h2>
@@ -17,17 +26,6 @@
                 <div onclick="renderUserInitials(); openMenu()" id="userInitials" class="headerProfileCircle">
                 </div>
             </div>
-        </section>
-
-    </header>
-    <main class="main-fullsize">
-        <div class="nav-contentsize">
-            <nav id="nav-container" class="nav-container">
-                <a class="desktop-logo-hide" href="/summary/summary.html">
-                    <img src="/img/icons/join-logo-white.svg" class="join-logo-desktop"></a>
-
-            </nav>
-            
             <div id="profileMenu" class="dontShow">
                 <a href="">
                     <h4 class="userOptions">Privacy-Policy</h4>
@@ -37,7 +35,59 @@
                     <h4 class="userOptions">Log out</h4>
                 </a>
             </div>
-        </div>
-    </main>
+        </section>
+        
+    </header>
+    <main class="main-fullsize">
+        <div class="main-Contentsize">
+            <nav id="nav-container" class="nav-container">
+                <a class="desktop-logo-hide" href="/summary/summary.html">
+                    <img src="/img/icons/join-logo-white.svg" class="join-logo-desktop"></a>
+                    
+                </nav>
+                <section class="mainAria">
+                    <div class="headline_searchAddTask">
+                        <p class="mainArea-headline">Board</p>
+                        <div class="searchInputField">
+                            <div class="inputBorder">
+                                <input type="text" class="searchTasks" min="2" placeholder="Find Task">
+                                <hr>
+                                <img src="/img/icons/search.svg" alt="search Symbol" class="searchSymbol">
+                            </div>
+                            <button onclick="addTask()" class="addTaskButton"> AddTask +</button>
+                            
+                        </div>
+                        
+                    </div>
+                    <div id="add-task-popup" class="add-task-popup"></div>
+                    <div class="categorys">
+                        <div class="TodoHeadline">
+                            <p>To do</p><img onclick="addTask()" src="/img/icons/plus-button.svg" alt="plusButton img">
+                        </div>
+                        <div class="InprogressHeadline">
+                            <p>In progress</p><img onclick="addTask()" src="/img/icons/plus-button.svg"
+                            alt="plusButton img">
+                        </div>
+                        <div class="AwaitfeedbackHeadline">
+                            <p>Await feedback</p><img onclick="addTask()" src="/img/icons/plus-button.svg"
+                            alt="plusButton img">
+                        </div>
+                        <div class="DoneHeadline">
+                            <p>Done</p>
+                        </div>
+                    </div>
+                    <div class="DragAndDropTaskAria">
+                        <div id="Todo" class="Todo" ondrop="moveTo('Todo')" ondragover="preventDefault(event)"></div>
+                        <div id="Inprogress" class="Inprogress" ondrop="moveTo('Inprogress')" ondragover="preventDefault(event)"></div>
+                        <div id="AwaitFeedback" class="AwaitFeedback" ondrop="moveTo('AwaitFeedback')" ondragover="preventDefault(event)"></div>
+                        <div id="Done" class="Done" ondrop="moveTo('Done')" ondragover="preventDefault(event)"></div>
+                    </div>
+                </section>
+                
+            </div>
+        </main>
+    
 </body>
+
+
 </html>

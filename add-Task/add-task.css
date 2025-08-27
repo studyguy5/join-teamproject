@@ -15,20 +15,23 @@ main h1{
     font-size: 61px;
     margin-left: 80px;
 }
-main input,
-main select{
+.input-section-right-input,
+.input-section-left-input,
+.section-right-select{
     max-width: 1920px;
     border-radius: 7px;
     border: 1px solid #c8c8c8;
     padding: 12px 21px;
     font-size: 20px;
 }
-main input,
+.input-section-right-input,
+.input-section-left-input
 main select:hover{
     cursor: pointer;
 }
-main input,
-main select:focus{
+.input-section-right-input,
+.input-section-left-input,
+.section-right-select:focus{
     border-color: #29ABE2;
 }
 main textarea{
@@ -51,7 +54,7 @@ main textarea:focus{
 
 .input-container{
     width: 100%;
-    max-width: 1920px;
+    /* max-width: 1440px; */
     display: flex;
     align-items: center;
     gap: 30px;

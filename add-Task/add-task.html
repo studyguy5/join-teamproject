@@ -49,11 +49,11 @@
 
             <section class="input-section-left">
                 <label for="task-title">Title<span class="requiredStar">*</span></label>
-                <input type="text" placeholder="Enter a title">
+                <input class="input-section-left-input" type="text" placeholder="Enter a title"> 
                 <label for="">Description</label>
                 <textarea rows="5" id="task-description" placeholder="Enter a description"></textarea>
                 <label for="date">Due Date<span class="requiredStar">*</span></label>
-                <input type="date">
+                <input class="input-section-left-input" type="date">
             </section>
 
             <div class="line"></div>
@@ -69,19 +69,19 @@
                     </section>
 
                     <label for="contactSelection">Assigned to</label>
-                    <select required tabindex="0">
+                    <select class="section-right-select" required tabindex="0">
                         <option value="" disabled selected hidden>Select contacts to assign</option>
                     </select>
 
                     <label for="category">Category<span class="requiredStar">*</span></label>
-                    <select required tabindex="0">
+                    <select class="section-right-select" required tabindex="0">
                         <option value="" disabled selected hidden>Select Task Category</option>
                         <option value="Technical Task">Technical Task</option>
                         <option value="User Story">User Story</option>
                     </select>
 
                     <label for="subtask">Subtask</label>
-                    <input type="text" placeholder="Enter new subtask">
+                    <input class="input-section-right-input" type="text" placeholder="Enter new subtask">
 
             </div>
         </div>

@@ -9,11 +9,11 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
         <div class="input-container">
           <section class="input-section-left">
             <label for="task-title">Title<span class="requiredStar">*</span></label>
-            <input id="title" type="text" placeholder="Enter a title" />
+            <input class="input-section-left-input" id="title" type="text" placeholder="Enter a title" />
             <label for="">Description</label>
             <textarea rows="5" id="task-description" placeholder="Enter a description"></textarea>
             <label for="date">Due Date<span class="requiredStar">*</span></label>
-            <input id="dueDate" type="date"></section>
+            <input class="input-section-left-input" id="dueDate" type="date"></section>
 
           <div class="line"></div>
 
@@ -34,20 +34,18 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
             </section>
 
             <label for="contactSelection">Assigned to</label>
-            <select required tabindex="0">
+            <select class="section-right-select" id="IdForContacts" required tabindex="0">
               <option value="">  
                 Select your Contacts
               </option>
-              <option value="Hans Peter">  
-                Hans Peter
-              </option>
-              <option id="testIdForContacts value="Hans Peter">  
+              
+              <option  value="Hans Peter">  
                 Hans Peter
               </option>
             </select>
 
             <label for="category">Category<span class="requiredStar">*</span></label>
-            <select required tabindex="0">
+            <select id="IdForTaskChoise" class="section-right-select" required tabindex="0">
               <option value="" disabled selected hidden>
                 Select Task Category
               </option>
@@ -56,7 +54,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
             </select>
 
             <label for="subtask">Subtask</label>
-            <input id="subtask" type="text" placeholder="Enter new subtask" />
+            <input class="input-section-right-input" id="subtask" type="text" placeholder="Enter new subtask" />
           </div>
         </div>
 
@@ -68,16 +66,16 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
 
           <div class="footer-buttons-section">
             <button class="clear-btn" type="reset">
-              Clear<img src="../img/x.svg" />
+              Clear<img src="/img/icons/x.svg" />
             </button>
             <button onclick="createTaskTemplate(); getTaskInformation()" class="create-task-btn">
-              Create Task<img src="../img/doneSymbol.svg" />
+              Create Task<img src="/img/icons/doneSymbol.svg" />
             </button>
           </div>
         </div>
 
         <div class="report" id="report">
-          Task added to board <img src="../img/board.svg" />
+          Task added to board <img src="/img/icons/board.svg" />
         </div>
       </main>
     </div>`

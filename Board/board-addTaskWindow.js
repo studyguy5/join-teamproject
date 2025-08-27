@@ -1,5 +1,5 @@
 
-
+let prioArray = [];
 document.addEventListener('DOMContentLoaded', async () => {
     init();
     createaddTaskPopup();
@@ -9,19 +9,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log(contacts);
     contactsArray = objectToArray(contacts)
     console.log(contactsArray);
+    showContacts();
     // renderMiniContactList(arraySorting(contactsArray), targetID = 'contactList') hier logik für das rendern der Mini-Contacte einbauen
 
     function sectionCheck(idsecTrue) {
         document.getElementById(idsecTrue).classList.add('active')
     }
     const buttons = document.querySelectorAll(".priority-section button");
+    console.log(buttons);
+    
     if (buttons) {
         buttons.forEach(button => {
             button.addEventListener("click", () => {
                 buttons.forEach(b => b.classList.remove("urgent", "medium", "low"));
                 const priority = button.dataset.priority;
                 button.classList.add(priority);
-                console.log('event works')
+                // prioArray.push(priority);
+                console.log(priority)
+                prioArray = [];
+                prioArray.push(priority);
             });
         })
     };
@@ -50,8 +56,6 @@ function createaddTaskPopup() {
 function addTask() {
     const popup = document.getElementById("add-task-popup");
     popup.classList.add("show");
-
-
 }
 
 
@@ -80,13 +84,13 @@ function showReportAddedTaskTemplate() {
 const BASE_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app"
 
 async function getObject(path = '') {
-  let response = await fetch(BASE_URL + path + ".json")
-  return responseToJson = await response.json()
+    let response = await fetch(BASE_URL + path + ".json")
+    return responseToJson = await response.json()
 }
 
-function objectToArray(contacts) {          
-    const object = Object.entries(contacts) 
-        console.log(object);
+function objectToArray(contacts) {
+    const object = Object.entries(contacts)
+    console.log(object);
     const arrayObject = object.map((member) => {
         return {
             id: member[0],
@@ -104,4 +108,17 @@ function arraySorting(array) {
         return memberA.name.localeCompare(memberB.name)
     })
     return sortedArray
+}
+
+function showContacts() {
+    let contacts = document.getElementById('IdForContacts')
+    
+
+    for (let index = 1; index < contactsArray.length; index++) {
+        contacts.innerHTML += `
+            <option class="contactBox" value="${contactsArray[index].name}">  
+              ${contactsArray[index].name}
+              </option>`
+
+    }
 }

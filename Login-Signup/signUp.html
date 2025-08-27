@@ -28,6 +28,11 @@
         <h1>Sign up</h1>
         <div class="blue-line"></div>
 
+        <div id="general-error" class="error-message"></div>
+        <div id="network-error" class="error-message">
+          Keine Internetverbindung verfügbar.
+        </div>
+
         <form class="signup-form" id="signupForm" onsubmit="return false;">
           <div class="input-field">
             <div class="input-wrapper">
@@ -39,6 +44,9 @@
                 required
               />
               <img src="svg/person.svg" alt="Person icon" class="input-icon" />
+              <div id="name-error" class="error-message">
+                Please enter your Fullname (with space)
+              </div>
             </div>
           </div>
 
@@ -52,7 +60,12 @@
                 required
               />
               <img src="svg/mail.svg" alt="Email icon" class="input-icon" />
-        
+              <div id="email-error" class="error-message">
+                Please enter your email address.
+              </div>
+              <div id="email-format-error" class="error-message">
+                Please enter a valid email address.
+              </div>
             </div>
           </div>
 
@@ -81,7 +94,15 @@
                   width: 20px;
                 "
               />
-        
+              <div id="password-error" class="error-message">
+                Please enter a password.
+              </div>
+              <div id="password-length-error" class="error-message">
+                The password must be at least 6 characters long.
+              </div>
+              <div id="password-weak-error" class="error-message">
+                Password is too weak.
+              </div>
             </div>
           </div>
 
@@ -110,7 +131,12 @@
                   width: 20px;
                 "
               />
-             
+              <div id="confirm-password-error" class="error-message">
+                Please confirm your password.
+              </div>
+              <div id="password-match-error" class="error-message">
+                Your passwords do not match.
+              </div>
             </div>
           </div>
 
@@ -118,11 +144,13 @@
             <input type="checkbox" id="privacy-policy" required />
             <label for="privacy-policy"
               >I accept the
-              <a href="privacy-login.html" class="privacy-link"
+              <a href="#" class="privacy-link"
                 >Privacy policy</a
               ></label
             >
-
+            <div id="privacy-error" class="error-message">
+              Please accept the privacy policy.
+            </div>
           </div>
 
           <button type="submit" class="signup-button" id="signupButton">
@@ -131,13 +159,18 @@
         </form>
       </div>
 
+      <div id="success-message" class="success-message">
+        <p>You Signed Up successfully</p>
+      </div>
+
       <footer class="page-footer">
-        <a href="privacy-login.html">Privacy Policy</a>
-        <a href="Legal-login.html">Legal notice</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Legal notice</a>
       </footer>
     </div>
 
     <script src="JavaScript/logoAnimation.js"></script>
+    <script src="JavaScript/sign-up.js" type="module"></script>
     <script src="JavaScript/showPassword.js"></script>
   </body>
 </html>

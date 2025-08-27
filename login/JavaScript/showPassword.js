@@ -1,4 +1,6 @@
-
+/**
+ * Sets up password field functionality when the DOM is loaded
+ */
 document.addEventListener('DOMContentLoaded', () => {
     const fields = [
         {
@@ -19,7 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     fields.forEach(field => setupPasswordField(field, lookOn, lookOff));
 });
 
-
+/**
+ * Sets up a password field with toggle functionality
+ * @param {Object} field - The field object containing input and toggle elements
+ * @param {string} lookOn - The path to the visibility off icon
+ * @param {string} lookOff - The path to the visibility on icon
+ */
 function setupPasswordField(field, lookOn, lookOff) {
     if (field.input && field.toggle && field.lock) {
         field.input.addEventListener('input', () => handleInput(field, lookOn));
@@ -28,7 +35,11 @@ function setupPasswordField(field, lookOn, lookOff) {
     }
 }
 
-
+/**
+ * Handles input changes in password fields
+ * @param {Object} field - The field object
+ * @param {string} lookOn - The path to the visibility off icon
+ */
 function handleInput(field, lookOn) {
     if (field.input.value.length > 0) {
         field.toggle.style.display = 'block';
@@ -38,8 +49,12 @@ function handleInput(field, lookOn) {
     }
 }
 
-
-
+/**
+ * Toggles password visibility
+ * @param {Object} field - The field object
+ * @param {string} lookOn - The path to the visibility off icon
+ * @param {string} lookOff - The path to the visibility on icon
+ */
 function togglePassword(field, lookOn, lookOff) {
     if (field.input.type === 'password') {
         field.input.type = 'text';
@@ -50,7 +65,11 @@ function togglePassword(field, lookOn, lookOff) {
     }
 }
 
-
+/**
+ * Sets the initial icon state based on field value
+ * @param {Object} field - The field object
+ * @param {string} lookOn - The path to the visibility off icon
+ */
 function initialIconState(field, lookOn) {
     if (field.input.value.length > 0) {
         field.toggle.style.display = 'block';
@@ -60,6 +79,11 @@ function initialIconState(field, lookOn) {
     }
 }
 
+/**
+ * Resets a field to its default state
+ * @param {Object} field - The field object
+ * @param {string} lookOn - The path to the visibility off icon
+ */
 function resetField(field, lookOn) {
     field.toggle.style.display = 'none';
     field.lock.style.display = 'block';

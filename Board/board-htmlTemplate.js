@@ -34,15 +34,14 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
             </section>
 
             <label for="contactSelection">Assigned to</label>
-            <select class="section-right-select" id="IdForContacts" required tabindex="0">
-              <option value="">  
+            <select  class="section-right-select" id="IdForContacts" required tabindex="0">
+              <option  value="">  
                 Select your Contacts
               </option>
               
-              <option  value="Hans Peter">  
-                Hans Peter
-              </option>
+              
             </select>
+            <div id="choosenContacts" class="choosenContacts"></div>
 
             <label for="category">Category<span class="requiredStar">*</span></label>
             <select id="IdForTaskChoise" class="section-right-select" required tabindex="0">
@@ -54,7 +53,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
             </select>
 
             <label for="subtask">Subtask</label>
-            <input class="input-section-right-input" id="subtask" type="text" placeholder="Enter new subtask" />
+            <input class="input-section-right-input" id="subtasks" type="text" placeholder="Enter new subtask" />
           </div>
         </div>
 

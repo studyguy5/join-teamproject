@@ -1,22 +1,26 @@
 
 let prioArray = [];
+window.contactsArray = [];
 document.addEventListener('DOMContentLoaded', async () => {
     init();
     createaddTaskPopup();
     sectionCheck('board');
     filterAndShowTasks();
+    
     contacts = await getObject(path = '/contacts')
     console.log(contacts);
     contactsArray = objectToArray(contacts)
     console.log(contactsArray);
     showContacts();
+    // renderContact();
+   
     // renderMiniContactList(arraySorting(contactsArray), targetID = 'contactList') hier logik für das rendern der Mini-Contacte einbauen
 
     function sectionCheck(idsecTrue) {
         document.getElementById(idsecTrue).classList.add('active')
     }
     const buttons = document.querySelectorAll(".priority-section button");
-    console.log(buttons);
+    
     
     if (buttons) {
         buttons.forEach(button => {
@@ -32,6 +36,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         })
     };
 })
+
+
 
 function showReportAddedTask() {
     const popup = document.getElementById("report");
@@ -115,10 +121,12 @@ function showContacts() {
     
 
     for (let index = 1; index < contactsArray.length; index++) {
+        console.log(contactsArray);
         contacts.innerHTML += `
-            <option class="contactBox" value="${contactsArray[index].name}">  
+            <option class="contactBox" value="${contactsArray[index].name}"> 
+            <div class="contactsCircle">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
               ${contactsArray[index].name}
-              </option>`
+              </option> `
 
     }
 }

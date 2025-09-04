@@ -1,7 +1,6 @@
-/* body {
-    scrollbar-width: none;
-} */
-
+body{
+    overflow-y: auto !important;
+}
 
 
 .flex-content-size {

@@ -54,8 +54,8 @@ function openMenu() {
         isOpen = true;
     } else if (isOpen) {
         menu.classList.add('slideback')
-        setTimeout(() => { menu.classList.add('dontShow') }, 500)
-        isOpen = false;
+        menu.classList.add('dontShow') 
+                isOpen = false;
     }
 
 }

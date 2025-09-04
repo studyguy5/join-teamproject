@@ -1,5 +1,5 @@
 const BASE_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app"
-
+// um daten zu holen
 async function getObject(path = '') {
   let response = await fetch(BASE_URL + path + ".json")
   return responseToJson = await response.json()

@@ -9,13 +9,15 @@
     <link rel="stylesheet" href="/Board/popupTemplate.css">
     <link rel="stylesheet" href="board.css">
     <link rel="stylesheet" href="/add-Task/add-task.css">
-    <!-- <link rel="stylesheet" href="add-task.css"> -->
+    
     <link rel="stylesheet" href="boardDragAndDrop.css">
     <script src="/global/includeHTML.js"></script>
     <script src="board-addTaskWindow.js"></script>
+    
     <script src="board-dragdrop.js"></script>
     <script src="board-htmlTemplate.js"></script>
-    <!-- <script src="/add-Task/add-task.js"></script> -->
+
+    
 </head>
 
 <body>
@@ -77,6 +79,7 @@
                             <p>Done</p>
                         </div>
                     </div>
+                    <div class="bigViewOfTask dont-Show" id="bigViewOfTask"></div>
                     <div class="DragAndDropTaskAria">
                         <div id="Todo" class="Todo" ondrop="moveTo('Todo')" ondragover="preventDefault(event)"></div>
                         <div id="Inprogress" class="Inprogress" ondrop="moveTo('Inprogress')" ondragover="preventDefault(event)"></div>

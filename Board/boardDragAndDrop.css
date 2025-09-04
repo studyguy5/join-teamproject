@@ -1,8 +1,8 @@
-.DragAndDropTaskAria{
-    width:100%;
-    max-width:1080px;
-    height:100%;
-    max-height:688px;
+.DragAndDropTaskAria {
+    width: 100%;
+    max-width: 1080px;
+    height: 100%;
+    max-height: 688px;
     overflow-y: scroll;
     display: flex;
     scrollbar-width: none;
@@ -10,60 +10,296 @@
     padding: 8px 64px 0px 64px;
 }
 
-.Todo{
-    width:100%;
+.Todo {
+    width: 100%;
     max-width: 252px;
-    height:100%;
-    max-height:688px;
+    height: 100%;
+    max-height: 688px;
     background-color: rgb(173, 216, 230, 0.2);
 }
 
-.Inprogress{
-    width:100%;
+.Inprogress {
+    width: 100%;
     max-width: 252px;
-    height:100%;
-    max-height:688px;
+    height: 100%;
+    max-height: 688px;
     background-color: rgb(173, 216, 230, 0.2);
 }
 
-.AwaitFeedback{
-    width:100%;
+.AwaitFeedback {
+    width: 100%;
     max-width: 252px;
-    height:100%;
-    max-height:688px;
-    background-color:rgb(173, 216, 230, 0.2);
+    height: 100%;
+    max-height: 688px;
+    background-color: rgb(173, 216, 230, 0.2);
 }
 
-.Done{
-    width:100%;
+.Done {
+    width: 100%;
     max-width: 252px;
-    height:100%;
-    max-height:688px;
-    background-color:rgb(173, 216, 230, 0.2);
+    height: 100%;
+    max-height: 688px;
+    background-color: rgb(173, 216, 230, 0.2);
 }
 
-.TaskDiv{
-    
-    
-    height:100%;
-    max-height:263px;
-    background-color: rgb(255, 215, 255, 1);
-    padding: 16px 8px;
+.TaskDiv {
+
+    margin-bottom: 16px;
+    height: 100%;
+    max-height: 263px;
+    background-color: rgb(192, 182, 109);
+    padding: 16px 16px;
     border-radius: 24px;
 }
 
-.darkblue{
-    width:113px;
-    height:27px;
+.darkblue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 113px;
+    height: 27px;
     padding: 4px 16px;
+    margin-bottom: 24px;
     border-radius: 8px;
     background-color: rgba(0, 56, 255, 1);
 }
 
-.türkis{
-    width:113px;
-    height:27px;
+.darkblueBigView {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 113px;
+    height: 27px;
     padding: 4px 16px;
+
+    border-radius: 8px;
+    background-color: rgba(0, 56, 255, 1);
+}
+
+.türkis {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 113px;
+    height: 27px;
+    padding: 4px 16px;
+    margin-bottom: 24px;
     border-radius: 8px;
     background: rgba(31, 215, 193, 1);
 }
+
+.türkisBigView {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 113px;
+    height: 27px;
+    padding: 4px 16px;
+
+    border-radius: 8px;
+    background: rgba(31, 215, 193, 1);
+}
+
+.taskTitle p {
+    margin: 0px 0px 8px 0px;
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(42, 54, 71, 1);
+
+}
+
+.taskDescription p {
+    color: rgba(168, 168, 168, 1);
+    font-weight: 400;
+    font-size: 16px;
+    margin: 0px 0px 24px 0px;
+}
+
+.subTasks {
+    display: flex;
+    height: 16px;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 24px;
+}
+
+.subTasks svg {
+    display: flex;
+    height: 8px;
+    width: 58.81%;
+
+}
+
+.back {
+    fill: rgba(244, 244, 244, 1);
+    rx: 8px;
+    ry: 8px;
+}
+
+.fill {
+    fill: rgba(69, 137, 255, 1);
+    rx: 8px;
+    ry: 8px;
+}
+
+.progressDescription {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.dont-Show {
+    display: none;
+}
+
+.bigViewOfTask {
+    position: absolute;
+    top: 120px;
+    right: 30px;
+    max-width: 525px;
+    width: 100%;
+    max-height: 931px;
+    height: 100%;
+    background-color: beige;
+    border-radius: 30px;
+    padding: 48px 40px;
+}
+
+.bigViewHeadlineCloseArea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 0px 24px 0px;
+}
+
+.titleBigView h2 {
+    margin: 0px 0px 24px 0px;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 61px;
+    line-height: 120%;
+    letter-spacing: 0%;
+
+}
+
+.descriptionBigView p {
+
+    font-weight: 400;
+    margin: 0px 0px 24px 0px;
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: 0%;
+
+}
+
+.dueDateBigView {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 25px;
+    margin: 0px 0px 24px 0px;
+}
+
+.dueDateBigView p {
+
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: 0%;
+
+}
+
+.contacts-Priority-Container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.priorityBigView{
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+    max-width:237px;
+    margin: 0px 0px 24px 0px;
+}
+
+.contactsMiniView{
+    height:32px;
+    width:100%;
+
+}
+
+
+
+.contactsCircle {
+    align-content: center;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    border: 1px solid red;
+    border-radius: 50px;
+    width:30px;
+    height:30px;
+}
+
+select.contactsCircle option{
+    align-content: center;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    border: 1px solid red;
+    border-radius: 50px;
+    width:30px;
+    height:30px;
+}
+
+/* .contactscirclePopup {
+    align-content: center;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    border: 1px solid red;
+    border-radius: 50px;
+    width:30px;
+    height:30px;
+} */
+
+.contactsCircle:first-child {
+    margin-left: 0px;
+    background-color: aqua;
+}
+
+.contactsCircle:nth-child(2) {
+    z-index: 2;
+    background-color: rgb(87, 119, 119);
+    transform: translateX(-15px)
+}
+
+.contactsCircle:nth-child(3) {
+    z-index: 3;
+    background-color: rgb(87, 119, 119);
+    transform: translateX(-30px)
+}
+
+.contactsCircle:nth-child(4) {
+    z-index: 4;
+    background-color: rgb(187, 255, 0);
+    transform: translateX(-45px)
+}
+
+.contactsCircle:nth-child(5) {
+    z-index: 5;
+    background-color: rgb(38, 0, 255);
+    transform: translateX(-60px)
+}
+
+.contactsCircle:nth-child(6) {
+    z-index: 6;
+    background-color: rgb(255, 0, 0);
+    transform: translateX(-75px)
+}
+
+.contactsCircle:nth-child(7) {
+    z-index: 7;
+    background-color: rgb(21, 255, 0);
+    
+}
+

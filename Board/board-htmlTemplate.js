@@ -1,19 +1,20 @@
 function renderHTMLOfPopup() {  //Zeile 47 select Contacts
   return `
-    <main>
+    <section class="addTaskPopupMain">
         <div class="popup-header">
           <h1>Add Task</h1>
           <img onclick="closePopup()" src="/img/icons/close-icon.svg" />
         </div>
 
-        <div class="input-container">
+        <div class="input-containerPopup">
           <section class="input-section-left">
-            <label for="task-title">Title<span class="requiredStar">*</span></label>
-            <input class="input-section-left-input" id="title" type="text" placeholder="Enter a title" />
-            <label for="">Description</label>
-            <textarea rows="5" id="task-description" placeholder="Enter a description"></textarea>
-            <label for="date">Due Date<span class="requiredStar">*</span></label>
-            <input class="input-section-left-input" id="dueDate" type="date"></section>
+              <label for="task-title">Title<span class="requiredStar">*</span></label>
+              <input class="input-section-left-input" id="title" type="text" placeholder="Enter a title" />
+              <label for="">Description</label>
+              <textarea rows="5" id="task-description" placeholder="Enter a description"></textarea>
+              <label for="date">Due Date<span class="requiredStar">*</span></label>
+              <input class="input-section-left-input" id="dueDate" type="date">
+            </section>
 
           <div class="line"></div>
 
@@ -53,11 +54,20 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
             </select>
 
             <label for="subtask">Subtask</label>
-            <input class="input-section-right-input" id="subtasks" type="text" placeholder="Enter new subtask" />
+            <div class="subtask-wrapper">
+              <input class="input-section-right-inputPopup" id="subtasks" type="text" placeholder="Enter new subtask">
+                            <span class="subtask-icon">
+                                <img onmousedown="clearSubtask()" class="x" src="/img/icons/subtasks-X.svg">
+                                <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
+                                <img onmousedown="renderSubtask()" class="hook" src="/img/icons/subtasks-icon.svg">
+                            </span>
+              </div>
+                    <ul class="ul-div" id="subtask-list-1" class="subtask-list">
+                    </ul>
           </div>
         </div>
 
-        <div class="footer">
+        <div class="footerPopup">
           <div class="footer-left">
             <p class="requiredStar">*</p>
             <p>This field is required</p>
@@ -73,9 +83,9 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
           </div>
         </div>
 
-        <div class="report" id="report">
+        <div class="reportPopup" id="report">
           Task added to board <img src="/img/icons/board.svg" />
         </div>
-      </main>
-    </div>`
+      </section>
+    `
 }

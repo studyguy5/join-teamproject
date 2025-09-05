@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/add-Task/add-task.css">
     <script src="/global/includeHTML.js"></script>
     <script src="/add-Task/add-task.js" defer></script>
+    <script src="/add-Task/subtask.js" defer></script>
 </head>
 
 <body>
@@ -53,7 +54,7 @@
                 <label for="">Description</label>
                 <textarea rows="5" id="task-description" placeholder="Enter a description"></textarea>
                 <label for="date">Due Date<span class="requiredStar">*</span></label>
-                <input class="input-section-left-input" type="date">
+                <input placeholder="dd/mm/yyyy" class="input-section-left-input" type="date">
             </section>
 
             <div class="line"></div>
@@ -69,7 +70,7 @@
                     </section>
 
                     <label for="contactSelection">Assigned to</label>
-                    <select class="section-right-select" required tabindex="0">
+                    <select class="section-right-select" id="IdForContactsNormal"  required tabindex="0">
                         <option value="" disabled selected hidden>Select contacts to assign</option>
                     </select>
 
@@ -80,9 +81,17 @@
                         <option value="User Story">User Story</option>
                     </select>
 
-                    <label for="subtask">Subtask</label>
-                    <input class="input-section-right-input" type="text" placeholder="Enter new subtask">
-
+                     <label for="subtask">Subtask</label>
+                    <div class="subtask-wrapper ">
+                        <input id="subtask" class="subtask input-section-right-input" type="text" placeholder="Enter new subtask">
+                            <span class="subtask-icon">
+                                <img onmousedown="clearSubtask()" class="x" src="/img/icons/subtasks-X.svg">
+                                <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
+                                <img onmousedown="renderSubtask()" class="hook" src="/img/icons/subtasks-icon.svg">
+                            </span>
+                    </div>
+                    <ul class="ul-div" id="subtask-list-1" class="subtask-list">
+                    </ul>
             </div>
         </div>
 

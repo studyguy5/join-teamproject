@@ -1,4 +1,4 @@
-.report {
+.reportPopup {
     position: fixed;
     bottom: -1000px;
     left: 50%;
@@ -7,8 +7,8 @@
     color: #fff;
     padding: 15px 25px;
     border-radius: 10px;
-    opacity: 0;
-    transition: all 0.3s ease;
+    opacity: 1;
+    transition: all 0.5s ease;
     pointer-events: none;
 
     width: 326;
@@ -22,26 +22,28 @@
     gap: 16px;
 }
 
-.report.show {
-    bottom: 50%;
+.reportPopup.show {
+    bottom: 400px;
     opacity: 1;
     transform: translate(-50%, 50%);
 }
 
-.report img {
+.reportPopup img {
     width: 30px;
     height: 30px;
 }
 
 .add-task-popup {
+    width:1116px;
+    height: 870px;
     position: fixed;
-    top: 65%;
+    top: 72%;
     right: -10000px;
     transform: translateY(-50%);
-    padding: 15px 45px;
+    padding: 64px 65,75px 64px 74px;
     border-radius: 10px;
-    /* max-width:1116px;
-    width:100%; */
+    /* /* max-width:1116px; */
+    /* width:100%; */
     opacity: 0;
     transition: all 0.4s ease;
     display: flex;
@@ -54,16 +56,18 @@
     right: 50%;
     z-index: 8;
     /* Endpunkt Mitte */
-    transform: translate(55%, -100%);
+    transform: translate(50%, -100%);
     /* korrekt zentrieren */
     opacity: 1;
 }
 
 .popup-header {
-    width: 850px;
+    width: 100%;
+    max-width: 1002px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 64px 40px 32px 74px;
 }
 
 .popup-header img {
@@ -81,40 +85,34 @@
 
 /* ////////////////////////////////////////////////////////////////// */
 
-
-/* main{
-    width: 100%;
-    max-width: 1920px;
-    height: 100%;
-    position: relative;
-    margin-left: 20px;
-    padding-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; */
-/* } */
-main h1 {
-    font-size: 40px;
-    margin-left: 0px;
+.addTaskPopupMain{
+height: 870px;
 }
 
-/* main input,
-main select{
-    max-width: 1920px;
-    border-radius: 7px;
+
+
+.addTaskPopupMain h1 {
+    font-size: 61px;
+    margin-left: 0px;
+    margin: 0px;
+}
+
+.addTaskPopupMain input,
+.addTaskPopupMain select{
+    
     border: 1px solid #c8c8c8;
     padding: 12px 21px;
     font-size: 18px;
-} */
-/* main input,
-main select:hover{
+}
+.addTaskPopupMain input,
+.addTaskPopupMain select:hover{
     cursor: pointer;
-} */
-/* main input,
-main select:focus{
+}
+.addTaskPopupMain input,
+.addTaskPopupMain select:focus{
     border-color: #29ABE2;
-} */
-main textarea {
+}
+.addTaskPopupMain textarea {
     max-width: 1920px;
     height: 100px;
     border-radius: 7px;
@@ -125,20 +123,20 @@ main textarea {
     resize: none;
 }
 
-main textarea:hover {
+.addTaskPopupMain textarea:hover {
     cursor: pointer;
 }
 
-main textarea:focus {
+.addTaskPopupMain textarea:focus {
     border-color: #29ABE2;
 }
 
 
-.input-container {
-    width: 100%;
-    max-width: 800px;
+.input-containerPopup {
+    
+    width: 976,25px;
     display: flex;
-    justify-content: space-between;
+    
     align-items: center;
     gap: 40px;
 }
@@ -178,6 +176,16 @@ main textarea:focus {
     margin-bottom: 4px;
 }
 
+.input-section-right-inputPopup {
+    width:100%;
+    max-width:398px;
+    border-radius: 7px;
+    border: 1px solid #c8c8c8;
+    padding: 12px 21px;
+    font-size: 20px;
+    
+}
+
 
 
 .priority-section {
@@ -207,6 +215,102 @@ main textarea:focus {
     color: orangered;
 }
 
+
+
+
+/* abschnitt für subtask optionen */
+.subtask-wrapper{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.subtask-list{
+    padding: 12px 21px;
+    display: flex;
+}
+.subtask-icon{
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    align-items: center;
+    align-self: end;
+    gap: 4px;
+    display: none;
+}
+.subtask-wrapper input:focus + .subtask-icon{
+    display: flex !important;
+}
+
+
+.x:hover , .hook:hover{
+    cursor: pointer;
+    background: #D1D1D1;
+    border-radius: 56px;
+}
+.delimiter{
+    width: 0px;
+    height: 20px;
+    border: 1px solid #D1D1D1;
+}
+.ul-div {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin: 0;
+    list-style: none;
+    
+}
+
+.listed{
+    margin-top: 8px;
+    display: flex;
+    padding: 6px 16px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    align-items: center;
+    height: 24px;
+}
+.listed:hover{
+    cursor: pointer;
+    background: #e6e6e6;
+    border-radius: 10px;
+}
+.dot{
+    margin-right: 16px;
+}
+.list-icon{
+    display: flex!important;
+}
+.list-icon{
+    display: flex;
+    position: absolute;
+    right: 12px;
+    gap: 4px;
+    display: none;
+}
+
+.pencil, .trash{
+    width: 20px;
+    height: 20px;
+}
+.edit-input{
+    height: 10px;
+    border: none;
+    outline: none;
+    border-radius: 0;
+
+    display: block;               
+    width: calc(100% - 2px);
+    margin-left: -16px;        
+    margin-right: -16px; 
+}
+.edit-input:focus {
+  border-bottom: 1px solid #29ABE2;
+}
+
 /* .contactscircle {
     align-content: center;
     text-align: center;
@@ -218,14 +322,18 @@ main textarea:focus {
     height:30px;
 } */
 
-.footer {
-    gap: 375px;
+.footerPopup {
+    gap: 537.75px;
     width: 100%;
-    max-width: 1920px;
-    margin-left: 0px;
-    margin-top: 48px;
+    max-width: 976.25px;
+    /* padding: 110px 65,75px 64px 74px; */
+    margin-bottom: 64px;
+    margin-left: 74px;
+    margin-right: 65.75px;
+    margin-top: 176px;
     display: flex;
     align-items: center;
+
 }
 
 .footer p {

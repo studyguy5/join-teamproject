@@ -90,11 +90,12 @@ let tasks = [
 // Vorlage um in task zu pushen
 
 
-function createTemplate() {
-
+function createTemplate(tid) {
+    
+console.log('wird aufgerufen')
     return {
         'category': '',
-        'id': 4,
+        'id': `${tid}`,
         'taskType': '',
         'title': '',
         'description': '',
@@ -131,9 +132,11 @@ let currentDraggedElement;
 
 let taskContainerArray = ['title', 'task-description', 'dueDate', 'IdForTaskChoise', 'subtasks'];
 let taskObjectKey = ['title', 'description', 'DueDate', 'taskType', 'subtasks'];
-
+let tid = 3;
 async function getTaskInformation() {
+    
     let newTask = createTemplate();
+    newTask.id = tid;
     for (let valueIndex = 0; valueIndex < taskObjectKey.length; valueIndex++) {
         newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value
     }
@@ -141,7 +144,8 @@ async function getTaskInformation() {
     newTask.assignedTo.push(Contacts);
     newTask.prio = prioArray[0];
     createSubtaskPoint(subtasks); // create template for subtask with checkpoint
-    createTemplate(subtasks); //create complete template of object with all data
+    tid++
+    createTemplate(tid); //create complete template of object with all data
     subtaskArray = newTask.subtasks; //path from subtask Array where new subtasks should be pushed into
     subtaskArray = createSubtaskPoint(subtasks); // subtasks template with variable is pushed into subtaskArray
     newTask.category = 'Todo';

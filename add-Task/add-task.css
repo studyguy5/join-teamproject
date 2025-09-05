@@ -1,6 +1,6 @@
 
 
-/* main{
+/* {
     width: 100%;
     max-width: 1920px;
     height: 100%;
@@ -11,22 +11,23 @@
     flex-direction: column;
     align-items: flex-start;
 } */
-main h1{
+.mainAreaRight h1{
     font-size: 61px;
     margin-left: 80px;
 }
 .input-section-right-input,
 .input-section-left-input,
 .section-right-select{
-    max-width: 1920px;
+    max-width:440px;
     border-radius: 7px;
     border: 1px solid #c8c8c8;
     padding: 12px 21px;
     font-size: 20px;
+    
 }
 .input-section-right-input,
 .input-section-left-input
-main select:hover{
+select:hover{
     cursor: pointer;
 }
 .input-section-right-input,
@@ -34,7 +35,110 @@ main select:hover{
 .section-right-select:focus{
     border-color: #29ABE2;
 }
-main textarea{
+
+.subtask-wrapper{
+    position: relative;
+    display: flex;
+    flex-direction: column;  
+}
+
+
+
+.subtask-wrapper .edit-input:focus{
+   border:unset;
+
+}
+
+
+.subtask-list{
+    padding: 12px 21px;
+    display: flex;
+}
+.subtask-icon{
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    align-items: center;
+    align-self: end;
+    gap: 4px;
+    display: none;
+}
+.subtask:focus + .subtask-icon{
+    display: flex !important;
+}
+.x:hover , .hook:hover{
+    cursor: pointer;
+    background: #D1D1D1;
+    border-radius: 56px;
+}
+.delimiter{
+    width: 0px;
+    height: 20px;
+    border: 1px solid #D1D1D1;
+}
+.ul-div {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin: 0;
+    list-style: none;
+    
+}
+
+.listed{
+    margin-top: 8px;
+    display: flex;
+    padding: 6px 16px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    align-items: center;
+    height: 24px;
+}
+.listed:hover{
+    cursor: pointer;
+    background: #e6e6e6;
+    border-radius: 10px;
+}
+.list-icon{
+    display: flex!important;
+}
+.dot{
+    margin-right: 16px;
+}
+.list-icon{
+    display: flex;
+    position: absolute;
+    right: 12px;
+    gap: 4px;
+    display: none;
+}
+
+.pencil, .trash{
+    width: 20px;
+    height: 20px;
+}
+.edit-input{
+    height: 10px;
+    border: none;
+    outline: none;
+    border-radius: 0;
+
+    display: block;               
+    width: calc(100% - 2px);
+    margin-left: -16px;        
+    margin-right: -16px; 
+}
+.edit-input:focus {
+    border-bottom: 1px solid #29ABE2;
+}
+
+
+
+
+
+ textarea{
     max-width: 1920px;
     height: 100px;
     border-radius: 7px;
@@ -44,17 +148,17 @@ main textarea{
     font-family: arial, sans-serif;
     resize: none;
 }
-main textarea:hover{
+ textarea:hover{
     cursor: pointer;
 }
-main textarea:focus{
+ textarea:focus{
     border-color: #29ABE2;
 }
 
 
 .input-container{
     width: 100%;
-    /* max-width: 1440px; */
+    max-width: 976,25px;
     display: flex;
     align-items: center;
     gap: 30px;
@@ -63,8 +167,8 @@ main textarea:focus{
     display: flex;
     flex-direction: column;
     margin-left: 70px;
-    width: 367px;
-    height: 367px;
+    width: 440px;
+    height: 376px;
 }
 .input-section-left label{
     font-size: 20px;
@@ -81,8 +185,8 @@ main textarea:focus{
 .input-section-right{
     display: flex;
     flex-direction: column;
-    width: 367px;
-    height: 367px;
+    width: 440px;
+    height: 400px;
     
 }
 .input-section-right label{
@@ -92,22 +196,22 @@ main textarea:focus{
 }
 
 
-
 .priority-section{
     display: flex;
     justify-content: space-between;
     gap: 16px;
 }
 .priority-section button{
-    width: 110px;
+    width: 136px;
     height: 40px;
     border: none;
     border-radius: 7px;
     font-size: 20px;
     cursor: pointer;
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
     padding: 16px 10px;
 }
 .priority-section button:hover{
@@ -121,9 +225,11 @@ main textarea:focus{
 .footer{
     gap: 375px;
     width: 100%;
-    max-width: 1920px;
-    margin-left: 80px;
-    margin-top: 48px;
+    max-width: 1440px;
+    margin-bottom: 64px;
+    margin-left: 74px;
+    margin-right: 65,75px;
+    margin-top: 110px;
     display: flex;
     align-items: center;
 }
@@ -194,6 +300,7 @@ main textarea:focus{
 .priority-section button.low {
     background-color: #7AE229;
     color: white;
+
 }
 .priority-section button.urgent img,
 .priority-section button.medium img,
@@ -211,15 +318,15 @@ textarea:focus::placeholder {
 
 .report {
     position: fixed;
-    bottom: -100px;
+    bottom: -1000px;
     left: 50%;
     transform: translateX(-50%);
     background-color:#2A3647;
     color: #fff;
     padding: 15px 25px;
     border-radius: 10px;
-    opacity: 0;
-    transition: all 0.3s ease;
+    opacity: 1;
+    transition: all 0.5s ease;
     pointer-events: none;
 
     width: 326;
@@ -233,8 +340,10 @@ textarea:focus::placeholder {
     gap: 16px;
 }
 
+
+
     .report.show {
-      bottom: 50%;
+      bottom: 800px;
       opacity: 1;
       transform: translate(-50%, 50%);
     }

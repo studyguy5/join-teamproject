@@ -55,7 +55,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
 
             <label for="subtask">Subtask</label>
             <div class="subtask-wrapper">
-              <input class="input-section-right-inputPopup" id="subtasks" type="text" placeholder="Enter new subtask">
+              <input class="inputPopup" id="subtask" type="text" placeholder="Enter new subtask">
                             <span class="subtask-icon">
                                 <img onmousedown="clearSubtask()" class="x" src="/img/icons/subtasks-X.svg">
                                 <img class="delimiter" src="/img/icons/delimiter-vertical.svg">

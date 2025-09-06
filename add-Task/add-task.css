@@ -25,16 +25,11 @@
     font-size: 20px;
     
 }
-.input-section-right-input,
-.input-section-left-input
-select:hover{
-    cursor: pointer;
-}
-.input-section-right-input,
-.input-section-left-input,
-.section-right-select:focus{
+
+.input-section-left input:focus{
     border-color: #29ABE2;
 }
+
 
 .subtask-wrapper{
     position: relative;
@@ -95,30 +90,36 @@ select:hover{
     color: #000000;
     align-items: center;
     height: 24px;
+    
 }
+
 .listed:hover{
     cursor: pointer;
     background: #e6e6e6;
     border-radius: 10px;
+    
+    .list-icon{
+        display: flex !important;
+    }
 }
-.list-icon{
-    display: flex!important;
-}
+
 .dot{
     margin-right: 16px;
 }
 .list-icon{
-    display: flex;
+    display: none;
     position: absolute;
     right: 12px;
     gap: 4px;
-    display: none;
+    
 }
 
 .pencil, .trash{
     width: 20px;
     height: 20px;
 }
+
+
 .edit-input{
     height: 10px;
     border: none;
@@ -131,7 +132,7 @@ select:hover{
     margin-right: -16px; 
 }
 .edit-input:focus {
-    border-bottom: 1px solid #29ABE2;
+    border-bottom: 1px solid #29ABE2 !important;
 }
 
 

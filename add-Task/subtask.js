@@ -1,5 +1,5 @@
 
-// rendert Icons beim Hoovern
+// rendert edit and delete Icons beim Hoovern
 function renderSubtask(){
     let subtask = document.getElementById("subtask");
     let list = document.getElementById("subtask-list-1");
@@ -12,7 +12,7 @@ function renderSubtask(){
         list.innerHTML += `<li onclick="editBulletpoint(${index})" id="listed-${index}" class="listed"> 
                               <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
                                 <span class="list-icon">
-                                    <img onmousedown="clearSubtask()" class="pencil" src="/img/icons/pencil-solo.svg">
+                                    <img onmousedown="clearSubtask()" class="pencil" src="/img/icons/pencil-edit.svg">
                                     <img class="delimiter" src="../img/delimiter-vertical.svg">
                                     <img onmousedown="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
                                 </span>
@@ -52,7 +52,7 @@ function editBulletpoint(index) {
         <span class="list-icon">
             <img onmousedown="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
             <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
-            <img onmousedown="saveBulletpoint(${index})" class="hook" src="/img/icons/subtask-icon.svg">
+            <img onmousedown="saveBulletpoint(${index})" class="hook" src="/img/icons/subtasks-icon.svg">
         </span>
     `;
 
@@ -69,7 +69,7 @@ function saveBulletpoint(index) {
         const li = document.getElementById(`listed-${index}`);
         li.innerHTML = `<span class="dot">•</span><p id="task-text-${index}">${newValue}</p>
                         <span class="list-icon">
-                            <img onmousedown="clearSubtask()" class="pencil" src="/img/icons/pencil-solo.svg">
+                            <img onmousedown="clearSubtask()" class="pencil" src="/img/icons/pencil-edit.svg">
                             <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
                             <img onmousedown="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
                         </span>`;

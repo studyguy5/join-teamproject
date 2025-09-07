@@ -19,12 +19,13 @@
     font-style: normal;
 }
 
-body {
-    display: flex;
+html, body {
+    /* display: flex; */
     flex-direction: column;
     font-family: 'inter-Regular';
     margin: 0 auto;
     overflow-y: hidden;
+    background-color: #F6F7F8
 }
 
 .header-fullsize {

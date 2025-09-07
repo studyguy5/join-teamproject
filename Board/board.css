@@ -49,6 +49,9 @@
 .inputBorder input:focus{
     outline:none;
 }
+.inputBorder:hover{
+    cursor: pointer;
+}
 
 hr{
     height:30px;
@@ -98,6 +101,7 @@ text-align:start;
 
 .searchInputField button:hover{
     background-color: #29ABE2;
+    border-color: #29ABE2;
     cursor: pointer;
 }
 

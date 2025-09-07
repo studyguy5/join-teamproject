@@ -7,7 +7,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
         </div>
 
         <div class="input-containerPopup">
-          <section class="input-section-left">
+          <section class="input-section-leftPopup">
               <label for="task-title">Title<span class="requiredStar">*</span></label>
               <input class="input-section-left-input" id="title" type="text" placeholder="Enter a title" />
               <label for="">Description</label>
@@ -18,7 +18,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
 
           <div class="line"></div>
 
-          <div class="input-section-right">
+          <div class="input-section-rightPopup">
             <label for="prio">Priority</label>
             <section class="priority-section">
               <button class="button" data-priority="urgent"  type="button">
@@ -68,7 +68,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
         </div>
 
         <div class="footerPopup">
-          <div class="footer-left">
+          <div class="footer-leftPopup">
             <p class="requiredStar">*</p>
             <p>This field is required</p>
           </div>

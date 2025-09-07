@@ -26,8 +26,16 @@
     
 }
 
-.input-section-left input:focus{
+.input-section-left-input:focus,
+.input-section-right-input:focus,
+.section-right-select:focus{
     border-color: #29ABE2;
+    outline: none;
+}
+.input-section-left-input:hover,
+.input-section-right-input:hover,
+.section-right-select:hover{
+    cursor: pointer;
 }
 
 
@@ -121,13 +129,13 @@
 
 
 .edit-input{
-    height: 10px;
+    height: 34px;
     border: none;
     outline: none;
     border-radius: 0;
-
+    padding-left: 16px;
     display: block;               
-    width: calc(100% - 2px);
+    width: 436px;
     margin-left: -16px;        
     margin-right: -16px; 
 }
@@ -154,6 +162,7 @@
 }
  textarea:focus{
     border-color: #29ABE2;
+    outline: none;
 }
 
 

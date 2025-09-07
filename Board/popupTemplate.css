@@ -138,7 +138,10 @@
     border: 1px solid #c8c8c8;
     padding: 12px 21px;
     font-size: 20px;
-
+}
+.inputPopup:focus{
+    border-color: #29ABE2;
+    outline: none;
 }
 
 

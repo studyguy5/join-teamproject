@@ -23,11 +23,22 @@
     border: 1px solid #c8c8c8;
     padding: 12px 21px;
     font-size: 20px;
-    
 }
+
+.input-section-right select:focus{
+    border-color: #29ABE2;
+    outline: none;
+}
+
 
 .input-section-left input:focus{
     border-color: #29ABE2;
+    outline: none;
+}
+
+.input-section-right-input:focus{
+    border-color: #29ABE2;
+    outline: none;
 }
 
 
@@ -154,6 +165,7 @@
 }
  textarea:focus{
     border-color: #29ABE2;
+    outline:none;
 }
 
 
@@ -167,7 +179,7 @@
 .input-section-left{
     display: flex;
     flex-direction: column;
-    margin-left: 70px;
+    margin-left: 96px;
     width: 440px;
     height: 376px;
 }
@@ -224,12 +236,12 @@
 }
 
 .footer{
-    gap: 375px;
+    gap: 497.25px;
     width: 100%;
-    max-width: 1440px;
+    max-width: 1304px;
     margin-bottom: 64px;
-    margin-left: 74px;
-    margin-right: 65,75px;
+    margin-left: 96px;
+    margin-right: 135.75px;
     margin-top: 110px;
     display: flex;
     align-items: center;
@@ -245,7 +257,10 @@
 .footer-buttons-section{
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    justify-content: end;
+    width:100%;
+    max-width: 309px;
+    gap: 16px;
 }
 .create-task-btn{
     width: 140px;

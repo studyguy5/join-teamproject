@@ -128,6 +128,7 @@
 .input-section-right input:focus,
 .input-section-right select:focus{
   border-color: #29ABE2;
+  outline:none;
 }
 
 /* eigene angelegte klasse für das subtask feld */
@@ -160,6 +161,7 @@
 
 .input-section-left textarea:focus {
     border-color: #29ABE2;
+    outline: none;
 }
 
 

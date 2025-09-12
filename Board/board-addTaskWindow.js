@@ -131,3 +131,29 @@ function showContacts() {
     }
 }
 
+function openTasktypeDropDown(){
+    let drop = document.getElementById('dropId')
+    drop.classList.toggle('dropTasktypeClose')
+    let layer = document.getElementById('hiddenlayer')
+    layer.classList.toggle('hiddenlayer')
+    if(document.querySelectorAll('.dropTasktypeOpen')){
+        let ch = document.getElementById('arrowImg')
+        ch.classList.toggle('select-arrow-open') 
+    }
+}
+
+function chooseValue(){
+    let choise = document.querySelectorAll('.taskOption')
+    
+    choise.forEach(b => b.addEventListener('click', () => {
+        const choiseOfTask = b.dataset.value
+        console.log(choiseOfTask);
+        document.getElementById('selectedTask').innerHTML = choiseOfTask;
+    }))
+    
+}
+
+function stopBubbling(event){
+        
+        event.stopPropagation()
+    }

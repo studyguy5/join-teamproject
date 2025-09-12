@@ -2,6 +2,18 @@ let categorys = ['Todo', 'Inprogress', 'AwaitFeedback', 'Done'];
 
 const BASe_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/"
 
+let taskContainerArray = ['title', 'task-description', 'dueDate'];
+let taskObjectKey = ['title', 'description', 'DueDate'];
+
+let currentDraggedElement;
+let index0 = 0;
+let index1 = 1;
+
+let subtaskArray = [];
+let subtaskvalue1;
+let subtaskvalue2;
+
+
 async function postData(path = '', data = {}) {
     let response = await fetch(BASe_URL + path + ".json", {
         method: "POST",
@@ -86,13 +98,13 @@ let tasks = [
         },
     }
 ];
-
 // Vorlage um in task zu pushen
 
+let tid = 3;
 
 function createTemplate(tid) {
-    
-console.log('wird aufgerufen')
+
+    console.log('createTemplate() wird aufgerufen')
     return {
         'category': '',
         'id': `${tid}`,
@@ -104,83 +116,94 @@ console.log('wird aufgerufen')
         'assignedTo': [
 
         ],
-        'subtasks': [{
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
-                '<label for="vehicle1"> I have a bike</label><br></br>'
-        },
-        {
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
-                '<label for="vehicle1"> I have a bike</label><br></br>'
-        },
-        {
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
-                '<label for="vehicle1"> I have a bike</label><br></br>'
-        }
+        'subtasks': [
+        
         ]
     }
 }
-// inserts checkbox into the subtasks array
-function createSubtaskPoint(subtasks) {
-    return {
-        '<input type="checkbox" id="subTask" name="subtask" value="value">':
-            `<label for="subTask">${subtasks}</label><br></br>`
-    };
+
+
+
+
+
+
+function pushObject(subtaskvalue1, subtaskvalue2) {
+    if (subtaskvalue1) {
+        let subTaskObject1 = {
+            '<input type="checkbox" id="subTask1" name="subtask" value="value">':
+                `<label for="subTask1">${subtaskvalue1}</label><br></br>`
+
+        };
+        subtaskArray.push(subTaskObject1)
+    } else { { '' } }
+    if (subtaskvalue2) {
+        ;
+        let subTaskObject2 = {
+            '<input type="checkbox" id="subTask2" name="subtask" value="value">':
+                `<label for="subTask2">${subtaskvalue2}</label><br></br>`
+        };
+        subtaskArray.push(subTaskObject2);
+    } else { { '' } }
 }
 
-let currentDraggedElement;
+function getSubtaskFromTemplate() {
+    if (document.getElementById(`task-text-${index0}`)) {
+        console.log('gibts des')
+        subtaskvalue1 = document.getElementById(`task-text-${index0}`).innerHTML
+    } else { '' };
+    if (document.getElementById(`task-text-${index1}`)) {
+        subtaskvalue2 = document.getElementById(`task-text-${index1}`).innerHTML
+    } else { '' }
+}
+
+function setContactAndPrioValue(newTask) {
+    console.log('wird auch aufgerufen')
+    let Contacts = document.getElementById('IdForContacts').value
+    newTask.assignedTo.push(Contacts);
+    newTask.prio = prioArray[0];
+    tid++
+}
 
 
-let taskContainerArray = ['title', 'task-description', 'dueDate', 'IdForTaskChoise', 'subtasks'];
-let taskObjectKey = ['title', 'description', 'DueDate', 'taskType', 'subtasks'];
-let tid = 3;
 async function getTaskInformation() {
-    
     let newTask = createTemplate();
     newTask.id = tid;
     for (let valueIndex = 0; valueIndex < taskObjectKey.length; valueIndex++) {
         newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value
     }
-    let Contacts = document.getElementById('IdForContacts').value
-    newTask.assignedTo.push(Contacts);
-    newTask.prio = prioArray[0];
-    createSubtaskPoint(subtasks); // create template for subtask with checkpoint
-    tid++
+    let Choise = document.getElementById('IdForTaskChoise').innerHTML
+    newTask.taskType = Choise
+    setContactAndPrioValue(newTask);
+    getSubtaskFromTemplate();
     createTemplate(tid); //create complete template of object with all data
     subtaskArray = newTask.subtasks; //path from subtask Array where new subtasks should be pushed into
-    subtaskArray = createSubtaskPoint(subtasks); // subtasks template with variable is pushed into subtaskArray
+    pushObject(subtaskvalue1, subtaskvalue2); // subtasks template with variable is pushed into subtaskArray
     newTask.category = 'Todo';
     await postData("task", newTask);
     tasks.push(newTask);
-    console.log('I pushed this into tasks', newTask);
     filterAndShowTasks();
 };
 
-
+// task-text-${index}
 
 async function filterAndShowTasks() {
     console.log(tasks)
     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
         document.getElementById(`${categorys[idIndex]}`).innerHTML = '';
-
         let filteredTasks = tasks.filter(f => f.category == categorys[idIndex]);
-
         for (let catIndex = 0; catIndex < filteredTasks.length; catIndex++) {
             let element = filteredTasks[catIndex];
-            // singleTaks.push(element);
-        
-
             document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoard(element);
             if (document.getElementById(`${categorys[idIndex]}`)) {
                 renderContact(element);
             }
-
         }
     }
-
     //  deleteData('');
-
 }
 
+let subtaskArrae = 5
+let progress = (3/subtaskArrae)*100
 function renderTaskintoBoard(element) {
     let taskOption = 'türkis';
     if (element.taskType !== 'technical Task') {
@@ -193,9 +216,9 @@ function renderTaskintoBoard(element) {
     <div class="subTasks">
     <svg role="progress subtask">
           <rect  width="128" height="8"  class="back"/>
-          <rect  width="110" height="8" class="fill"/>
+          <rect  width="${progress}" height="8" class="fill"/>
         </svg>
-        <p class="progressDescription">x/y Subtasks </p>
+        <p class="progressDescription">${3}/${subtaskArrae} Subtasks </p>
         </div>
     <div id="contacts-Priority-Container" class="contacts-Priority-Container" >
     <div id="${element.id}" class="contactsMiniView"></div>
@@ -250,7 +273,7 @@ function renderContact(element) {
             let slim = element.assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
             contact.innerHTML += `
     <div id="contactscircle" class="contactsCircle">${slim[ContactIndex][0] + slim[ContactIndex][1]} </div>
-    `};
+    `} else { contact.innerHTML = '' };
 }
 
 

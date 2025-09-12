@@ -15,7 +15,7 @@
     max-width: 252px;
     height: 100%;
     max-height: 688px;
-    background-color: rgb(173, 216, 230, 0.2);
+    
 }
 
 .Inprogress {
@@ -23,7 +23,7 @@
     max-width: 252px;
     height: 100%;
     max-height: 688px;
-    background-color: rgb(173, 216, 230, 0.2);
+    
 }
 
 .AwaitFeedback {
@@ -31,7 +31,7 @@
     max-width: 252px;
     height: 100%;
     max-height: 688px;
-    background-color: rgb(173, 216, 230, 0.2);
+    
 }
 
 .Done {
@@ -39,18 +39,20 @@
     max-width: 252px;
     height: 100%;
     max-height: 688px;
-    background-color: rgb(173, 216, 230, 0.2);
+    
 }
 
 .TaskDiv {
 
     margin-bottom: 16px;
-    height: 100%;
+    /* height: 100%; */
     max-height: 263px;
-    background-color: rgb(192, 182, 109);
+    background-color: rgb(255, 255, 255, 1);
     padding: 16px 16px;
     border-radius: 24px;
+    box-shadow: 0px 0px 10px 3px rgb(0, 0, 0, 0.08);
 }
+
 
 .darkblue {
     display: flex;
@@ -62,6 +64,7 @@
     margin-bottom: 24px;
     border-radius: 8px;
     background-color: rgba(0, 56, 255, 1);
+    color:white;
 }
 
 .darkblueBigView {
@@ -74,6 +77,7 @@
 
     border-radius: 8px;
     background-color: rgba(0, 56, 255, 1);
+    color:white;
 }
 
 .türkis {
@@ -86,6 +90,7 @@
     margin-bottom: 24px;
     border-radius: 8px;
     background: rgba(31, 215, 193, 1);
+    color:white;
 }
 
 .türkisBigView {
@@ -98,6 +103,7 @@
 
     border-radius: 8px;
     background: rgba(31, 215, 193, 1);
+    color:white;
 }
 
 .taskTitle p {
@@ -234,8 +240,9 @@
     text-align: center;
     position: relative;
     display: inline-block;
-    border: 1px solid red;
-    border-radius: 50px;
+    border: 1px solid  rgb(255, 255, 255, 1);
+    color:  rgb(255, 255, 255, 1);
+    border-radius: 45px;
     width:30px;
     height:30px;
 }
@@ -245,8 +252,8 @@ select.contactsCircle option{
     text-align: center;
     position: relative;
     display: inline-block;
-    border: 1px solid red;
-    border-radius: 50px;
+    border: 1px solid rgb(255, 255, 255, 1);
+    border-radius: 45px;
     width:30px;
     height:30px;
 }
@@ -264,30 +271,30 @@ select.contactsCircle option{
 
 .contactsCircle:first-child {
     margin-left: 0px;
-    background-color: aqua;
+    background-color: rgba(110, 82, 255, 1);
 }
 
 .contactsCircle:nth-child(2) {
     z-index: 2;
-    background-color: rgb(87, 119, 119);
+    background-color: rgba(31, 215, 193, 1);
     transform: translateX(-15px)
 }
 
 .contactsCircle:nth-child(3) {
     z-index: 3;
-    background-color: rgb(87, 119, 119);
+    background-color:rgba(252, 113, 255, 1);
     transform: translateX(-30px)
 }
 
 .contactsCircle:nth-child(4) {
     z-index: 4;
-    background-color: rgb(187, 255, 0);
+    background-color:rgba(195, 255, 43, 1);
     transform: translateX(-45px)
 }
 
 .contactsCircle:nth-child(5) {
     z-index: 5;
-    background-color: rgb(38, 0, 255);
+    background-color:rgba(255, 187, 43, 1);
     transform: translateX(-60px)
 }
 

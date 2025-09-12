@@ -1,6 +1,7 @@
 function renderHTMLOfPopup() {  //Zeile 47 select Contacts
   return `
-    <section class="addTaskPopupMain">
+    <section   class="addTaskPopupMain">
+    <div onclick="openTasktypeDropDown()" id="hiddenlayer" class="hiddenlayer show" ></div>
         <div class="popup-header">
           <h1>Add Task</h1>
           <img onclick="closePopup()" src="/img/icons/close-icon.svg" />
@@ -13,7 +14,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
               <label for="">Description</label>
               <textarea rows="5" id="task-description" placeholder="Enter a description"></textarea>
               <label for="date">Due Date<span class="requiredStar">*</span></label>
-              <input class="input-section-left-input" id="dueDate" type="date">
+              <input class="input-section-left-input" id="dueDate" placeholder="dd/mm/yyyy">
             </section>
 
           <div class="line"></div>
@@ -45,13 +46,16 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
             <div id="choosenContacts" class="choosenContacts"></div>
 
             <label for="category">Category<span class="requiredStar">*</span></label>
-            <select id="IdForTaskChoise" class="section-right-select" required tabindex="0">
-              <option value="" disabled selected hidden>
-                Select Task Category
-              </option>
-              <option value="Technical Task">Technical Task</option>
-              <option value="User Story">User Story</option>
-            </select>
+            <div id="IdForTaskChoise" class="section-right-select" onclick="event.stopPropagation(); openTasktypeDropDown()">
+            <p id="selectedTask" >Select Task Category</p>
+              <img id="arrowImg" class="select-arrow-down" src="/img/icons/select-arrow-down.svg">
+            </div>
+            <div id="dropId" class="dropTasktypeClose dropTasktypeOpen" >
+                
+              <div onclick="openTasktypeDropDown()" onmousedown="chooseValue()" id="option" class="taskOption" data-value="Technical Task">Technical Task</div>
+              <div onclick="openTasktypeDropDown()" onmousedown="chooseValue()" id="option" class="taskOption" data-value="User Story">User Story</div>
+              </div>
+            
 
             <label for="subtask">Subtask</label>
             <div class="subtask-wrapper">
@@ -86,6 +90,8 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
         <div class="reportPopup" id="report">
           Task added to board <img src="/img/icons/board.svg" />
         </div>
+        
       </section>
     `
 }
+

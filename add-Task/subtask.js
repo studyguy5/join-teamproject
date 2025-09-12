@@ -1,12 +1,15 @@
+let currentCount;
+let index = currentCount;
+
 
 // rendert edit and delete Icons beim Hoovern
 function renderSubtask(){
-    let subtask = document.getElementById("subtask");
-    let list = document.getElementById("subtask-list-1");
+    let subtask = document.getElementById("subtask"); // der standard input
+    let list = document.getElementById("subtask-list-1"); // das zusätzliche <ul> element
 
 
-    let currentCount = list.getElementsByClassName("listed").length;
-    let index = currentCount;
+    let currentCount = list.getElementsByClassName("listed").length; //klasse von li element
+    index = currentCount;
 
     if (currentCount < 2 && subtask.value.trim() !==""){
         list.innerHTML += `<li onclick="editBulletpoint(${index})" id="listed-${index}" class="listed"> 
@@ -19,6 +22,8 @@ function renderSubtask(){
                             </li>
         `;
         subtask.value = "";
+        // d = document.getElementById('task-text-0').innerHTML;
+        // console.log(d);
     }
 }
 

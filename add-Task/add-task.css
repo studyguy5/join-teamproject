@@ -278,6 +278,7 @@
     width:100%;
     max-width: 309px;
     gap: 16px;
+    z-index: 5;
 }
 .create-task-btn{
     width: 140px;

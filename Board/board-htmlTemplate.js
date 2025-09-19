@@ -36,24 +36,23 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
             </section>
 
             <label for="contactSelection">Assigned to</label>
-            <select  class="section-right-select" id="IdForContacts" required tabindex="0">
-              <option  value="">  
-                Select your Contacts
-              </option>
+            <div  class="section-right-select"  required tabindex="0" onclick="openContactView()">
+              <p >Select contacts to assign</p>
+              <img id="arrowImgC" class="select-arrow-downC" src="/img/icons/select-arrow-down.svg"> 
+            </div>
+            <div id="IdForContacts" class="availibleContactsOpen availibleContactsClose">
               
-              
-            </select>
+            </div>
             <div id="choosenContacts" class="choosenContacts"></div>
-
             <label for="category">Category<span class="requiredStar">*</span></label>
             <div id="IdForTaskChoise" class="section-right-select" onclick="event.stopPropagation(); openTasktypeDropDown()">
-            <p id="selectedTask" >Select Task Category</p>
-              <img id="arrowImg" class="select-arrow-down" src="/img/icons/select-arrow-down.svg">
+              <p id="selectedTask" >Select Task Category</p>
+              <img id="arrowImg" class="select-arrow-downT" src="/img/icons/select-arrow-down.svg">
             </div>
-            <div id="dropId" class="dropTasktypeClose dropTasktypeOpen" >
+              <div id="dropId" class="dropTasktypeClose dropTasktypeOpen" >
                 
-              <div onclick="openTasktypeDropDown()" onmousedown="chooseValue()" id="option" class="taskOption" data-value="Technical Task">Technical Task</div>
-              <div onclick="openTasktypeDropDown()" onmousedown="chooseValue()" id="option" class="taskOption" data-value="User Story">User Story</div>
+                <div onclick="openTasktypeDropDown()" onmousedown="chooseValue()" id="option" class="taskOption" data-value="Technical Task">Technical Task</div>
+                <div onclick="openTasktypeDropDown()" onmousedown="chooseValue()" id="option" class="taskOption" data-value="User Story">User Story</div>
               </div>
             
 

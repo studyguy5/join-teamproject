@@ -122,13 +122,42 @@ function showContacts() {
 
     for (let index = 1; index < contactsArray.length; index++) {
         console.log(contactsArray);
-        contacts.innerHTML += `
-            <option class="contactBox" value="${contactsArray[index].name}"> 
-            <div class="contactsCircle">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
-              ${contactsArray[index].name}
-              </option> `
+        contacts.innerHTML += `<div onclick="" class="contactBox">
+        <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
+            <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
+            <img  id="checkboxImg-${index}" onclick="chooseContact(${index})" class="checkbox" value="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
+            </div>`
 
     }
+}
+
+function chooseContact(index){
+    let choContact = document.getElementById(`checkboxImg-${index}`)
+    if(choContact.src.includes("/img/icons/normalCheckContact.svg")){
+        choContact.classList.remove('checkbox')
+        choContact.classList.add('checked')
+        renderChoosenContact(index);
+    choContact.src= "/img/icons/normalCheckedContact.svg"}else{
+        choContact.classList.add('checkbox')
+        choContact.classList.remove('checked')
+        deleteRenderedContact(index);
+        choContact.src= "/img/icons/normalCheckContact.svg"
+    }
+}
+
+function renderChoosenContact(index){
+    let listContact = document.getElementById('choosenContacts')
+    
+    listContact.innerHTML+=`
+    <div id="contactCirclePopupRender-${index}" class="contactCirclePopupRender">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
+    `
+    console.log(listContact);
+}
+
+function deleteRenderedContact(index){
+    let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
+    renderedContact.remove(`contactCirclePopupRender-${index}`)
+    renderedContact.innerHTML = '';
 }
 
 function openTasktypeDropDown(){
@@ -139,6 +168,15 @@ function openTasktypeDropDown(){
     if(document.querySelectorAll('.dropTasktypeOpen')){
         let ch = document.getElementById('arrowImg')
         ch.classList.toggle('select-arrow-open') 
+    }
+}
+
+function openContactView(){
+    let contactDrop = document.getElementById('IdForContacts')
+    contactDrop.classList.toggle('availibleContactsClose')
+    if(document.querySelectorAll('availibleContactsOpen')){
+        let contact = document.getElementById('arrowImgC')
+        contact.classList.toggle('select-arrow-open')
     }
 }
 

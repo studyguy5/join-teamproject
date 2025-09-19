@@ -156,24 +156,24 @@ function getSubtaskFromTemplate() {
     } else { '' }
 }
 
-function setContactAndPrioValue(newTask) {
+function setContactAndPrioValue(newTask, contactsArray, index) {
     console.log('wird auch aufgerufen')
-    let Contacts = document.getElementById('IdForContacts').value
-    newTask.assignedTo.push(Contacts);
+    // hier die gewählten Kontakte herausfiltern
+    let result = document.querySelectorAll('.contactCirclePopupRender').value
+    let filterC = contactsArray.filter(contactsArray[index].firstLetter == result)
+    console.log(filterC);
     newTask.prio = prioArray[0];
     tid++
 }
 
 
-async function getTaskInformation() {
+async function getTaskInformation(index) {
     let newTask = createTemplate();
     newTask.id = tid;
     for (let valueIndex = 0; valueIndex < taskObjectKey.length; valueIndex++) {
-        newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value
-    }
-    let Choise = document.getElementById('IdForTaskChoise').innerHTML
-    newTask.taskType = Choise
-    setContactAndPrioValue(newTask);
+        newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value};
+    newTask.taskType = document.getElementById('IdForTaskChoise').innerHTML
+    setContactAndPrioValue(newTask, index);
     getSubtaskFromTemplate();
     createTemplate(tid); //create complete template of object with all data
     subtaskArray = newTask.subtasks; //path from subtask Array where new subtasks should be pushed into
@@ -229,10 +229,11 @@ function renderTaskintoBoard(element) {
                 element.prio == 'low' ?
                     `<img src="/img/icons/low.svg">` : ''}</div>
         </div>
+        <div></div>
     </div>`
 
 }
-
+// ${Object.entries(tasks[2].subtasks)} Use this for bigview and Edit window
 
 function bigViewOfTask(id) {
     const elements = tasks.find(task => task.id === id);

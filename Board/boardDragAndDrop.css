@@ -247,27 +247,7 @@
     height:30px;
 }
 
-select.contactsCircle option{
-    align-content: center;
-    text-align: center;
-    position: relative;
-    display: inline-block;
-    border: 1px solid rgb(255, 255, 255, 1);
-    border-radius: 45px;
-    width:30px;
-    height:30px;
-}
 
-/* .contactscirclePopup {
-    align-content: center;
-    text-align: center;
-    position: relative;
-    display: inline-block;
-    border: 1px solid red;
-    border-radius: 50px;
-    width:30px;
-    height:30px;
-} */
 
 .contactsCircle:first-child {
     margin-left: 0px;

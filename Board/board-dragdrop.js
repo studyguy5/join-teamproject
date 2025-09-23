@@ -10,6 +10,7 @@ let index0 = 0;
 let index1 = 1;
 
 let subtaskArray = [];
+
 let subtaskvalue1;
 let subtaskvalue2;
 
@@ -49,64 +50,64 @@ async function sendAlltoFirebase(contactsArray, path = 'contact') {
 // let singleTaks = [];
 
 let tasks = [
-    {
-        'category': 'Todo',
-        'id': 0,
-        'taskType': 'technical Task',
-        'title': 'Setup File',
-        'description': 'setup file-structure in order to start working',
-        'Due Date': '10.09.25',
-        'prio': 'medium',
-        'assignedTo': ['Robert Fox'],
-        'subtasks': {
-            'done': 'use Camelcase technic',
-            'done': 'connect with github',
-            'open': 'push code to github'
-        },
-    },
-    {
-        'category': 'Todo',
-        'id': 1,
-        'taskType': 'technical Task',
-        'title': 'Take a zoom meeting',
-        'description': 'discuss important topics and distribute roles',
-        'Due Date': '25.09.25',
-        'prio': 'urgent',
-        'assignedTo': ['Robert Fox', 'Christina Tranvile'],
-        'subtasks': {
-            'done': 'invite team Members',
-            'done': 'include google calender',
-            'open': 'inform People about side Points'
-        },
-    },
-    {
-        'category': 'Inprogress',
-        'id': 2,
-        'taskType': 'User Story',
-        'title': 'Add Chat function to board',
-        'description': 'add Chat function to board for Users to communicate better',
-        'Due Date': '30.09.25',
-        'prio': 'medium',
-        'assignedTo': ['Robert Fox', 'Christina Tranvile', 'Tom Cruise'],
-        'subtasks': {
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
-                '<label for="vehicle1"> I have a bike</label><br></br>',
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
-                '<label for="vehicle1"> I have a bike</label><br></br>',
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
-                '<label for="vehicle1"> I have a bike</label><br></br>'
-        },
-    }
+    // {
+    //     'category': 'Todo',
+    //     'id': 0,
+    //     'taskType': 'technical Task',
+    //     'title': 'Setup File',
+    //     'description': 'setup file-structure in order to start working',
+    //     'Due Date': '10.09.25',
+    //     'prio': 'medium',
+    //     'assignedTo': ['Robert Fox'],
+    //     'subtasks': {
+    //         'done': 'use Camelcase technic',
+    //         'done': 'connect with github',
+    //         'open': 'push code to github'
+    //     },
+    // },
+    // {
+    //     'category': 'Todo',
+    //     'id': 1,
+    //     'taskType': 'technical Task',
+    //     'title': 'Take a zoom meeting',
+    //     'description': 'discuss important topics and distribute roles',
+    //     'Due Date': '25.09.25',
+    //     'prio': 'urgent',
+    //     'assignedTo': ['Robert Fox', 'Christina Tranvile'],
+    //     'subtasks': {
+    //         'done': 'invite team Members',
+    //         'done': 'include google calender',
+    //         'open': 'inform People about side Points'
+    //     },
+    // },
+    // {
+    //     'category': 'Inprogress',
+    //     'id': 2,
+    //     'taskType': 'User Story',
+    //     'title': 'Add Chat function to board',
+    //     'description': 'add Chat function to board for Users to communicate better',
+    //     'Due Date': '30.09.25',
+    //     'prio': 'medium',
+    //     'assignedTo': ['Robert Fox', 'Christina Tranvile', 'Tom Cruise'],
+    //     'subtasks': {
+    //         '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
+    //             '<label for="vehicle1"> I have a bike</label><br></br>',
+    //         '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
+    //             '<label for="vehicle1"> I have a bike</label><br></br>',
+    //         '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
+    //             '<label for="vehicle1"> I have a bike</label><br></br>'
+    //     },
+    // }
 ];
 // Vorlage um in task zu pushen
 
-let tid = 3;
+let tid = 0;
 
 function createTemplate(tid) {
 
     console.log('createTemplate() wird aufgerufen')
     return {
-        'category': '',
+        'category': 'Todo',
         'id': `${tid}`,
         'taskType': '',
         'title': '',
@@ -156,14 +157,14 @@ function getSubtaskFromTemplate() {
     } else { '' }
 }
 
-function setContactAndPrioValue(newTask, contactsArray, index) {
-    console.log('wird auch aufgerufen')
-    // hier die gewählten Kontakte herausfiltern
-    let result = document.querySelectorAll('.contactCirclePopupRender').value
-    let filterC = contactsArray.filter(contactsArray[index].firstLetter == result)
-    console.log(filterC);
+  function setContactAndPrioValue(newTask) {
+    let checkedImg = document.querySelectorAll('#IdForContacts img.checked')
+    checkedImg.forEach(img =>  {names = img.dataset.set;
+    newTask.assignedTo.push(names)})
+    console.log(newTask.assignedTo);
     newTask.prio = prioArray[0];
     tid++
+    
 }
 
 
@@ -172,7 +173,7 @@ async function getTaskInformation(index) {
     newTask.id = tid;
     for (let valueIndex = 0; valueIndex < taskObjectKey.length; valueIndex++) {
         newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value};
-    newTask.taskType = document.getElementById('IdForTaskChoise').innerHTML
+    newTask.taskType = document.getElementById('IdForTaskChoise').innerText
     setContactAndPrioValue(newTask, index);
     getSubtaskFromTemplate();
     createTemplate(tid); //create complete template of object with all data
@@ -184,7 +185,6 @@ async function getTaskInformation(index) {
     filterAndShowTasks();
 };
 
-// task-text-${index}
 
 async function filterAndShowTasks() {
     console.log(tasks)

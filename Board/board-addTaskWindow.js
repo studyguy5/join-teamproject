@@ -121,11 +121,11 @@ function showContacts() {
     
 
     for (let index = 1; index < contactsArray.length; index++) {
-        console.log(contactsArray);
+        // console.log(contactsArray);
         contacts.innerHTML += `<div onclick="" class="contactBox">
         <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
             <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
-            <img  id="checkboxImg-${index}" onclick="chooseContact(${index})" class="checkbox" value="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
+            <img  id="checkboxImg-${index}" onclick="chooseContact(${index})" class="checkbox" data-set="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
             </div>`
 
     }

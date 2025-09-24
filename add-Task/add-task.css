@@ -393,3 +393,16 @@ textarea:focus::placeholder {
       width: 30px;
       height: 30px;
     }
+
+    .required {
+        color: #FF8190;
+        font-size: 12px;
+        margin-top: 0px;
+        font-weight: 400;
+    }
+    .d-none{
+        display: none;
+    }
+    .input-error {
+        border: 1px solid #FF8190;
+    }

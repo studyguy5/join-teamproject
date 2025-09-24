@@ -49,7 +49,7 @@ async function sendAlltoFirebase(contactsArray, path = 'contact') {
 
 // let singleTaks = [];
 
-let tasks = [
+//let tasks = [
     // {
     //     'category': 'Todo',
     //     'id': 0,
@@ -98,7 +98,7 @@ let tasks = [
     //             '<label for="vehicle1"> I have a bike</label><br></br>'
     //     },
     // }
-];
+//];
 // Vorlage um in task zu pushen
 
 let tid = 0;

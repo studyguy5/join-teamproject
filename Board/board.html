@@ -16,6 +16,7 @@
     <script src="/add-Task/subtask.js" defer></script>
     <script src="board-htmlTemplate.js"></script>
     <script src="board-dragdrop.js" defer></script>
+    
 
     
 </head>
@@ -55,7 +56,7 @@
                             <div class="inputBorder">
                                 <input id="FindTask" type="text" class="searchTasks" min="2" placeholder="Find Task">
                                 <hr>
-                                <img src="/img/icons/search.svg" alt="search Symbol" class="searchSymbol">
+                                <img src="/img/icons/search.svg" alt="search Symbol" class="searchSymbol" onclick="beginSearching()">
                             </div>
                             <button onclick="addTask()" class="addTaskButton"> AddTask +</button>
                             
@@ -92,6 +93,6 @@
         </main>
     
 </body>
-
+<script src="taskArrayTestDatei.js"></script>
 
 </html>

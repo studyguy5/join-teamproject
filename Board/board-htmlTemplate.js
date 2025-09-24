@@ -11,10 +11,12 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
           <section class="input-section-leftPopup">
               <label for="task-title">Title<span class="requiredStar">*</span></label>
               <input class="input-section-left-input" id="title" type="text" placeholder="Enter a title" />
+
               <label for="">Description</label>
               <textarea rows="5" id="task-description" placeholder="Enter a description"></textarea>
+
               <label for="date">Due Date<span class="requiredStar">*</span></label>
-              <input class="input-section-left-input" id="dueDate" placeholder="dd/mm/yyyy">
+              <input class="input-section-left-input date-input" id="dueDate" placeholder="dd/mm/yyyy">
             </section>
 
           <div class="line"></div>

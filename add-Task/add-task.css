@@ -29,6 +29,14 @@
     padding: 12px 21px;
     font-size: 20px;
 }
+.date-input {
+  background: url("../img/icons/event.svg");
+  background-position: right 16px center;
+  background-repeat: no-repeat;
+  background-size: 24px; 
+  padding-right: 30px;   
+  background-color: #ffffff;
+}
 .section-right-select{
     max-width:440px;
     border-radius: 7px;

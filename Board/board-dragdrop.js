@@ -186,21 +186,20 @@ async function getTaskInformation(index) {
 };
 
 
-async function filterAndShowTasks() {
-    console.log(tasks)
-    for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
-        document.getElementById(`${categorys[idIndex]}`).innerHTML = '';
-        let filteredTasks = tasks.filter(f => f.category == categorys[idIndex]);
-        for (let catIndex = 0; catIndex < filteredTasks.length; catIndex++) {
-            let element = filteredTasks[catIndex];
-            document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoard(element);
-            if (document.getElementById(`${categorys[idIndex]}`)) {
-                renderContact(element);
-            }
-        }
-    }
-    //  deleteData('');
-}
+ async function filterAndShowTasks() {
+     console.log(tasks)
+     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
+         document.getElementById(`${categorys[idIndex]}`).innerHTML = '';
+         let filteredTasks = tasks.filter(f => f.category == categorys[idIndex]);
+         for (let catIndex = 0; catIndex < filteredTasks.length; catIndex++) {
+             let element = filteredTasks[catIndex];
+             document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoard(element);
+             if (document.getElementById(`${categorys[idIndex]}`)) {
+                 renderContact(element);
+             }
+         }
+     }
+ }
 
 let subtaskArrae = 5
 let progress = (3/subtaskArrae)*100

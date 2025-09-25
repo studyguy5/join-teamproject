@@ -47,9 +47,11 @@
     justify-content: space-between;
     align-items: center;
     gap: 50px;
-
-    
 }
+
+
+
+
 .box-upper-left {
     display: flex;
     align-items: center;
@@ -75,9 +77,6 @@
     color: #FFFFFF;
 }
 
-.box-upper-left:hover img {
-    content: url('/img/icons/pencile-gray.svg');
-}
 
 .box-upper-text {
     display: flex;
@@ -116,9 +115,7 @@
     color: #FFFFFF;
 }
 
-.box-upper-right:hover img {
-    content: url('../img/hook-hover.svg');
-}
+
 
 
 .box-middle {

@@ -9,7 +9,6 @@
     <!-- <link rel="stylesheet" href="/global/templates.css"> -->
     <link rel="stylesheet" href="/summary/summary.css">
     <script src="/global/includeHTML.js"></script>
-    <script src="/summary/summary-basic.js"></script>
 </head>
 
 <body>
@@ -56,7 +55,7 @@
 
                     <div class="box-upper">
                         <div onclick="summaryToBoard()" class="box-upper-left">
-                            <img src="/img/icons/pencilToDo.svg">
+                            <img src="../img/icons/summary-pencil-default.svg" alt="">
                             <div class="box-upper-text">
                                 0<span>To-Do</span>
                             </div>
@@ -65,7 +64,7 @@
 
 
                         <div onclick="summaryToBoard()" class="box-upper-right">
-                            <img src="../img/hook59.svg">
+                            <img src="../img/icons/summary-done-icon-default.svg" alt="">
                             <div class="box-upper-text">
                                 0<span>Done</span>
                             </div>
@@ -77,11 +76,11 @@
 
 
                     <div onclick="summaryToBoard()" class="box-middle">
-                        <img src="../img/urgentSymbol.svg">
+                        <img src="../img/icons/urgentSymbol.svg">
                         <div class="box-middle-text">
                             0<span>Urgent</span>
                         </div>
-                        <img class="box-middle-delimiter" src="../img/delimiter-vertical.svg">
+                        <img class="box-middle-delimiter" src="../img/icons/delimiter-vertical.svg">
                         <div>
                             <p class="date">date</p>
                             <p class="upcoming">Upcoming deadline</p>
@@ -122,5 +121,5 @@
         </div>
     </main>
 </body>
-
+ <script src="/summary/summary-basic.js"></script>
 </html>

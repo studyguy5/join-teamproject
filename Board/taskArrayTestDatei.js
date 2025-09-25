@@ -50,7 +50,9 @@ let tasks = [
 ];
 
 
-
+// searched Task function 
+// done by : Arnesto @tasks 
+// as parameter and modified function filter and show task to filterAndShowTasksAlternate(array)
 
 function beginSearching() {
     const searchField = document.querySelector('#FindTask')
@@ -68,7 +70,6 @@ function init_beginSearching() {
     return
 }
 
-//#29ABE2
 function init_finishSearching() {
     const imgContainer = document.querySelector('.searchSymbol')
     imgContainer.setAttribute('src', "/img/icons/search.svg")
@@ -111,8 +112,6 @@ function searchTaskEventHandling() {
     return
 }
 
-
-
 async function filterAndShowTasksAlternate(array) {
     console.log(array)
     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
@@ -128,3 +127,4 @@ async function filterAndShowTasksAlternate(array) {
     }
 }
 
+//-----------------------------------------------------------------------------------------------------------------

@@ -101,6 +101,11 @@ async function sendAlltoFirebase(contactsArray, path = 'contact') {
 //];
 // Vorlage um in task zu pushen
 
+
+
+
+
+
 let tid = 0;
 
 function createTemplate(tid) {

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     createaddTaskPopup();
     sectionCheck('board');
     filterAndShowTasks();
-    
+    searchTaskEventHandling();
     contacts = await getObject(path = '/contacts')
     console.log(contacts);
     contactsArray = objectToArray(contacts)
@@ -194,3 +194,5 @@ function stopBubbling(event){
         
         event.stopPropagation()
     }
+
+

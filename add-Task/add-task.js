@@ -21,7 +21,7 @@ function sectionCheck(idsecTrue) {
         buttons.forEach(b => b.classList.remove("urgent", "medium", "low"));
         const priority = button.dataset.priority;
         button.classList.add(priority);
-      console.log('event works')});
+      console.log(priority)});
     });
   
 

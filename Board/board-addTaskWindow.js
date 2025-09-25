@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 buttons.forEach(b => b.classList.remove("urgent", "medium", "low"));
                 const priority = button.dataset.priority;
                 button.classList.add(priority);
-                // prioArray.push(priority);
                 console.log(priority)
                 prioArray = [];
                 prioArray.push(priority);

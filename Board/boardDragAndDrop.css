@@ -158,6 +158,7 @@
 }
 
 .bigViewOfTask {
+    z-index: 4;
     position: absolute;
     top: 120px;
     right: 30px;
@@ -170,6 +171,9 @@
     padding: 48px 40px;
 }
 
+/* .singleContactBoxForBigView{
+    display: flex;
+} */
 .bigViewHeadlineCloseArea {
     display: flex;
     justify-content: space-between;
@@ -221,12 +225,20 @@
 
 .priorityBigView{
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
+    align-items: center;
     width:100%;
     max-width:237px;
     margin: 0px 0px 24px 0px;
 }
 
+.priorityBigView p{
+    margin-right:30px;
+}
+
+.priorityBigView img{
+    margin-left:10px;
+}
 .contactsMiniView{
     height:32px;
     width:100%;
@@ -246,6 +258,7 @@
     width:30px;
     height:30px;
 }
+
 
 
 
@@ -290,3 +303,48 @@
     
 }
 
+.singleContactBoxForBigView{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    max-width:445px;
+    width:100%;
+    height:56px;
+}
+
+.contactCircleBigView {
+    align-content: center;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    border: 1px solid  rgb(255, 255, 255, 1);
+    color:  rgb(255, 255, 255, 1);
+    border-radius: 45px;
+    width:30px;
+    height:30px;
+    margin-right:16px;
+}
+
+.singleContactBoxForBigView:first-child .contactCircleBigView{
+    background-color: rgba(110, 82, 255, 1);
+}
+
+.singleContactBoxForBigView:nth-child(2) .contactCircleBigView{
+    background-color: rgba(31, 215, 193, 1);
+}
+
+.singleContactBoxForBigView:nth-child(3) .contactCircleBigView{
+     background-color:rgba(252, 113, 255, 1);
+    }
+    
+    .singleContactBoxForBigView:nth-child(4) .contactCircleBigView{
+        background-color:rgba(195, 255, 43, 1);
+    }
+    
+    .singleContactBoxForBigView:nth-child(5) .contactCircleBigView{
+     background-color:rgba(255, 187, 43, 1);
+}
+
+.singleContactBoxForBigView:nth-child(6) .contactCircleBigView{
+     background-color: rgb(255, 0, 0);
+}

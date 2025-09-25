@@ -427,27 +427,27 @@
     font-size: 12px;
 }
 
-.contactBox:first-child .contactCirclePopup, .contactCirclePopupRender {
+.contactBox:first-child .contactCirclePopup {
     background-color: rgba(110, 82, 255, 1);
 }
 
-.contactBox:nth-child(2) .contactCirclePopup, .contactCirclePopupRender {
+.contactBox:nth-child(2) .contactCirclePopup {
     background-color: rgba(31, 215, 193, 1);
 }
 
-.contactBox:nth-child(3) .contactCirclePopup, .contactCirclePopupRender {
+.contactBox:nth-child(3) .contactCirclePopup {
     background-color:rgba(252, 113, 255, 1);
 }
 
-.contactBox:nth-child(4) .contactCirclePopup, .contactCirclePopupRender {
+.contactBox:nth-child(4) .contactCirclePopup {
     background-color:rgba(195, 255, 43, 1);
 }
 
-.contactBox:nth-child(5) .contactCirclePopup, .contactCirclePopupRender {
+.contactBox:nth-child(5) .contactCirclePopup {
     background-color:rgba(255, 187, 43, 1);
 }
 
-.contactBox:nth-child(6) .contactCirclePopup, .contactCirclePopupRender {
+.contactBox:nth-child(6) .contactCirclePopup {
     background-color: rgb(255, 0, 0);
 }
 

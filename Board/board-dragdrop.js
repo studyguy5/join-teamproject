@@ -50,54 +50,54 @@ async function sendAlltoFirebase(contactsArray, path = 'contact') {
 // let singleTaks = [];
 
 let tasks = [
-    // {
-    //     'category': 'Todo',
-    //     'id': 0,
-    //     'taskType': 'technical Task',
-    //     'title': 'Setup File',
-    //     'description': 'setup file-structure in order to start working',
-    //     'Due Date': '10.09.25',
-    //     'prio': 'medium',
-    //     'assignedTo': ['Robert Fox'],
-    //     'subtasks': {
-    //         'done': 'use Camelcase technic',
-    //         'done': 'connect with github',
-    //         'open': 'push code to github'
-    //     },
-    // },
-    // {
-    //     'category': 'Todo',
-    //     'id': 1,
-    //     'taskType': 'technical Task',
-    //     'title': 'Take a zoom meeting',
-    //     'description': 'discuss important topics and distribute roles',
-    //     'Due Date': '25.09.25',
-    //     'prio': 'urgent',
-    //     'assignedTo': ['Robert Fox', 'Christina Tranvile'],
-    //     'subtasks': {
-    //         'done': 'invite team Members',
-    //         'done': 'include google calender',
-    //         'open': 'inform People about side Points'
-    //     },
-    // },
-    // {
-    //     'category': 'Inprogress',
-    //     'id': 2,
-    //     'taskType': 'User Story',
-    //     'title': 'Add Chat function to board',
-    //     'description': 'add Chat function to board for Users to communicate better',
-    //     'Due Date': '30.09.25',
-    //     'prio': 'medium',
-    //     'assignedTo': ['Robert Fox', 'Christina Tranvile', 'Tom Cruise'],
-    //     'subtasks': {
-    //         '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
-    //             '<label for="vehicle1"> I have a bike</label><br></br>',
-    //         '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
-    //             '<label for="vehicle1"> I have a bike</label><br></br>',
-    //         '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
-    //             '<label for="vehicle1"> I have a bike</label><br></br>'
-    //     },
-    // }
+    {
+        'category': 'Todo',
+        'id': 0,
+        'taskType': 'technical Task',
+        'title': 'Setup File',
+        'description': 'setup file-structure in order to start working',
+        'Due Date': '10.09.25',
+        'prio': 'Medium',
+        'assignedTo': ['Robert Fox'],
+        'subtasks': {
+            'done': 'use Camelcase technic',
+            'done': 'connect with github',
+            'open': 'push code to github'
+        },
+    },
+    {
+        'category': 'Todo',
+        'id': 1,
+        'taskType': 'technical Task',
+        'title': 'Take a zoom meeting',
+        'description': 'discuss important topics and distribute roles',
+        'Due Date': '25.09.25',
+        'prio': 'Urgent',
+        'assignedTo': ['Robert Fox', 'Christina Tranvile'],
+        'subtasks': {
+            'done': 'invite team Members',
+            'done': 'include google calender',
+            'open': 'inform People about side Points'
+        },
+    },
+    {
+        'category': 'Inprogress',
+        'id': 2,
+        'taskType': 'User Story',
+        'title': 'Add Chat function to board',
+        'description': 'add Chat function to board for Users to communicate better',
+        'Due Date': '30.09.25',
+        'prio': 'Medium',
+        'assignedTo': ['Robert Fox', 'Christina Tranvile', 'Tom Cruise'],
+        'subtasks': {
+            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
+                '<label for="vehicle1"> I have a bike</label><br></br>',
+            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
+                '<label for="vehicle1"> I have a bike</label><br></br>',
+            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
+                '<label for="vehicle1"> I have a bike</label><br></br>'
+        },
+    }
 ];
 // Vorlage um in task zu pushen
 
@@ -118,7 +118,7 @@ function createTemplate(tid) {
 
         ],
         'subtasks': [
-        
+
         ]
     }
 }
@@ -157,14 +157,16 @@ function getSubtaskFromTemplate() {
     } else { '' }
 }
 
-  function setContactAndPrioValue(newTask) {
+function setContactAndPrioValue(newTask) {
     let checkedImg = document.querySelectorAll('#IdForContacts img.checked')
-    checkedImg.forEach(img =>  {names = img.dataset.set;
-    newTask.assignedTo.push(names)})
+    checkedImg.forEach(img => {
+        names = img.dataset.set;
+        newTask.assignedTo.push(names)
+    })
     console.log(newTask.assignedTo);
     newTask.prio = prioArray[0];
     tid++
-    
+
 }
 
 
@@ -172,7 +174,8 @@ async function getTaskInformation(index) {
     let newTask = createTemplate();
     newTask.id = tid;
     for (let valueIndex = 0; valueIndex < taskObjectKey.length; valueIndex++) {
-        newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value};
+        newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value
+    };
     newTask.taskType = document.getElementById('IdForTaskChoise').innerText
     setContactAndPrioValue(newTask, index);
     getSubtaskFromTemplate();
@@ -203,13 +206,14 @@ async function filterAndShowTasks() {
 }
 
 let subtaskArrae = 5
-let progress = (3/subtaskArrae)*100
+let progress = (3 / subtaskArrae) * 100
 function renderTaskintoBoard(element) {
     let taskOption = 'türkis';
     if (element.taskType !== 'technical Task') {
         taskOption = 'darkblue';
     }
-    return `<div draggable="true" ondragstart="startDragging(${element['id']})" id="TaskDiv" onclick="bigViewOfTask(${element.id})" class="TaskDiv">
+    return `<div draggable="true" ondragstart="startDragging(${element['id']})" 
+    id="TaskDiv" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderSubtaskForBigView(${element.id})" class="TaskDiv">
     <div id="taskType" class="${taskOption}">${element.taskType}</div>
     <div class="taskTitle"><p>${element.title}</p></div>
     <div class="taskDescription"><p>${element.description}</p></div>
@@ -222,11 +226,11 @@ function renderTaskintoBoard(element) {
         </div>
     <div id="contacts-Priority-Container" class="contacts-Priority-Container" >
     <div id="${element.id}" class="contactsMiniView"></div>
-    <div class="taskPriority">${element.prio == 'urgent' ?
+    <div class="taskPriority">${element.prio == 'Urgent' ?
             `<img src="/img/icons/urgent.svg">` :
-            element.prio == 'medium' ?
+            element.prio == 'Medium' ?
                 `<img src="/img/icons/medium.svg">` :
-                element.prio == 'low' ?
+                element.prio == 'Low' ?
                     `<img src="/img/icons/low.svg">` : ''}</div>
         </div>
         <div></div>
@@ -252,19 +256,52 @@ function bigViewOfTask(id) {
     <div class="titleBigView"><h2>${elements.title}</h2></div>
     <div class="descriptionBigView"><p>${elements.description}</p></div>
     <div class="dueDateBigView"> <p>Due Date:</p> ${elements["Due Date"]}</div>
-    <div class="priorityBigView"><p>Priority</p>${elements.prio == 'urgent' ?
-            `<img src="/img/icons/urgent.svg">` :
-            elements.prio == 'medium' ?
-                `<img src="/img/icons/medium.svg">` :
-                elements.prio == 'low' ?
-                    `<img src="/img/icons/low.svg">` : ''}
+    <div class="priorityBigView"><p>Priority:</p>${elements.prio == 'Urgent' ?
+            `${elements.prio}<img src="/img/icons/urgent.svg">` :
+            elements.prio == 'Medium' ?
+                `${elements.prio}<img src="/img/icons/medium.svg">` :
+                elements.prio == 'Low' ?
+                    `${elements.prio}<img src="/img/icons/low.svg">` : ''}
      </div>
-     <div class="assignedToBigView"><p>assigned To:</p> 
-     <div id="contacts" class="contacts">
+     <div class="assignedToBigView"><p>Assigned To:</p> 
+     <div id="contactsBV" class="contactsBV"></div>
+     </div>
+     
+     <div class="subtaskBigView"><p>Subtasks:</p>
+     <div id="subTaskForBigView" class="subTaskForBigView"> 
+     <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                <label for="vehicle1">${Object.values(elements.subtasks)}</label><br></br>
+     </div>
      </div>
      `
-    console.log(prioArray[0]);
+
 };
+
+function renderContactForBigView(id) {
+    let rightContacts = tasks.find(task => task.id === id)
+    let contactForBig = document.getElementById('contactsBV')
+    for (let BVindex = 0; BVindex < rightContacts.assignedTo.length; BVindex++) {
+        let short = rightContacts.assignedTo.map(sh => sh.split(" ").map(c => c.charAt(0)))
+        contactForBig.innerHTML += `
+        <div class="singleContactBoxForBigView">
+            <div id="contactCirclePopupRender-${BVindex}" class="contactCircleBigView">${short[BVindex][0] + short[BVindex][1]}</div>
+            <div id="singleContactInBigView-${BVindex}" > ${rightContacts.assignedTo[BVindex]}</div>
+        </div>
+    ` }
+    
+}
+
+function renderSubtaskForBigView(id){
+    let rightSubtasks = tasks.find(task => task.id === id)
+    let subBigView = document.getElementById('subTaskForBigView')
+    for (let index = 0; index < rightSubtasks.subtasks.length; index++) {
+        subBigView.innerHTML+=`
+        
+        `
+        
+    }
+    
+}
 
 
 function renderContact(element) {

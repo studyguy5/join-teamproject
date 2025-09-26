@@ -49,18 +49,21 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
               
             </div>
             <div id="choosenContacts" class="choosenContacts"></div>
-            
+
             <label for="category">Category<span class="requiredStar">*</span></label>
             <div id="IdForTaskChoise" class="section-right-select" onclick="event.stopPropagation(); openTasktypeDropDown()">
               <p id="selectedTask" >Select Task Category</p>
               <img id="arrowImg" class="select-arrow-downT" src="/img/icons/select-arrow-down.svg">
             </div>
+            <p class="required d-none">This field is required</p>
               <div id="dropId" class="dropTasktypeClose dropTasktypeOpen" >
+
+              <input type="hidden" id="categoryValue" name="category" class="hidden-input"> 
                 
                 <div onclick="openTasktypeDropDown()" onmousedown="chooseValue()" id="option" class="taskOption" data-value="Technical Task">Technical Task</div>
                 <div onclick="openTasktypeDropDown()" onmousedown="chooseValue()" id="option" class="taskOption" data-value="User Story">User Story</div>
               </div>
-              <p class="required d-none">This field is required</p>
+              
             
 
             <label for="subtask">Subtask</label>

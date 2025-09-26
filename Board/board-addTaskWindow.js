@@ -81,7 +81,7 @@ function createTaskTemplate() {
 function formValidationAddTaskTemp() {
     const title = document.getElementById("title").value;
     const dueDate = document.getElementById("dueDate").value;
-    // const category = document.getElementById("categoryValue").value; // <-- hidden input
+    const category = document.getElementById("categoryValue").value; // <-- hidden input
     
     if (title === "" || dueDate === "") {
         displayRequiredMessageTemp();
@@ -94,12 +94,12 @@ function formValidationAddTaskTemp() {
 function displayRequiredMessageTemp() {
     const titleInput = document.getElementById("title");
     const dateInput = document.getElementById("dueDate");
-    // const categoryInput = document.getElementById("categoryValue");
-    // const categoryDiv = document.getElementById("category");
+    const categoryInput = document.getElementById("categoryValue");
+    const categoryDiv = document.getElementById("IdForTaskChoise");
 
     const titleMessage = titleInput.nextElementSibling;
     const dateMessage = dateInput.nextElementSibling;
-    // const categoryMessage = categoryDiv.nextElementSibling;
+    const categoryMessage = categoryDiv.nextElementSibling;
 
     if (titleInput.value === "") {
         titleMessage.classList.remove("d-none");
@@ -117,13 +117,13 @@ function displayRequiredMessageTemp() {
         dateInput.classList.remove("input-error");
     }
 
-    // if (categoryInput.value === "") {
-    //     categoryMessage.classList.remove("d-none");
-    //     categoryDiv.classList.add("input-error");
-    // } else {
-    //     categoryMessage.classList.add("d-none");
-    //     categoryDiv.classList.remove("input-error");
-    // }
+    if (categoryInput.value === "") {
+        categoryMessage.classList.remove("d-none");
+        categoryDiv.classList.add("input-error");
+    } else {
+        categoryMessage.classList.add("d-none");
+        categoryDiv.classList.remove("input-error");
+    }
 }
 
 

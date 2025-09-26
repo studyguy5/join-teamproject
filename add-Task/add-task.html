@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/global/global.css">
-    <!-- <link rel="stylesheet" href="/global/templates.css"> -->
     <link rel="stylesheet" href="/add-Task/add-task.css">
-    <script src="/global/includeHTML.js"></script>
-    <script src="/add-Task/add-task.js" defer></script>
-    <script src="/add-Task/subtask.js" defer></script>
+    <link rel="stylesheet" href="../add-Task/select.css">
+    
 </head>
 
 <body>
@@ -50,14 +48,15 @@
 
             <section class="input-section-left">
                 <label for="task-title">Title<span class="requiredStar">*</span></label>
-                <input class="input-section-left-input" type="text" placeholder="Enter a title">
-                
+                <input id="title-add-task" class="input-section-left-input" type="text" placeholder="Enter a title">
+                <p class="required d-none">This field is required</p>
 
                 <label for="">Description</label>
                 <textarea rows="5" id="task-description" placeholder="Enter a description"></textarea>
 
                 <label for="date">Due Date<span class="requiredStar">*</span></label>
-                <input type="text" placeholder="dd/mm/yyyy" class="input-section-left-input date-input">
+                <input id="date-add-task" type="text" placeholder="dd/mm/yyyy" class="input-section-left-input date-input">
+                <p class="required d-none">This field is required</p>
                 
             </section>
 
@@ -79,11 +78,18 @@
                     </select>
 
                     <label for="category">Category<span class="requiredStar">*</span></label>
-                    <select class="section-right-select" required tabindex="0">
-                        <option value="" disabled selected hidden>Select Task Category</option>
-                        <option value="Technical Task">Technical Task</option>
-                        <option value="User Story">User Story</option>
-                    </select>
+                    <div class="custom-select" id="category">
+                        <button type="button" class="select-trigger">
+                            Select Task Category <img src="../img/icons/arrow_drop_downaa.svg">
+                        </button>
+                        <ul class="options">
+                            <li data-value="Technical Task">Technical Task</li>
+                            <li data-value="User Story">User Story</li>
+                        </ul>
+                        <input type="hidden" id="categoryValue" name="category" class="hidden-input"> 
+                        </div>
+                        <p class="required d-none">This field is required</p>
+
 
                      <label for="subtask">Subtask</label>
                     <div class="subtask-wrapper ">
@@ -107,7 +113,7 @@
 
             <div class="footer-buttons-section">
                 <button class="clear-btn" type="reset">Clear<img src="/img/icons/x.svg"></button>
-                <button onclick="showReportAddedTask()" class="create-task-btn">Create Task<img src="/img/icons/doneSymbol.svg"></button>
+                <button onclick="createTask()" class="create-task-btn">Create Task<img src="/img/icons/doneSymbol.svg"></button>
             </div>
 
         </div>
@@ -120,6 +126,11 @@
 
         </div>
     </main>
+
+    <script src="/global/includeHTML.js"></script>
+    <script src="/add-Task/add-task.js" defer></script>
+    <script src="/add-Task/subtask.js" defer></script>
+    <script src="../add-Task/select.js"></script>
 </body>
 
 </html>

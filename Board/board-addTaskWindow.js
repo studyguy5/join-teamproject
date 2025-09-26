@@ -72,7 +72,58 @@ function closePopup() {
 
 
 function createTaskTemplate() {
+    if (!formValidationAddTaskTemp()) return;
+
     showReportAddedTaskTemplate();
+}
+
+
+function formValidationAddTaskTemp() {
+    const title = document.getElementById("title").value;
+    const dueDate = document.getElementById("dueDate").value;
+    // const category = document.getElementById("categoryValue").value; // <-- hidden input
+    
+    if (title === "" || dueDate === "") {
+        displayRequiredMessageTemp();
+        return false;
+    }
+    return true;
+}
+
+
+function displayRequiredMessageTemp() {
+    const titleInput = document.getElementById("title");
+    const dateInput = document.getElementById("dueDate");
+    // const categoryInput = document.getElementById("categoryValue");
+    // const categoryDiv = document.getElementById("category");
+
+    const titleMessage = titleInput.nextElementSibling;
+    const dateMessage = dateInput.nextElementSibling;
+    // const categoryMessage = categoryDiv.nextElementSibling;
+
+    if (titleInput.value === "") {
+        titleMessage.classList.remove("d-none");
+        titleInput.classList.add("input-error");
+    } else {
+        titleMessage.classList.add("d-none");
+        titleInput.classList.remove("input-error");
+    }
+
+    if (dateInput.value === "") {
+        dateMessage.classList.remove("d-none");
+        dateInput.classList.add("input-error");
+    } else {
+        dateMessage.classList.add("d-none");
+        dateInput.classList.remove("input-error");
+    }
+
+    // if (categoryInput.value === "") {
+    //     categoryMessage.classList.remove("d-none");
+    //     categoryDiv.classList.add("input-error");
+    // } else {
+    //     categoryMessage.classList.add("d-none");
+    //     categoryDiv.classList.remove("input-error");
+    // }
 }
 
 

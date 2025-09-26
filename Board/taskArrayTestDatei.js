@@ -9,9 +9,12 @@ let tasks = [
         'prio': 'medium',
         'assignedTo': ['Robert Fox'],
         'subtasks': {
-            'done': 'use Camelcase technic',
-            'done': 'connect with github',
-            'open': 'push code to github'
+            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
+            '<label for="vehicle1"> check notificatoins in OneNote</label><br></br>',
+            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
+            '<label for="vehicle1"> connect with github</label><br></br>',
+            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
+            '<label for="vehicle1"> push code to github</label><br></br>'
         },
     },
     {
@@ -24,9 +27,12 @@ let tasks = [
         'prio': 'urgent',
         'assignedTo': ['Robert Fox', 'Christina Tranvile'],
         'subtasks': {
-            'done': 'invite team Members',
-            'done': 'include google calender',
-            'open': 'inform People about side Points'
+            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
+            '<label for="vehicle1"> tell teammember about addon</label><br></br>',
+            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
+            '<label for="vehicle1"> discuss sidepoints</label><br></br>',
+            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
+            '<label for="vehicle1"> play Minecraft after Zoom</label><br></br>'
         },
     },
     {

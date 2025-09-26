@@ -6,7 +6,7 @@ let tasks = [
         'title': 'Setup File',
         'description': 'setup file-structure in order to start working',
         'Due Date': '10.09.25',
-        'prio': 'medium',
+        'prio': 'Medium',
         'assignedTo': ['Robert Fox'],
         'subtasks': {
             '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
@@ -24,7 +24,7 @@ let tasks = [
         'title': 'Take a zoom meeting',
         'description': 'discuss important topics and distribute roles',
         'Due Date': '25.09.25',
-        'prio': 'urgent',
+        'prio': 'Urgent',
         'assignedTo': ['Robert Fox', 'Christina Tranvile'],
         'subtasks': {
             '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
@@ -42,7 +42,7 @@ let tasks = [
         'title': 'Add Chat function to board',
         'description': 'add Chat function to board for Users to communicate better',
         'Due Date': '30.09.25',
-        'prio': 'medium',
+        'prio': 'Medium',
         'assignedTo': ['Robert Fox', 'Christina Tranvile', 'Tom Cruise'],
         'subtasks': {
             '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':

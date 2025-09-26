@@ -9,14 +9,17 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
 
         <div class="input-containerPopup">
           <section class="input-section-leftPopup">
+
               <label for="task-title">Title<span class="requiredStar">*</span></label>
               <input class="input-section-left-input" id="title" type="text" placeholder="Enter a title" />
+              <p class="required d-none">This field is required</p>
 
               <label for="">Description</label>
               <textarea rows="5" id="task-description" placeholder="Enter a description"></textarea>
 
               <label for="date">Due Date<span class="requiredStar">*</span></label>
               <input class="input-section-left-input date-input" id="dueDate" placeholder="dd/mm/yyyy">
+              <p class="required d-none">This field is required</p>
             </section>
 
           <div class="line"></div>
@@ -46,6 +49,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
               
             </div>
             <div id="choosenContacts" class="choosenContacts"></div>
+            
             <label for="category">Category<span class="requiredStar">*</span></label>
             <div id="IdForTaskChoise" class="section-right-select" onclick="event.stopPropagation(); openTasktypeDropDown()">
               <p id="selectedTask" >Select Task Category</p>
@@ -56,6 +60,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
                 <div onclick="openTasktypeDropDown()" onmousedown="chooseValue()" id="option" class="taskOption" data-value="Technical Task">Technical Task</div>
                 <div onclick="openTasktypeDropDown()" onmousedown="chooseValue()" id="option" class="taskOption" data-value="User Story">User Story</div>
               </div>
+              <p class="required d-none">This field is required</p>
             
 
             <label for="subtask">Subtask</label>

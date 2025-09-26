@@ -1,0 +1,49 @@
+.custom-select {
+  position: relative;
+  font-family: sans-serif;
+  border-radius: 8px;
+}
+.select-trigger {
+  max-width: 1920px;
+  width: 100%;
+  padding: 8px 21px;
+  text-align: left;
+  border: 1px solid #c8c8c8cc;
+  border-radius: 7px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+}
+.select-trigger img{
+    position: absolute;
+    right: 2px;
+    height: 36px;
+    width: 36px;
+}
+.select-trigger img:hover{
+    background-color: #ededed;
+    border-radius: 50px;
+}
+.options {
+  border-radius: 7px;
+  background: white;
+  list-style: none;
+  padding: 0;
+  margin-top: 0;
+  display: none;
+  z-index: 10;
+  font-size: 20px;
+}
+.options li {
+  padding: 16px 22px;
+  cursor: pointer;
+}
+.options li:hover {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+

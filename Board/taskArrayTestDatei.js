@@ -9,12 +9,12 @@ let tasks = [
         'prio': 'Medium',
         'assignedTo': ['Robert Fox'],
         'subtasks': {
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
-            '<label for="vehicle1"> check notificatoins in OneNote</label><br></br>',
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
-            '<label for="vehicle1"> connect with github</label><br></br>',
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
-            '<label for="vehicle1"> push code to github</label><br></br>'
+            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
+                '<label for="vehicle1"> check notificatoins in OneNote</label><br></br>',
+            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
+                '<label for="vehicle1"> connect with github</label><br></br>',
+            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
+                '<label for="vehicle1"> push code to github</label><br></br>'
         },
     },
     {
@@ -27,12 +27,12 @@ let tasks = [
         'prio': 'Urgent',
         'assignedTo': ['Robert Fox', 'Christina Tranvile'],
         'subtasks': {
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
-            '<label for="vehicle1"> tell teammember about addon</label><br></br>',
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
-            '<label for="vehicle1"> discuss sidepoints</label><br></br>',
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
-            '<label for="vehicle1"> play Minecraft after Zoom</label><br></br>'
+            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
+                '<label for="vehicle1"> tell teammember about addon</label><br></br>',
+            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
+                '<label for="vehicle1"> discuss sidepoints</label><br></br>',
+            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
+                '<label for="vehicle1"> play Minecraft after Zoom</label><br></br>'
         },
     },
     {
@@ -90,11 +90,14 @@ function searchAndRender(searchField) {
         const searchKey = searchField.value.toLowerCase()
         if (searchKey.length >= 2) {
             let searchedTask = tasks.filter(task => {
-                const filteredTask = task.title.toLowerCase().includes(searchKey)
+                const filteredTask = (task.title.toLowerCase().includes(searchKey) || task.description.toLowerCase().includes(searchKey))
                 return filteredTask
             })
-            filterAndShowTasksAlternate(searchedTask)
-
+            if (searchedTask.length === 0) {
+                taskNotFound()
+            } else {
+                filterAndShowTasksAlternate(searchedTask)
+            }
         } else {
             filterAndShowTasks()
         }
@@ -133,4 +136,21 @@ async function filterAndShowTasksAlternate(array) {
     }
 }
 
+function setCardZero() {
+    let template;
+    template = `<div class="card-zero">No tasks found in this section</div>`;
+    return template
+}
 //-----------------------------------------------------------------------------------------------------------------
+
+function taskNotFound() {
+    const parent = document.querySelector('.DragAndDropTaskAria')
+    const divs = parent.querySelectorAll('div')
+    divs.forEach(div => {
+        div.innerHTML = setCardZero()
+    });
+    return
+}
+
+
+

@@ -258,14 +258,16 @@ nav {
     cursor: pointer;
     color: rgb(168, 168, 168, 1);
     text-decoration: none;
-    width: 100%;
+    width: 100% ;
     display: flex;
+    flex-direction: row;
     justify-content: left;
     font-size: 16px;
     width: 109px;
     height: 35px;
     padding: 8px;
     gap: 8px;
+
 
 }
 
@@ -285,13 +287,13 @@ nav {
 .privacy-legal-section>a>h4 {
     margin: 8px 0px;
     font-weight: normal;
-    width:fit-content;
+    width: fit-content;
     height: 19px;
     font-size: 16px;
     line-height: 120%;
     letter-spacing: 0%;
     vertical-align: middle;
-    
+
 }
 
 .privacy-legal-section>a>h4:hover {

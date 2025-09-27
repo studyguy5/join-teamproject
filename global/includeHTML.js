@@ -26,6 +26,8 @@ function includeNavLinks() {
     }
 }
 
+
+
 function includePrivacyLinks() {
     let include = document.getElementById('nav-container')
     include.innerHTML += `

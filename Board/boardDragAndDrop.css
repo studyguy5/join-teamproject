@@ -43,9 +43,8 @@
 }
 
 .TaskDiv {
-
+    cursor:pointer;
     margin-bottom: 16px;
-    /* height: 100%; */
     max-height: 263px;
     background-color: rgb(255, 255, 255, 1);
     padding: 16px 16px;
@@ -129,11 +128,84 @@
     margin-bottom: 24px;
 }
 
+.subTaskForBigView{
+    display: block;
+    
+    /* height: 100px; */
+    margin-bottom: 20px;
+}
+
+.subTaskForBigView label{
+    
+    width:fit-content;
+}
+
 .subTasks svg {
     display: flex;
     height: 8px;
     width: 58.81%;
 
+}
+
+
+.editeDeleteArea{
+    display: flex;
+    justify-content: end;
+    height:30px;
+}
+
+.editAndDeleteButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editAndDeleteButton h4{
+    font-size: 16px;
+    margin-left:8px;
+    font-weight: normal;   
+    color:rgba(42, 54, 71, 1);
+    cursor: pointer;
+}
+
+.editField{
+    display: flex;
+}
+
+.editField:hover img{
+    content: url(/img/icons/edit-hover.svg);     
+}
+
+.editField:hover h4{
+    color: rgba(41, 171, 226, 1);
+    font-weight: bolder;
+    font-size: 17px;
+    vertical-align: left;
+}
+
+
+.deleteField{
+    display: flex;
+}
+
+.deleteField:hover img{
+    content: url(/img/icons/delete-hover.svg);
+}
+
+.deleteField:hover h4{
+    color: rgba(41, 171, 226, 1);
+    font-weight: bolder;
+    font-size: 17px;
+}
+
+.editAndDeleteButton img{
+    cursor: pointer;
+}
+
+.lineToSeperate{
+    height:23px;
+    margin: 0px 8px;
+    border: 1px solid rgba(209, 209, 209, 1);
 }
 
 .back {
@@ -165,15 +237,13 @@
     max-width: 525px;
     width: 100%;
     max-height: 931px;
-    height: 100%;
-    background-color: beige;
+    height: fit-content;
+    background: rgba(255, 255, 255, 1);
     border-radius: 30px;
     padding: 48px 40px;
 }
 
-/* .singleContactBoxForBigView{
-    display: flex;
-} */
+
 .bigViewHeadlineCloseArea {
     display: flex;
     justify-content: space-between;

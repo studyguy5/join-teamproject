@@ -8,15 +8,14 @@ let tasks = [
         'Due Date': '10.09.25',
         'prio': 'Medium',
         'assignedTo': ['Robert Fox'],
-        'subtasks': {
+        'subtasks': [ {
             '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
-            '<label for="vehicle1"> check notificatoins in OneNote</label><br></br>',
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
-            '<label for="vehicle1"> connect with github</label><br></br>',
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
-            '<label for="vehicle1"> push code to github</label><br></br>'
+            '<label for="vehicle1"> check notificatoins in OneNote</label>'},
+            {'<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
+            '<label for="vehicle1"> connect with github</label>'}
+        ]
         },
-    },
+    
     {
         'category': 'Todo',
         'id': 1,
@@ -26,15 +25,14 @@ let tasks = [
         'Due Date': '25.09.25',
         'prio': 'Urgent',
         'assignedTo': ['Robert Fox', 'Christina Tranvile'],
-        'subtasks': {
+        'subtasks': [ {
             '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
-            '<label for="vehicle1"> tell teammember about addon</label><br></br>',
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
-            '<label for="vehicle1"> discuss sidepoints</label><br></br>',
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
-            '<label for="vehicle1"> play Minecraft after Zoom</label><br></br>'
+            '<label for="vehicle1"> tell teammember about addon</label>'},
+            {'<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
+            '<label for="vehicle1"> discuss sidepoints</label>'}
+        ]    
         },
-    },
+    
     {
         'category': 'Inprogress',
         'id': 2,
@@ -44,15 +42,14 @@ let tasks = [
         'Due Date': '30.09.25',
         'prio': 'Medium',
         'assignedTo': ['Robert Fox', 'Christina Tranvile', 'Tom Cruise'],
-        'subtasks': {
+        'subtasks': [ {
             '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
-                '<label for="vehicle1"> I have a bike</label><br></br>',
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
-                '<label for="vehicle1"> I have a bike</label><br></br>',
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
-                '<label for="vehicle1"> I have a bike</label><br></br>'
+                '<label for="vehicle1"> Buy a quad to travel</label>'},
+            {'<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
+                '<label for="vehicle1"> I have a bike</label>'}
+        ]     
         },
-    }
+    
 ];
 
 

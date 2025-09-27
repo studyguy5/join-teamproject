@@ -101,7 +101,7 @@ body {
     /* direkt unter dem Header platzieren */
     right: 40px;
     /* rechtsbündig am Header */
-    z-index: 999;
+    z-index: 9;
     opacity: 0;
     width: 150px;
     height: 158px;
@@ -115,9 +115,7 @@ body {
 
 @keyframes slideIn {
 
-    /* 
-    from{left:1420px;}
-    to{left:1320px;} */
+    
     from {
         opacity: 0;
     }
@@ -127,10 +125,7 @@ body {
     }
 }
 
-/* @keyframes slideback {
 
-    /* from{left:1320px;}
-    to{left:1420px;} */
 from {
     opacity: 1;
 }
@@ -139,12 +134,7 @@ to {
     opacity: 0;
 }
 
-/* } */
 
-/* .slideback {
-
-    animation: slideback 0.5s ease-in forwards;
-} */
 
 .profileMenu a {
     color: white;
@@ -258,7 +248,6 @@ nav {
     cursor: pointer;
     color: rgb(168, 168, 168, 1);
     text-decoration: none;
-    width: 100%;
     display: flex;
     justify-content: left;
     font-size: 16px;
@@ -266,13 +255,16 @@ nav {
     height: 35px;
     padding: 8px;
     gap: 8px;
-
+    
 }
 
 .privacy-legal-section a:hover {
     color: rgba(41, 171, 226, 1);
-    /* transform: scaleX(1.05); */
-    width: 112px;
+    text-decoration: none;
+    vertical-align: right;
+    font-size: 16px;
+    width:110px;
+    /* width: 115px; */
     height: 35px;
     opacity: 1;
     padding: 8px;
@@ -285,7 +277,7 @@ nav {
 .privacy-legal-section>a>h4 {
     margin: 8px 0px;
     font-weight: normal;
-    width:fit-content;
+    width:109px;
     height: 19px;
     font-size: 16px;
     line-height: 120%;
@@ -294,8 +286,9 @@ nav {
     
 }
 
-.privacy-legal-section>a>h4:hover {
+.privacy-legal-section h4:hover {
     height: 19px;
+    width:115px;
     font-size: 17px;
     font-weight: bold;
     line-height: 120%;

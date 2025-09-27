@@ -217,7 +217,7 @@ function renderTaskintoBoard(element) {
         taskOption = 'darkblue';
     }
     return `<div draggable="true" ondragstart="startDragging(${element['id']})" 
-    id="TaskDiv" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderSubtaskForBigView(${element.id})" class="TaskDiv">
+    id="TaskDiv" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderSubtaskForBigView(${element.id}); renderEditAndDeleteButton()" class="TaskDiv">
     <div id="taskType" class="${taskOption}">${element.taskType}</div>
     <div class="taskTitle"><p>${element.title}</p></div>
     <div class="taskDescription"><p>${element.description}</p></div>
@@ -273,13 +273,32 @@ function bigViewOfTask(id) {
      
      <div class="subtaskBigView"><p>Subtasks:</p>
      <div id="subTaskForBigView" class="subTaskForBigView"> 
-     <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                <label for="vehicle1">${Object.values(elements.subtasks)}</label><br></br>
+                ${elements.subtasks[0] ? `<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">` : ''}
+        <label for="vehicle1">${Object.values(elements.subtasks[0]) ? Object.values(elements.subtasks[0]) : ''}</label><br></br>
+                ${elements.subtasks[1] ? `<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">` : ''}
+        <label for="vehicle1">${Object.values(elements.subtasks[1] ? elements.subtasks[1] : '')}</label>
      </div>
      </div>
+     <div class="editeDeleteArea" id="editeDeleteArea"></div>
      `
 
 };
+
+function renderEditAndDeleteButton(){
+    let editandDelete = document.getElementById('editeDeleteArea')
+    editandDelete.innerHTML=`<div class="editAndDeleteButton">
+    <div class="deleteField">
+    <img class="deleteImg" src="/img/icons/delete-symbol.svg">
+    <h4>Delete</h4>
+    </div>
+    <hr class="lineToSeperate">
+    <div class="editField">
+    <img class="editImg" src="/img/icons/edit-symbol.svg">
+    <h4>Edit</h4>
+    </div>
+    </div>
+    `
+}
 
 function renderContactForBigView(id) {
     let rightContacts = tasks.find(task => task.id === id)

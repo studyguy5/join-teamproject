@@ -260,9 +260,8 @@ nav {
     text-decoration: none;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     font-size: 16px;
-
     width: 109px;
     height: 35px;
     padding: 8px;
@@ -302,6 +301,7 @@ nav {
     line-height: 120%;
     letter-spacing: 0%;
     vertical-align: middle;
+    text-align: left;
 
 }
 

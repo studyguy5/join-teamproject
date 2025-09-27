@@ -40,6 +40,9 @@ function includePrivacyLinks() {
 function renderUserInitials() {
     if (window.location.pathname !== "/privacy-policy/privacy-policy.html" || "/legal-notice/legal-notice.html") {
         let profileInfo = document.getElementById('userInitials')
+        if (!profileInfo) {
+            return
+        } 
         profileInfo.innerHTML = `<h2>RG</h2>`
     } else {}
 }

@@ -168,8 +168,6 @@ function arraySorting(array) {
 
 function showContacts() {
     let contacts = document.getElementById('IdForContacts')
-    
-
     for (let index = 1; index < contactsArray.length; index++) {
         // console.log(contactsArray);
         contacts.innerHTML += `<div onclick="" class="contactBox">

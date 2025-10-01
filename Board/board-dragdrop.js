@@ -119,6 +119,7 @@ function createTemplate(tid) {
         'description': '',
         'DueDate': '',
         'prio': '',
+        'progress' : '0',
         'assignedTo': [
 
         ],
@@ -209,8 +210,20 @@ async function getTaskInformation(index) {
      }
  }
 
-let subtaskArrae = 5
-let progress = (3 / subtaskArrae) * 100
+let subtaskMaxAmount = 2
+
+let progress;
+let TaskDone;
+
+
+function checkDone(id){
+    let sort =  tasks.filter(tasks => tasks.id === id);
+    TaskDone = document.querySelectorAll('.subTaskForBigView .subtaskImgDiv .checkedSubtask')
+    console.log(TaskDone.length);
+    sort[0].progress =  (TaskDone.length/ subtaskMaxAmount) * 100
+    filterAndShowTasks(id);
+}
+
 function renderTaskintoBoard(element) {
     let taskOption = 'türkis';
     if (element.taskType !== 'technical Task') {
@@ -224,9 +237,9 @@ function renderTaskintoBoard(element) {
     <div class="subTasks">
     <svg role="progress subtask">
           <rect  width="128" height="8"  class="back"/>
-          <rect  width="${progress}" height="8" class="fill"/>
+          <rect  width="${element.progress}" height="8" class="fill"/>
         </svg>
-        <p class="progressDescription">${3}/${subtaskArrae} Subtasks </p>
+        <p class="progressDescription">${(element.progress/100)*2}/${subtaskMaxAmount} Subtasks </p>
         </div>
     <div id="contacts-Priority-Container" class="contacts-Priority-Container" >
     <div id="${element.id}" class="contactsMiniView"></div>
@@ -273,10 +286,10 @@ function bigViewOfTask(id) {
      
      <div class="subtaskBigView"><p>Subtasks:</p>
      <div id="subTaskForBigView" class="subTaskForBigView"> 
-                ${elements.subtasks[0] ? `<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">` : ''}
-        <label for="vehicle1">${Object.values(elements.subtasks[0]) ? Object.values(elements.subtasks[0]) : ''}</label><br></br>
-                ${elements.subtasks[1] ? `<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">` : ''}
-        <label for="vehicle1">${Object.values(elements.subtasks[1] ? elements.subtasks[1] : '')}</label>
+              <div id="subtaskBigView1" class="subtaskImgDiv">  ${elements.subtasks[0] ? `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` : ''}
+        <p>${Object.values(elements.subtasks[0] ? elements.subtasks[0] : '')}</p></div></br>
+                <div  class="subtaskImgDiv"> ${elements.subtasks[1] ? `<img id="subtaskBigViewImg2" class="checkboxS2" onclick="confirmSubtask2(); checkDone(${elements, id})"src="/img/icons/normalCheckContact.svg">` : ''}
+        <p>${Object.values(elements.subtasks[1] ? elements.subtasks[1] : '')}</p></div>
      </div>
      </div>
      <div class="editeDeleteArea" id="editeDeleteArea"></div>
@@ -324,6 +337,31 @@ function renderSubtaskForBigView(id){
         
     }
     
+}
+
+function confirmSubtask1(){
+    let choSubtask1 = document.getElementById(`subtaskBigViewImg1`)
+    if(choSubtask1.src.includes("/img/icons/normalCheckContact.svg")){
+        choSubtask1.classList.remove('checkboxS1')
+        choSubtask1.classList.add('checkedSubtask')
+        choSubtask1.src= "/img/icons/normalCheckedContact.svg"}else{
+            choSubtask1.classList.add('checkboxS1')
+            choSubtask1.classList.remove('checkedSubtask')
+            choSubtask1.src= "/img/icons/normalCheckContact.svg"
+        }
+        
+    }
+    
+function confirmSubtask2(){
+    let choSubtask2 = document.getElementById(`subtaskBigViewImg2`)
+    if(choSubtask2.src.includes("/img/icons/normalCheckContact.svg")){
+        choSubtask2.classList.remove('checkboxS2')
+        choSubtask2.classList.add('checkedSubtask')
+    choSubtask2.src= "/img/icons/normalCheckedContact.svg"}else{
+        choSubtask2.classList.add('checkboxS2')
+        choSubtask2.classList.remove('checkedSubtask')
+        choSubtask2.src= "/img/icons/normalCheckContact.svg"
+    }
 }
 
 

@@ -7,12 +7,13 @@ let tasks = [
         'description': 'setup file-structure in order to start working',
         'Due Date': '10.09.25',
         'prio': 'Medium',
+        'progress' : '0',
         'assignedTo': ['Robert Fox'],
         'subtasks': [ {
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
-            '<label for="vehicle1"> check notificatoins in OneNote</label>'},
-            {'<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
-            '<label for="vehicle1"> connect with github</label>'}
+            '<img src="/img/icons/normalCheckContact.svg">': 
+            'check notificatoins in OneNote'},
+            {'<img src="/img/icons/normalCheckContact.svg">': 
+            'connect with github'}
         ]
         },
     
@@ -24,12 +25,13 @@ let tasks = [
         'description': 'discuss important topics and distribute roles',
         'Due Date': '25.09.25',
         'prio': 'Urgent',
+        'progress' : '0',
         'assignedTo': ['Robert Fox', 'Christina Tranvile'],
         'subtasks': [ {
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
-            '<label for="vehicle1"> tell teammember about addon</label>'},
-            {'<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">': 
-            '<label for="vehicle1"> discuss sidepoints</label>'}
+            '<img src="/img/icons/normalCheckContact.svg">': 
+            'tell teammember about addon'},
+            {'<img src="/img/icons/normalCheckContact.svg">': 
+            'discuss sidepoints'}
         ]    
         },
     
@@ -41,12 +43,13 @@ let tasks = [
         'description': 'add Chat function to board for Users to communicate better',
         'Due Date': '30.09.25',
         'prio': 'Medium',
+        'progress' : '0',
         'assignedTo': ['Robert Fox', 'Christina Tranvile', 'Tom Cruise'],
         'subtasks': [ {
-            '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
-                '<label for="vehicle1"> Buy a quad to travel</label>'},
-            {'<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
-                '<label for="vehicle1"> I have a bike</label>'}
+            '<img src="/img/icons/normalCheckContact.svg">':
+                'Buy a quad to travel'},
+            {'<img src="/img/icons/normalCheckContact.svg">':
+                'withdraw some money'}
         ]     
         },
     
@@ -87,11 +90,14 @@ function searchAndRender(searchField) {
         const searchKey = searchField.value.toLowerCase()
         if (searchKey.length >= 2) {
             let searchedTask = tasks.filter(task => {
-                const filteredTask = task.title.toLowerCase().includes(searchKey)
+                const filteredTask = (task.title.toLowerCase().includes(searchKey) || task.description.toLowerCase().includes(searchKey))
                 return filteredTask
             })
-            filterAndShowTasksAlternate(searchedTask)
-
+            if (searchedTask.length === 0) {
+                taskNotFound()
+            } else {
+                filterAndShowTasksAlternate(searchedTask)
+            }
         } else {
             filterAndShowTasks()
         }
@@ -130,4 +136,21 @@ async function filterAndShowTasksAlternate(array) {
     }
 }
 
+function setCardZero() {
+    let template;
+    template = `<div class="card-zero">No tasks found in this section</div>`;
+    return template
+}
 //-----------------------------------------------------------------------------------------------------------------
+
+function taskNotFound() {
+    const parent = document.querySelector('.DragAndDropTaskAria')
+    const divs = parent.querySelectorAll('div')
+    divs.forEach(div => {
+        div.innerHTML = setCardZero()
+    });
+    return
+}
+
+
+

@@ -135,9 +135,32 @@
     margin-bottom: 20px;
 }
 
-.subTaskForBigView label{
+.subtaskImgDiv{
+    display: flex;
+    height:30px;
     
-    width:fit-content;
+    align-items: center;
+}
+
+.subtaskImgDiv img{
+margin-right:10px;
+}
+
+.subTaskForBigView p{
+    display: inline-flex;
+}
+
+.checkedSubtask{
+     right:20px;
+     cursor: pointer;
+}
+
+.checkboxS1{
+    cursor: pointer;
+}
+
+.checkboxS2{
+    cursor: pointer;
 }
 
 .subTasks svg {

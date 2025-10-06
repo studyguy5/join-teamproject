@@ -91,6 +91,9 @@
     background: rgba(31, 215, 193, 1);
     color:white;
 }
+.closeIcon{
+    cursor: pointer;
+}
 
 .türkisBigView {
     display: flex;

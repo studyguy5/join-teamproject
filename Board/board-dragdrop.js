@@ -138,11 +138,7 @@ function setContactAndPrioValue(newTask) {
 
 async function getTaskInformation(index) {
     let newTask = createTemplate();
-    if (tasks.length == 0) {
-       newTask.id = 0;
-    } else {
-        newTask.id = tasks.length;
-    }
+        newTask.id = (tasks.length);
     for (let valueIndex = 0; valueIndex < taskObjectKey.length; valueIndex++) {
         newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value
     };
@@ -188,7 +184,7 @@ function checkDone(id) {
     let sort = tasks.filter(tasks => tasks.id === id);
     TaskDone = document.querySelectorAll('.subTaskForBigView .subtaskImgDiv .checkedSubtask')
 
-    sort[0].progress = (TaskDone.length / 2) * 100
+    sort[0].progress = (TaskDone.length /sort[0].subtasks.length) * 128
     filterAndShowTasks(id);
 }
 
@@ -198,7 +194,7 @@ function renderTaskintoBoard(element) {
         taskOption = 'darkblue';
     }
     return `<div draggable="true" ondragstart="startDragging(${element['id']})" 
-    id="TaskDiv" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderSubtaskForBigView(${element.id}); renderEditAndDeleteButton()" class="TaskDiv">
+    id="TaskDiv" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderEditAndDeleteButton()" class="TaskDiv">
     <div id="taskType" class="${taskOption}">${element.taskType}</div>
     <div class="taskTitle"><p>${element.title}</p></div>
     <div class="taskDescription"><p>${element.description}</p></div>
@@ -207,7 +203,7 @@ function renderTaskintoBoard(element) {
           <rect  width="128" height="8"  class="back"/>
           <rect  width="${element.progress}" height="8" class="fill"/>
         </svg>
-        <p class="progressDescription">${(element.progress / 100) * 2}/${2} Subtasks </p>
+        <p class="progressDescription">${(element.progress/128)*(element.subtasks.length)}/${element.subtasks.length} Subtasks </p>
         </div>
     <div id="contacts-Priority-Container" class="contacts-Priority-Container" >
     <div id="${element.id}" class="contactsMiniView"></div>
@@ -236,7 +232,7 @@ function bigViewOfTask(id) {
     connectionToTaskWindow.innerHTML = `
     <div class="bigViewHeadlineCloseArea" id="bigViewHeadlineCloseArea">
     <div class="${taskOption}">${elements.taskType}</div>
-    <div class="closeIcon" id="closeIcon"><img onclick="closeBigView()" src="/img/icons/closeFrame.svg" alt="testObject"></div>
+    <div class="closeIcon" id="closeIcon"><img onclick="closeBigView()" src="/img/icons/closeFrame.svg" alt="closeButton"></div>
     </div>
     <div class="titleBigView"><h2>${elements.title}</h2></div>
     <div class="descriptionBigView"><p>${elements.description}</p></div>
@@ -268,7 +264,7 @@ function bigViewOfTask(id) {
 function renderEditAndDeleteButton() {
     let editandDelete = document.getElementById('editeDeleteArea')
     editandDelete.innerHTML = `<div class="editAndDeleteButton">
-    <div class="deleteField">
+    <div onclick="deleteTaskFromBoard(${id})" class="deleteField">
     <img class="deleteImg" src="/img/icons/delete-symbol.svg">
     <h4>Delete</h4>
     </div>
@@ -295,15 +291,10 @@ function renderContactForBigView(id) {
 
 }
 
-function renderSubtaskForBigView(id) {
-    let rightSubtasks = tasks.find(task => task.id === id)
-    let subBigView = document.getElementById('subTaskForBigView')
-    for (let index = 0; index < rightSubtasks.subtasks.length; index++) {
-        subBigView.innerHTML += `
-        
-        `
-
-    }
+function deleteTaskFromBoard(id) {
+    let openedTask = tasks.find(task => task.id === id)
+    
+    // hier einen index rausschneiden um den Eintrag zu löschen
 
 }
 

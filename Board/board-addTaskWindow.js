@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (buttons) {
         buttons.forEach(button => {
             button.addEventListener("click", () => {
-                buttons.forEach(b => b.classList.remove("urgent", "medium", "low"));
+                buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
                 const priority = button.dataset.priority;
                 button.classList.add(priority);
                 console.log(priority)

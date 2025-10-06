@@ -261,7 +261,7 @@ function bigViewOfTask(id) {
 
 };
 
-function renderEditAndDeleteButton() {
+function renderEditAndDeleteButton(id) {
     let editandDelete = document.getElementById('editeDeleteArea')
     editandDelete.innerHTML = `<div class="editAndDeleteButton">
     <div onclick="deleteTaskFromBoard(${id})" class="deleteField">

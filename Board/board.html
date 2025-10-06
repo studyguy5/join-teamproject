@@ -57,22 +57,22 @@
                                 <hr>
                                 <img src="/img/icons/search.svg" alt="search Symbol" class="searchSymbol" onclick="beginSearching()">
                             </div>
-                            <button onclick="addTask()" class="addTaskButton"> AddTask +</button>
+                            <button  onclick="addTask()" class="addTaskButton"> AddTask +</button>
                             
                         </div>
                         
                     </div>
                     <div id="add-task-popup" class="add-task-popup"></div>
                     <div class="categorys">
-                        <div class="TodoHeadline">
-                            <p>To do</p><img onclick="addTask()" src="/img/icons/plus-button.svg" alt="plusButton img">
+                        <div  class="TodoHeadline">
+                            <p>To do</p><img data-category-id="Todo" onclick="addTask()" src="/img/icons/plus-button.svg" alt="plusButton img">
                         </div>
-                        <div class="InprogressHeadline">
-                            <p>In progress</p><img onclick="addTask()" src="/img/icons/plus-button.svg"
+                        <div  class="InprogressHeadline">
+                            <p>In progress</p><img data-category-id="Inprogress" onclick="addTask()" src="/img/icons/plus-button.svg"
                             alt="plusButton img">
                         </div>
-                        <div class="AwaitfeedbackHeadline">
-                            <p>Await feedback</p><img onclick="addTask()" src="/img/icons/plus-button.svg"
+                        <div  class="AwaitfeedbackHeadline">
+                            <p>Await feedback</p><img data-category-id="AwaitFeedback" onclick="addTask()" src="/img/icons/plus-button.svg"
                             alt="plusButton img">
                         </div>
                         <div class="DoneHeadline">

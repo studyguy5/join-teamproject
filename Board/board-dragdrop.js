@@ -14,15 +14,25 @@ let subtaskArray = [];
 let subtaskvalue1;
 let subtaskvalue2;
 
+// async function postData(path="", data={}) {
+//     let response = await fetch(BASe_URL + path + ".json", {
+//         method:"POST",
+//         headers:{
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(data)
+//     });
+//     return response.json();
+// }
 
 async function postData(path = '', data = {}) {
     let response = await fetch(BASe_URL + path + ".json", {
         method: "POST",
-        header: {
+        headers: {
             "content-type": "application/json",
         },
         body: JSON.stringify(data)
-    })
+    });
     let responseToJson = await response.json();
     return responseToJson.name
 }
@@ -47,107 +57,53 @@ async function sendAlltoFirebase(contactsArray, path = 'contact') {
     }
 }
 
-// let singleTaks = [];
-
-// let tasks = [
-//     {
-//         'category': 'Todo',
-//         'id': 0,
-//         'taskType': 'technical Task',
-//         'title': 'Setup File',
-//         'description': 'setup file-structure in order to start working',
-//         'Due Date': '10.09.25',
-//         'prio': 'Medium',
-//         'assignedTo': ['Robert Fox'],
-//         'subtasks': {
-//             'done': 'use Camelcase technic',
-//             'done': 'connect with github',
-//             'open': 'push code to github'
-//         },
-//     },
-//     {
-//         'category': 'Todo',
-//         'id': 1,
-//         'taskType': 'technical Task',
-//         'title': 'Take a zoom meeting',
-//         'description': 'discuss important topics and distribute roles',
-//         'Due Date': '25.09.25',
-//         'prio': 'Urgent',
-//         'assignedTo': ['Robert Fox', 'Christina Tranvile'],
-//         'subtasks': {
-//             'done': 'invite team Members',
-//             'done': 'include google calender',
-//             'open': 'inform People about side Points'
-//         },
-//     },
-//     {
-//         'category': 'Inprogress',
-//         'id': 2,
-//         'taskType': 'User Story',
-//         'title': 'Add Chat function to board',
-//         'description': 'add Chat function to board for Users to communicate better',
-//         'Due Date': '30.09.25',
-//         'prio': 'Medium',
-//         'assignedTo': ['Robert Fox', 'Christina Tranvile', 'Tom Cruise'],
-//         'subtasks': {
-//             '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
-//                 '<label for="vehicle1"> I have a bike</label><br></br>',
-//             '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
-//                 '<label for="vehicle1"> I have a bike</label><br></br>',
-//             '<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">':
-//                 '<label for="vehicle1"> I have a bike</label><br></br>'
-//         },
-//     }
-// ];
-// Vorlage um in task zu pushen
+let choosenCategory;
+let rightColumn = document.querySelectorAll('.categorys > div img').forEach(el => {
+    el.addEventListener('click', () => {
+        console.log(el.dataset.categoryId)
+        choosenCategory = el.dataset.categoryId
+    })
+})
 
 
 
+// let tid = tasks.length;
 
-
-
-let tid = 0;
-
-function createTemplate(tid) {
-
+function createTemplate() {
+    
     console.log('createTemplate() wird aufgerufen')
     return {
-        'category': 'Todo',
-        'id': `${tid}`,
+        'category': `${choosenCategory}`,
+        'id': '',
         'taskType': '',
         'title': '',
         'description': '',
         'DueDate': '',
         'prio': '',
-        'progress' : '0',
+        'progress': '0',
         'assignedTo': [
-
+            
         ],
         'subtasks': [
-
+            
         ]
     }
 }
 
-
-
-
-
-
 function pushObject(subtaskvalue1, subtaskvalue2) {
     if (subtaskvalue1) {
         let subTaskObject1 = {
-            '<input type="checkbox" id="subTask1" name="subtask" value="value">':
-                `<label for="subTask1">${subtaskvalue1}</label><br></br>`
-
+            "value1":
+            `${subtaskvalue1}`
+            
         };
         subtaskArray.push(subTaskObject1)
     } else { { '' } }
     if (subtaskvalue2) {
         ;
         let subTaskObject2 = {
-            '<input type="checkbox" id="subTask2" name="subtask" value="value">':
-                `<label for="subTask2">${subtaskvalue2}</label><br></br>`
+            "value2":
+            `${subtaskvalue2}`
         };
         subtaskArray.push(subTaskObject2);
     } else { { '' } }
@@ -155,7 +111,7 @@ function pushObject(subtaskvalue1, subtaskvalue2) {
 
 function getSubtaskFromTemplate() {
     if (document.getElementById(`task-text-${index0}`)) {
-        console.log('gibts des')
+        
         subtaskvalue1 = document.getElementById(`task-text-${index0}`).innerHTML
     } else { '' };
     if (document.getElementById(`task-text-${index1}`)) {
@@ -171,62 +127,74 @@ function setContactAndPrioValue(newTask) {
     })
     console.log(newTask.assignedTo);
     newTask.prio = prioArray[0];
-    tid++
-
+    
+    
 }
+
+// function clearInputs(){
+    
+// }
 
 
 async function getTaskInformation(index) {
     let newTask = createTemplate();
-    newTask.id = tid;
+    if (tasks.length == 0) {
+       newTask.id = 0;
+    } else {
+        newTask.id = tasks.length;
+    }
     for (let valueIndex = 0; valueIndex < taskObjectKey.length; valueIndex++) {
         newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value
     };
     newTask.taskType = document.getElementById('IdForTaskChoise').innerText
     setContactAndPrioValue(newTask, index);
     getSubtaskFromTemplate();
-    createTemplate(tid); //create complete template of object with all data
+    createTemplate(); //create complete template of object with all data
     subtaskArray = newTask.subtasks; //path from subtask Array where new subtasks should be pushed into
     pushObject(subtaskvalue1, subtaskvalue2); // subtasks template with variable is pushed into subtaskArray
-    newTask.category = 'Todo';
+    newTask.category = choosenCategory ? choosenCategory : 'Todo';
     await postData("task", newTask);
+    console.log(newTask);
     tasks.push(newTask);
+    // clearInputs();
     filterAndShowTasks();
 };
 
 
- async function filterAndShowTasks() {
-     console.log(tasks)
-     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
-         document.getElementById(`${categorys[idIndex]}`).innerHTML = '';
-         let filteredTasks = tasks.filter(f => f.category == categorys[idIndex]);
-         for (let catIndex = 0; catIndex < filteredTasks.length; catIndex++) {
-             let element = filteredTasks[catIndex];
-             document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoard(element);
-             if (document.getElementById(`${categorys[idIndex]}`)) {
-                 renderContact(element);
-             }
-         }
-     }
- }
+async function filterAndShowTasks() {
+    console.log(tasks)
+    for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
+        document.getElementById(`${categorys[idIndex]}`).innerHTML = '';
+        let filteredTasks = tasks.filter(f => f.category == categorys[idIndex]);
+        for (let catIndex = 0; catIndex < filteredTasks.length; catIndex++) {
+            let element = filteredTasks[catIndex];
+            document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoard(element);
+            if (document.getElementById(`${categorys[idIndex]}`)) {
+                renderContact(element);
+            }
+        }
+    }
+}
 
-let subtaskMaxAmount = 2
+
 
 let progress;
 let TaskDone;
 
+Taskavailable = document.querySelectorAll('.subTaskForBigView > subtaskImgDiv img')
+console.log(Taskavailable);
 
-function checkDone(id){
-    let sort =  tasks.filter(tasks => tasks.id === id);
+function checkDone(id) {
+    let sort = tasks.filter(tasks => tasks.id === id);
     TaskDone = document.querySelectorAll('.subTaskForBigView .subtaskImgDiv .checkedSubtask')
-    console.log(TaskDone.length);
-    sort[0].progress =  (TaskDone.length/ subtaskMaxAmount) * 100
+
+    sort[0].progress = (TaskDone.length / 2) * 100
     filterAndShowTasks(id);
 }
 
 function renderTaskintoBoard(element) {
     let taskOption = 'türkis';
-    if (element.taskType !== 'technical Task') {
+    if (element.taskType === 'User Story') {
         taskOption = 'darkblue';
     }
     return `<div draggable="true" ondragstart="startDragging(${element['id']})" 
@@ -239,7 +207,7 @@ function renderTaskintoBoard(element) {
           <rect  width="128" height="8"  class="back"/>
           <rect  width="${element.progress}" height="8" class="fill"/>
         </svg>
-        <p class="progressDescription">${(element.progress/100)*2}/${subtaskMaxAmount} Subtasks </p>
+        <p class="progressDescription">${(element.progress / 100) * 2}/${2} Subtasks </p>
         </div>
     <div id="contacts-Priority-Container" class="contacts-Priority-Container" >
     <div id="${element.id}" class="contactsMiniView"></div>
@@ -258,7 +226,7 @@ function renderTaskintoBoard(element) {
 
 function bigViewOfTask(id) {
     const elements = tasks.find(task => task.id === id);
-    if (elements.taskType !== 'technical Task') {
+    if (elements.taskType === 'User Story') {
         taskOption = 'darkblueBigView';
     } else {
         taskOption = 'türkisBigView';
@@ -272,7 +240,7 @@ function bigViewOfTask(id) {
     </div>
     <div class="titleBigView"><h2>${elements.title}</h2></div>
     <div class="descriptionBigView"><p>${elements.description}</p></div>
-    <div class="dueDateBigView"> <p>Due Date:</p> ${elements["Due Date"]}</div>
+    <div class="dueDateBigView"> <p>Due Date:</p> ${elements["DueDate"]}</div>
     <div class="priorityBigView"><p>Priority:</p>${elements.prio == 'Urgent' ?
             `${elements.prio}<img src="/img/icons/urgent.svg">` :
             elements.prio == 'Medium' ?
@@ -297,9 +265,9 @@ function bigViewOfTask(id) {
 
 };
 
-function renderEditAndDeleteButton(){
+function renderEditAndDeleteButton() {
     let editandDelete = document.getElementById('editeDeleteArea')
-    editandDelete.innerHTML=`<div class="editAndDeleteButton">
+    editandDelete.innerHTML = `<div class="editAndDeleteButton">
     <div class="deleteField">
     <img class="deleteImg" src="/img/icons/delete-symbol.svg">
     <h4>Delete</h4>
@@ -324,43 +292,45 @@ function renderContactForBigView(id) {
             <div id="singleContactInBigView-${BVindex}" > ${rightContacts.assignedTo[BVindex]}</div>
         </div>
     ` }
-    
+
 }
 
-function renderSubtaskForBigView(id){
+function renderSubtaskForBigView(id) {
     let rightSubtasks = tasks.find(task => task.id === id)
     let subBigView = document.getElementById('subTaskForBigView')
     for (let index = 0; index < rightSubtasks.subtasks.length; index++) {
-        subBigView.innerHTML+=`
+        subBigView.innerHTML += `
         
         `
-        
+
     }
-    
+
 }
 
-function confirmSubtask1(){
+function confirmSubtask1() {
     let choSubtask1 = document.getElementById(`subtaskBigViewImg1`)
-    if(choSubtask1.src.includes("/img/icons/normalCheckContact.svg")){
+    if (choSubtask1.src.includes("/img/icons/normalCheckContact.svg")) {
         choSubtask1.classList.remove('checkboxS1')
         choSubtask1.classList.add('checkedSubtask')
-        choSubtask1.src= "/img/icons/normalCheckedContact.svg"}else{
-            choSubtask1.classList.add('checkboxS1')
-            choSubtask1.classList.remove('checkedSubtask')
-            choSubtask1.src= "/img/icons/normalCheckContact.svg"
-        }
-        
+        choSubtask1.src = "/img/icons/normalCheckedContact.svg"
+    } else {
+        choSubtask1.classList.add('checkboxS1')
+        choSubtask1.classList.remove('checkedSubtask')
+        choSubtask1.src = "/img/icons/normalCheckContact.svg"
     }
-    
-function confirmSubtask2(){
+
+}
+
+function confirmSubtask2() {
     let choSubtask2 = document.getElementById(`subtaskBigViewImg2`)
-    if(choSubtask2.src.includes("/img/icons/normalCheckContact.svg")){
+    if (choSubtask2.src.includes("/img/icons/normalCheckContact.svg")) {
         choSubtask2.classList.remove('checkboxS2')
         choSubtask2.classList.add('checkedSubtask')
-    choSubtask2.src= "/img/icons/normalCheckedContact.svg"}else{
+        choSubtask2.src = "/img/icons/normalCheckedContact.svg"
+    } else {
         choSubtask2.classList.add('checkboxS2')
         choSubtask2.classList.remove('checkedSubtask')
-        choSubtask2.src= "/img/icons/normalCheckContact.svg"
+        choSubtask2.src = "/img/icons/normalCheckContact.svg"
     }
 }
 

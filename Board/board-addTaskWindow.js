@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     init();
     createaddTaskPopup();
     sectionCheck('board');
+    
+    tasks.push(...Object.values(await getData('task')));
     filterAndShowTasks();
     searchTaskEventHandling();
     contacts = await getObject(path = '/contacts')
@@ -36,6 +38,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 })
 
+
+async function getData(path = '') {
+    let response = await fetch(BASe_URL + path + ".json")
+    return allTasks = await response.json();
+
+}
 
 
 function showReportAddedTask() {

@@ -331,22 +331,22 @@
           saturate(2735%) hue-rotate(168deg) brightness(94%) contrast(92%);
 }
 
-.priority-section button.urgent {
+.priority-section button.Urgent {
     background-color: #FF3D00;
     color: white;
 }
-.priority-section button.medium {
+.priority-section button.Medium {
     background-color: #FFA800;
     color: white;
 }
-.priority-section button.low {
+.priority-section button.Low {
     background-color: #7AE229;
     color: white;
 
 }
-.priority-section button.urgent img,
-.priority-section button.medium img,
-.priority-section button.low img {
+.priority-section button.Urgent img,
+.priority-section button.Medium img,
+.priority-section button.Low img {
   filter: brightness(0) invert(1);
 }
 

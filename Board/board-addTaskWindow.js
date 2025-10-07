@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     createaddTaskPopup();
     sectionCheck('board');
     
-    tasks.push(...Object.values(await getData('task')));
+    tasks.push(...Object.entries(await getData('task')));
+
     filterAndShowTasks();
     searchTaskEventHandling();
     contacts = await getObject(path = '/contacts')

@@ -280,7 +280,6 @@
 
 
 
-
 .input-section-left label {
     font-size: 18px;
     margin-top: 18px;
@@ -330,6 +329,22 @@
 
 .requiredStar {
     color: orangered;
+}
+
+/* class to change p-tag into a input */
+
+.hidden-input:focus-visible{
+    outline:none;
+    border:none;
+}
+
+.hidden-input{
+    outline:none;
+    border:none;
+}
+
+.dont-Show{
+    display:none;
 }
 
 .availibleContactsOpen{

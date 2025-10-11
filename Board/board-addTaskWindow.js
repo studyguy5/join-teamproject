@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     init();
     createaddTaskPopup();
     sectionCheck('board');
-    
+
     tasks.push(...Object.entries(await getData('task')));
 
     filterAndShowTasks();
@@ -16,15 +16,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log(contactsArray);
     showContacts();
     // renderContact();
-   
+
     // renderMiniContactList(arraySorting(contactsArray), targetID = 'contactList') hier logik für das rendern der Mini-Contacte einbauen
 
     function sectionCheck(idsecTrue) {
         document.getElementById(idsecTrue).classList.add('active')
     }
     const buttons = document.querySelectorAll(".priority-section button");
-    
-    
+
+
     if (buttons) {
         buttons.forEach(button => {
             button.addEventListener("click", () => {
@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         })
     };
 })
+
 
 
 async function getData(path = '') {
@@ -86,12 +87,29 @@ function createTaskTemplate() {
     showReportAddedTaskTemplate();
 }
 
+function constantCheck() {
+    const title = document.getElementById("title").value;
+    const description = document.getElementById('task-description').value;
+    const dueDate = document.getElementById("dueDate").value;
+    const taskType = document.getElementById("selectedTask").innerText;
+    console.log("it check's")
+    if (title !== "" && dueDate !== "" && description !== "" && taskType !== "Select Task Category") {
+
+        document.getElementById('creatButtonID').disabled = false;
+    }
+
+}
+
+
+function makeDisabled() {
+    document.getElementById('creatButtonID').disabled = true;
+}
 
 function formValidationAddTaskTemp() {
     const title = document.getElementById("title").value;
     const dueDate = document.getElementById("dueDate").value;
     const category = document.getElementById("categoryValue").value; // <-- hidden input
-    
+
     if (title === "" || dueDate === "") {
         displayRequiredMessageTemp();
         return false;
@@ -177,80 +195,152 @@ function arraySorting(array) {
 
 function showContacts() {
     let contacts = document.getElementById('IdForContacts')
+    contacts.innerHTML = "";
     for (let index = 1; index < contactsArray.length; index++) {
         // console.log(contactsArray);
         contacts.innerHTML += `<div onclick="" class="contactBox">
         <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
-            <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
-            <img  id="checkboxImg-${index}" onclick="chooseContact(${index})" class="checkbox" data-set="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
-            </div>`
+        <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
+        <img  id="checkboxImg-${index}" onclick="chooseContact(${index})" class="checkbox" data-set="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
+        </div>`
 
     }
 }
 
-function chooseContact(index){
-    let choContact = document.getElementById(`checkboxImg-${index}`)
-    if(choContact.src.includes("/img/icons/normalCheckContact.svg")){
-        choContact.classList.remove('checkbox')
-        choContact.classList.add('checked')
-        renderChoosenContact(index);
-    choContact.src= "/img/icons/normalCheckedContact.svg"}else{
-        choContact.classList.add('checkbox')
-        choContact.classList.remove('checked')
-        deleteRenderedContact(index);
-        choContact.src= "/img/icons/normalCheckContact.svg"
-    }
+function showInput() {
+
+    if (document.getElementById('placeholderpTag')){
+        document.getElementById('placeholderpTag').classList.toggle('dont-Show');
+        document.getElementById('filterContacts').classList.toggle('dont-Show');
+        document.getElementById('filterContacts').focus()
+    };
 }
 
-function renderChoosenContact(index){
-    let listContact = document.getElementById('choosenContacts')
+let filteredContacts;
+function filterContactsInPopup() {
+    let r;
     
-    listContact.innerHTML+=`
-    <div id="contactCirclePopupRender-${index}" class="contactCirclePopupRender">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
-    `
-    console.log(listContact);
-}
-
-function deleteRenderedContact(index){
-    let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
-    renderedContact.remove(`contactCirclePopupRender-${index}`)
-    renderedContact.innerHTML = '';
-}
-
-function openTasktypeDropDown(){
-    let drop = document.getElementById('dropId')
-    drop.classList.toggle('dropTasktypeClose')
-    let layer = document.getElementById('hiddenlayer')
-    layer.classList.toggle('hiddenlayer')
-    if(document.querySelectorAll('.dropTasktypeOpen')){
-        let ch = document.getElementById('arrowImg')
-        ch.classList.toggle('select-arrow-open') 
+    let typedValue = document.getElementById('filterContacts').value
+    
+    if (typedValue.length > 0) {
+        let val = Object.values(contactsArray);
+        
+         r = val.slice(1)
+         filteredContacts = r.filter(fn => {return fn.name.toLowerCase().includes(typedValue.toLowerCase())})
+            
+        renderfilteredContactsInPopup(filteredContacts);    
+    
+    //    console.log(filteredContacts);
+    }else if(typedValue.length < 1){
+        showContacts();
     }
 }
 
-function openContactView(){
+function renderfilteredContactsInPopup(filteredContacts){
+
+   let filtContactInPopup =  document.getElementById('IdForContacts')
+   filtContactInPopup.innerHTML = "";
+   for (let filterContactIndex = 0; filterContactIndex < filteredContacts.length; filterContactIndex++) {   
+   filtContactInPopup.innerHTML += `
+   <div onclick="" class="contactBox">
+        <div class="contactCirclePopup">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>
+        <span for="contactName" class="contactName"> ${filteredContacts[filterContactIndex].name}</span> 
+        <img  id="checkboxImg-${filterContactIndex}" onclick="chooseFilteredContact(${filterContactIndex})" class="checkbox" data-set="${filteredContacts[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
+        </div>
+   `}
+
+}
+
+
+function openContactView() {
     let contactDrop = document.getElementById('IdForContacts')
     contactDrop.classList.toggle('availibleContactsClose')
-    if(document.querySelectorAll('availibleContactsOpen')){
+    if (document.querySelectorAll('availibleContactsOpen')) {
         let contact = document.getElementById('arrowImgC')
         contact.classList.toggle('select-arrow-open')
     }
 }
 
-function chooseValue(){
+function chooseContact(index) {
+    let choContact = document.getElementById(`checkboxImg-${index}`)
+    if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
+        choContact.classList.remove('checkbox')
+        choContact.classList.add('checked')
+        renderChoosenContact(index);
+        choContact.src = "/img/icons/normalCheckedContact.svg"
+    } else {
+        choContact.classList.add('checkbox')
+        choContact.classList.remove('checked')
+        deleteRenderedContact(index);
+        choContact.src = "/img/icons/normalCheckContact.svg"
+    }
+}
+
+function chooseFilteredContact(filterContactIndex) {
+    let choContact = document.getElementById(`checkboxImg-${filterContactIndex}`)
+    if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
+        choContact.classList.remove('checkbox')
+        choContact.classList.add('checked')
+        renderFilteredChoosenContact(filterContactIndex)
+        choContact.src = "/img/icons/normalCheckedContact.svg"
+    } else {
+        choContact.classList.add('checkbox')
+        choContact.classList.remove('checked')
+        deleteRenderedContact(filterContactIndex);
+        choContact.src = "/img/icons/normalCheckContact.svg"
+    }
+}
+
+function renderChoosenContact(index) {
+    let listContact = document.getElementById('choosenContacts')
+
+    listContact.innerHTML += `
+    <div id="contactCirclePopupRender-${index}" class="contactCirclePopupRender">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
+    `
+    console.log(listContact);
+}
+
+function renderFilteredChoosenContact(filterContactIndex) {
+    let listContact = document.getElementById('choosenContacts')
+
+    listContact.innerHTML += `
+    <div id="contactCirclePopupRender-${filterContactIndex}" class="contactCirclePopupRender">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>
+    `
+    console.log(listContact);
+}
+
+function deleteRenderedContact(index) {
+    let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
+    renderedContact.remove(`contactCirclePopupRender-${index}`)
+    renderedContact.innerHTML = '';
+}
+
+function openTasktypeDropDown() {
+    let drop = document.getElementById('dropId')
+    drop.classList.toggle('dropTasktypeClose')
+    let layer = document.getElementById('hiddenlayer')
+    layer.classList.toggle('hiddenlayer')
+    if (document.querySelectorAll('.dropTasktypeOpen')) {
+        let ch = document.getElementById('arrowImg')
+        ch.classList.toggle('select-arrow-open')
+    }
+}
+
+
+function chooseValue() {
     let choise = document.querySelectorAll('.taskOption')
-    
+
     choise.forEach(b => b.addEventListener('click', () => {
         const choiseOfTask = b.dataset.value
         console.log(choiseOfTask);
         document.getElementById('selectedTask').innerHTML = choiseOfTask;
     }))
-    
+
 }
 
-function stopBubbling(event){
-        
-        event.stopPropagation()
-    }
+function stopBubbling(event) {
+
+    event.stopPropagation()
+}
 
 

@@ -210,7 +210,7 @@ function renderTaskintoBoard(element) {
     <rect  width="128" height="8"  class="back"/>
     <rect  width="${element.progress}" height="8" class="fill"/>
     </svg>
-    <p class="progressDescription">${(element.progress / 128) * (element.subtasks.length)}/${element.subtasks.length} Subtasks </p>
+    <p class="progressDescription">${(element.progress / 128) * (element.subtasks.length)}/${(element.subtasks.length)} Subtasks </p>
     </div>
     <div id="contacts-Priority-Container" class="contacts-Priority-Container" >
     <div id="${element.id}" class="contactsMiniView"></div>
@@ -350,7 +350,7 @@ function confirmSubtask2() {
 
 function renderContact(element) {
     let contact = document.getElementById(`${element.id}`)
-    if (contact)
+    if (element.assignedTo !== "")
         for (let ContactIndex = 0; ContactIndex < element.assignedTo.length; ContactIndex++) {
             let slim = element.assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
             contact.innerHTML += `

@@ -10,22 +10,22 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
         <div class="input-containerPopup">
           <section class="input-section-leftPopup">
 
-              <label for="task-title">Title<span class="requiredStar">*</span></label>
-              <input class="input-section-left-input" id="title" type="text" placeholder="Enter a title" />
+              <label>Title<span class="requiredStar">*</span></label>
+              <input oninput="constantCheck()" class="input-section-left-input" id="title" type="text" placeholder="Enter a title" />
               <p class="required d-none">This field is required</p>
 
-              <label for="">Description</label>
+              <label>Description</label>
               <textarea rows="5" id="task-description" placeholder="Enter a description"></textarea>
 
-              <label for="date">Due Date<span class="requiredStar">*</span></label>
-              <input class="input-section-left-input date-input" id="dueDate" placeholder="dd/mm/yyyy">
+              <label>Due Date<span class="requiredStar">*</span></label>
+              <input oninput="constantCheck()" class="input-section-left-input date-input" id="dueDate" placeholder="dd/mm/yyyy">
               <p class="required d-none">This field is required</p>
             </section>
 
           <div class="line"></div>
 
           <div class="input-section-rightPopup">
-            <label for="prio">Priority</label>
+            <label>Priority</label>
             <section class="priority-section">
               <button class="button" data-priority="Urgent"  type="button">
                 Urgent<img src="/img/icons/urgent.svg" />
@@ -40,9 +40,10 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
               </button>
             </section>
 
-            <label for="contactSelection">Assigned to</label>
-            <div  class="section-right-select"  required tabindex="0" onclick="openContactView()">
-              <p >Select contacts to assign</p>
+            <label>Assigned to</label>
+            <div  class="section-right-select"  required tabindex="0" onclick="openContactView(); showInput()">
+              <p id="placeholderpTag">Select contacts to assign</p>
+              <input oninput="filterContactsInPopup()"  type="text" id="filterContacts"  class="dont-Show hidden-input">
               <img id="arrowImgC" class="select-arrow-downC" src="/img/icons/select-arrow-down.svg"> 
             </div>
             <div id="IdForContacts" class="availibleContactsOpen availibleContactsClose">
@@ -50,15 +51,15 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
             </div>
             <div id="choosenContacts" class="choosenContacts"></div>
 
-            <label for="category">Category<span class="requiredStar">*</span></label>
+            <label >Category<span class="requiredStar">*</span></label>
             <div id="IdForTaskChoise" class="section-right-select" onclick="event.stopPropagation(); openTasktypeDropDown()">
-              <p id="selectedTask" >Select Task Category</p>
+              <p  id="selectedTask" >Select Task Category</p>
               <img id="arrowImg" class="select-arrow-downT" src="/img/icons/select-arrow-down.svg">
             </div>
             <p class="required d-none">This field is required</p>
               <div id="dropId" class="dropTasktypeClose dropTasktypeOpen" >
 
-              <input type="hidden" id="categoryValue" name="category" class="hidden-input"> 
+              <input  type="hidden" id="categoryValue" name="category" class="hidden-input"> 
                 
                 <div onclick="openTasktypeDropDown()" onmousedown="chooseValue()" id="option" class="taskOption" data-value="Technical Task">Technical Task</div>
                 <div onclick="openTasktypeDropDown()" onmousedown="chooseValue()" id="option" class="taskOption" data-value="User Story">User Story</div>
@@ -66,7 +67,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
               
             
 
-            <label for="subtask">Subtask</label>
+            <label>Subtask</label>
             <div class="subtask-wrapper">
               <input class="inputPopup" id="subtask" type="text" placeholder="Enter new subtask">
                             <span class="subtask-icon">
@@ -90,7 +91,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
             <button class="clear-btn" type="reset">
               Clear<img src="/img/icons/x.svg" />
             </button>
-            <button onclick="createTaskTemplate(); getTaskInformation()" class="create-task-btn">
+            <button id="creatButtonID" type="button" disabled onclick="createTaskTemplate(); getTaskInformation(); makeDisabled()" class="create-task-btn">
               Create Task<img src="/img/icons/doneSymbol.svg" />
             </button>
           </div>

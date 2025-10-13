@@ -1,61 +1,10 @@
-let tasks = [
-    // {
-    //     'category': 'Todo',
-    //     'id': 0,
-    //     'taskType': 'technical Task',
-    //     'title': 'Setup File',
-    //     'description': 'setup file-structure in order to start working',
-    //     'Due Date': '10.09.25',
-    //     'prio': 'Medium',
-    //     'progress' : '0',
-    //     'assignedTo': ['Robert Fox'],
-    //     'subtasks': [ {
-    //         '<img src="/img/icons/normalCheckContact.svg">': 
-    //         'check notificatoins in OneNote'},
-    //         {'<img src="/img/icons/normalCheckContact.svg">': 
-    //         'connect with github'}
-    //     ]
-    //     },
+
+ window.tasks = [
     
-    // {
-    //     'category': 'Todo',
-    //     'id': 1,
-    //     'taskType': 'technical Task',
-    //     'title': 'Take a zoom meeting',
-    //     'description': 'discuss important topics and distribute roles',
-    //     'Due Date': '25.09.25',
-    //     'prio': 'Urgent',
-    //     'progress' : '0',
-    //     'assignedTo': ['Robert Fox', 'Christina Tranvile'],
-    //     'subtasks': [ {
-    //         '<img src="/img/icons/normalCheckContact.svg">': 
-    //         'tell teammember about addon'},
-    //         {'<img src="/img/icons/normalCheckContact.svg">': 
-    //         'discuss sidepoints'}
-    //     ]    
-    //     },
-    
-    // {
-    //     'category': 'Inprogress',
-    //     'id': 2,
-    //     'taskType': 'User Story',
-    //     'title': 'Add Chat function to board',
-    //     'description': 'add Chat function to board for Users to communicate better',
-    //     'Due Date': '30.09.25',
-    //     'prio': 'Medium',
-    //     'progress' : '0',
-    //     'assignedTo': ['Robert Fox', 'Christina Tranvile', 'Tom Cruise'],
-    //     'subtasks': [ {
-    //         '<img src="/img/icons/normalCheckContact.svg">':
-    //             'Buy a quad to travel'},
-    //         {'<img src="/img/icons/normalCheckContact.svg">':
-    //             'withdraw some money'}
-    //     ]     
-    //     },
     
 ];
 
-
+window.tasks
 // searched Task function 
 // done by : Arnesto @tasks 
 // as parameter and modified function filter and show task to filterAndShowTasksAlternate(array)

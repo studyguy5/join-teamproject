@@ -225,7 +225,7 @@ function renderTaskintoBoard(element) {
         </div>`
         
     }
-    // ${Object.entries(tasks[2].subtasks)} Use this for bigview and Edit window
+    // if bedingung einbauen, wenn subtask.lenght = 0 -> dann nichts anzeigen (no barchart, no numbers)
     
     function bigViewOfTask(id) {
         const elements = tasks.find(task => task[1].id === id);

@@ -5,11 +5,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     init();
     createaddTaskPopup();
     sectionCheck('board');
-
     tasks.push(...Object.entries(await getData('task')));
 
     filterAndShowTasks();
     searchTaskEventHandling();
+    
     contacts = await getObject(path = '/contacts')
     console.log(contacts);
     contactsArray = objectToArray(contacts)

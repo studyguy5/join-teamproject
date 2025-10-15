@@ -49,6 +49,11 @@
     justify-content: space-between;
 }
 
+.section-right-select p{
+    margin: 0px;
+    padding: 0px;
+}
+
 .section-right-select img:hover{
     content: url(/img/icons/select-arrow-downHover.svg);
 }
@@ -407,4 +412,154 @@ textarea:focus::placeholder {
         border: 1px solid #FF8190;
     }
 
+    .availibleContactsOpen{
+    
+    position:relative;
+    top: -8px;
+    padding-top: 8px;
+    opacity: 1;
+    max-height:288px;
+    height: 100%;
+    transition:  100ms ease;
+    background-color: white;
+}
 
+.availibleContactsClose{
+    opacity: 0;
+    height:0px;
+    max-height: 0px;
+    transition:  100ms ease;
+}
+
+.contactBox{
+    display: flex;
+    height: 56px;
+    border-radius: 10px;
+    align-items: center;
+    position:relative;
+}
+
+.checkbox{
+    margin-left:220px;
+    position:absolute;
+    right:20px;
+}
+
+.checked{
+    margin-left:220px;
+    position:absolute;
+    right:20px;
+    content: url(/img/icons/checkedContactWhite.svg);
+}
+.checked:hover{
+    background-image: url(/img/icons/hoverCheckedContact.svg);
+}
+.checkbox:hover{
+    background-image: url(/img/icons/hoverCheckContact.svg);
+}
+
+.contactBox:hover{
+    background-color: rgba(238, 238, 238, 1);
+    cursor: pointer;
+}
+
+.contactBox:hover:has(.checked) {
+    background-color: rgba(42, 54, 71, 1);   
+}
+
+.contactBox:has(.checked) {
+   background-color: rgba(9, 25, 49, 1);
+    color:white;
+}
+
+.choosenContacts{
+    height:fit-content;
+    width:440px;
+    display: flex;
+    
+}
+
+.contactCircleNormal {
+    margin-right:16px;
+    margin-left:16px;
+    align-content: center;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    border: 1px solid rgb(255, 255, 255, 1);
+    border-radius: 45px;
+    width:30px;
+    height:30px;
+    color:white;
+    font-size: 12px;
+    
+}
+
+.contactCircleNormalRender{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(255, 255, 255, 1);
+    border-radius: 45px;
+    width:30px;
+    height:30px;
+    color:white;
+    font-size: 12px;
+}
+
+.contactBox:first-child .contactCircleNormal {
+    background-color: rgba(110, 82, 255, 1);
+}
+
+.contactBox:nth-child(2) .contactCircleNormal {
+    background-color: rgba(31, 215, 193, 1);
+}
+
+.contactBox:nth-child(3) .contactCircleNormal {
+    background-color:rgba(252, 113, 255, 1);
+}
+
+.contactBox:nth-child(4) .contactCircleNormal {
+    background-color:rgba(195, 255, 43, 1);
+}
+
+.contactBox:nth-child(5) .contactCircleNormal {
+    background-color:rgba(255, 187, 43, 1);
+}
+
+.contactBox:nth-child(6) .contactCircleNormal {
+    background-color: rgb(255, 0, 0);
+}
+
+.contactCircleNormalRender:first-child {
+    background-color: rgba(110, 82, 255, 1);
+}
+
+.contactCircleNormalRender:nth-child(2) {
+    background-color: rgba(31, 215, 193, 1);
+}
+
+.contactCircleNormalRender:nth-child(3) {
+  background-color:rgba(252, 113, 255, 1);
+}
+
+.contactCircleNormalRender:nth-child(4) {
+    background-color:rgba(195, 255, 43, 1);
+}
+
+.contactCircleNormalRender:nth-child(5) {
+    background-color:rgba(255, 187, 43, 1);
+}
+
+.contactCircleNormalRender:nth-child(6) {
+    background-color: rgb(255, 0, 0);
+}
+
+.dont-Show{
+    display:none;
+}
+
+.section-right-select input:focus {
+    border: none;
+    outline: none;
+}

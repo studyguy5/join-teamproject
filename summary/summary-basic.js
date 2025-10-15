@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     doneSummaryEventHandler();
     tasks.push(...Object.entries(await getData('task')));
     deliverDataToSummary(tasks);
+    greetingUser();
     console.log(tasks);
     function sectionCheck(idsecTrue) {
         document.getElementById(idsecTrue).classList.add('active')
@@ -64,4 +65,19 @@ function deliverDataToSummary(tasks) {
     document.getElementById('taskInProgress').innerHTML = inprogress.length;
     let awaitfeedback = tasks.filter(td => td[1].category === 'AwaitFeedback')
     document.getElementById('taskAwaitFeedback').innerHTML = awaitfeedback.length;
+}
+
+function greetingUser(){
+    let date = new Date()
+    let s = date.getHours();
+    let h = date.getMinutes();
+    console.log(s);
+    console.log(h);
+    console.log(s +":" +h)
+    let greetingView = document.getElementById('greeting-time');
+    if(s < 12){
+        greetingView.innerHTML = 'Good Morning'
+    }else if(s >= 12){
+        greetingView.innerHTML = 'Good Afternoon'
+    }
 }

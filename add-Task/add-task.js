@@ -42,19 +42,113 @@ function sectionCheck(idsecTrue) {
     return arrayObject;
 }
 
-    function showContacts() {
+   function showContacts() {
     let contacts = document.getElementById('IdForContactsNormal')
-    
-
+    contacts.innerHTML = "";
     for (let index = 1; index < contactsArray.length; index++) {
-        console.log(contactsArray);
-        contacts.innerHTML += `
-            <option class="contactBox" value="${contactsArray[index].name}"> 
-            <div class="contactsCircle">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
-              ${contactsArray[index].name}
-              </option> `
+        // console.log(contactsArray);
+        contacts.innerHTML += `<div onclick="" class="contactBox">
+        <div class="contactCircleNormal">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
+        <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
+        <img  id="checkboxImg-${index}" onclick="chooseContactNormal(${index})" class="checkbox" data-set="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
+        </div>`
 
     }
+}
+
+function showInputNormal() {
+
+    if (document.getElementById('placeholderptag')){
+        document.getElementById('placeholderptag').classList.toggle('dont-Show');
+        document.getElementById('filterContactsNormal').classList.toggle('dont-Show');
+        document.getElementById('filterContactsNormal').focus()
+    };
+}
+
+function openContactViewNormal() {
+    let contactDrop = document.getElementById('IdForContactsNormal')
+    contactDrop.classList.toggle('availibleContactsClose')
+    if (document.querySelectorAll('availibleContactsOpen')) {
+        let contact = document.getElementById('arrowImgC')
+        contact.classList.toggle('select-arrow-open')
+    }
+}
+
+function chooseContactNormal(index) {
+    let choContact = document.getElementById(`checkboxImg-${index}`)
+    if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
+        choContact.classList.remove('checkbox')
+        choContact.classList.add('checked')
+        renderChoosenContactNormal(index);
+        choContact.src = "/img/icons/normalCheckedContact.svg"
+    } else {
+        choContact.classList.add('checkbox')
+        choContact.classList.remove('checked')
+        deleteRenderedContactNormal(index);
+        choContact.src = "/img/icons/normalCheckContact.svg"
+    }
+}
+
+function chooseFilteredContactNormal(filterContactIndex) {
+    let choContact = document.getElementById(`checkboxImg-${filterContactIndex}`)
+    if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
+        choContact.classList.remove('checkbox')
+        choContact.classList.add('checked')
+        renderFilteredChoosenContactNormal(filterContactIndex)
+        choContact.src = "/img/icons/normalCheckedContact.svg"
+    } else {
+        choContact.classList.add('checkbox')
+        choContact.classList.remove('checked')
+        deleteRenderedContactNormal(filterContactIndex);
+        choContact.src = "/img/icons/normalCheckContact.svg"
+    }
+}
+
+function renderChoosenContactNormal(index) {
+    let listContact = document.getElementById('choosenContacts')
+
+    listContact.innerHTML += `
+    <div id="contactCircleNormalRender-${index}" class="contactCircleNormalRender">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
+    `
+    console.log(listContact);
+}
+
+function renderFilteredChoosenContactNormal(filterContactIndex) {
+    let listContact = document.getElementById('choosenContacts')
+
+    listContact.innerHTML += `
+    <div id="contactCirclePopupRender-${filterContactIndex}" class="contactCirclePopupRender">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>
+    `
+    console.log(listContact);
+}
+
+function deleteRenderedContactNormal(index) {
+    let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
+    renderedContact.remove(`contactCirclePopupRender-${index}`)
+    renderedContact.innerHTML = '';
+}
+
+function openTasktypeDropDownNormal() {
+    let drop = document.getElementById('dropId')
+    drop.classList.toggle('dropTasktypeClose')
+    let layer = document.getElementById('hiddenlayer')
+    layer.classList.toggle('hiddenlayer')
+    if (document.querySelectorAll('.dropTasktypeOpen')) {
+        let ch = document.getElementById('arrowImg')
+        ch.classList.toggle('select-arrow-open')
+    }
+}
+
+
+function chooseValueNormal() {
+    let choise = document.querySelectorAll('.taskOption')
+
+    choise.forEach(b => b.addEventListener('click', () => {
+        const choiseOfTask = b.dataset.value
+        console.log(choiseOfTask);
+        document.getElementById('selectedTask').innerHTML = choiseOfTask;
+    }))
+
 }
 
 

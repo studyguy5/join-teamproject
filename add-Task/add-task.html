@@ -73,10 +73,15 @@
                     </section>
 
                     <label for="contactSelection">Assigned to</label>
-                    <select class="section-right-select" id="IdForContactsNormal"  required tabindex="0">
-                        <option value="" disabled selected hidden>Select contacts to assign</option>
-                    </select>
+                    <div class="section-right-select"   required tabindex="0" onclick="openContactViewNormal(); showInputNormal()">
+                        <p id="placeholderptag">Select contacts to assign</p>
+                        <input oninput="filterContactsInPopup()"  type="text" id="filterContactsNormal"  class="dont-Show hidden-input">
+                        <img id="arrowImgC" class="select-arrow-downC" src="/img/icons/select-arrow-down.svg">
+                    </div>
+                    <div id="IdForContactsNormal" class="availibleContactsOpen availibleContactsClose">
 
+                    </div>
+                    <div id="choosenContacts" class="choosenContacts"></div>
                     <label for="category">Category<span class="requiredStar">*</span></label>
                     <div class="custom-select" id="category">
                         <button type="button" class="select-trigger">

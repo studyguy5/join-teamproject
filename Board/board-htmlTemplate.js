@@ -27,7 +27,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
           <div class="input-section-rightPopup">
             <label>Priority</label>
             <section class="priority-section">
-              <button class="button" data-priority="Urgent"  type="button">
+              <button class="button" data-priority="Urgent" type="button">
                 Urgent<img src="/img/icons/urgent.svg" />
               </button>
 

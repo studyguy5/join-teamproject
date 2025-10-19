@@ -350,21 +350,25 @@
 .availibleContactsOpen{
     
     position:relative;
-    top: -8px;
+    margin-top: -8px;
     padding-top: 8px;
     opacity: 1;
     max-height:288px;
-    height: 100%;
+    min-height:288px;
     transition:  100ms ease;
     background-color: white;
+    overflow-y: scroll;
 }
 
 .availibleContactsClose{
     opacity: 0;
     height:0px;
-    max-height: 0px;
+    /* max-height: 0px; */
     transition:  100ms ease;
+    overflow: hidden;
 }
+
+
 
 .contactBox{
     display: flex;

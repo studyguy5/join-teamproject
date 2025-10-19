@@ -15,7 +15,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
               <p class="required d-none">This field is required</p>
 
               <label>Description</label>
-              <textarea rows="5" id="task-description" placeholder="Enter a description"></textarea>
+              <textarea oninput="constantCheck()" rows="5" id="task-description" placeholder="Enter a description"></textarea>
 
               <label>Due Date<span class="requiredStar">*</span></label>
               <input oninput="constantCheck()" class="input-section-left-input date-input" id="dueDate" placeholder="dd/mm/yyyy">
@@ -46,14 +46,15 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
               <input oninput="filterContactsInPopup()"  type="text" id="filterContacts"  class="dont-Show hidden-input">
               <img id="arrowImgC" class="select-arrow-downC" src="/img/icons/select-arrow-down.svg"> 
             </div>
-            <div id="IdForContacts" class="availibleContactsOpen availibleContactsClose">
+            <div id="IdForContacts" class="availibleContactsClose">
               
             </div>
             <div id="choosenContacts" class="choosenContacts"></div>
 
             <label >Category<span class="requiredStar">*</span></label>
-            <div id="IdForTaskChoise" class="section-right-select" onclick="event.stopPropagation(); openTasktypeDropDown()">
-              <p  id="selectedTask" >Select Task Category</p>
+            <div id="IdForTaskChoise" class="section-right-select"  onclick="event.stopPropagation(); openTasktypeDropDown()">
+              
+            <p id="selectedTask">Select Task Category</p>
               <img id="arrowImg" class="select-arrow-downT" src="/img/icons/select-arrow-down.svg">
             </div>
             <p class="required d-none">This field is required</p>
@@ -61,8 +62,8 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
 
               <input  type="hidden" id="categoryValue" name="category" class="hidden-input"> 
                 
-                <div onclick="openTasktypeDropDown()" onmousedown="chooseValue()" id="option" class="taskOption" data-value="Technical Task">Technical Task</div>
-                <div onclick="openTasktypeDropDown()" onmousedown="chooseValue()" id="option" class="taskOption" data-value="User Story">User Story</div>
+                <div onmousedown="chooseValue()" onclick="openTasktypeDropDown(); constantCheck()"  id="option" class="taskOption" data-value="Technical Task">Technical Task</div>
+                <div onmousedown="chooseValue()" onclick="openTasktypeDropDown(); constantCheck()"  id="option" class="taskOption" data-value="User Story">User Story</div>
               </div>
               
             
@@ -88,10 +89,10 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
           </div>
 
           <div class="footer-buttons-section">
-            <button class="clear-btn" type="reset">
+            <button onclick="clearTask()" class="clear-btn" type="reset">
               Clear<img src="/img/icons/x.svg" />
             </button>
-            <button id="creatButtonID" type="button" disabled onclick="createTaskTemplate(); getTaskInformation(); makeDisabled()" class="create-task-btn">
+            <button id="creatButtonID" type="button" disabled onclick="constantCheck(); createTaskTemplate(); getTaskInformation()" class="create-task-btn">
               Create Task<img src="/img/icons/doneSymbol.svg" />
             </button>
           </div>

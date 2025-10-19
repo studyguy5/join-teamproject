@@ -136,12 +136,11 @@ function setContactAndPrioValue(newTask) {
     
 }
 
-// function clearInputs(){
-    
-// }
+
 
 
 async function getTaskInformation(index) {
+    console.log('arbeitet')
     let newTask = createTemplate();
     newTask.id = (tasks.length) +1;
     for (let valueIndex = 0; valueIndex < taskObjectKey.length; valueIndex++) {
@@ -206,11 +205,12 @@ function renderTaskintoBoard(element) {
     <div class="taskTitle"><p>${element.title}</p></div>
     <div class="taskDescription"><p>${element.description}</p></div>
     <div class="subTasks">
+    ${element.subtasks != null  ? `
     <svg role="progress subtask">
     <rect  width="128" height="8"  class="back"/>
     <rect  width="${element.progress}" height="8" class="fill"/>
     </svg>
-    <p class="progressDescription">${(element.progress / 128) * (element.subtasks.length)}/${(element.subtasks.length)} Subtasks </p>
+    <p class="progressDescription">${(element.progress / 128) * (element.subtasks.length)}/${(element.subtasks.length)} Subtasks </p>` : ''}
     </div>
     <div id="contacts-Priority-Container" class="contacts-Priority-Container" >
     <div id="${element.id}" class="contactsMiniView"></div>
@@ -255,14 +255,14 @@ function renderTaskintoBoard(element) {
      <div id="contactsBV" class="contactsBV"></div>
      </div>
      
-     <div class="subtaskBigView"><p>Subtasks:</p>
+     <div class="subtaskBigView"><p>${elements[1].subtasks != null ? `Subtasks`: ''}</p>
      <div id="subTaskForBigView" class="subTaskForBigView"> 
-     <div id="subtaskBigView1" class="subtaskImgDiv">  ${elements[1].subtasks[0] ?
+     <div id="subtaskBigView1" class="subtaskImgDiv">  ${elements[1].subtasks != null ?
         `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` : ''}
-        <p>${Object.values(elements[1].subtasks[0] ? elements[1].subtasks[0] : '')}</p></div></br>
-        <div  class="subtaskImgDiv"> ${elements[1].subtasks[1] ?
+        <p>${Object.values(elements[1].subtasks != null ? elements[1].subtasks[0] : '')}</p></div></br>
+        <div  class="subtaskImgDiv"> ${elements[1].subtasks != null ?
             `<img id="subtaskBigViewImg2" class="checkboxS2" onclick="confirmSubtask2(); checkDone(${elements, id})"src="/img/icons/normalCheckContact.svg">` : ''}
-            <p>${Object.values(elements[1].subtasks[1] ? elements[1].subtasks[1] : '')}</p></div>
+            <p>${Object.values(elements[1].subtasks != null ? elements[1].subtasks[1] : '')}</p></div>
             </div>
             </div>
             <div class="editeDeleteArea" id="editeDeleteArea"></div>
@@ -350,7 +350,7 @@ function confirmSubtask2() {
 
 function renderContact(element) {
     let contact = document.getElementById(`${element.id}`)
-    if (element.assignedTo !== "")
+    if (element.assignedTo)
         for (let ContactIndex = 0; ContactIndex < element.assignedTo.length; ContactIndex++) {
             let slim = element.assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
             contact.innerHTML += `

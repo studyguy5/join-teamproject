@@ -88,6 +88,7 @@ function createTaskTemplate() {
 }
 
 function constantCheck() {
+    setTimeout(() => {
     const title = document.getElementById("title").value;
     const description = document.getElementById('task-description').value;
     const dueDate = document.getElementById("dueDate").value;
@@ -96,7 +97,7 @@ function constantCheck() {
     if (title !== "" && dueDate !== "" && description !== "" && taskType !== "Select Task Category") {
 
         document.getElementById('creatButtonID').disabled = false;
-    }
+    }}, 500);
 
 }
 
@@ -198,7 +199,7 @@ function showContacts() {
     contacts.innerHTML = "";
     for (let index = 1; index < contactsArray.length; index++) {
         // console.log(contactsArray);
-        contacts.innerHTML += `<div onclick="" class="contactBox">
+        contacts.innerHTML += `<div class="contactBox">
         <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
         <img  id="checkboxImg-${index}" onclick="chooseContact(${index})" class="checkbox" data-set="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
@@ -254,7 +255,14 @@ function renderfilteredContactsInPopup(filteredContacts){
 
 function openContactView() {
     let contactDrop = document.getElementById('IdForContacts')
-    contactDrop.classList.toggle('availibleContactsClose')
+    if(contactDrop.classList.contains('availibleContactsClose')) {
+    contactDrop.classList.remove('availibleContactsClose');
+    contactDrop.classList.add('availibleContactsOpen');
+  } else if(contactDrop.classList.contains('availibleContactsOpen')) {
+    contactDrop.classList.remove('availibleContactsOpen');
+    contactDrop.classList.add('availibleContactsClose');
+  }
+    
     if (document.querySelectorAll('availibleContactsOpen')) {
         let contact = document.getElementById('arrowImgC')
         contact.classList.toggle('select-arrow-open')
@@ -341,6 +349,17 @@ function chooseValue() {
 function stopBubbling(event) {
 
     event.stopPropagation()
+}
+
+function clearTask(){
+    const title = document.getElementById("title").value = "";
+    const description = document.getElementById('task-description').value = "";
+    const dueDate = document.getElementById("dueDate").value = "";
+    document.getElementById(`choosenContacts`).innerHTML= "";
+    const buttons = document.querySelectorAll(".priority-section button");
+    buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
+    const taskType = document.getElementById("selectedTask").innerText = "Select Task Category";
+    document.getElementById('subtask-list-1').innerHTML = "";
 }
 
 

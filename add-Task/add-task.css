@@ -412,23 +412,26 @@ textarea:focus::placeholder {
         border: 1px solid #FF8190;
     }
 
-    .availibleContactsOpen{
+.availibleContactsOpen{
     
     position:relative;
-    top: -8px;
+    margin-top: -8px;
     padding-top: 8px;
     opacity: 1;
     max-height:288px;
-    height: 100%;
+    min-height: 288px;
     transition:  100ms ease;
     background-color: white;
+    overflow-y: scroll;
+    /* box-sizing: border-box; */
 }
 
 .availibleContactsClose{
     opacity: 0;
     height:0px;
-    max-height: 0px;
+    /* max-height: 0px; */
     transition:  100ms ease;
+    overflow-y:hidden;
 }
 
 .contactBox{
@@ -562,4 +565,96 @@ textarea:focus::placeholder {
 .section-right-select input:focus {
     border: none;
     outline: none;
+}
+
+
+.select-arrow-downC{
+    transform: rotateX(0deg);
+    transition: 500ms ease-in-out;
+}
+
+.select-arrow-downT{
+    transform: rotateX(0deg);
+    transition: 500ms ease-in-out;
+}
+
+.select-arrow-open{
+    transform:rotateX(180deg);
+    transition: 500ms ease-in-out;
+}
+
+
+.ForTaskChoise P{
+    margin:0px;
+}
+
+.ForTaskChoise {
+  max-width: 1920px;
+  /* width: 100%; */
+  padding: 12px 16px;
+  text-align: left;
+  border: 1px solid #c8c8c8cc;
+  border-radius: 7px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+  z-index: 2;
+}
+
+
+.dropTasktypeOpen{
+    display:flex;
+    flex-direction: column;
+    justify-content: start;
+    border-radius: 7px;
+    border-left:0.5px solid rgb(160, 154, 154, 0.1);
+    border-right:0.5px solid rgb(160, 154, 154, 0.1);
+    border-bottom: 0.5px solid rgb(160, 154, 154, 0.1);
+    box-shadow: 0px 0px 14px 3px rgb(0, 0, 0, 0.04);
+    width: 439px;
+    height: 105px;
+    padding-top:8px;
+    position:relative;
+    top: -8px;
+    background-color: white;
+    opacity: 1;
+}
+
+.dropTasktypeClose{
+    max-height:0px;
+    opacity: 0;
+    transition: max-height 100ms ease-out, opacity 100ms ease-out;
+}
+
+.taskOption{
+    z-index: 3;
+    padding-top: 16px;
+    padding-left:20px;
+    width:418px;
+    height:48px;
+    
+}
+
+.taskOption:hover{
+    background-color: rgb(194, 194, 194);
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.taskOption img:hover{
+    content: url(/img/icons/select-arrow-downHover.svg);
+}
+
+.hidden-input:focus-visible{
+    outline:none;
+    border:none;
+}
+
+.hidden-input{
+    outline:none;
+    border:none;
 }

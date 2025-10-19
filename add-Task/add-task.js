@@ -482,18 +482,4 @@ let subtaskvalue1;
 let subtaskvalue2;
 
 
-function clearForm() {
-  document.getElementById("title-add-task").value = "";
-  document.getElementById("task-description").value = "";
-  document.getElementById("date-add-task").value = "";
-  document.getElementById("categoryValue").value = "";
-  document.querySelector("#category .select-trigger").innerHTML =
-    'Select Task Category <img src="../img/icons/arrow_drop_downaa.svg">';
-  document.getElementById("subtask").value = "";
-  document.getElementById("subtask-list-1").innerHTML = "";
-  document.getElementById("choosenContacts").innerHTML = "";
-  document.getElementById("filterContactsNormal").value = "";
-  document.querySelector("#placeholderptag").textContent = "Select contacts to assign";
-  document.querySelectorAll(".priority-section button").forEach(b => b.classList.remove("active"));
-  document.querySelectorAll(".required").forEach(e => e.classList.add("d-none"));
-}
+

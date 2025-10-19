@@ -344,3 +344,18 @@ function stopBubbling(event) {
 }
 
 
+function clearPopupForm() {
+  document.getElementById("title").value = "";
+  document.getElementById("task-description").value = "";
+  document.getElementById("dueDate").value = "";
+  document.getElementById("categoryValue").value = "";
+  document.getElementById("selectedTask").textContent = "Select Task Category";
+  document.getElementById("subtask").value = "";
+  document.getElementById("subtask-list-1").innerHTML = "";
+  document.getElementById("choosenContacts").innerHTML = "";
+  document.getElementById("filterContacts").value = "";
+  document.getElementById("placeholderpTag").textContent = "Select contacts to assign";
+  document.querySelectorAll(".priority-section button").forEach(b => b.classList.remove("active"));
+  document.querySelectorAll(".required").forEach(e => e.classList.add("d-none"));
+}
+

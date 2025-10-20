@@ -94,6 +94,10 @@
 .closeIcon{
     cursor: pointer;
 }
+.closeIcon:hover{
+    background-color: rgb(238, 238, 238);
+    border-radius: 50px;
+}
 
 .türkisBigView {
     display: flex;
@@ -141,8 +145,14 @@
 .subtaskImgDiv{
     display: flex;
     height:30px;
-    
     align-items: center;
+    border-radius: 10px;
+    padding: 0 8px;
+    width: fit-content;
+}
+.subtaskImgDiv:hover{
+    cursor: default;
+    background-color: rgb(238, 238, 238);
 }
 
 .subtaskImgDiv img{

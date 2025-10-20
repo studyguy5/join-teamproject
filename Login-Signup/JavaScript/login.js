@@ -1,7 +1,7 @@
 import { auth } from './firebase.js';
 import {
   signInWithEmailAndPassword,
-  signInAnonymously,
+  signInAnonymously, // bleibt importiert, auch wenn wir ohne Anmeldung weiterleiten
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 import database from './database.js';
 
@@ -41,6 +41,7 @@ function validateEmailField() {
   setText(emailErr, '');
   return true;
 }
+
 function validatePasswordField() {
   const pwd = passwordInput?.value || '';
   if (!pwd) {
@@ -50,6 +51,7 @@ function validatePasswordField() {
   setText(pwdErr, '');
   return true;
 }
+
 function formValid() {
   const v1 = validateEmailField();
   const v2 = validatePasswordField();
@@ -74,28 +76,33 @@ updateNetworkStatus();
 
 /**
  * Ziel-URL bestimmen.
- * Default ist jetzt RELATIV nach oben: '../summary.html'
- * (weil dein Login unter /Login-Signup/ läuft und summary.html im Projekt-Root liegt)
+ * Da deine Login-Seite unter /Login-Signup/ liegt und summary.html im Projekt-Root,
+ * ist der sichere Default ein RELATIVER Pfad eine Ebene hoch: "../summary.html".
+ * ?redirect=... wird weiterhin unterstützt (absolut oder relativ).
  */
 function getRedirectUrl(defaultTarget = '../summary.html') {
   try {
     const params = new URLSearchParams(window.location.search);
     let target = params.get('redirect') || defaultTarget;
+
     if (target.startsWith('/')) {
-      return new URL(target, window.location.origin).href; // absolute Pfade
+      // absolute Pfade gegen die Origin auflösen
+      return new URL(target, window.location.origin).href;
     }
-    return new URL(target, window.location.href).href;      // relative Pfade
+    // relative Pfade gegen die aktuelle Seite auflösen
+    return new URL(target, window.location.href).href;
   } catch {
     return defaultTarget;
   }
 }
 
-// Submit
+// Submit (E-Mail/Passwort)
 form?.addEventListener('submit', async (e) => {
   e.preventDefault();
   clearErrors();
 
   if (!formValid()) return;
+
   if (!navigator.onLine) {
     showGeneralError('Keine Internetverbindung verfügbar.');
     return;
@@ -107,9 +114,17 @@ form?.addEventListener('submit', async (e) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
 
-    try { await database.getUser(email); } 
-    catch (e) { console.warn('Konnte Benutzerprofil nicht laden:', e); }
+    // Optional: Benutzerprofil laden (Remote oder lokal)
+    try {
+      await database.getUser(email);
+    } catch (e) {
+      console.warn('Konnte Benutzerprofil nicht laden:', e);
+    }
 
+    // TODO: Weiterleitung nach erfolgreichem Login
+    // window.location.href = 'board.html';
+
+    // Weiterleitung (eine Ebene hoch zur summary.html)
     const target = getRedirectUrl('../summary.html');
     window.location.href = target;
   } catch (error) {
@@ -130,7 +145,7 @@ form?.addEventListener('submit', async (e) => {
   }
 });
 
-// Gast-Login
+// Gast-Login (OHNE Anmeldung → direkte Weiterleitung)
 guestBtn?.addEventListener('click', async () => {
   clearErrors();
 
@@ -140,16 +155,18 @@ guestBtn?.addEventListener('click', async () => {
   }
 
   try {
-    await signInAnonymously(auth);
+    // Markiere Gast-Modus (optional, falls summary darauf reagieren soll)
+    sessionStorage.setItem('guest', 'true');
 
+    // Falls du später doch anonym anmelden willst, könntest du das hier
+    // NACH der Navigation versuchen. Für "ohne sich anzumelden" lassen wir es weg.
+    // try { await signInAnonymously(auth); } catch { /* ignorieren */ }
+
+    // Direkte Weiterleitung zur Summary (eine Ebene hoch)
     const target = getRedirectUrl('../summary.html');
     window.location.href = target;
   } catch (e) {
-    console.error('Guest login error:', e, e.code, e.message);
-    let msg = 'Gast-Login fehlgeschlagen.';
-    if (e.code === 'auth/operation-not-allowed') {
-      msg = 'Gast-Login ist in Firebase nicht aktiviert (Authentication → Sign-in method → Anonymous).';
-    }
-    showGeneralError(`${msg}${e.code ? ` [${e.code}]` : ''}`);
+    console.error('Guest redirect error:', e);
+    showGeneralError('Konnte nicht zur Summary weiterleiten.');
   }
 });

@@ -183,6 +183,11 @@ margin-right:10px;
 
 }
 
+.taskPriority{
+    display: flex;
+    align-items: center;
+}
+
 
 .editeDeleteArea{
     display: flex;

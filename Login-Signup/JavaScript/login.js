@@ -1,7 +1,7 @@
 import { auth } from './firebase.js';
 import {
   signInWithEmailAndPassword,
-  signInAnonymously,
+  signInAnonymously, // bleibt importiert, auch wenn wir ohne Anmeldung weiterleiten
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 import database from './database.js';
 
@@ -74,7 +74,29 @@ window.addEventListener('online', updateNetworkStatus);
 window.addEventListener('offline', updateNetworkStatus);
 updateNetworkStatus();
 
-// Submit
+/**
+ * Ziel-URL bestimmen.
+ * Da deine Login-Seite unter /Login-Signup/ liegt und summary.html im Projekt-Root,
+ * ist der sichere Default ein RELATIVER Pfad eine Ebene hoch: "../summary.html".
+ * ?redirect=... wird weiterhin unterstützt (absolut oder relativ).
+ */
+function getRedirectUrl(defaultTarget = '../summary.html') {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    let target = params.get('redirect') || defaultTarget;
+
+    if (target.startsWith('/')) {
+      // absolute Pfade gegen die Origin auflösen
+      return new URL(target, window.location.origin).href;
+    }
+    // relative Pfade gegen die aktuelle Seite auflösen
+    return new URL(target, window.location.href).href;
+  } catch {
+    return defaultTarget;
+  }
+}
+
+// Submit (E-Mail/Passwort)
 form?.addEventListener('submit', async (e) => {
   e.preventDefault();
   clearErrors();
@@ -101,6 +123,10 @@ form?.addEventListener('submit', async (e) => {
 
     // TODO: Weiterleitung nach erfolgreichem Login
     // window.location.href = 'board.html';
+
+    // Weiterleitung (eine Ebene hoch zur summary.html)
+    const target = getRedirectUrl('../summary.html');
+    window.location.href = target;
   } catch (error) {
     console.error('Login error:', error, error.code, error.message);
     let msg = 'Email oder Passwort ist falsch.';
@@ -119,7 +145,7 @@ form?.addEventListener('submit', async (e) => {
   }
 });
 
-// Gast-Login
+// Gast-Login (OHNE Anmeldung → direkte Weiterleitung)
 guestBtn?.addEventListener('click', async () => {
   clearErrors();
 
@@ -129,15 +155,18 @@ guestBtn?.addEventListener('click', async () => {
   }
 
   try {
-    await signInAnonymously(auth);
-    // TODO: Weiterleitung für Gast
-    // window.location.href = 'board.html';
+    // Markiere Gast-Modus (optional, falls summary darauf reagieren soll)
+    sessionStorage.setItem('guest', 'true');
+
+    // Falls du später doch anonym anmelden willst, könntest du das hier
+    // NACH der Navigation versuchen. Für "ohne sich anzumelden" lassen wir es weg.
+    // try { await signInAnonymously(auth); } catch { /* ignorieren */ }
+
+    // Direkte Weiterleitung zur Summary (eine Ebene hoch)
+    const target = getRedirectUrl('../summary.html');
+    window.location.href = target;
   } catch (e) {
-    console.error('Guest login error:', e, e.code, e.message);
-    let msg = 'Gast-Login fehlgeschlagen.';
-    if (e.code === 'auth/operation-not-allowed') {
-      msg = 'Gast-Login ist in Firebase nicht aktiviert (Authentication → Sign-in method → Anonymous).';
-    }
-    showGeneralError(`${msg}${e.code ? ` [${e.code}]` : ''}`);
+    console.error('Guest redirect error:', e);
+    showGeneralError('Konnte nicht zur Summary weiterleiten.');
   }
 });

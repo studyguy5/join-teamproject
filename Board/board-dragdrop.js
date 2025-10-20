@@ -262,7 +262,7 @@ function renderTaskintoBoard(element) {
         <p>${Object.values(elements[1].subtasks != null ? elements[1].subtasks[0] : '')}</p></div></br>
         <div  class="subtaskImgDiv"> ${elements[1].subtasks != null ?
             `<img id="subtaskBigViewImg2" class="checkboxS2" onclick="confirmSubtask2(); checkDone(${elements, id})"src="/img/icons/normalCheckContact.svg">` : ''}
-            <p>${Object.values(elements[1].subtasks != null ? elements[1].subtasks[1] : '')}</p></div>
+            <p>${Object.values(elements[1].subtasks !== null ? elements[1].subtasks[1] : '')}</p></div>
             </div>
             </div>
             <div class="editeDeleteArea" id="editeDeleteArea"></div>

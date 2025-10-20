@@ -41,7 +41,6 @@ function validateEmailField() {
   setText(emailErr, '');
   return true;
 }
-
 function validatePasswordField() {
   const pwd = passwordInput?.value || '';
   if (!pwd) {
@@ -51,7 +50,6 @@ function validatePasswordField() {
   setText(pwdErr, '');
   return true;
 }
-
 function formValid() {
   const v1 = validateEmailField();
   const v2 = validatePasswordField();
@@ -74,13 +72,30 @@ window.addEventListener('online', updateNetworkStatus);
 window.addEventListener('offline', updateNetworkStatus);
 updateNetworkStatus();
 
+/**
+ * Ziel-URL bestimmen.
+ * Default ist jetzt RELATIV nach oben: '../summary.html'
+ * (weil dein Login unter /Login-Signup/ läuft und summary.html im Projekt-Root liegt)
+ */
+function getRedirectUrl(defaultTarget = '../summary.html') {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    let target = params.get('redirect') || defaultTarget;
+    if (target.startsWith('/')) {
+      return new URL(target, window.location.origin).href; // absolute Pfade
+    }
+    return new URL(target, window.location.href).href;      // relative Pfade
+  } catch {
+    return defaultTarget;
+  }
+}
+
 // Submit
 form?.addEventListener('submit', async (e) => {
   e.preventDefault();
   clearErrors();
 
   if (!formValid()) return;
-
   if (!navigator.onLine) {
     showGeneralError('Keine Internetverbindung verfügbar.');
     return;
@@ -92,15 +107,11 @@ form?.addEventListener('submit', async (e) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
 
-    // Optional: Benutzerprofil laden (Remote oder lokal)
-    try {
-      await database.getUser(email);
-    } catch (e) {
-      console.warn('Konnte Benutzerprofil nicht laden:', e);
-    }
+    try { await database.getUser(email); } 
+    catch (e) { console.warn('Konnte Benutzerprofil nicht laden:', e); }
 
-    // TODO: Weiterleitung nach erfolgreichem Login
-    // window.location.href = 'board.html';
+    const target = getRedirectUrl('../summary.html');
+    window.location.href = target;
   } catch (error) {
     console.error('Login error:', error, error.code, error.message);
     let msg = 'Email oder Passwort ist falsch.';
@@ -130,8 +141,9 @@ guestBtn?.addEventListener('click', async () => {
 
   try {
     await signInAnonymously(auth);
-    // TODO: Weiterleitung für Gast
-    // window.location.href = 'board.html';
+
+    const target = getRedirectUrl('../summary.html');
+    window.location.href = target;
   } catch (e) {
     console.error('Guest login error:', e, e.code, e.message);
     let msg = 'Gast-Login fehlgeschlagen.';

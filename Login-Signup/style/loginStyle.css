@@ -161,7 +161,7 @@ h1::after {
 .input-icon {
     position: absolute;
     right: 15px;
-    top: 50%;
+    top: 35%;
     transform: translateY(-50%);
     width: 20px;
     height: auto;

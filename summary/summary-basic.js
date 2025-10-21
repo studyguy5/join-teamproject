@@ -77,7 +77,13 @@ function greetingUser(){
     let greetingView = document.getElementById('greeting-time');
     if(s < 12){
         greetingView.innerHTML = 'Good Morning'
-    }else if(s >= 12){
+    }else if(s >= 12 & s < 18){
         greetingView.innerHTML = 'Good Afternoon'
+    }else{
+        greetingView.innerHTML = 'Good Evening'
     }
+}
+
+function nameOfUser(){
+    
 }

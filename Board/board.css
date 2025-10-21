@@ -52,7 +52,7 @@
     outline: none;
 }
 
-.inputBorder:hover {
+.inputBorder input:hover {
     cursor: pointer;
 }
 
@@ -93,7 +93,8 @@ hr {
 }
 
 .inputBorder img:hover {
-    background-color: rgba(0, 0, 0, 0.205)
+    background-color: rgba(0, 0, 0, 0.205);
+    cursor: pointer;
 }
 
 

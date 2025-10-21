@@ -257,12 +257,12 @@ function renderTaskintoBoard(element) {
      
      <div class="subtaskBigView"><p>${elements[1].subtasks != null ? `Subtasks`: ''}</p>
      <div id="subTaskForBigView" class="subTaskForBigView"> 
-     <div id="subtaskBigView1" class="subtaskImgDiv">  ${elements[1].subtasks != null ?
+     <div id="subtaskBigView1" class="subtaskImgDiv">  ${elements[1]?.subtasks?.[0] != null ?
         `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` : ''}
-        <p>${Object.values(elements[1].subtasks != null ? elements[1].subtasks[0] : '')}</p></div></br>
-        <div  class="subtaskImgDiv"> ${elements[1].subtasks != null ?
+        <p>${elements[1]?.subtasks?.[0] != null ? Object.values(elements[1].subtasks[0]) : ''}</p></div></br>
+        <div  class="subtaskImgDiv"> ${elements[1]?.subtasks?.[1] != null ?
             `<img id="subtaskBigViewImg2" class="checkboxS2" onclick="confirmSubtask2(); checkDone(${elements, id})"src="/img/icons/normalCheckContact.svg">` : ''}
-            <p>${Object.values(elements[1].subtasks != null ? elements[1].subtasks[1] : '')}</p></div>
+            <p>${elements[1]?.subtasks?.[1] != null ? Object.values(elements[1].subtasks[1]) : ''}</p></div>
             </div>
             </div>
             <div class="editeDeleteArea" id="editeDeleteArea"></div>

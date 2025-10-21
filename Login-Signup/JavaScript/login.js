@@ -41,7 +41,7 @@ window.addEventListener('online', updateNetworkStatus);
 window.addEventListener('offline', updateNetworkStatus);
 updateNetworkStatus();
 
-function getRedirectUrl(defaultTarget = '../summary.html'){
+function getRedirectUrl(defaultTarget = '../summary/summary.html'){
   try{
     const params = new URLSearchParams(window.location.search);
     let target = params.get('redirect') || defaultTarget;
@@ -81,7 +81,7 @@ form?.addEventListener('submit', async (e)=>{
 
     storeNameForSummary(fullName);
 
-    const target = getRedirectUrl('../summary.html');
+    const target = getRedirectUrl('../summary/summary.html');
     window.location.href = target;
   }catch(error){
     let msg = 'Email oder Passwort ist falsch.';
@@ -101,7 +101,7 @@ guestBtn?.addEventListener('click', async ()=>{
   try{
     sessionStorage.setItem('guest','true');
     localStorage.setItem('userFullName', 'Guest User');
-    const target = getRedirectUrl('../summary.html');
+    const target = getRedirectUrl('../summary/summary.html');
     window.location.href = target;
   }catch(e){
     showGeneralError('Konnte nicht zur Summary weiterleiten.');

@@ -401,7 +401,6 @@ function preventDefault(ev, category) {
     ev.preventDefault();
     let re = tasks.find(ct => ct[1].id == [currentDraggedElement]);
     let checkEmpty = document.querySelectorAll(`#${category} .emptyCategory`)
-    console.log(checkEmpty);
     if(checkEmpty.length !== 0){document.getElementById(`${category}`).innerHTML = "";}
     let demo = document.querySelectorAll(`.${category} .TaskDivDemo`)
     if (demo.length == 0 && re[1].category != category) {

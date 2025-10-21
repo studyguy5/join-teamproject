@@ -142,10 +142,23 @@ body {
   opacity: 0.5;
 }
 
+/* ===== Sichtbarkeitsschalter (Auge) ===== */
+/* Deine ursprüngliche Klasse */
 .visibility-icon {
   position: absolute;
   right: 15px;
-  top: 50%;
+  top: 35%;
+  transform: translateY(-50%);
+  width: 20px;
+  cursor: pointer;
+  display: none;
+}
+
+/* Alias, falls du in HTML/JS .toggle-icon verwendest */
+.toggle-icon {
+  position: absolute;
+  right: 15px;
+  top: 35%;
   transform: translateY(-50%);
   width: 20px;
   cursor: pointer;
@@ -286,6 +299,10 @@ body {
   width: auto;
   max-width: 80%;
 }
+/* Sichtbar machen (spielt mit deinem JS zusammen) */
+.success-message.is-visible { display: block !important; }
+/* Fallback, wenn dein JS direkt display:block setzt */
+.success-message[style*="display: block"] { display: block !important; }
 
 .page-footer {
   position: fixed;

@@ -33,8 +33,19 @@ const networkError = document.getElementById('network-error');
 const successMessage = document.getElementById('success-message');
 
 /* ========= Helpers ========= */
-const show = (el) => { if (el) el.classList.add('is-visible'); };
-const hide = (el) => { if (el) el.classList.remove('is-visible'); };
+const show = (el) => {
+  if (!el) return;
+  el.classList.add('is-visible');
+  el.style.display = 'block';
+  el.removeAttribute('hidden');
+  requestAnimationFrame(() => { el.style.opacity = '1'; });
+};
+const hide = (el) => {
+  if (!el) return;
+  el.classList.remove('is-visible');
+  el.style.opacity = '0';
+  setTimeout(() => { el.style.display = 'none'; el.setAttribute('hidden', ''); }, 200);
+};
 
 function markFieldError(input, isError) {
   if (!input) return;
@@ -168,11 +179,12 @@ form?.addEventListener('submit', async (e) => {
 
     await database.addUser({ email, name });
 
-    // ➜ Name für Summary speichern
+    // Name für Summary speichern
     localStorage.setItem('userFullName', name);
 
+    // Erfolgsbanner sichtbar machen und kurze Pause vor Redirect
     show(successMessage);
-    setTimeout(() => { window.location.href = 'Index.html'; }, 1200);
+    setTimeout(() => { window.location.href = 'Index.html'; }, 1800);
   } catch (error) {
     let msg = 'Registrierung fehlgeschlagen.';
     switch (error.code) {

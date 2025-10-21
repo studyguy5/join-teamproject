@@ -3,11 +3,9 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Inter', Arial, sans-serif;
-
 }
 
 body {
-  
     margin: 0 auto;   
     background-color: #F6F7F8;
     display: flex;
@@ -17,7 +15,6 @@ body {
     min-height: 100vh;
     position: relative;
     max-width: 1440px;
-
 }
 
 .content-wrapper {
@@ -43,9 +40,6 @@ body {
 
 .signup-page-logo {
     padding:0 20px;
-}
-
-.signup-page-logo {
     position: absolute;
     top: 0;
     left: 60px;
@@ -57,14 +51,10 @@ body {
         justify-content: center;
         background-color: #F6F7F8;
     }
-    
-
-    
     .signup-card {
         position: relative;
         margin: auto;
     }
-    
     .page-footer {
         position: fixed;
         bottom: 0;
@@ -72,7 +62,6 @@ body {
         max-width: 1920px;
     }
 }
-
 
 .page-logo img {
     width: 80px;
@@ -144,6 +133,8 @@ body {
 .input-wrapper {
     position: relative;
     width: 100%;
+    /* Neu: Platz unter dem Input für die absolute Error-Message */
+    padding-bottom: 22px;
 }
 
 .input-wrapper input {
@@ -179,13 +170,17 @@ body {
     display: none;
 }
 
+/* Fehlertext – sichtbar in Rot unter dem Feld */
 .error-message {
     color: #ff0000;
     font-size: 14px;
     margin-top: 5px;
     display: none;
     position: absolute;
+    left: 0;
+    top: calc(100% + 4px);
     width: 100%;
+    line-height: 1.2;
 }
 
 .input-field input.error {
@@ -225,6 +220,18 @@ body {
     color: #ff0000;
     font-size: 14px;
     display: none;
+}
+
+/* Banner für allgemeine / Netzwerkfehler */
+.error-banner {
+    position: static !important;
+    display: none;
+    background: #ffecec;
+    border: 1px solid #ff3b30;
+    color: #b00020;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin: 12px 0;
 }
 
 .signup-button {
@@ -299,6 +306,7 @@ body {
     background-color: transparent;
     z-index: 10;
 }
+
 @media (max-width: 768px) {
     body {
         padding: 20px;

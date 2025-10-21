@@ -53,7 +53,7 @@ async function putData(path = '', data = {}) {
 async function getData(path = '') {
     let response = await fetch(BASe_URL + path + ".json")
     return allTasks = await response.json();
-    
+
 }
 
 async function sendAlltoFirebase(contactsArray, path = 'contact') {
@@ -75,7 +75,7 @@ let rightColumn = document.querySelectorAll('.categorys > div img').forEach(el =
 // let tid = tasks.length;
 
 function createTemplate() {
-    
+
     console.log('createTemplate() wird aufgerufen')
     return {
         'category': `${choosenCategory}`,
@@ -87,10 +87,10 @@ function createTemplate() {
         'prio': '',
         'progress': '0',
         'assignedTo': [
-            
+
         ],
         'subtasks': [
-            
+
         ]
     }
 }
@@ -99,8 +99,8 @@ function pushObject(subtaskvalue1, subtaskvalue2) {
     if (subtaskvalue1) {
         let subTaskObject1 = {
             "value1":
-            `${subtaskvalue1}`
-            
+                `${subtaskvalue1}`
+
         };
         subtaskArray.push(subTaskObject1)
     } else { { '' } }
@@ -108,7 +108,7 @@ function pushObject(subtaskvalue1, subtaskvalue2) {
         ;
         let subTaskObject2 = {
             "value2":
-            `${subtaskvalue2}`
+                `${subtaskvalue2}`
         };
         subtaskArray.push(subTaskObject2);
     } else { { '' } }
@@ -116,7 +116,7 @@ function pushObject(subtaskvalue1, subtaskvalue2) {
 
 function getSubtaskFromTemplate() {
     if (document.getElementById(`task-text-${index0}`)) {
-        
+
         subtaskvalue1 = document.getElementById(`task-text-${index0}`).innerHTML
     } else { '' };
     if (document.getElementById(`task-text-${index1}`)) {
@@ -132,8 +132,8 @@ function setContactAndPrioValue(newTask) {
     })
     console.log(newTask.assignedTo);
     newTask.prio = prioArray[0];
-    
-    
+
+
 }
 
 
@@ -142,7 +142,7 @@ function setContactAndPrioValue(newTask) {
 async function getTaskInformation(index) {
     console.log('arbeitet')
     let newTask = createTemplate();
-    newTask.id = (tasks.length) +1;
+    newTask.id = (tasks.length) + 1;
     for (let valueIndex = 0; valueIndex < taskObjectKey.length; valueIndex++) {
         newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value
     };
@@ -168,15 +168,25 @@ async function filterAndShowTasks() {
     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
         document.getElementById(`${categorys[idIndex]}`).innerHTML = '';
         let filteredTasks = tasks.filter(f => f[1].category == categorys[idIndex]);
-        for (let catIndex = 0; catIndex < filteredTasks.length; catIndex++) {
-            let element = filteredTasks[catIndex][1];
-            document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoard(element);
-            if (document.getElementById(`${categorys[idIndex]}`)) {
-                renderContact(element);
+        if (filteredTasks == '' || filteredTasks == null) {
+            document.getElementById(`${categorys[idIndex]}`).innerHTML = `<div id="emptyCategory" class="emptyCategory"> No Tasks ${categorys[idIndex]}</div>`
+        } else {
+            for (let catIndex = 0; catIndex < filteredTasks.length; catIndex++) {
+
+                let element = filteredTasks[catIndex][1];
+                document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoard(element);
+                if (document.getElementById(`${categorys[idIndex]}`)) {
+                    renderContact(element);
+                }
+
+
             }
         }
     }
 }
+
+
+
 
 
 
@@ -189,7 +199,7 @@ console.log(Taskavailable);
 function checkDone(id) {
     let sort = tasks.filter(tasks => tasks[1].id === id);
     TaskDone = document.querySelectorAll('.subTaskForBigView .subtaskImgDiv .checkedSubtask')
-    
+
     sort[0][1].progress = (TaskDone.length / sort[0][1].subtasks.length) * 128
     filterAndShowTasks(id);
 }
@@ -199,13 +209,14 @@ function renderTaskintoBoard(element) {
     if (element.taskType === 'User Story') {
         taskOption = 'darkblue';
     }
+
     return `<div draggable="true" ondragstart="startDragging(${element['id']})" 
-    id="TaskDiv" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderEditAndDeleteButton(${element.id})" class="TaskDiv">
+    id="TaskDiv-${element.id}" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderEditAndDeleteButton(${element.id})" class="TaskDiv">
     <div id="taskType" class="${taskOption}">${element.taskType}</div>
     <div class="taskTitle"><p>${element.title}</p></div>
     <div class="taskDescription"><p>${element.description}</p></div>
     <div class="subTasks">
-    ${element.subtasks != null  ? `
+    ${element.subtasks != null ? `
     <svg role="progress subtask">
     <rect  width="128" height="8"  class="back"/>
     <rect  width="${element.progress}" height="8" class="fill"/>
@@ -215,24 +226,24 @@ function renderTaskintoBoard(element) {
     <div id="contacts-Priority-Container" class="contacts-Priority-Container" >
     <div id="${element.id}" class="contactsMiniView"></div>
     <div class="taskPriority">${element.prio == 'Urgent' ?
-        `<img src="/img/icons/urgent.svg">` :
-        element.prio == 'Medium' ?
-        `<img src="/img/icons/medium.svg">` :
-        element.prio == 'Low' ?
-        `<img src="/img/icons/low.svg">` : ''}</div>
+            `<img src="/img/icons/urgent.svg">` :
+            element.prio == 'Medium' ?
+                `<img src="/img/icons/medium.svg">` :
+                element.prio == 'Low' ?
+                    `<img src="/img/icons/low.svg">` : ''}</div>
         </div>
         <div></div>
         </div>`
-        
-    }
-    // if bedingung einbauen, wenn subtask.lenght = 0 -> dann nichts anzeigen (no barchart, no numbers)
-    
-    function bigViewOfTask(id) {
-        const elements = tasks.find(task => task[1].id === id);
-        if (elements[1].taskType === 'User Story') {
-            taskOption = 'darkblueBigView';
-        } else {
-            taskOption = 'türkisBigView';
+}
+
+// if bedingung einbauen, wenn subtask.lenght = 0 -> dann nichts anzeigen (no barchart, no numbers)
+
+function bigViewOfTask(id) {
+    const elements = tasks.find(task => task[1].id === id);
+    if (elements[1].taskType === 'User Story') {
+        taskOption = 'darkblueBigView';
+    } else {
+        taskOption = 'türkisBigView';
     }
     let connectionToTaskWindow = document.getElementById('bigViewOfTask')
     connectionToTaskWindow.classList.remove('dont-Show')
@@ -247,18 +258,18 @@ function renderTaskintoBoard(element) {
     <div class="priorityBigView"><p>Priority:</p>${elements[1].prio == 'Urgent' ?
             `${elements[1].prio}<img src="/img/icons/urgent.svg">` :
             elements[1].prio == 'Medium' ?
-            `${elements[1].prio}<img src="/img/icons/medium.svg">` :
-            elements[1].prio == 'Low' ?
-            `${elements[1].prio}<img src="/img/icons/low.svg">` : ''}
+                `${elements[1].prio}<img src="/img/icons/medium.svg">` :
+                elements[1].prio == 'Low' ?
+                    `${elements[1].prio}<img src="/img/icons/low.svg">` : ''}
             </div>
      <div class="assignedToBigView"><p>Assigned To:</p> 
      <div id="contactsBV" class="contactsBV"></div>
      </div>
      
-     <div class="subtaskBigView"><p>${elements[1].subtasks != null ? `Subtasks`: ''}</p>
+     <div class="subtaskBigView"><p>${elements[1].subtasks != null ? `Subtasks` : ''}</p>
      <div id="subTaskForBigView" class="subTaskForBigView"> 
      <div id="subtaskBigView1" class="subtaskImgDiv">  ${elements[1]?.subtasks?.[0] != null ?
-        `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` : ''}
+            `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` : ''}
         <p>${elements[1]?.subtasks?.[0] != null ? Object.values(elements[1].subtasks[0]) : ''}</p></div></br>
         <div  class="subtaskImgDiv"> ${elements[1]?.subtasks?.[1] != null ?
             `<img id="subtaskBigViewImg2" class="checkboxS2" onclick="confirmSubtask2(); checkDone(${elements, id})"src="/img/icons/normalCheckContact.svg">` : ''}
@@ -267,10 +278,10 @@ function renderTaskintoBoard(element) {
             </div>
             <div class="editeDeleteArea" id="editeDeleteArea"></div>
             `
-            
-        };
-        
-        function renderEditAndDeleteButton(id) {
+
+};
+
+function renderEditAndDeleteButton(id) {
     let editandDelete = document.getElementById('editeDeleteArea')
     editandDelete.innerHTML = `<div class="editAndDeleteButton">
     <div onclick="deleteTaskFromBoard(${id})" class="deleteField">
@@ -297,29 +308,29 @@ function renderContactForBigView(id) {
         <div id="singleContactInBigView-${BVindex}" > ${rightContacts[1].assignedTo[BVindex]}</div>
         </div>
         ` }
-        
-    }
 
-    async function deleteTaskFromBoard(id) {
-        let openedTask = tasks.find(task => task[1].id === id)
-        let indexOfopenedTask = tasks.indexOf(tasks.find(task => task[1].id === id))
-        console.log(openedTask);
-        let firebaseID = [openedTask[0]];
-        console.log(firebaseID[0]);
-        tasks.splice(indexOfopenedTask, 1);
-        closeBigView();
-        await deleteData(firebaseID);
-        filterAndShowTasks();
-        // hier einen index rausschneiden um den Eintrag zu löschen
-        
-    }
-    
-    async function deleteData(firebaseID) {
-      const response = await fetch(`https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/task/${firebaseID[0]}.json`, {
+}
+
+async function deleteTaskFromBoard(id) {
+    let openedTask = tasks.find(task => task[1].id === id)
+    let indexOfopenedTask = tasks.indexOf(tasks.find(task => task[1].id === id))
+    console.log(openedTask);
+    let firebaseID = [openedTask[0]];
+    console.log(firebaseID[0]);
+    tasks.splice(indexOfopenedTask, 1);
+    closeBigView();
+    await deleteData(firebaseID);
+    filterAndShowTasks();
+    // hier einen index rausschneiden um den Eintrag zu löschen
+
+}
+
+async function deleteData(firebaseID) {
+    const response = await fetch(`https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/task/${firebaseID[0]}.json`, {
         method: "DELETE",
-      });
-      return await response.json();
-    };
+    });
+    return await response.json();
+};
 function confirmSubtask1() {
     let choSubtask1 = document.getElementById(`subtaskBigViewImg1`)
     if (choSubtask1.src.includes("/img/icons/normalCheckContact.svg")) {
@@ -373,13 +384,49 @@ function moveTo(category) {
     filterAndShowTasks();
 }
 
+// function signalForInput(category) {
+//     // onmouseover="signalForInput('Todo')"
+
+// }
+
 function startDragging(id) {
     currentDraggedElement = id
+    document.getElementById(`TaskDiv-${id}`).style.transform = 'rotate(5deg)';
 }
 
-function preventDefault(ev) {
+let once = false;
+
+
+function preventDefault(ev, category) {
     ev.preventDefault();
+    let re = tasks.find(ct => ct[1].id == [currentDraggedElement]);
+    let checkEmpty = document.querySelectorAll(`#${category} .emptyCategory`)
+    console.log(checkEmpty);
+    if(checkEmpty.length !== 0){document.getElementById(`${category}`).innerHTML = "";}
+    let demo = document.querySelectorAll(`.${category} .TaskDivDemo`)
+    if (demo.length == 0 && re[1].category != category) {
+        document.getElementById(category).innerHTML += `
+    <div class="TaskDivDemo" id="TaskDivDemo">Drop me here</div>
+    `;
+        once = true;
+    }
+
+
 }
+
+
+function leaveCategory(category) {
+    let clean = document.querySelectorAll(`.${category} .TaskDivDemo`);
+    if (clean.length === 1 && once === true) {
+        clean[0].remove();
+        console.log(clean);
+        once = false;
+    }
+
+}
+
+
+
 
 
 

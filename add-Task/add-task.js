@@ -170,6 +170,7 @@ function chooseValueNormal() {
 
 
 function createTask() {
+    console.log('createTask() wird aufgerufen');
     if (!formValidationAddTask()) return;
 
     const popup = document.getElementById("report");
@@ -203,7 +204,7 @@ function createTask() {
 function formValidationAddTask() {
     const title = document.getElementById("title-add-task").value;
     const dueDate = document.getElementById("date-add-task").value;
-    // const category = document.getElementById("categoryValue").value; // <-- hidden input
+    // const category = document.getElementById("categoryValue").value;
     
     if (title === "" || dueDate === "") {
         displayRequiredMessage();

@@ -289,7 +289,7 @@ function renderEditAndDeleteButton(id) {
     <h4>Delete</h4>
     </div>
     <hr class="lineToSeperate">
-    <div class="editField">
+    <div onclick="activateEditModus()" class="editField">
     <img class="editImg" src="/img/icons/edit-symbol.svg">
     <h4>Edit</h4>
     </div>
@@ -313,15 +313,15 @@ function renderContactForBigView(id) {
 
 async function deleteTaskFromBoard(id) {
     let openedTask = tasks.find(task => task[1].id === id)
-    let indexOfopenedTask = tasks.indexOf(tasks.find(task => task[1].id === id))
     console.log(openedTask);
     let firebaseID = [openedTask[0]];
     console.log(firebaseID[0]);
-    tasks.splice(indexOfopenedTask, 1);
     closeBigView();
     await deleteData(firebaseID);
+    tasks = [];
+    tasks.push(...Object.entries(await getData('task')));
     filterAndShowTasks();
-    // hier einen index rausschneiden um den Eintrag zu löschen
+    // Array wird nach dem Löschen geleert und neu befüllt, ist einfacher weil ich sonst immer den richtigen Index finden muss
 
 }
 
@@ -331,6 +331,13 @@ async function deleteData(firebaseID) {
     });
     return await response.json();
 };
+
+function activateEditModus(){
+    let edit = document.getElementById('bigViewOfTask')
+    edit.innerHTML = "";
+    edit.innerHTML = renderBigEditView();
+}
+
 function confirmSubtask1() {
     let choSubtask1 = document.getElementById(`subtaskBigViewImg1`)
     if (choSubtask1.src.includes("/img/icons/normalCheckContact.svg")) {
@@ -443,3 +450,5 @@ function objectToArray(contacts) {
 
     return arrayObject;
 }
+
+

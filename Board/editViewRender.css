@@ -1,0 +1,324 @@
+.bigViewOfTask {
+    z-index: 4;
+    position: absolute;
+    top: 120px;
+    right: 30px;
+    max-width: 525px;
+    width: 100%;
+    max-height: 931px;
+    height: fit-content;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 30px;
+    padding: 48px 40px;
+
+}
+
+
+.editBigView {
+    max-width: 535px;
+    /* width: 100%; */
+    height: 697px;
+    padding: 64px, 75px 64px 74px;
+    border-radius: 10px;
+    opacity: 1;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    /* overflow-y: scroll; */
+    width: calc(100% + 10px);
+  overflow-y: auto;
+  padding-right: 10px;
+    overflow-x: hidden;
+    
+}
+
+.editViewHeader {
+    width: 100%;
+    max-width: 525px;
+    
+    min-height:56px;
+    display: flex;
+    justify-content: end;
+    position:sticky;
+    top:0px;
+    /* margin-bottom: 24px; */
+    background-color: white;
+}
+
+.editViewHeader img{
+    cursor: pointer;
+}
+
+.editView-mainInput {
+    align-items: center;
+
+}
+
+.input-section-leftEditView {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* margin-left: 74px; */
+    width: 525px;
+    height: 376px;
+}
+
+.input-section-leftEditView label{
+    margin-bottom: 8px;
+}
+
+
+.input-section-left-inputEditView {
+    border: 1px solid #c8c8c8;
+    padding: 12px 21px;
+    margin-bottom: 32px;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.input-section-left-inputEditView:focus,
+.input-section-left-inputEditView:focus {
+    border-color: #29ABE2;
+    outline: none;
+}
+
+.input-section-leftEditView textarea {
+    margin-bottom: 32px;
+    height: 120px;
+    border-radius: 10px;
+    border: 1px solid #c8c8c8;
+    padding: 12px 21px;
+    font-size: 18px;
+    font-family: arial, sans-serif;
+    resize: none;
+}
+
+.dateEditView {
+    background: url("../img/icons/event.svg");
+    background-position: right 16px center;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    padding-right: 30px;
+    background-color: #ffffff;
+    margin-bottom: 40px;
+}
+
+
+.input-section-right-EditView {
+    max-width: 525px;
+    width:100%;
+    font-size: 20px;
+}
+
+.input-section-right-EditView button{
+
+    margin-bottom: 24px;
+}
+
+/* .priority-sectoinEditView{
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+} */
+
+.section-right-selectEditView{
+    max-width:525px;
+    border-radius: 10px;
+    border: 1px solid #c8c8c8;
+    padding: 12px 16px;
+    font-size: 20px;
+    background-color: white;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.section-right-selectEditView p{
+    margin: 0px;
+    padding: 0px;
+}
+
+.subtask-wrapperEditView {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:100%;
+    max-width:525px;
+}
+
+/* breite für subtaskinput hier */
+.inputPopupEditView {
+    width: 100%;
+    max-width: 486px;       
+    border-radius: 10px;
+    border: 1px solid #c8c8c8;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+}
+
+.inputPopupEditView:focus {
+    border-color: #29ABE2;
+    outline: none;
+}
+
+/* for subtask */
+
+.subtask-list {
+    padding: 12px 21px;
+    display: flex;
+}
+
+.subtask-icon {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    align-items: center;
+    align-self: end;
+    gap: 4px;
+    display: none;
+}
+
+.subtask-wrapper input:focus+.subtask-icon {
+    display: flex !important;
+}
+
+
+.x:hover,
+.hook:hover {
+    cursor: pointer;
+    background: #D1D1D1;
+    border-radius: 56px;
+}
+
+.delimiter {
+    width: 0px;
+    height: 20px;
+    border: 1px solid #D1D1D1;
+}
+
+.ul-div {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin: 0;
+    list-style: none;
+
+}
+
+.listed {
+    margin-top: 8px;
+    display: flex;
+    padding: 6px 16px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    align-items: center;
+    height: 24px;
+}
+
+.listed:hover {
+    cursor: pointer;
+    background: #e6e6e6;
+    border-radius: 10px;
+
+    .list-icon {
+        display: flex !important;
+    }
+}
+
+.dot {
+    margin-right: 16px;
+}
+
+.list-icon {
+    display: flex;
+    position: absolute;
+    right: 12px;
+    gap: 4px;
+    display: none;
+}
+
+.pencil,
+.trash {
+    width: 20px;
+    height: 20px;
+}
+
+.edit-input {
+    height: 10px;
+    border: none;
+    outline: none;
+    border-radius: 0;
+
+    display: block;
+    width: calc(100% - 2px);
+    margin-left: -16px;
+    margin-right: -16px;
+}
+
+.edit-input:focus {
+    border-bottom: 1px solid #29ABE2;
+}
+
+
+/* für footer Area ab hier */
+
+.footerPopupEditView {
+    width: 100%;
+    max-width: 525px;
+    position:sticky;
+    bottom:0px;
+    min-height:64px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    background-color: white;
+}
+
+.footer p {
+    font-size: 16px;
+}
+
+.footer-leftPopup {
+    display: flex;
+    max-width:170px;
+    width:100%;
+}
+
+
+.footer-buttons-sectionEditView {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.create-task-btn {
+    width: 140px;
+    height: 40px;
+    border-radius: 7px;
+    background-color: #2A3647;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: none;
+}
+
+.create-task-btn:hover {
+    background-color: #29ABE2;
+}
+
+.checkEditView{
+    width:24px;
+    height:24px;
+}

@@ -243,6 +243,7 @@
     display: flex;
     justify-content: space-between;
     gap: 16px;
+    /* margin-bottom:24px; */
 }
 .priority-section button{
     width: 136px;

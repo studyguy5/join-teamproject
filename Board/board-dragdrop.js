@@ -289,7 +289,7 @@ function renderEditAndDeleteButton(id) {
     <h4>Delete</h4>
     </div>
     <hr class="lineToSeperate">
-    <div onclick="activateEditModus()" class="editField">
+    <div onclick="activateEditModus(${id})" class="editField">
     <img class="editImg" src="/img/icons/edit-symbol.svg">
     <h4>Edit</h4>
     </div>
@@ -298,9 +298,11 @@ function renderEditAndDeleteButton(id) {
 }
 
 function renderContactForBigView(id) {
+
+    
     let rightContacts = tasks.find(task => task[1].id === id)
     let contactForBig = document.getElementById('contactsBV')
-    for (let BVindex = 0; BVindex < rightContacts[1].assignedTo.length; BVindex++) {
+    for (let BVindex = 0; BVindex < rightContacts[1].assignedTo?.length; BVindex++) {
         let short = rightContacts[1].assignedTo.map(sh => sh.split(" ").map(c => c.charAt(0)))
         contactForBig.innerHTML += `
         <div class="singleContactBoxForBigView">
@@ -332,10 +334,11 @@ async function deleteData(firebaseID) {
     return await response.json();
 };
 
-function activateEditModus(){
+function activateEditModus(id){
     let edit = document.getElementById('bigViewOfTask')
     edit.innerHTML = "";
     edit.innerHTML = renderBigEditView();
+    getCurrentValues(id)
 }
 
 function confirmSubtask1() {

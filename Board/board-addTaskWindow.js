@@ -335,6 +335,8 @@ function openTasktypeDropDown() {
 }
 
 
+
+
 function chooseValue() {
     let choise = document.querySelectorAll('.taskOption')
 

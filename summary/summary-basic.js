@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Benutzer: Initialen + Begrüßung/Datum
   renderUserInitials();
-  updateGreetingAndDate();                 // setzt Greeting + heutiges Datum
+  updateGreetingAndDate();                 // setzt Greeting + Datum (nur wenn kein Urgent-Datum gefunden)
 
   // Bei langen Sessions automatisch aktualisieren (z. B. bei 12:00 / 18:00)
   setInterval(updateGreetingAndDate, 60 * 1000);
@@ -44,6 +44,59 @@ function doneSummaryEventHandler() {
   box?.addEventListener('mouseleave', () => box.querySelector('img')?.setAttribute('src', "../img/icons/summary-done-icon-default.svg"));
 }
 
+/* ---------- NEU: Helper fürs Urgent-Datum ---------- */
+let hasUrgentDeadline = false;
+
+function parseDateSmart(input) {
+  if (!input || typeof input !== 'string') return null;
+  const s = input.trim();
+
+  // dd/mm/yyyy oder dd.mm.yyyy
+  let m = s.match(/^(\d{1,2})[\/.](\d{1,2})[\/.](\d{4})$/);
+  if (m) {
+    const [_, d, mo, y] = m;
+    const date = new Date(+y, +mo - 1, +d);
+    return isNaN(date) ? null : date;
+  }
+  // yyyy-mm-dd
+  m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+  if (m) {
+    const [_, y, mo, d] = m;
+    const date = new Date(+y, +mo - 1, +d);
+    return isNaN(date) ? null : date;
+  }
+  // Fallback: Date kann evtl. direkt parsen
+  const date = new Date(s);
+  return isNaN(date) ? null : date;
+}
+
+function startOfDay(d) {
+  const x = new Date(d);
+  x.setHours(0,0,0,0);
+  return x;
+}
+
+function findNextUrgentDeadline(taskEntries) {
+  const today = startOfDay(new Date());
+  const urgentDates = [];
+
+  for (const [, t] of taskEntries) {
+    if (!t || t.prio !== 'Urgent') continue;
+    const due = parseDateSmart(t.DueDate);
+    if (!due) continue;
+    if (startOfDay(due) >= today) urgentDates.push(due);
+  }
+
+  if (!urgentDates.length) return null;
+  urgentDates.sort((a,b) => a - b);
+  return urgentDates[0];
+}
+
+function formatDateReadable(d, locale = 'en-US') {
+  return new Intl.DateTimeFormat(locale, { month: 'long', day: 'numeric', year: 'numeric' }).format(d);
+}
+/* --------------------------------------------------- */
+
 function deliverDataToSummary(tasks) {
   let todo = tasks.filter(td => td[1].category === 'Todo');
   document.getElementById('todoTask').innerHTML = todo.length;
@@ -57,6 +110,15 @@ function deliverDataToSummary(tasks) {
   document.getElementById('taskInProgress').innerHTML = inprogress.length;
   let awaitfeedback = tasks.filter(td => td[1].category === 'AwaitFeedback');
   document.getElementById('taskAwaitFeedback').innerHTML = awaitfeedback.length;
+
+  // NEU: nächstes Urgent-Datum setzen (falls vorhanden)
+  const nextUrgent = findNextUrgentDeadline(tasks);
+  if (nextUrgent) {
+    setUpcomingDate(formatDateReadable(nextUrgent, 'en-US'));
+    hasUrgentDeadline = true;
+  } else {
+    hasUrgentDeadline = false; // UpdateGreeting setzt dann heute
+  }
 }
 
 /* ===================== USERNAME & INITIALEN ===================== */
@@ -96,7 +158,6 @@ function computeGreeting() {
 }
 
 function formatTodayDate(locale = 'en-US') {
-  // "October 16, 2022" – wie im Figma
   const d = new Date();
   return new Intl.DateTimeFormat(locale, { month: 'long', day: 'numeric', year: 'numeric' }).format(d);
 }
@@ -114,7 +175,6 @@ function setUpcomingDate(text) {
     if (el) { el.textContent = text; return true; }
   }
   // 2) Fallback: deine aktuelle Struktur nutzt <p class="date">…</p>
-  //    Nimm die erste .box-middle .date oder notfalls die erste .date
   const el1 = document.querySelector('.box-middle .date');
   if (el1) { el1.textContent = text; return true; }
   const el2 = document.querySelector('.date');
@@ -137,5 +197,8 @@ function updateGreetingAndDate() {
   if (timeEl) timeEl.textContent = greeting + ',';
   if (nameEl) { nameEl.textContent = fullName; nameEl.classList.remove('d-none'); }
 
-  setUpcomingDate(today);
+  // Nur heutiges Datum setzen, wenn kein Urgent-Datum angezeigt wird
+  if (!hasUrgentDeadline) {
+    setUpcomingDate(today);
+  }
 }

@@ -116,6 +116,51 @@
     margin-bottom: 24px;
 }
 
+.priority-sectionEdit {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.priority-sectionEdit button {
+    width: 137.67px;
+    height: 56px;
+    border: none;
+    border-radius: 7px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 16px 10px;
+}
+
+.priority-sectionEdit button:hover {
+    box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.priority-sectionEdit button.Urgent {
+    background-color: #FF3D00;
+    color: white;
+}
+
+.priority-sectionEdit button.Medium {
+    background-color: #FFA800;
+    color: white;
+}
+
+.priority-sectionEdit button.Low {
+    background-color: #7AE229;
+    color: white;
+}
+
+.priority-sectionEdit button.Urgent img,
+.priority-sectionEdit button.Medium img,
+.priority-sectionEdit button.Low img {
+    filter: brightness(0) invert(1);
+}
+
 /* .priority-sectoinEditView{
     display: flex;
     justify-content: space-between;
@@ -161,6 +206,7 @@
     transition:  100ms ease;
     background-color: white;
     overflow-y: scroll;
+    transition: 500ms ease-in-out;
 }
 
 .availibleContactsCloseEdit{
@@ -181,35 +227,35 @@
     position:relative;
 }
 
-.checkbox{
+.checkboxEdit{
     margin-left:220px;
     position:absolute;
     right:20px;
 }
 
-.checked{
+.checkedEdit{
     margin-left:220px;
     position:absolute;
     right:20px;
     content: url(/img/icons/checkedContactWhite.svg);
 }
-.checked:hover{
+.checkedEdit:hover{
     background-image: url(/img/icons/hoverCheckedContact.svg);
 }
-.checkbox:hover{
+.checkboxEdit:hover{
     background-image: url(/img/icons/hoverCheckContact.svg);
 }
 
-.contactBox:hover{
+.contactBoxEdit:hover{
     background-color: rgba(238, 238, 238, 1);
     cursor: pointer;
 }
 
-.contactBox:hover:has(.checked) {
+.contactBox:hover:has(.checkedEdit) {
     background-color: rgba(42, 54, 71, 1);   
 }
 
-.contactBox:has(.checked) {
+.contactBox:has(.checkedEdit) {
    background-color: rgba(9, 25, 49, 1);
     color:white;
 }
@@ -230,8 +276,8 @@
     display: inline-block;
     border: 1px solid rgb(255, 255, 255, 1);
     border-radius: 45px;
-    width:30px;
-    height:30px;
+    width:32px;
+    height:32px;
     color:white;
     font-size: 12px;
     
@@ -241,10 +287,11 @@
     display:flex;
     align-items: center;
     justify-content: center;
+    margin-top:8px;
     border: 1px solid rgb(255, 255, 255, 1);
     border-radius: 45px;
-    width:30px;
-    height:30px;
+    width:40px;
+    height:40px;
     color:white;
     font-size: 12px;
 }

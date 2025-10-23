@@ -337,8 +337,9 @@ async function deleteData(firebaseID) {
 function activateEditModus(id){
     let edit = document.getElementById('bigViewOfTask')
     edit.innerHTML = "";
-    edit.innerHTML = renderBigEditView();
+    edit.innerHTML = renderBigEditView(id);
     getCurrentValues(id)
+    prioButtonactivate(id);
 }
 
 function confirmSubtask1() {

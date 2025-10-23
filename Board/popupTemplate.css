@@ -76,6 +76,7 @@
     cursor: pointer;
     border-radius: 56px;
     opacity: 1;
+    z-index:2;
 }
 
 .popup-header img:hover {
@@ -97,6 +98,20 @@
 .show{
     position:fixed;
     z-index: 2;
+    background-color: rgb(255, 0, 0, 0.0);
+    width:100%;
+    max-width:1116px;
+    height:100%;
+    max-height:870px;
+}
+
+.hiddenlayer2{
+    display: none;
+}
+
+.show2{
+    position:fixed;
+    z-index: 1;
     background-color: rgb(255, 0, 0, 0.0);
     width:100%;
     max-width:1116px;
@@ -348,7 +363,7 @@
 }
 
 .availibleContactsOpen{
-    
+    z-index:3;
     position:relative;
     margin-top: -8px;
     padding-top: 8px;

@@ -2,6 +2,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
   return `
     <section   class="addTaskPopupMain">
     <div onclick="openTasktypeDropDown()" id="hiddenlayer" class="hiddenlayer show" ></div>
+    <div onclick="openContactView(); showInput()" id="hiddenlayer2" class="hiddenlayer2 show2" ></div>
         <div class="popup-header">
           <h1>Add Task</h1>
           <img onclick="closePopup()" src="/img/icons/close-icon.svg" />

@@ -414,7 +414,7 @@ textarea:focus::placeholder {
     }
 
 .availibleContactsOpen{
-    
+    z-index:3;
     position:relative;
     margin-top: -8px;
     padding-top: 8px;

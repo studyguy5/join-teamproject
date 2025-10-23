@@ -208,14 +208,6 @@ function showContacts() {
     }
 }
 
-function showInput() {
-
-    if (document.getElementById('placeholderpTag')){
-        document.getElementById('placeholderpTag').classList.toggle('dont-Show');
-        document.getElementById('filterContacts').classList.toggle('dont-Show');
-        document.getElementById('filterContacts').focus()
-    };
-}
 
 let filteredContacts;
 function filterContactsInPopup() {
@@ -226,12 +218,12 @@ function filterContactsInPopup() {
     if (typedValue.length > 0) {
         let val = Object.values(contactsArray);
         
-         r = val.slice(1)
-         filteredContacts = r.filter(fn => {return fn.name.toLowerCase().includes(typedValue.toLowerCase())})
-            
+        r = val.slice(1)
+        filteredContacts = r.filter(fn => {return fn.name.toLowerCase().includes(typedValue.toLowerCase())})
+        
         renderfilteredContactsInPopup(filteredContacts);    
-    
-    //    console.log(filteredContacts);
+        
+        //    console.log(filteredContacts);
     }else if(typedValue.length < 1){
         showContacts();
     }
@@ -239,28 +231,40 @@ function filterContactsInPopup() {
 
 function renderfilteredContactsInPopup(filteredContacts){
 
-   let filtContactInPopup =  document.getElementById('IdForContacts')
-   filtContactInPopup.innerHTML = "";
-   for (let filterContactIndex = 0; filterContactIndex < filteredContacts.length; filterContactIndex++) {   
-   filtContactInPopup.innerHTML += `
-   <div onclick="" class="contactBox">
+    let filtContactInPopup =  document.getElementById('IdForContacts')
+    filtContactInPopup.innerHTML = "";
+    for (let filterContactIndex = 0; filterContactIndex < filteredContacts.length; filterContactIndex++) {   
+        filtContactInPopup.innerHTML += `
+        <div onclick="" class="contactBox">
         <div class="contactCirclePopup">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${filteredContacts[filterContactIndex].name}</span> 
         <img  id="checkboxImg-${filterContactIndex}" onclick="chooseFilteredContact(${filterContactIndex})" class="checkbox" data-set="${filteredContacts[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
         </div>
-   `}
-
-}
-
-
+        `}
+        
+    }
+    
+    function showInput() {
+        console.log('show input')
+        if (document.getElementById('placeholderpTag')){
+            document.getElementById('placeholderpTag').classList.toggle('dont-Show');
+            document.getElementById('filterContacts').classList.toggle('dont-Show');
+            document.getElementById('filterContacts').focus()
+        };
+    }
+    
 function openContactView() {
     let contactDrop = document.getElementById('IdForContacts')
     if(contactDrop.classList.contains('availibleContactsClose')) {
-    contactDrop.classList.remove('availibleContactsClose');
-    contactDrop.classList.add('availibleContactsOpen');
+        contactDrop.classList.remove('availibleContactsClose');
+        contactDrop.classList.add('availibleContactsOpen');
+        let layer = document.getElementById('hiddenlayer2')
+        layer.classList.toggle('hiddenlayer2')
   } else if(contactDrop.classList.contains('availibleContactsOpen')) {
     contactDrop.classList.remove('availibleContactsOpen');
     contactDrop.classList.add('availibleContactsClose');
+    let layer = document.getElementById('hiddenlayer2')
+        layer.classList.toggle('hiddenlayer2')
   }
     
     if (document.querySelectorAll('availibleContactsOpen')) {

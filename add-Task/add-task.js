@@ -18,23 +18,26 @@ function sectionCheck(idsecTrue) {
 }})
 
  
-    const buttons = document.querySelectorAll(".priority-section button");
-    
-    buttons.forEach(button => {
-      button.addEventListener("click", () => {
-        buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
-        const priority = button.dataset.priority;
-        button.classList.add(priority);
-      console.log(priority)});
-    });
-  
+const buttons = document.querySelectorAll(".priority-section button");
 
-    async function getObject(path = '') {
+// ▼▼▼ Anpassung: gewählte Priority IMMER im prioArray[0] speichern
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
+    const priority = button.dataset.priority;
+    button.classList.add(priority);
+    prioArray[0] = priority;                 // <--- NEU: damit Summary die Prio kennt
+    console.log(priority);
+  });
+});
+// ▲▲▲
+
+async function getObject(path = '') {
     let response = await fetch(BASe_URL + path + ".json")
     return responseToJson = await response.json()
 }
 
-    function objectToArray(contacts) {
+function objectToArray(contacts) {
     const object = Object.entries(contacts)
     console.log(object);
     const arrayObject = object.map((member) => {
@@ -52,7 +55,6 @@ function showContacts() {
     let contacts = document.getElementById('IdForContactsNormal')
     contacts.innerHTML = "";
     for (let index = 1; index < contactsArray.length; index++) {
-        // console.log(contactsArray);
         contacts.innerHTML += `<div class="contactBox">
         <div class="contactCircleNormal">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
@@ -74,8 +76,8 @@ function renderfilteredContactsInNormal(filteredContacts){
         <img  id="checkboxImg-${filterContactIndex}" onclick="chooseFilteredContactNormal(${filterContactIndex})" class="checkbox" data-set="${filteredContacts[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
         </div>
    `}
-
 }
+
 function showInputNormal() {
 
     if (document.getElementById('placeholderptag')){
@@ -170,7 +172,6 @@ function chooseValueNormal() {
 
 
 function createTask() {
-    console.log('createTask() wird aufgerufen');
     if (!formValidationAddTask()) return;
 
     const popup = document.getElementById("report");
@@ -204,7 +205,7 @@ function createTask() {
 function formValidationAddTask() {
     const title = document.getElementById("title-add-task").value;
     const dueDate = document.getElementById("date-add-task").value;
-    // const category = document.getElementById("categoryValue").value;
+    // const category = document.getElementById("categoryValue").value; // <-- hidden input
     
     if (title === "" || dueDate === "") {
         displayRequiredMessage();
@@ -242,7 +243,6 @@ function filterContactsInNormal() {
             
         renderfilteredContactsInNormal(filteredContacts);    
     
-    //    console.log(filteredContacts);
     }else if(typedValue.length < 1){
         showContacts();
     }
@@ -368,9 +368,10 @@ function setContactAndPrioValue(newTask) {
         newTask.assignedTo.push(names)
     })
     console.log(newTask.assignedTo);
-    newTask.prio = prioArray[0];
-    
-    
+
+    // ▼▼▼ Wichtig: hier landet jetzt die ausgewählte Prio
+    newTask.prio = prioArray[0] || '';       // falls nichts gewählt, leer lassen
+    // ▲▲▲
 }
 
 
@@ -405,6 +406,7 @@ function clearTaskNormal(){
     document.getElementById('choosenContacts').innerHTML= "";
     const buttons = document.querySelectorAll(".priority-section button");
     buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
+    prioArray.length = 0; // ▼▼▼ optional: Auswahl zurücksetzen
     const taskType = document.getElementById("selectedTaskNormal").innerText = "Select Task Category";
     document.getElementById('subtask-list-1').innerHTML = "";
 }
@@ -481,6 +483,35 @@ let subtaskArray = [];
 
 let subtaskvalue1;
 let subtaskvalue2;
+/* --- dein vorhandener add-task.js Code bleibt komplett wie er ist --- */
 
+/* ===================== USERNAME & INITIALEN (wie in summary) ===================== */
+function getStoredUserName() {
+  const name = localStorage.getItem('userFullName');
+  if (name && name.trim()) return name.trim();
+  if (sessionStorage.getItem('guest') === 'true') return 'Guest User';
+  return 'User';
+}
 
+function getInitials(fullName) {
+  const parts = (fullName || '').trim().split(/\s+/).filter(Boolean);
+  if (!parts.length) return 'US';
+  const first = parts[0][0] || '';
+  const last  = parts.length > 1 ? parts[parts.length - 1][0] : (parts[0][1] || '');
+  return (first + last).toUpperCase();
+}
 
+window.renderUserInitials = function renderUserInitials() {
+  const fullName = getStoredUserName();
+  const initials = getInitials(fullName);
+  const el = document.getElementById('userInitials');
+  if (el) {
+    el.textContent = initials;
+    el.setAttribute('title', fullName);
+  el.setAttribute('aria-label', fullName);
+  }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  try { renderUserInitials(); } catch (e) {}
+});

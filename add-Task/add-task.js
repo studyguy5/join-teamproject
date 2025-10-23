@@ -254,7 +254,7 @@ function displayRequiredMessage() {
     const titleInput = document.getElementById("title-add-task");
     const dateInput = document.getElementById("date-add-task");
     const categoryInput = document.getElementById("categoryValue");
-    const categoryDiv = document.getElementById("category");
+    const categoryDiv = document.getElementById("IdForTaskChoiseNormal");
     
     const titleMessage = titleInput.nextElementSibling;
     const dateMessage = dateInput.nextElementSibling;

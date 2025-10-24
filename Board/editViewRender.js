@@ -83,32 +83,32 @@ function getCurrentValues(id) {
   document.getElementById('task-descriptionEdit').value = `${singleTask[1].description}`;
   document.getElementById("dueDateEdit").value = `${singleTask[1].DueDate}`;
   renderChoosenContactEdit(id);
-  document.getElementById("selectedTaskEditView").innerText = `${singleTask[1].taskType}`;
+  // document.getElementById("selectedTaskEditView").innerText = `${singleTask[1].taskType}`;
   console.log("")
 }
 
+// taskType  komplett entfernen (darf im Edit-Modus nicht erscheinen)
+// function openTasktypeDropDownEdit() {
+//   let drop = document.getElementById('dropIdEdit')
+//   drop.classList.toggle('dropTasktypeCloseEdit')
+//   let layer = document.getElementById('hiddenlayer')
+//   layer.classList.toggle('hiddenlayer')
+//   if (document.querySelectorAll('.dropTasktypeOpenEdit')) {
+//     let ch = document.getElementById('arrowImgEdit')
+//     ch.classList.toggle('select-arrow-openEdit')
+//   }
+// }
+// // auch das hier entfernen(gehört auch zum TaskType)
+// function chooseValueEdit() {
+//   let choise = document.querySelectorAll('.taskOptionEdit')
 
-function openTasktypeDropDownEdit() {
-  let drop = document.getElementById('dropIdEdit')
-  drop.classList.toggle('dropTasktypeCloseEdit')
-  let layer = document.getElementById('hiddenlayer')
-  layer.classList.toggle('hiddenlayer')
-  if (document.querySelectorAll('.dropTasktypeOpenEdit')) {
-    let ch = document.getElementById('arrowImgEdit')
-    ch.classList.toggle('select-arrow-openEdit')
-  }
-}
+//   choise.forEach(b => b.addEventListener('click', () => {
+//     const choiseOfTask = b.dataset.value
+//     console.log(choiseOfTask);
+//     document.getElementById('selectedTaskEditView').innerHTML = choiseOfTask;
+//   }))
 
-function chooseValueEdit() {
-  let choise = document.querySelectorAll('.taskOptionEdit')
-
-  choise.forEach(b => b.addEventListener('click', () => {
-    const choiseOfTask = b.dataset.value
-    console.log(choiseOfTask);
-    document.getElementById('selectedTaskEditView').innerHTML = choiseOfTask;
-  }))
-
-}
+// }
 
 function openContactViewEdit() {
   let contactDrop = document.getElementById('IdForContactsEdit')
@@ -315,24 +315,7 @@ function renderBigEditView(id) {
               
             </div>
             <div id="choosenContactsEdit" class="choosenContactsEdit"></div>
-
-            <p class="taskChoiseEdit">Category<span class="requiredStar">*</span></p>
-            <div id="IdForTaskChoise" class="section-right-selectEditView"  onclick="event.stopPropagation(); openTasktypeDropDownEdit()">
-              
-            <p id="selectedTaskEditView">Select Task Category</p>
-              <img id="arrowImgEdit" class="select-arrow-downTEdit" src="/img/icons/select-arrow-down.svg">
-            </div>
-            <p class="required d-none">This field is required</p>
-              <div id="dropIdEdit" class="dropTasktypeCloseEdit dropTasktypeOpenEdit" >
-
-              <input  type="hidden" id="categoryValue" name="category" class="hidden-input"> 
-                
-                <div onmousedown="chooseValueEdit()" onclick="openTasktypeDropDownEdit(); constantCheck()"  id="option" class="taskOptionEdit" data-value="Technical Task">Technical Task</div>
-                <div onmousedown="chooseValueEdit()" onclick="openTasktypeDropDownEdit(); constantCheck()"  id="option" class="taskOptionEdit" data-value="User Story">User Story</div>
-              </div>
-              
             
-
             <p class="subtaskEdit">Subtask</p>
             <div class="subtask-wrapperEditView">
               <input class="inputPopupEditView" id="subtask" type="text" placeholder="Enter new subtask">

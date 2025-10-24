@@ -446,7 +446,7 @@
     display: flex;
 }
 
-.subtask-icon {
+.subtask-iconEdit {
     position: absolute;
     right: 12px;
     top: 12px;
@@ -456,19 +456,19 @@
     display: none;
 }
 
-.subtask-wrapper input:focus+.subtask-icon {
+.subtask-wrapperEditView input:focus+.subtask-iconEdit {
     display: flex !important;
 }
 
 
-.x:hover,
-.hook:hover {
+.xEdit:hover,
+.hookEdit:hover {
     cursor: pointer;
     background: #D1D1D1;
     border-radius: 56px;
 }
 
-.delimiter {
+.delimiterEdit {
     width: 0px;
     height: 20px;
     border: 1px solid #D1D1D1;

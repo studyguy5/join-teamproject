@@ -315,14 +315,14 @@ function renderBigEditView(id) {
               
             </div>
             <div id="choosenContactsEdit" class="choosenContactsEdit"></div>
-            
+
             <p class="subtaskEdit">Subtask</p>
             <div class="subtask-wrapperEditView">
               <input class="inputPopupEditView" id="subtask" type="text" placeholder="Enter new subtask">
-                            <span class="subtask-icon">
-                                <img onmousedown="clearSubtask()" class="x" src="/img/icons/subtasks-X.svg">
-                                <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
-                                <img onmousedown="renderSubtask()" class="hook" src="/img/icons/subtasks-icon.svg">
+                            <span class="subtask-iconEdit">
+                                <img onmousedown="clearSubtask()" class="xEdit" src="/img/icons/subtasks-X.svg">
+                                <img class="delimiterEdit" src="/img/icons/delimiter-vertical.svg">
+                                <img onmousedown="renderSubtask()" class="hookEdit" src="/img/icons/subtasks-icon.svg">
                             </span>
               </div>
                     <ul class="ul-div" id="subtask-list-1" class="subtask-list">

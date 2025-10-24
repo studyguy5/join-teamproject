@@ -410,7 +410,7 @@ textarea:focus::placeholder {
         display: none;
     }
     .input-error {
-        border: 1px solid #FF8190;
+        border: 1px solid #FF8190!important;
     }
 
 .availibleContactsOpen{

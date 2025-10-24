@@ -187,27 +187,39 @@ function createTask() {
     }
     
     
-    const categoryDiv = document.getElementById("category");
-    if (categoryDiv) {
-        const trigger = categoryDiv.querySelector(".select-trigger");
-        const options = categoryDiv.querySelectorAll(".options li");
-        const hiddenInput = document.getElementById("categoryValue");
+// const categoryDiv = document.getElementById("category");
+//     if (categoryDiv) {
+//         const trigger = categoryDiv.querySelector(".select-trigger");
+//         const options = categoryDiv.querySelectorAll(".options li");
+//         const hiddenInput = document.getElementById("categoryValue");
         
-        options.forEach(opt => {
-            opt.addEventListener("click", () => {
-      trigger.innerHTML = `${opt.textContent} <img src="../img/icons/arrow_drop_downaa.svg">`;
-      hiddenInput.value = opt.dataset.value;
+//         options.forEach(opt => {
+//             opt.addEventListener("click", () => {
+//       trigger.innerHTML = `${opt.textContent} <img src="../img/icons/arrow_drop_downaa.svg">`;
+//       hiddenInput.value = opt.dataset.value;
+//     });
+//   });
+// }
+const categoryDiv = document.getElementById("IdForTaskChoiseNormal");
+const options = document.querySelectorAll("#dropIdNormal .taskOption");
+const hiddenInput = document.getElementById("categoryValue");
+const selectedTask = document.getElementById("selectedTaskNormal");
+
+options.forEach(opt => {
+    opt.addEventListener("click", () => {
+        selectedTask.textContent = opt.dataset.value;
+        hiddenInput.value = opt.dataset.value;
+        document.getElementById("dropIdNormal").classList.remove("dropTasktypeOpen");
     });
-  });
-}
+});
 
 
 function formValidationAddTask() {
     const title = document.getElementById("title-add-task").value;
     const dueDate = document.getElementById("date-add-task").value;
-    // const category = document.getElementById("categoryValue").value; // <-- hidden input
+    const category = document.getElementById("categoryValue").value; // <-- hidden input
     
-    if (title === "" || dueDate === "") {
+    if (title === "" || dueDate === "" || category === "") {
         displayRequiredMessage();
         return false;
     }
@@ -249,17 +261,50 @@ function filterContactsInNormal() {
 }
 
 
-
+// function displayRequiredMessage() {
+//     const titleInput = document.getElementById("title-add-task");
+//     const dateInput = document.getElementById("date-add-task");
+//     const categoryInput = document.getElementById("categoryValue");
+//     const categoryDiv = document.getElementById("IdForTaskChoiseNormal");
+    
+//     const titleMessage = titleInput.nextElementSibling;
+//     const dateMessage = dateInput.nextElementSibling;
+//     const categoryMessage = categoryDiv.nextElementSibling;
+    
+//     if (titleInput.value === "") {
+//         titleMessage.classList.remove("d-none");
+//         titleInput.classList.add("input-error");
+//     } else {
+//         titleMessage.classList.add("d-none");
+//         titleInput.classList.remove("input-error");
+//     }
+    
+//     if (dateInput.value === "") {
+//         dateMessage.classList.remove("d-none");
+//         dateInput.classList.add("input-error");
+//     } else {
+//         dateMessage.classList.add("d-none");
+//         dateInput.classList.remove("input-error");
+//     }
+    
+//     if (categoryInput.value === "") {
+//         categoryMessage.classList.remove("d-none");
+//         categoryDiv.classList.add("input-error");
+//     } else {
+//         categoryMessage.classList.add("d-none");
+//         categoryDiv.classList.remove("input-error");
+//     }
+// }
 function displayRequiredMessage() {
     const titleInput = document.getElementById("title-add-task");
     const dateInput = document.getElementById("date-add-task");
-    const categoryInput = document.getElementById("categoryValue");
     const categoryDiv = document.getElementById("IdForTaskChoiseNormal");
-    
+    const categoryInput = document.getElementById("categoryValue");
+
     const titleMessage = titleInput.nextElementSibling;
     const dateMessage = dateInput.nextElementSibling;
-    const categoryMessage = categoryDiv.nextElementSibling;
-    
+    const categoryMessage = categoryDiv.parentElement.querySelector(".required");
+
     if (titleInput.value === "") {
         titleMessage.classList.remove("d-none");
         titleInput.classList.add("input-error");
@@ -267,7 +312,7 @@ function displayRequiredMessage() {
         titleMessage.classList.add("d-none");
         titleInput.classList.remove("input-error");
     }
-    
+
     if (dateInput.value === "") {
         dateMessage.classList.remove("d-none");
         dateInput.classList.add("input-error");
@@ -275,7 +320,7 @@ function displayRequiredMessage() {
         dateMessage.classList.add("d-none");
         dateInput.classList.remove("input-error");
     }
-    
+
     if (categoryInput.value === "") {
         categoryMessage.classList.remove("d-none");
         categoryDiv.classList.add("input-error");
@@ -284,6 +329,8 @@ function displayRequiredMessage() {
         categoryDiv.classList.remove("input-error");
     }
 }
+
+
 async function postData(path = '', data = {}) {
     console.log('post Data')
     let response = await fetch(BASe_URL + path + ".json", {

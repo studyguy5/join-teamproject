@@ -217,14 +217,17 @@ options.forEach(opt => {
 function formValidationAddTask() {
     const title = document.getElementById("title-add-task").value;
     const dueDate = document.getElementById("date-add-task").value;
-    const category = document.getElementById("categoryValue").value; // <-- hidden input
+    const category = document.getElementById("categoryValue").value; // hidden input
     
     if (title === "" || dueDate === "" || category === "") {
-        displayRequiredMessage();
+        displayRequiredMessage(); 
         return false;
+    } else {
+        getTaskInformationNormal();
+        return true;
     }
-    return true;
 }
+
 
 
 function constantCheck() {

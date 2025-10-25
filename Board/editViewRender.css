@@ -456,7 +456,7 @@
     display: none;
 }
 
-.subtask-wrapperEditView input:focus+.subtask-iconEdit {
+.subtask-wrapperEditView input:focus +.subtask-iconEdit {
     display: flex !important;
 }
 
@@ -484,7 +484,7 @@
 
 }
 
-.listed {
+.listedEdit {
     margin-top: 8px;
     display: flex;
     padding: 6px 16px;
@@ -495,7 +495,7 @@
     height: 24px;
 }
 
-.listed:hover {
+.listedEdit:hover {
     cursor: pointer;
     background: #e6e6e6;
     border-radius: 10px;

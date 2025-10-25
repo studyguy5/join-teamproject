@@ -50,6 +50,7 @@ const hide = (el) => {
 function markFieldError(input, isError) {
   if (!input) return;
   input.classList.toggle('error', !!isError);
+  input.classList.toggle('valid', !isError && !!input.value);
   input.setAttribute('aria-invalid', isError ? 'true' : 'false');
 }
 

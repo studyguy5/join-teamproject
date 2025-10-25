@@ -96,7 +96,6 @@ function constantCheck() {
     console.log("it check's")
     if (title !== "" && dueDate !== "" && description !== "" && taskType !== "Select Task Category") {
 
-        document.getElementById('creatButtonID').disabled = false;
     }}, 500);
 
 }
@@ -106,16 +105,19 @@ function makeDisabled() {
     document.getElementById('creatButtonID').disabled = true;
 }
 
+
 function formValidationAddTaskTemp() {
     const title = document.getElementById("title").value;
     const dueDate = document.getElementById("dueDate").value;
-    const category = document.getElementById("categoryValue").value; // <-- hidden input
+    const taskType = document.getElementById("selectedTask").innerText; // <-- hidden input
 
-    if (title === "" || dueDate === "") {
+    if (title === "" || dueDate === "" || taskType === "Select Task Category") {
         displayRequiredMessageTemp();
         return false;
+    } else {
+        getTaskInformation();
+        return true;
     }
-    return true;
 }
 
 

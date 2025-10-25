@@ -83,6 +83,8 @@ function getCurrentValues(id) {
   document.getElementById('task-descriptionEdit').value = `${singleTask[1].description}`;
   document.getElementById("dueDateEdit").value = `${singleTask[1].DueDate}`;
   renderChoosenContactEdit(id);
+  document.getElementById('subtask-list-1').innerHTML += `${singleTask[1]?.subtasks[0].value1}`;
+  document.getElementById('subtask-list-1').innerHTML += `${singleTask[1]?.subtasks[1]?.value2}`;
   // document.getElementById("selectedTaskEditView").innerText = `${singleTask[1].taskType}`;
   console.log("")
 }
@@ -237,7 +239,7 @@ function renderChoosenContactEdit(id, index) {
      Choosen.innerHTML += `<h6>max of length reached</h6>`}
 
   else if(RightTask[1].assignedTo.length <= 2) {
-    for (let preIndex = 0; preIndex < RightTask[1].assignedTo.length; preIndex++) {
+    for (let preIndex = 0; preIndex < RightTask[1].assignedTo?.length; preIndex++) {
 
       thisTask = RightTask[1].assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
       Choosen.innerHTML += `
@@ -259,6 +261,90 @@ function deleteRenderedContactEdit(index) {
   let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
   renderedContact.remove(`contactCirclePopupRender-${index}`)
   renderedContact.innerHTML = '';
+}
+
+// ======== ab hier funktionen für das Rendern von Subtask im Edit-View =====//
+// let currentCount;
+// let index = currentCount;
+
+function renderSubtaskEdit(){
+    let subtask = document.getElementById("subtaskEdit"); // der standard input
+    let list = document.getElementById("subtask-list-1"); // das zusätzliche <ul> element
+
+
+    let currentCount = list.getElementsByClassName("listed").length; //klasse von li element
+    index = currentCount;
+
+    if (currentCount < 2 && subtask.value.trim() !==""){
+        list.innerHTML += `<li onclick="editBulletpointEditView(${index})" id="listed-${index}" class="listed"> 
+                              <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
+                                <span class="list-icon">
+                                    <img onmousedown="clearSubtaskEdit()" class="pencil" src="/img/icons/pencil-edit.svg">
+                                    <img class="delimiter" src="../img/delimiter-vertical.svg">
+                                    <img onmousedown="deleteBulletpointEdit(${index})" class="trash" src="/img/icons/trash.svg">
+                                </span>
+                            </li>
+        `;
+        subtask.value = "";
+        // d = document.getElementById('task-text-0').innerHTML;
+        // console.log(d);
+    }
+}
+
+
+// leere das subtask input Feld
+function clearSubtaskEdit(){
+    document.getElementById("subtask").value = "";
+}
+
+// lösche gerenderten Bulletpoint
+function deleteBulletpointEdit(index) {
+    let el = document.getElementById(`listed-${index}`);
+    if (el) el.remove();
+}
+
+// bearbeite gerenderten Bulletpoint
+function editBulletpointEditView(index) {
+    const li = document.getElementById(`listed-${index}`);
+    const textEl = document.getElementById(`task-text-${index}`);
+    const inputEl = document.getElementById(`edit-input-${index}`);
+
+    // Wenn schon ein Input da ist, nicht nochmal umbauen
+    if (inputEl) {
+        inputEl.focus();
+        return;
+    }
+
+    const currentText = textEl ? textEl.textContent : ""; // fallback, falls kein <p> existiert
+
+    li.innerHTML = `
+        <input class="edit-input" type="text" id="edit-input-${index}" value="${currentText}">
+        <span class="list-icon">
+            <img onmousedown="deleteBulletpointEdit(${index})" class="trash" src="/img/icons/trash.svg">
+            <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
+            <img onmousedown="saveBulletpointEdit(${index})" class="hook" src="/img/icons/subtasks-icon.svg">
+        </span>
+    `;
+
+    document.getElementById(`edit-input-${index}`).focus();
+}
+
+
+
+function saveBulletpointEdit(index) {
+    const input = document.getElementById(`edit-input-${index}`);
+    const newValue = input.value.trim();
+
+    if (newValue !== "") {
+        const li = document.getElementById(`listed-${index}`);
+        li.innerHTML = `<span class="dot">•</span><p id="task-text-${index}">${newValue}</p>
+                        <span class="list-icon">
+                            <img onmousedown="clearSubtask()" class="pencil" src="/img/icons/pencil-edit.svg">
+                            <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
+                            <img onmousedown="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
+                        </span>`;
+        li.setAttribute("onclick", `editBulletpointEditView(${index})`);
+    }
 }
 
 function renderBigEditView(id) {
@@ -318,14 +404,14 @@ function renderBigEditView(id) {
 
             <p class="subtaskEdit">Subtask</p>
             <div class="subtask-wrapperEditView">
-              <input class="inputPopupEditView" id="subtask" type="text" placeholder="Enter new subtask">
+              <input class="inputPopupEditView" id="subtaskEdit" type="text" placeholder="Enter new subtask">
                             <span class="subtask-iconEdit">
                                 <img onmousedown="clearSubtask()" class="xEdit" src="/img/icons/subtasks-X.svg">
                                 <img class="delimiterEdit" src="/img/icons/delimiter-vertical.svg">
-                                <img onmousedown="renderSubtask()" class="hookEdit" src="/img/icons/subtasks-icon.svg">
+                                <img onmousedown="renderSubtaskEdit()" class="hookEdit" src="/img/icons/subtasks-icon.svg">
                             </span>
               </div>
-                    <ul class="ul-div" id="subtask-list-1" class="subtask-list">
+                    <ul class="ul-divEdit" id="subtask-list-1" class="subtask-listEdit">
                     </ul>
           </div>
         </div>

@@ -295,6 +295,8 @@ function filterContactsInNormal() {
 //         categoryDiv.classList.remove("input-error");
 //     }
 // }
+
+
 function displayRequiredMessage() {
     const titleInput = document.getElementById("title-add-task");
     const dateInput = document.getElementById("date-add-task");

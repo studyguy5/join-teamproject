@@ -341,7 +341,7 @@ function renderBigEditView(id) {
 
 <div class="footerPopupEditView">
           <div class="footer-buttons-sectionEditView">
-            <button id="creatButtonID" type="button" disabled onclick="constantCheck(); createTaskTemplate(); getTaskInformation()" class="create-task-btn">
+            <button id="creatButtonID" type="button" disabled onclick="constantCheck(); createTaskTemplate(); " class="create-task-btn">
               OK<img class="checkEditView" src="/img/icons/doneSymbol.svg" />
             </button>
           </div>

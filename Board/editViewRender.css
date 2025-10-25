@@ -441,7 +441,7 @@
 
 /* for subtask */
 
-.subtask-list {
+.subtask-listEdit {
     padding: 12px 21px;
     display: flex;
 }
@@ -474,7 +474,7 @@
     border: 1px solid #D1D1D1;
 }
 
-.ul-div {
+.ul-divEdit {
     position: relative;
     display: flex;
     flex-direction: column;

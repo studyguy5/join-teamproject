@@ -50,29 +50,26 @@ function prioButtonactivate(id) {
     if (button.innerText === thisprio) {
       button.classList.add(thisprio)
     }
-  })
+})
 
-  if (buttonsEdit) {
+if (buttonsEdit) {
     buttonsEdit.forEach(button => {
       button.addEventListener("click", () => {
-        buttonsEdit.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
+          buttonsEdit.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
         const priority = button.dataset.priority;
         button.classList.add(priority);
         console.log(priority)
         prioArray = [];
         prioArray.push(priority);
-      });
-    })
+    });
+})
   };
 }
 
-
-
-
 function closeEditView() {
-  console.log('ruft auf')
-  const popup = document.getElementById('bigViewOfTask');
-  popup.classList.add("dont-Show");
+    console.log('ruft auf')
+    const popup = document.getElementById('bigViewOfTask');
+    popup.classList.add("dont-Show");
 }
 
 function getCurrentValues(id) {
@@ -81,58 +78,39 @@ function getCurrentValues(id) {
   document.getElementById('task-descriptionEdit').value = `${singleTask[1].description}`;
   document.getElementById("dueDateEdit").value = `${singleTask[1].DueDate}`;
   renderChoosenContactEdit(id);
-  document.getElementById('subtask-list-1').innerHTML += `${singleTask[1]?.subtasks[0].value1}`;
-  document.getElementById('subtask-list-1').innerHTML += `${singleTask[1]?.subtasks[1]?.value2}`;
-  // document.getElementById("selectedTaskEditView").innerText = `${singleTask[1].taskType}`;
+  if(singleTask[1].subtasks[0]){
+  renderSubtaskEdit();
+  document.getElementById(`listed-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[0] ? singleTask[1]?.subtasks?.[0].value1 : ''}`;}
+  if(singleTask[1].subtasks[1]){
+  renderSubtaskEdit();
+  document.getElementById(`listed-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[1] ? singleTask[1]?.subtasks?.[1].value2 : ''}`;}  
   console.log("")
 }
 
-// taskType  komplett entfernen (darf im Edit-Modus nicht erscheinen)
-// function openTasktypeDropDownEdit() {
-//   let drop = document.getElementById('dropIdEdit')
-//   drop.classList.toggle('dropTasktypeCloseEdit')
-//   let layer = document.getElementById('hiddenlayer')
-//   layer.classList.toggle('hiddenlayer')
-//   if (document.querySelectorAll('.dropTasktypeOpenEdit')) {
-//     let ch = document.getElementById('arrowImgEdit')
-//     ch.classList.toggle('select-arrow-openEdit')
-//   }
-// }
-// // auch das hier entfernen(gehört auch zum TaskType)
-// function chooseValueEdit() {
-//   let choise = document.querySelectorAll('.taskOptionEdit')
-
-//   choise.forEach(b => b.addEventListener('click', () => {
-//     const choiseOfTask = b.dataset.value
-//     console.log(choiseOfTask);
-//     document.getElementById('selectedTaskEditView').innerHTML = choiseOfTask;
-//   }))
-
-// }
 
 function openContactViewEdit() {
-  let contactDrop = document.getElementById('IdForContactsEdit')
-  if (contactDrop.classList.contains('availibleContactsCloseEdit')) {
+    let contactDrop = document.getElementById('IdForContactsEdit')
+    if (contactDrop.classList.contains('availibleContactsCloseEdit')) {
     contactDrop.classList.remove('availibleContactsCloseEdit');
     contactDrop.classList.add('availibleContactsOpenEdit');
-  } else if (contactDrop.classList.contains('availibleContactsOpenEdit')) {
+} else if (contactDrop.classList.contains('availibleContactsOpenEdit')) {
     contactDrop.classList.remove('availibleContactsOpenEdit');
     contactDrop.classList.add('availibleContactsCloseEdit');
-  }
+}
 
-  if (document.querySelectorAll('availibleContactsOpenEdit')) {
+if (document.querySelectorAll('availibleContactsOpenEdit')) {
     let contact = document.getElementById('arrowImgCEdit')
     contact.classList.toggle('select-arrow-openEdit')
-  }
+}
 }
 
 function showInput() {
-  console.log('show input')
-  if (document.getElementById('placeholderpTagEdit')) {
-    document.getElementById('placeholderpTagEdit').classList.toggle('dont-Show');
-    document.getElementById('filterContactsEdit').classList.toggle('dont-Show');
-    document.getElementById('filterContactsEdit').focus()
-  };
+    console.log('show input')
+    if (document.getElementById('placeholderpTagEdit')) {
+        document.getElementById('placeholderpTagEdit').classList.toggle('dont-Show');
+        document.getElementById('filterContactsEdit').classList.toggle('dont-Show');
+        document.getElementById('filterContactsEdit').focus()
+    };
 }
 
 function showContactsEdit(id) {
@@ -147,74 +125,74 @@ function showContactsEdit(id) {
         <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
         <img  id="checkboxImgEdit-${index}" onclick="chooseContactEdit(${id}, ${index})" class="checkboxEdit" data-set="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
         </div>`
-
-  }
+        
+    }
 }
 
 let filteredContactsEdit;
 function filterContactsInPopupEdit() {
   let r;
-
+  
   let typedValue = document.getElementById('filterContactsEdit').value
-
+  
   if (typedValue.length > 0) {
-    let val = Object.values(contactsArray);
-
-    r = val.slice(1)
-    filteredContactsEdit = r.filter(fn => { return fn.name.toLowerCase().includes(typedValue.toLowerCase()) })
-
-    renderfilteredContactsInPopupEdit(filteredContactsEdit);
-
-    //    console.log(filteredContacts);
-  } else if (typedValue.length < 1) {
-    showContactsEdit();
-  }
+      let val = Object.values(contactsArray);
+      
+      r = val.slice(1)
+      filteredContactsEdit = r.filter(fn => { return fn.name.toLowerCase().includes(typedValue.toLowerCase()) })
+      
+      renderfilteredContactsInPopupEdit(filteredContactsEdit);
+      
+      //    console.log(filteredContacts);
+    } else if (typedValue.length < 1) {
+        showContactsEdit();
+    }
 }
 
 // Liste der Kontakte
 function chooseContactEdit(id, index) {
   let choContact = document.getElementById(`checkboxImgEdit-${index}`)
   if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
-    choContact.classList.remove('checkboxEdit')
-    choContact.classList.add('checkedEdit')
-    renderChoosenContactEdit(id, index);
-    choContact.src = "/img/icons/normalCheckedContact.svg"
-  } else {
-    choContact.classList.add('checkboxEdit')
+      choContact.classList.remove('checkboxEdit')
+      choContact.classList.add('checkedEdit')
+      renderChoosenContactEdit(id, index);
+      choContact.src = "/img/icons/normalCheckedContact.svg"
+    } else {
+        choContact.classList.add('checkboxEdit')
     choContact.classList.remove('checkedEdit')
     deleteRenderedContactEdit(id, index);
     choContact.src = "/img/icons/normalCheckContact.svg"
-  }
+}
 }
 
 function renderfilteredContactsInPopupEdit(filteredContactsEdit) {
-
-  let filtContactInPopupEdit = document.getElementById('IdForContactsEdit')
-  filtContactInPopupEdit.innerHTML = "";
-  for (let filterContactIndex = 0; filterContactIndex < filteredContactsEdit.length; filterContactIndex++) {
-    filtContactInPopupEdit.innerHTML += `
+    
+    let filtContactInPopupEdit = document.getElementById('IdForContactsEdit')
+    filtContactInPopupEdit.innerHTML = "";
+    for (let filterContactIndex = 0; filterContactIndex < filteredContactsEdit.length; filterContactIndex++) {
+        filtContactInPopupEdit.innerHTML += `
         <div onclick="" class="contactBox">
         <div class="contactCirclePopup">${filteredContactsEdit[filterContactIndex].firstLetter + filteredContactsEdit[filterContactIndex].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${filteredContactsEdit[filterContactIndex].name}</span> 
         <img  id="checkboxImg-${filterContactIndex}" onclick="chooseFilteredContact(${filterContactIndex})" class="checkbox" data-set="${filteredContactsEdit[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
         </div>
         `}
-
-}
-
-function chooseFilteredContact(filterContactIndex) {
-  let choContact = document.getElementById(`checkboxImg-${filterContactIndex}`)
-  if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
-    choContact.classList.remove('checkbox')
-    choContact.classList.add('checked')
-    renderFilteredChoosenContact(filterContactIndex)
+        
+    }
+    
+    function chooseFilteredContact(filterContactIndex) {
+        let choContact = document.getElementById(`checkboxImg-${filterContactIndex}`)
+        if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
+            choContact.classList.remove('checkbox')
+            choContact.classList.add('checked')
+            renderFilteredChoosenContact(filterContactIndex)
     choContact.src = "/img/icons/normalCheckedContact.svg"
   } else {
-    choContact.classList.add('checkbox')
+      choContact.classList.add('checkbox')
     choContact.classList.remove('checked')
     deleteRenderedContact(filterContactIndex);
     choContact.src = "/img/icons/normalCheckContact.svg"
-  }
+}
 }
 
 let thisTask;
@@ -223,42 +201,42 @@ function renderChoosenContactEdit(id, index) {
   const RightTask = tasks.find(task => task[1].id === id);
   // render und pushen wenn array < 2
   if (index && RightTask[1].assignedTo.length < 2) {
-    const contList = contactsArray[index]
-    RightTask[1].assignedTo.push(contList?.name);
-    for (let preIndex = RightTask[1].assignedTo.length - 1; preIndex < RightTask[1].assignedTo.length; preIndex++) {
-
-      thisTask = RightTask[1].assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
-      Choosen.innerHTML += `
-    <div id="contactCirclePopupRender-${id}" class="contactCirclePopupRender">${thisTask[preIndex][0] + thisTask[preIndex][1]}</div>
+      const contList = contactsArray[index]
+      RightTask[1].assignedTo.push(contList?.name);
+      for (let preIndex = RightTask[1].assignedTo.length - 1; preIndex < RightTask[1].assignedTo.length; preIndex++) {
+          
+          thisTask = RightTask[1].assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
+          Choosen.innerHTML += `
+          <div id="contactCirclePopupRender-${id}" class="contactCirclePopupRender">${thisTask[preIndex][0] + thisTask[preIndex][1]}</div>
     `;
-    }
+}
     // normal rendern, wenn array voll
-  } else if(index && RightTask[1].assignedTo.length >= 2){
-     Choosen.innerHTML += `<h6>max of length reached</h6>`}
-
-  else if(RightTask[1].assignedTo.length <= 2) {
-    for (let preIndex = 0; preIndex < RightTask[1].assignedTo?.length; preIndex++) {
-
+} else if(index && RightTask[1].assignedTo.length >= 2){
+    Choosen.innerHTML += `<h6>max of length reached</h6>`}
+    
+    else if(RightTask[1].assignedTo.length <= 2) {
+        for (let preIndex = 0; preIndex < RightTask[1].assignedTo?.length; preIndex++) {
+            
       thisTask = RightTask[1].assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
       Choosen.innerHTML += `
     <div id="contactCirclePopupRender-${id}" class="contactCirclePopupRender">${thisTask[preIndex][0] + thisTask[preIndex][1]}</div>
     `;
     }
-  } }
+} }
 
 function renderFilteredChoosenContact(filterContactIndex) {
-  let listContact = document.getElementById('choosenContacts')
-
-  listContact.innerHTML += `
+    let listContact = document.getElementById('choosenContacts')
+    
+    listContact.innerHTML += `
     <div id="contactCirclePopupRender-${filterContactIndex}" class="contactCirclePopupRender">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>
     `
-
+    
 }
 
 function deleteRenderedContactEdit(index) {
-  let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
-  renderedContact.remove(`contactCirclePopupRender-${index}`)
-  renderedContact.innerHTML = '';
+    let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
+    renderedContact.remove(`contactCirclePopupRender-${index}`)
+    renderedContact.innerHTML = '';
 }
 
 // ======== ab hier funktionen für das Rendern von Subtask im Edit-View =====//
@@ -266,26 +244,38 @@ function deleteRenderedContactEdit(index) {
 // let index = currentCount;
 
 function renderSubtaskEdit(){
+    console.log('rendert')
     let subtask = document.getElementById("subtaskEdit"); // der standard input
     let list = document.getElementById("subtaskEdit-list-1"); // das zusätzliche <ul> element
-
-
-    let currentCount = list.getElementsByClassName("listed").length; //klasse von li element
+    
+    
+    let currentCount = list.getElementsByClassName("listedEdit").length; //klasse von li element
     index = currentCount;
-
-    if (currentCount < 2 && subtask.value.trim() !==""){
+    
+    if (currentCount < 2 && subtask.value.trim() ===""){
         list.innerHTML += `<li onclick="editBulletpointEditView(${index})" id="listed-${index}" class="listedEdit"> 
-                              <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
-                                <span class="list-icon">
+        <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
+        <span class="list-icon">
                                     <img onmousedown="clearSubtaskEdit()" class="pencil" src="/img/icons/pencil-edit.svg">
                                     <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
                                     <img onmousedown="deleteBulletpointEdit(${index})" class="trash" src="/img/icons/trash.svg">
-                                </span>
-                            </li>
-        `;
-        subtask.value = "";
-        // d = document.getElementById('task-text-0').innerHTML;
-        // console.log(d);
+                                    </span>
+                                    </li>
+                                    `;
+                                    subtask.value = "";
+                                    // d = document.getElementById('task-text-0').innerHTML;
+                                    // console.log(d);
+    }else if(currentCount < 2 && subtask.value.trim() !==""){
+        list.innerHTML += `<li onclick="editBulletpointEditView(${index})" id="listed-${index}" class="listedEdit"> 
+        <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
+        <span class="list-icon">
+                                    <img onmousedown="clearSubtaskEdit()" class="pencil" src="/img/icons/pencil-edit.svg">
+                                    <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
+                                    <img onmousedown="deleteBulletpointEdit(${index})" class="trash" src="/img/icons/trash.svg">
+                                    </span>
+                                    </li>
+                                    `;
+                                    subtask.value = "";
     }
 }
 
@@ -306,7 +296,7 @@ function editBulletpointEditView(index) {
     const li = document.getElementById(`listed-${index}`);
     const textEl = document.getElementById(`task-text-${index}`);
     const inputEl = document.getElementById(`edit-input-${index}`);
-
+    
     // Wenn schon ein Input da ist, nicht nochmal umbauen
     if (inputEl) {
         inputEl.focus();
@@ -314,33 +304,33 @@ function editBulletpointEditView(index) {
     }
 
     const currentText = textEl ? textEl.textContent : ""; // fallback, falls kein <p> existiert
-
+    
     li.innerHTML = `
-        <input class="edit-input" type="text" id="edit-input-${index}" value="${currentText}">
-        <span class="list-icon">
-            <img onmousedown="deleteBulletpointEdit(${index})" class="trash" src="/img/icons/trash.svg">
-            <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
-            <img onmousedown="saveBulletpointEdit(${index})" class="hook" src="/img/icons/subtasks-icon.svg">
+    <input class="edit-input" type="text" id="edit-input-${index}" value="${currentText}">
+    <span class="list-icon">
+    <img onmousedown="deleteBulletpointEdit(${index})" class="trash" src="/img/icons/trash.svg">
+    <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
+    <img onmousedown="saveBulletpointEdit(${index})" class="hook" src="/img/icons/subtasks-icon.svg">
         </span>
-    `;
-
-    document.getElementById(`edit-input-${index}`).focus();
-}
-
-
-
-function saveBulletpointEdit(index) {
-    const input = document.getElementById(`edit-input-${index}`);
+        `;
+        
+        document.getElementById(`edit-input-${index}`).focus();
+    }
+    
+    
+    
+    function saveBulletpointEdit(index) {
+        const input = document.getElementById(`edit-input-${index}`);
     const newValue = input.value.trim();
-
+    
     if (newValue !== "") {
         const li = document.getElementById(`listed-${index}`);
         li.innerHTML = `<span class="dot">•</span><p id="task-text-${index}">${newValue}</p>
-                        <span class="list-icon">
-                            <img onmousedown="clearSubtask()" class="pencil" src="/img/icons/pencil-edit.svg">
-                            <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
-                            <img onmousedown="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
-                        </span>`;
+        <span class="list-icon">
+        <img onmousedown="clearSubtask()" class="pencil" src="/img/icons/pencil-edit.svg">
+        <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
+        <img onmousedown="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
+        </span>`;
         li.setAttribute("onclick", `editBulletpointEditView(${index})`);
     }
 }

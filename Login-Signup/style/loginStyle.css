@@ -153,6 +153,18 @@ h1::after {
     box-sizing: border-box;
 }
 
+/* Valid (türkis) */
+.input-wrapper input.valid {
+  border-color: #29ABE2 !important;
+  box-shadow: 0 0 0 3px rgba(41, 171, 226, 0.12);
+}
+
+/* Error (rot) */
+.input-wrapper input.error {
+  border-color: #E60000 !important;
+  box-shadow: 0 0 0 3px rgba(230, 0, 0, 0.12);
+}
+
 .input-wrapper input:focus {
     outline: none;
     border-color: #29ABE2;
@@ -178,13 +190,30 @@ h1::after {
     display: none;
 }
 
+/* Login inline error message (wie signup) */
 .error-message-login {
-    color: #ff0000;
+    color: #E60000;
     font-size: 14px;
-    margin-top: 5px;
     display: none;
     width: 100%;
+    position: absolute;
+    left: 0;
+    top: calc(100% + 4px);
 }
+.error-message-login.is-visible { display: block !important; }
+
+/* General error banner (red) */
+.error-banner {
+  display: none;
+  background: #FFE6E6;
+  border: 1px solid #E60000;
+  color: #B00020;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 12px 0;
+}
+.error-banner.is-visible,
+.error-banner[style*="display: block"] { display: block !important; }
 
 input::placeholder {
     color: #D1D1D1;

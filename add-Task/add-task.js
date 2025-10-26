@@ -187,19 +187,6 @@ function createTask() {
     }
     
     
-// const categoryDiv = document.getElementById("category");
-//     if (categoryDiv) {
-//         const trigger = categoryDiv.querySelector(".select-trigger");
-//         const options = categoryDiv.querySelectorAll(".options li");
-//         const hiddenInput = document.getElementById("categoryValue");
-        
-//         options.forEach(opt => {
-//             opt.addEventListener("click", () => {
-//       trigger.innerHTML = `${opt.textContent} <img src="../img/icons/arrow_drop_downaa.svg">`;
-//       hiddenInput.value = opt.dataset.value;
-//     });
-//   });
-// }
 const categoryDiv = document.getElementById("IdForTaskChoiseNormal");
 const options = document.querySelectorAll("#dropIdNormal .taskOption");
 const hiddenInput = document.getElementById("categoryValue");

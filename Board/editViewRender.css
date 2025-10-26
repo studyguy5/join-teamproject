@@ -246,7 +246,7 @@
     background-image: url(/img/icons/hoverCheckContact.svg);
 }
 
-.contactBoxEdit:hover{
+.contactBox:hover{
     background-color: rgba(238, 238, 238, 1);
     cursor: pointer;
 }

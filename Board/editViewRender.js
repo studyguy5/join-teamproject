@@ -48,9 +48,9 @@ function renderBigEditView(id) {
             </section>
 
             <p class="assignedToEdit">Assigned to</p>
-            <div  class="section-right-selectEditView"  required tabindex="0" onclick="showContactsEdit(${id}); openContactViewEdit(); showInput()">
+            <div  class="section-right-selectEditView"  required tabindex="0" onclick="showContactsEdit(${id}); openContactViewEdit(); showInputFilter()">
               <p id="placeholderpTagEdit">Select contacts to assign</p>
-              <input oninput="filterContactsInPopupEdit()"  type="text" id="filterContactsEdit"  class="dont-Show hidden-input">
+              <input oninput="filterContactsInPopupEdit(${id})"  type="text" id="filterContactsEdit"  class="dont-Show hidden-input">
               <img id="arrowImgCEdit" class="select-arrow-downCEdit" src="/img/icons/select-arrow-down.svg"> 
             </div>
             <div id="IdForContactsEdit" class="availibleContactsCloseEdit">
@@ -83,7 +83,7 @@ function renderBigEditView(id) {
 
 <div class="footerPopupEditView">
           <div class="footer-buttons-sectionEditView">
-            <button id="creatButtonID" type="button" disabled onclick="constantCheck(); createTaskTemplate(); " class="create-task-btn">
+            <button id="creatButtonID" type="button" disabled onclick="createTaskTemplateEdit(${id})" class="create-task-btn">
               OK<img class="checkEditView" src="/img/icons/doneSymbol.svg" />
             </button>
           </div>

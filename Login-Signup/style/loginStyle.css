@@ -161,7 +161,7 @@ h1::after {
 
 /* Error (rot) */
 .input-wrapper input.error {
-  border-color: #FF8190 !important;
+  border-color: #E60026 !important;
   
 }
 
@@ -192,7 +192,7 @@ h1::after {
 
 /* Login inline error message (wie signup) */
 .error-message-login {
-    color: #FF8190;
+    color: #E60026;
     font-size: 14px;
     display: none;
     width: 100%;
@@ -206,8 +206,8 @@ h1::after {
 .error-banner {
   display: none;
   background: #FFE6E6;
-  border: 1px solid #FF8190;
-  color: #FF8190;
+  border: 1px solid #E60026;
+  color: #E60026;
   border-radius: 8px;
   padding: 10px 12px;
   margin: 12px 0;

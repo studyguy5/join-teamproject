@@ -161,8 +161,8 @@ h1::after {
 
 /* Error (rot) */
 .input-wrapper input.error {
-  border-color: #E60000 !important;
-  box-shadow: 0 0 0 3px rgba(230, 0, 0, 0.12);
+  border-color: #FF8190 !important;
+  
 }
 
 .input-wrapper input:focus {
@@ -192,13 +192,13 @@ h1::after {
 
 /* Login inline error message (wie signup) */
 .error-message-login {
-    color: #E60000;
+    color: #FF8190;
     font-size: 14px;
     display: none;
     width: 100%;
     position: absolute;
-    left: 0;
-    top: calc(100% + 4px);
+    left: 4px;
+    margin-top: 8px;
 }
 .error-message-login.is-visible { display: block !important; }
 
@@ -206,8 +206,8 @@ h1::after {
 .error-banner {
   display: none;
   background: #FFE6E6;
-  border: 1px solid #E60000;
-  color: #B00020;
+  border: 1px solid #FF8190;
+  color: #FF8190;
   border-radius: 8px;
   padding: 10px 12px;
   margin: 12px 0;

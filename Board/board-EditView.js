@@ -292,7 +292,7 @@ function renderfilteredContactsInPopupEdit(id, filteredContactsEdit) {
 
 function chooseFilteredContactEdit(id, filterContactIndex) {
     let choContactFilter = document.getElementById(`checkboxImgEdit-${filterContactIndex}`)
-    if (choContactFilter.src.includes("/img/icons/normalCheckContact.svg")) {
+    if (choContactFilter.classList.contains("checkboxEdit")) {
         choContactFilter.classList.remove('checkboxEdit')
         choContactFilter.classList.add('checkedEdit')
         renderFilteredChoosenContact(id, filterContactIndex)

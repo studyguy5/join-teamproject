@@ -86,6 +86,9 @@ function createTemplate() {
         'DueDate': '',
         'prio': '',
         'progress': '0',
+        'cid': [
+
+        ],
         'assignedTo': [
 
         ],
@@ -126,8 +129,12 @@ function getSubtaskFromTemplate() {
 
 function setContactAndPrioValue(newTask) {
     let checkedImg = document.querySelectorAll('#IdForContacts img.checked')
+    console.log(checkedImg);
     checkedImg.forEach(img => {
         names = img.dataset.set;
+        let id = img.id;
+        newTask.cid.push(id);
+        console.log(id);
         newTask.assignedTo.push(names)
     })
     console.log(newTask.assignedTo);

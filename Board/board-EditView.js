@@ -80,11 +80,11 @@ function getCurrentValues(id) {
     document.getElementById('task-descriptionEdit').value = `${singleTask[1].description}`;
     document.getElementById("dueDateEdit").value = `${singleTask[1].DueDate}`;
     renderChoosenContactEdit(id);
-    if (singleTask[1].subtasks[0]) {
+    if (singleTask[1].subtasks?.[0]) {
         renderSubtaskEdit();
         document.getElementById(`listed-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[0] ? singleTask[1]?.subtasks?.[0].value1 : ''}`;
     }
-    if (singleTask[1].subtasks[1]) {
+    if (singleTask[1].subtasks?.[1]) {
         renderSubtaskEdit();
         document.getElementById(`listed-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[1] ? singleTask[1]?.subtasks?.[1].value2 : ''}`;
     }
@@ -230,17 +230,25 @@ function showInputFilter() {
     };
 }
 
+
 function showContactsEdit(id) {
     console.log('arbeitet auch im edit')
+    const thisT = tasks.find(task => task[1].id === id);
     let contacts = document.getElementById('IdForContactsEdit')
     console.log(contacts);
+    let result = thisT[1].cid
+    let onlyNumber = result.map(id => {
+    return parseInt(id.split('-')[1]);
+});
+    
     contacts.innerHTML = "";
     for (let index = 1; index < contactsArray.length; index++) {
-        // console.log(contactsArray);
         contacts.innerHTML += `<div class="contactBox">
         <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
-        <img  id="checkboxImgEdit-${index}" onclick="chooseContactEdit(${id}, ${index})" class="checkboxEdit" data-set="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
+        <img  id="checkboxImgEdit-${index}" onclick="chooseContactEdit(${id}, ${index})" 
+        class="${onlyNumber.includes(index) ? 'checkedEdit' : 'checkboxEdit'}" data-set="${contactsArray[index].name}"
+         src="/img/icons/normalCheckContact.svg">
         </div>`
 
     }
@@ -329,7 +337,7 @@ let preIndex;
 // Liste der Kontakte
 function chooseContactEdit(id, index) {
     let choContact = document.getElementById(`checkboxImgEdit-${index}`)
-    if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
+    if (choContact.classList.contains("checkboxEdit")) {
         choContact.classList.remove('checkboxEdit')
         choContact.classList.add('checkedEdit')
         renderChoosenContactEdit(id, index);
@@ -366,10 +374,11 @@ function renderChoosenContactEdit(id, index) {
 
     else if (RightTask[1].assignedTo.length < 5) {
         for (let preIndex = 0; preIndex < RightTask[1].assignedTo?.length; preIndex++) {
+            let num = parseInt(RightTask[1].cid[preIndex].split('-')[1]);
             
             thisTask = RightTask[1].assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
             Choosen.innerHTML += `
-    <div id="contactCirclePopupRender-${index}" class="contactCirclePopupRender">${thisTask[preIndex][0] + thisTask[preIndex][1]}</div>
+    <div id="contactCirclePopupRender-${num}" class="contactCirclePopupRender">${thisTask[preIndex][0] + thisTask[preIndex][1]}</div>
     `;
     index++
         }

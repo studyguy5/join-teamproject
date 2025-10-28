@@ -798,6 +798,7 @@ h1 {
     background-color: rgba(42, 54, 71, 1);
     color: white;
     transition: all 100ms ease-in-out;
+    border: none;
 }
 
 #createContactOverlay:hover {

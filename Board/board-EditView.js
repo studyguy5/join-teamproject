@@ -20,6 +20,13 @@ async function getObject(path = '') {
     return responseToJson = await response.json()
 }
 
+async function deleteData(firebaseID) {
+    const response = await fetch(`https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/task/${firebaseID[0]}.json`, {
+        method: "DELETE",
+    });
+    return await response.json();
+};
+
 function objectToArray(contacts) {
     const object = Object.entries(contacts)
     console.log(object);
@@ -72,6 +79,7 @@ function closeEditView() {
     console.log('ruft auf')
     const popup = document.getElementById('bigViewOfTask');
     popup.classList.add("dont-Show");
+    first = true;
 }
 
 function getCurrentValues(id) {
@@ -82,19 +90,35 @@ function getCurrentValues(id) {
     renderChoosenContactEdit(id);
     if (singleTask[1].subtasks?.[0]) {
         renderSubtaskEdit();
-        document.getElementById(`listed-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[0] ? singleTask[1]?.subtasks?.[0].value1 : ''}`;
+        document.getElementById(`task-text-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[0] ? singleTask[1]?.subtasks?.[0].value1 : ''}`;
     }
     if (singleTask[1].subtasks?.[1]) {
         renderSubtaskEdit();
-        document.getElementById(`listed-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[1] ? singleTask[1]?.subtasks?.[1].value2 : ''}`;
+        document.getElementById(`task-text-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[1] ? singleTask[1]?.subtasks?.[1].value2 : ''}`;
     }
-    console.log("")
+    console.log(singleTask[1]);
 }
 
 function createTaskTemplateEdit(id) {
     if (!formValidationAddTaskTempEdit(id)) return;
 
     showReportAddedTaskTemplateEdit();
+}
+
+function setContactAndPrioValueEdit(taskToEdit) {
+    let checkedImg = document.querySelectorAll('#IdForContactsEdit img.checkedEdit')
+    console.log(checkedImg);
+    checkedImg.forEach(img => {
+        names = img.dataset.set;
+        let id = img.id;
+        taskToEdit[1].cid.push(id);
+        console.log(id);
+        taskToEdit[1].assignedTo.push(names)
+    })
+    console.log(taskToEdit[1].assignedTo);
+    taskToEdit[1].prio = prioArray[0];
+
+
 }
 
 // function constantCheck() {
@@ -167,27 +191,65 @@ function showReportAddedTaskTemplateEdit() {
     }, 1000);
 }
 
-async function getTaskInformationEdit(id) {
-    console.log('arbeitet')
-    const taskToEdit = tasks.find(task => task[1].id === id);
-    let newTask = createTemplate();
-    newTask.id = (tasks.length) + 1;
-    for (let valueIndex = 0; valueIndex < taskObjectKey.length; valueIndex++) {
-        newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value
+function pushObjectEdit(taskToEdit, subtaskvalue1, subtaskvalue2) {
+    
+        let subTaskObject = {
+            "value":
+                `${subtaskvalue1 || subtaskvalue2}`
+
+        };
+        taskToEdit[1].subtasks.push(subTaskObject)
+    
+    
+    }
+
+function getSubtaskFromTemplateEdit() {  //hole die Daten
+    if (document.getElementById(`task-text-${index0}`)) {
+
+        subtaskvalue1 = document.getElementById(`task-text-${index0}`).innerHTML
     };
-    newTask.taskType = document.getElementById('selectedTaskNormal').innerText
-    setContactAndPrioValue(newTask, index);
-    getSubtaskFromTemplate();
-    createTemplate(); //create complete template of object with all data
-    subtaskArray = newTask.subtasks; //path from subtask Array where new subtasks should be pushed into
-    pushObject(subtaskvalue1, subtaskvalue2); // subtasks template with variable is pushed into subtaskArray
-    newTask.category = 'Todo';
-    await postData("task", newTask);
-    console.log(newTask);
+    if (document.getElementById(`task-text-${index1}`)) {
+        subtaskvalue2 = document.getElementById(`task-text-${index1}`).innerHTML
+    }
+}
+
+function pushSubtaskIntoArray(taskToEdit, subtaskvalue1, subtaskvalue2){
+    if(subtaskvalue1){
+        pushObjectEdit(taskToEdit, subtaskvalue1, null);
+    }
+    if(subtaskvalue2){
+        pushObjectEdit(taskToEdit, null, subtaskvalue2);
+    }
+}
+
+let editInputId = ['titleEdit', 'task-descriptionEdit', 'dueDateEdit'];
+let existingObjects = ['title', 'description', 'DueDate']
+let existingFilledObjects = ['DueDate', 'description', 'progress', 'title'];
+
+async function getTaskInformationEdit(id) {
+    const taskToEdit = tasks.find(task => task[1].id === id);
+    let firebaseID = [taskToEdit[0]];
+    await deleteData(firebaseID);
+    //hier wird alles geleert was verändert werden kann
+    for (let makeEmptyIndex = 0; makeEmptyIndex < existingFilledObjects.length; makeEmptyIndex++) {
+        taskToEdit[1][existingFilledObjects[makeEmptyIndex]] = '';
+    }
+    taskToEdit[1].assignedTo = [];
+    taskToEdit[1].cid = [];
+    taskToEdit[1].subtasks = []; 
+    console.log(taskToEdit[1]);
+    for (let valueIndex = 0; valueIndex < editInputId.length; valueIndex++) { //Arrays überarbeiten
+        taskToEdit[1][existingObjects[valueIndex]] = document.getElementById(`${editInputId[valueIndex]}`).value
+    };
+    setContactAndPrioValueEdit(taskToEdit);
+    getSubtaskFromTemplateEdit(taskToEdit);
+    pushSubtaskIntoArray(taskToEdit, subtaskvalue1, subtaskvalue2);
+    await postData("task", taskToEdit[1]);
+    console.log(taskToEdit[1]);
     tasks = [];
     tasks.push(...Object.entries(await getData('task')));
-
     filterAndShowTasksEdit();
+    closeEditView();
 };
 
 async function filterAndShowTasksEdit() {
@@ -203,6 +265,19 @@ async function filterAndShowTasksEdit() {
             }
         }
     }
+}
+let first = true;
+function openContactWithCounter(id){
+    if(first){
+        showContactsEdit(id);
+        openContactViewEdit();
+        showInputFilter();
+        first = false;
+    }else{
+        openContactViewEdit();
+        showInputFilter();
+    }
+
 }
 
 function openContactViewEdit() {
@@ -417,7 +492,7 @@ function renderSubtaskEdit() {
         list.innerHTML += `<li onclick="editBulletpointEditView(${index})" id="listed-${index}" class="listedEdit"> 
         <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
         <span class="list-icon">
-                                    <img onmousedown="clearSubtaskEdit()" class="pencil" src="/img/icons/pencil-edit.svg">
+                                    <img onmousedown="editBulletpointEditView(${index})" class="pencil" src="/img/icons/pencil-edit.svg">
                                     <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
                                     <img onmousedown="deleteBulletpointEdit(${index})" class="trash" src="/img/icons/trash.svg">
                                     </span>
@@ -430,7 +505,7 @@ function renderSubtaskEdit() {
         list.innerHTML += `<li onclick="editBulletpointEditView(${index})" id="listed-${index}" class="listedEdit"> 
         <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
         <span class="list-icon">
-                                    <img onmousedown="clearSubtaskEdit()" class="pencil" src="/img/icons/pencil-edit.svg">
+                                    <img onmousedown="editBulletpointEditView(${index})" class="pencil" src="/img/icons/pencil-edit.svg">
                                     <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
                                     <img onmousedown="deleteBulletpointEdit(${index})" class="trash" src="/img/icons/trash.svg">
                                     </span>

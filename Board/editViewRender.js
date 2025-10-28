@@ -22,7 +22,7 @@ function renderBigEditView(id) {
               <p class="required d-none">This field is required</p>
 
               <label>Description</label>
-              <textarea id="task-descriptionEdit" oninput="constantCheck()" rows="5" id="task-description" placeholder="Enter a description"></textarea>
+              <textarea id="task-descriptionEdit" oninput="constantCheck()" rows="5" id="task-descriptionEdit" placeholder="Enter a description"></textarea>
 
               <label>Due Date<span class="requiredStar">*</span></label>
               <input oninput="constantCheck()" class="input-section-left-inputEditView dateEditView" id="dueDateEdit" placeholder="dd/mm/yyyy">
@@ -48,7 +48,7 @@ function renderBigEditView(id) {
             </section>
 
             <p class="assignedToEdit">Assigned to</p>
-            <div  class="section-right-selectEditView"  required tabindex="0" onclick="showContactsEdit(${id}); openContactViewEdit(); showInputFilter()">
+            <div  class="section-right-selectEditView"  required tabindex="0" onclick="openContactWithCounter(${id})">
               <p id="placeholderpTagEdit">Select contacts to assign</p>
               <input oninput="filterContactsInPopupEdit(${id})"  type="text" id="filterContactsEdit"  class="dont-Show hidden-input">
               <img id="arrowImgCEdit" class="select-arrow-downCEdit" src="/img/icons/select-arrow-down.svg"> 
@@ -83,7 +83,7 @@ function renderBigEditView(id) {
 
 <div class="footerPopupEditView">
           <div class="footer-buttons-sectionEditView">
-            <button id="creatButtonID" type="button" disabled onclick="createTaskTemplateEdit(${id})" class="create-task-btn">
+            <button id="creatButtonID" type="button" onclick="createTaskTemplateEdit(${id})" class="create-task-btn">
               OK<img class="checkEditView" src="/img/icons/doneSymbol.svg" />
             </button>
           </div>

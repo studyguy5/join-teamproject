@@ -7,8 +7,8 @@ let taskContainerArray = ['title', 'task-description', 'dueDate'];
 let taskObjectKey = ['title', 'description', 'DueDate'];
 
 let currentDraggedElement;
-let index0 = 0;
-let index1 = 1;
+window.index0 = 0;
+window.index1 = 1;
 
 let subtaskArray = [];
 
@@ -108,7 +108,7 @@ function pushObject(subtaskvalue1, subtaskvalue2) {
         subtaskArray.push(subTaskObject1)
     } else { { '' } }
     if (subtaskvalue2) {
-        ;
+        
         let subTaskObject2 = {
             "value2":
                 `${subtaskvalue2}`

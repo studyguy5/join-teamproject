@@ -2,9 +2,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
     contacts = await getObject(path = '/contacts')
     contactsArray = objectToArray(contacts);
-
-
-
+    
+    
 })
 
 // let taskContainerArray = ['title', 'task-description', 'dueDate'];
@@ -37,7 +36,7 @@ function objectToArray(contacts) {
         }
     })
     console.log(arrayObject);
-
+    
     return arrayObject;
 }
 
@@ -60,7 +59,7 @@ function prioButtonactivate(id) {
             button.classList.add(thisprio)
         }
     })
-
+    
     if (buttonsEdit) {
         buttonsEdit.forEach(button => {
             button.addEventListener("click", () => {
@@ -122,29 +121,29 @@ function setContactAndPrioValueEdit(taskToEdit) {
 }
 
 // function constantCheck() {
-//     setTimeout(() => {
-//     const title = document.getElementById("title").value;
-//     const description = document.getElementById('task-description').value;
-//     const dueDate = document.getElementById("dueDate").value;
-//     const taskType = document.getElementById("selectedTask").innerText;
-//     console.log("it check's")
-//     if (title !== "" && dueDate !== "" && description !== "" && taskType !== "Select Task Category") {
-
-//     }}, 500);
-
-// }
-
-
-// function makeDisabled() {
-//     document.getElementById('creatButtonID').disabled = true;
-// }
-
-
-function formValidationAddTaskTempEdit(id) {
+    //     setTimeout(() => {
+        //     const title = document.getElementById("title").value;
+        //     const description = document.getElementById('task-description').value;
+        //     const dueDate = document.getElementById("dueDate").value;
+        //     const taskType = document.getElementById("selectedTask").innerText;
+        //     console.log("it check's")
+        //     if (title !== "" && dueDate !== "" && description !== "" && taskType !== "Select Task Category") {
+            
+        //     }}, 500);
+        
+        // }
+        
+        
+        // function makeDisabled() {
+            //     document.getElementById('creatButtonID').disabled = true;
+            // }
+            
+            
+            function formValidationAddTaskTempEdit(id) {
     const title = document.getElementById("titleEdit").value;
     const dueDate = document.getElementById("dueDateEdit").value;
-
-
+    
+    
     if (title === "" || dueDate === "") {
         displayRequiredMessageTempEdit();
         return false;
@@ -155,14 +154,15 @@ function formValidationAddTaskTempEdit(id) {
 }
 
 
+
 function displayRequiredMessageTempEdit() {
     const titleInput = document.getElementById("titleEdit");
     const dateInput = document.getElementById("dueDateEdit");
-
+    
     const titleMessage = titleInput.nextElementSibling;
     const dateMessage = dateInput.nextElementSibling;
-
-
+    
+    
     if (titleInput.value === "") {
         titleMessage.classList.remove("d-none");
         titleInput.classList.add("input-error");
@@ -170,7 +170,7 @@ function displayRequiredMessageTempEdit() {
         titleMessage.classList.add("d-none");
         titleInput.classList.remove("input-error");
     }
-
+    
     if (dateInput.value === "") {
         dateMessage.classList.remove("d-none");
         dateInput.classList.add("input-error");
@@ -224,7 +224,7 @@ function pushSubtaskIntoArray(taskToEdit, subtaskvalue1, subtaskvalue2){
 
 let editInputId = ['titleEdit', 'task-descriptionEdit', 'dueDateEdit'];
 let existingObjects = ['title', 'description', 'DueDate']
-let existingFilledObjects = ['DueDate', 'description', 'progress', 'title'];
+let existingFilledObjects = ['DueDate', 'description', 'title'];
 
 async function getTaskInformationEdit(id) {
     const taskToEdit = tasks.find(task => task[1].id === id);

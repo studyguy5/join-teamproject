@@ -139,8 +139,8 @@ function setContactAndPrioValue(newTask) {
     })
     console.log(newTask.assignedTo);
     newTask.prio = prioArray[0];
-
-
+    
+    
 }
 
 
@@ -149,7 +149,14 @@ function setContactAndPrioValue(newTask) {
 async function getTaskInformation(index) {
     console.log('arbeitet')
     let newTask = createTemplate();
-    newTask.id = (tasks.length) + 1;
+    const allIds = tasks.map(ta => ta[1].id) 
+    console.log(allIds);
+    let rn = Math.floor(Math.random()*50)
+    while (allIds.includes(rn)) {
+      rn = Math.floor(Math.random()*10)  
+    }
+    newTask.id = rn;
+    console.log(rn);
     for (let valueIndex = 0; valueIndex < taskObjectKey.length; valueIndex++) {
         newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value
     };
@@ -179,14 +186,14 @@ async function filterAndShowTasks() {
             document.getElementById(`${categorys[idIndex]}`).innerHTML = `<div id="emptyCategory" class="emptyCategory"> No Tasks ${categorys[idIndex]}</div>`
         } else {
             for (let catIndex = 0; catIndex < filteredTasks.length; catIndex++) {
-
+                
                 let element = filteredTasks[catIndex][1];
                 document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoard(element);
                 if (document.getElementById(`${categorys[idIndex]}`)) {
                     renderContact(element);
                 }
-
-
+                
+                
             }
         }
     }

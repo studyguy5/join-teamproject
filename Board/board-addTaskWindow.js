@@ -6,7 +6,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     createaddTaskPopup();
     sectionCheck('board');
     tasks.push(...Object.entries(await getData('task')));
-
+   const allIds = tasks.map(ta => ta[1].id) 
+    console.log(allIds);
+    let rn = Math.floor(Math.random()*50)
+    while (allIds.includes(rn)) {
+      rn = Math.floor(Math.random()*10)  
+    }
+    console.log(rn);
     filterAndShowTasks();
     searchTaskEventHandling();
     

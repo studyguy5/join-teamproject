@@ -49,15 +49,15 @@ async function putData(path = '', data = {}) {
 }
 
 async function patchData(path = '', data = {}) {
-  const response = await fetch(BASe_URL + path + ".json", {
-    method: "PATCH",
-    mode: 'cors',
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data)
-  });
-  return await response.json();
+    const response = await fetch(BASe_URL + path + ".json", {
+        method: "PATCH",
+        mode: 'cors',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    return await response.json();
 }
 
 
@@ -115,17 +115,17 @@ function pushObject(subtaskvalue1, subtaskvalue2) {
         let subTaskObject1 = {
             "value":                //vorher value1
                 `${subtaskvalue1}`,
-                'status' : 'open'
+            'status': 'open'
 
         };
         subtaskArray.push(subTaskObject1)
     }
     if (subtaskvalue2) {
-        
+
         let subTaskObject2 = {
             "value":                //vorher value2
                 `${subtaskvalue2}`,
-                'status' : 'open'
+            'status': 'open'
         };
         subtaskArray.push(subTaskObject2);
     }
@@ -138,7 +138,7 @@ function getSubtaskFromTemplate() {
     };
     if (document.getElementById(`task-text-${index1}`)) {
         subtaskvalue2 = document.getElementById(`task-text-${index1}`).innerHTML
-    } 
+    }
 }
 
 function setContactAndPrioValue(newTask) {
@@ -153,8 +153,8 @@ function setContactAndPrioValue(newTask) {
     })
     console.log(newTask.assignedTo);
     newTask.prio = prioArray[0];
-    
-    
+
+
 }
 
 
@@ -163,11 +163,11 @@ function setContactAndPrioValue(newTask) {
 async function getTaskInformation(index) {
     console.log('arbeitet')
     let newTask = createTemplate();
-    const allIds = tasks.map(ta => ta[1].id) 
+    const allIds = tasks.map(ta => ta[1].id)
     console.log(allIds);
-    let rn = Math.floor(Math.random()*50)
+    let rn = Math.floor(Math.random() * 50)
     while (allIds.includes(rn)) {
-      rn = Math.floor(Math.random()*10)  
+        rn = Math.floor(Math.random() * 10)
     }
     newTask.id = rn;
     console.log(rn);
@@ -200,14 +200,14 @@ async function filterAndShowTasks() {
             document.getElementById(`${categorys[idIndex]}`).innerHTML = `<div id="emptyCategory" class="emptyCategory"> No Tasks ${categorys[idIndex]}</div>`
         } else {
             for (let catIndex = 0; catIndex < filteredTasks.length; catIndex++) {
-                
+
                 let element = filteredTasks[catIndex][1];
                 document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoard(element);
                 if (document.getElementById(`${categorys[idIndex]}`)) {
                     renderContact(element);
                 }
-                
-                
+
+
             }
         }
     }
@@ -226,9 +226,11 @@ console.log(Taskavailable);
 
 function checkDone(id) {
     let sort = tasks.filter(tasks => tasks[1].id === id);
+    let firebaseIde = sort[0][0];
     TaskDone = document.querySelectorAll('.subTaskForBigView .subtaskImgDiv .checkedSubtask')
 
     sort[0][1].progress = (TaskDone.length / sort[0][1].subtasks.length) * 128
+    putData(`task/${firebaseIde}/progress`, `${sort[0][1].progress}`)
     filterAndShowTasks(id);
 }
 
@@ -297,11 +299,11 @@ function bigViewOfTask(id) {
      <div class="subtaskBigView"><p>${elements[1].subtasks != null ? `Subtasks` : ''}</p>
      <div id="subTaskForBigView" class="subTaskForBigView"> 
      <div id="subtaskBigView1" class="subtaskImgDiv">  ${elements[1]?.subtasks?.[0] != null ? elements[1]?.subtasks?.[0].status === 'open' ?
-            `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` : 
-                    `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckedContact.svg">` : ''}
+            `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` :
+            `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckedContact.svg">` : ''}
         <p>${elements[1]?.subtasks?.[0] != null ? elements[1].subtasks?.[0].value : ''}</p></div></br>
-        <div  class="subtaskImgDiv"> ${elements[1]?.subtasks?.[1] != null ? elements[1]?.subtasks?.[0].status === 'open' ? 
-            `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` : 
+        <div  class="subtaskImgDiv"> ${elements[1]?.subtasks?.[1] != null ? elements[1]?.subtasks?.[0].status === 'open' ?
+            `<img id="subtaskBigViewImg2" class="checkboxS1" onclick="confirmSubtask2(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` :
             `<img id="subtaskBigViewImg2" class="checkboxS2" onclick="confirmSubtask2(${id}); checkDone(${elements, id})"src="/img/icons/normalCheckedContact.svg">` : ''}
             <p>${elements[1]?.subtasks?.[1] != null ? elements[1].subtasks?.[1].value : ''}</p></div>
             </div>
@@ -329,7 +331,7 @@ function renderEditAndDeleteButton(id) {
 
 function renderContactForBigView(id) {
 
-    
+
     let rightContacts = tasks.find(task => task[1].id === id)
     let contactForBig = document.getElementById('contactsBV')
     for (let BVindex = 0; BVindex < rightContacts[1].assignedTo?.length; BVindex++) {
@@ -364,7 +366,7 @@ async function deleteData(firebaseID) {
     return await response.json();
 };
 
-function activateEditModus(id){
+function activateEditModus(id) {
     let edit = document.getElementById('bigViewOfTask')
     edit.innerHTML = "";
     edit.innerHTML = renderBigEditView(id);
@@ -372,27 +374,27 @@ function activateEditModus(id){
     prioButtonactivate(id);
 }
 
-function confirmSubtask1(id) {
-     let RT1 = tasks.find(task => task[1].id === id)
+ function confirmSubtask1(id) {
+    let RT1 = tasks.find(task => task[1].id === id)
     let firebaseId = RT1[0]
     let choSubtask1 = document.getElementById(`subtaskBigViewImg1`)
     if (choSubtask1.src.includes("/img/icons/normalCheckContact.svg")) {
         choSubtask1.classList.remove('checkboxS1')
         choSubtask1.classList.add('checkedSubtask')
         choSubtask1.src = "/img/icons/normalCheckedContact.svg"
-         putData(`task/${firebaseId}/subtasks/0/status`, 'closed')
+        putData(`task/${firebaseId}/subtasks/0/status`, 'closed')
     } else {
         choSubtask1.classList.add('checkboxS1')
         choSubtask1.classList.remove('checkedSubtask')
         choSubtask1.src = "/img/icons/normalCheckContact.svg"
-         putData(`task/${firebaseId}/subtasks/0/status`, 'open')
+        putData(`task/${firebaseId}/subtasks/0/status`, 'open')
     }
 
 }
 
-function confirmSubtask2(id) {
+ function confirmSubtask2(id) {
     let RT2 = tasks.find(task => task[1].id === id)
-    RT2[0] = firebaseId;
+    let firebaseId = RT2[0]
     let choSubtask2 = document.getElementById(`subtaskBigViewImg2`)
     if (choSubtask2.src.includes("/img/icons/normalCheckContact.svg")) {
         choSubtask2.classList.remove('checkboxS2')
@@ -420,9 +422,12 @@ function renderContact(element) {
 
 
 
-function closeBigView() {
+async function closeBigView() {
     let closefeature = document.getElementById('bigViewOfTask')
     closefeature.classList.add('dont-Show')
+    tasks = [];
+    tasks.push(...Object.entries(await getData('task')));
+    filterAndShowTasks();
 };
 
 
@@ -451,7 +456,7 @@ function preventDefault(ev, category) {
     ev.preventDefault();
     let re = tasks.find(ct => ct[1].id == [currentDraggedElement]);
     let checkEmpty = document.querySelectorAll(`#${category} .emptyCategory`)
-    if(checkEmpty.length !== 0){document.getElementById(`${category}`).innerHTML = "";}
+    if (checkEmpty.length !== 0) { document.getElementById(`${category}`).innerHTML = ""; }
     let demo = document.querySelectorAll(`.${category} .TaskDivDemo`)
     if (demo.length == 0 && re[1].category != category) {
         document.getElementById(category).innerHTML += `

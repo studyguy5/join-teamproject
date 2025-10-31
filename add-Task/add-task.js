@@ -356,6 +356,9 @@ function createTemplate() {
         'DueDate': '',
         'prio': '',
         'progress': '0',
+        'cid' : [
+
+        ],
         'assignedTo': [
             
         ],

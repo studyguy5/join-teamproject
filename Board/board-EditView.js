@@ -195,7 +195,8 @@ function pushObjectEdit(taskToEdit, subtaskvalue1, subtaskvalue2) {
     
         let subTaskObject = {
             "value":
-                `${subtaskvalue1 || subtaskvalue2}`
+                `${subtaskvalue1 || subtaskvalue2}`,
+                'status' : 'open'
 
         };
         taskToEdit[1].subtasks.push(subTaskObject)
@@ -311,8 +312,8 @@ function showContactsEdit(id) {
     const thisT = tasks.find(task => task[1].id === id);
     let contacts = document.getElementById('IdForContactsEdit')
     console.log(contacts);
-    let result = thisT[1].cid
-    let onlyNumber = result.map(id => {
+    let result = thisT[1]?.cid
+    let onlyNumber = result?.map(id => {
     return parseInt(id.split('-')[1]);
 });
     
@@ -322,7 +323,7 @@ function showContactsEdit(id) {
         <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
         <img  id="checkboxImgEdit-${index}" onclick="chooseContactEdit(${id}, ${index})" 
-        class="${onlyNumber.includes(index) ? 'checkedEdit' : 'checkboxEdit'}" data-set="${contactsArray[index].name}"
+        class="${onlyNumber?.includes(index) ? 'checkedEdit' : 'checkboxEdit'}" data-set="${contactsArray[index].name}"
          src="/img/icons/normalCheckContact.svg">
         </div>`
 

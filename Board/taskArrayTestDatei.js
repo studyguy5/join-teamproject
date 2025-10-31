@@ -1,4 +1,6 @@
 
+
+
  window.tasks = [
     
     
@@ -53,6 +55,8 @@ function searchAndRender(searchField) {
     })
     return;
 }
+
+
 
 function finishedSearching() {
     init_finishSearching()

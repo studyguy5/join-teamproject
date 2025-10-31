@@ -48,6 +48,12 @@
 
 .editViewHeader img{
     cursor: pointer;
+    padding: 4px;
+    height: fit-content;
+}
+.editViewHeader img:hover{
+    background-color: rgb(238, 238, 238);
+    border-radius: 50px;
 }
 
 .editView-mainInput {
@@ -571,22 +577,23 @@
     gap: 10px;
 }
 
-.create-task-btn {
-    width: 140px;
-    height: 40px;
-    border-radius: 7px;
+.ok-btn-edit-view {
+    width: 90px;
+    height: 60px;
+    border-radius: 10px;
     background-color: #2A3647;
     color: white;
-    font-size: 18px;
+    font-size: 21px;
+    font-weight: bold;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 4px;
     border: none;
 }
 
-.create-task-btn:hover {
+.ok-btn-edit-view:hover {
     background-color: #29ABE2;
 }
 

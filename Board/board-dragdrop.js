@@ -114,7 +114,8 @@ function pushObject(subtaskvalue1, subtaskvalue2) {
     if (subtaskvalue1) {
         let subTaskObject1 = {
             "value":                //vorher value1
-                `${subtaskvalue1}`
+                `${subtaskvalue1}`,
+                'status' : 'open'
 
         };
         subtaskArray.push(subTaskObject1)
@@ -123,7 +124,8 @@ function pushObject(subtaskvalue1, subtaskvalue2) {
         
         let subTaskObject2 = {
             "value":                //vorher value2
-                `${subtaskvalue2}`
+                `${subtaskvalue2}`,
+                'status' : 'open'
         };
         subtaskArray.push(subTaskObject2);
     }

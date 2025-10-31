@@ -48,6 +48,18 @@ async function putData(path = '', data = {}) {
     return responseToJson = await response.json();
 }
 
+async function patchData(path = '', data = {}) {
+  const response = await fetch(BASe_URL + path + ".json", {
+    method: "PATCH",
+    mode: 'cors',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  });
+  return await response.json();
+}
+
 
 // um daten zu holen (GET)
 async function getData(path = '') {
@@ -101,30 +113,30 @@ function createTemplate() {
 function pushObject(subtaskvalue1, subtaskvalue2) {
     if (subtaskvalue1) {
         let subTaskObject1 = {
-            "value1":
+            "value":                //vorher value1
                 `${subtaskvalue1}`
 
         };
         subtaskArray.push(subTaskObject1)
-    } else { { '' } }
+    }
     if (subtaskvalue2) {
         
         let subTaskObject2 = {
-            "value2":
+            "value":                //vorher value2
                 `${subtaskvalue2}`
         };
         subtaskArray.push(subTaskObject2);
-    } else { { '' } }
+    }
 }
 
 function getSubtaskFromTemplate() {
     if (document.getElementById(`task-text-${index0}`)) {
 
         subtaskvalue1 = document.getElementById(`task-text-${index0}`).innerHTML
-    } else { '' };
+    };
     if (document.getElementById(`task-text-${index1}`)) {
         subtaskvalue2 = document.getElementById(`task-text-${index1}`).innerHTML
-    } else { '' }
+    } 
 }
 
 function setContactAndPrioValue(newTask) {
@@ -406,6 +418,7 @@ function closeBigView() {
 function moveTo(category) {
     let er = tasks.find(ct => ct[1].id == [currentDraggedElement]);
     er[1].category = category;
+    putData(`task/${er[0]}/category`, `${category}`);
     filterAndShowTasks();
 }
 

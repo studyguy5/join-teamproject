@@ -89,11 +89,11 @@ function getCurrentValues(id) {
     renderChoosenContactEdit(id);
     if (singleTask[1].subtasks?.[0]) {
         renderSubtaskEdit();
-        document.getElementById(`task-text-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[0] ? singleTask[1]?.subtasks?.[0].value1 : ''}`;
+        document.getElementById(`task-text-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[0] ? singleTask[1]?.subtasks?.[0].value : ''}`;
     }
     if (singleTask[1].subtasks?.[1]) {
         renderSubtaskEdit();
-        document.getElementById(`task-text-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[1] ? singleTask[1]?.subtasks?.[1].value2 : ''}`;
+        document.getElementById(`task-text-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[1] ? singleTask[1]?.subtasks?.[1].value : ''}`;
     }
     console.log(singleTask[1]);
 }
@@ -447,7 +447,7 @@ function renderChoosenContactEdit(id, index) {
         Choosen.innerHTML += `<h6>max of length reached</h6>`
     }
 
-    else if (RightTask[1].assignedTo.length < 5) {
+    else if (RightTask[1].assignedTo?.length < 5) {
         for (let preIndex = 0; preIndex < RightTask[1].assignedTo?.length; preIndex++) {
             let num = parseInt(RightTask[1].cid[preIndex].split('-')[1]);
             

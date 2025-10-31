@@ -296,12 +296,14 @@ function bigViewOfTask(id) {
      
      <div class="subtaskBigView"><p>${elements[1].subtasks != null ? `Subtasks` : ''}</p>
      <div id="subTaskForBigView" class="subTaskForBigView"> 
-     <div id="subtaskBigView1" class="subtaskImgDiv">  ${elements[1]?.subtasks?.[0] != null ?
-            `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` : ''}
-        <p>${elements[1]?.subtasks?.[0] != null ? Object.values(elements[1].subtasks[0]) : ''}</p></div></br>
-        <div  class="subtaskImgDiv"> ${elements[1]?.subtasks?.[1] != null ?
-            `<img id="subtaskBigViewImg2" class="checkboxS2" onclick="confirmSubtask2(); checkDone(${elements, id})"src="/img/icons/normalCheckContact.svg">` : ''}
-            <p>${elements[1]?.subtasks?.[1] != null ? Object.values(elements[1].subtasks[1]) : ''}</p></div>
+     <div id="subtaskBigView1" class="subtaskImgDiv">  ${elements[1]?.subtasks?.[0] != null ? elements[1]?.subtasks?.[0].status === 'open' ?
+            `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` : 
+                    `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckedContact.svg">` : ''}
+        <p>${elements[1]?.subtasks?.[0] != null ? elements[1].subtasks?.[0].value : ''}</p></div></br>
+        <div  class="subtaskImgDiv"> ${elements[1]?.subtasks?.[1] != null ? elements[1]?.subtasks?.[0].status === 'open' ? 
+            `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` : 
+            `<img id="subtaskBigViewImg2" class="checkboxS2" onclick="confirmSubtask2(${id}); checkDone(${elements, id})"src="/img/icons/normalCheckedContact.svg">` : ''}
+            <p>${elements[1]?.subtasks?.[1] != null ? elements[1].subtasks?.[1].value : ''}</p></div>
             </div>
             </div>
             <div class="editeDeleteArea" id="editeDeleteArea"></div>
@@ -370,30 +372,38 @@ function activateEditModus(id){
     prioButtonactivate(id);
 }
 
-function confirmSubtask1() {
+function confirmSubtask1(id) {
+     let RT1 = tasks.find(task => task[1].id === id)
+    let firebaseId = RT1[0]
     let choSubtask1 = document.getElementById(`subtaskBigViewImg1`)
     if (choSubtask1.src.includes("/img/icons/normalCheckContact.svg")) {
         choSubtask1.classList.remove('checkboxS1')
         choSubtask1.classList.add('checkedSubtask')
         choSubtask1.src = "/img/icons/normalCheckedContact.svg"
+         putData(`task/${firebaseId}/subtasks/0/status`, 'closed')
     } else {
         choSubtask1.classList.add('checkboxS1')
         choSubtask1.classList.remove('checkedSubtask')
         choSubtask1.src = "/img/icons/normalCheckContact.svg"
+         putData(`task/${firebaseId}/subtasks/0/status`, 'open')
     }
 
 }
 
-function confirmSubtask2() {
+function confirmSubtask2(id) {
+    let RT2 = tasks.find(task => task[1].id === id)
+    RT2[0] = firebaseId;
     let choSubtask2 = document.getElementById(`subtaskBigViewImg2`)
     if (choSubtask2.src.includes("/img/icons/normalCheckContact.svg")) {
         choSubtask2.classList.remove('checkboxS2')
         choSubtask2.classList.add('checkedSubtask')
         choSubtask2.src = "/img/icons/normalCheckedContact.svg"
+        putData(`task/${firebaseId}/subtasks/1/status`, 'closed')
     } else {
         choSubtask2.classList.add('checkboxS2')
         choSubtask2.classList.remove('checkedSubtask')
         choSubtask2.src = "/img/icons/normalCheckContact.svg"
+        putData(`task/${firebaseId}/subtasks/1/status`, 'open')
     }
 }
 

@@ -41,7 +41,7 @@ function searchAndRender(searchField) {
         const searchKey = searchField.value.toLowerCase()
         if (searchKey.length >= 2) {
             let searchedTask = tasks.filter(task => {
-                const filteredTask = (task.title.toLowerCase().includes(searchKey) || task.description.toLowerCase().includes(searchKey))
+                const filteredTask = (task[1].title.toLowerCase().includes(searchKey) || task[1].description.toLowerCase().includes(searchKey))
                 return filteredTask
             })
             if (searchedTask.length === 0) {
@@ -78,15 +78,55 @@ async function filterAndShowTasksAlternate(array) {
     console.log(array)
     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
         document.getElementById(`${categorys[idIndex]}`).innerHTML = '';
-        let filteredTasks = array.filter(f => f.category == categorys[idIndex]);
+        let filteredTasks = array.filter(f => f[1].category == categorys[idIndex]);
         for (let catIndex = 0; catIndex < filteredTasks.length; catIndex++) {
             let element = filteredTasks[catIndex];
-            document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoard(element);
+            document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoardFilter(element);
             if (document.getElementById(`${categorys[idIndex]}`)) {
-                renderContact(element);
+                renderContactFilter(element);
             }
         }
     }
+}
+
+function renderTaskintoBoardFilter(element) {
+    let taskOption = 'türkis';
+    if (element.taskType === 'User Story') {
+        taskOption = 'darkblue';
+    }
+    return `<div draggable="true" ondragstart="startDragging(${element['id']})" 
+    id="TaskDiv-${element[1].id}" onclick="bigViewOfTask(${element[1].id}); renderContactForBigView(${element[1].id}); renderEditAndDeleteButton(${element[1].id})" class="TaskDiv">
+    <div id="taskType" class="${taskOption}">${element[1].taskType}</div>
+    <div class="taskTitle"><p>${element[1].title}</p></div>
+    <div class="taskDescription"><p>${element[1].description}</p></div>
+    <div class="subTasks">
+    ${element[1].subtasks != null ? `
+    <svg role="progress subtask">
+    <rect  width="128" height="8"  class="back"/>
+    <rect  width="${element[1].progress}" height="8" class="fill"/>
+    </svg>
+    <p class="progressDescription">${(element[1].progress / 128) * (element[1].subtasks.length)}/${(element[1].subtasks.length)} Subtasks </p>` : ''}
+    </div>
+    <div id="contacts-Priority-Container" class="contacts-Priority-Container" >
+    <div id="${element[1].id}" class="contactsMiniView"></div>
+    <div class="taskPriority">${element[1].prio == 'Urgent' ?
+            `<img src="/img/icons/urgent.svg">` :
+            element[1].prio == 'Medium' ?
+                `<img src="/img/icons/medium.svg">` :
+                element[1].prio == 'Low' ?
+                    `<img src="/img/icons/low.svg">` : ''}</div>
+        </div>
+        <div></div>
+        </div>`
+}
+
+function renderContactFilter(element) {
+    let contact = document.getElementById(`${element[1].id}`)
+    if (element[1].assignedTo)
+        for (let ContactIndex = 0; ContactIndex < element[1].assignedTo.length; ContactIndex++) {
+            let slim = element[1].assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
+            contact.innerHTML += `
+    <div id="contactscircle" class="contactsCircle">${slim[ContactIndex][0] + slim[ContactIndex][1]} </div>`} else { contact.innerHTML = '' };
 }
 
 function setCardZero() {

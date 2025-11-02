@@ -2,17 +2,9 @@
 document.addEventListener('DOMContentLoaded', async () => {
     contacts = await getObject(path = '/contacts')
     contactsArray = objectToArray(contacts);
-    
-    
 })
 
-// let taskContainerArray = ['title', 'task-description', 'dueDate'];
-// let taskObjectKey = ['title', 'description', 'DueDate'];
-// let categorys = ['Todo', 'Inprogress', 'AwaitFeedback', 'Done'];
-
 const BAsE_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app"
-
-// =========== get Contacts from Firebase form into array and Sorting it=======
 
 async function getObject(path = '') {
     let response = await fetch(BAsE_URL + path + ".json")
@@ -36,7 +28,6 @@ function objectToArray(contacts) {
         }
     })
     console.log(arrayObject);
-    
     return arrayObject;
 }
 
@@ -59,7 +50,6 @@ function prioButtonactivate(id) {
             button.classList.add(thisprio)
         }
     })
-    
     if (buttonsEdit) {
         buttonsEdit.forEach(button => {
             button.addEventListener("click", () => {
@@ -95,12 +85,10 @@ function getCurrentValues(id) {
         renderSubtaskEdit();
         document.getElementById(`task-text-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[1] ? singleTask[1]?.subtasks?.[1].value : ''}`;
     }
-    console.log(singleTask[1]);
 }
 
 function createTaskTemplateEdit(id) {
     if (!formValidationAddTaskTempEdit(id)) return;
-
     showReportAddedTaskTemplateEdit();
 }
 
@@ -116,34 +104,12 @@ function setContactAndPrioValueEdit(taskToEdit) {
     })
     console.log(taskToEdit[1].assignedTo);
     taskToEdit[1].prio = prioArray[0];
-
-
 }
 
-// function constantCheck() {
-    //     setTimeout(() => {
-        //     const title = document.getElementById("title").value;
-        //     const description = document.getElementById('task-description').value;
-        //     const dueDate = document.getElementById("dueDate").value;
-        //     const taskType = document.getElementById("selectedTask").innerText;
-        //     console.log("it check's")
-        //     if (title !== "" && dueDate !== "" && description !== "" && taskType !== "Select Task Category") {
-            
-        //     }}, 500);
-        
-        // }
-        
-        
-        // function makeDisabled() {
-            //     document.getElementById('creatButtonID').disabled = true;
-            // }
-            
-            
-            function formValidationAddTaskTempEdit(id) {
+
+function formValidationAddTaskTempEdit(id) {
     const title = document.getElementById("titleEdit").value;
     const dueDate = document.getElementById("dueDateEdit").value;
-    
-    
     if (title === "" || dueDate === "") {
         displayRequiredMessageTempEdit();
         return false;
@@ -158,11 +124,8 @@ function setContactAndPrioValueEdit(taskToEdit) {
 function displayRequiredMessageTempEdit() {
     const titleInput = document.getElementById("titleEdit");
     const dateInput = document.getElementById("dueDateEdit");
-    
     const titleMessage = titleInput.nextElementSibling;
     const dateMessage = dateInput.nextElementSibling;
-    
-    
     if (titleInput.value === "") {
         titleMessage.classList.remove("d-none");
         titleInput.classList.add("input-error");
@@ -170,7 +133,6 @@ function displayRequiredMessageTempEdit() {
         titleMessage.classList.add("d-none");
         titleInput.classList.remove("input-error");
     }
-    
     if (dateInput.value === "") {
         dateMessage.classList.remove("d-none");
         dateInput.classList.add("input-error");
@@ -184,7 +146,6 @@ function displayRequiredMessageTempEdit() {
 function showReportAddedTaskTemplateEdit() {
     const popup = document.getElementById("report");
     popup.classList.add("show");
-
     setTimeout(() => {
         popup.classList.remove("show");
         closePopup();
@@ -192,21 +153,16 @@ function showReportAddedTaskTemplateEdit() {
 }
 
 function pushObjectEdit(taskToEdit, subtaskvalue1, subtaskvalue2) {
-    
-        let subTaskObject = {
-            "value":
-                `${subtaskvalue1 || subtaskvalue2}`,
-                'status' : 'open'
-
-        };
-        taskToEdit[1].subtasks.push(subTaskObject)
-    
-    
-    }
+    let subTaskObject = {
+        "value":
+            `${subtaskvalue1 || subtaskvalue2}`,
+        'status': 'open'
+    };
+    taskToEdit[1].subtasks.push(subTaskObject)
+}
 
 function getSubtaskFromTemplateEdit() {  //hole die Daten
     if (document.getElementById(`task-text-${index0}`)) {
-
         subtaskvalue1 = document.getElementById(`task-text-${index0}`).innerHTML
     };
     if (document.getElementById(`task-text-${index1}`)) {
@@ -214,11 +170,11 @@ function getSubtaskFromTemplateEdit() {  //hole die Daten
     }
 }
 
-function pushSubtaskIntoArray(taskToEdit, subtaskvalue1, subtaskvalue2){
-    if(subtaskvalue1){
+function pushSubtaskIntoArray(taskToEdit, subtaskvalue1, subtaskvalue2) {
+    if (subtaskvalue1) {
         pushObjectEdit(taskToEdit, subtaskvalue1, null);
     }
-    if(subtaskvalue2){
+    if (subtaskvalue2) {
         pushObjectEdit(taskToEdit, null, subtaskvalue2);
     }
 }
@@ -231,13 +187,12 @@ async function getTaskInformationEdit(id) {
     const taskToEdit = tasks.find(task => task[1].id === id);
     let firebaseID = [taskToEdit[0]];
     await deleteData(firebaseID);
-    //hier wird alles geleert was verändert werden kann
     for (let makeEmptyIndex = 0; makeEmptyIndex < existingFilledObjects.length; makeEmptyIndex++) {
         taskToEdit[1][existingFilledObjects[makeEmptyIndex]] = '';
     }
     taskToEdit[1].assignedTo = [];
     taskToEdit[1].cid = [];
-    taskToEdit[1].subtasks = []; 
+    taskToEdit[1].subtasks = [];
     console.log(taskToEdit[1]);
     for (let valueIndex = 0; valueIndex < editInputId.length; valueIndex++) { //Arrays überarbeiten
         taskToEdit[1][existingObjects[valueIndex]] = document.getElementById(`${editInputId[valueIndex]}`).value
@@ -267,18 +222,18 @@ async function filterAndShowTasksEdit() {
         }
     }
 }
+
 let first = true;
-function openContactWithCounter(id){
-    if(first){
+function openContactWithCounter(id) {
+    if (first) {
         showContactsEdit(id);
         openContactViewEdit();
         showInputFilter();
         first = false;
-    }else{
+    } else {
         openContactViewEdit();
         showInputFilter();
     }
-
 }
 
 function openContactViewEdit() {
@@ -314,9 +269,9 @@ function showContactsEdit(id) {
     console.log(contacts);
     let result = thisT[1]?.cid
     let onlyNumber = result?.map(id => {
-    return parseInt(id.split('-')[1]);
-});
-    
+        return parseInt(id.split('-')[1]);
+    });
+
     contacts.innerHTML = "";
     for (let index = 1; index < contactsArray.length; index++) {
         contacts.innerHTML += `<div class="contactBox">
@@ -326,24 +281,18 @@ function showContactsEdit(id) {
         class="${onlyNumber?.includes(index) ? 'checkedEdit' : 'checkboxEdit'}" data-set="${contactsArray[index].name}"
          src="/img/icons/normalCheckContact.svg">
         </div>`
-
     }
 }
 
 let filteredContactsEdit = [];
 function filterContactsInPopupEdit(id) {
     let r;
-
     let typedValue = document.getElementById('filterContactsEdit').value
-
     if (typedValue.length > 0) {
         let val = Object.values(contactsArray);
-
         r = val.slice(1)
         filteredContactsEdit = r.filter(fn => { return fn.name.toLowerCase().includes(typedValue.toLowerCase()) })
-
         renderfilteredContactsInPopupEdit(id, filteredContactsEdit);
-
         //    console.log(filteredContacts);
     } else if (typedValue.length < 1) {
         showContactsEdit();
@@ -352,7 +301,6 @@ function filterContactsInPopupEdit(id) {
 
 
 function renderfilteredContactsInPopupEdit(id, filteredContactsEdit) {
-
     let filtContactInPopupEdit = document.getElementById('IdForContactsEdit')
     filtContactInPopupEdit.innerHTML = "";
     for (let filterContactIndex = 0; filterContactIndex < filteredContactsEdit.length; filterContactIndex++) {
@@ -363,7 +311,6 @@ function renderfilteredContactsInPopupEdit(id, filteredContactsEdit) {
         <img  id="checkboxImgEdit-${filterContactIndex}" onclick="chooseFilteredContactEdit(${id}, ${filterContactIndex})" class="checkboxEdit" data-set="${filteredContactsEdit[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
         </div>
         `}
-
 }
 
 function chooseFilteredContactEdit(id, filterContactIndex) {
@@ -390,15 +337,15 @@ function renderFilteredChoosenContact(id, filterContactIndex) {
         const contFilterList = filteredContactsEdit[filterContactIndex]
         filteredRightTask[1].assignedTo.push(contFilterList?.name);
         let root = filteredRightTask[1].assignedTo;
-        for (let filterIndex = root.length -1; filterIndex < root.length; filterIndex++) {
-             thisFilteredTask = root.map(c => c.split(" ").map(f => f.charAt(0)))
+        for (let filterIndex = root.length - 1; filterIndex < root.length; filterIndex++) {
+            thisFilteredTask = root.map(c => c.split(" ").map(f => f.charAt(0)))
             listContact.innerHTML += `
         <div id="contactCirclePopupRender-${id}" class="contactCirclePopupRender">${thisFilteredTask[filterIndex][0] + thisFilteredTask[filterIndex][1]}</div>
         `}
 
-    }else if(filterContactIndex && filteredRightTask[1].assignedTo.length >= 5) {
+    } else if (filterContactIndex && filteredRightTask[1].assignedTo.length >= 5) {
         listContact.innerHTML += `<h6>max of length reached</h6>`
-    }else if (filteredRightTask[1].assignedTo.length < 5) {
+    } else if (filteredRightTask[1].assignedTo.length < 5) {
         for (let filterIndex = 0; filterIndex < filteredRightTask[1].assignedTo?.length; filterIndex++) {
 
             thisFilteredTask = filteredRightTask[1].assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
@@ -440,55 +387,47 @@ function renderChoosenContactEdit(id, index) {
 
             thisTask = RightTask[1].assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
             Choosen.innerHTML += `
-          <div id="contactCirclePopupRender-${index}" class="contactCirclePopupRender">${thisTask[preIndex][0] + thisTask[preIndex][1]}</div>
-    `;
+          <div id="contactCirclePopupRender-${index}" class="contactCirclePopupRender">${thisTask[preIndex][0] + thisTask[preIndex][1]}</div>`;
         }
         // normal rendern, wenn array voll
     } else if (index && RightTask[1].assignedTo.length >= 5) {
         Choosen.innerHTML += `<h6>max of length reached</h6>`
-    }
-
-    else if (RightTask[1].assignedTo?.length < 5) {
+    } else if (RightTask[1].assignedTo?.length < 5) {
         for (let preIndex = 0; preIndex < RightTask[1].assignedTo?.length; preIndex++) {
             let num = parseInt(RightTask[1].cid[preIndex].split('-')[1]);
-            
+
             thisTask = RightTask[1].assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
             Choosen.innerHTML += `
-    <div id="contactCirclePopupRender-${num}" class="contactCirclePopupRender">${thisTask[preIndex][0] + thisTask[preIndex][1]}</div>
-    `;
-    index++
+    <div id="contactCirclePopupRender-${num}" class="contactCirclePopupRender">${thisTask[preIndex][0] + thisTask[preIndex][1]}</div>`;
+            index++
         }
     }
 }
 
 function deleteRenderedContactEdit(index) {
     let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
-    if(renderedContact)
-    renderedContact.remove();
+    if (renderedContact)
+        renderedContact.remove();
     renderedContact.innerHTML = '';
 }
 
 
 function deleteRenderedFilteredContactEdit(filterIndex) {
     let renderedContactFilter = document.getElementById(`contactCirclePopupRender-${filterIndex}`)
-    if(renderedContactFilter)
-    renderedContactFilter.remove();
+    if (renderedContactFilter)
+        renderedContactFilter.remove();
     renderedContactFilter.innerHTML = '';
 }
 
 // ======== ab hier funktionen für das Rendern von Subtask im Edit-View =====//
-// let currentCount;
-// let index = currentCount;
+
 
 function renderSubtaskEdit() {
     console.log('rendert')
     let subtask = document.getElementById("subtaskEdit"); // der standard input
     let list = document.getElementById("subtaskEdit-list-1"); // das zusätzliche <ul> element
-
-
     let currentCount = list.getElementsByClassName("listedEdit").length; //klasse von li element
     index = currentCount;
-
     if (currentCount < 2 && subtask.value.trim() === "") {
         list.innerHTML += `<li onclick="editBulletpointEditView(${index})" id="listed-${index}" class="listedEdit"> 
         <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
@@ -497,11 +436,8 @@ function renderSubtaskEdit() {
                                     <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
                                     <img onmousedown="deleteBulletpointEdit(${index})" class="trash" src="/img/icons/trash.svg">
                                     </span>
-                                    </li>
-                                    `;
+                                    </li>`;
         subtask.value = "";
-        // d = document.getElementById('task-text-0').innerHTML;
-        // console.log(d);
     } else if (currentCount < 2 && subtask.value.trim() !== "") {
         list.innerHTML += `<li onclick="editBulletpointEditView(${index})" id="listed-${index}" class="listedEdit"> 
         <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
@@ -510,8 +446,7 @@ function renderSubtaskEdit() {
                                     <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
                                     <img onmousedown="deleteBulletpointEdit(${index})" class="trash" src="/img/icons/trash.svg">
                                     </span>
-                                    </li>
-                                    `;
+                                    </li>`;
         subtask.value = "";
     }
 }
@@ -533,24 +468,18 @@ function editBulletpointEditView(index) {
     const li = document.getElementById(`listed-${index}`);
     const textEl = document.getElementById(`task-text-${index}`);
     const inputEl = document.getElementById(`edit-input-${index}`);
-
-    // Wenn schon ein Input da ist, nicht nochmal umbauen
     if (inputEl) {
         inputEl.focus();
         return;
     }
-
     const currentText = textEl ? textEl.textContent : ""; // fallback, falls kein <p> existiert
-
     li.innerHTML = `
     <input class="edit-input" type="text" id="edit-input-${index}" value="${currentText}">
     <span class="list-icon">
     <img onmousedown="deleteBulletpointEdit(${index})" class="trash" src="/img/icons/trash.svg">
     <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
     <img onmousedown="saveBulletpointEdit(${index})" class="hook" src="/img/icons/subtasks-icon.svg">
-        </span>
-        `;
-
+        </span>`;
     document.getElementById(`edit-input-${index}`).focus();
 }
 
@@ -559,7 +488,6 @@ function editBulletpointEditView(index) {
 function saveBulletpointEdit(index) {
     const input = document.getElementById(`edit-input-${index}`);
     const newValue = input.value.trim();
-
     if (newValue !== "") {
         const li = document.getElementById(`listed-${index}`);
         li.innerHTML = `<span class="dot">•</span><p id="task-text-${index}">${newValue}</p>

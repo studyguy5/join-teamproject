@@ -1,7 +1,5 @@
 let categorys = ['Todo', 'Inprogress', 'AwaitFeedback', 'Done'];
-
 const BASe_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/"
-// const BASe_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/"
 
 let taskContainerArray = ['title', 'task-description', 'dueDate'];
 let taskObjectKey = ['title', 'description', 'DueDate'];
@@ -15,16 +13,6 @@ let subtaskArray = [];
 let subtaskvalue1;
 let subtaskvalue2;
 
-// async function postData(path="", data={}) {
-//     let response = await fetch(BASe_URL + path + ".json", {
-//         method:"POST",
-//         headers:{
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(data)
-//     });
-//     return response.json();
-// }
 
 async function postData(path = '', data = {}) {
     let response = await fetch(BASe_URL + path + ".json", {
@@ -37,6 +25,7 @@ async function postData(path = '', data = {}) {
     let responseToJson = await response.json();
     return responseToJson.name
 }
+
 async function putData(path = '', data = {}) {
     let response = await fetch(BASe_URL + path + ".json", {
         method: "PUT",
@@ -83,12 +72,7 @@ let rightColumn = document.querySelectorAll('.categorys > div img').forEach(el =
 })
 
 
-
-// let tid = tasks.length;
-
 function createTemplate() {
-
-    console.log('createTemplate() wird aufgerufen')
     return {
         'category': `${choosenCategory}`,
         'id': '',
@@ -99,41 +83,28 @@ function createTemplate() {
         'prio': '',
         'progress': '0',
         'cid': [
-
         ],
         'assignedTo': [
-
         ],
         'subtasks': [
-
         ]
     }
 }
 
 function pushObject(subtaskvalue1, subtaskvalue2) {
     if (subtaskvalue1) {
-        let subTaskObject1 = {
-            "value":                //vorher value1
-                `${subtaskvalue1}`,
-            'status': 'open'
-
-        };
+        let subTaskObject1 = {"value":`${subtaskvalue1}`,'status': 'open'};
         subtaskArray.push(subTaskObject1)
     }
     if (subtaskvalue2) {
-
         let subTaskObject2 = {
-            "value":                //vorher value2
-                `${subtaskvalue2}`,
-            'status': 'open'
-        };
+            "value":`${subtaskvalue2}`,'status': 'open'};
         subtaskArray.push(subTaskObject2);
     }
 }
 
 function getSubtaskFromTemplate() {
     if (document.getElementById(`task-text-${index0}`)) {
-
         subtaskvalue1 = document.getElementById(`task-text-${index0}`).innerHTML
     };
     if (document.getElementById(`task-text-${index1}`)) {
@@ -143,7 +114,6 @@ function getSubtaskFromTemplate() {
 
 function setContactAndPrioValue(newTask) {
     let checkedImg = document.querySelectorAll('#IdForContacts img.checked')
-    console.log(checkedImg);
     checkedImg.forEach(img => {
         names = img.dataset.set;
         let id = img.id;
@@ -151,26 +121,20 @@ function setContactAndPrioValue(newTask) {
         console.log(id);
         newTask.assignedTo.push(names)
     })
-    console.log(newTask.assignedTo);
     newTask.prio = prioArray[0];
-
-
 }
 
 
 
 
 async function getTaskInformation(index) {
-    console.log('arbeitet')
     let newTask = createTemplate();
     const allIds = tasks.map(ta => ta[1].id)
-    console.log(allIds);
     let rn = Math.floor(Math.random() * 50)
     while (allIds.includes(rn)) {
         rn = Math.floor(Math.random() * 10)
     }
     newTask.id = rn;
-    console.log(rn);
     for (let valueIndex = 0; valueIndex < taskObjectKey.length; valueIndex++) {
         newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value
     };
@@ -182,17 +146,13 @@ async function getTaskInformation(index) {
     pushObject(subtaskvalue1, subtaskvalue2); // subtasks template with variable is pushed into subtaskArray
     newTask.category = choosenCategory ? choosenCategory : 'Todo';
     await postData("task", newTask);
-    console.log(newTask);
     tasks = [];
     tasks.push(...Object.entries(await getData('task')));
-    // tasks.push(newTask);
-    // clearInputs();
     filterAndShowTasks();
 };
 
 
 async function filterAndShowTasks() {
-    console.log(tasks)
     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
         document.getElementById(`${categorys[idIndex]}`).innerHTML = '';
         let filteredTasks = tasks.filter(f => f[1].category == categorys[idIndex]);
@@ -200,23 +160,15 @@ async function filterAndShowTasks() {
             document.getElementById(`${categorys[idIndex]}`).innerHTML = `<div id="emptyCategory" class="emptyCategory"> No Tasks ${categorys[idIndex]}</div>`
         } else {
             for (let catIndex = 0; catIndex < filteredTasks.length; catIndex++) {
-
                 let element = filteredTasks[catIndex][1];
                 document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoard(element);
                 if (document.getElementById(`${categorys[idIndex]}`)) {
                     renderContact(element);
                 }
-
-
             }
         }
     }
 }
-
-
-
-
-
 
 let progress;
 let TaskDone;
@@ -228,45 +180,13 @@ function checkDone(id) {
     let sort = tasks.filter(tasks => tasks[1].id === id);
     let firebaseIde = sort[0][0];
     TaskDone = document.querySelectorAll('.subTaskForBigView .subtaskImgDiv .checkedSubtask')
-
     sort[0][1].progress = (TaskDone.length / sort[0][1].subtasks.length) * 128
     putData(`task/${firebaseIde}/progress`, `${sort[0][1].progress}`)
     filterAndShowTasks(id);
 }
 
-function renderTaskintoBoard(element) {
-    let taskOption = 'türkis';
-    if (element.taskType === 'User Story') {
-        taskOption = 'darkblue';
-    }
 
-    return `<div draggable="true" ondragstart="startDragging(${element['id']})" 
-    id="TaskDiv-${element.id}" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderEditAndDeleteButton(${element.id})" class="TaskDiv">
-    <div id="taskType" class="${taskOption}">${element.taskType}</div>
-    <div class="taskTitle"><p>${element.title}</p></div>
-    <div class="taskDescription"><p>${element.description}</p></div>
-    <div class="subTasks">
-    ${element.subtasks != null ? `
-    <svg role="progress subtask">
-    <rect  width="128" height="8"  class="back"/>
-    <rect  width="${element.progress}" height="8" class="fill"/>
-    </svg>
-    <p class="progressDescription">${(element.progress / 128) * (element.subtasks.length)}/${(element.subtasks.length)} Subtasks </p>` : ''}
-    </div>
-    <div id="contacts-Priority-Container" class="contacts-Priority-Container" >
-    <div id="${element.id}" class="contactsMiniView"></div>
-    <div class="taskPriority">${element.prio == 'Urgent' ?
-            `<img src="/img/icons/urgent.svg">` :
-            element.prio == 'Medium' ?
-                `<img src="/img/icons/medium.svg">` :
-                element.prio == 'Low' ?
-                    `<img src="/img/icons/low.svg">` : ''}</div>
-        </div>
-        <div></div>
-        </div>`
-}
 
-// if bedingung einbauen, wenn subtask.lenght = 0 -> dann nichts anzeigen (no barchart, no numbers)
 
 function bigViewOfTask(id) {
     const elements = tasks.find(task => task[1].id === id);
@@ -277,73 +197,21 @@ function bigViewOfTask(id) {
     }
     let connectionToTaskWindow = document.getElementById('bigViewOfTask')
     connectionToTaskWindow.classList.remove('dont-Show')
-    connectionToTaskWindow.innerHTML = `
-    <div class="bigViewHeadlineCloseArea" id="bigViewHeadlineCloseArea">
-    <div class="${taskOption}">${elements[1].taskType}</div>
-    <div class="closeIcon" id="closeIcon"><img onclick="closeBigView()" src="/img/icons/closeFrame.svg" alt="closeButton"></div>
-    </div>
-    <div class="titleBigView"><h2>${elements[1].title}</h2></div>
-    <div class="descriptionBigView"><p>${elements[1].description}</p></div>
-    <div class="dueDateBigView"> <p>Due Date:</p> ${elements[1]["DueDate"]}</div>
-    <div class="priorityBigView"><p>Priority:</p>${elements[1].prio == 'Urgent' ?
-            `${elements[1].prio}<img src="/img/icons/urgent.svg">` :
-            elements[1].prio == 'Medium' ?
-                `${elements[1].prio}<img src="/img/icons/medium.svg">` :
-                elements[1].prio == 'Low' ?
-                    `${elements[1].prio}<img src="/img/icons/low.svg">` : ''}
-            </div>
-     <div class="assignedToBigView"><p>Assigned To:</p> 
-     <div id="contactsBV" class="contactsBV"></div>
-     </div>
-     
-     <div class="subtaskBigView"><p>${elements[1].subtasks != null ? `Subtasks` : ''}</p>
-     <div id="subTaskForBigView" class="subTaskForBigView"> 
-     <div id="subtaskBigView1" class="subtaskImgDiv">  ${elements[1]?.subtasks?.[0] != null ? elements[1]?.subtasks?.[0].status === 'open' ?
-            `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` :
-            `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckedContact.svg">` : ''}
-        <p>${elements[1]?.subtasks?.[0] != null ? elements[1].subtasks?.[0].value : ''}</p></div></br>
-        <div  class="subtaskImgDiv"> ${elements[1]?.subtasks?.[1] != null ? elements[1]?.subtasks?.[0].status === 'open' ?
-            `<img id="subtaskBigViewImg2" class="checkboxS1" onclick="confirmSubtask2(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` :
-            `<img id="subtaskBigViewImg2" class="checkboxS2" onclick="confirmSubtask2(${id}); checkDone(${elements, id})"src="/img/icons/normalCheckedContact.svg">` : ''}
-            <p>${elements[1]?.subtasks?.[1] != null ? elements[1].subtasks?.[1].value : ''}</p></div>
-            </div>
-            </div>
-            <div class="editeDeleteArea" id="editeDeleteArea"></div>
-            `
-
-};
+    connectionToTaskWindow.innerHTML = renderBigViewHTML(elements, id);
+} 
 
 function renderEditAndDeleteButton(id) {
     let editandDelete = document.getElementById('editeDeleteArea')
-    editandDelete.innerHTML = `<div class="editAndDeleteButton">
-    <div onclick="deleteTaskFromBoard(${id})" class="deleteField">
-    <img class="deleteImg" src="/img/icons/delete-symbol.svg">
-    <h4>Delete</h4>
-    </div>
-    <hr class="lineToSeperate">
-    <div onclick="activateEditModus(${id})" class="editField">
-    <img class="editImg" src="/img/icons/edit-symbol.svg">
-    <h4>Edit</h4>
-    </div>
-    </div>
-    `
+    editandDelete.innerHTML = renderHTMLForEditandDeleteButton(id); 
 }
 
 function renderContactForBigView(id) {
-
-
     let rightContacts = tasks.find(task => task[1].id === id)
     let contactForBig = document.getElementById('contactsBV')
     for (let BVindex = 0; BVindex < rightContacts[1].assignedTo?.length; BVindex++) {
         let short = rightContacts[1].assignedTo.map(sh => sh.split(" ").map(c => c.charAt(0)))
-        contactForBig.innerHTML += `
-        <div class="singleContactBoxForBigView">
-        <div id="contactCirclePopupRender-${BVindex}" class="contactCircleBigView">${short[BVindex][0] + short[BVindex][1]}</div>
-        <div id="singleContactInBigView-${BVindex}" > ${rightContacts[1].assignedTo[BVindex]}</div>
-        </div>
-        ` }
-
-}
+        contactForBig.innerHTML += renderContactHTMLForBigView(rightContacts, BVindex, short);
+     }  }
 
 async function deleteTaskFromBoard(id) {
     let openedTask = tasks.find(task => task[1].id === id)
@@ -355,8 +223,6 @@ async function deleteTaskFromBoard(id) {
     tasks = [];
     tasks.push(...Object.entries(await getData('task')));
     filterAndShowTasks();
-    // Array wird nach dem Löschen geleert und neu befüllt, ist einfacher weil ich sonst immer den richtigen Index finden muss
-
 }
 
 async function deleteData(firebaseID) {
@@ -389,7 +255,6 @@ function activateEditModus(id) {
         choSubtask1.src = "/img/icons/normalCheckContact.svg"
         putData(`task/${firebaseId}/subtasks/0/status`, 'open')
     }
-
 }
 
  function confirmSubtask2(id) {
@@ -416,8 +281,7 @@ function renderContact(element) {
         for (let ContactIndex = 0; ContactIndex < element.assignedTo.length; ContactIndex++) {
             let slim = element.assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
             contact.innerHTML += `
-    <div id="contactscircle" class="contactsCircle">${slim[ContactIndex][0] + slim[ContactIndex][1]} </div>
-    `} else { contact.innerHTML = '' };
+    <div id="contactscircle" class="contactsCircle">${slim[ContactIndex][0] + slim[ContactIndex][1]} </div>`} else { contact.innerHTML = '' };
 }
 
 
@@ -439,10 +303,6 @@ function moveTo(category) {
     filterAndShowTasks();
 }
 
-// function signalForInput(category) {
-//     // onmouseover="signalForInput('Todo')"
-
-// }
 
 function startDragging(id) {
     currentDraggedElement = id
@@ -460,12 +320,9 @@ function preventDefault(ev, category) {
     let demo = document.querySelectorAll(`.${category} .TaskDivDemo`)
     if (demo.length == 0 && re[1].category != category) {
         document.getElementById(category).innerHTML += `
-    <div class="TaskDivDemo" id="TaskDivDemo">Drop me here</div>
-    `;
+    <div class="TaskDivDemo" id="TaskDivDemo">Drop me here</div>`;
         once = true;
     }
-
-
 }
 
 
@@ -476,12 +333,7 @@ function leaveCategory(category) {
         console.log(clean);
         once = false;
     }
-
 }
-
-
-
-
 
 
 function objectToArray(contacts) {
@@ -493,9 +345,6 @@ function objectToArray(contacts) {
             ...member[1]
         }
     })
-
-    console.log(arrayObject);
-
     return arrayObject;
 }
 

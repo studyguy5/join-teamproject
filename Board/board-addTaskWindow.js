@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log(rn);
     filterAndShowTasks();
     searchTaskEventHandling();
-    
     contacts = await getObject(path = '/contacts')
     console.log(contacts);
     contactsArray = objectToArray(contacts)
@@ -57,11 +56,9 @@ async function getData(path = '') {
 function showReportAddedTask() {
     const popup = document.getElementById("report");
     popup.classList.add("show");
-
     setTimeout(() => {
         window.location.href = "../board/board.html";
     }, 900);
-
     setTimeout(() => {
         popup.classList.remove("show");
     }, 1000);
@@ -89,7 +86,6 @@ function closePopup() {
 
 function createTaskTemplate() {
     if (!formValidationAddTaskTemp()) return;
-
     showReportAddedTaskTemplate();
 }
 
@@ -116,7 +112,6 @@ function formValidationAddTaskTemp() {
     const title = document.getElementById("title").value;
     const dueDate = document.getElementById("dueDate").value;
     const taskType = document.getElementById("selectedTask").innerText; // <-- hidden input
-
     if (title === "" || dueDate === "" || taskType === "Select Task Category") {
         displayRequiredMessageTemp();
         return false;
@@ -132,11 +127,9 @@ function displayRequiredMessageTemp() {
     const dateInput = document.getElementById("dueDate");
     const categoryInput = document.getElementById("categoryValue");
     const categoryDiv = document.getElementById("IdForTaskChoise");
-
     const titleMessage = titleInput.nextElementSibling;
     const dateMessage = dateInput.nextElementSibling;
     const categoryMessage = categoryDiv.nextElementSibling;
-
     if (titleInput.value === "") {
         titleMessage.classList.remove("d-none");
         titleInput.classList.add("input-error");
@@ -144,7 +137,6 @@ function displayRequiredMessageTemp() {
         titleMessage.classList.add("d-none");
         titleInput.classList.remove("input-error");
     }
-
     if (dateInput.value === "") {
         dateMessage.classList.remove("d-none");
         dateInput.classList.add("input-error");
@@ -152,11 +144,10 @@ function displayRequiredMessageTemp() {
         dateMessage.classList.add("d-none");
         dateInput.classList.remove("input-error");
     }
-
     if (categoryInput.value === "") {
         categoryMessage.classList.remove("d-none");
         categoryDiv.classList.add("input-error");
-    } else {
+    }else {
         categoryMessage.classList.add("d-none");
         categoryDiv.classList.remove("input-error");
     }
@@ -166,7 +157,6 @@ function displayRequiredMessageTemp() {
 function showReportAddedTaskTemplate() {
     const popup = document.getElementById("report");
     popup.classList.add("show");
-
     setTimeout(() => {
         popup.classList.remove("show");
         closePopup();
@@ -189,8 +179,6 @@ function objectToArray(contacts) {
             ...member[1]
         }
     })
-    console.log(arrayObject);
-
     return arrayObject;
 }
 
@@ -206,13 +194,11 @@ function showContacts() {
     let contacts = document.getElementById('IdForContacts')
     contacts.innerHTML = "";
     for (let index = 1; index < contactsArray.length; index++) {
-        // console.log(contactsArray);
-        contacts.innerHTML += `<div class="contactBox">
+             contacts.innerHTML += `<div class="contactBox">
         <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
         <img  id="checkboxImg-${index}" onclick="chooseContact(${index})" class="checkbox" data-set="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
         </div>`
-
     }
 }
 
@@ -220,25 +206,18 @@ function showContacts() {
 let filteredContacts;
 function filterContactsInPopup() {
     let r;
-    
     let typedValue = document.getElementById('filterContacts').value
-    
     if (typedValue.length > 0) {
         let val = Object.values(contactsArray);
-        
         r = val.slice(1)
         filteredContacts = r.filter(fn => {return fn.name.toLowerCase().includes(typedValue.toLowerCase())})
-        
         renderfilteredContactsInPopup(filteredContacts);    
-        
-        //    console.log(filteredContacts);
     }else if(typedValue.length < 1){
         showContacts();
     }
 }
 
 function renderfilteredContactsInPopup(filteredContacts){
-
     let filtContactInPopup =  document.getElementById('IdForContacts')
     filtContactInPopup.innerHTML = "";
     for (let filterContactIndex = 0; filterContactIndex < filteredContacts.length; filterContactIndex++) {   
@@ -247,9 +226,7 @@ function renderfilteredContactsInPopup(filteredContacts){
         <div class="contactCirclePopup">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${filteredContacts[filterContactIndex].name}</span> 
         <img  id="checkboxImg-${filterContactIndex}" onclick="chooseFilteredContact(${filterContactIndex})" class="checkbox" data-set="${filteredContacts[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
-        </div>
-        `}
-        
+        </div>`}
     }
     
     function showInput() {
@@ -257,8 +234,7 @@ function renderfilteredContactsInPopup(filteredContacts){
         if (document.getElementById('placeholderpTag')){
             document.getElementById('placeholderpTag').classList.toggle('dont-Show');
             document.getElementById('filterContacts').classList.toggle('dont-Show');
-            document.getElementById('filterContacts').focus()
-        };
+            document.getElementById('filterContacts').focus()};
     }
     
 function openContactView() {
@@ -274,7 +250,6 @@ function openContactView() {
     let layer = document.getElementById('hiddenlayer2')
         layer.classList.toggle('hiddenlayer2')
   }
-    
     if (document.querySelectorAll('availibleContactsOpen')) {
         let contact = document.getElementById('arrowImgC')
         contact.classList.toggle('select-arrow-open')
@@ -313,20 +288,14 @@ function chooseFilteredContact(filterContactIndex) {
 
 function renderChoosenContact(index) {
     let listContact = document.getElementById('choosenContacts')
-
     listContact.innerHTML += `
-    <div id="contactCirclePopupRender-${index}" class="contactCirclePopupRender">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
-    `
-    console.log(listContact);
+    <div id="contactCirclePopupRender-${index}" class="contactCirclePopupRender">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>`
 }
 
 function renderFilteredChoosenContact(filterContactIndex) {
     let listContact = document.getElementById('choosenContacts')
-
     listContact.innerHTML += `
-    <div id="contactCirclePopupRender-${filterContactIndex}" class="contactCirclePopupRender">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>
-    `
-    console.log(listContact);
+    <div id="contactCirclePopupRender-${filterContactIndex}" class="contactCirclePopupRender">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>`
 }
 
 function deleteRenderedContact(index) {
@@ -346,22 +315,16 @@ function openTasktypeDropDown() {
     }
 }
 
-
-
-
 function chooseValue() {
     let choise = document.querySelectorAll('.taskOption')
-
     choise.forEach(b => b.addEventListener('click', () => {
         const choiseOfTask = b.dataset.value
         console.log(choiseOfTask);
         document.getElementById('selectedTask').innerHTML = choiseOfTask;
     }))
-
 }
 
 function stopBubbling(event) {
-
     event.stopPropagation()
 }
 
@@ -378,7 +341,6 @@ function clearTask(){
 
 
 /* --- dein vorhandener board-addTaskWindow.js Code bleibt komplett wie er ist --- */
-
 /* ===================== USERNAME & INITIALEN (wie in summary) ===================== */
 function getStoredUserName() {
   const name = localStorage.getItem('userFullName');

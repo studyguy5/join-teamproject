@@ -1,16 +1,4 @@
 
-
-/* {
-    width: 100%;
-    max-width: 1920px;
-    height: 100%;
-    position: relative;
-    margin-left: 232px;
-    padding-top: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-} */
 .mainAreaRight h1{
     font-size: 61px;
     margin-left: 80px;
@@ -81,7 +69,6 @@
 
 .subtask-wrapper .edit-input:focus{
    border:unset;
-
 }
 
 
@@ -118,7 +105,6 @@
     padding-left: 0;
     margin: 0;
     list-style: none;
-    
 }
 
 .listed{
@@ -129,15 +115,13 @@
     font-weight: 400;
     color: #000000;
     align-items: center;
-    height: 24px;
-    
+    height: 24px; 
 }
 
 .listed:hover{
     cursor: pointer;
     background: #e6e6e6;
     border-radius: 10px;
-    
     .list-icon{
         display: flex !important;
     }
@@ -171,13 +155,10 @@
     margin-left: -16px;        
     margin-right: -16px; 
 }
+
 .edit-input:focus {
     border-bottom: 1px solid #29ABE2 !important;
 }
-
-
-
-
 
  textarea{
     max-width: 1920px;
@@ -243,8 +224,8 @@
     display: flex;
     justify-content: space-between;
     gap: 16px;
-    /* margin-bottom:24px; */
 }
+
 .priority-section button{
     width: 136px;
     height: 40px;
@@ -376,7 +357,6 @@ textarea:focus::placeholder {
     opacity: 1;
     transition: all 0.5s ease;
     pointer-events: none;
-
     width: 326;
     height: 74;
     opacity: 1;
@@ -387,8 +367,6 @@ textarea:focus::placeholder {
     align-items: center;
     gap: 16px;
 }
-
-
 
     .report.show {
       bottom: 800px;
@@ -424,13 +402,11 @@ textarea:focus::placeholder {
     transition:  100ms ease;
     background-color: white;
     overflow-y: scroll;
-    /* box-sizing: border-box; */
 }
 
 .availibleContactsClose{
     opacity: 0;
     height:0px;
-    /* max-height: 0px; */
     transition:  100ms ease;
     overflow-y:hidden;
 }
@@ -480,7 +456,6 @@ textarea:focus::placeholder {
     height:fit-content;
     width:440px;
     display: flex;
-    
 }
 
 .contactCircleNormal {
@@ -496,7 +471,6 @@ textarea:focus::placeholder {
     height:30px;
     color:white;
     font-size: 12px;
-    
 }
 
 .contactCircleNormalRender{
@@ -584,7 +558,6 @@ textarea:focus::placeholder {
     transition: 500ms ease-in-out;
 }
 
-
 .ForTaskChoise P{
     margin:0px;
 }
@@ -605,7 +578,6 @@ textarea:focus::placeholder {
   margin-bottom: 0;
   z-index: 2;
 }
-
 
 .dropTasktypeOpen{
     display:flex;

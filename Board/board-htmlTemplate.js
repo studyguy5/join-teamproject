@@ -107,3 +107,93 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
     `
 }
 
+// hier das ganze HTML vom Board reingeben
+
+function renderTaskintoBoard(element) {
+    let taskOption = 'türkis';
+    if (element.taskType === 'User Story') {
+        taskOption = 'darkblue';
+    }
+    return `<div draggable="true" ondragstart="startDragging(${element['id']})" 
+    id="TaskDiv-${element.id}" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderEditAndDeleteButton(${element.id})" class="TaskDiv">
+    <div id="taskType" class="${taskOption}">${element.taskType}</div>
+    <div class="taskTitle"><p>${element.title}</p></div>
+    <div class="taskDescription"><p>${element.description}</p></div>
+    <div class="subTasks">
+    ${element.subtasks != null ? `
+    <svg role="progress subtask">
+    <rect  width="128" height="8"  class="back"/>
+    <rect  width="${element.progress}" height="8" class="fill"/>
+    </svg>
+    <p class="progressDescription">${(element.progress / 128) * (element.subtasks.length)}/${(element.subtasks.length)} Subtasks </p>` : ''}
+    </div>
+    <div id="contacts-Priority-Container" class="contacts-Priority-Container" >
+    <div id="${element.id}" class="contactsMiniView"></div>
+    <div class="taskPriority">${element.prio == 'Urgent' ?
+            `<img src="/img/icons/urgent.svg">` :
+            element.prio == 'Medium' ?
+                `<img src="/img/icons/medium.svg">` :
+                element.prio == 'Low' ?
+                    `<img src="/img/icons/low.svg">` : ''}</div>
+        </div>
+        <div></div>
+        </div>`
+}
+
+function renderBigViewHTML(elements, id){
+  return `
+    <div class="bigViewHeadlineCloseArea" id="bigViewHeadlineCloseArea">
+    <div class="${taskOption}">${elements[1].taskType}</div>
+    <div class="closeIcon" id="closeIcon"><img onclick="closeBigView()" src="/img/icons/closeFrame.svg" alt="closeButton"></div>
+    </div>
+    <div class="titleBigView"><h2>${elements[1].title}</h2></div>
+    <div class="descriptionBigView"><p>${elements[1].description}</p></div>
+    <div class="dueDateBigView"> <p>Due Date:</p> ${elements[1]["DueDate"]}</div>
+    <div class="priorityBigView"><p>Priority:</p>${elements[1].prio == 'Urgent' ?
+            `${elements[1].prio}<img src="/img/icons/urgent.svg">` :
+            elements[1].prio == 'Medium' ?
+                `${elements[1].prio}<img src="/img/icons/medium.svg">` :
+                elements[1].prio == 'Low' ?
+                    `${elements[1].prio}<img src="/img/icons/low.svg">` : ''}
+            </div>
+     <div class="assignedToBigView"><p>Assigned To:</p> 
+     <div id="contactsBV" class="contactsBV"></div>
+     </div>
+     
+     <div class="subtaskBigView"><p>${elements[1].subtasks != null ? `Subtasks` : ''}</p>
+     <div id="subTaskForBigView" class="subTaskForBigView"> 
+     <div id="subtaskBigView1" class="subtaskImgDiv">  ${elements[1]?.subtasks?.[0] != null ? elements[1]?.subtasks?.[0].status === 'open' ?
+            `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` :
+            `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckedContact.svg">` : ''}
+        <p>${elements[1]?.subtasks?.[0] != null ? elements[1].subtasks?.[0].value : ''}</p></div></br>
+        <div  class="subtaskImgDiv"> ${elements[1]?.subtasks?.[1] != null ? elements[1]?.subtasks?.[0].status === 'open' ?
+            `<img id="subtaskBigViewImg2" class="checkboxS1" onclick="confirmSubtask2(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` :
+            `<img id="subtaskBigViewImg2" class="checkboxS2" onclick="confirmSubtask2(${id}); checkDone(${elements, id})"src="/img/icons/normalCheckedContact.svg">` : ''}
+            <p>${elements[1]?.subtasks?.[1] != null ? elements[1].subtasks?.[1].value : ''}</p></div>
+            </div>
+            </div>
+            <div class="editeDeleteArea" id="editeDeleteArea"></div>`
+};
+
+function renderContactHTMLForBigView(rightContacts, BVindex, short){
+  return `
+        <div class="singleContactBoxForBigView">
+        <div id="contactCirclePopupRender-${BVindex}" class="contactCircleBigView">${short[BVindex][0] + short[BVindex][1]}</div>
+        <div id="singleContactInBigView-${BVindex}" > ${rightContacts[1].assignedTo[BVindex]}</div>
+        </div>`
+}
+
+function renderHTMLForEditandDeleteButton(id){
+  return `<div class="editAndDeleteButton">
+    <div onclick="deleteTaskFromBoard(${id})" class="deleteField">
+    <img class="deleteImg" src="/img/icons/delete-symbol.svg">
+    <h4>Delete</h4>
+    </div>
+    <hr class="lineToSeperate">
+    <div onclick="activateEditModus(${id})" class="editField">
+    <img class="editImg" src="/img/icons/edit-symbol.svg">
+    <h4>Edit</h4>
+    </div>
+    </div>`
+}
+

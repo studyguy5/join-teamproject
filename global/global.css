@@ -33,7 +33,6 @@ body {
     width: 100%;
     max-width: 100%;
     height: 96px;
-
 }
 
 
@@ -47,7 +46,6 @@ body {
     max-width: 1440px;
     height: 96px;
     background-color: #FFFFFF;
-
     box-shadow: 0px 4px 4px 0px rgb(0, 0, 0, 0.1);
 }
 
@@ -117,28 +115,14 @@ body {
     animation: slideIn 0.5s ease-in forwards;
 }
 
-@keyframes slideIn {
-
-    
+@keyframes slideIn {   
     from {
         opacity: 0;
     }
-
     to {
         opacity: 1;
     }
 }
-
-
-from {
-    opacity: 1;
-}
-
-to {
-    opacity: 0;
-}
-
-
 
 .profileMenu a {
     color: white;
@@ -163,8 +147,7 @@ to {
     height: 100vh;
     max-width: 1440px;
     margin: 0 auto;
-    /* background-color: #f5f3f3; */
-}
+    }
 
 .join-logo-desktop {
     cursor: pointer;
@@ -176,14 +159,12 @@ to {
 }
 
 nav {
-
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 15px;
     background: #2a3647;
     width: 232px;
-    /* overflow: hidden; */
     position: relative;
     top: -96px;
     z-index: 0;
@@ -214,14 +195,9 @@ nav {
     display: flex;
     align-items: center;
     gap: 8px;
-    /* width: 100%; */
     padding: 8px 0px 8px 53px;
     cursor: pointer;
-
-
 }
-
-
 
 .nav-elements>li>a>img {
     width: 30px;
@@ -248,7 +224,6 @@ nav {
 }
 
 .privacy-legal-section a {
-
     cursor: pointer;
     color: rgb(168, 168, 168, 1);
     text-decoration: none;
@@ -269,12 +244,10 @@ nav {
     vertical-align: right;
     font-size: 16px;
     width:110px;
-    /* width: 115px; */
     height: 35px;
     opacity: 1;
     padding: 8px;
     gap: 8px;
-
 }
 
 
@@ -288,7 +261,6 @@ nav {
     line-height: 120%;
     letter-spacing: 0%;
     vertical-align: middle;
-
 }
 
 .privacy-legal-section h4:hover {
@@ -300,7 +272,6 @@ nav {
     letter-spacing: 0%;
     vertical-align: middle;
     text-align: left;
-
 }
 
 

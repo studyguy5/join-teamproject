@@ -10,9 +10,7 @@
     background: rgba(255, 255, 255, 1);
     border-radius: 30px;
     padding: 48px 30px 48px 40px;
-
 }
-
 
 .editBigView {
     max-width: 455px;
@@ -25,55 +23,49 @@
     display: flex;
     flex-direction: column;
     background: white;
-    /* overflow-y: scroll; */
     width: calc(100% + 10px);
-  overflow-y: auto;
-  padding-right: 10px;
+    overflow-y: auto;
+    padding-right: 10px;
     overflow-x: hidden;
-    
 }
 
 .editViewHeader {
     width: 100%;
     max-width: 445px;
-    
-    min-height:56px;
+    min-height: 56px;
     display: flex;
     justify-content: end;
-    position:sticky;
-    top:0px;
-    /* margin-bottom: 24px; */
+    position: sticky;
+    top: 0px;
     background-color: white;
 }
 
-.editViewHeader img{
+.editViewHeader img {
     cursor: pointer;
     padding: 4px;
     height: fit-content;
 }
-.editViewHeader img:hover{
+
+.editViewHeader img:hover {
     background-color: rgb(238, 238, 238);
     border-radius: 50px;
 }
 
 .editView-mainInput {
     align-items: center;
-
 }
 
 .input-section-leftEditView {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* margin-left: 74px; */
     width: 445px;
     height: 376px;
 }
 
-.input-section-leftEditView label{
+.input-section-leftEditView label {
     margin-bottom: 8px;
 }
-
 
 .input-section-left-inputEditView {
     border: 1px solid #c8c8c8;
@@ -110,15 +102,13 @@
     margin-bottom: 40px;
 }
 
-
 .input-section-right-EditView {
     max-width: 445px;
-    width:110%;
+    width: 110%;
     font-size: 20px;
 }
 
-.input-section-right-EditView button{
-
+.input-section-right-EditView button {
     margin-bottom: 24px;
 }
 
@@ -167,15 +157,8 @@
     filter: brightness(0) invert(1);
 }
 
-/* .priority-sectoinEditView{
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 24px;
-} */
-
-.section-right-selectEditView{
-    max-width:525px;
+.section-right-selectEditView {
+    max-width: 525px;
     border-radius: 10px;
     border: 1px solid #c8c8c8;
     padding: 12px 16px;
@@ -184,121 +167,115 @@
     z-index: 1;
     display: flex;
     justify-content: space-between;
-    position:relative;
+    position: relative;
     cursor: pointer;
 }
 
-.taskChoiseEdit{
-    margin-top:24px;
+.taskChoiseEdit {
+    margin-top: 24px;
     margin-bottom: 8px;
 }
-
 /* für Kontakte ab hier */
 
-.assignedToEdit{
-    margin-top:24px;
+.assignedToEdit {
+    margin-top: 24px;
     margin-bottom: 8px;
 }
 
-
-.availibleContactsOpenEdit{
-    
-    position:relative;
+.availibleContactsOpenEdit {
+    position: relative;
     margin-top: -8px;
     padding-top: 8px;
     opacity: 1;
-    max-height:288px;
-    min-height:288px;
-    transition:  100ms ease;
+    max-height: 288px;
+    min-height: 288px;
+    transition: 100ms ease;
     background-color: white;
     overflow-y: scroll;
     transition: 500ms ease-in-out;
 }
 
-.availibleContactsCloseEdit{
+.availibleContactsCloseEdit {
     opacity: 0;
-    height:0px;
-    /* max-height: 0px; */
-    transition:  100ms ease;
+    height: 0px;
+    transition: 100ms ease;
     overflow: hidden;
 }
 
-
-
-.contactBox{
+.contactBox {
     display: flex;
     height: 56px;
     border-radius: 10px;
     align-items: center;
-    position:relative;
+    position: relative;
 }
 
-.checkboxEdit{
-    margin-left:220px;
-    position:absolute;
-    right:20px;
+.checkboxEdit {
+    margin-left: 220px;
+    position: absolute;
+    right: 20px;
 }
 
-.checkedEdit{
-    margin-left:220px;
-    position:absolute;
-    right:20px;
+.checkedEdit {
+    margin-left: 220px;
+    position: absolute;
+    right: 20px;
     content: url(/img/icons/checkedContactWhite.svg);
 }
-.checkedEdit:hover{
+
+.checkedEdit:hover {
     background-image: url(/img/icons/hoverCheckedContact.svg);
 }
-.checkboxEdit:hover{
+
+.checkboxEdit:hover {
     background-image: url(/img/icons/hoverCheckContact.svg);
 }
 
-.contactBox:hover{
+.contactBox:hover {
     background-color: rgba(238, 238, 238, 1);
     cursor: pointer;
 }
 
 .contactBox:hover:has(.checkedEdit) {
-    background-color: rgba(42, 54, 71, 1);   
+    background-color: rgba(42, 54, 71, 1);
 }
 
 .contactBox:has(.checkedEdit) {
-   background-color: rgba(9, 25, 49, 1);
-    color:white;
+    background-color: rgba(9, 25, 49, 1);
+    color: white;
 }
 
-.choosenContactsEdit{
-    height:30px;
-    width:440px;
+.choosenContactsEdit {
+    height: 30px;
+    width: 440px;
     display: flex;
-    
 }
 
 .contactCirclePopup {
-    margin-right:16px;
-    margin-left:16px;
+    margin-right: 16px;
+    margin-left: 16px;
     align-content: center;
     text-align: center;
     position: relative;
     display: inline-block;
     border: 1px solid rgb(255, 255, 255, 1);
     border-radius: 45px;
-    width:32px;
-    height:32px;
-    color:white;
+    width: 32px;
+    height: 32px;
+    color: white;
     font-size: 12px;
-    
 }
 
-.contactCirclePopupRender{
-    display:flex;
+.contactCirclePopupRender {
+    display: flex;
     align-items: center;
     justify-content: center;
-    margin-top:8px;
+    margin-top: 8px;
     border: 1px solid rgb(255, 255, 255, 1);
     border-radius: 45px;
-    width:40px;
-    height:40px;
-    color:white;
+    width: 40px;
+    height: 40px;
+    color: white;
     font-size: 12px;
 }
 
@@ -311,15 +288,15 @@
 }
 
 .contactBox:nth-child(3) .contactCirclePopup {
-    background-color:rgba(252, 113, 255, 1);
+    background-color: rgba(252, 113, 255, 1);
 }
 
 .contactBox:nth-child(4) .contactCirclePopup {
-    background-color:rgba(195, 255, 43, 1);
+    background-color: rgba(195, 255, 43, 1);
 }
 
 .contactBox:nth-child(5) .contactCirclePopup {
-    background-color:rgba(255, 187, 43, 1);
+    background-color: rgba(255, 187, 43, 1);
 }
 
 .contactBox:nth-child(6) .contactCirclePopup {
@@ -335,27 +312,27 @@
 }
 
 .contactCirclePopupRender:nth-child(3) {
-  background-color:rgba(252, 113, 255, 1);
+    background-color: rgba(252, 113, 255, 1);
 }
 
 .contactCirclePopupRender:nth-child(4) {
-    background-color:rgba(195, 255, 43, 1);
+    background-color: rgba(195, 255, 43, 1);
 }
 
 .contactCirclePopupRender:nth-child(5) {
-    background-color:rgba(255, 187, 43, 1);
+    background-color: rgba(255, 187, 43, 1);
 }
 
 .contactCirclePopupRender:nth-child(6) {
     background-color: rgb(255, 0, 0);
 }
 
-.subtaskEdit{
-    margin-top:24px;
+.subtaskEdit {
+    margin-top: 24px;
     margin-bottom: 8px;
 }
 
-.section-right-selectEditView p{
+.section-right-selectEditView p {
     margin: 0px;
     padding: 0px;
 }
@@ -365,195 +342,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width:100%;
-    max-width:525px;
-}
-
-/* breite für subtaskinput hier */
-.inputPopupEditView {
     width: 100%;
-    max-width: 411px;       
-    border-radius: 10px;
-    border: 1px solid #c8c8c8;
-    padding: 12px 16px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 20px;
+    max-width: 525px;
 }
-
-.inputPopupEditView:focus {
-    border-color: #29ABE2;
-    outline: none;
-}
-
-.dropTasktypeOpenEdit{
-    display:flex;
-    flex-direction: column;
-    justify-content: start;
-    border-radius: 10px;
-    border-left:0.5px solid rgb(160, 154, 154, 0.1);
-    border-right:0.5px solid rgb(160, 154, 154, 0.1);
-    border-bottom: 0.5px solid rgb(160, 154, 154, 0.1);
-    box-shadow: 0px 0px 14px 3px rgb(0, 0, 0, 0.04);
-    width: 518px;
-    height: 105px;
-    padding-top:8px;
-    position:relative;
-    top: -8px;
-    background-color: white;
-    opacity: 1;
-    /* margin-top:-16px; */
-}
-
-.dropTasktypeCloseEdit{
-    max-height:0px;
-    opacity: 0;
-    transition: max-height 100ms ease-out, opacity 100ms ease-out;
-}
-
-.taskOptionEdit{
-    z-index: 3;
-    padding-top: 16px;
-    /* padding-left:20px; */
-    width:445px;
-    height:48px;
-    
-}
-
-.taskOptionEdit:hover{
-    background-color: rgb(194, 194, 194);
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.taskOptionEdit img:hover{
-    content: url(/img/icons/select-arrow-downHover.svg);
-}
-
-.select-arrow-downCEdit{
-    transform: rotateX(0deg);
-    transition: 500ms ease-in-out;
-}
-
-.select-arrow-downTEdit{
-    transform: rotateX(0deg);
-    transition: 500ms ease-in-out;
-}
-
-.select-arrow-openEdit{
-    transform:rotateX(180deg);
-    transition: 500ms ease-in-out;
-}
-
-/* for subtask */
-
-.subtask-listEdit {
-    padding: 12px 21px;
-    display: flex;
-}
-
-.subtask-iconEdit {
-    position: absolute;
-    right: 12px;
-    top: 12px;
-    align-items: center;
-    align-self: end;
-    gap: 4px;
-    display: none;
-}
-
-.subtask-wrapperEditView input:focus +.subtask-iconEdit {
-    display: flex !important;
-}
-
-
-.xEdit:hover,
-.hookEdit:hover {
-    cursor: pointer;
-    background: #D1D1D1;
-    border-radius: 56px;
-}
-
-.delimiterEdit {
-    width: 0px;
-    height: 20px;
-    border: 1px solid #D1D1D1;
-}
-
-.ul-divEdit {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    padding-left: 0;
-    margin: 0;
-    list-style: none;
-
-}
-
-.listedEdit {
-    margin-top: 8px;
-    display: flex;
-    padding: 6px 16px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #000000;
-    align-items: center;
-    height: 24px;
-}
-
-.listedEdit:hover {
-    cursor: pointer;
-    background: #e6e6e6;
-    border-radius: 10px;
-
-    .list-icon {
-        display: flex !important;
-    }
-}
-
-.dot {
-    margin-right: 16px;
-}
-
-.list-icon {
-    display: flex;
-    position: absolute;
-    right: 12px;
-    gap: 4px;
-    display: none;
-}
-
-.pencil,
-.trash {
-    width: 20px;
-    height: 20px;
-}
-
-.edit-input {
-    height: 10px;
-    border: none;
-    outline: none;
-    border-radius: 0;
-
-    display: block;
-    width: calc(100% - 2px);
-    margin-left: -16px;
-    margin-right: -16px;
-}
-
-.edit-input:focus {
-    border-bottom: 1px solid #29ABE2;
-}
-
-
 /* für footer Area ab hier */
 
 .footerPopupEditView {
     width: 100%;
     max-width: 445px;
-    position:sticky;
-    bottom:0px;
-    min-height:64px;
+    position: sticky;
+    bottom: 0px;
+    min-height: 64px;
     display: flex;
     align-items: end;
     justify-content: end;
@@ -566,10 +365,9 @@
 
 .footer-leftPopup {
     display: flex;
-    max-width:170px;
-    width:100%;
+    max-width: 170px;
+    width: 100%;
 }
-
 
 .footer-buttons-sectionEditView {
     display: flex;
@@ -597,7 +395,7 @@
     background-color: #29ABE2;
 }
 
-.checkEditView{
-    width:24px;
-    height:24px;
+.checkEditView {
+    width: 24px;
+    height: 24px;
 }

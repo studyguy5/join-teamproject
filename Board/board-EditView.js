@@ -42,7 +42,6 @@ function arraySorting(array) {
 
 function prioButtonactivate(id) {
     const buttonsEdit = document.querySelectorAll(".priority-sectionEdit button");
-    console.log(buttonsEdit);
     let rightTask = tasks.find(r => r[1].id === id);
     let thisprio = rightTask[1].prio;
     buttonsEdit.forEach((button) => {
@@ -56,7 +55,6 @@ function prioButtonactivate(id) {
                 buttonsEdit.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
                 const priority = button.dataset.priority;
                 button.classList.add(priority);
-                console.log(priority)
                 prioArray = [];
                 prioArray.push(priority);
             });
@@ -65,7 +63,6 @@ function prioButtonactivate(id) {
 }
 
 function closeEditView() {
-    console.log('ruft auf')
     const popup = document.getElementById('bigViewOfTask');
     popup.classList.add("dont-Show");
     first = true;
@@ -94,15 +91,12 @@ function createTaskTemplateEdit(id) {
 
 function setContactAndPrioValueEdit(taskToEdit) {
     let checkedImg = document.querySelectorAll('#IdForContactsEdit img.checkedEdit')
-    console.log(checkedImg);
     checkedImg.forEach(img => {
         names = img.dataset.set;
         let id = img.id;
         taskToEdit[1].cid.push(id);
-        console.log(id);
         taskToEdit[1].assignedTo.push(names)
     })
-    console.log(taskToEdit[1].assignedTo);
     taskToEdit[1].prio = prioArray[0];
 }
 
@@ -193,7 +187,6 @@ async function getTaskInformationEdit(id) {
     taskToEdit[1].assignedTo = [];
     taskToEdit[1].cid = [];
     taskToEdit[1].subtasks = [];
-    console.log(taskToEdit[1]);
     for (let valueIndex = 0; valueIndex < editInputId.length; valueIndex++) { //Arrays überarbeiten
         taskToEdit[1][existingObjects[valueIndex]] = document.getElementById(`${editInputId[valueIndex]}`).value
     };
@@ -201,7 +194,6 @@ async function getTaskInformationEdit(id) {
     getSubtaskFromTemplateEdit(taskToEdit);
     pushSubtaskIntoArray(taskToEdit, subtaskvalue1, subtaskvalue2);
     await postData("task", taskToEdit[1]);
-    console.log(taskToEdit[1]);
     tasks = [];
     tasks.push(...Object.entries(await getData('task')));
     filterAndShowTasksEdit();
@@ -209,7 +201,6 @@ async function getTaskInformationEdit(id) {
 };
 
 async function filterAndShowTasksEdit() {
-    console.log(tasks)
     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
         document.getElementById(`${categorys[idIndex]}`).innerHTML = '';
         let filteredTasks = tasks.filter(f => f[1].category == categorys[idIndex]);
@@ -263,24 +254,15 @@ function showInputFilter() {
 
 
 function showContactsEdit(id) {
-    console.log('arbeitet auch im edit')
     const thisT = tasks.find(task => task[1].id === id);
     let contacts = document.getElementById('IdForContactsEdit')
-    console.log(contacts);
     let result = thisT[1]?.cid
     let onlyNumber = result?.map(id => {
         return parseInt(id.split('-')[1]);
     });
-
     contacts.innerHTML = "";
     for (let index = 1; index < contactsArray.length; index++) {
-        contacts.innerHTML += `<div class="contactBox">
-        <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
-        <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
-        <img  id="checkboxImgEdit-${index}" onclick="chooseContactEdit(${id}, ${index})" 
-        class="${onlyNumber?.includes(index) ? 'checkedEdit' : 'checkboxEdit'}" data-set="${contactsArray[index].name}"
-         src="/img/icons/normalCheckContact.svg">
-        </div>`
+        contacts.innerHTML += renderContactsInEdit(id, contactsArray, index, onlyNumber); 
     }
 }
 
@@ -293,9 +275,8 @@ function filterContactsInPopupEdit(id) {
         r = val.slice(1)
         filteredContactsEdit = r.filter(fn => { return fn.name.toLowerCase().includes(typedValue.toLowerCase()) })
         renderfilteredContactsInPopupEdit(id, filteredContactsEdit);
-        //    console.log(filteredContacts);
     } else if (typedValue.length < 1) {
-        showContactsEdit();
+        showContactsEdit(id);
     }
 }
 
@@ -304,13 +285,7 @@ function renderfilteredContactsInPopupEdit(id, filteredContactsEdit) {
     let filtContactInPopupEdit = document.getElementById('IdForContactsEdit')
     filtContactInPopupEdit.innerHTML = "";
     for (let filterContactIndex = 0; filterContactIndex < filteredContactsEdit.length; filterContactIndex++) {
-        filtContactInPopupEdit.innerHTML += `
-        <div  class="contactBox">
-        <div class="contactCirclePopup">${filteredContactsEdit[filterContactIndex].firstLetter + filteredContactsEdit[filterContactIndex].secondFirstLetter}</div>
-        <span for="contactName" class="contactName"> ${filteredContactsEdit[filterContactIndex].name}</span> 
-        <img  id="checkboxImgEdit-${filterContactIndex}" onclick="chooseFilteredContactEdit(${id}, ${filterContactIndex})" class="checkboxEdit" data-set="${filteredContactsEdit[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
-        </div>
-        `}
+        filtContactInPopupEdit.innerHTML += renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterContactIndex); }
 }
 
 function chooseFilteredContactEdit(id, filterContactIndex) {
@@ -331,7 +306,6 @@ function chooseFilteredContactEdit(id, filterContactIndex) {
 
 function renderFilteredChoosenContact(id, filterContactIndex) {
     let listContact = document.getElementById('choosenContactsEdit')
-    // forschleife und if-statement einbauen - noch nicht fertig =============
     const filteredRightTask = tasks.find(task => task[1].id === id);
     if (filterContactIndex && filteredRightTask[1].assignedTo.length < 5) {
         const contFilterList = filteredContactsEdit[filterContactIndex]
@@ -342,16 +316,13 @@ function renderFilteredChoosenContact(id, filterContactIndex) {
             listContact.innerHTML += `
         <div id="contactCirclePopupRender-${id}" class="contactCirclePopupRender">${thisFilteredTask[filterIndex][0] + thisFilteredTask[filterIndex][1]}</div>
         `}
-
     } else if (filterContactIndex && filteredRightTask[1].assignedTo.length >= 5) {
         listContact.innerHTML += `<h6>max of length reached</h6>`
     } else if (filteredRightTask[1].assignedTo.length < 5) {
         for (let filterIndex = 0; filterIndex < filteredRightTask[1].assignedTo?.length; filterIndex++) {
-
             thisFilteredTask = filteredRightTask[1].assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
             listContact.innerHTML += `
-    <div id="contactCirclePopupRender-${id}" class="contactCirclePopupRender">${thisFilteredTask[filterIndex][0] + thisFilteredTask[filterIndex][1]}</div>
-    `;
+    <div id="contactCirclePopupRender-${id}" class="contactCirclePopupRender">${thisFilteredTask[filterIndex][0] + thisFilteredTask[filterIndex][1]}</div>`;
         }
     }
 }
@@ -374,7 +345,6 @@ function chooseContactEdit(id, index) {
 }
 
 
-
 let thisTask;
 function renderChoosenContactEdit(id, index) {
     let Choosen = document.getElementById('choosenContactsEdit')
@@ -395,7 +365,6 @@ function renderChoosenContactEdit(id, index) {
     } else if (RightTask[1].assignedTo?.length < 5) {
         for (let preIndex = 0; preIndex < RightTask[1].assignedTo?.length; preIndex++) {
             let num = parseInt(RightTask[1].cid[preIndex].split('-')[1]);
-
             thisTask = RightTask[1].assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
             Choosen.innerHTML += `
     <div id="contactCirclePopupRender-${num}" class="contactCirclePopupRender">${thisTask[preIndex][0] + thisTask[preIndex][1]}</div>`;
@@ -406,96 +375,13 @@ function renderChoosenContactEdit(id, index) {
 
 function deleteRenderedContactEdit(index) {
     let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
-    if (renderedContact)
-        renderedContact.remove();
+    if (renderedContact) renderedContact.remove();
     renderedContact.innerHTML = '';
 }
 
 
 function deleteRenderedFilteredContactEdit(filterIndex) {
     let renderedContactFilter = document.getElementById(`contactCirclePopupRender-${filterIndex}`)
-    if (renderedContactFilter)
-        renderedContactFilter.remove();
+    if (renderedContactFilter) renderedContactFilter.remove();
     renderedContactFilter.innerHTML = '';
-}
-
-// ======== ab hier funktionen für das Rendern von Subtask im Edit-View =====//
-
-
-function renderSubtaskEdit() {
-    console.log('rendert')
-    let subtask = document.getElementById("subtaskEdit"); // der standard input
-    let list = document.getElementById("subtaskEdit-list-1"); // das zusätzliche <ul> element
-    let currentCount = list.getElementsByClassName("listedEdit").length; //klasse von li element
-    index = currentCount;
-    if (currentCount < 2 && subtask.value.trim() === "") {
-        list.innerHTML += `<li onclick="editBulletpointEditView(${index})" id="listed-${index}" class="listedEdit"> 
-        <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
-        <span class="list-icon">
-                                    <img onmousedown="editBulletpointEditView(${index})" class="pencil" src="/img/icons/pencil-edit.svg">
-                                    <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
-                                    <img onmousedown="deleteBulletpointEdit(${index})" class="trash" src="/img/icons/trash.svg">
-                                    </span>
-                                    </li>`;
-        subtask.value = "";
-    } else if (currentCount < 2 && subtask.value.trim() !== "") {
-        list.innerHTML += `<li onclick="editBulletpointEditView(${index})" id="listed-${index}" class="listedEdit"> 
-        <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
-        <span class="list-icon">
-                                    <img onmousedown="editBulletpointEditView(${index})" class="pencil" src="/img/icons/pencil-edit.svg">
-                                    <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
-                                    <img onmousedown="deleteBulletpointEdit(${index})" class="trash" src="/img/icons/trash.svg">
-                                    </span>
-                                    </li>`;
-        subtask.value = "";
-    }
-}
-
-
-// leere das subtask input Feld
-function clearSubtaskEdit() {
-    document.getElementById("subtask").value = "";
-}
-
-// lösche gerenderten Bulletpoint
-function deleteBulletpointEdit(index) {
-    let el = document.getElementById(`listed-${index}`);
-    if (el) el.remove();
-}
-
-// bearbeite gerenderten Bulletpoint
-function editBulletpointEditView(index) {
-    const li = document.getElementById(`listed-${index}`);
-    const textEl = document.getElementById(`task-text-${index}`);
-    const inputEl = document.getElementById(`edit-input-${index}`);
-    if (inputEl) {
-        inputEl.focus();
-        return;
-    }
-    const currentText = textEl ? textEl.textContent : ""; // fallback, falls kein <p> existiert
-    li.innerHTML = `
-    <input class="edit-input" type="text" id="edit-input-${index}" value="${currentText}">
-    <span class="list-icon">
-    <img onmousedown="deleteBulletpointEdit(${index})" class="trash" src="/img/icons/trash.svg">
-    <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
-    <img onmousedown="saveBulletpointEdit(${index})" class="hook" src="/img/icons/subtasks-icon.svg">
-        </span>`;
-    document.getElementById(`edit-input-${index}`).focus();
-}
-
-
-
-function saveBulletpointEdit(index) {
-    const input = document.getElementById(`edit-input-${index}`);
-    const newValue = input.value.trim();
-    if (newValue !== "") {
-        const li = document.getElementById(`listed-${index}`);
-        li.innerHTML = `<span class="dot">•</span><p id="task-text-${index}">${newValue}</p>
-        <span class="list-icon">
-        <img onmousedown="clearSubtask()" class="pencil" src="/img/icons/pencil-edit.svg">
-        <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
-        <img onmousedown="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
-        </span>`;
-        li.setAttribute("onclick", `editBulletpointEditView(${index})`);
-    }
 }

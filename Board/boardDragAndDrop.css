@@ -357,8 +357,6 @@
     width: 100%;
 }
 
-
-
 .contactsCircle {
     align-content: center;
     text-align: center;
@@ -370,9 +368,6 @@
     width: 30px;
     height: 30px;
 }
-
-
-
 
 .contactsCircle:first-child {
     margin-left: 0px;

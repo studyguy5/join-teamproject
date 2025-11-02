@@ -10,7 +10,6 @@
     opacity: 1;
     transition: all 0.5s ease;
     pointer-events: none;
-
     width: 326;
     height: 74;
     opacity: 1;
@@ -293,9 +292,6 @@
     outline: none;
 }
 
-
-
-
 .input-section-left label {
     font-size: 18px;
     margin-top: 18px;
@@ -309,16 +305,11 @@
     width: 2px;
 }
 
-
-
 .input-section-right label {
     font-size: 18px;
     margin-top: 18px;
     margin-bottom: 4px;
 }
-
-
-
 
 .priority-section {
     display: flex;
@@ -379,7 +370,6 @@
 .availibleContactsClose{
     opacity: 0;
     height:0px;
-    /* max-height: 0px; */
     transition:  100ms ease;
     overflow: hidden;
 }
@@ -406,9 +396,11 @@
     right:20px;
     content: url(/img/icons/checkedContactWhite.svg);
 }
+
 .checked:hover{
     background-image: url(/img/icons/hoverCheckedContact.svg);
 }
+
 .checkbox:hover{
     background-image: url(/img/icons/hoverCheckContact.svg);
 }
@@ -430,8 +422,7 @@
 .choosenContacts{
     height:30px;
     width:440px;
-    display: flex;
-    
+    display: flex;    
 }
 
 .contactCirclePopup {
@@ -447,7 +438,6 @@
     height:30px;
     color:white;
     font-size: 12px;
-    
 }
 
 .contactCirclePopupRender{
@@ -510,7 +500,6 @@
     background-color: rgb(255, 0, 0);
 }
 
-
 /* abschnitt für subtask optionen */
 .subtask-wrapper {
     position: relative;
@@ -559,7 +548,6 @@
     padding-left: 0;
     margin: 0;
     list-style: none;
-
 }
 
 .listed {
@@ -577,7 +565,6 @@
     cursor: pointer;
     background: #e6e6e6;
     border-radius: 10px;
-
     .list-icon {
         display: flex !important;
     }
@@ -606,7 +593,6 @@
     border: none;
     outline: none;
     border-radius: 0;
-
     display: block;
     width: calc(100% - 2px);
     margin-left: -16px;
@@ -622,14 +608,12 @@
     gap: 537.75px;
     width: 100%;
     max-width: 976.25px;
-    /* padding: 110px 65,75px 64px 74px; */
     margin-bottom: 64px;
     margin-left: 74px;
     margin-right: 65.75px;
     margin-top: 176px;
     display: flex;
     align-items: center;
-
 }
 
 .footer p {

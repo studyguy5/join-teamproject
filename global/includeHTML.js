@@ -2,8 +2,6 @@
 
 let links = ['summary', 'add-task', 'board', 'contacts'];
 
-
-
 function init() {
     includeNavLinks();
     includePrivacyLinks();
@@ -27,16 +25,15 @@ function includeNavLinks() {
 }
 
 
-
 function includePrivacyLinks() {
     let include = document.getElementById('nav-container')
     include.innerHTML += `
     <section class="privacy-legal-section">
                 <a href="/privacy-policy/privacy-policy.html"><h4>Privacy Policy</h4></a>
                 <a href="/legal-Notice/legal-notice.html"><h4>Legal notice</h4></a>
-            </section>
-    `
+            </section>`
 }
+
 
 // muss noch aufgerufen werden
 function renderUserInitials() {
@@ -64,19 +61,3 @@ function openMenu() {
     }
 
 }
-
-// function setActive(links, i) {
-//     console.log('active Funktion arbeitet', links)
-//     let active = document.getElementById(`'${links[i]}'`)
-    
-//     active.classList.add('active')
-    
-// };
-
-// document.addEventListener('DOMContentLoaded', async () => {
- 
-//     sectionCheck('contacts')
-
-// function sectionCheck(idsecTrue) {
-//     document.getElementById(idsecTrue).classList.add('active')
-// }}

@@ -26,6 +26,7 @@ async function postData(path = '', data = {}) {
     return responseToJson.name
 }
 
+
 async function putData(path = '', data = {}) {
     let response = await fetch(BASe_URL + path + ".json", {
         method: "PUT",
@@ -36,6 +37,7 @@ async function putData(path = '', data = {}) {
     })
     return responseToJson = await response.json();
 }
+
 
 async function patchData(path = '', data = {}) {
     const response = await fetch(BASe_URL + path + ".json", {
@@ -57,11 +59,13 @@ async function getData(path = '') {
 
 }
 
+
 async function sendAlltoFirebase(contactsArray, path = 'contact') {
     for (let index = 0; index < contactsArray.length; index++) {
         await postData(path = path, data = array[index])
     }
 }
+
 
 let choosenCategory;
 let rightColumn = document.querySelectorAll('.categorys > div img').forEach(el => {
@@ -91,17 +95,20 @@ function createTemplate() {
     }
 }
 
+
 function pushObject(subtaskvalue1, subtaskvalue2) {
     if (subtaskvalue1) {
-        let subTaskObject1 = {"value":`${subtaskvalue1}`,'status': 'open'};
+        let subTaskObject1 = { "value": `${subtaskvalue1}`, 'status': 'open' };
         subtaskArray.push(subTaskObject1)
     }
     if (subtaskvalue2) {
         let subTaskObject2 = {
-            "value":`${subtaskvalue2}`,'status': 'open'};
+            "value": `${subtaskvalue2}`, 'status': 'open'
+        };
         subtaskArray.push(subTaskObject2);
     }
 }
+
 
 function getSubtaskFromTemplate() {
     if (document.getElementById(`task-text-${index0}`)) {
@@ -111,6 +118,7 @@ function getSubtaskFromTemplate() {
         subtaskvalue2 = document.getElementById(`task-text-${index1}`).innerHTML
     }
 }
+
 
 function setContactAndPrioValue(newTask) {
     let checkedImg = document.querySelectorAll('#IdForContacts img.checked')
@@ -123,8 +131,6 @@ function setContactAndPrioValue(newTask) {
     })
     newTask.prio = prioArray[0];
 }
-
-
 
 
 async function getTaskInformation(index) {
@@ -170,11 +176,12 @@ async function filterAndShowTasks() {
     }
 }
 
+
 let progress;
 let TaskDone;
 
 Taskavailable = document.querySelectorAll('.subTaskForBigView > subtaskImgDiv img')
-console.log(Taskavailable);
+
 
 function checkDone(id) {
     let sort = tasks.filter(tasks => tasks[1].id === id);
@@ -184,8 +191,6 @@ function checkDone(id) {
     putData(`task/${firebaseIde}/progress`, `${sort[0][1].progress}`)
     filterAndShowTasks(id);
 }
-
-
 
 
 function bigViewOfTask(id) {
@@ -198,12 +203,14 @@ function bigViewOfTask(id) {
     let connectionToTaskWindow = document.getElementById('bigViewOfTask')
     connectionToTaskWindow.classList.remove('dont-Show')
     connectionToTaskWindow.innerHTML = renderBigViewHTML(elements, id);
-} 
+}
+
 
 function renderEditAndDeleteButton(id) {
     let editandDelete = document.getElementById('editeDeleteArea')
-    editandDelete.innerHTML = renderHTMLForEditandDeleteButton(id); 
+    editandDelete.innerHTML = renderHTMLForEditandDeleteButton(id);
 }
+
 
 function renderContactForBigView(id) {
     let rightContacts = tasks.find(task => task[1].id === id)
@@ -211,7 +218,9 @@ function renderContactForBigView(id) {
     for (let BVindex = 0; BVindex < rightContacts[1].assignedTo?.length; BVindex++) {
         let short = rightContacts[1].assignedTo.map(sh => sh.split(" ").map(c => c.charAt(0)))
         contactForBig.innerHTML += renderContactHTMLForBigView(rightContacts, BVindex, short);
-     }  }
+    }
+}
+
 
 async function deleteTaskFromBoard(id) {
     let openedTask = tasks.find(task => task[1].id === id)
@@ -225,12 +234,14 @@ async function deleteTaskFromBoard(id) {
     filterAndShowTasks();
 }
 
+
 async function deleteData(firebaseID) {
     const response = await fetch(`https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/task/${firebaseID[0]}.json`, {
         method: "DELETE",
     });
     return await response.json();
 };
+
 
 function activateEditModus(id) {
     let edit = document.getElementById('bigViewOfTask')
@@ -240,7 +251,8 @@ function activateEditModus(id) {
     prioButtonactivate(id);
 }
 
- function confirmSubtask1(id) {
+
+function confirmSubtask1(id) {
     let RT1 = tasks.find(task => task[1].id === id)
     let firebaseId = RT1[0]
     let choSubtask1 = document.getElementById(`subtaskBigViewImg1`)
@@ -257,7 +269,8 @@ function activateEditModus(id) {
     }
 }
 
- function confirmSubtask2(id) {
+
+function confirmSubtask2(id) {
     let RT2 = tasks.find(task => task[1].id === id)
     let firebaseId = RT2[0]
     let choSubtask2 = document.getElementById(`subtaskBigViewImg2`)
@@ -281,9 +294,9 @@ function renderContact(element) {
         for (let ContactIndex = 0; ContactIndex < element.assignedTo.length; ContactIndex++) {
             let slim = element.assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
             contact.innerHTML += `
-    <div id="contactscircle" class="contactsCircle">${slim[ContactIndex][0] + slim[ContactIndex][1]} </div>`} else { contact.innerHTML = '' };
+    <div id="contactscircle" class="contactsCircle">${slim[ContactIndex][0] + slim[ContactIndex][1]} </div>`
+        } else { contact.innerHTML = '' };
 }
-
 
 
 async function closeBigView() {

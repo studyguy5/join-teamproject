@@ -20,10 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     contactsArray = objectToArray(contacts)
     console.log(contactsArray);
     showContacts();
-    // renderContact();
-
-    // renderMiniContactList(arraySorting(contactsArray), targetID = 'contactList') hier logik für das rendern der Mini-Contacte einbauen
-
+    
     function sectionCheck(idsecTrue) {
         document.getElementById(idsecTrue).classList.add('active')
     }
@@ -43,7 +40,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         })
     };
 })
-
 
 
 async function getData(path = '') {
@@ -97,9 +93,7 @@ function constantCheck() {
     const taskType = document.getElementById("selectedTask").innerText;
     console.log("it check's")
     if (title !== "" && dueDate !== "" && description !== "" && taskType !== "Select Task Category") {
-
     }}, 500);
-
 }
 
 
@@ -163,12 +157,14 @@ function showReportAddedTaskTemplate() {
     }, 1000);
 }
 
+
 const BASE_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app"
 
 async function getObject(path = '') {
     let response = await fetch(BASE_URL + path + ".json")
     return responseToJson = await response.json()
 }
+
 
 function objectToArray(contacts) {
     const object = Object.entries(contacts)
@@ -182,6 +178,7 @@ function objectToArray(contacts) {
     return arrayObject;
 }
 
+
 function arraySorting(array) {
     const sortedArray = array
     sortedArray.sort((memberA, memberB) => {
@@ -189,6 +186,7 @@ function arraySorting(array) {
     })
     return sortedArray
 }
+
 
 function showContacts() {
     let contacts = document.getElementById('IdForContacts')
@@ -217,6 +215,7 @@ function filterContactsInPopup() {
     }
 }
 
+
 function renderfilteredContactsInPopup(filteredContacts){
     let filtContactInPopup =  document.getElementById('IdForContacts')
     filtContactInPopup.innerHTML = "";
@@ -228,6 +227,7 @@ function renderfilteredContactsInPopup(filteredContacts){
         <img  id="checkboxImg-${filterContactIndex}" onclick="chooseFilteredContact(${filterContactIndex})" class="checkbox" data-set="${filteredContacts[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
         </div>`}
     }
+
     
     function showInput() {
         console.log('show input')
@@ -237,6 +237,7 @@ function renderfilteredContactsInPopup(filteredContacts){
             document.getElementById('filterContacts').focus()};
     }
     
+
 function openContactView() {
     let contactDrop = document.getElementById('IdForContacts')
     if(contactDrop.classList.contains('availibleContactsClose')) {
@@ -256,6 +257,7 @@ function openContactView() {
     }
 }
 
+
 function chooseContact(index) {
     let choContact = document.getElementById(`checkboxImg-${index}`)
     if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
@@ -270,6 +272,7 @@ function chooseContact(index) {
         choContact.src = "/img/icons/normalCheckContact.svg"
     }
 }
+
 
 function chooseFilteredContact(filterContactIndex) {
     let choContact = document.getElementById(`checkboxImg-${filterContactIndex}`)
@@ -286,11 +289,13 @@ function chooseFilteredContact(filterContactIndex) {
     }
 }
 
+
 function renderChoosenContact(index) {
     let listContact = document.getElementById('choosenContacts')
     listContact.innerHTML += `
     <div id="contactCirclePopupRender-${index}" class="contactCirclePopupRender">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>`
 }
+
 
 function renderFilteredChoosenContact(filterContactIndex) {
     let listContact = document.getElementById('choosenContacts')
@@ -298,11 +303,13 @@ function renderFilteredChoosenContact(filterContactIndex) {
     <div id="contactCirclePopupRender-${filterContactIndex}" class="contactCirclePopupRender">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>`
 }
 
+
 function deleteRenderedContact(index) {
     let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
     renderedContact.remove(`contactCirclePopupRender-${index}`)
     renderedContact.innerHTML = '';
 }
+
 
 function openTasktypeDropDown() {
     let drop = document.getElementById('dropId')
@@ -315,6 +322,7 @@ function openTasktypeDropDown() {
     }
 }
 
+
 function chooseValue() {
     let choise = document.querySelectorAll('.taskOption')
     choise.forEach(b => b.addEventListener('click', () => {
@@ -324,9 +332,11 @@ function chooseValue() {
     }))
 }
 
+
 function stopBubbling(event) {
     event.stopPropagation()
 }
+
 
 function clearTask(){
     const title = document.getElementById("title").value = "";
@@ -349,6 +359,7 @@ function getStoredUserName() {
   return 'User';
 }
 
+
 function getInitials(fullName) {
   const parts = (fullName || '').trim().split(/\s+/).filter(Boolean);
   if (!parts.length) return 'US';
@@ -356,6 +367,7 @@ function getInitials(fullName) {
   const last  = parts.length > 1 ? parts[parts.length - 1][0] : (parts[0][1] || '');
   return (first + last).toUpperCase();
 }
+
 
 window.renderUserInitials = function renderUserInitials() {
   const fullName = getStoredUserName();
@@ -367,6 +379,7 @@ window.renderUserInitials = function renderUserInitials() {
     el.setAttribute('aria-label', fullName);
   }
 };
+
 
 document.addEventListener('DOMContentLoaded', () => {
   try { renderUserInitials(); } catch (e) {}

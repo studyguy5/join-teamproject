@@ -1,0 +1,231 @@
+.bigViewOfTask {
+    z-index: 4;
+    position: absolute;
+    top: 120px;
+    right: 30px;
+    max-width: 445px;
+    width: 100%;
+    max-height: 931px;
+    height: fit-content;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 30px;
+    padding: 48px 40px;
+}
+
+
+.bigViewHeadlineCloseArea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 0px 24px 0px;
+}
+
+.titleBigView h2 {
+    margin: 0px 0px 24px 0px;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 61px;
+    line-height: 120%;
+    letter-spacing: 0%;
+}
+
+.descriptionBigView p {
+
+    font-weight: 400;
+    margin: 0px 0px 24px 0px;
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: 0%;
+}
+
+.dueDateBigView {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 25px;
+    margin: 0px 0px 24px 0px;
+}
+
+.dueDateBigView p {
+
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: 0%;
+}
+
+.contacts-Priority-Container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.priorityBigView {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    max-width: 237px;
+    margin: 0px 0px 24px 0px;
+}
+
+.priorityBigView p {
+    margin-right: 30px;
+}
+
+.priorityBigView img {
+    margin-left: 10px;
+}
+
+.contactCircleBigView {
+    align-content: center;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    border: 1px solid rgb(255, 255, 255, 1);
+    color: rgb(255, 255, 255, 1);
+    border-radius: 45px;
+    width: 30px;
+    height: 30px;
+    margin-right: 16px;
+}
+
+.subTaskForBigView {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.subtaskImgDiv {
+    display: flex;
+    height: 30px;
+    align-items: center;
+    border-radius: 10px;
+    padding: 0 8px;
+    width: fit-content;
+}
+
+.subtaskImgDiv:hover {
+    cursor: default;
+    background-color: rgb(238, 238, 238);
+}
+
+.subtaskImgDiv img {
+    margin-right: 10px;
+}
+
+.subTaskForBigView p {
+    display: inline-flex;
+}
+
+.checkedSubtask {
+    right: 20px;
+    cursor: pointer;
+}
+
+.checkboxS1 {
+    cursor: pointer;
+}
+
+.checkboxS2 {
+    cursor: pointer;
+
+}
+
+.subTasks svg {
+    display: flex;
+    height: 8px;
+    width: 58.81%;
+
+}
+
+.singleContactBoxForBigView {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    max-width: 445px;
+    width: 100%;
+    height: 56px;
+}
+
+.singleContactBoxForBigView:first-child .contactCircleBigView {
+    background-color: rgba(110, 82, 255, 1);
+}
+
+.singleContactBoxForBigView:nth-child(2) .contactCircleBigView {
+    background-color: rgba(31, 215, 193, 1);
+}
+
+.singleContactBoxForBigView:nth-child(3) .contactCircleBigView {
+    background-color: rgba(252, 113, 255, 1);
+}
+
+.singleContactBoxForBigView:nth-child(4) .contactCircleBigView {
+    background-color: rgba(195, 255, 43, 1);
+}
+
+.singleContactBoxForBigView:nth-child(5) .contactCircleBigView {
+    background-color: rgba(255, 187, 43, 1);
+}
+
+.singleContactBoxForBigView:nth-child(6) .contactCircleBigView {
+    background-color: rgb(255, 0, 0);
+}
+
+.editeDeleteArea {
+    display: flex;
+    justify-content: end;
+    height: 30px;
+}
+
+.editAndDeleteButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editAndDeleteButton h4 {
+    font-size: 16px;
+    margin-left: 8px;
+    font-weight: normal;
+    color: rgba(42, 54, 71, 1);
+    cursor: pointer;
+}
+
+.editField {
+    display: flex;
+}
+
+.editField:hover img {
+    content: url(/img/icons/edit-hover.svg);
+}
+
+.editField:hover h4 {
+    color: rgba(41, 171, 226, 1);
+    font-weight: bolder;
+    font-size: 17px;
+    vertical-align: left;
+}
+
+
+.deleteField {
+    display: flex;
+}
+
+.deleteField:hover img {
+    content: url(/img/icons/delete-hover.svg);
+}
+
+.deleteField:hover h4 {
+    color: rgba(41, 171, 226, 1);
+    font-weight: bolder;
+    font-size: 17px;
+}
+
+.editAndDeleteButton img {
+    cursor: pointer;
+}
+
+.lineToSeperate {
+    height: 23px;
+    margin: 0px 8px;
+    border: 1px solid rgba(209, 209, 209, 1);
+}

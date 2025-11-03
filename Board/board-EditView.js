@@ -4,12 +4,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     contactsArray = objectToArray(contacts);
 })
 
+
 const BAsE_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app"
+
 
 async function getObject(path = '') {
     let response = await fetch(BAsE_URL + path + ".json")
     return responseToJson = await response.json()
 }
+
 
 async function deleteData(firebaseID) {
     const response = await fetch(`https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/task/${firebaseID[0]}.json`, {
@@ -17,6 +20,7 @@ async function deleteData(firebaseID) {
     });
     return await response.json();
 };
+
 
 function objectToArray(contacts) {
     const object = Object.entries(contacts)
@@ -30,6 +34,7 @@ function objectToArray(contacts) {
     console.log(arrayObject);
     return arrayObject;
 }
+
 
 function arraySorting(array) {
     const sortedArray = array
@@ -62,11 +67,13 @@ function prioButtonactivate(id) {
     };
 }
 
+
 function closeEditView() {
     const popup = document.getElementById('bigViewOfTask');
     popup.classList.add("dont-Show");
     first = true;
 }
+
 
 function getCurrentValues(id) {
     const singleTask = tasks.find(task => task[1].id === id);
@@ -84,10 +91,12 @@ function getCurrentValues(id) {
     }
 }
 
+
 function createTaskTemplateEdit(id) {
     if (!formValidationAddTaskTempEdit(id)) return;
     showReportAddedTaskTemplateEdit();
 }
+
 
 function setContactAndPrioValueEdit(taskToEdit) {
     let checkedImg = document.querySelectorAll('#IdForContactsEdit img.checkedEdit')
@@ -112,7 +121,6 @@ function formValidationAddTaskTempEdit(id) {
         return true;
     }
 }
-
 
 
 function displayRequiredMessageTempEdit() {
@@ -146,6 +154,7 @@ function showReportAddedTaskTemplateEdit() {
     }, 1000);
 }
 
+
 function pushObjectEdit(taskToEdit, subtaskvalue1, subtaskvalue2) {
     let subTaskObject = {
         "value":
@@ -154,6 +163,7 @@ function pushObjectEdit(taskToEdit, subtaskvalue1, subtaskvalue2) {
     };
     taskToEdit[1].subtasks.push(subTaskObject)
 }
+
 
 function getSubtaskFromTemplateEdit() {  //hole die Daten
     if (document.getElementById(`task-text-${index0}`)) {
@@ -164,6 +174,7 @@ function getSubtaskFromTemplateEdit() {  //hole die Daten
     }
 }
 
+
 function pushSubtaskIntoArray(taskToEdit, subtaskvalue1, subtaskvalue2) {
     if (subtaskvalue1) {
         pushObjectEdit(taskToEdit, subtaskvalue1, null);
@@ -173,9 +184,11 @@ function pushSubtaskIntoArray(taskToEdit, subtaskvalue1, subtaskvalue2) {
     }
 }
 
+
 let editInputId = ['titleEdit', 'task-descriptionEdit', 'dueDateEdit'];
 let existingObjects = ['title', 'description', 'DueDate']
 let existingFilledObjects = ['DueDate', 'description', 'title'];
+
 
 async function getTaskInformationEdit(id) {
     const taskToEdit = tasks.find(task => task[1].id === id);
@@ -200,6 +213,7 @@ async function getTaskInformationEdit(id) {
     closeEditView();
 };
 
+
 async function filterAndShowTasksEdit() {
     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
         document.getElementById(`${categorys[idIndex]}`).innerHTML = '';
@@ -214,6 +228,7 @@ async function filterAndShowTasksEdit() {
     }
 }
 
+
 let first = true;
 function openContactWithCounter(id) {
     if (first) {
@@ -226,6 +241,7 @@ function openContactWithCounter(id) {
         showInputFilter();
     }
 }
+
 
 function openContactViewEdit() {
     let contactDrop = document.getElementById('IdForContactsEdit')
@@ -242,6 +258,7 @@ function openContactViewEdit() {
         contact.classList.toggle('select-arrow-openEdit')
     }
 }
+
 
 function showInputFilter() {
     console.log('show input')
@@ -266,6 +283,7 @@ function showContactsEdit(id) {
     }
 }
 
+
 let filteredContactsEdit = [];
 function filterContactsInPopupEdit(id) {
     let r;
@@ -287,6 +305,7 @@ function renderfilteredContactsInPopupEdit(id, filteredContactsEdit) {
     for (let filterContactIndex = 0; filterContactIndex < filteredContactsEdit.length; filterContactIndex++) {
         filtContactInPopupEdit.innerHTML += renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterContactIndex); }
 }
+
 
 function chooseFilteredContactEdit(id, filterContactIndex) {
     let choContactFilter = document.getElementById(`checkboxImgEdit-${filterContactIndex}`)
@@ -326,9 +345,10 @@ function renderFilteredChoosenContact(id, filterContactIndex) {
         }
     }
 }
+
 let preIndex;
 
-// Liste der Kontakte
+
 function chooseContactEdit(id, index) {
     let choContact = document.getElementById(`checkboxImgEdit-${index}`)
     if (choContact.classList.contains("checkboxEdit")) {
@@ -349,17 +369,14 @@ let thisTask;
 function renderChoosenContactEdit(id, index) {
     let Choosen = document.getElementById('choosenContactsEdit')
     const RightTask = tasks.find(task => task[1].id === id);
-    // render und pushen wenn array < 2
-    if (index && RightTask[1].assignedTo.length < 5) {
+        if (index && RightTask[1].assignedTo.length < 5) {
         const list = contactsArray[index].name
         RightTask[1].assignedTo.push(list);   // pushe ihn ins assignedTo array
-        for (let preIndex = RightTask[1].assignedTo.length - 1; preIndex < RightTask[1].assignedTo.length; preIndex++) {    //iteriere drüber
-
+        for (let preIndex = RightTask[1].assignedTo.length - 1; preIndex < RightTask[1].assignedTo.length; preIndex++) {  
             thisTask = RightTask[1].assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
             Choosen.innerHTML += `
           <div id="contactCirclePopupRender-${index}" class="contactCirclePopupRender">${thisTask[preIndex][0] + thisTask[preIndex][1]}</div>`;
         }
-        // normal rendern, wenn array voll
     } else if (index && RightTask[1].assignedTo.length >= 5) {
         Choosen.innerHTML += `<h6>max of length reached</h6>`
     } else if (RightTask[1].assignedTo?.length < 5) {
@@ -372,6 +389,7 @@ function renderChoosenContactEdit(id, index) {
         }
     }
 }
+
 
 function deleteRenderedContactEdit(index) {
     let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)

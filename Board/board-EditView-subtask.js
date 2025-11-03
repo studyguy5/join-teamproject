@@ -32,11 +32,13 @@ function clearSubtaskEdit() {
     document.getElementById("subtask").value = "";
 }
 
+
 // lösche gerenderten Bulletpoint
 function deleteBulletpointEdit(index) {
     let el = document.getElementById(`listed-${index}`);
     if (el) el.remove();
 }
+
 
 // bearbeite gerenderten Bulletpoint
 function editBulletpointEditView(index) {
@@ -57,7 +59,6 @@ function editBulletpointEditView(index) {
         </span>`;
     document.getElementById(`edit-input-${index}`).focus();
 }
-
 
 
 function saveBulletpointEdit(index) {

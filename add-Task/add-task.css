@@ -1,4 +1,3 @@
-
 .mainAreaRight h1{
     font-size: 61px;
     margin-left: 80px;
@@ -58,19 +57,15 @@
     cursor: pointer;
 }
 
-
 .subtask-wrapper{
     position: relative;
     display: flex;
     flex-direction: column;  
 }
 
-
-
 .subtask-wrapper .edit-input:focus{
    border:unset;
 }
-
 
 .subtask-list{
     padding: 12px 21px;
@@ -135,14 +130,12 @@
     position: absolute;
     right: 12px;
     gap: 4px;
-    
 }
 
 .pencil, .trash{
     width: 20px;
     height: 20px;
 }
-
 
 .edit-input{
     height: 34px;
@@ -178,7 +171,6 @@
     outline:none;
     outline: none;
 }
-
 
 .input-container{
     width: 100%;
@@ -218,7 +210,6 @@
     margin-top: 20px;
     margin-bottom: 4px;
 }
-
 
 .priority-section{
     display: flex;
@@ -264,7 +255,6 @@
 .footer-left{
     display: flex;
 }
-
 
 .footer-buttons-section{
     display: flex;
@@ -329,7 +319,6 @@
 .priority-section button.Low {
     background-color: #7AE229;
     color: white;
-
 }
 .priority-section button.Urgent img,
 .priority-section button.Medium img,
@@ -343,7 +332,6 @@ input:focus::placeholder {
 textarea:focus::placeholder {
   color: transparent;
 }
-
 
 .report {
     position: fixed;
@@ -368,28 +356,28 @@ textarea:focus::placeholder {
     gap: 16px;
 }
 
-    .report.show {
-      bottom: 800px;
-      opacity: 1;
-      transform: translate(-50%, 50%);
-    }
-    .report img {
-      width: 30px;
-      height: 30px;
-    }
+.report.show {
+    bottom: 800px;
+    opacity: 1;
+    transform: translate(-50%, 50%);
+}
+.report img {
+    width: 30px;
+    height: 30px;
+}
 
-    .required {
-        color: #E60026;
-        font-size: 12px;
-        margin-top: 0px;
-        font-weight: 400;
-    }
-    .d-none{
-        display: none;
-    }
-    .input-error {
-        border: 1px solid #E60026!important;
-    }
+.required {
+    color: #E60026;
+    font-size: 12px;
+    margin-top: 0px;
+    font-weight: 400;
+}
+.d-none{
+    display: none;
+}
+.input-error {
+    border: 1px solid #E60026!important;
+}
 
 .availibleContactsOpen{
     z-index:3;
@@ -409,225 +397,4 @@ textarea:focus::placeholder {
     height:0px;
     transition:  100ms ease;
     overflow-y:hidden;
-}
-
-.contactBox{
-    display: flex;
-    height: 56px;
-    border-radius: 10px;
-    align-items: center;
-    position:relative;
-}
-
-.checkbox{
-    margin-left:220px;
-    position:absolute;
-    right:20px;
-}
-
-.checked{
-    margin-left:220px;
-    position:absolute;
-    right:20px;
-    content: url(/img/icons/checkedContactWhite.svg);
-}
-.checked:hover{
-    background-image: url(/img/icons/hoverCheckedContact.svg);
-}
-.checkbox:hover{
-    background-image: url(/img/icons/hoverCheckContact.svg);
-}
-
-.contactBox:hover{
-    background-color: rgba(238, 238, 238, 1);
-    cursor: pointer;
-}
-
-.contactBox:hover:has(.checked) {
-    background-color: rgba(42, 54, 71, 1);   
-}
-
-.contactBox:has(.checked) {
-   background-color: rgba(9, 25, 49, 1);
-    color:white;
-}
-
-.choosenContacts{
-    height:fit-content;
-    width:440px;
-    display: flex;
-}
-
-.contactCircleNormal {
-    margin-right:16px;
-    margin-left:16px;
-    align-content: center;
-    text-align: center;
-    position: relative;
-    display: inline-block;
-    border: 1px solid rgb(255, 255, 255, 1);
-    border-radius: 45px;
-    width:30px;
-    height:30px;
-    color:white;
-    font-size: 12px;
-}
-
-.contactCircleNormalRender{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgb(255, 255, 255, 1);
-    border-radius: 45px;
-    width:30px;
-    height:30px;
-    color:white;
-    font-size: 12px;
-}
-
-.contactBox:first-child .contactCircleNormal {
-    background-color: rgba(110, 82, 255, 1);
-}
-
-.contactBox:nth-child(2) .contactCircleNormal {
-    background-color: rgba(31, 215, 193, 1);
-}
-
-.contactBox:nth-child(3) .contactCircleNormal {
-    background-color:rgba(252, 113, 255, 1);
-}
-
-.contactBox:nth-child(4) .contactCircleNormal {
-    background-color:rgba(195, 255, 43, 1);
-}
-
-.contactBox:nth-child(5) .contactCircleNormal {
-    background-color:rgba(255, 187, 43, 1);
-}
-
-.contactBox:nth-child(6) .contactCircleNormal {
-    background-color: rgb(255, 0, 0);
-}
-
-.contactCircleNormalRender:first-child {
-    background-color: rgba(110, 82, 255, 1);
-}
-
-.contactCircleNormalRender:nth-child(2) {
-    background-color: rgba(31, 215, 193, 1);
-}
-
-.contactCircleNormalRender:nth-child(3) {
-  background-color:rgba(252, 113, 255, 1);
-}
-
-.contactCircleNormalRender:nth-child(4) {
-    background-color:rgba(195, 255, 43, 1);
-}
-
-.contactCircleNormalRender:nth-child(5) {
-    background-color:rgba(255, 187, 43, 1);
-}
-
-.contactCircleNormalRender:nth-child(6) {
-    background-color: rgb(255, 0, 0);
-}
-
-.dont-Show{
-    display:none;
-}
-
-.section-right-select input:focus {
-    border: none;
-    outline: none;
-}
-
-
-.select-arrow-downC{
-    transform: rotateX(0deg);
-    transition: 500ms ease-in-out;
-}
-
-.select-arrow-downT{
-    transform: rotateX(0deg);
-    transition: 500ms ease-in-out;
-}
-
-.select-arrow-open{
-    transform:rotateX(180deg);
-    transition: 500ms ease-in-out;
-}
-
-.ForTaskChoise P{
-    margin:0px;
-}
-
-.ForTaskChoise {
-  max-width: 1920px;
-  /* width: 100%; */
-  padding: 12px 16px;
-  text-align: left;
-  border: 1px solid #c8c8c8cc;
-  border-radius: 7px;
-  background: #fff;
-  cursor: pointer;
-  font-size: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0;
-  z-index: 2;
-}
-
-.dropTasktypeOpen{
-    display:flex;
-    flex-direction: column;
-    justify-content: start;
-    border-radius: 7px;
-    border-left:0.5px solid rgb(160, 154, 154, 0.1);
-    border-right:0.5px solid rgb(160, 154, 154, 0.1);
-    border-bottom: 0.5px solid rgb(160, 154, 154, 0.1);
-    box-shadow: 0px 0px 14px 3px rgb(0, 0, 0, 0.04);
-    width: 439px;
-    height: 105px;
-    padding-top:8px;
-    position:relative;
-    top: -8px;
-    background-color: white;
-    opacity: 1;
-}
-
-.dropTasktypeClose{
-    max-height:0px;
-    opacity: 0;
-    transition: max-height 100ms ease-out, opacity 100ms ease-out;
-}
-
-.taskOption{
-    z-index: 3;
-    padding-top: 16px;
-    padding-left:20px;
-    width:418px;
-    height:48px;
-    
-}
-
-.taskOption:hover{
-    background-color: rgb(194, 194, 194);
-    border-radius: 7px;
-    cursor: pointer;
-}
-
-.taskOption img:hover{
-    content: url(/img/icons/select-arrow-downHover.svg);
-}
-
-.hidden-input:focus-visible{
-    outline:none;
-    border:none;
-}
-
-.hidden-input{
-    outline:none;
-    border:none;
 }

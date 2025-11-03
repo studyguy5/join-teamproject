@@ -31,12 +31,13 @@ buttons.forEach(button => {
         console.log(priority);
     });
 });
-// ▲▲▲
+
 
 async function getObject(path = '') {
     let response = await fetch(BASe_URL + path + ".json")
     return responseToJson = await response.json()
 }
+
 
 function objectToArray(contacts) {
     const object = Object.entries(contacts)
@@ -52,6 +53,7 @@ function objectToArray(contacts) {
     return arrayObject;
 }
 
+
 function showContacts() {
     let contacts = document.getElementById('IdForContactsNormal')
     contacts.innerHTML = "";
@@ -64,6 +66,7 @@ function showContacts() {
 
     }
 }
+
 
 function renderfilteredContactsInNormal(filteredContacts) {
 
@@ -79,6 +82,7 @@ function renderfilteredContactsInNormal(filteredContacts) {
    `}
 }
 
+
 function showInputNormal() {
 
     if (document.getElementById('placeholderptag')) {
@@ -87,6 +91,7 @@ function showInputNormal() {
         document.getElementById('filterContactsNormal').focus()
     };
 }
+
 
 function openContactViewNormal() {
     let contactDrop = document.getElementById('IdForContactsNormal')
@@ -104,6 +109,7 @@ function openContactViewNormal() {
     }
 }
 
+
 function chooseContactNormal(index) {
     let choContact = document.getElementById(`checkboxImg-${index}`)
     if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
@@ -118,6 +124,7 @@ function chooseContactNormal(index) {
         choContact.src = "/img/icons/normalCheckContact.svg"
     }
 }
+
 
 function chooseFilteredContactNormal(filterContactIndex) {
     let choContact = document.getElementById(`checkboxImg-${filterContactIndex}`)
@@ -134,6 +141,7 @@ function chooseFilteredContactNormal(filterContactIndex) {
     }
 }
 
+
 function renderChoosenContactNormal(index) {
     let listContact = document.getElementById('choosenContacts')
 
@@ -142,6 +150,7 @@ function renderChoosenContactNormal(index) {
     `
     console.log(listContact);
 }
+
 
 function renderFilteredChoosenContactNormal(filterContactIndex) {
     let listContact = document.getElementById('choosenContacts')
@@ -152,12 +161,12 @@ function renderFilteredChoosenContactNormal(filterContactIndex) {
     console.log(listContact);
 }
 
+
 function deleteRenderedContactNormal(index) {
     let renderedContact = document.getElementById(`contactCircleNormalRender-${index}`)
     renderedContact.remove(`contactCircleNormalRender-${index}`)
     renderedContact.innerHTML = '';
 }
-
 
 
 function chooseValueNormal() {
@@ -168,7 +177,6 @@ function chooseValueNormal() {
         console.log(choiseOfTask);
         document.getElementById('selectedTaskNormal').innerHTML = choiseOfTask;
     }))
-
 }
 
 
@@ -217,7 +225,6 @@ function formValidationAddTask() {
 }
 
 
-
 function constantCheck() {
     setTimeout(() => {
         const title = document.getElementById("title-add-task").value;
@@ -230,8 +237,8 @@ function constantCheck() {
             document.getElementById('creatButtonIDNormal').disabled = false;
         }
     }, 500);
-
 }
+
 
 let filteredContacts;
 function filterContactsInNormal() {
@@ -252,35 +259,55 @@ function filterContactsInNormal() {
     }
 }
 
+
+// function displayRequiredMessage() {
+//     const titleInput = document.getElementById("title-add-task");
+//     const dateInput = document.getElementById("date-add-task");
+//     const categoryDiv = document.getElementById("IdForTaskChoiseNormal");
+//     const categoryInput = document.getElementById("categoryValue");
+//     const titleMessage = titleInput.nextElementSibling;
+//     const dateMessage = dateInput.nextElementSibling;
+//     const categoryMessage = categoryDiv.parentElement.querySelector(".required");
+//     if (titleInput.value === "") {
+//         titleMessage.classList.remove("d-none");
+//         titleInput.classList.add("input-error");
+//     } else {
+//         titleMessage.classList.add("d-none");
+//         titleInput.classList.remove("input-error");
+//     }
+//     if (dateInput.value === "") {
+//         dateMessage.classList.remove("d-none");
+//         dateInput.classList.add("input-error");
+//     } else {
+//         dateMessage.classList.add("d-none");
+//         dateInput.classList.remove("input-error");
+//     }
+//     if (categoryInput.value === "") {
+//         categoryMessage.classList.remove("d-none");
+//         categoryDiv.classList.add("input-error");
+//     } else {
+//         categoryMessage.classList.add("d-none");
+//         categoryDiv.classList.remove("input-error");
+//     }
+// }
+function toggleRequiredMessage(input, message, hasError) {
+    message.classList.toggle("d-none", !hasError);
+    input.classList.toggle("input-error", hasError);
+}
+
 function displayRequiredMessage() {
     const titleInput = document.getElementById("title-add-task");
     const dateInput = document.getElementById("date-add-task");
     const categoryDiv = document.getElementById("IdForTaskChoiseNormal");
     const categoryInput = document.getElementById("categoryValue");
-    const titleMessage = titleInput.nextElementSibling;
-    const dateMessage = dateInput.nextElementSibling;
-    const categoryMessage = categoryDiv.parentElement.querySelector(".required");
-    if (titleInput.value === "") {
-        titleMessage.classList.remove("d-none");
-        titleInput.classList.add("input-error");
-    } else {
-        titleMessage.classList.add("d-none");
-        titleInput.classList.remove("input-error");
-    }
-    if (dateInput.value === "") {
-        dateMessage.classList.remove("d-none");
-        dateInput.classList.add("input-error");
-    } else {
-        dateMessage.classList.add("d-none");
-        dateInput.classList.remove("input-error");
-    }
-    if (categoryInput.value === "") {
-        categoryMessage.classList.remove("d-none");
-        categoryDiv.classList.add("input-error");
-    } else {
-        categoryMessage.classList.add("d-none");
-        categoryDiv.classList.remove("input-error");
-    }
+
+    toggleRequiredMessage(titleInput, titleInput.nextElementSibling, titleInput.value === "");
+    toggleRequiredMessage(dateInput, dateInput.nextElementSibling, dateInput.value === "");
+    toggleRequiredMessage(
+        categoryDiv,
+        categoryDiv.parentElement.querySelector(".required"),
+        categoryInput.value === ""
+    );
 }
 
 
@@ -296,6 +323,7 @@ async function postData(path = '', data = {}) {
     let responseToJson = await response.json();
     return responseToJson.name
 }
+
 
 function openTaskTypeDropDownNormal() {
     let arrow = document.getElementById('arrowImgNormal')
@@ -324,6 +352,7 @@ function createTemplate() {
     }
 }
 
+
 function pushObject(subtaskvalue1, subtaskvalue2) {
     if (subtaskvalue1) {
         let subTaskObject1 = { "value": `${subtaskvalue1}`, 'status': 'open' };
@@ -335,11 +364,13 @@ function pushObject(subtaskvalue1, subtaskvalue2) {
     }
 }
 
+
 async function getData(path = '') {
     let response = await fetch(BASe_URL + path + ".json")
     return allTasks = await response.json();
 
 }
+
 
 function getSubtaskFromTemplate() {
     if (document.getElementById(`task-text-${index0}`)) {
@@ -350,6 +381,7 @@ function getSubtaskFromTemplate() {
     }
 }
 
+
 function setContactAndPrioValue(newTask) {
     let checkedImg = document.querySelectorAll('#IdForContacts img.checked')
     checkedImg.forEach(img => {
@@ -359,7 +391,6 @@ function setContactAndPrioValue(newTask) {
     // ▼▼▼ Wichtig: hier landet jetzt die ausgewählte Prio
     newTask.prio = prioArray[0] || '';       // falls nichts gewählt, leer lassen
 }
-
 
 
 async function getTaskInformationNormal(index) {
@@ -381,6 +412,7 @@ async function getTaskInformationNormal(index) {
     filterAndShowTasks();
 };
 
+
 function clearTaskNormal() {
     const title = document.getElementById("title-add-task").value = "";
     const description = document.getElementById('task-description').value = "";
@@ -392,6 +424,7 @@ function clearTaskNormal() {
     const taskType = document.getElementById("selectedTaskNormal").innerText = "Select Task Category";
     document.getElementById('subtask-list-1').innerHTML = "";
 }
+
 
 async function filterAndShowTasks() {
     console.log(tasks)
@@ -409,10 +442,10 @@ async function filterAndShowTasks() {
 }
 
 
-
 let progress;
 let TaskDone;
 Taskavailable = document.querySelectorAll('.subTaskForBigView > subtaskImgDiv img')
+
 
 function checkDone(id) {
     let sort = tasks.filter(tasks => tasks[1].id === id);
@@ -420,6 +453,7 @@ function checkDone(id) {
     sort[0][1].progress = (TaskDone.length / sort[0][1].subtasks.length) * 128
     filterAndShowTasks(id);
 }
+
 
 function renderTaskintoBoard(element) {
     let taskOption = 'türkis';
@@ -469,6 +503,7 @@ function getStoredUserName() {
     return 'User';
 }
 
+
 function getInitials(fullName) {
     const parts = (fullName || '').trim().split(/\s+/).filter(Boolean);
     if (!parts.length) return 'US';
@@ -476,6 +511,7 @@ function getInitials(fullName) {
     const last = parts.length > 1 ? parts[parts.length - 1][0] : (parts[0][1] || '');
     return (first + last).toUpperCase();
 }
+
 
 window.renderUserInitials = function renderUserInitials() {
     const fullName = getStoredUserName();
@@ -487,6 +523,7 @@ window.renderUserInitials = function renderUserInitials() {
         el.setAttribute('aria-label', fullName);
     }
 };
+
 
 document.addEventListener('DOMContentLoaded', () => {
     try { renderUserInitials(); } catch (e) { }

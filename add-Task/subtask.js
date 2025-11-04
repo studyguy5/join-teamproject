@@ -1,8 +1,6 @@
 let currentCount;
 let index = currentCount;
 
-
-
 function renderSubtask(){
     let subtask = document.getElementById("subtask"); 
     let list = document.getElementById("subtask-list-1"); 
@@ -15,13 +13,24 @@ function renderSubtask(){
                               <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
                                 <span class="list-icon">
                                     <img onmousedown="clearSubtask()" class="pencil" src="/img/icons/pencil-edit.svg">
-                                    <img class="delimiter" src="../img/delimiter-vertical.svg">
+                                    <img class="delimiter" src="../img/icons/delimiter-vertical.svg">
                                     <img onmousedown="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
                                 </span>
                             </li>
         `;
         subtask.value = "";
     }
+}
+
+
+function enableEnterForSubtask() {
+    let subtask = document.getElementById("subtask");
+    subtask.addEventListener("keydown", e => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            renderSubtask();
+        }
+    });
 }
 
 
@@ -76,3 +85,6 @@ function saveBulletpoint(index) {
         li.setAttribute("onclick", `editBulletpoint(${index})`);
     }
 }
+
+
+window.addEventListener("DOMContentLoaded", enableEnterForSubtask);

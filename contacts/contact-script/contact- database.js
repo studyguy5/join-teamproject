@@ -5,12 +5,14 @@ async function getObject(path = '') {
   return responseToJson = await response.json()
 }
 
+
 async function deleteData(path = '') {
   const response = await fetch(BASE_URL + path + ".json", {
     method: "DELETE",
   });
   return await response.json();
 }
+
 
 async function postData(path = '', data = {}) {
   let response = await fetch(BASE_URL + path + ".json", {
@@ -36,6 +38,7 @@ async function putData(path = '', data = {}) {
   return responseToJson = await response.json();
 }
 
+
 async function patchData(path = '', data = {}) {
   const response = await fetch(BASE_URL + path + ".json", {
     method: "PATCH",
@@ -47,10 +50,12 @@ async function patchData(path = '', data = {}) {
   return await response.json();
 }
 
+
 async function getArray(pathAdresse = '') {
   const object = Object.entries(await getObject(path = pathAdresse))
   return objectToArray(object);
 }
+
 
 // nur für den Test oder Notfall
 async function sendAlltoFirebase(array, path = 'contact') {

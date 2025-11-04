@@ -1,5 +1,7 @@
 let contacts;
 let contactsArray;
+
+
 document.addEventListener('DOMContentLoaded', async () => {
     init() 
     sectionCheck('contacts')
@@ -7,6 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     contactsArray = objectToArray(contacts)
     renderContactList(arraySorting(contactsArray), targetID = 'contactList')
 })
+
 
 //validation functions
 function formValidation() {
@@ -28,12 +31,14 @@ function formValidation() {
     return true
 }
 
+
 function getErrorLogic(inputField) {
     inputField.setAttribute('placeholder', 'please write your ' + `${inputField.id}`)
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty')
     return
 }
+
 
 function getErrorLogicIndex2(inputField) {
     inputField.setAttribute('placeholder', 'please write your phone number ')
@@ -48,6 +53,7 @@ function removeErrorMark(inputField) {
     container.classList.remove('input-empty')
 }
 
+
 //view and interactions functions
 function contentCheck(inputField) {
     let booleansValue;
@@ -60,9 +66,11 @@ function contentCheck(inputField) {
     return booleansValue
 }
 
+
 function sectionCheck(idsecTrue) {
     document.getElementById(idsecTrue).classList.add('active')
 }
+
 
 function renderContactList(array, targetID = '') {
     document.getElementById(targetID).innerHTML = '';
@@ -71,23 +79,28 @@ function renderContactList(array, targetID = '') {
     }
 }
 
+
 function getContactsDetails(targetID = '', object, id = '') {
     document.getElementById(targetID).innerHTML = setContactDetails(object, id)
 }
 
+
 function getAddOverlayContent(targetID = '') {
     switchOverlayContentWithSlide(targetID, setAddOverlayContent())
 }
+
 
 async function getEditOverlayContent(targetID = '', contactId) {
     await switchOverlayContentWithSlide(targetID, setEditOverlayContent(contactId))
     showCurrentValue(contactId)
 }
 
+
 function showContactDetails(id) {
     selectedNameCheck(id);
     switchContentWithSlide(targetID = 'detailBody', id)
 }
+
 
 function selectedNameCheck(id) {
     document.querySelectorAll('.contact-name').forEach((divContainer) => {
@@ -96,10 +109,12 @@ function selectedNameCheck(id) {
     document.getElementById(id).classList.add('selected')
 }
 
+
 function closeOverlay() {
     document.querySelector('.overlay').classList.remove('showed')
     document.body.style.overflowY = ''
 }
+
 
 function overlayShow() {
     document.querySelector('.overlay').classList.add('showed')
@@ -107,10 +122,12 @@ function overlayShow() {
     document.body.style.overflowY = 'hidden'
 }
 
+
 function scrollIntoView(id) {
     document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "center" })
     showContactDetails(id)
 }
+
 
 async function showSuccessMessage(showIntervall, hideIntervall) {
     await setTimer(showIntervall)
@@ -136,6 +153,7 @@ function objectToArray(contacts) {
     return arrayObject;
 }
 
+
 function arraySorting(array) {
     const sortedArray = array
     sortedArray.sort((memberA, memberB) => {
@@ -143,6 +161,7 @@ function arraySorting(array) {
     })
     return sortedArray
 }
+
 
 //animation-functions
 async function switchContentWithSlide(targetID = '', id) {
@@ -154,6 +173,7 @@ async function switchContentWithSlide(targetID = '', id) {
     return;
 }
 
+
 async function switchMessageContentWithSlide(targetQuerry = '') {
     const container = document.querySelector(targetQuerry)
     const slideOutAnimation = container.animate(transformArrayStart, animationAttributeObjectStart);
@@ -162,6 +182,7 @@ async function switchMessageContentWithSlide(targetQuerry = '') {
     container.animate(transformArrayFinish, animationAttributeObjectFinish);
     return;
 }
+
 
 async function resetContentWithSlide(targetID = '') {
     const container = document.getElementById(targetID)
@@ -172,6 +193,7 @@ async function resetContentWithSlide(targetID = '') {
     return;
 }
 
+
 async function switchOverlayContentWithSlide(targetID = '', htmlContent) {
     const container = document.getElementById(targetID)
     const slideOutAnimation = container.animate(overlayTransformArrayStart, overlayAnimationAttributeObjectStart);
@@ -180,11 +202,13 @@ async function switchOverlayContentWithSlide(targetID = '', htmlContent) {
     container.animate(overlayTransformArrayFinish, overlayAnimationAttributeObjectFinish);
 }
 
+
 async function setTimer(time) {
     return new Promise((resolve) => {
         setTimeout(resolve, time)
     })
 }
+
 
 //API and DOM connections functions
 function getObjectFromContactForm(nameId, emailId, phoneNumberId) {
@@ -202,6 +226,7 @@ function getObjectFromContactForm(nameId, emailId, phoneNumberId) {
     return formJson
 }
 
+
 function getNewContactData(id) {
     const name = document.getElementById('name').value.trim()
     const email = document.getElementById('email').value.trim()
@@ -216,6 +241,7 @@ function getNewContactData(id) {
     }
     return formJson
 }
+
 
 async function addContact(nameId, emailId, phoneNumberId) {
     const validation = formValidation()
@@ -232,12 +258,14 @@ async function addContact(nameId, emailId, phoneNumberId) {
     return
 }
 
+
 async function refreshContactList() {
     contacts = await getObject(path = '/contacts')
     contactsArray = objectToArray(contacts)
     renderContactList(arraySorting(contactsArray), targetID = 'contactList')
     return
 }
+
 
 async function saveChanges(id) {
     const validation = formValidation()
@@ -253,6 +281,7 @@ async function saveChanges(id) {
     return
 }
 
+
 function showCurrentValue(id) {
     document.getElementById('name').value = contacts[id].name
     document.getElementById('email').value = contacts[id].email
@@ -260,12 +289,14 @@ function showCurrentValue(id) {
     return
 }
 
+
 async function deleteContact(id) {
     await deleteData(path = ('/contacts/' + `${id}`))
     await refreshContactList()
     await resetContentWithSlide(targetID = 'detailBody')
     return
 }
+
 
 /* --- dein vorhandener contact-overall-script.js Code bleibt komplett wie er ist --- */
 
@@ -277,6 +308,7 @@ function getStoredUserName() {
   return 'User';
 }
 
+
 function getInitials(fullName) {
   const parts = (fullName || '').trim().split(/\s+/).filter(Boolean);
   if (!parts.length) return 'US';
@@ -284,6 +316,7 @@ function getInitials(fullName) {
   const last  = parts.length > 1 ? parts[parts.length - 1][0] : (parts[0][1] || '');
   return (first + last).toUpperCase();
 }
+
 
 window.renderUserInitials = function renderUserInitials() {
   const fullName = getStoredUserName();
@@ -295,6 +328,7 @@ window.renderUserInitials = function renderUserInitials() {
     el.setAttribute('aria-label', fullName);
   }
 };
+
 
 document.addEventListener('DOMContentLoaded', () => {
   try { renderUserInitials(); } catch (e) {}

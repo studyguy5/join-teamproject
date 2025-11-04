@@ -31,6 +31,7 @@ function setContactList(array, index) {
     return template
 }
 
+
 function setContactDetails(object, id) {
     let template = `    <div class="floating-contact">
                             <div class="floating-contact-header">
@@ -94,6 +95,7 @@ function setContactDetails(object, id) {
                         </div>`;
     return template;
 }
+
 
 function setAddOverlayContent() {
     let template;
@@ -176,6 +178,7 @@ function setAddOverlayContent() {
     return template
 }
 
+
 function setEditOverlayContent(id) {
     let template;
     template = `<div class="overlay-logo">
@@ -254,6 +257,7 @@ function setEditOverlayContent(id) {
     return template
 }
 
+
 function setBadgeColor() {
     const positionR = Math.floor(Math.random() * 256)
     const positionG = Math.floor(Math.random() * 256)
@@ -261,11 +265,13 @@ function setBadgeColor() {
     return ([positionR, positionG, positionB]);
 }
 
+
 function setFirstLetter(string) {
     const nameArray = string.trim().split(" ")
     let firstLetter = nameArray[0][0].toUpperCase()
     return firstLetter
 }
+
 
 function setSecondFirstLetter(string) {
     const nameArray = string.trim().split(" ")
@@ -279,6 +285,7 @@ function setSecondFirstLetter(string) {
     }
     return secondFirstLetter
 }
+
 
 function setSucessMessage() {
     let template

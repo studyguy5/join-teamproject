@@ -304,6 +304,8 @@ document.addEventListener('click', (e) => {
     if (!contactTrigger.contains(e.target) && !contactBox.contains(e.target)) {
         contactBox.classList.add('availibleContactsClose');
         contactBox.classList.remove('availibleContactsOpen');
+         document.getElementById('placeholderptag').classList.remove('dont-Show');
+         document.getElementById('filterContactsNormal').classList.add('dont-Show');
     }
 
     // Category schließen, wenn Klick außerhalb

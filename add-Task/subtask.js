@@ -1,14 +1,11 @@
 let currentCount;
 let index = currentCount;
 
-
-// rendert edit and delete Icons beim Hoovern
 function renderSubtask(){
-    let subtask = document.getElementById("subtask"); // der standard input
-    let list = document.getElementById("subtask-list-1"); // das zusätzliche <ul> element
+    let subtask = document.getElementById("subtask"); 
+    let list = document.getElementById("subtask-list-1"); 
 
-
-    let currentCount = list.getElementsByClassName("listed").length; //klasse von li element
+    let currentCount = list.getElementsByClassName("listed").length; 
     index = currentCount;
 
     if (currentCount < 2 && subtask.value.trim() !==""){
@@ -16,41 +13,49 @@ function renderSubtask(){
                               <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
                                 <span class="list-icon">
                                     <img onmousedown="clearSubtask()" class="pencil" src="/img/icons/pencil-edit.svg">
-                                    <img class="delimiter" src="../img/delimiter-vertical.svg">
+                                    <img class="delimiter" src="../img/icons/delimiter-vertical.svg">
                                     <img onmousedown="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
                                 </span>
                             </li>
         `;
         subtask.value = "";
-        // d = document.getElementById('task-text-0').innerHTML;
-        // console.log(d);
     }
 }
 
-// leere das subtask input Feld
+
+function enableEnterForSubtask() {
+    let subtask = document.getElementById("subtask");
+    subtask.addEventListener("keydown", e => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            renderSubtask();
+        }
+    });
+}
+
+
 function clearSubtask(){
     document.getElementById("subtask").value = "";
 }
 
-// lösche gerenderten Bulletpoint
+
 function deleteBulletpoint(index) {
     let el = document.getElementById(`listed-${index}`);
     if (el) el.remove();
 }
 
-// bearbeite gerenderten Bulletpoint
+
 function editBulletpoint(index) {
     const li = document.getElementById(`listed-${index}`);
     const textEl = document.getElementById(`task-text-${index}`);
     const inputEl = document.getElementById(`edit-input-${index}`);
 
-    // Wenn schon ein Input da ist, nicht nochmal umbauen
     if (inputEl) {
         inputEl.focus();
         return;
     }
 
-    const currentText = textEl ? textEl.textContent : ""; // fallback, falls kein <p> existiert
+    const currentText = textEl ? textEl.textContent : ""; 
 
     li.innerHTML = `
         <input class="edit-input" type="text" id="edit-input-${index}" value="${currentText}">
@@ -63,7 +68,6 @@ function editBulletpoint(index) {
 
     document.getElementById(`edit-input-${index}`).focus();
 }
-
 
 
 function saveBulletpoint(index) {
@@ -81,3 +85,6 @@ function saveBulletpoint(index) {
         li.setAttribute("onclick", `editBulletpoint(${index})`);
     }
 }
+
+
+window.addEventListener("DOMContentLoaded", enableEnterForSubtask);

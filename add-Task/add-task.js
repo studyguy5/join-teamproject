@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     showContacts();
     sectionCheck('add-task')
 
-    console.log(tasks);
     function sectionCheck(idsecTrue) {
         document.getElementById(idsecTrue).classList.add('active')
     }
@@ -28,29 +27,28 @@ buttons.forEach(button => {
         const priority = button.dataset.priority;
         button.classList.add(priority);
         prioArray[0] = priority;                 // <--- NEU: damit Summary die Prio kennt
-        console.log(priority);
     });
 });
-// ▲▲▲
+
 
 async function getObject(path = '') {
     let response = await fetch(BASe_URL + path + ".json")
     return responseToJson = await response.json()
 }
 
+
 function objectToArray(contacts) {
     const object = Object.entries(contacts)
-    console.log(object);
     const arrayObject = object.map((member) => {
         return {
             id: member[0],
             ...member[1]
         }
     })
-    console.log(arrayObject);
 
     return arrayObject;
 }
+
 
 function showContacts() {
     let contacts = document.getElementById('IdForContactsNormal')
@@ -64,6 +62,7 @@ function showContacts() {
 
     }
 }
+
 
 function renderfilteredContactsInNormal(filteredContacts) {
 
@@ -79,6 +78,7 @@ function renderfilteredContactsInNormal(filteredContacts) {
    `}
 }
 
+
 function showInputNormal() {
 
     if (document.getElementById('placeholderptag')) {
@@ -87,6 +87,7 @@ function showInputNormal() {
         document.getElementById('filterContactsNormal').focus()
     };
 }
+
 
 function openContactViewNormal() {
     let contactDrop = document.getElementById('IdForContactsNormal')
@@ -104,6 +105,7 @@ function openContactViewNormal() {
     }
 }
 
+
 function chooseContactNormal(index) {
     let choContact = document.getElementById(`checkboxImg-${index}`)
     if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
@@ -118,6 +120,7 @@ function chooseContactNormal(index) {
         choContact.src = "/img/icons/normalCheckContact.svg"
     }
 }
+
 
 function chooseFilteredContactNormal(filterContactIndex) {
     let choContact = document.getElementById(`checkboxImg-${filterContactIndex}`)
@@ -134,14 +137,15 @@ function chooseFilteredContactNormal(filterContactIndex) {
     }
 }
 
+
 function renderChoosenContactNormal(index) {
     let listContact = document.getElementById('choosenContacts')
 
     listContact.innerHTML += `
     <div id="contactCircleNormalRender-${index}" class="contactCircleNormalRender">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
     `
-    console.log(listContact);
 }
+
 
 function renderFilteredChoosenContactNormal(filterContactIndex) {
     let listContact = document.getElementById('choosenContacts')
@@ -149,8 +153,8 @@ function renderFilteredChoosenContactNormal(filterContactIndex) {
     listContact.innerHTML += `
     <div id="contactCircleNormalRender-${filterContactIndex}" class="contactCircleNormalRender">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>
     `
-    console.log(listContact);
 }
+
 
 function deleteRenderedContactNormal(index) {
     let renderedContact = document.getElementById(`contactCircleNormalRender-${index}`)
@@ -159,16 +163,13 @@ function deleteRenderedContactNormal(index) {
 }
 
 
-
 function chooseValueNormal() {
     let choise = document.querySelectorAll('.taskOption')
 
     choise.forEach(b => b.addEventListener('click', () => {
         const choiseOfTask = b.dataset.value
-        console.log(choiseOfTask);
         document.getElementById('selectedTaskNormal').innerHTML = choiseOfTask;
     }))
-
 }
 
 
@@ -217,21 +218,19 @@ function formValidationAddTask() {
 }
 
 
-
 function constantCheck() {
     setTimeout(() => {
         const title = document.getElementById("title-add-task").value;
         const description = document.getElementById('task-description').value;
         const dueDate = document.getElementById("date-add-task").value;
         const taskType = document.getElementById("selectedTaskNormal").innerText;
-        console.log("it check's")
         if (title !== "" && dueDate !== "" && description !== "" && taskType !== "Select Task Category") {
 
             document.getElementById('creatButtonIDNormal').disabled = false;
         }
     }, 500);
-
 }
+
 
 let filteredContacts;
 function filterContactsInNormal() {
@@ -252,40 +251,29 @@ function filterContactsInNormal() {
     }
 }
 
+
+function toggleRequiredMessage(input, message, hasError) {
+    message.classList.toggle("d-none", !hasError);
+    input.classList.toggle("input-error", hasError);
+}
+
 function displayRequiredMessage() {
     const titleInput = document.getElementById("title-add-task");
     const dateInput = document.getElementById("date-add-task");
     const categoryDiv = document.getElementById("IdForTaskChoiseNormal");
     const categoryInput = document.getElementById("categoryValue");
-    const titleMessage = titleInput.nextElementSibling;
-    const dateMessage = dateInput.nextElementSibling;
-    const categoryMessage = categoryDiv.parentElement.querySelector(".required");
-    if (titleInput.value === "") {
-        titleMessage.classList.remove("d-none");
-        titleInput.classList.add("input-error");
-    } else {
-        titleMessage.classList.add("d-none");
-        titleInput.classList.remove("input-error");
-    }
-    if (dateInput.value === "") {
-        dateMessage.classList.remove("d-none");
-        dateInput.classList.add("input-error");
-    } else {
-        dateMessage.classList.add("d-none");
-        dateInput.classList.remove("input-error");
-    }
-    if (categoryInput.value === "") {
-        categoryMessage.classList.remove("d-none");
-        categoryDiv.classList.add("input-error");
-    } else {
-        categoryMessage.classList.add("d-none");
-        categoryDiv.classList.remove("input-error");
-    }
+
+    toggleRequiredMessage(titleInput, titleInput.nextElementSibling, titleInput.value === "");
+    toggleRequiredMessage(dateInput, dateInput.nextElementSibling, dateInput.value === "");
+    toggleRequiredMessage(
+        categoryDiv,
+        categoryDiv.parentElement.querySelector(".required"),
+        categoryInput.value === ""
+    );
 }
 
 
 async function postData(path = '', data = {}) {
-    console.log('post Data')
     let response = await fetch(BASe_URL + path + ".json", {
         method: "POST",
         headers: {
@@ -297,12 +285,33 @@ async function postData(path = '', data = {}) {
     return responseToJson.name
 }
 
+
 function openTaskTypeDropDownNormal() {
     let arrow = document.getElementById('arrowImgNormal')
     arrow.classList.toggle('select-arrow-open')
     let drop = document.getElementById('dropIdNormal')
     drop.classList.toggle('dropTasktypeClose')
 }
+
+
+document.addEventListener('click', (e) => {
+    const contactBox = document.getElementById('IdForContactsNormal');
+    const contactTrigger = document.querySelector('.section-right-select');
+    const categoryDrop = document.getElementById('dropIdNormal');
+    const categoryTrigger = document.getElementById('IdForTaskChoiseNormal');
+
+    // Assigned-to schließen, wenn Klick außerhalb
+    if (!contactTrigger.contains(e.target) && !contactBox.contains(e.target)) {
+        contactBox.classList.add('availibleContactsClose');
+        contactBox.classList.remove('availibleContactsOpen');
+    }
+
+    // Category schließen, wenn Klick außerhalb
+    if (!categoryTrigger.contains(e.target) && !categoryDrop.contains(e.target)) {
+        categoryDrop.classList.add('dropTasktypeClose');
+        document.getElementById('arrowImgNormal').classList.remove('select-arrow-open');
+    }
+});
 
 
 function createTemplate() {
@@ -324,6 +333,7 @@ function createTemplate() {
     }
 }
 
+
 function pushObject(subtaskvalue1, subtaskvalue2) {
     if (subtaskvalue1) {
         let subTaskObject1 = { "value": `${subtaskvalue1}`, 'status': 'open' };
@@ -335,11 +345,12 @@ function pushObject(subtaskvalue1, subtaskvalue2) {
     }
 }
 
+
 async function getData(path = '') {
     let response = await fetch(BASe_URL + path + ".json")
     return allTasks = await response.json();
-
 }
+
 
 function getSubtaskFromTemplate() {
     if (document.getElementById(`task-text-${index0}`)) {
@@ -350,6 +361,7 @@ function getSubtaskFromTemplate() {
     }
 }
 
+
 function setContactAndPrioValue(newTask) {
     let checkedImg = document.querySelectorAll('#IdForContacts img.checked')
     checkedImg.forEach(img => {
@@ -359,7 +371,6 @@ function setContactAndPrioValue(newTask) {
     // ▼▼▼ Wichtig: hier landet jetzt die ausgewählte Prio
     newTask.prio = prioArray[0] || '';       // falls nichts gewählt, leer lassen
 }
-
 
 
 async function getTaskInformationNormal(index) {
@@ -381,113 +392,11 @@ async function getTaskInformationNormal(index) {
     filterAndShowTasks();
 };
 
-function clearTaskNormal() {
-    const title = document.getElementById("title-add-task").value = "";
-    const description = document.getElementById('task-description').value = "";
-    const dueDate = document.getElementById("date-add-task").value = "";
-    document.getElementById('choosenContacts').innerHTML = "";
-    const buttons = document.querySelectorAll(".priority-section button");
-    buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
-    prioArray.length = 0; // ▼▼▼ optional: Auswahl zurücksetzen
-    const taskType = document.getElementById("selectedTaskNormal").innerText = "Select Task Category";
-    document.getElementById('subtask-list-1').innerHTML = "";
-}
-
-async function filterAndShowTasks() {
-    console.log(tasks)
-    for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
-        document.getElementById(`${categorys[idIndex]}`).innerHTML = '';
-        let filteredTasks = tasks.filter(f => f[1].category == categorys[idIndex]);
-        for (let catIndex = 0; catIndex < filteredTasks.length; catIndex++) {
-            let element = filteredTasks[catIndex][1];
-            document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoard(element);
-            if (document.getElementById(`${categorys[idIndex]}`)) {
-                renderContact(element);
-            }
-        }
-    }
-}
 
 
 
-let progress;
-let TaskDone;
-Taskavailable = document.querySelectorAll('.subTaskForBigView > subtaskImgDiv img')
-
-function checkDone(id) {
-    let sort = tasks.filter(tasks => tasks[1].id === id);
-    TaskDone = document.querySelectorAll('.subTaskForBigView .subtaskImgDiv .checkedSubtask')
-    sort[0][1].progress = (TaskDone.length / sort[0][1].subtasks.length) * 128
-    filterAndShowTasks(id);
-}
-
-function renderTaskintoBoard(element) {
-    let taskOption = 'türkis';
-    if (element.taskType === 'User Story') {
-        taskOption = 'darkblue';
-    }
-    return `<div draggable="true" ondragstart="startDragging(${element['id']})" 
-    id="TaskDiv" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderEditAndDeleteButton(${element.id})" class="TaskDiv">
-    <div id="taskType" class="${taskOption}">${element.taskType}</div>
-    <div class="taskTitle"><p>${element.title}</p></div>
-    <div class="taskDescription"><p>${element.description}</p></div>
-    <div class="subTasks">
-    ${element.subtasks != null ? `
-    <svg role="progress subtask">
-    <rect  width="128" height="8"  class="back"/>
-    <rect  width="${element.progress}" height="8" class="fill"/>
-    </svg>
-    <p class="progressDescription">${(element.progress / 128) * (element.subtasks.length)}/${(element.subtasks.length)} Subtasks </p>` : ''}
-    </div>
-    <div id="contacts-Priority-Container" class="contacts-Priority-Container" >
-    <div id="${element.id}" class="contactsMiniView"></div>
-    <div class="taskPriority">${element.prio == 'Urgent' ?
-            `<img src="/img/icons/urgent.svg">` :
-            element.prio == 'Medium' ?
-                `<img src="/img/icons/medium.svg">` :
-                element.prio == 'Low' ?
-                    `<img src="/img/icons/low.svg">` : ''}</div>
-        </div>
-        <div></div>
-        </div>`
-}
 
 
-let currentDraggedElement;
-let index0 = 0;
-let index1 = 1;
-let subtaskArray = [];
-let subtaskvalue1;
-let subtaskvalue2;
-/* --- dein vorhandener add-task.js Code bleibt komplett wie er ist --- */
 
-/* ===================== USERNAME & INITIALEN (wie in summary) ===================== */
-function getStoredUserName() {
-    const name = localStorage.getItem('userFullName');
-    if (name && name.trim()) return name.trim();
-    if (sessionStorage.getItem('guest') === 'true') return 'Guest User';
-    return 'User';
-}
 
-function getInitials(fullName) {
-    const parts = (fullName || '').trim().split(/\s+/).filter(Boolean);
-    if (!parts.length) return 'US';
-    const first = parts[0][0] || '';
-    const last = parts.length > 1 ? parts[parts.length - 1][0] : (parts[0][1] || '');
-    return (first + last).toUpperCase();
-}
 
-window.renderUserInitials = function renderUserInitials() {
-    const fullName = getStoredUserName();
-    const initials = getInitials(fullName);
-    const el = document.getElementById('userInitials');
-    if (el) {
-        el.textContent = initials;
-        el.setAttribute('title', fullName);
-        el.setAttribute('aria-label', fullName);
-    }
-};
-
-document.addEventListener('DOMContentLoaded', () => {
-    try { renderUserInitials(); } catch (e) { }
-});

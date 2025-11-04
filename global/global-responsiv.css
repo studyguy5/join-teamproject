@@ -1,3 +1,34 @@
+@media(max-width:1120px){
+    nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    background: #2a3647;
+    width: 202px;
+    position: relative;
+    top: -96px;
+    z-index: 0;
+    height: 1024px;
+}
+
+.privacy-legal-section {
+    width: 202px;
+    height: 317px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    background-color: #2a3647;
+    color: gray;
+    padding-top: 114.02px;
+    padding-bottom: 64px;
+    gap: 4px;
+}
+
+
+}
+
 
 @media (max-width: 900px){
     .headline{

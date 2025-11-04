@@ -128,8 +128,9 @@ hr {
     height: 24px;
     width: 100%;
     gap: 34.67px;
-    max-width: 1080px;
+    max-width: 1208px;
     padding: 0px 64px 0px 64px;
+    box-sizing: border-box;
 }
 
 .categorys img {

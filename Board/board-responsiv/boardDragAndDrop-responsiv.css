@@ -1,0 +1,262 @@
+/* @media(max-width:1390px) {
+    .DragAndDropTaskAria {
+        width: 100%;
+        max-width: 1080px;
+        height: 100%;
+        max-height: 688px;
+        overflow-y: scroll;
+        display: flex;
+        scrollbar-width: none;
+        gap: 26px;
+        padding: 8px 64px 0px 64px;
+    }
+
+    .DragAndDropTaskAria {
+        width: 100%;
+        max-width: 1080px;
+
+        gap: 26px;
+        padding: 8px 24px 0px 24px;
+    }
+
+    .Todo {
+        width: 100%;
+        max-width: 232px;
+        height: 100%;
+        max-height: 688px;
+
+    }
+
+    .Inprogress {
+        width: 100%;
+        max-width: 232px;
+        height: 100%;
+        max-height: 688px;
+
+    }
+
+    .AwaitFeedback {
+        width: 100%;
+        max-width: 232px;
+        height: 100%;
+        max-height: 688px;
+
+    }
+
+    .Done {
+        width: 100%;
+        max-width: 232px;
+        height: 100%;
+        max-height: 688px;
+
+    }
+
+    .TaskDiv {
+        cursor: pointer;
+        margin-bottom: 16px;
+        max-height: 263px;
+        background-color: rgb(255, 255, 255, 1);
+        padding: 16px 16px;
+        border-radius: 24px;
+        box-shadow: 0px 0px 10px 3px rgb(0, 0, 0, 0.08);
+    }
+} */
+
+@media(max-width:1280px) {
+
+
+    .DragAndDropTaskAria {
+        /* width: 100%;
+        max-width: 1020px; */
+
+        gap: 26px;
+        padding: 8px 74px 0px 24px;
+    }
+
+    .Todo {
+        width: 100%;
+        max-width: 222px;
+        height: 100%;
+        max-height: 688px;
+    }
+
+    .Inprogress {
+        width: 100%;
+        max-width: 222px;
+        height: 100%;
+        max-height: 688px;
+
+    }
+
+    .AwaitFeedback {
+        width: 100%;
+        max-width: 222px;
+        height: 100%;
+        max-height: 688px;
+
+    }
+
+    .Done {
+        width: 100%;
+        max-width: 222px;
+        height: 100%;
+        max-height: 688px;
+
+    }
+
+    .TaskDiv {
+        cursor: pointer;
+        margin-bottom: 16px;
+        max-height: 263px;
+        background-color: rgb(255, 255, 255, 1);
+        padding: 16px 16px;
+        border-radius: 24px;
+        box-shadow: 0px 0px 10px 3px rgb(0, 0, 0, 0.08);
+    }
+
+    .back {
+        width: 88px;
+    }
+
+    .türkis {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 93px;
+        height: 27px;
+        padding: 4px 1px;
+        margin-bottom: 24px;
+        border-radius: 8px;
+        background: rgba(31, 215, 193, 1);
+        color: white;
+        font-size: 12px;
+    }
+}
+
+@media(max-width:1180px){
+    .emptyCategory {
+        font-size: 12px;
+    }
+}
+
+@media(max-width: 1120px) {
+    
+
+    .taskTitle p {
+        font-size: 13px;
+    }
+
+    .taskDescription p {
+        font-size: 12px;
+    }
+
+}
+
+@media(max-width:1000px) {
+    .categorys {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .DragAndDropTaskAria {
+        width: 100%;
+        max-width: 890px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr  1fr; /* Headers + Content für 2 Spalten */
+        gap: 28px;
+        padding: 8px 24px 0px 24px;
+    }
+
+    .TodoHeadline {
+        grid-row: 1;
+        grid-column: 1;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .Todo {
+        grid-row: 1;
+        grid-column: 1;
+    }
+
+    .InprogressHeadline {
+        grid-row: 1;
+        grid-column: 2;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .Inprogress {
+        grid-row: 1;
+        grid-column: 2;
+    }
+
+    .AwaitfeedbackHeadline {
+        grid-row: 2;
+        grid-column: 1;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .AwaitFeedback {
+        grid-row: 2;
+        grid-column: 1;
+    }
+
+
+    .DoneHeadline {
+        grid-row: 2;
+        grid-column: 2;
+        font-weight: bold;
+        margin-bottom: 10px;
+        /* margin-left: -346px; */
+    }
+
+    .Done {
+        grid-row: 2;
+        grid-column: 2;
+    }
+
+    /* mit before headlines direkt über dem Inhalt */
+
+    .Todo::before {
+    content: "Todo"; /* der Inhalt*/
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    /* margin-top: -30px; Nach oben über den Gap hinaus */
+  }
+
+  .Inprogress::before {
+    content: "Inprogress";  /* der Inhalt*/
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    /* margin-top: -30px; */
+  }
+
+  .AwaitFeedback::before {
+    content: "AwaitFeedback"; /* der Inhalt*/
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    /* margin-top: -30px; */
+  }
+
+  .Done::before {
+    content: "Done"; /* der Inhalt*/
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    /* margin-top: -30px; */
+  }
+
+  /* Verstecke die original Headline-Divs */
+  .TodoHeadline,
+  .InprogressHeadline,
+  .AwaitfeedbackHeadline,
+  .DoneHeadline {
+    display: none;
+  }
+}

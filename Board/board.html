@@ -88,10 +88,27 @@
                         </div>
                     </div>
                     <div class="bigViewOfTask dont-Show" id="bigViewOfTask"></div>
-                    <div class="DragAndDropTaskAria">
-                        <div id="Todo" class="Todo"  ondrop="moveTo('Todo')" ondragover="preventDefault(event, 'Todo')" ondragleave="leaveCategory('Todo')"></div>
-                        <div id="Inprogress"  class="Inprogress"  ondrop="moveTo('Inprogress')" ondragover="preventDefault(event, 'Inprogress')" ondragleave="leaveCategory('Inprogress')"></div>
-                        <div id="AwaitFeedback" class="AwaitFeedback"  ondrop="moveTo('AwaitFeedback')" ondragover="preventDefault(event, 'AwaitFeedback')" ondragleave="leaveCategory('AwaitFeedback')"></div>
+                    <div class="DragAndDropTaskAria"> 
+                        <div  class="TodoMobile" id="TodoMobile">
+                                <p>To do</p><img data-category-id="Todo" onclick="addTask()" src="/img/icons/plus-button.svg" alt="plusButton img">
+                        </div>
+                        <div id="Todo" class="Todo"  ondrop="moveTo('Todo')" ondragover="preventDefault(event, 'Todo')" ondragleave="leaveCategory('Todo')">
+
+                    </div>
+                    <div  class="InprogressMobile" id="InprogressMobile">
+                                <p>In progress</p><img data-category-id="Inprogress" onclick="addTask()" src="/img/icons/plus-button.svg"
+                                alt="plusButton img">
+                            </div>
+                        <div id="Inprogress"  class="Inprogress"  ondrop="moveTo('Inprogress')" ondragover="preventDefault(event, 'Inprogress')" ondragleave="leaveCategory('Inprogress')">
+                            
+                        </div>
+                        <div  class="AwaitfeedbackMobile" id="AwaitfeedbackMobile">
+                                <p>Await feedback</p><img data-category-id="AwaitFeedback" onclick="addTask()" src="/img/icons/plus-button.svg"
+                                alt="plusButton img">
+                            </div>
+                        <div id="AwaitFeedback" class="AwaitFeedback"  ondrop="moveTo('AwaitFeedback')" ondragover="preventDefault(event, 'AwaitFeedback')" ondragleave="leaveCategory('AwaitFeedback')">
+                            
+                        </div>
                         <div id="Done" class="Done"  ondrop="moveTo('Done')" ondragover="preventDefault(event, 'Done')" ondragleave="leaveCategory('Done')"></div>
                     </div>
                 </section>

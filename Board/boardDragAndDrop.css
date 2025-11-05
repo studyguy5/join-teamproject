@@ -11,6 +11,8 @@
     box-sizing: border-box;
 }
 
+
+
 .Todo {
     width: 100%;
     max-width: 252px;
@@ -41,6 +43,12 @@
     height: 100%;
     max-height: 688px;
 
+}
+
+.TodoMobile,
+.InprogressMobile,
+.AwaitfeedbackMobile {
+    display: none;
 }
 
 .TaskDiv {
@@ -127,8 +135,8 @@
     font-weight: 400;
     font-size: 16px;
     margin: 0px 0px 10px 0px;
-    min-height:20px;
-    max-height:75px;
+    min-height: 20px;
+    max-height: 75px;
     overflow: hidden;
 }
 
@@ -137,7 +145,7 @@
     height: 16px;
     align-items: center;
     gap: 11px;
-    margin-bottom: 24px; 
+    margin-bottom: 24px;
 }
 
 
@@ -243,7 +251,7 @@
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
 }
 
-.TaskDivDemo{
+.TaskDivDemo {
     pointer-events: none;
     border: 1px dashed rgb(168, 168, 168, 1);
     margin-bottom: 16px;
@@ -261,11 +269,25 @@
 
 
 @keyframes slide {
-  
-  0%   {opacity: 0.2;}
-  25%  {opacity: 0.4;}
-  50%  {opacity: 0.6;}
-  75%  {opacity: 0.8;}
-  100% {opacity: 1;}
+
+    0% {
+        opacity: 0.2;
+    }
+
+    25% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    75% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 1;
+    }
 
 }

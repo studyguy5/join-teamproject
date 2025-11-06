@@ -401,3 +401,82 @@ textarea:focus::placeholder {
     transition:  100ms ease;
     overflow-y:hidden;
 }
+
+
+/* /////////////////////responsiv/////////////////////////////// */
+
+@media(max-width:1272px) {
+    .input-section-left, .input-section-right {
+        width: 400px;
+    }
+}
+
+@media(max-width:1196px) {
+    .input-section-left {
+        width: 340px;
+        margin-left: 40px;
+    }
+}
+
+@media(max-width:1196px) {
+    .input-section-right {
+        width: 340px;
+    }
+}
+
+@media (max-width:1000px) {
+    .mainAreaRight{
+        overflow-x: auto;
+    }
+    .mainAreaRight h1{
+        font-size: 48px;
+        margin-left: 40px;
+    }
+    .input-container{
+        flex-direction: column;
+        max-width: none;
+        gap: 0;
+    }
+    .input-section-left{
+        margin-left: 0;
+    }
+    .line{
+        display: none;
+    }
+}
+
+@media(max-width:570px) {
+    .input-section-left{
+        width: 300px;
+    }
+    .input-section-right {
+        width: 300px;
+    }
+    .mainAreaRight h1{
+        font-size: 44px;
+    }
+}
+
+@media(max-width:520px) {
+    .input-section-left{
+        width: 240px;
+    }
+    .input-section-right {
+        width: 240px;
+    }
+    .mainAreaRight h1{
+        font-size: 42px;
+    }
+}
+
+@media(max-width:460px) {
+    .input-section-left{
+        width: 200px;
+    }
+    .input-section-right {
+        width: 200px;
+    }
+    .mainAreaRight h1{
+        font-size: 38px;
+    }
+}

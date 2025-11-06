@@ -1,0 +1,54 @@
+@media (max-width: 768px) {
+  body { padding: 20px; justify-content: flex-start; }
+  .page-logo { margin-top: 20px; top: 30px; left: 45px; }
+  .page-logo img { width: 64px; height: auto; }
+
+  .signup-card {
+    width: 100%;
+    max-width: 500px;
+    padding: 24px;
+    margin-top: 180px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    background-color: white;
+  }
+
+  h1 { font-size: 42px; margin-bottom: 20px; }
+  .back-arrow { top: 20px; left: 20px; }
+
+  .input-field input { padding: 12px 40px 12px 12px; font-size: 16px; }
+
+  .signup-button { max-width: none; font-size: 16px; margin: auto; width: 100%; }
+
+  .privacy-checkbox { margin-top: 0; }
+
+  .page-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 0;
+    background-color: #F6F7F8;
+  }
+}
+
+@media (max-width: 480px) {
+  body { padding: 16px; }
+  .page-logo img { width: 45px; height: auto; }
+  .page-logo { top: 0px; left: 25px; }
+
+  .signup-card { padding: 20px; }
+  h1 { font-size: 36px; }
+
+  .input-field input { padding: 10px 40px 10px 12px; font-size: 14px; }
+  .privacy-checkbox label { font-size: 16px; }
+
+  .page-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 12px 0;
+    background-color: #F6F7F8;
+  }
+}

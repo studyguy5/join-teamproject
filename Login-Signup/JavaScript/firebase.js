@@ -10,7 +10,7 @@ import {
   enableIndexedDbPersistence,
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-// Deine Firebase-Konfiguration
+
 const firebaseConfig = {
   apiKey: "AIzaSyB_IdcKkQ1lf4bj_MY2Lg0Bxjjyh9QXQWs",
   authDomain: "signupfinal-7739e.firebaseapp.com",
@@ -20,20 +20,47 @@ const firebaseConfig = {
   appId: "1:1015305876711:web:37da6ef12da29097359e42",
 };
 
-// App
-const app = initializeApp(firebaseConfig);
 
-// Auth mit persistenter Sitzung (Local Storage)
-const auth = getAuth(app);
-setPersistence(auth, browserLocalPersistence).catch((e) => {
-  console.warn("Konnte Auth-Persistenz nicht setzen:", e);
-});
+function createApp(config) {
+  return initializeApp(config);
+}
 
-// Firestore + Offline-Persistenz (optional)
-const db = getFirestore(app);
-enableIndexedDbPersistence(db).catch((e) => {
-  // z.B. mehrere Tabs offen -> kann fehlschlagen, ist aber unkritisch.
-  console.warn("IndexedDB-Persistenz für Firestore nicht aktiv:", e);
-});
+
+function createAuth(appInstance) {
+  return getAuth(appInstance);
+}
+
+
+function setAuthPersistence(authInstance) {
+  setPersistence(authInstance, browserLocalPersistence)
+    .catch((e) => {
+      console.warn("Konnte Auth-Persistenz nicht setzen:", e);
+    });
+}
+
+
+function createFirestore(appInstance) {
+  return getFirestore(appInstance);
+}
+
+
+function enableFirestorePersistence(dbInstance) {
+  enableIndexedDbPersistence(dbInstance)
+    .catch((e) => {
+      console.warn("IndexedDB-Persistenz für Firestore nicht aktiv:", e);
+    });
+}
+
+
+const app = createApp(firebaseConfig);
+
+
+const auth = createAuth(app);
+setAuthPersistence(auth);
+
+
+const db = createFirestore(app);
+enableFirestorePersistence(db);
+
 
 export { app, auth, db };

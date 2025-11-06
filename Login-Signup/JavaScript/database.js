@@ -10,248 +10,222 @@ import {
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-const DB_NAME = 'JoinDB';
-const DB_VERSION = 1;
+const dbName = 'joinDB';
+const dbVersion = 1;
 
-const STORES = {
-  USERS: 'users',
-  TASKS: 'tasks',
-  CONTACTS: 'contacts',
+const stores = {
+  users: 'users',
+  tasks: 'tasks',
+  contacts: 'contacts',
 };
 
-/**
- * Wrapper für IndexedDB + Sync mit Firestore.
- * - IndexedDB für Offline (users/tasks/contacts)
- * - Firestore als Remote-Quelle (users)
- */
 class Database {
   constructor() {
     this.db = null;
-    // Promise, die aufgelöst wird, wenn IndexedDB bereit ist
-    this.ready = this.init();
+    this.ready = this.initIndexedDb();
   }
 
-  /**
-   * IndexedDB initialisieren und Stores anlegen.
-   */
-  async init() {
+  initIndexedDb() {
     return new Promise((resolve, reject) => {
-      const request = indexedDB.open(DB_NAME, DB_VERSION);
-
-      request.onerror = (event) => reject(event.target.error);
-      request.onsuccess = (event) => {
+      const request = indexedDB.open(dbName, dbVersion);
+      request.onerror = event => reject(event.target.error);
+      request.onsuccess = event => {
         this.db = event.target.result;
         resolve(this.db);
       };
-
-      request.onupgradeneeded = (event) => {
-        const db = event.target.result;
-
-        if (!db.objectStoreNames.contains(STORES.USERS)) {
-          db.createObjectStore(STORES.USERS, { keyPath: 'email' });
-        }
-        if (!db.objectStoreNames.contains(STORES.TASKS)) {
-          db.createObjectStore(STORES.TASKS, { keyPath: 'id', autoIncrement: true });
-        }
-        if (!db.objectStoreNames.contains(STORES.CONTACTS)) {
-          db.createObjectStore(STORES.CONTACTS, { keyPath: 'id', autoIncrement: true });
-        }
-      };
+      request.onupgradeneeded = event => this.createStores(event.target.result);
     });
   }
+
+
+  createStores(db) {
+    if (!db.objectStoreNames.contains(stores.users)) {
+      db.createObjectStore(stores.users, { keyPath: 'email' });
+    }
+    if (!db.objectStoreNames.contains(stores.tasks)) {
+      db.createObjectStore(stores.tasks, { keyPath: 'id', autoIncrement: true });
+    }
+    if (!db.objectStoreNames.contains(stores.contacts)) {
+      db.createObjectStore(stores.contacts, { keyPath: 'id', autoIncrement: true });
+    }
+  }
+
 
   async add(storeName, data) {
     await this.ready;
-    return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction(storeName, 'readwrite');
-      const store = transaction.objectStore(storeName);
-      const request = store.add(data);
-
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
+    return this.runStoreTransaction(storeName, 'add', data);
   }
+
 
   async get(storeName, key) {
     await this.ready;
-    return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction(storeName, 'readonly');
-      const store = transaction.objectStore(storeName);
-      const request = store.get(key);
+    return this.runStoreTransaction(storeName, 'get', key);
+  }
 
+
+  async update(storeName, data) {
+    await this.ready;
+    return this.runStoreTransaction(storeName, 'put', data);
+  }
+
+
+  async delete(storeName, key) {
+    await this.ready;
+    return this.runStoreTransaction(storeName, 'delete', key);
+  }
+
+
+  runStoreTransaction(storeName, method, value) {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction(storeName, 'readwrite');
+      const store = transaction.objectStore(storeName);
+      const request = store[method](value);
       request.onsuccess = () => resolve(request.result || null);
       request.onerror = () => reject(request.error);
     });
   }
 
-  async update(storeName, data) {
-    await this.ready;
-    return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction(storeName, 'readwrite');
-      const store = transaction.objectStore(storeName);
-      const request = store.put(data);
 
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  }
-
-  async delete(storeName, key) {
-    await this.ready;
-    return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction(storeName, 'readwrite');
-      const store = transaction.objectStore(storeName);
-      const request = store.delete(key);
-
-      request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error);
-    });
-  }
-
-  /**
-   * Nutzer in Firestore + IndexedDB speichern.
-   * Erwartet: userData enthält mindestens { email, name }
-   */
   async addUser(userData) {
-    try {
-      if (!auth.currentUser) {
-        throw new Error('Kein angemeldeter Benutzer vorhanden.');
-      }
-      const uid = auth.currentUser.uid;
+    this.checkUserAuthenticated();
+    const uid = auth.currentUser.uid;
+    const firestoreData = this.prepareFirestoreUser(userData, uid);
+    await this.saveUserFirestore(uid, firestoreData);
+    const localData = this.prepareLocalUser(userData, uid);
+    await this.add(stores.users, localData);
+    return uid;
+  }
 
-      const userDataToSave = {
-        uid,
-        email: userData.email,
-        name: userData.name || '',
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
-        ...userData, // erlaubt weitere Felder (Avatar etc.)
-      };
 
-      const userDocRef = doc(db, 'users', uid);
-      await setDoc(userDocRef, userDataToSave, { merge: true });
-
-      // Lokal in IndexedDB (KeyPath = email)
-      await this.add(STORES.USERS, {
-        email: userDataToSave.email,
-        uid: userDataToSave.uid,
-        name: userDataToSave.name,
-        // Timestamps als ISO-Strings lokal ablegen (serverTimestamp ist ein Sentinel)
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        ...userData, // zusätzliche Felder
-      });
-
-      return uid;
-    } catch (error) {
-      console.error('Error adding user:', error);
-      throw error;
+  checkUserAuthenticated() {
+    if (!auth.currentUser) {
+      throw new Error('Kein angemeldeter Benutzer vorhanden.');
     }
   }
 
-  /**
-   * Nutzer holen: bevorzugt per Firestore (falls angemeldet), sonst Query per Email,
-   * oder Fallback auf IndexedDB.
-   */
+
+  prepareFirestoreUser(userData, uid) {
+    return {
+      uid,
+      email: userData.email,
+      name: userData.name || '',
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+      ...userData,
+    };
+  }
+
+
+  async saveUserFirestore(uid, userData) {
+    const userDocRef = doc(db, 'users', uid);
+    await setDoc(userDocRef, userData, { merge: true });
+  }
+
+
+  prepareLocalUser(userData, uid) {
+    return {
+      email: userData.email,
+      uid: uid,
+      name: userData.name || '',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      ...userData,
+    };
+  }
+
+
   async getUser(email) {
-    try {
-      // 1) Wenn angemeldet, hole eigenes Profil per UID
-      if (auth.currentUser?.uid) {
-        const userDocRef = doc(db, 'users', auth.currentUser.uid);
-        const userDoc = await getDoc(userDocRef);
-        if (userDoc.exists()) {
-          return userDoc.data();
-        }
-      }
-
-      // 2) Wenn Email vorhanden, in Firestore nach Email suchen
-      if (email) {
-        const q = query(collection(db, 'users'), where('email', '==', email));
-        const snapshot = await getDocs(q);
-        if (!snapshot.empty) {
-          return snapshot.docs[0].data();
-        }
-      }
-
-      // 3) Fallback: lokal aus IndexedDB per Email
-      if (email) {
-        return await this.get(STORES.USERS, email);
-      }
-
-      return null;
-    } catch (error) {
-      console.error('Error getting user:', error);
-      // letzte Rettung: IndexedDB
-      if (email) {
-        return await this.get(STORES.USERS, email);
-      }
-      throw error;
+    if (auth.currentUser?.uid) {
+      const user = await this.getUserByUid(auth.currentUser.uid);
+      if (user) return user;
     }
+    if (email) {
+      const user = await this.getUserByEmailFirestore(email);
+      if (user) return user;
+      return await this.get(stores.users, email);
+    }
+    return null;
   }
 
-  /**
-   * Nutzer aktualisieren (Firestore + IndexedDB).
-   * Achtung: Wenn sich die Email ändert, passt der Key in IndexedDB nicht mehr.
-   */
+
+  async getUserByUid(uid) {
+    const userDocRef = doc(db, 'users', uid);
+    const userDoc = await getDoc(userDocRef);
+    return userDoc.exists() ? userDoc.data() : null;
+  }
+
+
+  async getUserByEmailFirestore(email) {
+    const q = query(collection(db, 'users'), where('email', '==', email));
+    const snapshot = await getDocs(q);
+    return !snapshot.empty ? snapshot.docs[0].data() : null;
+  }
+
+
   async updateUser(userData) {
-    try {
-      if (!auth.currentUser?.uid) {
-        throw new Error('Kein angemeldeter Benutzer vorhanden.');
-      }
-      const uid = auth.currentUser.uid;
+    this.checkUserAuthenticated();
+    const uid = auth.currentUser.uid;
+    await this.updateUserFirestore(uid, userData);
+    await this.updateUserLocal(userData);
+    return uid;
+  }
 
-      const userDocRef = doc(db, 'users', uid);
-      await setDoc(
-        userDocRef,
-        { ...userData, updatedAt: serverTimestamp() },
-        { merge: true }
-      );
 
-      if (!userData.email) {
-        throw new Error('Für das lokale Update wird die Email als Key benötigt.');
-      }
-      const existingLocal = await this.get(STORES.USERS, userData.email);
-      const localMerged = {
-        ...(existingLocal || {}),
-        ...userData,
-        updatedAt: new Date().toISOString(),
-      };
-      await this.update(STORES.USERS, localMerged);
+  async updateUserFirestore(uid, userData) {
+    const userDocRef = doc(db, 'users', uid);
+    await setDoc(userDocRef, { ...userData, updatedAt: serverTimestamp() }, { merge: true });
+  }
 
-      return uid;
-    } catch (error) {
-      console.error('Error updating user:', error);
-      throw error;
+
+  async updateUserLocal(userData) {
+    if (!userData.email) {
+      throw new Error('Für das lokale Update wird die Email als Key benötigt.');
     }
+    const existingLocal = await this.get(stores.users, userData.email);
+    const merged = { ...(existingLocal || {}), ...userData, updatedAt: new Date().toISOString() };
+    await this.update(stores.users, merged);
   }
 
-  // Tasks (nur lokal)
+
   async addTask(taskData) {
-    return this.add(STORES.TASKS, taskData);
-  }
-  async getTask(id) {
-    return this.get(STORES.TASKS, id);
-  }
-  async updateTask(taskData) {
-    return this.update(STORES.TASKS, taskData);
-  }
-  async deleteTask(id) {
-    return this.delete(STORES.TASKS, id);
+    return this.add(stores.tasks, taskData);
   }
 
-  // Contacts (nur lokal)
+
+  async getTask(id) {
+    return this.get(stores.tasks, id);
+  }
+
+
+  async updateTask(taskData) {
+    return this.update(stores.tasks, taskData);
+  }
+
+
+  async deleteTask(id) {
+    return this.delete(stores.tasks, id);
+  }
+
+
   async addContact(contactData) {
-    return this.add(STORES.CONTACTS, contactData);
+    return this.add(stores.contacts, contactData);
   }
+
+
   async getContact(id) {
-    return this.get(STORES.CONTACTS, id);
+    return this.get(stores.contacts, id);
   }
+
+
   async updateContact(contactData) {
-    return this.update(STORES.CONTACTS, contactData);
+    return this.update(stores.contacts, contactData);
   }
+
+
   async deleteContact(id) {
-    return this.delete(STORES.CONTACTS, id);
+    return this.delete(stores.contacts, id);
   }
+
 }
 
 const database = new Database();

@@ -1,92 +1,71 @@
-/**
- * Sets up password field functionality when the DOM is loaded
- */
 document.addEventListener('DOMContentLoaded', () => {
-    const fields = [
-        {
-            input: document.getElementById('password'),
-            toggle: document.getElementById('togglePassword'),
-            lock: document.querySelector('#password + .input-icon')
-        },
-        {
-            input: document.getElementById('confirmPassword'),
-            toggle: document.getElementById('toggleConfirmPassword'),
-            lock: document.querySelector('#confirmPassword + .input-icon')
-        }
-    ];
-
-    const lookOn = 'svg/visibility_off.svg';
-    const lookOff = 'svg/visibility.svg';
-
-    fields.forEach(field => setupPasswordField(field, lookOn, lookOff));
+  const lookOn = 'svg/visibility_off.svg';
+  const lookOff = 'svg/visibility.svg';
+  setupPasswordIcons('password', 'togglePassword', lookOn, lookOff);
+  setupPasswordIcons('confirmPassword', 'toggleConfirmPassword', lookOn, lookOff);
 });
 
-/**
- * Sets up a password field with toggle functionality
- * @param {Object} field - The field object containing input and toggle elements
- * @param {string} lookOn - The path to the visibility off icon
- * @param {string} lookOff - The path to the visibility on icon
- */
-function setupPasswordField(field, lookOn, lookOff) {
-    if (field.input && field.toggle && field.lock) {
-        field.input.addEventListener('input', () => handleInput(field, lookOn));
-        field.toggle.addEventListener('click', () => togglePassword(field, lookOn, lookOff));
-        initialIconState(field, lookOn);
-    }
+
+function setupPasswordIcons(inputId, toggleId, lookOn, lookOff) {
+  const input = document.getElementById(inputId);
+  const toggle = document.getElementById(toggleId);
+  const lock = document.querySelector(`#${inputId} + .input-icon`);
+  if (input && toggle && lock) {
+    input.addEventListener('input', () => handlePasswordInput(input, toggle, lock, lookOn));
+    toggle.addEventListener('click', () => togglePasswordVisibility(input, toggle, lookOn, lookOff));
+    setInitialPasswordIcon(input, toggle, lock, lookOn);
+  }
 }
 
-/**
- * Handles input changes in password fields
- * @param {Object} field - The field object
- * @param {string} lookOn - The path to the visibility off icon
- */
-function handleInput(field, lookOn) {
-    if (field.input.value.length > 0) {
-        field.toggle.style.display = 'block';
-        field.lock.style.display = 'none';
-    } else {
-        resetField(field, lookOn);
-    }
+
+function handlePasswordInput(input, toggle, lock, lookOn) {
+  if (input.value.length > 0) {
+    showToggleIcon(toggle, lock);
+  } else {
+    resetPasswordField(input, toggle, lock, lookOn);
+  }
 }
 
-/**
- * Toggles password visibility
- * @param {Object} field - The field object
- * @param {string} lookOn - The path to the visibility off icon
- * @param {string} lookOff - The path to the visibility on icon
- */
-function togglePassword(field, lookOn, lookOff) {
-    if (field.input.type === 'password') {
-        field.input.type = 'text';
-        field.toggle.src = lookOff;
-    } else {
-        field.input.type = 'password';
-        field.toggle.src = lookOn;
-    }
+
+function togglePasswordVisibility(input, toggle, lookOn, lookOff) {
+  if (input.type === 'password') {
+    setPasswordTypeText(input, toggle, lookOff);
+  } else {
+    setPasswordTypePassword(input, toggle, lookOn);
+  }
 }
 
-/**
- * Sets the initial icon state based on field value
- * @param {Object} field - The field object
- * @param {string} lookOn - The path to the visibility off icon
- */
-function initialIconState(field, lookOn) {
-    if (field.input.value.length > 0) {
-        field.toggle.style.display = 'block';
-        field.lock.style.display = 'none';
-    } else {
-        resetField(field, lookOn);
-    }
+
+function setInitialPasswordIcon(input, toggle, lock, lookOn) {
+  if (input.value.length > 0) {
+    showToggleIcon(toggle, lock);
+  } else {
+    resetPasswordField(input, toggle, lock, lookOn);
+  }
 }
 
-/**
- * Resets a field to its default state
- * @param {Object} field - The field object
- * @param {string} lookOn - The path to the visibility off icon
- */
-function resetField(field, lookOn) {
-    field.toggle.style.display = 'none';
-    field.lock.style.display = 'block';
-    field.input.type = 'password';
-    field.toggle.src = lookOn;
+
+function showToggleIcon(toggle, lock) {
+  toggle.style.display = 'block';
+  lock.style.display = 'none';
+}
+
+
+function resetPasswordField(input, toggle, lock, lookOn) {
+  toggle.style.display = 'none';
+  lock.style.display = 'block';
+  input.type = 'password';
+  toggle.src = lookOn;
+}
+
+
+function setPasswordTypeText(input, toggle, lookOff) {
+  input.type = 'text';
+  toggle.src = lookOff;
+}
+
+
+function setPasswordTypePassword(input, toggle, lookOn) {
+  input.type = 'password';
+  toggle.src = lookOn;
 }

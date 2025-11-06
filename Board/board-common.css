@@ -122,6 +122,10 @@ hr {
     cursor: pointer;
 }
 
+#shortAddButton{
+    display:none;
+}
+
 .categorys {
     display: flex;
     justify-content: space-evenly;

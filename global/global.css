@@ -26,6 +26,8 @@ body {
     font-family: 'inter-Regular';
     margin: 0 auto;
     overflow-y: hidden;
+    overflow-x: hidden;
+    min-height:926px;
     background-color: #F6F7F8
 }
 
@@ -35,6 +37,9 @@ body {
     height: 96px;
 }
 
+.joinMobile{
+    display:none;
+}
 
 .header-content {
     display: flex;

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Join-Kanban-Board</title>
     <link rel="stylesheet" href="/global/global.css">
     <link rel="stylesheet" href="/global/global-responsiv.css">
     <link rel="stylesheet" href="/board/popupTemplate.css">
@@ -35,6 +35,7 @@
 <body>
     <header class="header-fullsize">
         <section class="header-content">
+            <img class="joinMobile" src="/img/icons/join-mobileLogo.svg">
             <h2 class="headline">Kanban Projekt Management Tool</h2>
             <div class="profile_help-aria" >
                 <a href="/help/help.html"><img src="/img/icons/help.svg"></a>
@@ -58,7 +59,7 @@
                 </nav>
                 <section class="mainAria">
                     <div class="headline_searchAddTask">
-                        <p class="mainArea-headline">Board</p>
+                        <p class="mainArea-headline">Board</p><img data-category-id="Todo" id="shortAddButton" onclick="addTask()" src="/img/icons/plus-button.svg" alt="plusButton img">
                         <div class="searchInputField">
                             <div class="inputBorder">
                                 <input id="FindTask" type="text" class="searchTasks" min="2" placeholder="Find Task">

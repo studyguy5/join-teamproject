@@ -126,6 +126,10 @@ hr {
     display:none;
 }
 
+.DoneHeadlineMobile{
+    display:none;
+}
+
 .categorys {
     display: flex;
     justify-content: space-evenly;

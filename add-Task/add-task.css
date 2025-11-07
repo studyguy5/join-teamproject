@@ -455,6 +455,37 @@ textarea:focus::placeholder {
     .mainAreaRight h1{
         font-size: 44px;
     }
+    .input-section-left label {
+        font-size: 16px;
+    }
+    .input-section-left-input{
+        font-size: 16px;
+    }
+    textarea{
+        font-size: 16px;
+    }
+    .input-section-right label{
+        font-size: 16px;
+    }
+    .priority-section{
+        flex-direction: column;
+    }
+    .priority-section button{
+        font-size: 16px;
+        width: auto;
+    }
+    .section-right-select{
+        font-size: 16px;
+    }
+    .ForTaskChoise{
+        font-size: 16px;
+    }
+    .ForTaskChoise p{
+        font-size: 16px;
+    }
+    .input-section-right-input{
+        font-size: 16px;
+    }
 }
 
 @media(max-width:520px) {
@@ -467,6 +498,7 @@ textarea:focus::placeholder {
     .mainAreaRight h1{
         font-size: 42px;
     }
+    
 }
 
 @media(max-width:460px) {
@@ -478,5 +510,20 @@ textarea:focus::placeholder {
     }
     .mainAreaRight h1{
         font-size: 38px;
+    }
+}
+
+@media(max-width:428px) {
+    .priority-section{
+        flex-direction: row;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .input-section-left{
+        width: 290px;
+    }
+    .input-section-right{
+        width: 290px;
     }
 }

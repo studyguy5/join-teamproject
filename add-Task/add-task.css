@@ -1,3 +1,6 @@
+.mainAreaRight{
+    height: 928px;
+}
 .mainAreaRight h1{
     font-size: 61px;
     margin-left: 80px;
@@ -239,15 +242,17 @@
 }
 
 .footer{
-    gap: 497.25px;
-    width: 100%;
+    /* gap: 497.25px; */
+    width: auto;
     max-width: 1304px;
+    padding: 0 160px;
     margin-bottom: 64px;
-    margin-left: 96px;
-    margin-right: 135.75px;
+    /* margin-left: 96px;
+    margin-right: 135.75px; */
     margin-top: 110px;
     display: flex;
     align-items: center;
+    justify-content: space-around;
 }
 .footer p{
     font-size: 16px;
@@ -442,6 +447,23 @@ textarea:focus::placeholder {
     }
     .line{
         display: none;
+    }
+
+    .footer-left{
+        width: auto;
+        position: relative;
+        bottom: 100px;
+        left: 30%;
+    }
+}
+
+
+@media (max-width:940px) {
+    .clear-btn{
+        font-size: 16px;
+    }
+    .create-task-btn{
+        font-size: 16px;
     }
 }
 

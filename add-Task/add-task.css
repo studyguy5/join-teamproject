@@ -1,5 +1,6 @@
 .mainAreaRight{
     height: 928px;
+    width: 100%;
 }
 .mainAreaRight h1{
     font-size: 61px;
@@ -244,7 +245,7 @@
 .footer{
     width: auto;
     max-width: 1304px;
-    padding: 0 160px;
+    /* padding: 0 160px; */
     margin-bottom: 64px;
     margin-top: 110px;
     display: flex;

@@ -36,14 +36,6 @@
     .line{
         display: none;
     }
-
-    .footer-left{
-        width: auto;
-        position: relative;
-        bottom: 100px;
-        left: 30%;
-        
-    }
 }
 
 
@@ -53,6 +45,12 @@
     }
     .create-task-btn{
         font-size: 16px;
+    }
+}
+
+@media (max-width:680px) {
+    .footer{
+        flex-direction: column;
     }
 }
 
@@ -97,6 +95,9 @@
     .input-section-right-input{
         font-size: 16px;
     }
+    .input-container {
+        padding-bottom: 120px;
+    }
 }
 
 @media(max-width:520px) {
@@ -136,5 +137,12 @@
     }
     .input-section-right{
         width: 290px;
+    }
+
+    .mainAreaRight{
+        height: 846px;
+    }
+    .input-container{
+        padding-bottom: 0;
     }
 }

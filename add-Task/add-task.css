@@ -242,13 +242,10 @@
 }
 
 .footer{
-    /* gap: 497.25px; */
     width: auto;
     max-width: 1304px;
     padding: 0 160px;
     margin-bottom: 64px;
-    /* margin-left: 96px;
-    margin-right: 135.75px; */
     margin-top: 110px;
     display: flex;
     align-items: center;
@@ -270,6 +267,11 @@
     gap: 16px;
     z-index: 5;
 }
+
+
+
+
+
 .create-task-btn{
     width: 140px;
     height: 40px;
@@ -312,6 +314,10 @@
   filter: brightness(0) saturate(100%) invert(58%) sepia(87%) 
           saturate(2735%) hue-rotate(168deg) brightness(94%) contrast(92%);
 }
+
+
+
+
 
 .priority-section button.Urgent {
     background-color: #FF3D00;
@@ -408,144 +414,5 @@ textarea:focus::placeholder {
 }
 
 
-/* /////////////////////responsiv/////////////////////////////// */
-
-@media(max-width:1272px) {
-    .input-section-left, .input-section-right {
-        width: 400px;
-    }
-}
-
-@media(max-width:1196px) {
-    .input-section-left {
-        width: 340px;
-        margin-left: 40px;
-    }
-}
-
-@media(max-width:1196px) {
-    .input-section-right {
-        width: 340px;
-    }
-}
-
-@media (max-width:1000px) {
-    .mainAreaRight{
-        overflow-x: auto;
-    }
-    .mainAreaRight h1{
-        font-size: 48px;
-        margin-left: 40px;
-    }
-    .input-container{
-        flex-direction: column;
-        max-width: none;
-        gap: 0;
-    }
-    .input-section-left{
-        margin-left: 0;
-    }
-    .line{
-        display: none;
-    }
-
-    .footer-left{
-        width: auto;
-        position: relative;
-        bottom: 100px;
-        left: 30%;
-    }
-}
 
 
-@media (max-width:940px) {
-    .clear-btn{
-        font-size: 16px;
-    }
-    .create-task-btn{
-        font-size: 16px;
-    }
-}
-
-@media(max-width:570px) {
-    .input-section-left{
-        width: 300px;
-    }
-    .input-section-right {
-        width: 300px;
-    }
-    .mainAreaRight h1{
-        font-size: 44px;
-    }
-    .input-section-left label {
-        font-size: 16px;
-    }
-    .input-section-left-input{
-        font-size: 16px;
-    }
-    textarea{
-        font-size: 16px;
-    }
-    .input-section-right label{
-        font-size: 16px;
-    }
-    .priority-section{
-        flex-direction: column;
-    }
-    .priority-section button{
-        font-size: 16px;
-        width: auto;
-    }
-    .section-right-select{
-        font-size: 16px;
-    }
-    .ForTaskChoise{
-        font-size: 16px;
-    }
-    .ForTaskChoise p{
-        font-size: 16px;
-    }
-    .input-section-right-input{
-        font-size: 16px;
-    }
-}
-
-@media(max-width:520px) {
-    .input-section-left{
-        width: 240px;
-    }
-    .input-section-right {
-        width: 240px;
-    }
-    .mainAreaRight h1{
-        font-size: 42px;
-    }
-    
-}
-
-@media(max-width:460px) {
-    .input-section-left{
-        width: 200px;
-    }
-    .input-section-right {
-        width: 200px;
-    }
-    .mainAreaRight h1{
-        font-size: 38px;
-    }
-}
-
-@media(max-width:428px) {
-    .priority-section{
-        flex-direction: row;
-        justify-content: center;
-        gap: 8px;
-    }
-    
-    .input-section-left{
-        width: 290px;
-    }
-    .input-section-right{
-        width: 290px;
-    }
-}

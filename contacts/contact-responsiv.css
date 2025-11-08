@@ -1,0 +1,150 @@
+/* Tablet: mittlere Screens */
+@media (max-width: 1024px) {
+    .contact-body-list {
+        width: 40%;
+    }
+
+    .contact-body-detail {
+        width: 60%;
+    }
+
+    .header-title {
+        font-size: 48px;
+    }
+
+    .header-sub-title {
+        font-size: 20px;
+    }
+
+    .add-new-contact-button {
+        width: 200px;
+    }
+}
+
+/* Tablet / kleine Laptops */
+@media (max-width: 850px) {
+    .content-body {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-body-list {
+        width: 90%;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .contact-body-detail {
+        width: 90%;
+        margin-top: 24px;
+    }
+
+    .detail-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+}
+
+/* Smartphones */
+@media (max-width: 600px) {
+    .contact-body-list {
+        width: 100%;
+        padding: 8px;
+        gap: 6px;
+    }
+
+    .contact-body-detail {
+        width: 100%;
+        padding: 0 8px;
+    }
+
+    .add-new-contact-button {
+        width: 90%;
+        font-size: 14px;
+    }
+
+    .header-title {
+        font-size: 36px;
+    }
+
+    .header-sub-title {
+        font-size: 18px;
+    }
+
+    .floating-profile-name {
+        font-size: 28px;
+    }
+}
+
+/* Sehr kleine Handys (<428px) */
+@media (max-width: 428px) {
+    .content-body {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .contact-body-list {
+        width: 100%;
+        height: auto;
+        max-height: 50vh;
+        overflow-y: scroll;
+    }
+
+    .contact-body-detail {
+        width: 100%;
+        height: auto;
+        padding-bottom: 100px; /* Platz für mobile Navbar */
+    }
+
+    .floating-contact {
+        width: 100%;
+        margin: 0;
+        align-items: center;
+    }
+
+    .floating-contact-header {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .floating-contact-badge {
+        width: 80px;
+        height: 80px;
+        font-size: 32px;
+    }
+
+    .floating-profile-name {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .floating-contact-email p,
+    .floating-contact-phone p {
+        font-size: 14px !important;
+    }
+
+    /* Overlay für Mobile */
+    .overlay-content {
+        width: 95%;
+        height: auto;
+        flex-direction: column;
+        border-radius: 20px;
+    }
+
+    .overlay-logo {
+        width: 100%;
+        height: 120px;
+        border-radius: 20px 20px 0 0;
+    }
+
+    .overlay-form {
+        width: 100%;
+        padding: 16px;
+        flex-direction: column;
+        align-items: center;
+    }
+}

@@ -19,7 +19,7 @@
 
 @media (max-width:1000px) {
     .mainAreaRight{
-        overflow-x: auto;
+        overflow-x: hidden;
     }
     .mainAreaRight h1{
         font-size: 48px;
@@ -51,6 +51,9 @@
 @media (max-width:680px) {
     .footer{
         flex-direction: column;
+    }
+    .footer-buttons-section{
+        justify-content: center;
     }
 }
 
@@ -110,6 +113,9 @@
     .mainAreaRight h1{
         font-size: 42px;
     }
+    .footer-buttons-section{
+        gap: 4px;
+    }
     
 }
 
@@ -144,5 +150,8 @@
     }
     .input-container{
         padding-bottom: 0;
+    }
+    .footer-buttons-section{
+        margin-bottom: 40px;
     }
 }

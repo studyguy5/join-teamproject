@@ -36,7 +36,6 @@
     width: 1116px;
     height: 870px;
     position: fixed;
-    top: 72%;
     right: -10000px;
     transform: translateY(-50%);
     padding: 64px 65, 75px 64px 74px;
@@ -55,7 +54,7 @@
     right: 50%;
     z-index: 8;
     /* Endpunkt Mitte */
-    transform: translate(50%, -100%);
+    transform: translate(50%);
     /* korrekt zentrieren */
     opacity: 1;
 }
@@ -88,6 +87,7 @@
 .addTaskPopupMain {
     height: 870px;
     background-color: #f8f5f5;
+    border-radius: 30px;
 }
 
 .hiddenlayer{

@@ -57,6 +57,13 @@ ol{
 h3{
     margin-top:0px;
     font-size: 20px;
-    
+}
+
+@media (max-width: 900px) {
+    .mainTextAria{
+        margin-left:16px;
+        margin-right:16px;
+        margin-top:16px;
+    }
 }
 

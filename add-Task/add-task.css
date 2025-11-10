@@ -3,7 +3,7 @@
     width: 100%;
 }
 .mainAreaRight h1{
-    font-size: 61px;
+    font-size: clamp(40px, 3vw, 61px);
     margin-left: 80px;
 }
 .input-section-right-input{

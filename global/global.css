@@ -28,6 +28,7 @@ body {
     overflow-y: hidden;
     overflow-x: hidden;
     min-height:926px;
+    height:1024px;
     background-color: #F6F7F8
 }
 
@@ -282,5 +283,6 @@ nav {
 
 .main-fullsize {
     width: 100%;
+    max-height:calc(1024px - 80px);
     max-width: 100%;
 }

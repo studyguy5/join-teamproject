@@ -4,3 +4,31 @@
     height:calc(1024px - 206px);
     overflow-y: scroll;
 }
+
+.privacy-headline{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.privacy-headline a img{
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .privacy-wrapper{
+        margin-left:16px;
+        margin-top:16px;
+        height: calc(1024px - 126px);
+    }
+}
+
+@media (max-width: 428px) {
+    .privacy-wrapper {
+        margin-left: 16px;
+        margin-top: 16px;
+        height: calc(1024px - 206px);
+    }
+    .privacy-headline a img{
+        display: flex;
+    }
+}

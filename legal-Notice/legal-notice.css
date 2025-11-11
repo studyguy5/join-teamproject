@@ -8,3 +8,22 @@
 .marked {
     color: #29ABE2;
 }
+
+.legal-headline{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.legal-headline a img{
+    display: none;
+}
+
+@media (max-width: 428px) {
+    .legal-wrapper {
+        margin-left: 16px;
+        margin-top: 16px;
+    }
+    .legal-headline a img{
+        display: flex;
+    }
+}

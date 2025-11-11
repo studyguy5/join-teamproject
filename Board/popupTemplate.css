@@ -40,8 +40,6 @@
     transform: translateY(-50%);
     padding: 64px 65, 75px 64px 74px;
     border-radius: 10px;
-    /* /* max-width:1116px; */
-    /* width:100%; */
     opacity: 0;
     transition: all 0.4s ease;
     display: flex;
@@ -53,18 +51,15 @@
 .add-task-popup.show {
     right: 50%;
     z-index: 8;
-    /* Endpunkt Mitte */
     transform: translate(50%);
-    /* korrekt zentrieren */
     opacity: 1;
 }
 
 .popup-header {
-    width: 100%;
+    align-items: center;
     max-width: 1002px;
     display: flex;
     justify-content: space-between;
-    /* align-items: center; */
     padding: 64px 40px 32px 74px;
 }
 
@@ -94,17 +89,6 @@
     display: none;
 }
 
-/* .show{
-    position:fixed;
-    z-index: 2;
-    background-color: rgb(255, 0, 0, 0.0);
-    width:100%;
-    max-width:1116px;
-    height:100%;
-    max-height:870px;
-    overflow: hidden;
-} */
-
 .hiddenlayer2{
     display: none;
 }
@@ -120,8 +104,6 @@
 }
 
 /* selbst gebautes Dropdown */
-
-
 
 .section-right-select p{
     margin: 0px;
@@ -188,7 +170,7 @@
 
 /* ///////////////////////////////////// */
 .addTaskPopupMain h1 {
-    font-size: 61px;
+    font-size: clamp(40px, 3vw, 61px);
     margin-left: 0px;
     margin: 0px;
 }
@@ -708,3 +690,6 @@ input:focus::placeholder {
 textarea:focus::placeholder {
     color: transparent;
 }
+
+
+

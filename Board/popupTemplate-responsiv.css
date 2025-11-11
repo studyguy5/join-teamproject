@@ -1,0 +1,76 @@
+@media (max-width: 1200px) {
+    .input-section-leftPopup {
+        width: 340px;
+        margin-left: unset;
+    }
+    .input-section-rightPopup {
+        width: 340px;
+    }
+    .input-containerPopup{
+        justify-content: center;
+    }
+    .add-task-popup{
+        width: auto;
+    }
+    .footerPopup{
+        width: auto;
+    }
+    .inputPopup{
+        width: 295px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .input-containerPopup{
+        flex-direction: column;
+    }
+    .line{
+        display: none;
+    }
+    .addTaskPopupMain{
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 100vw;
+    }
+    .popup-header{
+        width: unset;
+    }
+    .footerPopup{
+        gap: unset;
+        justify-content: center;
+    }
+}
+
+@media(max-width:590px) {
+    .footerPopup{
+        flex-direction: column;
+    }
+    .footer-buttons-section {
+        width: unset!important;
+    }
+}
+
+@media (max-width:430px){
+    .input-section-leftPopup label{
+        font-size: 16px;
+    }
+    .input-section-left-input{
+        font-size: 16px;
+    }
+    textarea{
+        font-size: 16px;
+    }
+    .date-input{
+        font-size: 16px;
+    }
+    .input-section-rightPopup label{
+        font-size: 16px;
+    }
+    .priority-section button{
+        font-size: 16px!important;
+    }
+    .section-right-select{
+        font-size: 16px!important;
+    }
+}
+

@@ -54,6 +54,7 @@
     }
     .footer-buttons-section{
         justify-content: center;
+        margin-bottom: 30px;
     }
 }
 
@@ -150,8 +151,5 @@
     }
     .input-container{
         padding-bottom: 0;
-    }
-    .footer-buttons-section{
-        margin-bottom: 40px;
     }
 }

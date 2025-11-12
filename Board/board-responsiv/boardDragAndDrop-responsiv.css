@@ -348,7 +348,7 @@
         width: 100%;
         min-width: fit-content;
         max-width: 828px;
-        height: calc(1074px - 296px - 80px - 60px);
+        height: calc(977px - 296px - 80px - 60px);
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr 1fr;

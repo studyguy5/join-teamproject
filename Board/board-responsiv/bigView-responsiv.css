@@ -1,6 +1,181 @@
-
-@media(max-width:1135px){
-    .bigViewOfTask{
-        right:140px;
+@media(max-width:1135px) {
+    .bigViewOfTask {
+        right: 140px;
+        max-height: 780px;
     }
+}
+
+@media(max-width:710px) {
+    .bigViewOfTask {
+        right: 60px;
+        max-width: 420px;
+    }
+
+    .titleBigView h2 {
+        font-size: 50px;
+    }
+
+    .descriptionBigView p {
+        font-size: 18px;
+    }
+}
+
+@media(max-width:570px) {
+    .bigViewOfTask {
+        right: 50px;
+        max-width: 320px;
+        padding: 48px 32px;
+    }
+
+
+    .titleBigView h2 {
+        font-size: 36px;
+    }
+
+    .descriptionBigView p {
+        font-size: 16px;
+    }
+
+    .dueDateBigView {
+        font-size: 16px;
+    }
+
+    .dueDateBigView p {
+        font-size: 17px;
+    }
+}
+
+@media(max-width:500px) {
+    .bigViewOfTask {
+        right: 30px;
+    }
+}
+
+@media(max-width:428px) {
+
+    html,
+    body {
+        max-height: 926px;
+    }
+
+    .mainAria {
+        max-height: 926px;
+        min-height: calc(926px - 160px);
+    }
+
+    .main-Contentsize {
+        max-height: calc(926px - 80px - 80px);
+    }
+
+    nav {
+        top: calc(926px - 80px);
+    }
+
+     .descriptionBigView p {
+        max-width:300px;
+    }
+
+    .assignedToBigView{
+
+        max-width:300px;
+    }
+    
+
+    .assignedToBigView p {
+        font-size: 16px;
+    }
+
+    .bigViewOfTask {
+        right: 10px;
+        top:-40px;
+        padding: 10px 20px
+    }
+
+    .titleBigView{
+        max-width:300px;
+    }
+
+     .titleBigView h2 {
+        font-size: 32px;
+        max-width:300px;
+    }
+
+    .descriptionBigView{
+        max-width:300px;
+    }
+    .descriptionBigView p {
+        font-size: 12px;
+    }
+
+    .dueDateBigView {
+        max-width:300px;
+    }
+
+    .bigViewHeadlineCloseArea {
+        max-width:300px;
+    }
+
+    .subtaskBigView{
+        max-width:300px;
+    }
+
+    .editeDeleteArea{
+        max-width:300px;
+    }
+
+    .footerPopupEditView{
+        bottom:90px;
+    }
+
+    .ok-btn-edit-view {
+        height:40px;
+    }
+}
+
+@media(max-width:370px){
+    .bigViewOfTask{
+        right:5px;
+        top:-55px;
+        max-width:290px;
+        padding:20px 10px;
+    }
+
+    .bigViewHeadlineCloseArea{
+        max-width:280px;
+    }
+
+    .titleBigView h2 {
+        font-size: 28px;
+    }
+
+    .editeDeleteArea{
+        justify-content: center;
+    } 
+
+     .titleBigView {
+        max-width:280px;
+    }
+
+
+    .descriptionBigView  {
+        max-width:280px;
+    }
+
+    .assignedToBigView{
+
+        max-width:280px;
+    }
+
+    .dueDateBigView {
+        max-width:280px;
+    }
+
+    .subtaskBigView{
+        max-width:280px;
+    }
+
+    .editeDeleteArea{
+        max-width:280px;
+    }
+
 }

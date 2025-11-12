@@ -32,7 +32,7 @@ function renderBigEditView(id) {
           
 
           <div class="input-section-right-EditView">
-            <p>Priority</p>
+            <p id="priO">Priority</p>
             <section class="priority-sectionEdit">
               <button class="button" data-priority="Urgent" type="button">
                 Urgent<img src="/img/icons/urgent.svg" />

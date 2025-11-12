@@ -99,6 +99,7 @@
         padding-right: 10px;
         padding-left: 10px;
         flex-direction: row-reverse;
+        height:216px;
     }
 
     .headline_searchAddTask p {
@@ -149,8 +150,11 @@
     }
 
     #shortAddButton{
+        content:url(/img/icons/add-task-mobile.svg);
         display:block;
         position:absolute;
+        width:40px;
+        height:40px;
         top:65px;
         right:20px;
         cursor: pointer;

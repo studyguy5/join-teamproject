@@ -1,0 +1,119 @@
+@media(max-width:710px){
+    .input-section-left-inputEditView {
+        max-width:375px;
+    }
+
+    .input-section-leftEditView textarea{
+        max-width:375px;
+    }
+
+    .dateEditView{
+        max-width:366px;
+    }
+
+    .priority-sectionEdit{
+        max-width:419px;
+    }
+
+    .section-right-selectEditView {
+        max-width:385px;
+    }
+
+    .subtask-wrapperEditView {
+        max-width:385px;
+        align-items: baseline;
+    }
+
+    
+}
+
+@media(max-width:570px){
+    
+
+    .input-section-leftEditView {
+        height: 346px;
+    }    
+
+     .input-section-left-inputEditView {
+        max-width:274px;
+    }
+
+    .input-section-leftEditView textarea{
+        margin-bottom: 15px;
+        max-width:274px;
+    }
+    #task-descriptionEdit{
+        max-height:60px;
+    }
+
+    #priO{
+        margin: 10px 0px;
+    }
+    .dateEditView{
+        margin-bottom: 20px;
+        max-width:265px;
+    }
+
+    .priority-sectionEdit{
+        max-width:274px;
+    }
+
+    .section-right-selectEditView {
+        max-width:284px;
+    }
+
+    .subtask-wrapperEditView {
+        max-width:284px;
+        align-items: baseline;
+    }
+}
+
+@media(max-width:428px){
+    .editBigView{
+        height:660px;
+    }
+}
+
+@media(max-width:370px){
+    .editBigView{
+        height:660px;
+        width: calc(96% + 10px);
+    }
+
+    .footerPopupEditView{
+        height:20px;
+        max-height:30px
+    }
+
+     .input-section-left-inputEditView {
+        max-width:230px;
+    }
+
+    .input-section-leftEditView textarea{
+        margin-bottom: 15px;
+        max-width:230px;
+    }
+
+     .dateEditView{
+        margin-bottom: 20px;
+        max-width:221px;
+    }
+    .priority-sectionEdit{
+        gap:10px;
+    }
+
+     .priority-sectionEdit button{
+        max-width:221px;
+        font-size: 15px;
+    }
+
+    .section-right-selectEditView {
+        max-width:240px;
+    }
+
+    .subtask-wrapperEditView{
+        max-width:240px;
+        align-items: baseline;
+    }
+
+}

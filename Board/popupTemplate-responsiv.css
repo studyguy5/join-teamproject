@@ -52,25 +52,50 @@
 
 @media (max-width:430px){
     .input-section-leftPopup label{
-        font-size: 16px;
+        font-size: 16px!important;
     }
     .input-section-left-input{
-        font-size: 16px;
+        font-size: 16px!important;
     }
     textarea{
-        font-size: 16px;
+        font-size: 16px!important;
     }
     .date-input{
-        font-size: 16px;
+        font-size: 16px!important;
     }
     .input-section-rightPopup label{
-        font-size: 16px;
+        font-size: 16px!important;
     }
     .priority-section button{
         font-size: 16px!important;
     }
     .section-right-select{
         font-size: 16px!important;
+    }
+    .input-section-leftPopup{
+        width: 260px;
+    }
+    .input-section-rightPopup{
+        width: 260px;
+    }
+    .priority-section{
+        gap: unset!important;
+    }
+    .priority-section button{
+        gap: 4px!important;
+    }
+    .inputPopup{
+        width: 218px;
+        font-size: 16px!important;
+    }
+    .clear-btn {
+        font-size: 16px!important;
+    }
+    .create-task-btn{
+        font-size: 16px!important;
+    }
+    .popup-header{
+        padding-left: 44px;
     }
 }
 

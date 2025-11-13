@@ -103,7 +103,7 @@ function deliverDataToSummary(tasks) {
   let done = tasks.filter(td => td[1].category === 'Done');
   document.getElementById('doneTask').innerHTML = done.length;
   let urgent = tasks.filter(td => td[1].prio === 'Urgent');
-  document.getElementById('prioUrgent').innerHTML = urgent.length;
+  document.getElementById('prioUrgent').innerHTML = urgent.length + `<span>Urgent</span>`;
 
   document.getElementById('allTaskInBoard').innerHTML = tasks.length;
   let inprogress = tasks.filter(td => td[1].category === 'Inprogress');

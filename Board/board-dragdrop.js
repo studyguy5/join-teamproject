@@ -68,7 +68,18 @@ async function sendAlltoFirebase(contactsArray, path = 'contact') {
 
 
 let choosenCategory;
-let rightColumn = document.querySelectorAll('.categorys > div img').forEach(el => {
+let rightColumn = document.querySelectorAll('.categorys > div img')
+if(rightColumn)
+rightColumn.forEach(el => {
+    el.addEventListener('click', () => {
+        console.log(el.dataset.categoryId)
+        choosenCategory = el.dataset.categoryId
+    })
+})
+
+let rigthColumnRe = document.querySelectorAll('.DragAndDropTaskAria > div img')
+if(rigthColumnRe)
+rigthColumnRe.forEach(el => {
     el.addEventListener('click', () => {
         console.log(el.dataset.categoryId)
         choosenCategory = el.dataset.categoryId

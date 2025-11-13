@@ -65,6 +65,7 @@
 @media(max-width:1180px) {
     .emptyCategory {
         font-size: 12px;
+        margin: 16px 0px 26px 4px;
     }
 }
 
@@ -78,7 +79,7 @@
     }
 }
 
-@media(max-width:1000px) {
+@media(max-width:1070px) {
     .categorys {
         display: none;
     }
@@ -88,15 +89,23 @@
         max-width: 890px;
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto 1fr auto 1fr auto 1fr auto 1fr;
         /* Headers + Content für 2 Spalten */
         box-sizing: border-box;
-        height:calc(712px - 80px);
+        height: calc(712px - 80px);
         padding: 8px 0px 0px 24px;
+        gap: 0px;
+    }
+
+    .DragAndDropTaskAria:nth-child(2) {
+        border: 0px;
     }
 
     .TaskDiv {
         min-width: 212px;
+        max-width:212px;
+        height: clamp(240px, 250px, 270px);
+        margin: 16px 0px 26px 4px;
     }
 
     .TodoMobile {
@@ -114,8 +123,9 @@
         align-items: center;
         width: 220px;
         height: 15px;
-        grid-row: 2;
+        grid-row: 3;
         grid-column: 1;
+        margin-bottom: 10px;
     }
 
     .AwaitfeedbackMobile {
@@ -123,8 +133,9 @@
         align-items: center;
         width: 220px;
         height: 15px;
-        grid-row: 3;
+        grid-row: 5;
         grid-column: 1;
+        margin-bottom: 10px;
     }
 
     .DoneHeadlineMobile {
@@ -132,7 +143,7 @@
         align-items: center;
         width: 220px;
         height: 15px;
-        grid-row: 4;
+        grid-row: 7;
         grid-column: 1;
         font-weight: bold;
         margin-bottom: 10px;
@@ -141,8 +152,8 @@
 
     .Todo {
         display: flex;
-        margin: 39px 0px 39px 0px;
-        grid-row: 1;
+        gap:34px;
+        grid-row: 2;
         grid-column: 1;
     }
 
@@ -150,21 +161,21 @@
         width: 100%;
         gap: 34px;
         overflow-x: scroll;
-        min-height: 250px;
+        height: max-content;
         min-width: 450px;
-        max-width: 800px;
+        max-width: 840px;
         scrollbar-width: none;
         display: flex;
-        margin: 39px 0px 39px 0px;
-        grid-row: 2;
+        /* margin: 39px 0px 39px 0px; */
+        grid-row: 4;
         grid-column: 1;
     }
 
 
     .AwaitFeedback {
         display: flex;
-        margin: 39px 0px 39px 0px;
-        grid-row: 3;
+        gap:34px;
+        grid-row: 6;
         grid-column: 1;
     }
 
@@ -175,7 +186,7 @@
         max-width: 222px;
         height: 100%;
         max-height: 688px;
-        gap:34px;
+        gap: 34px;
     }
 
 
@@ -209,11 +220,11 @@
         max-width: 710px;
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto 1fr auto 1fr auto 1fr auto 1fr;
         /* Headers + Content für 2 Spalten */
-        gap: 35px;
+        gap: 0px;
         box-sizing: border-box;
-         /* height: calc(1074px - 296px - 80px - 60px); */
+        /* height: calc(1074px - 296px - 80px - 60px); */
         height: calc(712px - 80px);
         padding: 8px 0px 0px 24px;
     }
@@ -233,7 +244,7 @@
         align-items: center;
         width: 220px;
         height: 15px;
-        grid-row: 2;
+        grid-row: 3;
         grid-column: 1;
 
     }
@@ -243,14 +254,14 @@
         align-items: center;
         width: 220px;
         height: 15px;
-        grid-row: 3;
+        grid-row: 5;
         grid-column: 1;
 
     }
 
     .DoneHeadlineMobile {
 
-        grid-row: 4;
+        grid-row: 7;
         grid-column: 1;
         font-weight: bold;
         margin-bottom: 10px;
@@ -258,39 +269,43 @@
     }
 
     .Todo {
-        min-height:270px;
-        margin: 39px 0px 0px 0px;
-        display:flex;
-        grid-row: 1;
+        /* min-height:270px; */
+        /* margin: 39px 0px 0px 0px; */
+        display: flex;
+        height: max-content;
+        grid-row: 2;
         grid-column: 1;
-        gap:34px;
+        gap: 34px;
     }
 
     .Inprogress {
-        min-height:270px;
-       margin: 39px 0px 0px 0px;
-        display:flex;
-        grid-row: 2;
+        /* min-height:270px; */
+        overflow-y: hidden;
+        display: flex;
+        height: max-content;
+        grid-row: 4;
         grid-column: 1;
-        gap:34px;
+        gap: 34px;
     }
 
     .AwaitFeedback {
-        min-height:270px;
-        margin: 39px 0px 0px 0px;
-        display:flex;
-        grid-row: 3;
+        /* min-height:270px; */
+        /* margin: 39px 0px 0px 0px; */
+        display: flex;
+        height: max-content;
+        grid-row: 6;
         grid-column: 1;
-        gap:34px;
+        gap: 34px;
     }
 
     .Done {
-        min-height:270px;
-       margin: 39px 0px 0px 0px;
-        display:flex;
-        grid-row: 4;
+        /* min-height:270px; */
+        /* margin: 39px 0px 0px 0px; */
+        display: flex;
+        height: max-content;
+        grid-row: 8;
         grid-column: 1;
-        gap:34px;
+        gap: 34px;
     }
 
 
@@ -305,12 +320,13 @@
 
     .TaskDiv {
         cursor: pointer;
-        min-width:222px;
+        min-width: 222px;
         /* max-width:min-content; */
-        margin-bottom: 16px;
+        /* margin-bottom: 16px; */
         max-height: 263px;
         background-color: rgb(255, 255, 255, 1);
         padding: 16px 16px;
+        margin: 16px 0px 26px 4px;
         border-radius: 24px;
         box-shadow: 0px 0px 10px 3px rgb(0, 0, 0, 0.08);
         box-sizing: border-box;
@@ -351,9 +367,9 @@
         height: calc(977px - 296px - 80px - 60px);
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto 1fr auto 1fr auto 1fr auto 1fr;
         /* Headers + Content für 2 Spalten */
-        gap: 35px;
+        gap: 0px;
         padding: 18px 0px 0px 24px;
     }
 
@@ -362,48 +378,51 @@
         left: 65px;
         justify-content: space-between;
         align-items: center;
-       max-width:396px;
-       width: calc(100vw - 46px);
+        max-width: 396px;
+        width: calc(100vw - 46px);
         height: 15px;
         grid-row: 1;
         grid-column: 1;
         box-sizing: border-box;
+        margin-bottom: 10px;
     }
 
     .InprogressMobile {
         position: relative;
-        left: 63px;
+        left: 68px;
         justify-content: space-between;
         align-items: center;
-       max-width:396px;
-        width: calc(100vw - 35px);
-        height: 15px;
-        grid-row: 2;
-        grid-column: 1;
-        box-sizing: border-box;
-    }
-
-    .AwaitfeedbackMobile {
-        position: relative;
-        left: 63px;
-        justify-content: space-between;
-        align-items: center;
-        max-width:396px;
-       width: calc(100vw - 35px);
+        max-width: 396px;
+        width: calc(100vw - 46px);
         height: 15px;
         grid-row: 3;
         grid-column: 1;
         box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    .AwaitfeedbackMobile {
+        position: relative;
+        left: 68px;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 396px;
+        width: calc(100vw - 35px);
+        height: 15px;
+        grid-row: 5;
+        grid-column: 1;
+        box-sizing: border-box;
+        margin-bottom: 10px;
     }
 
     .DoneHeadlineMobile {
         margin: 0 auto;
-        grid-row: 4;
+        grid-row: 7;
         grid-column: 1;
         font-weight: bold;
         margin-bottom: 10px;
         position: relative;
-        left: -31px;
+        left: -28px;
         justify-content: space-between;
         align-items: center;
         width: 220px;
@@ -412,52 +431,26 @@
 
     .Todo {
         display: flex;
-        position: relative;
-        left: 63px;
-        min-height: 270px;
-        grid-row: 1;
-        grid-column: 1;
-        gap: 34px;
-        min-width: 409px;
-        overflow-x: scroll;
-        scrollbar-width: none;
-        margin: 39px 0px 0px 0px;
-    }
-     
-
-
-
-    .Inprogress {
-        display: flex;
+        height: max-content;
         position: relative;
         left: 63px;
         min-height: 270px;
         grid-row: 2;
         grid-column: 1;
         gap: 34px;
-        min-width: 409px;
+        min-width: fit-content;
         overflow-x: scroll;
+        overflow-y: hidden;
         scrollbar-width: none;
-        margin: 39px 0px 0px 0px;
+        /* margin: 39px 0px 0px 0px; */
     }
 
 
-    .AwaitFeedback {
-        display: flex;
-        position: relative;
-        left: 63px;
-        min-height: 270px;
-        grid-row: 3;
-        grid-column: 1;
-        gap: 34px;
-        min-width: 409px;
-        overflow-x: scroll;
-        scrollbar-width: none;
-        margin: 39px 0px 0px 0px;
-    }
 
-    .Done {
+
+    .Inprogress {
         display: flex;
+        height: max-content;
         position: relative;
         left: 63px;
         min-height: 270px;
@@ -466,15 +459,49 @@
         gap: 34px;
         min-width: 409px;
         overflow-x: scroll;
+         overflow-y: hidden;
         scrollbar-width: none;
-        margin: 39px 0px 0px 0px;
+        /* margin: 39px 0px 0px 0px; */
+    }
+
+
+    .AwaitFeedback {
+        display: flex;
+        height: max-content;
+        position: relative;
+        left: 63px;
+        min-height: 270px;
+        grid-row: 6;
+        grid-column: 1;
+        gap: 34px;
+        min-width: 409px;
+        overflow-x: scroll;
+         overflow-y: hidden;
+        scrollbar-width: none;
+        /* margin: 39px 0px 0px 0px; */
+    }
+
+    .Done {
+        display: flex;
+        height: max-content;
+        position: relative;
+        left: 63px;
+        min-height: 270px;
+        grid-row: 8;
+        grid-column: 1;
+        gap: 34px;
+        min-width: 409px;
+        overflow-x: scroll;
+         overflow-y: hidden;
+        scrollbar-width: none;
+        /* margin: 39px 0px 0px 0px; */
     }
 
     .TaskDiv {
         cursor: pointer;
         min-width: 222px;
         max-width: min-content;
-        margin-bottom: 16px;
+        margin: 16px 0px 26px 4px;
         max-height: 263px;
         background-color: rgb(255, 255, 255, 1);
         padding: 16px 16px;
@@ -489,18 +516,18 @@
     .AwaitfeedbackMobile {
         display: flex;
         font-weight: bold;
-    
+
     }
 
     .TodoMobile img,
     .InprogressMobile img,
     .AwaitfeedbackMobile img {
         cursor: pointer;
-        display:block;
-        position:sticky;
-        right:25px;
+        display: block;
+        position: sticky;
+        right: 25px;
         overflow-x: clip;
-        overflow-y:visible;
+        overflow-y: visible;
         box-sizing: border-box;
     }
 

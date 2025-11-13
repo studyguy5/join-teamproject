@@ -1,4 +1,4 @@
-@media(max-width:1135px) {
+@media(max-width:1175px) {
     nav {
         width: 202px;
 
@@ -21,78 +21,6 @@
 
 }
 
-
-@media (max-width: 900px) {
-    .headline {
-        margin-left: 300px;
-        font-size: 20px;
-    }
-}
-
-@media (max-width: 780px) {
-    .headline {
-        margin-left: 270px;
-        font-size: 18px;
-    }
-}
-
-@media(max-width:710px) {
-
-    .headline {
-        margin-left: 240px;
-        font-size: 18px;
-    }
-
-    nav {
-        width: 182px;
-        /* position:fixed; */
-    }
-
-    .privacy-legal-section {
-        width: 182px;
-        height: 317px;
-        display: flex;
-        flex-direction: column;
-        justify-content: end;
-        align-items: center;
-        background-color: #2a3647;
-        color: gray;
-        padding-top: 114.02px;
-        padding-bottom: 64px;
-        gap: 4px;
-    }
-
-    .nav-elements>li>a {
-        padding: 8px 0px 8px 43px;
-    }
-
-}
-
-@media (max-width: 680px) {
-    .headline {
-        margin-left: 220px;
-        font-size: 16px;
-    }
-}
-
-@media(max-width:620px) {
-    .headline {
-        margin-left: 200px;
-        font-size: 14px;
-    }
-}
-
-@media(max-width:570px) {
-    .headline {
-        margin-left: 190px;
-        font-size: 14px;
-    }
-
-    .profile_help-aria {
-        margin-right: 16px;
-        gap: 10px;
-    }
-}
 
 @media(max-width:1000px) {
     .html {
@@ -231,6 +159,7 @@
         height: 76px;
         display: flex;
         flex-direction: column;
+        align-items: center;
         box-sizing: border-box;
     }
 
@@ -242,6 +171,82 @@
         justify-content: center;
     }
 }
+
+
+@media (max-width: 900px) {
+    .headline {
+        margin-left: 300px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 780px) {
+    .headline {
+        margin-left: 270px;
+        font-size: 18px;
+    }
+}
+
+@media(max-width:710px) {
+
+    .headline {
+        margin-left: 240px;
+        font-size: 18px;
+    }
+
+    nav {
+        width: 182px;
+        /* position:fixed; */
+    }
+
+    .privacy-legal-section {
+        width: 182px;
+        height: 317px;
+        display: none;
+        flex-direction: column;
+        justify-content: end;
+        align-items: center;
+        background-color: #2a3647;
+        color: gray;
+        padding-top: 114.02px;
+        padding-bottom: 64px;
+        gap: 4px;
+    }
+
+    .nav-elements>li>a {
+        /* padding: 8px 0px 8px 43px; */
+        justify-content: center;
+    }
+    
+
+}
+
+@media (max-width: 680px) {
+    .headline {
+        margin-left: 220px;
+        font-size: 16px;
+    }
+}
+
+@media(max-width:620px) {
+    .headline {
+        margin-left: 200px;
+        font-size: 14px;
+    }
+}
+
+@media(max-width:570px) {
+    .headline {
+        margin-left: 190px;
+        font-size: 14px;
+    }
+
+    .profile_help-aria {
+        margin-right: 16px;
+        gap: 10px;
+    }
+}
+
 
 @media(max-width:370px) {
 

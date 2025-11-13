@@ -385,4 +385,20 @@ document.addEventListener('DOMContentLoaded', () => {
   try { renderUserInitials(); } catch (e) {}
 });
 
-
+function randomFill(){
+document.getElementById('title').value = 'Beispieltitel';
+document.getElementById('task-description').value = 'Meine Beschreibung hier...';
+document.getElementById('dueDate').value = '12.05.2028';
+document.getElementById('selectedTask').innerHTML = 'User Story';
+prioButtonactivate()
+}
+function prioButtonactivate() {
+    const buttonsEdit = document.querySelectorAll(".priority-sectionEdit button");
+    let rightTask = tasks.find(r => r[1].id > 10);
+    let thisprio = rightTask[1].prio;
+    buttonsEdit.forEach((button) => {
+        if (button.innerText === thisprio) {
+            button.classList.add(thisprio)
+        }
+    })
+}

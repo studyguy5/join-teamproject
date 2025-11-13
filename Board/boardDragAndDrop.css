@@ -2,7 +2,7 @@
     width: 100%;
     max-width: 1208px;
     height: 100%;
-    max-height: 688px;
+    max-height: calc(688px - 32px);
     overflow-y: scroll;
     display: flex;
     scrollbar-width: none;

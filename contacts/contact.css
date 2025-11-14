@@ -181,8 +181,8 @@ h1 {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    align-items: center;
     gap: 10px;
+    align-items: center;
 }
 
 .add-new-contact-button {
@@ -274,6 +274,9 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+.center-alignment{
+    display: none;
 }
 
 .contact-name,

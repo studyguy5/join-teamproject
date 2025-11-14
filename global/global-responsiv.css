@@ -44,6 +44,10 @@
         /* margin-bottom: 48px; */
     }
 
+    .profileMenu {
+        top:82px;
+    }
+
     .headerProfileCircle {
         width:40px;
         height:40px;

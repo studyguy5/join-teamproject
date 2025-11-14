@@ -117,7 +117,11 @@ function renderTaskintoBoard(element) {
   }
   return `<div draggable="true" onmouseenter="renderMiniMenü(${element.id})" onmouseleave="renderMiniMenü(${element.id})" ondragstart="startDragging(${element['id']})" 
     id="TaskDiv-${element.id}" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderEditAndDeleteButton(${element.id})" class="TaskDiv">
-    <div class=" dOntShow" id="miniMenüResponsiv-${element.id}">Optionen in arbeit</div>
+    <div class=" dOntShow" id="miniMenüResponsiv-${element.id}">
+    <p class="head">Move to</p>
+    <p class="firstLine"><img src="/img/icons/arrow_upward.svg">Todo</p>
+    <p class="secondLine"><img src="/img/icons/arrow_downward.svg">Review</p>
+    </div>
     <div  id="taskType" class="${taskOption}">${element.taskType}</div>
     <div class="taskTitle"><p>${element.title}</p></div>
     <div class="taskDescription"><p>${element.description}</p></div>

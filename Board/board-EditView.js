@@ -48,7 +48,7 @@ function arraySorting(array) {
 function prioButtonactivate(id) {
     const buttonsEdit = document.querySelectorAll(".priority-sectionEdit button");
     let rightTask = tasks.find(r => r[1].id === id);
-    let thisprio = rightTask[1].prio;
+    let thisprio = rightTask?.[1].prio;
     buttonsEdit.forEach((button) => {
         if (button.innerText === thisprio) {
             button.classList.add(thisprio)
@@ -191,6 +191,7 @@ let existingFilledObjects = ['DueDate', 'description', 'title'];
 
 
 async function getTaskInformationEdit(id) {
+    console.log('editgetTask');
     const taskToEdit = tasks.find(task => task[1].id === id);
     let firebaseID = [taskToEdit[0]];
     await deleteData(firebaseID);
@@ -369,7 +370,7 @@ let thisTask;
 function renderChoosenContactEdit(id, index) {
     let Choosen = document.getElementById('choosenContactsEdit')
     const RightTask = tasks.find(task => task[1].id === id);
-        if (index && RightTask[1].assignedTo.length < 5) {
+        if (index && RightTask[1]?.assignedTo?.length < 5) {
         const list = contactsArray[index].name
         RightTask[1].assignedTo.push(list);   // pushe ihn ins assignedTo array
         for (let preIndex = RightTask[1].assignedTo.length - 1; preIndex < RightTask[1].assignedTo.length; preIndex++) {  
@@ -377,7 +378,7 @@ function renderChoosenContactEdit(id, index) {
             Choosen.innerHTML += `
           <div id="contactCirclePopupRender-${index}" class="contactCirclePopupRender">${thisTask[preIndex][0] + thisTask[preIndex][1]}</div>`;
         }
-    } else if (index && RightTask[1].assignedTo.length >= 5) {
+    } else if (index && RightTask[1]?.assignedTo?.length >= 5) {
         Choosen.innerHTML += `<h6>max of length reached</h6>`
     } else if (RightTask[1].assignedTo?.length < 5) {
         for (let preIndex = 0; preIndex < RightTask[1].assignedTo?.length; preIndex++) {

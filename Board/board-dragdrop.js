@@ -145,6 +145,7 @@ function setContactAndPrioValue(newTask) {
 
 
 async function getTaskInformation(index) {
+    console.log('normales getTask');
     let newTask = createTemplate();
     const allIds = tasks.map(ta => ta[1].id)
     let rn = Math.floor(Math.random() * 50)
@@ -258,7 +259,7 @@ function activateEditModus(id) {
     let edit = document.getElementById('bigViewOfTask')
     edit.innerHTML = "";
     edit.innerHTML = renderBigEditView(id);
-    getCurrentValues(id)
+    getCurrentValues(id);
     prioButtonactivate(id);
 }
 

@@ -21,13 +21,20 @@
     margin: 0px 0px 24px 0px;
 }
 
+.titleBigView{
+    max-width:fit-content;
+}
+
 .titleBigView h2 {
+    overflow-wrap: break-word;
     margin: 0px 0px 24px 0px;
     font-weight: 700;
     font-style: Bold;
     font-size: 61px;
     line-height: 120%;
     letter-spacing: 0%;
+    min-width:300px;
+    width:100%;
 }
 
 .descriptionBigView p {

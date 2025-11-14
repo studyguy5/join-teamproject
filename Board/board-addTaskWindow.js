@@ -200,6 +200,19 @@ function showContacts() {
     }
 }
 
+let first = true;
+function openContactWithCounter(id) {
+    if (first) {
+        showContacts(id);
+        openContactView();
+        showInput();
+        first = false;
+    } else {
+        openContactView();
+        showInput();
+    }
+}
+
 
 let filteredContacts;
 function filterContactsInPopup() {
@@ -275,17 +288,17 @@ function chooseContact(index) {
 
 
 function chooseFilteredContact(filterContactIndex) {
-    let choContact = document.getElementById(`checkboxImg-${filterContactIndex}`)
-    if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
-        choContact.classList.remove('checkbox')
-        choContact.classList.add('checked')
+    let choContactF = document.getElementById(`checkboxImg-${filterContactIndex}`)
+    if (choContactF.src.includes("/img/icons/normalCheckContact.svg")) {
+        choContactF.classList.remove('checkbox')
+        choContactF.classList.add('checked')
         renderFilteredChoosenContact(filterContactIndex)
-        choContact.src = "/img/icons/normalCheckedContact.svg"
+        choContactF.src = "/img/icons/normalCheckedContact.svg"
     } else {
-        choContact.classList.add('checkbox')
-        choContact.classList.remove('checked')
+        choContactF.classList.add('checkbox')
+        choContactF.classList.remove('checked')
         deleteRenderedContact(filterContactIndex);
-        choContact.src = "/img/icons/normalCheckContact.svg"
+        choContactF.src = "/img/icons/normalCheckContact.svg"
     }
 }
 

@@ -182,6 +182,7 @@
     top: -8px;
     background-color: white;
     opacity: 1;
+    z-index: 3px;
 }
 
 .dropTasktypeClose{

@@ -115,10 +115,9 @@ function renderTaskintoBoard(element) {
   if (element.taskType === 'User Story') {
     taskOption = 'darkblue';
   }
-  return `<div draggable="true" ondragstart="startDragging(${element['id']})" 
+  return `<div draggable="true" onmouseenter="renderMiniMenü(${element.id})" onmouseleave="renderMiniMenü(${element.id})" ondragstart="startDragging(${element['id']})" 
     id="TaskDiv-${element.id}" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderEditAndDeleteButton(${element.id})" class="TaskDiv">
     <div class=" dOntShow" id="miniMenüResponsiv-${element.id}">Optionen in arbeit</div>
-    <button class="miniMenüButton" onclick="event.stopPropagation(); renderMiniMenü(${element.id})">MiniMenü</button>
     <div  id="taskType" class="${taskOption}">${element.taskType}</div>
     <div class="taskTitle"><p>${element.title}</p></div>
     <div class="taskDescription"><p>${element.description}</p></div>
@@ -144,11 +143,10 @@ function renderTaskintoBoard(element) {
 }
 
 function renderMiniMenü(id){
-  //  let mini = tasks.filter(tasks => tasks[1].id === id);
-  miniMenu = document.getElementById(`miniMenüResponsiv-${id}`)
+   miniMenu = document.getElementById(`miniMenüResponsiv-${id}`)
   miniMenu.classList.toggle('miniMenüResponsiv')
-  console.log('wird getriggert')
 }
+
 
 function renderBigViewHTML(elements, id) {
   return `

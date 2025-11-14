@@ -132,9 +132,9 @@ function getStoredUserName() {
 function getInitials(fullName) {
   const parts = (fullName || '').trim().split(/\s+/).filter(Boolean);
   if (!parts.length) return 'US';
-  const first = parts[0][0] || '';
+  const first = parts[0][0] || 'Guest' || '';
   const last = parts.length > 1 ? parts[parts.length - 1][0] : (parts[0][1] || '');
-  return (first + last).toUpperCase();
+  return (first == 'Guest' ? 'Guest' : first + last).toUpperCase();
 }
 
 window.renderUserInitials = function renderUserInitials() {

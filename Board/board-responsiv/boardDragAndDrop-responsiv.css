@@ -84,11 +84,24 @@
         display: none;
     }
 
-    .miniMenüButton {
+    /* .miniMenüButton {
         display: block;
         position:absolute;
         left:120px;
         
+    } */
+
+    .miniMenüResponsiv{
+        display: flex;
+        position: absolute;
+        right: -38px;
+        width: 80px;
+        height: 90px;
+        color:white;
+        background-color: #2a3647;
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+        border-bottom-left-radius: 15px;
     }
 
     .DragAndDropTaskAria {
@@ -99,14 +112,12 @@
         grid-template-rows: auto 1fr auto 1fr auto 1fr auto 1fr;
         /* Headers + Content für 2 Spalten */
         box-sizing: border-box;
-        height: calc(712px - 80px);
+        min-height:705px;
+        height: calc(712px  + 80px);
         padding: 8px 0px 0px 24px;
         gap: 0px;
     }
 
-    .DragAndDropTaskAria:nth-child(2) {
-        border: 0px;
-    }
 
     .TaskDiv {
         min-width: 212px;
@@ -221,6 +232,22 @@
     }
 }
 
+@media(max-width:1000px) {
+    
+    .DragAndDropTaskAria {
+        width: 100%;
+        max-width: 890px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto 1fr auto 1fr auto 1fr;
+        /* Headers + Content für 2 Spalten */
+        box-sizing: border-box;
+        min-height:632px;
+        height: calc(712px  - 100px);
+        padding: 8px 0px 0px 24px;
+        gap: 0px;
+    }
+}
 @media(max-width:710px) {
     .DragAndDropTaskAria {
         width: 100%;
@@ -378,6 +405,7 @@
         /* Headers + Content für 2 Spalten */
         gap: 0px;
         padding: 18px 0px 0px 24px;
+        min-height: 545px;
     }
 
     .TodoMobile {

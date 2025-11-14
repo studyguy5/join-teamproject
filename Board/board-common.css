@@ -5,7 +5,8 @@
     width: 100%;
     max-width: 1208px;
     height: 100%;
-    max-height: calc(1024px - 80px);
+    max-height: calc(1007px - 80px);
+    box-sizing: border-box;
 }
 
 .headline_searchAddTask {

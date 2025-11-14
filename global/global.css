@@ -283,6 +283,6 @@ nav {
 
 .main-fullsize {
     width: 100%;
-    max-height:calc(1024px - 80px);
+    max-height:calc(1007px - 80px);
     max-width: 100%;
 }

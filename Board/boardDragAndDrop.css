@@ -64,29 +64,13 @@
     position:relative;
 }
 
-/* .miniMenüResponsiv{
-    display:flex;
-} */
-
 .dOntShow{
     display:none;
 }
 
-.miniMenüButton{
-    display:none;
-}
 
 .miniMenüResponsiv{
-        display: flex;
-        position: absolute;
-        right: -38px;
-        width: 80px;
-        height: 90px;
-        color:white;
-        background-color: #2a3647;
-        border-top-right-radius: 15px;
-        border-bottom-right-radius: 15px;
-        border-bottom-left-radius: 15px;
+        display: none;
     }
 
 

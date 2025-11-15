@@ -4,7 +4,7 @@ let transformArrayStart = [
     { transform: 'translateX(25%)', opacity: 0 }
 ]
 let animationAttributeObjectStart = {
-    duration: 300,
+    duration: 100,
     easing: 'ease-in'
 }
 let transformArrayFinish = [

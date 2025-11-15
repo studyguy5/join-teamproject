@@ -42,14 +42,17 @@
             </div>
             <div>
                 <div class="content-body">
-                    <div class="contact-body-list" id="contact-body-list" onclick="initContactToggle()">
+                    <div class="contact-body-list" id="contact-body-list">
                         <div class="add-new-contact-button" id="addNewContact"
                             onclick="overlayShow(),getAddOverlayContent(targetID='overlay-content')">
                             <b>Add new Contact</b>
                             <img src="icon-img/person_add.svg" alt="">
                         </div>
-                        <div id="contactList" class="contact-list"></div>
+                        <div id="contactList" class="contact-list">
+                        </div>
+                        <div class="person-add" onclick="overlayShow(),getAddOverlayContent(targetID='overlay-content')"><img src="../img/icons/person-add.svg"></div>
                     </div>
+
                     <div class="contact-body-detail" id="contact-body-detail">
                         <div class="detail-header">
                             <div class="header-title">Contacts</div>
@@ -59,12 +62,14 @@
                             <div class="contact-resp-arrow" onclick="closeContactOverlay()"><img src="../img/icons/arrow-left-line.svg"></div>
 
                         </div>
+                        
                         <div class="detail-body" id="detailBody"></div>
                         <div class="add-contact-success-box" id="add-contact-success-box">
+                            
                         </div>
                     </div>
                 </div>
-                <div class="person-add" onclick="overlayShow(),getAddOverlayContent(targetID='overlay-content')"><img src="../img/icons/person-add.svg"></div>
+                
             </div>
             <div class="overlay">
                 <div class="overlay-content" id="overlay-content">
@@ -73,14 +78,15 @@
         </div>
     </main>
 
+    
 
 
 
 </body>
-<script src="contact-overall-script.js"></script>
+<script src="contact-script/contact-overall-script.js"></script>
 <script src="contact-script/contact- database.js"></script>
 <script src="contact-script/contact-animation.js"></script>
 <script src="contact-script/contact-template.js"></script>
-<script src="responsiv.js"></script>
+<script src="contact-script/responsiv.js"></script>
 
 </html>

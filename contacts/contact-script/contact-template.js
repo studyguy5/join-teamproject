@@ -11,7 +11,7 @@ function setContactList(array, index) {
                             </div>
                         </div>
                         <div class="contact-separator-box"></div>
-                        <div class="contact-name" id ="${array[index].id}" onclick='showContactDetails("${array[index].id}")'>
+                        <div class="contact-name" id ="${array[index].id}" onclick='initContactToggle(); showContactDetails("${array[index].id}")'>
                             <div class="profile-badge" style="background-color: rgba(${array[index].badgeColor[0]}, ${array[index].badgeColor[1]},${array[index].badgeColor[2]}, 1); color: white;">${array[index].firstLetter}${array[index].secondFirstLetter}</div>
                             <div class="profile">
                                 <div class="profile-name" >${array[index].name}</div>
@@ -20,7 +20,7 @@ function setContactList(array, index) {
                     </div>`;
         refFirstLetter = firstLetter
     } else {
-        template = `    <div class="contact-name" id ="${array[index].id}" onclick='showContactDetails("${array[index].id}")'>
+        template = `    <div class="contact-name" id ="${array[index].id}" onclick='initContactToggle(); showContactDetails("${array[index].id}")'>
                             <div class="profile-badge" style="background-color: rgba(${array[index].badgeColor[0]}, ${array[index].badgeColor[1]},${array[index].badgeColor[2]}, 1); color: white;">${array[index].firstLetter}${array[index].secondFirstLetter}</div>
                             <div class="profile">
                                 <div class="profile-name">${array[index].name}</div>
@@ -92,6 +92,20 @@ function setContactDetails(object, id) {
                                     </div>
                                 </div>
                             </div>
+                            <div onclick="toggleContactMore(event)" class="menu-contact-options"><img src="../img/icons/more_vert.svg"></div>
+                            
+                            <div  class="contact-more-wrapper" id="contact-more-wrapper">
+
+                                <div class="contact-more-edit" onclick = "overlayShow(),getEditOverlayContent(targetID = 'overlay-content','${id}')">
+                                    <img src="../img/icons/pencil-edit.svg">
+                                    <p>Edit</p>
+                                </div>
+
+                                <div class="contact-more-delete" onclick = "deleteContact('${id}')">
+                                    <img src="../img/icons/trash.svg">
+                                    <p>Delete</p>
+                                </div>
+                            </div>
                         </div>`;
     return template;
 }
@@ -142,7 +156,7 @@ function setAddOverlayContent() {
                             </div>
                         </div>
                         <div class="add-contact-text-submit">
-                            <div id="cancel-overlay">
+                            <div class="add-overlay-cancel" id="cancel-overlay" onclick="closeOverlay()">
                                 <p>Cancel</p>
                                 <svg class="cancel-icon" width="32" height="32" viewBox="0 0 32 32" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -221,8 +235,8 @@ function setEditOverlayContent(id) {
                             </div>
                         </div>
                         <div class="add-contact-text-submit">
-                            <div id="cancel-overlay">
-                                <p>Cancel</p>
+                            <div id="cancel-overlay" onclick="deleteContact('${id}'); closeOverlay();">
+                                <p>Delete</p>
                                 <svg class="cancel-icon" width="32" height="32" viewBox="0 0 32 32" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <mask id="mask0_71720_5528" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4"

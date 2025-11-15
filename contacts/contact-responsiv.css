@@ -112,14 +112,14 @@
     }
 
     /* Cancel verstecken */
-    #cancel-overlay {
-        display: none;
+    .add-overlay-cancel{
+        display: none!important;
     }
 
     /* Submit zentrieren */
     #createContactOverlay {
         width: 180px;
-        margin: 0 auto;
+        /* margin: 0 auto; */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -131,7 +131,7 @@
         display: flex;
         justify-content: center;
         margin-top: 20px;
-        gap: 0; /* Cancel ist ja entfernt */
+        gap: 16px;
     }
 
     .add-contact-text-form{

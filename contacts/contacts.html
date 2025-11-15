@@ -42,13 +42,14 @@
             </div>
             <div>
                 <div class="content-body">
-                    <div class="contact-body-list" id="contact-body-list" onclick="initContactToggle()">
+                    <div class="contact-body-list" id="contact-body-list">
                         <div class="add-new-contact-button" id="addNewContact"
                             onclick="overlayShow(),getAddOverlayContent(targetID='overlay-content')">
                             <b>Add new Contact</b>
                             <img src="icon-img/person_add.svg" alt="">
                         </div>
-                        <div id="contactList" class="contact-list"></div>
+                        <div id="contactList" class="contact-list">
+                        </div>
                         <div class="person-add" onclick="overlayShow(),getAddOverlayContent(targetID='overlay-content')"><img src="../img/icons/person-add.svg"></div>
                     </div>
 

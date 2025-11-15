@@ -261,7 +261,10 @@ function activateEditModus(id) {
     edit.innerHTML = renderBigEditView(id);
     getCurrentValues(id);
     prioButtonactivate(id);
+    showContactsEdit(id);
 }
+
+
 
 
 function confirmSubtask1(id) {

@@ -42,7 +42,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
             </section>
 
             <label>Assigned to</label>
-            <div  class="section-right-select"  required tabindex="0" onclick="openContactWithCounter()">
+            <div  class="section-right-select"  required tabindex="0" onclick="openContactWithCounterForPopup()">
               <p id="placeholderpTag">Select contacts to assign</p>
               <input oninput="filterContactsInPopup()"  type="text" id="filterContacts"  class="dont-Show hidden-input">
               <img id="arrowImgC" class="select-arrow-downC" src="/img/icons/select-arrow-down.svg"> 

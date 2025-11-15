@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join-Kanban-Board</title>
-    <link rel="stylesheet" href="/global/global.css">
-    <link rel="stylesheet" href="/global/global-responsiv.css">
-    <link rel="stylesheet" href="/board/popupTemplate.css">
-    <link rel="stylesheet" href="/board/popupTemplate-responsiv.css">
-    <link rel="stylesheet" href="/board/editViewRender.css">
-    <link rel="stylesheet" href="/board/board-responsiv/editViewRender-responsiv.css">
-    <link rel="stylesheet" href="/board/editViewSubtask.css">
-    <link rel="stylesheet" href="/board/bigView.css">
-    <link rel="stylesheet" href="/board/board-responsiv/bigView-responsiv.css">
-    <link rel="stylesheet" href="board-common.css">
-    <link rel="stylesheet" href="/board/board-responsiv/board-common-responsiv.css">
-    <link rel="stylesheet" href="/add-task/add-task.css">
-    <link rel="stylesheet" href="/add-Task/add-task-continued.css">
-    <link rel="stylesheet" href="boardDragAndDrop.css">
-    <link rel="stylesheet" href="/board/board-responsiv/boardDragAndDrop-responsiv.css">
-    <link rel="icon" type="image/x-icon" href="svg/Capa 2.svg">
-    
-    <script src="/global/includeHTML.js"></script>
-    <script src="board-addTaskWindow.js"></script>
-    <script src="/add-task/subtask.js" defer></script>
-    <script src="board-renderTemplates.js"></script>
-    <script src="/board/editViewRender.js"></script>
-    <script src="board-dragdrop.js" defer></script>
-    <script src="board-EditView.js"></script>
-    <script src="board-EditView-subtask.js"></script>
-    
-
-    
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Join-Kanban-Board</title>
+        <link rel="stylesheet" href="/global/global.css">
+        <link rel="stylesheet" href="/global/global-responsiv.css">
+        <link rel="stylesheet" href="/board/popupTemplate.css">
+        <link rel="stylesheet" href="/board/popupTemplate-responsiv.css">
+        <link rel="stylesheet" href="/board/editViewRender.css">
+        <link rel="stylesheet" href="/board/board-responsiv/editViewRender-responsiv.css">
+        <link rel="stylesheet" href="/board/editViewSubtask.css">
+        <link rel="stylesheet" href="/board/bigView.css">
+        <link rel="stylesheet" href="/board/board-responsiv/bigView-responsiv.css">
+        <link rel="stylesheet" href="board-common.css">
+        <link rel="stylesheet" href="/board/board-responsiv/board-common-responsiv.css">
+        <link rel="stylesheet" href="/add-task/add-task.css">
+        <link rel="stylesheet" href="/add-Task/add-task-continued.css">
+        <link rel="stylesheet" href="boardDragAndDrop.css">
+        <link rel="stylesheet" href="/board/board-responsiv/boardDragAndDrop-responsiv.css">
+        <link rel="icon" type="image/x-icon" href="svg/Capa 2.svg">
+        
+        <script src="/global/includeHTML.js"></script>
+        <script src="/board/board-addTaskWindow.js"></script>
+        <script src="/add-task/subtask.js" defer></script>
+        <script src="/board/board-EditView.js" defer></script>
+        <script src="/board/board-renderTemplates.js"></script>
+        <script src="/board/editViewRender.js"></script>
+        <script src="/board/board-dragdrop.js" defer></script>
+        <script src="/board/board-EditView-subtask.js"></script>
+        
+    </head>
 
 <body>
     <header class="header-fullsize">
@@ -75,7 +73,7 @@
                         
                     </div>
                     <div id="add-task-popup" class="add-task-popup"></div>
-
+                    
                     <div class="categorys">
                         <div  class="TodoHeadline">
                             <p>To do</p><img data-category-id="Todo" onclick="addTask()" src="/img/icons/plus-button.svg" alt="plusButton img">
@@ -96,23 +94,23 @@
                     <div class="DragAndDropTaskAria"> 
                         <div  class="TodoMobile" id="TodoMobile">
                                 <p>To do</p><img data-category-id="Todo" onclick="addTask()" src="/img/icons/plus-button.svg" alt="plusButton img">
-                        </div>
-                        <div id="Todo" class="Todo"  ondrop="moveTo('Todo')" ondragover="preventDefault(event, 'Todo')" ondragleave="leaveCategory('Todo')">
-
-                    </div>
-                    <div  class="InprogressMobile" id="InprogressMobile">
-                                <p>In progress</p><img data-category-id="Inprogress" onclick="addTask()" src="/img/icons/plus-button.svg"
-                                alt="plusButton img">
                             </div>
-                        <div id="Inprogress"  class="Inprogress"  ondrop="moveTo('Inprogress')" ondragover="preventDefault(event, 'Inprogress')" ondragleave="leaveCategory('Inprogress')">
+                        <div id="Todo" class="Todo"  ondrop="moveTo('Todo')" ondragover="preventDefault(event, 'Todo')" ondragleave="leaveCategory('Todo')">
                             
                         </div>
-                        <div  class="AwaitfeedbackMobile" id="AwaitfeedbackMobile">
+                        <div  class="InprogressMobile" id="InprogressMobile">
+                            <p>In progress</p><img data-category-id="Inprogress" onclick="addTask()" src="/img/icons/plus-button.svg"
+                            alt="plusButton img">
+                            </div>
+                            <div id="Inprogress"  class="Inprogress"  ondrop="moveTo('Inprogress')" ondragover="preventDefault(event, 'Inprogress')" ondragleave="leaveCategory('Inprogress')">
+                                
+                            </div>
+                            <div  class="AwaitfeedbackMobile" id="AwaitfeedbackMobile">
                                 <p>Await feedback</p><img data-category-id="AwaitFeedback" onclick="addTask()" src="/img/icons/plus-button.svg"
                                 alt="plusButton img">
                             </div>
-                        <div id="AwaitFeedback" class="AwaitFeedback"  ondrop="moveTo('AwaitFeedback')" ondragover="preventDefault(event, 'AwaitFeedback')" ondragleave="leaveCategory('AwaitFeedback')">
-                            
+                            <div id="AwaitFeedback" class="AwaitFeedback"  ondrop="moveTo('AwaitFeedback')" ondragover="preventDefault(event, 'AwaitFeedback')" ondragleave="leaveCategory('AwaitFeedback')">
+                                
                         </div>
                         <div class="DoneHeadlineMobile">
                             <p>Done</p>
@@ -120,11 +118,11 @@
                         <div id="Done" class="Done"  ondrop="moveTo('Done')" ondragover="preventDefault(event, 'Done')" ondragleave="leaveCategory('Done')"></div>
                     </div>
                 </section>
-
+                
             </div>
         </main>
     
-</body>
+    </body>
 <script src="taskArrayFilter.js"></script>
 
 </html>

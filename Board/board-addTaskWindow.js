@@ -200,13 +200,13 @@ function showContacts() {
     }
 }
 
-let first = true;
-function openContactWithCounter(id) {
-    if (first) {
+let firstTime = true;
+function openContactWithCounterForPopup(id) {
+    if (firstTime) {
         showContacts(id);
         openContactView();
         showInput();
-        first = false;
+        firstTime = false;
     } else {
         openContactView();
         showInput();

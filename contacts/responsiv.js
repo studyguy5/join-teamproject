@@ -29,3 +29,10 @@ function closeContactOverlay(){
   bodyList.style.display = "flex";
   bodyDetail.style.display = "none";
 }
+
+
+function toggleContactMore() {
+    console.log("works");
+    const box = document.getElementById('contact-more-wrapper');
+    box.classList.toggle('active');
+}

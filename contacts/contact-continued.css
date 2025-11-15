@@ -161,7 +161,7 @@
     right: 0;
     height: 100%;
     min-height: 793px;
-    min-width: 1000px;
+    /* min-width: 1000px; */
     display: none;
     flex-direction: row;
     max-width: 1440px;
@@ -361,6 +361,7 @@
     height: 0px;
     border: 3px solid rgba(41, 171, 226, 1);
     border-radius: 8px;
+    margin-top: 16px;
 }
 
 .overlay-img-container {
@@ -423,5 +424,54 @@
     padding: 12px;
     gap: 10px;
     background: #2A3647;
+    cursor: pointer;
+}
+.menu-contact-options{
+    display: none;
+    width: fit-content;
+    height: 56px;
+    border-radius: 56px;
+    border-width: 1px;
+    padding: 12px;
+    gap: 10px;
+    opacity: 1;
+    background: #2A3647;
+    cursor: pointer;
+}
 
+.contact-more-wrapper{
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    width: 116px;
+    height: 100px;
+    padding: 10px;
+    opacity: 1;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    
+
+
+}
+.contact-more-edit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+.contact-more-delete{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+.contact-more-delete img,
+.contact-more-edit img{
+    width: 24px;
+    height: 24px;
 }

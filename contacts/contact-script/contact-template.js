@@ -92,6 +92,18 @@ function setContactDetails(object, id) {
                                     </div>
                                 </div>
                             </div>
+                            <div class="menu-contact-options"><img src="../img/icons/more_vert.svg"></div>
+                            
+                            <div class="contact-more-wrapper">
+                                <div class="contact-more-edit">
+                                    <img src="../img/icons/pencil-edit.svg">
+                                    <p>Edit</p>
+                                </div>
+                                <div class="contact-more-delete">
+                                    <img src="../img/icons/trash.svg">
+                                    <p>Delete</p>
+                            </div>
+    </div>
                         </div>`;
     return template;
 }

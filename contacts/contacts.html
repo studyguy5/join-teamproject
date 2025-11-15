@@ -49,7 +49,9 @@
                             <img src="icon-img/person_add.svg" alt="">
                         </div>
                         <div id="contactList" class="contact-list"></div>
+                        <div class="person-add" onclick="overlayShow(),getAddOverlayContent(targetID='overlay-content')"><img src="../img/icons/person-add.svg"></div>
                     </div>
+
                     <div class="contact-body-detail" id="contact-body-detail">
                         <div class="detail-header">
                             <div class="header-title">Contacts</div>
@@ -59,12 +61,14 @@
                             <div class="contact-resp-arrow" onclick="closeContactOverlay()"><img src="../img/icons/arrow-left-line.svg"></div>
 
                         </div>
+                        
                         <div class="detail-body" id="detailBody"></div>
                         <div class="add-contact-success-box" id="add-contact-success-box">
+                            
                         </div>
                     </div>
                 </div>
-                <div class="person-add" onclick="overlayShow(),getAddOverlayContent(targetID='overlay-content')"><img src="../img/icons/person-add.svg"></div>
+                
             </div>
             <div class="overlay">
                 <div class="overlay-content" id="overlay-content">
@@ -73,6 +77,7 @@
         </div>
     </main>
 
+    
 
 
 

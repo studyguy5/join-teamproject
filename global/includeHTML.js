@@ -14,7 +14,7 @@ function checkSignUpStatus(){
         includePrivacyLinks();
     }else{
         includeNavLinksWithoutUser();
-        includePrivacyLinks();
+        includePrivacyLinksWithoutUser();
     }
 }
 
@@ -55,6 +55,15 @@ function includePrivacyLinks() {
     let include = document.getElementById('nav-container')
     include.innerHTML += `
     <section class="privacy-legal-section">
+                <a href="/privacy-policy/privacy-policy.html"><h4>Privacy Policy</h4></a>
+                <a href="/legal-Notice/legal-notice.html"><h4>Legal notice</h4></a>
+            </section>`
+}
+
+function includePrivacyLinksWithoutUser() {
+    let include = document.getElementById('nav-container')
+    include.innerHTML += `
+    <section class="privacy-legal-sectionNonUser">
                 <a href="/privacy-policy/privacy-policy.html"><h4>Privacy Policy</h4></a>
                 <a href="/legal-Notice/legal-notice.html"><h4>Legal notice</h4></a>
             </section>`

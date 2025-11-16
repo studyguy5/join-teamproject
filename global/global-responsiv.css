@@ -1,4 +1,25 @@
-@media(max-width:1175px) {
+
+@media(min-width: 1175px){
+    nav{
+        width:232px;
+    }
+
+    .privacy-legal-section {
+        width: 232px;
+        height: 317px;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: center;
+        background-color: #2a3647;
+        color: gray;
+        padding-top: 114.02px;
+        padding-bottom: 64px;
+        gap: 4px;
+    }
+}
+
+@media(min-width:1000px) and (max-width:1175px ) {
     nav {
         width: 202px;
 
@@ -121,7 +142,7 @@
         box-sizing: border-box;
     }
 
-    .privacy-legal-section {
+    .privacy-legal-sectionNonUser {
         width: 252px;
         height: 68px;
         display: flex;
@@ -205,7 +226,7 @@
         /* position:fixed; */
     }
 
-    .privacy-legal-section {
+    .privacy-legal-sectionNonUser {
         width: 252px;
         height: 68px;
         display: flex;
@@ -257,7 +278,7 @@
      nav {
         top: calc(926px - 80px);
     }
-    .privacy-legal-section {
+    .privacy-legal-sectionNonUser {
         width: 182px;
         height: 68px;
         display: flex;

@@ -218,7 +218,7 @@ nav {
 .privacy-legal-section {
     width: 232px;
     height: 317px;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: end;
     align-items: center;

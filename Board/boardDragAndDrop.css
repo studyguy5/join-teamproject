@@ -134,6 +134,10 @@
     color: white;
 }
 
+.MiniMenüButton{
+        display:none;
+    }
+
 .taskTitle p {
     margin: 0px 0px 8px 0px;
     font-size: 16px;

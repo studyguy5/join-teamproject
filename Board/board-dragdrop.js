@@ -69,22 +69,22 @@ async function sendAlltoFirebase(contactsArray, path = 'contact') {
 
 let choosenCategory;
 let rightColumn = document.querySelectorAll('.categorys > div img')
-if(rightColumn)
-rightColumn.forEach(el => {
-    el.addEventListener('click', () => {
-        console.log(el.dataset.categoryId)
-        choosenCategory = el.dataset.categoryId
+if (rightColumn)
+    rightColumn.forEach(el => {
+        el.addEventListener('click', () => {
+            console.log(el.dataset.categoryId)
+            choosenCategory = el.dataset.categoryId
+        })
     })
-})
 
 let rigthColumnRe = document.querySelectorAll('.DragAndDropTaskAria > div img')
-if(rigthColumnRe)
-rigthColumnRe.forEach(el => {
-    el.addEventListener('click', () => {
-        console.log(el.dataset.categoryId)
-        choosenCategory = el.dataset.categoryId
+if (rigthColumnRe)
+    rigthColumnRe.forEach(el => {
+        el.addEventListener('click', () => {
+            console.log(el.dataset.categoryId)
+            choosenCategory = el.dataset.categoryId
+        })
     })
-})
 
 
 function createTemplate() {
@@ -215,6 +215,41 @@ function bigViewOfTask(id) {
     let connectionToTaskWindow = document.getElementById('bigViewOfTask')
     connectionToTaskWindow.classList.remove('dont-Show')
     connectionToTaskWindow.innerHTML = renderBigViewHTML(elements, id);
+}
+
+function moveUpCategory(id) {
+    let curTask = tasks.filter(tasks => tasks[1].id === id);
+    console.log('moveUp')
+    switch (curTask[0][1].category) {
+        case 'Todo': 
+            break;
+        case 'Inprogress': curTask[0][1].category = 'Todo', filterAndShowTasks(id); 
+            break;
+        case 'AwaitFeedback': curTask[0][1].category = 'Inprogress', filterAndShowTasks(id); 
+            break;
+        case 'Done': curTask[0][1].category = 'AwaitFeedback', filterAndShowTasks(id);
+            break;
+        default: 
+            break;
+    }
+
+}
+
+function moveDownCategory(id) {
+    let CurTask = tasks.filter(tasks => tasks[1].id === id);
+    console.log('moveDown')
+    switch (CurTask[0][1].category) {
+        case 'Todo': CurTask[0][1].category = 'Inprogress', filterAndShowTasks(id);
+            break;
+        case 'Inprogress': CurTask[0][1].category = 'AwaitFeedback', filterAndShowTasks(id);
+            break;
+        case 'AwaitFeedback': CurTask[0][1].category = 'Done', filterAndShowTasks(id);
+            break;
+        case 'Done': 
+            break;
+        default: 
+            break;
+    }
 }
 
 

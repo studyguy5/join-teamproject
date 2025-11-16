@@ -60,6 +60,10 @@
         color: white;
         font-size: 12px;
     }
+
+    .MiniMenüButton {
+        display: none;
+    }
 }
 
 @media(max-width:1180px) {
@@ -67,9 +71,17 @@
         font-size: 12px;
         margin: 16px 0px 26px 4px;
     }
+
+    .MiniMenüButton {
+        display: none;
+    }
 }
 
 @media(max-width: 1120px) {
+    .MiniMenüButton {
+        display: none;
+    }
+
     .taskTitle p {
         font-size: 13px;
     }
@@ -84,66 +96,84 @@
         display: none;
     }
 
-    /* .miniMenüButton {
-        display: block;
-        position:absolute;
-        left:120px;
-        
-    } */
+    .MiniMenüButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 16px;
+        width: 26px;
+        height: 24px;
+        border: none;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
 
-    .miniMenüResponsiv{
+    .MiniMenüButton img {
+        width: 26px;
+        height: 24px;
+        padding-top: 2px;
+        padding-right: 3px;
+        padding-bottom: 2px;
+        padding-left: 3px;
+        gap: 4px;
+    }
+
+    .miniMenüResponsiv {
         display: block;
         position: absolute;
-        right: -38px;
+        right: -98px;
         width: 106px;
         height: 113px;
-        color:white;
+        color: white;
         background-color: #2a3647;
         border-top-right-radius: 15px;
         border-bottom-right-radius: 15px;
         border-bottom-left-radius: 15px;
     }
-    .head{
-        font-size:16px;
+
+    .miniMenüResponsiv>p>img {
+        /* margin-left: -10px; */
+        width: 20px;
+        height: 20px;
+    }
+
+    .head {
+        font-size: 16px;
         margin: 0px 0px 5px 15px;
         padding: 4px 5px 4px 2px;
     }
 
-    .firstLine{
+    .firstLine {
         margin: 16px 8px 4px 8px;
         padding: 4px 46px 4px 30px;
-        display:flex;
+        display: flex;
         justify-content: center;
         align-items: center;
-        
+
         font-size: 16px;
     }
 
-    .firstLine:hover{
+    .firstLine:hover {
         background-color: rgba(9, 25, 49, 1);
         border-radius: 8px;
     }
 
-    .secondLine{
-        margin:0px 8px 16px 8px;
+    .secondLine {
+        margin: 0px 8px 16px 8px;
         padding: 4px 5px 4px 2px;
-        display:flex;
+        display: flex;
         justify-content: center;
         align-items: center;
-        margin:10 auto;
-        font-size: 16px;    
+        margin: 10 auto;
+        font-size: 16px;
     }
 
-    .secondLine:hover{
-         background-color:rgba(9, 25, 49, 1);
-         border-radius: 8px; 
+    .secondLine:hover {
+        background-color: rgba(9, 25, 49, 1);
+        border-radius: 8px;
     }
 
-    .miniMenüResponsiv>p>img{
-        /* margin-left: -10px; */
-        width:20px;
-        height:20px;
-    }
 
 
     .DragAndDropTaskAria {
@@ -154,8 +184,8 @@
         grid-template-rows: auto 1fr auto 1fr auto 1fr auto 1fr;
         /* Headers + Content für 2 Spalten */
         box-sizing: border-box;
-        min-height:705px;
-        height: calc(712px  + 80px);
+        min-height: 705px;
+        height: calc(712px + 80px);
         padding: 8px 0px 0px 24px;
         gap: 0px;
     }
@@ -163,6 +193,7 @@
 
     .TaskDiv {
         min-width: 212px;
+        position: relative;
         max-width: 212px;
         height: clamp(240px, 250px, 270px);
         margin: 16px 0px 26px 4px;
@@ -275,7 +306,7 @@
 }
 
 @media(max-width:1000px) {
-    
+
     .DragAndDropTaskAria {
         width: 100%;
         max-width: 890px;
@@ -284,12 +315,13 @@
         grid-template-rows: auto 1fr auto 1fr auto 1fr auto 1fr;
         /* Headers + Content für 2 Spalten */
         box-sizing: border-box;
-        min-height:632px;
-        height: calc(712px  - 100px);
+        min-height: 632px;
+        height: calc(712px - 100px);
         padding: 8px 0px 0px 24px;
         gap: 0px;
     }
 }
+
 @media(max-width:710px) {
     .DragAndDropTaskAria {
         width: 100%;

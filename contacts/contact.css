@@ -30,7 +30,6 @@ h1 {
     max-width: 1920px;
     width: 100%;
     position: relative;
-
 }
 
 .menu-bar {
@@ -42,7 +41,6 @@ h1 {
     height: 100vh;
     max-height: 1024px;
     min-width: 154px;
-
 }
 
 .main-content-body {
@@ -172,10 +170,10 @@ h1 {
     max-height: 888px;
     gap: 10px;
     padding-bottom: 16px;
-
 }
 
 .contact-list {
+    overflow-x: hidden;
     overflow-y: auto;
     width: 100%;
     display: flex;

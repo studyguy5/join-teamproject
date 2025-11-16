@@ -158,7 +158,7 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 100%;
+    height: 928px;
     min-height: 793px;
     display: none;
     flex-direction: row;
@@ -181,6 +181,7 @@
     flex-direction: row;
     border-radius: 30px;
     background-color: white;
+
 }
 
 .overlay-logo {

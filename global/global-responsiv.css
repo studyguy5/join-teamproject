@@ -253,6 +253,12 @@
     }
 }
 
+@media(max-width: 428px){
+     nav {
+        top: calc(926px - 80px);
+    }
+}
+
 
 @media(max-width:370px) {
     .nav-container {

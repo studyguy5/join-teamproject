@@ -67,10 +67,6 @@
         max-height: calc(926px - 80px - 80px);
     }
 
-    nav {
-        top: calc(926px - 80px);
-    }
-
      .descriptionBigView p {
         max-width:300px;
     }

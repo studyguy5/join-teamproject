@@ -438,7 +438,7 @@
         left: -63px;
         top: 222px;
         width: 100%;
-        min-width: fit-content;
+        min-width: max-content;
         max-width: 828px;
         height: calc(977px - 296px - 80px - 60px);
         display: grid;
@@ -515,7 +515,7 @@
         grid-row: 2;
         grid-column: 1;
         gap: 34px;
-        min-width: fit-content;
+        min-width: 260px;
         overflow-x: scroll;
         overflow-y: hidden;
         scrollbar-width: none;

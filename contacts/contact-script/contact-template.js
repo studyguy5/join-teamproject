@@ -1,4 +1,6 @@
 let refFirstLetter;
+
+
 function setContactList(array, index) {
     const firstLetter = array[index].firstLetter
     let template;

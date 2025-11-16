@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function initContactToggle() {
-
   const list = document.getElementById("contactList");
   const bodyList = document.getElementById("contact-body-list");
   const bodyDetail = document.getElementById("contact-body-detail");

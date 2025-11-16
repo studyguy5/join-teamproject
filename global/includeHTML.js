@@ -7,6 +7,11 @@ function init() {
     renderUserInitials();
 }
 
+function deleteSession(){
+    console.log('it clears session')
+    let clear = sessionStorage.removeItem('guest')
+}
+
 function checkSignUpStatus(){
     let signUpStatus = sessionStorage.getItem('guest')
     if(signUpStatus){

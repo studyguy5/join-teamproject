@@ -130,13 +130,17 @@ function getStoredUserName() {
 }
 
 function getInitials(fullName) {
-  const parts = (fullName || '').trim().split(/\s+/).filter(Boolean);
+  const name = (fullName || '').trim().toLowerCase();
+  // Wenn Gast-User, immer "G"!
+  if (name === 'guest user' || name === 'guest') {
+    return 'G';
+  }
+  const parts = name.split(/\s+/).filter(Boolean);
   if (!parts.length) return 'US';
-  const first = parts[0][0] || 'Guest' || '';
+  const first = parts[0][0] || '';
   const last = parts.length > 1 ? parts[parts.length - 1][0] : (parts[0][1] || '');
-  return (first == 'Guest' ? 'Guest' : first + last).toUpperCase();
+  return (first + last).toUpperCase();
 }
-
 window.renderUserInitials = function renderUserInitials() {
   const fullName = getStoredUserName();
   const initials = getInitials(fullName);

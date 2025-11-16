@@ -3,9 +3,19 @@
 let links = ['summary', 'add-task', 'board', 'contacts'];
 
 function init() {
-    includeNavLinks();
-    includePrivacyLinks();
+    checkSignUpStatus();
     renderUserInitials();
+}
+
+function checkSignUpStatus(){
+    let signUpStatus = sessionStorage.getItem('guest')
+    if(signUpStatus){
+        includeNavLinks();
+        includePrivacyLinks();
+    }else{
+        includeNavLinksWithoutUser();
+        includePrivacyLinks();
+    }
 }
 
 function includeNavLinks() {
@@ -22,6 +32,22 @@ function includeNavLinks() {
         </li></ul>
         `
     }
+}
+
+function includeNavLinksWithoutUser() {
+    let includeElements = document.getElementById('nav-container');
+
+        includeElements.innerHTML += `
+        
+        <ul id="LogIn" class="nav-elements LogIn">
+        <li>
+            <a href="/login-signup/index.html">
+                <img src="/img/icons/logInIcon.svg"/>
+                <span>Log In</span>
+            </a>
+        </li></ul>
+        `
+
 }
 
 

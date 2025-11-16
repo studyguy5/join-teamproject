@@ -122,16 +122,16 @@
     }
 
     .privacy-legal-section {
-        width: 182px;
-        height: 317px;
-        display: none;
-        flex-direction: unset;
-        justify-content: end;
+        width: 252px;
+        height: 68px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
         align-items: center;
         background-color: #2a3647;
         color: gray;
-        padding-top: 114.02px;
-        padding-bottom: 64px;
+        padding-top: 10px;
+        padding-bottom: 0px;
         gap: 4px;
     }
 
@@ -206,16 +206,16 @@
     }
 
     .privacy-legal-section {
-        width: 182px;
-        height: 317px;
-        display: none;
-        flex-direction: column;
-        justify-content: end;
+        width: 252px;
+        height: 68px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
         align-items: center;
         background-color: #2a3647;
         color: gray;
-        padding-top: 114.02px;
-        padding-bottom: 64px;
+        padding-top: 10px;
+        padding-bottom: 0px;
         gap: 4px;
     }
 
@@ -256,6 +256,19 @@
 @media(max-width: 428px){
      nav {
         top: calc(926px - 80px);
+    }
+    .privacy-legal-section {
+        width: 182px;
+        height: 68px;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        align-items: center;
+        background-color: #2a3647;
+        color: gray;
+        padding-top: 114.02px;
+        padding: 0px;
+        gap: 4px;
     }
 }
 

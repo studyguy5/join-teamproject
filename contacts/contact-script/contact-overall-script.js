@@ -243,20 +243,48 @@ function getNewContactData(id) {
 }
 
 
+// async function addContact(nameId, emailId, phoneNumberId) {
+//     const validation = formValidation()
+//     if (validation) {
+//         const newContact = getObjectFromContactForm(nameId, emailId, phoneNumberId)
+//         const newContactId = await postData(path = '/contacts', data = newContact)
+//         await refreshContactList()
+//         scrollIntoView(newContactId)
+//         closeOverlay()
+//         showSuccessMessage(500, 3000)
+//     } else {
+//         formValidation()
+//     }
+//     return
+// }
 async function addContact(nameId, emailId, phoneNumberId) {
-    const validation = formValidation()
-    if (validation) {
-        const newContact = getObjectFromContactForm(nameId, emailId, phoneNumberId)
-        const newContactId = await postData(path = '/contacts', data = newContact)
-        await refreshContactList()
-        scrollIntoView(newContactId)
-        closeOverlay()
-        showSuccessMessage(500, 3000)
-    } else {
-        formValidation()
-    }
-    return
+    const validation = formValidation();
+    if (!validation) return formValidation();
+
+    const newContact = getObjectFromContactForm(nameId, emailId, phoneNumberId);
+    const newContactId = await postData('/contacts', newContact);
+
+    await refreshContactList();
+
+    // wiederholtes prüfen bis es existiert
+    waitForDOM(() => document.getElementById(newContactId))
+        .then(() => scrollIntoView(newContactId));
+
+    closeOverlay();
+    showSuccessMessage(500, 3000);
 }
+
+function waitForDOM(checkFn) {
+    return new Promise(resolve => {
+        const interval = setInterval(() => {
+            if (checkFn()) {
+                clearInterval(interval);
+                resolve();
+            }
+        }, 20);
+    });
+}
+
 
 
 async function refreshContactList() {

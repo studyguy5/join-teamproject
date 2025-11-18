@@ -104,33 +104,6 @@
     }
 }
 
-/* @media(max-width:520px) {
-    .input-section-left{
-        width: 240px;
-    }
-    .input-section-right {
-        width: 240px;
-    }
-    .mainAreaRight h1{
-        font-size: 42px;
-    }
-    .footer-buttons-section{
-        gap: 4px;
-    }
-    
-} */
-
-/* @media(max-width:460px) {
-    .input-section-left{
-        width: 200px;
-    }
-    .input-section-right {
-        width: 200px;
-    }
-    .mainAreaRight h1{
-        font-size: 38px;
-    }
-} */
 
 @media(max-width:428px) {
     .priority-section{

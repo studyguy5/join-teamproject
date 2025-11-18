@@ -27,7 +27,6 @@ function includeNavLinks() {
     let includeElements = document.getElementById('nav-container');
     for (let i = 0; i < links.length; i++) {
         includeElements.innerHTML += `
-        
         <ul id="${links[i]}" class="nav-elements ${links[i]}">
         <li>
             <a href="/${links[i]}/${links[i]}.html">
@@ -41,9 +40,7 @@ function includeNavLinks() {
 
 function includeNavLinksWithoutUser() {
     let includeElements = document.getElementById('nav-container');
-
         includeElements.innerHTML += `
-        
         <ul id="LogIn" class="nav-elements LogIn">
         <li>
             <a href="/login-signup/index.html">
@@ -52,7 +49,6 @@ function includeNavLinksWithoutUser() {
             </a>
         </li></ul>
         `
-
 }
 
 

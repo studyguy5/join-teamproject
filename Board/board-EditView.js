@@ -1,11 +1,10 @@
 
+const BAsE_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app"
+
 document.addEventListener('DOMContentLoaded', async () => {
     contacts = await getObject(path = '/contacts')
     contactsArray = objectToArray(contacts);
 })
-
-
-const BAsE_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app"
 
 
 async function getObject(path = '') {
@@ -51,8 +50,7 @@ function prioButtonactivate(id) {
     let thisprio = rightTask?.[1].prio;
     buttonsEdit.forEach((button) => {
         if (button.innerText === thisprio) {
-            button.classList.add(thisprio)
-        }
+            button.classList.add(thisprio)}
     })
     if (buttonsEdit) {
         buttonsEdit.forEach(button => {
@@ -96,8 +94,6 @@ function createTaskTemplateEdit(id) {
     if (!formValidationAddTaskTempEdit(id)) return;
     showReportAddedTaskTemplateEdit();
 }
-
-
 
 
 function formValidationAddTaskTempEdit(id) {
@@ -144,6 +140,7 @@ function showReportAddedTaskTemplateEdit() {
     }, 1000);
 }
 
+
 function setContactAndPrioValueEdit(taskToEdit) {
     let checkedImg = document.querySelectorAll('#IdForContactsEdit img.checkedEdit')
     taskToEdit[1].cid = [];
@@ -157,6 +154,7 @@ function setContactAndPrioValueEdit(taskToEdit) {
     console.log('contacts are been pushed')})
     taskToEdit[1].prio = prioArray[0];
 }
+
 
 function pushObjectEdit(taskToEdit, subtaskvalue1, subtaskvalue2) {
     let subTaskObject = {
@@ -193,6 +191,7 @@ let existingObjects = ['title', 'description', 'DueDate']
 let existingFilledObjects = ['DueDate', 'description', 'title'];
 
 let first = true;
+
 
 async function getTaskInformationEdit(id) {
     console.log('editgetTask');
@@ -237,12 +236,8 @@ async function filterAndShowTasksEdit() {
 
 
 function openContactWithCounter() {
-    
-        // showContactsEdit(id);   // render the contacts and push id into array
         openContactViewEdit();  //open the div for contacts
         showInputFilter();  // change from p-tag to input ready to write and search
-    
-    
 }
 
 

@@ -4,7 +4,7 @@ body{
 
 .flex-content-size {
     display: flex;
-    height: 87vh !important;
+    height:calc(1024px - 96px);
     position: relative;
     justify-content: left !important;
 }

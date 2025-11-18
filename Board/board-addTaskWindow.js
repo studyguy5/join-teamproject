@@ -1,6 +1,9 @@
 
 let prioArray = [];
 window.contactsArray = [];
+document.addEventListener('DOMContentLoaded', () => {
+  try { renderUserInitials(); } catch (e) {}
+});
 document.addEventListener('DOMContentLoaded', async () => {
     init();
     createaddTaskPopup();
@@ -363,7 +366,6 @@ function clearTask(){
 }
 
 
-/* --- dein vorhandener board-addTaskWindow.js Code bleibt komplett wie er ist --- */
 /* ===================== USERNAME & INITIALEN (wie in summary) ===================== */
 function getStoredUserName() {
   const name = localStorage.getItem('userFullName');
@@ -374,7 +376,6 @@ function getStoredUserName() {
 
 function getInitials(fullName) {
   const name = (fullName || '').trim().toLowerCase();
-  // Wenn Gast-User, immer "G"!
   if (name === 'guest user' || name === 'guest') {
     return 'G';
   }
@@ -396,11 +397,7 @@ window.renderUserInitials = function renderUserInitials() {
   }
 };
 
-
-document.addEventListener('DOMContentLoaded', () => {
-  try { renderUserInitials(); } catch (e) {}
-});
-
+// diese zwei Funktionen sind für das zufällige befüllen der Eingabefelder//
 function randomFill(){
 document.getElementById('title').value = 'Beispieltitel';
 document.getElementById('task-description').value = 'Meine Beschreibung hier...';
@@ -408,6 +405,7 @@ document.getElementById('dueDate').value = '12.05.2028';
 document.getElementById('selectedTask').innerHTML = 'User Story';
 prioButtonactivate()
 }
+
 function prioButtonactivate() {
     const buttonsEdit = document.querySelectorAll(".priority-sectionEdit button");
     let rightTask = tasks.find(r => r[1].id > 10);

@@ -145,7 +145,6 @@ function setContactAndPrioValue(newTask) {
 
 
 async function getTaskInformation(index) {
-    console.log('normales getTask');
     let newTask = createTemplate();
     const allIds = tasks.map(ta => ta[1].id)
     let rn = Math.floor(Math.random() * 50)
@@ -191,7 +190,6 @@ async function filterAndShowTasks() {
 
 let progress;
 let TaskDone;
-
 Taskavailable = document.querySelectorAll('.subTaskForBigView > subtaskImgDiv img')
 
 
@@ -217,6 +215,7 @@ function bigViewOfTask(id) {
     connectionToTaskWindow.innerHTML = renderBigViewHTML(elements, id);
 }
 
+
 function moveUpCategory(id) {
     let curTask = tasks.filter(tasks => tasks[1].id === id);
     console.log('moveUp')
@@ -234,6 +233,7 @@ function moveUpCategory(id) {
     }
 
 }
+
 
 function moveDownCategory(id) {
     let CurTask = tasks.filter(tasks => tasks[1].id === id);
@@ -300,8 +300,6 @@ function activateEditModus(id) {
 }
 
 
-
-
 function confirmSubtask1(id) {
     let RT1 = tasks.find(task => task[1].id === id)
     let firebaseId = RT1[0]
@@ -358,7 +356,6 @@ async function closeBigView() {
 };
 
 
-// functions for drag and drop (prefent default, save id from moving element and change categeroy at the drop location)
 function moveTo(category) {
     let er = tasks.find(ct => ct[1].id == [currentDraggedElement]);
     er[1].category = category;

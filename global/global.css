@@ -229,7 +229,21 @@ nav {
     gap: 4px;
 }
 
-.privacy-legal-section a {
+/* .privacy-legal-sectionNonUser {
+        width: 252px;
+        height: 68px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background-color: #2a3647;
+        color: gray;
+        padding-top: 10px;
+        padding-bottom: 0px;
+        gap: 4px;
+    } */
+
+.privacy-legal-section a , .privacy-legal-sectionNonUser a {
     cursor: pointer;
     color: rgb(168, 168, 168, 1);
     text-decoration: none;
@@ -244,7 +258,7 @@ nav {
     
 }
 
-.privacy-legal-section a:hover {
+.privacy-legal-section a:hover , .privacy-legal-sectionNonUser a:hover{
     color: rgba(41, 171, 226, 1);
     text-decoration: none;
     vertical-align: right;
@@ -258,7 +272,7 @@ nav {
 
 
 
-.privacy-legal-section>a>h4 {
+.privacy-legal-section>a>h4 , .privacy-legal-sectionNonUser>a>h4 {
     margin: 8px 0px;
     font-weight: normal;
     width:109px;
@@ -269,7 +283,7 @@ nav {
     vertical-align: middle;
 }
 
-.privacy-legal-section h4:hover {
+.privacy-legal-section h4:hover , .privacy-legal-sectionNonUser h4:hover{
     height: 19px;
     width:115px;
     font-size: 17px;

@@ -140,15 +140,13 @@ async function showSuccessMessage(showIntervall, hideIntervall) {
 
 //data in general functions     targetObject = let contacts in Zeile 1
 function objectToArray(contacts) {          
-    const object = Object.entries(contacts) 
-        console.log(object);
+    const object = Object.entries(contacts)
     const arrayObject = object.map((member) => {
         return {
             id: member[0],
             ...member[1]
         }
     })
-    console.log(arrayObject);
 
     return arrayObject;
 }

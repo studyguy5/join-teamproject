@@ -117,7 +117,7 @@ function setAddOverlayContent() {
     let template;
     template = `<div class="overlay-logo">
                     <div class="overlay-img-container">
-                        <img src="icon-img/join-main-logo.png" alt="">
+                        <img src="../img/icons/join-main-logo.png" alt="">
                     </div>
                     <div id="overlayTitle">
                         <div class="overlay-title-text">
@@ -134,27 +134,27 @@ function setAddOverlayContent() {
                 <div class="overlay-form">
                     <div class="overlay-icon">
                         <div id="overlayIcon">
-                            <img src="icon-img/person.svg" alt="">
+                            <img src="../img/icons/person.svg" alt="">
                         </div>
                     </div>
                     <div class="add-contact-text">
                         <div class="overlay-close">
                             <div class="close-icon-container" onclick="closeOverlay()">
-                                <img src="icon-img/Close.svg" alt="">
+                                <img src="../img/icons/Close.svg" alt="">
                             </div>
                         </div>
                         <div class="add-contact-text-form">
                             <div>
                                 <input type="text" id="name" placeholder="name">
-                                <img src="icon-img/person (2).svg" alt="" class="name-icon">
+                                <img src="../img/icons/person (2).svg" alt="" class="name-icon">
                             </div>
                             <div>
                                 <input type="text" id="email" placeholder="email">
-                                <img src="icon-img/mail.svg" alt="" class="mail-icon">
+                                <img src="../img/icons/mail.svg" alt="" class="mail-icon">
                             </div>
                             <div>
                                 <input type="text" id="phone" placeholder="phone">
-                                <img src="icon-img/call.svg" alt="" class="phoneNumber-icon">
+                                <img src="../img/icons/call.svg" alt="" class="phoneNumber-icon">
                             </div>
                         </div>
                         <div class="add-contact-text-submit">
@@ -186,7 +186,7 @@ function setAddOverlayContent() {
                             </div>
                             <div id="createContactOverlay" onclick= "addContact('name', 'email', 'phone')">
                                 <p>Create contact</p>
-                                <img src="icon-img/check.svg" alt="">
+                                <img src="../img/icons/check.svg" alt="">
                             </div>
                         </div>
                     </div>
@@ -199,7 +199,7 @@ function setEditOverlayContent(id) {
     let template;
     template = `<div class="overlay-logo">
                     <div class="overlay-img-container">
-                        <img src="icon-img/join-main-logo.png" alt="">
+                        <img src="../img/icons/join-main-logo.png" alt="">
                     </div>
                     <div id="overlayTitle">
                         <div class="overlay-title-text">
@@ -219,21 +219,21 @@ function setEditOverlayContent(id) {
                     <div class="add-contact-text">
                         <div class="overlay-close">
                             <div class="close-icon-container" onclick="closeOverlay()">
-                                <img src="icon-img/Close.svg" alt="">
+                                <img src="../img/icons/Close.svg" alt="">
                             </div>
                         </div>
                         <div class="add-contact-text-form">
                             <div>
                                 <input type="text" id="name" placeholder="Name">
-                                <img src="icon-img/person (2).svg" alt="" class="name-icon">
+                                <img src="../img/icons/person (2).svg" alt="" class="name-icon">
                             </div>
                             <div>
                                 <input type="text" id="email" placeholder="Email">
-                                <img src="icon-img/mail.svg" alt="" class="mail-icon">
+                                <img src="../img/icons/mail.svg" alt="" class="mail-icon">
                             </div>
                             <div>
                                 <input type="text" id="phone" placeholder="Phone">
-                                <img src="icon-img/call.svg" alt="" class="phoneNumber-icon">
+                                <img src="../img/icons/call.svg" alt="" class="phoneNumber-icon">
                             </div>
                         </div>
                         <div class="add-contact-text-submit">
@@ -265,7 +265,7 @@ function setEditOverlayContent(id) {
                             </div>
                             <div id="createContactOverlay" onclick = "saveChanges('${id}')">
                                 <p>Save</p>
-                                <img src="icon-img/check.svg" alt="">
+                                <img src="../img/icons/check.svg" alt="">
                             </div>
                         </div>
                     </div>

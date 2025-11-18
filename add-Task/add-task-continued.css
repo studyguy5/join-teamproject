@@ -1,4 +1,3 @@
-
 .contactBox{
     display: flex;
     height: 56px;
@@ -19,9 +18,11 @@
     right:20px;
     content: url(/img/icons/checkedContactWhite.svg);
 }
+
 .checked:hover{
     background-image: url(/img/icons/hoverCheckedContact.svg);
 }
+
 .checkbox:hover{
     background-image: url(/img/icons/hoverCheckContact.svg);
 }
@@ -132,7 +133,6 @@
     outline: none;
 }
 
-
 .select-arrow-downC{
     transform: rotateX(0deg);
     transition: 500ms ease-in-out;
@@ -199,7 +199,6 @@
     padding-left:20px;
     width:auto;
     height:48px;
-    
 }
 
 .taskOption:hover{

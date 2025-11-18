@@ -1,6 +1,7 @@
 let currentCount;
 let index = currentCount;
 
+
 function renderSubtask(){
     let subtask = document.getElementById("subtask"); 
     let list = document.getElementById("subtask-list-1"); 

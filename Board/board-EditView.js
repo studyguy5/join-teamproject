@@ -141,6 +141,15 @@ function showReportAddedTaskTemplateEdit() {
 }
 
 
+function editFeedback() {
+    const feedback = document.getElementById("edit-feedback");
+    feedback.classList.add("show");
+    setTimeout(() => {
+        feedback.classList.remove("show");
+    }, 2000);
+}
+
+
 function setContactAndPrioValueEdit(taskToEdit) {
     let checkedImg = document.querySelectorAll('#IdForContactsEdit img.checkedEdit')
     taskToEdit[1].cid = [];
@@ -213,6 +222,8 @@ async function getTaskInformationEdit(id) {
     tasks.push(...Object.entries(await getData('task')));
     filterAndShowTasksEdit();
     closeEditView();
+
+    editFeedback();
 };
 
 

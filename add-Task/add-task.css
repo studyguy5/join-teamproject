@@ -395,7 +395,7 @@ textarea:focus::placeholder {
     bottom: 800px;
     opacity: 1;
     transform: translate(-50%, 50%);
-    z-index: 10000;
+    z-index: 100000000;
 }
 
 .report img {

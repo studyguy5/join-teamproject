@@ -19,6 +19,10 @@
     font-style: normal;
 }
 
+html{
+    scroll-behavior: smooth;
+    overflow-y: auto!important;
+}
 html,
 body {
     /* display: flex; */

@@ -231,3 +231,4 @@ function renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterCon
         <img  id="checkboxImgEdit-${filterContactIndex}" onclick="chooseFilteredContactEdit(${id}, ${filterContactIndex})" class="checkboxEdit" data-set="${filteredContactsEdit[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
         </div>`
 }
+

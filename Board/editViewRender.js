@@ -71,6 +71,13 @@ function renderBigEditView(id) {
                     </ul>
           </div>
         </div>
+
+        
+
+        <div class="report" id="report">
+          Task added to board <img src="/img/icons/board.svg" />
+        </div>
+        
       </section>
 
 

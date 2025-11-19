@@ -215,7 +215,7 @@ hr {
 
 .edit-feedback {
     position: fixed;
-    bottom: -1000px;
+    bottom: -100px;
     left: 50%;
     transform: translateX(-50%);
     background-color:#2A3647;
@@ -237,7 +237,7 @@ hr {
     z-index: 10000;
 }
 
-.edit-feedback.show {
+.show {
     bottom: 500px;
     opacity: 1;
     transform: translate(-50%, 50%);

@@ -399,3 +399,9 @@
     width: 24px;
     height: 24px;
 }
+
+.report.show {
+    bottom: 400px;
+    opacity: 1;
+    transform: translate(-50%, 50%);
+}

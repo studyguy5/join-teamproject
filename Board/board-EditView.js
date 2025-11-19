@@ -162,17 +162,19 @@ function pushObjectEdit(taskToEdit, subtaskvalue1, subtaskvalue2) {
             `${subtaskvalue1 || subtaskvalue2}`,
         'status': 'open'
     };
-    taskToEdit[1].subtasks.push(subTaskObject)
+    taskToEdit[1].subtasks.push(subTaskObject);
 }
 
 
-function getSubtaskFromTemplateEdit() {  //hole die Daten
+function getSubtaskFromTemplateEdit(taskToEdit) {  //hole die Daten
     if (document.getElementById(`task-text-${index0}`)) {
         subtaskvalue1 = document.getElementById(`task-text-${index0}`).innerHTML
     };
     if (document.getElementById(`task-text-${index1}`)) {
         subtaskvalue2 = document.getElementById(`task-text-${index1}`).innerHTML
     }
+    taskToEdit[1].subtasks = [];    // hier leere ich das Arry local, damit beide values aus dem Edit Modus eingefügt werden können, egal ob alt oder neu
+    // so entsteht kein doppelter Eintrag und es ist nach aktuellem Bearbeitungsstand im Edit-Mode
 }
 
 
@@ -213,7 +215,24 @@ async function getTaskInformationEdit(id) {
     tasks.push(...Object.entries(await getData('task')));
     filterAndShowTasksEdit();
     closeEditView();
+    // showReportAddedTaskTemplate();
 };
+
+// function showReportAddedTaskTemplate() {
+//     const popup = document.getElementById("reportEdit");
+//     popup.classList.add("showReport");
+//     setTimeout(() => {
+//         popup.classList.remove("showReport");
+//      }, 3000);
+// }
+
+// // function showReportAddedTask() {
+// //     const popup = document.getElementById("report");
+// //     popup.classList.add("show");
+// //     setTimeout(() => {
+// //         popup.classList.remove("show");
+// //     }, 1000);
+// // }
 
 
 async function filterAndShowTasksEdit() {

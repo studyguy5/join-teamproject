@@ -74,7 +74,7 @@ function renderBigEditView(id) {
 
         
 
-        <div class="reportPopup" id="report">
+        <div class="report" id="report">
           Task added to board <img src="/img/icons/board.svg" />
         </div>
         

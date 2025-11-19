@@ -108,16 +108,6 @@ function formValidationAddTaskTempEdit(id) {
     }
 }
 
-function editFeedback() {
-    const feedback = document.getElementById("edit-feedback");
-    feedback.classList.add("show");
-    setTimeout(() => {
-        feedback.classList.remove("show");
-    }, 2000);
-}
-
-
-
 
 function displayRequiredMessageTempEdit() {
     const titleInput = document.getElementById("titleEdit");
@@ -153,6 +143,7 @@ function showReportAddedTaskTemplateEdit() {
 
 function editFeedback() {
     const feedback = document.getElementById("edit-feedback");
+    console.log("adding class to feedback", feedback); // Test
     feedback.classList.add("show");
     setTimeout(() => {
         feedback.classList.remove("show");
@@ -234,8 +225,7 @@ async function getTaskInformationEdit(id) {
     tasks.push(...Object.entries(await getData('task')));
     filterAndShowTasksEdit();
     closeEditView();
-   editFeedback();
-    
+    editFeedback();
 };
 
 // function showReportAddedTaskTemplate() {
@@ -246,13 +236,13 @@ async function getTaskInformationEdit(id) {
 //      }, 3000);
 // }
 
-// // function showReportAddedTask() {
-// //     const popup = document.getElementById("report");
-// //     popup.classList.add("show");
-// //     setTimeout(() => {
-// //         popup.classList.remove("show");
-// //     }, 1000);
-// // }
+// function showReportAddedTask() {
+//     const popup = document.getElementById("report");
+//     popup.classList.add("show");
+//     setTimeout(() => {
+//         popup.classList.remove("show");
+//     }, 1000);
+// }
 
 
 async function filterAndShowTasksEdit() {

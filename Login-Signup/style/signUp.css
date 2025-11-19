@@ -76,7 +76,7 @@ body {
   border-radius: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
   width: 600px;
-  padding: 40px;
+  padding: 30px;
   position: relative;
 }
 
@@ -102,11 +102,10 @@ body {
 .signup-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .input-field {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   position: relative;
 }
 

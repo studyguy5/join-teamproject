@@ -178,15 +178,32 @@ form?.addEventListener('submit', async (e) => {
     const redirectUrl = getRedirectUrl('../summary/summary.html');
     window.location.href = redirectUrl;
 
+  // } catch (error) {
+  //   let msg = 'Email oder Passwort ist falsch.';
+  //   if (error.code === 'auth/too-many-requests') msg = 'Zu viele Versuche. Bitte später erneut versuchen.';
+  //   if (error.code === 'auth/invalid-email') msg = 'Ungültige Email-Adresse.';
+  //   if (error.message) msg += ` (${error.message})`;
+  //   showGeneralErrorMessage(`${msg}${error.code ? ` [${error.code}]` : ''}`);
+  //   setFieldError(emailInput, true);
+  //   setFieldError(passwordInput, true);
+  // }
   } catch (error) {
     let msg = 'Email oder Passwort ist falsch.';
-    if (error.code === 'auth/too-many-requests') msg = 'Zu viele Versuche. Bitte später erneut versuchen.';
-    if (error.code === 'auth/invalid-email') msg = 'Ungültige Email-Adresse.';
-    if (error.message) msg += ` (${error.message})`;
-    showGeneralErrorMessage(`${msg}${error.code ? ` [${error.code}]` : ''}`);
+
+    if (error.code === 'auth/too-many-requests') {
+        msg = 'Zu viele Versuche. Bitte später erneut versuchen.';
+    }
+    if (error.code === 'auth/invalid-email') {
+        msg = 'Ungültige Email-Adresse.';
+    }
+
+    // Nur die klare Fehlermeldung anzeigen
+    showGeneralErrorMessage(msg);
+
     setFieldError(emailInput, true);
     setFieldError(passwordInput, true);
-  }
+}
+
 });
 
 

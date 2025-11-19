@@ -131,7 +131,7 @@ h1::after {
 }
 
 .input-group {
-    margin-bottom: 24px;
+    /* margin-bottom: 24px; */
     text-align: left;
 }
 
@@ -196,7 +196,7 @@ h1::after {
     font-size: 14px;
     display: none;
     width: 100%;
-    position: absolute;
+    position: relative;
     left: 4px;
     margin-top: 8px;
 }

@@ -234,13 +234,8 @@ async function getTaskInformationEdit(id) {
     tasks.push(...Object.entries(await getData('task')));
     filterAndShowTasksEdit();
     closeEditView();
-<<<<<<< HEAD
    editFeedback();
     
-=======
-
-    editFeedback();
->>>>>>> c07c9f9ae2b9cfdccf5763a0ee4e07d85ba71c8a
 };
 
 // function showReportAddedTaskTemplate() {

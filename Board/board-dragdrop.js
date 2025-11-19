@@ -108,14 +108,13 @@ function createTemplate() {
 
 
 function pushObject(subtaskvalue1, subtaskvalue2) {
+    console.log('popup object')
     if (subtaskvalue1) {
         let subTaskObject1 = { "value": `${subtaskvalue1}`, 'status': 'open' };
         subtaskArray.push(subTaskObject1)
     }
     if (subtaskvalue2) {
-        let subTaskObject2 = {
-            "value": `${subtaskvalue2}`, 'status': 'open'
-        };
+        let subTaskObject2 = {"value": `${subtaskvalue2}`, 'status': 'open'};
         subtaskArray.push(subTaskObject2);
     }
 }

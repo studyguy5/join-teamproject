@@ -108,6 +108,16 @@ function formValidationAddTaskTempEdit(id) {
     }
 }
 
+function editFeedback() {
+    const feedback = document.getElementById("edit-feedback");
+    feedback.classList.add("show");
+    setTimeout(() => {
+        feedback.classList.remove("show");
+    }, 2000);
+}
+
+
+
 
 function displayRequiredMessageTempEdit() {
     const titleInput = document.getElementById("titleEdit");
@@ -215,7 +225,8 @@ async function getTaskInformationEdit(id) {
     tasks.push(...Object.entries(await getData('task')));
     filterAndShowTasksEdit();
     closeEditView();
-    // showReportAddedTaskTemplate();
+   editFeedback();
+    
 };
 
 // function showReportAddedTaskTemplate() {

@@ -1,31 +1,60 @@
+/**
+ * Registrierungs-Formular für neuen Benutzer, mit Validierung und UI-Fehleranzeige.
+ * Erstellt anschließend einen neuen Benutzer über Firebase und speichert die Daten lokal.
+ * 
+ * @module sign-up
+ */
+
 import { auth } from './firebase.js';
 import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 import database from './database.js';
 
-
+/** @type {HTMLFormElement|null} */
 const form = document.getElementById('signupForm');
+/** @type {HTMLButtonElement|null} */
 const signupButton = document.getElementById('signupButton');
+/** @type {HTMLInputElement|null} */
 const nameInput = document.getElementById('name');
+/** @type {HTMLInputElement|null} */
 const emailInput = document.getElementById('email');
+/** @type {HTMLInputElement|null} */
 const passwordInput = document.getElementById('password');
+/** @type {HTMLInputElement|null} */
 const confirmInput = document.getElementById('confirmPassword');
+/** @type {HTMLInputElement|null} */
 const privacyCheckbox = document.getElementById('privacy-policy');
+/** @type {HTMLElement|null} */
 const nameErr = document.getElementById('name-error');
+/** @type {HTMLElement|null} */
 const emailErr = document.getElementById('email-error');
+/** @type {HTMLElement|null} */
 const emailFormatErr = document.getElementById('email-format-error');
+/** @type {HTMLElement|null} */
 const pwdErr = document.getElementById('password-error');
+/** @type {HTMLElement|null} */
 const pwdLenErr = document.getElementById('password-length-error');
+/** @type {HTMLElement|null} */
 const pwdWeakErr = document.getElementById('password-weak-error');
+/** @type {HTMLElement|null} */
 const confirmErr = document.getElementById('confirm-password-error');
+/** @type {HTMLElement|null} */
 const pwdMatchErr = document.getElementById('password-match-error');
+/** @type {HTMLElement|null} */
 const privacyErr = document.getElementById('privacy-error');
+/** @type {HTMLElement|null} */
 const generalError = document.getElementById('general-error');
+/** @type {HTMLElement|null} */
 const networkError = document.getElementById('network-error');
+/** @type {HTMLElement|null} */
 const successMessage = document.getElementById('success-message');
 
 
 // ========== Helpers ==========
 
+/**
+ * Zeigt ein Element an (macht sichtbar, entfernt hidden und setzt opacity).
+ * @param {HTMLElement} element
+ */
 function showElement(element) {
   if (!element) return;
   element.classList.add('is-visible');
@@ -34,7 +63,10 @@ function showElement(element) {
   requestAnimationFrame(() => { element.style.opacity = '1'; });
 }
 
-
+/**
+ * Blendet ein Element aus und setzt opacity zurück.
+ * @param {HTMLElement} element
+ */
 function hideElement(element) {
   if (!element) return;
   element.classList.remove('is-visible');
@@ -45,7 +77,11 @@ function hideElement(element) {
   }, 200);
 }
 
-
+/**
+ * Markiert ein Eingabefeld als Fehler/valide, setzt aria-invalid entsprechend.
+ * @param {HTMLInputElement} input
+ * @param {boolean} isError
+ */
 function setFieldError(input, isError) {
   if (!input) return;
   input.classList.toggle('error', !!isError);
@@ -53,7 +89,10 @@ function setFieldError(input, isError) {
   input.setAttribute('aria-invalid', isError ? 'true' : 'false');
 }
 
-
+/**
+ * Zeigt eine allgemeine Fehlermeldung an.
+ * @param {string} msg
+ */
 function showGeneralError(msg) {
   if (generalError) {
     generalError.textContent = msg || 'Es ist ein Fehler aufgetreten.';
@@ -61,7 +100,9 @@ function showGeneralError(msg) {
   }
 }
 
-
+/**
+ * Blendet alle generellen Fehlermeldungen aus.
+ */
 function clearGeneralErrors() {
   hideElement(generalError);
   hideElement(networkError);
@@ -70,41 +111,75 @@ function clearGeneralErrors() {
 
 // ========== Pure Checks ==========
 
+/**
+ * Prüfung ob Name gültig ist (nicht leer).
+ * @param {string} val
+ * @returns {boolean}
+ */
 function isNameValid(val) {
   return (val?.trim()?.length ?? 0) >= 1;
 }
 
-
+/**
+ * Prüfung ob Email angegeben ist.
+ * @param {string} val
+ * @returns {boolean}
+ */
 function isEmailProvided(val) {
   return (val?.trim()?.length ?? 0) > 0;
 }
 
-
+/**
+ * Prüfung ob Email-Format gültig ist.
+ * @param {string} val
+ * @returns {boolean}
+ */
 function isEmailFormatOk(val) {
   return /^[^\s@]+@[^\s@]+$/.test(val?.trim() || '');
 }
 
-
+/**
+ * Mindestlänge eines Strings prüfen.
+ * @param {string} val
+ * @param {number} [min=6]
+ * @returns {boolean}
+ */
 function hasMinLen(val, min = 6) {
   return (val?.length ?? 0) >= min;
 }
 
-
+/**
+ * Prüft, ob Zeichen im Passwort enthalten sind.
+ * @param {string} val
+ * @returns {boolean}
+ */
 function hasLetters(val) {
   return /[A-Za-z]/.test(val || '');
 }
 
-
+/**
+ * Prüft, ob Zahlen im Passwort enthalten sind.
+ * @param {string} val
+ * @returns {boolean}
+ */
 function hasNumbers(val) {
   return /\d/.test(val || '');
 }
 
-
+/**
+ * Prüft, ob das Passwort stark genug ist.
+ * @param {string} val
+ * @returns {boolean}
+ */
 function isPasswordStrong(val) {
   return hasMinLen(val, 6) && hasLetters(val) && hasNumbers(val);
 }
 
-
+/**
+ * Bestätigungsfeld muss ausgefüllt sein.
+ * @param {string} val
+ * @returns {boolean}
+ */
 function isConfirmProvided(val) {
   return (val?.length ?? 0) > 0;
 }
@@ -112,6 +187,10 @@ function isConfirmProvided(val) {
 
 // ========== Validations ==========
 
+/**
+ * Validiert das Name-Feld und zeigt ggf. Fehlermeldung.
+ * @returns {boolean}
+ */
 function validateName() {
   const val = nameInput.value || '';
   const ok = isNameValid(val);
@@ -120,7 +199,10 @@ function validateName() {
   return ok;
 }
 
-
+/**
+ * Validiert das Email-Feld und zeigt ggf. Fehlermeldung/Format-Fehler.
+ * @returns {boolean}
+ */
 function validateEmail() {
   const val = emailInput.value || '';
   let ok = true;
@@ -140,7 +222,10 @@ function validateEmail() {
   return ok;
 }
 
-
+/**
+ * Validiert das Passwortfeld und zeigt ggf. Fehlermeldungen zu Länge/Stärke.
+ * @returns {boolean}
+ */
 function validatePassword() {
   const val = passwordInput.value || '';
   let ok = true;
@@ -168,7 +253,10 @@ function validatePassword() {
   return ok;
 }
 
-
+/**
+ * Validiert das Bestätigungsfeld für das Passwort.
+ * @returns {boolean}
+ */
 function validateConfirm() {
   const pwd = passwordInput.value || '';
   const conf = confirmInput.value || '';
@@ -189,7 +277,10 @@ function validateConfirm() {
   return ok;
 }
 
-
+/**
+ * Validiert die Checkbox für Datenschutz.
+ * @returns {boolean}
+ */
 function validatePrivacy() {
   const ok = !!privacyCheckbox.checked;
   ok ? hideElement(privacyErr) : showElement(privacyErr);
@@ -199,6 +290,9 @@ function validatePrivacy() {
 
 // ========== Step Access (Silent) ==========
 
+/**
+ * Erlaubt/verbietet die nächsten Schritte je nach Formstatus.
+ */
 function updateStepAccessSilent() {
   const nameValid = isNameValid(nameInput.value);
   emailInput.disabled = !nameValid;
@@ -223,14 +317,12 @@ nameInput?.addEventListener('input', () => {
   updateStepAccessSilent();
 });
 
-
 emailInput?.addEventListener('input', () => {
   hideElement(emailErr);
   hideElement(emailFormatErr);
   setFieldError(emailInput, false);
   updateStepAccessSilent();
 });
-
 
 passwordInput?.addEventListener('input', () => {
   hideElement(pwdErr);
@@ -240,7 +332,6 @@ passwordInput?.addEventListener('input', () => {
   updateStepAccessSilent();
 });
 
-
 confirmInput?.addEventListener('input', () => {
   hideElement(confirmErr);
   hideElement(pwdMatchErr);
@@ -248,30 +339,25 @@ confirmInput?.addEventListener('input', () => {
   updateStepAccessSilent();
 });
 
-
 nameInput?.addEventListener('blur', () => {
   validateName();
   updateStepAccessSilent();
 });
-
 
 emailInput?.addEventListener('blur', () => {
   validateEmail();
   updateStepAccessSilent();
 });
 
-
 passwordInput?.addEventListener('blur', () => {
   validatePassword();
   updateStepAccessSilent();
 });
 
-
 confirmInput?.addEventListener('blur', () => {
   validateConfirm();
   updateStepAccessSilent();
 });
-
 
 privacyCheckbox?.addEventListener('change', () => {
   validatePrivacy();
@@ -281,6 +367,9 @@ privacyCheckbox?.addEventListener('change', () => {
 
 // ========== Network Status ==========
 
+/**
+ * Prüft Netzwerkstatus und zeigt ggf. Hinweis an.
+ */
 function updateNetworkStatus() {
   if (!navigator.onLine) {
     showElement(networkError);
@@ -290,9 +379,7 @@ function updateNetworkStatus() {
 }
 
 window.addEventListener('online', updateNetworkStatus);
-
 window.addEventListener('offline', updateNetworkStatus);
-
 updateNetworkStatus();
 
 

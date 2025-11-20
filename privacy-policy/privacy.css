@@ -1,8 +1,9 @@
 .privacy-wrapper {
-    margin-left: 96px;
-    margin-top: 110px;
-    height:calc(1024px - 206px);
-    overflow-y: scroll;
+    /* margin-left: 96px;
+    margin-top: 110px; */
+    padding: 60px;
+    height:100vh;
+    overflow-y: auto;
 }
 
 .privacy-headline{

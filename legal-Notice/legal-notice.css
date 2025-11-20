@@ -1,8 +1,8 @@
 .legal-wrapper {
     margin-left: 96px;
     margin-top: 110px;
-    height:calc(1024px - 206px);
-    overflow-y: scroll;
+    height:100vh;
+    overflow-y: auto;
 }
 
 .marked {

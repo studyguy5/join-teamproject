@@ -72,7 +72,7 @@ function closeEditView() {
     first = true;
 }
 
-
+/**here we get all the values allready saved and put it into and Edit Mode View to change them */
 function getCurrentValues(id) {
     const singleTask = tasks.find(task => task[1].id === id);
     document.getElementById("titleEdit").value = `${singleTask[1].title}`
@@ -140,7 +140,7 @@ function showReportAddedTaskTemplateEdit() {
     }, 1000);
 }
 
-
+/**show an User Feedback if the User saves a edited Task */
 function editFeedback() {
     const feedback = document.getElementById("edit-feedback");
     console.log("adding class to feedback", feedback); // Test
@@ -150,7 +150,9 @@ function editFeedback() {
     }, 2000);
 }
 
-
+/**searches for checked img, empties all relevant arrays and takes all current choosen ones
+ * in order to keep it up to date and prevent double pushing 
+ */
 function setContactAndPrioValueEdit(taskToEdit) {
     let checkedImg = document.querySelectorAll('#IdForContactsEdit img.checkedEdit')
     taskToEdit[1].cid = [];
@@ -165,7 +167,7 @@ function setContactAndPrioValueEdit(taskToEdit) {
     taskToEdit[1].prio = prioArray[0];
 }
 
-
+/**taskes values and creates object with it and pushes it after that into subtasks */
 function pushObjectEdit(taskToEdit, subtaskvalue1, subtaskvalue2) {
     let subTaskObject = {
         "value":
@@ -175,7 +177,7 @@ function pushObjectEdit(taskToEdit, subtaskvalue1, subtaskvalue2) {
     taskToEdit[1].subtasks.push(subTaskObject);
 }
 
-
+/**here we get the actual values out from innerHTML */
 function getSubtaskFromTemplateEdit(taskToEdit) {  //hole die Daten
     if (document.getElementById(`task-text-${index0}`)) {
         subtaskvalue1 = document.getElementById(`task-text-${index0}`).innerHTML
@@ -187,7 +189,7 @@ function getSubtaskFromTemplateEdit(taskToEdit) {  //hole die Daten
     // so entsteht kein doppelter Eintrag und es ist nach aktuellem Bearbeitungsstand im Edit-Mode
 }
 
-
+/**here we check if values are here and execute the function above to create and push */
 function pushSubtaskIntoArray(taskToEdit, subtaskvalue1, subtaskvalue2) {
     if (subtaskvalue1) {
         pushObjectEdit(taskToEdit, subtaskvalue1, null);
@@ -204,7 +206,7 @@ let existingFilledObjects = ['DueDate', 'description', 'title'];
 
 let first = true;
 
-
+/**main function to get all the values, this function is used more times */
 async function getTaskInformationEdit(id) {
     console.log('editgetTask');
     const taskToEdit = tasks.find(task => task[1].id === id);
@@ -228,23 +230,7 @@ async function getTaskInformationEdit(id) {
     editFeedback();
 };
 
-// function showReportAddedTaskTemplate() {
-//     const popup = document.getElementById("reportEdit");
-//     popup.classList.add("showReport");
-//     setTimeout(() => {
-//         popup.classList.remove("showReport");
-//      }, 3000);
-// }
-
-// function showReportAddedTask() {
-//     const popup = document.getElementById("report");
-//     popup.classList.add("show");
-//     setTimeout(() => {
-//         popup.classList.remove("show");
-//     }, 1000);
-// }
-
-
+/**filter the task and display it into the board page */
 async function filterAndShowTasksEdit() {
     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
         document.getElementById(`${categorys[idIndex]}`).innerHTML = '';
@@ -263,7 +249,7 @@ async function filterAndShowTasksEdit() {
     }
 }
 
-
+/**opens the Contact view and switches from p-tag to input field */
 function openContactWithCounter() {
         openContactViewEdit();  //open the div for contacts
         showInputFilter();  // change from p-tag to input ready to write and search
@@ -296,7 +282,7 @@ function showInputFilter() {
     };
 }
 
-
+/**renders the Contacts in Edit Mode */
 function showContactsEdit(id) {
     const thisT = tasks.find(task => task[1].id === id);
     let contacts = document.getElementById('IdForContactsEdit')
@@ -310,7 +296,7 @@ function showContactsEdit(id) {
     }
 }
 
-
+/**filters the contacts accordingly to your inputs in the input-field */
 let filteredContactsEdit = [];
 function filterContactsInPopupEdit(id) {
     let r;
@@ -325,7 +311,7 @@ function filterContactsInPopupEdit(id) {
     }
 }
 
-
+/**renders the filtered Contacts inot the list */
 function renderfilteredContactsInPopupEdit(id, filteredContactsEdit) {
     let filtContactInPopupEdit = document.getElementById('IdForContactsEdit')
     filtContactInPopupEdit.innerHTML = "";
@@ -334,7 +320,7 @@ function renderfilteredContactsInPopupEdit(id, filteredContactsEdit) {
     }
 }
 
-
+/**shows the choosen Contacts in the filtered list */
 function chooseFilteredContactEdit(id, filterContactIndex) {
     let choContactFilter = document.getElementById(`checkboxImgEdit-${filterContactIndex}`)
     if (choContactFilter.classList.contains("checkboxEdit")) {
@@ -350,7 +336,9 @@ function chooseFilteredContactEdit(id, filterContactIndex) {
     }
 }
 
-
+/**renders the filtered Contacts below the list the same as the non-filtered contacts
+ * and checks if an index is involved and new contacts were choosen or just the old ones
+ */
 function renderFilteredChoosenContact(id, filterContactIndex) {
     let listContact = document.getElementById('choosenContactsEdit')
     const filteredRightTask = tasks.find(task => task[1].id === id);
@@ -376,7 +364,7 @@ function renderFilteredChoosenContact(id, filterContactIndex) {
 
 let preIndex;
 
-
+/**shows the non-filtered choosen Contacts in the list */
 function chooseContactEdit(id, index) {
     let choContact = document.getElementById(`checkboxImgEdit-${index}`)
     if (choContact.classList.contains("checkboxEdit")) {
@@ -394,6 +382,9 @@ function chooseContactEdit(id, index) {
 
 
 let thisTask;
+/**renders the choosen Contacts below the list and check if an index is involved
+ * and new Contacts were choosen or just the old ones
+ */
 function renderChoosenContactEdit(id, index) {
     let Choosen = document.getElementById('choosenContactsEdit')
     const RightTask = tasks.find(task => task[1].id === id);
@@ -422,14 +413,14 @@ function renderChoosenContactEdit(id, index) {
     }
 }
 
-
+/**deletes a rendered Contact in Edit Mode */
 function deleteRenderedContactEdit(index) {
     let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
     if (renderedContact) renderedContact.remove();
     renderedContact.innerHTML = '';
 }
 
-
+/**deletes a filtered Contacts in Edit-Mode */
 function deleteRenderedFilteredContactEdit(filterIndex) {
     let renderedContactFilter = document.getElementById(`contactCirclePopupRender-${filterIndex}`)
     if (renderedContactFilter) renderedContactFilter.remove();

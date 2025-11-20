@@ -1,24 +1,26 @@
+/**executes the most importend function at first */
 document.addEventListener('DOMContentLoaded', async () => {
-  // Dein bestehendes Init
   init();
   sectionCheck('summary');
   toDoSummaryEventHandler();
   doneSummaryEventHandler();
 
-  // Tasks laden & Zahlen befüllen (robust, falls null)
+  /**loads all Task, Data and Numbers, which are needed to display the summary page correct */
   const data = await getData('task');
   const entries = data ? Object.entries(data) : [];
   tasks.push(...entries);
   deliverDataToSummary(tasks);
 
-  // Benutzer: Initialen + Begrüßung/Datum
+  
+  /**renders greeting of Users and current Date */
   renderUserInitials();
   updateGreetingAndDate();                 // setzt Greeting + Datum (nur wenn kein Urgent-Datum gefunden)
 
-  // Bei langen Sessions automatisch aktualisieren (z. B. bei 12:00 / 18:00)
+  /**updates the greeting and date function on certain intervall times to keep it updated */
   setInterval(updateGreetingAndDate, 60 * 1000);
 });
 
+/**set the current displayed page on active to show visually which page is opened */
 function sectionCheck(idsecTrue) {
   document.getElementById(idsecTrue)?.classList.add('active');
 }
@@ -30,8 +32,11 @@ async function getData(path = '') {
   return await response.json();
 }
 
+/**for the redirecting to the board page after click on numbers */
 function summaryToBoard() { window.location.href = '/board/board.html'; }
 
+
+/**changes the img if an User hovers over that specific element */
 function toDoSummaryEventHandler() {
   const box = document.querySelector('.box-upper-left');
   box?.addEventListener('mouseenter', () => box.querySelector('img')?.setAttribute('src', "../img/icons/summary-pencil-hover.svg"));
@@ -47,6 +52,8 @@ function doneSummaryEventHandler() {
 /* ---------- NEU: Helper fürs Urgent-Datum ---------- */
 let hasUrgentDeadline = false;
 
+
+/**sets up the format of the date, makes exeptions and gives structure */
 function parseDateSmart(input) {
   if (!input || typeof input !== 'string') return null;
   const s = input.trim();
@@ -76,6 +83,8 @@ function startOfDay(d) {
   return x;
 }
 
+
+/**searches for the next available urgent deadline date */
 function findNextUrgentDeadline(taskEntries) {
   const today = startOfDay(new Date());
   const urgentDates = [];
@@ -92,11 +101,14 @@ function findNextUrgentDeadline(taskEntries) {
   return urgentDates[0];
 }
 
+/**puts the format into a readable one for the user */
 function formatDateReadable(d, locale = 'en-US') {
   return new Intl.DateTimeFormat(locale, { month: 'long', day: 'numeric', year: 'numeric' }).format(d);
 }
 /* --------------------------------------------------- */
 
+
+/**feeds the date from local array into summary to show the numbers correctly */
 function deliverDataToSummary(tasks) {
   let todo = tasks.filter(td => td[1].category === 'Todo');
   document.getElementById('todoTask').innerHTML = todo.length;
@@ -111,7 +123,7 @@ function deliverDataToSummary(tasks) {
   let awaitfeedback = tasks.filter(td => td[1].category === 'AwaitFeedback');
   document.getElementById('taskAwaitFeedback').innerHTML = awaitfeedback.length;
 
-  // NEU: nächstes Urgent-Datum setzen (falls vorhanden)
+  /** New: sets the urgent date (if available) */ 
   const nextUrgent = findNextUrgentDeadline(tasks);
   if (nextUrgent) {
     setUpcomingDate(formatDateReadable(nextUrgent, 'en-US'));
@@ -122,6 +134,8 @@ function deliverDataToSummary(tasks) {
 }
 
 /* ===================== USERNAME & INITIALEN ===================== */
+
+/**get the stored User name and return user */
 function getStoredUserName() {
   const name = localStorage.getItem('userFullName');
   if (name && name.trim()) return name.trim();
@@ -129,6 +143,7 @@ function getStoredUserName() {
   return 'User';
 }
 
+/**get the Initials from the User name */
 function getInitials(fullName) {
   const name = (fullName || '').trim().toLowerCase();
   // Wenn Gast-User, immer "G"!
@@ -141,6 +156,9 @@ function getInitials(fullName) {
   const last = parts.length > 1 ? parts[parts.length - 1][0] : (parts[0][1] || '');
   return (first + last).toUpperCase();
 }
+
+
+/**render the Initials from the User name */
 window.renderUserInitials = function renderUserInitials() {
   const fullName = getStoredUserName();
   const initials = getInitials(fullName);
@@ -154,6 +172,7 @@ window.renderUserInitials = function renderUserInitials() {
 
 /* ===================== GREETING + HEUTIGES DATUM ===================== */
 
+/**render the greeting of the User */
 function computeGreeting() {
   const h = new Date().getHours();
   if (h < 12) return 'Good morning';
@@ -191,6 +210,8 @@ window.greetingUser = function greetingUser() {
   updateGreetingAndDate();
 };
 
+
+/**updates the greeting and date according to the current Time and current Date */
 function updateGreetingAndDate() {
   const fullName = getStoredUserName();
   const greeting = computeGreeting();

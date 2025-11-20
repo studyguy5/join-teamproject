@@ -27,20 +27,20 @@ function renderSubtaskEdit() {
 }
 
 
-// leere das subtask input Feld
+/**makes the subtask input field empty */
 function clearSubtaskEdit() {
     document.getElementById("subtask").value = "";
 }
 
 
-// lösche gerenderten Bulletpoint
+/**deletes a rendered pulletpoint */
 function deleteBulletpointEdit(index) {
     let el = document.getElementById(`listed-${index}`);
     if (el) el.remove();
 }
 
 
-// bearbeite gerenderten Bulletpoint
+/**sets an allready rendered pulletpoint back into edit mode in order to change him before pushing*/
 function editBulletpointEditView(index) {
     const li = document.getElementById(`listed-${index}`);
     const textEl = document.getElementById(`task-text-${index}`);
@@ -60,7 +60,7 @@ function editBulletpointEditView(index) {
     document.getElementById(`edit-input-${index}`).focus();
 }
 
-
+/**saves the typed in pulletpoints from the input Field */
 function saveBulletpointEdit(index) {
     const input = document.getElementById(`edit-input-${index}`);
     const newValue = input.value.trim();

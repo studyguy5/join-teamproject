@@ -108,8 +108,8 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
     `
 }
 
-// hier das ganze HTML vom Board reingeben
 
+/**renders the Task into the board page */
 function renderTaskintoBoard(element) {
   let taskOption = 'türkis';
   if (element.taskType === 'User Story') {
@@ -147,17 +147,22 @@ function renderTaskintoBoard(element) {
         </div>`
 }
 
+
+/**renders the mini Menü for changing the category in Responsiv View */
 function renderMiniMenü(id){
    miniMenu = document.getElementById(`miniMenüResponsiv-${id}`)
   miniMenu.classList.toggle('miniMenüResponsiv')
 }
 
+
+/**closes the Mini Menü if you leave a Task */
 function closeMiniMenü(id){
   closeM = document.getElementById(`miniMenüResponsiv-${id}`)
   closeM.classList.remove('miniMenüResponsiv')
 }
 
 
+/**renders the html for the BigView */
 function renderBigViewHTML(elements, id) {
   return `
     <div class="bigViewHeadlineCloseArea" id="bigViewHeadlineCloseArea">
@@ -193,6 +198,7 @@ function renderBigViewHTML(elements, id) {
             <div class="editeDeleteArea" id="editeDeleteArea"></div>`
 };
 
+/**renders the Contacts into BigView */
 function renderContactHTMLForBigView(rightContacts, BVindex, short) {
   return `<div class="singleContactBoxForBigView">
         <div id="contactCirclePopupRender-${BVindex}" class="contactCircleBigView">${short[BVindex][0] + short[BVindex][1]}</div>
@@ -200,6 +206,8 @@ function renderContactHTMLForBigView(rightContacts, BVindex, short) {
         </div>`
 }
 
+
+/**renders the HTML for the edit and delete Button */
 function renderHTMLForEditandDeleteButton(id) {
   return `<div class="editAndDeleteButton">
     <div onclick="deleteTaskFromBoard(${id})" class="deleteField">
@@ -214,6 +222,8 @@ function renderHTMLForEditandDeleteButton(id) {
     </div>`
 }
 
+
+/**renders the contacts in Edit-Mode */
 function renderContactsInEdit(id, contactsArray, index, onlyNumber) {
   return `<div class="contactBox">
         <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
@@ -224,6 +234,8 @@ function renderContactsInEdit(id, contactsArray, index, onlyNumber) {
         </div>`
 }
 
+
+/**renders the filtered Contacts HTML into the div */
 function renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterContactIndex){
   return `<div  class="contactBox">
         <div class="contactCirclePopup">${filteredContactsEdit[filterContactIndex].firstLetter + filteredContactsEdit[filterContactIndex].secondFirstLetter}</div>

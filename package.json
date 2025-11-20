@@ -1,5 +1,9 @@
 {
   "devDependencies": {
     "jsdoc": "^4.0.5"
+  },
+
+  "scripts": {
+    "docs": "jsdoc . -r -d docs"
   }
 }

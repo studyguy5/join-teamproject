@@ -13,7 +13,7 @@ let subtaskArray = [];
 let subtaskvalue1;
 let subtaskvalue2;
 
-
+/**basic function to post Data into firebase */
 async function postData(path = '', data = {}) {
     let response = await fetch(BASe_URL + path + ".json", {
         method: "POST",
@@ -26,7 +26,7 @@ async function postData(path = '', data = {}) {
     return responseToJson.name
 }
 
-
+/**basic function to replace Data within firebase */
 async function putData(path = '', data = {}) {
     let response = await fetch(BASe_URL + path + ".json", {
         method: "PUT",
@@ -38,7 +38,7 @@ async function putData(path = '', data = {}) {
     return responseToJson = await response.json();
 }
 
-
+/**basic function to update Data within firebase */
 async function patchData(path = '', data = {}) {
     const response = await fetch(BASe_URL + path + ".json", {
         method: "PATCH",
@@ -52,14 +52,14 @@ async function patchData(path = '', data = {}) {
 }
 
 
-// um daten zu holen (GET)
+/**basic function to get Data from firebase */
 async function getData(path = '') {
     let response = await fetch(BASe_URL + path + ".json")
     return allTasks = await response.json();
 
 }
 
-
+/**send all Data into firebase as the name says */
 async function sendAlltoFirebase(contactsArray, path = 'contact') {
     for (let index = 0; index < contactsArray.length; index++) {
         await postData(path = path, data = array[index])
@@ -68,6 +68,7 @@ async function sendAlltoFirebase(contactsArray, path = 'contact') {
 
 
 let choosenCategory;
+/**this eventListener chanes the category if you add a Task on Inprogress or AwaitFeedback */
 let rightColumn = document.querySelectorAll('.categorys > div img')
 if (rightColumn)
     rightColumn.forEach(el => {
@@ -77,6 +78,7 @@ if (rightColumn)
         })
     })
 
+/**the same as above but for the categorys in the responsiv view, these are other divs made visible for responsiv design */
 let rigthColumnRe = document.querySelectorAll('.DragAndDropTaskAria > div img')
 if (rigthColumnRe)
     rigthColumnRe.forEach(el => {
@@ -86,7 +88,7 @@ if (rigthColumnRe)
         })
     })
 
-
+/**the template for Task itself to post local and into firebase */
 function createTemplate() {
     return {
         'category': `${choosenCategory}`,
@@ -106,7 +108,7 @@ function createTemplate() {
     }
 }
 
-
+/**create a object with the value given and push it into the subtask array */
 function pushObject(subtaskvalue1, subtaskvalue2) {
     console.log('popup object')
     if (subtaskvalue1) {
@@ -119,7 +121,7 @@ function pushObject(subtaskvalue1, subtaskvalue2) {
     }
 }
 
-
+/**filter the subtask out of the div in order to work with and push it later */
 function getSubtaskFromTemplate() {
     if (document.getElementById(`task-text-${index0}`)) {
         subtaskvalue1 = document.getElementById(`task-text-${index0}`).innerHTML
@@ -129,7 +131,7 @@ function getSubtaskFromTemplate() {
     }
 }
 
-
+/**filter the data from dataset and id and push it separate inot arrays to display and work with it later */
 function setContactAndPrioValue(newTask) {
     let checkedImg = document.querySelectorAll('#IdForContacts img.checked')
     checkedImg.forEach(img => {
@@ -142,7 +144,7 @@ function setContactAndPrioValue(newTask) {
     newTask.prio = prioArray[0];
 }
 
-
+/**get all the typed in Data and push it into the created object structure (called template) */
 async function getTaskInformation(index) {
     let newTask = createTemplate();
     const allIds = tasks.map(ta => ta[1].id)
@@ -167,7 +169,7 @@ async function getTaskInformation(index) {
     filterAndShowTasks();
 };
 
-
+/**filter the results and sort it according to the category in each column */
 async function filterAndShowTasks() {
     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
         document.getElementById(`${categorys[idIndex]}`).innerHTML = '';
@@ -191,7 +193,7 @@ let progress;
 let TaskDone;
 Taskavailable = document.querySelectorAll('.subTaskForBigView > subtaskImgDiv img')
 
-
+/**check if an subtask gets checked and update this on firebase in order to show it other Users in the world */
 function checkDone(id) {
     let sort = tasks.filter(tasks => tasks[1].id === id);
     let firebaseIde = sort[0][0];
@@ -201,7 +203,7 @@ function checkDone(id) {
     filterAndShowTasks(id);
 }
 
-
+/**is in charge of the big View, checks the taskType in sets the color accordingly and renders after that the whole task */
 function bigViewOfTask(id) {
     const elements = tasks.find(task => task[1].id === id);
     if (elements[1].taskType === 'User Story') {
@@ -214,7 +216,7 @@ function bigViewOfTask(id) {
     connectionToTaskWindow.innerHTML = renderBigViewHTML(elements, id);
 }
 
-
+/**switch Case to change the categorys in responsiv view and resplace the DragAndDrop system */
 function moveUpCategory(id) {
     let curTask = tasks.filter(tasks => tasks[1].id === id);
     console.log('moveUp')
@@ -251,13 +253,13 @@ function moveDownCategory(id) {
     }
 }
 
-
+/**renders the Edit and Delete area with the buttons on each bigView */
 function renderEditAndDeleteButton(id) {
     let editandDelete = document.getElementById('editeDeleteArea')
     editandDelete.innerHTML = renderHTMLForEditandDeleteButton(id);
 }
 
-
+/**renders the Contacts in the bigView */
 function renderContactForBigView(id) {
     let rightContacts = tasks.find(task => task[1].id === id)
     let contactForBig = document.getElementById('contactsBV')
@@ -267,7 +269,7 @@ function renderContactForBigView(id) {
     }
 }
 
-
+/**if the user wants to delete a Task, it will be updated local and in firebase */
 async function deleteTaskFromBoard(id) {
     let openedTask = tasks.find(task => task[1].id === id)
     console.log(openedTask);
@@ -280,7 +282,7 @@ async function deleteTaskFromBoard(id) {
     filterAndShowTasks();
 }
 
-
+/**delete in firebase */
 async function deleteData(firebaseID) {
     const response = await fetch(`https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/task/${firebaseID[0]}.json`, {
         method: "DELETE",
@@ -288,7 +290,7 @@ async function deleteData(firebaseID) {
     return await response.json();
 };
 
-
+/**renders the Edit View in the same div as the BigView */
 function activateEditModus(id) {
     let edit = document.getElementById('bigViewOfTask')
     edit.innerHTML = "";
@@ -298,7 +300,7 @@ function activateEditModus(id) {
     showContactsEdit(id);
 }
 
-
+/**changes the img if an user sets a Subtask as done in bigView */
 function confirmSubtask1(id) {
     let RT1 = tasks.find(task => task[1].id === id)
     let firebaseId = RT1[0]
@@ -334,7 +336,7 @@ function confirmSubtask2(id) {
     }
 }
 
-
+/**renders the Contacts in BigView */
 function renderContact(element) {
     let contact = document.getElementById(`${element.id}`)
     if (element.assignedTo)
@@ -345,7 +347,7 @@ function renderContact(element) {
         } else { contact.innerHTML = '' };
 }
 
-
+/**closes the bigView as the name says */
 async function closeBigView() {
     let closefeature = document.getElementById('bigViewOfTask')
     closefeature.classList.add('dont-Show')
@@ -354,7 +356,9 @@ async function closeBigView() {
     filterAndShowTasks();
 };
 
-
+/**this function searches for the task id matching with currentDraggedElement and
+ * changes the category into the category the task is trying to drop on a new area (dragAndDrop)
+ */
 function moveTo(category) {
     let er = tasks.find(ct => ct[1].id == [currentDraggedElement]);
     er[1].category = category;
@@ -362,7 +366,7 @@ function moveTo(category) {
     filterAndShowTasks();
 }
 
-
+/**this is triggered if you start to pull a task out of its area */
 function startDragging(id) {
     currentDraggedElement = id
     document.getElementById(`TaskDiv-${id}`).style.transform = 'rotate(5deg)';
@@ -370,7 +374,7 @@ function startDragging(id) {
 
 let once = false;
 
-
+/**this prevents the default setting in javascript in order to make drag and drop working */
 function preventDefault(ev, category) {
     ev.preventDefault();
     let re = tasks.find(ct => ct[1].id == [currentDraggedElement]);
@@ -384,7 +388,7 @@ function preventDefault(ev, category) {
     }
 }
 
-
+/**if a task leaves a category,the info "no Tasks in this category" will be removed once */
 function leaveCategory(category) {
     let clean = document.querySelectorAll(`.${category} .TaskDivDemo`);
     if (clean.length === 1 && once === true) {

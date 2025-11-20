@@ -11,6 +11,7 @@ window.tasks
 // done by : Arnesto @tasks 
 // as parameter and modified function filter and show task to filterAndShowTasksAlternate(array)
 
+/**starts the searching process and calls functions from below */
 function beginSearching() {
     const searchField = document.querySelector('#FindTask')
     init_beginSearching()
@@ -18,6 +19,8 @@ function beginSearching() {
     searchAndRender(searchField)
 }
 
+
+/**changes img, changes border-color and sets an onclick for finishedSearching */
 function init_beginSearching() {
     const imgContainer = document.querySelector('.searchSymbol')
     imgContainer.setAttribute('src', "/img/icons/subtasks-x.svg")
@@ -27,6 +30,8 @@ function init_beginSearching() {
     return
 }
 
+
+/**changes the img, set the border-color back to default and sets an onclick */
 function init_finishSearching() {
     const imgContainer = document.querySelector('.searchSymbol')
     imgContainer.setAttribute('src', "/img/icons/search.svg")
@@ -36,6 +41,8 @@ function init_finishSearching() {
     return
 }
 
+
+/**is responsible for searching and rendering the filtered results */
 function searchAndRender(searchField) {
     searchField.addEventListener('input', () => {
         const searchKey = searchField.value.toLowerCase()
@@ -57,7 +64,7 @@ function searchAndRender(searchField) {
 }
 
 
-
+/**ends the search mode and shows the results */
 function finishedSearching() {
     init_finishSearching()
     document.querySelector('#FindTask').blur()
@@ -66,6 +73,7 @@ function finishedSearching() {
     return
 }
 
+/**sets the focus in the input-field */
 function searchTaskEventHandling() {
     const searchField = document.querySelector('#FindTask')
     searchField.addEventListener('focus', () => {
@@ -74,6 +82,8 @@ function searchTaskEventHandling() {
     return
 }
 
+
+/**shows the filtered results in the board page */
 async function filterAndShowTasksAlternate(array) {
     console.log(array)
     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
@@ -89,6 +99,8 @@ async function filterAndShowTasksAlternate(array) {
     }
 }
 
+
+/**renders the filtered Task into the board page */
 function renderTaskintoBoardFilter(element) {
     let taskOption = 'türkis';
     if (element.taskType === 'User Story') {
@@ -120,6 +132,8 @@ function renderTaskintoBoardFilter(element) {
         </div>`
 }
 
+
+
 function renderContactFilter(element) {
     let contact = document.getElementById(`${element[1].id}`)
     if (element[1].assignedTo)
@@ -129,6 +143,8 @@ function renderContactFilter(element) {
     <div id="contactscircle" class="contactsCircle">${slim[ContactIndex][0] + slim[ContactIndex][1]} </div>`} else { contact.innerHTML = '' };
 }
 
+
+/**is displayed if durring filter task no results were found */
 function setCardZero() {
     let template;
     template = `<div class="card-zero">No tasks found in this section</div>`;
@@ -136,6 +152,8 @@ function setCardZero() {
 }
 //-----------------------------------------------------------------------------------------------------------------
 
+
+/**checks if the not task Found is needed to display */
 function taskNotFound() {
     const parent = document.querySelector('.DragAndDropTaskAria')
     const divs = parent.querySelectorAll('div')

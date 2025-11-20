@@ -1,8 +1,5 @@
 
-
-
-
-
+/**renders the Edit-Mode into the div from BigView */
 function renderBigEditView(id) {
   return `<div class="editViewHeader">
         

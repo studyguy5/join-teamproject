@@ -6,25 +6,15 @@
 
 
 @media (max-width: 930px) {
-  body { 
-    padding: 20px; 
-    justify-content: flex-start; 
-  }
-  .page-logo { 
-    /* margin-top: 20px;  */
-    top: 30px; 
-    left: 45px; 
-  }
-  .page-logo img { 
-    width: 64px; 
-    height: auto; 
-  }
+  body { padding: 20px; justify-content: flex-start; }
+  .page-logo { margin-top: 20px; top: 30px; left: 45px; }
+  .page-logo img { width: 64px; height: auto; }
 
   .signup-card {
     width: 100%;
     max-width: 500px;
     padding: 24px;
-    margin-top: 120px;
+    margin-top: 67px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
     background-color: white;

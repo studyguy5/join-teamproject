@@ -6,9 +6,19 @@
 
 
 @media (max-width: 930px) {
-  body { padding: 20px; justify-content: flex-start; }
-  .page-logo { margin-top: 20px; top: 30px; left: 45px; }
-  .page-logo img { width: 64px; height: auto; }
+  body { 
+    padding: 20px; 
+    justify-content: flex-start; 
+  }
+  .page-logo { 
+    /* margin-top: 20px;  */
+    top: 30px; 
+    left: 45px; 
+  }
+  .page-logo img { 
+    width: 64px; 
+    height: auto; 
+  }
 
   .signup-card {
     width: 100%;
@@ -45,8 +55,12 @@
   .page-logo img { width: 45px; height: auto; }
   .page-logo { top: 0px; left: 25px; }
 
-  .signup-card { padding: 20px; }
-  h1 { font-size: 36px; }
+  /* .signup-card { 
+    padding: 20px; 
+  } */
+  h1 { 
+    font-size: 36px; 
+  }
 
   .input-field input { padding: 10px 40px 10px 12px; font-size: 14px; }
   .privacy-checkbox label { font-size: 16px; }

@@ -32,7 +32,8 @@ body {
     overflow-y: hidden;
     overflow-x: hidden;
     min-height:926px;
-    height:1024px;
+    /* height:1024px; */
+    height:100vh;
     background-color: #F6F7F8
 }
 
@@ -179,7 +180,8 @@ nav {
     position: relative;
     top: -96px;
     z-index: 0;
-    height: 1024px;
+    /* height: 1024px; */
+    height:100vh;
 }
 
 .active {

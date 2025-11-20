@@ -5,7 +5,7 @@ function clearTaskNormal() {
     document.getElementById('choosenContacts').innerHTML = "";
     const buttons = document.querySelectorAll(".priority-section button");
     buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
-    prioArray.length = 0; // ▼▼▼ optional: Auswahl zurücksetzen
+    prioArray.length = 0; 
     const taskType = document.getElementById("selectedTaskNormal").innerText = "Select Task Category";
     document.getElementById('subtask-list-1').innerHTML = "";
 }
@@ -45,7 +45,7 @@ function renderTaskintoBoard(element) {
         taskOption = 'darkblue';
     }
 
-    taskTemplate(element, taskOption); //das template wurde ausgelagert
+    taskTemplate(element, taskOption); 
 }
 
 
@@ -55,9 +55,8 @@ let index1 = 1;
 let subtaskArray = [];
 let subtaskvalue1;
 let subtaskvalue2;
-/* --- dein vorhandener add-task.js Code bleibt komplett wie er ist --- */
 
-/* ===================== USERNAME & INITIALEN (wie in summary) ===================== */
+
 function getStoredUserName() {
     const name = localStorage.getItem('userFullName');
     if (name && name.trim()) return name.trim();
@@ -68,7 +67,7 @@ function getStoredUserName() {
 
 function getInitials(fullName) {
   const name = (fullName || '').trim().toLowerCase();
-  // Wenn Gast-User, immer "G"!
+  
   if (name === 'guest user' || name === 'guest') {
     return 'G';
   }

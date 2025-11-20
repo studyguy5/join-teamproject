@@ -20,13 +20,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 const buttons = document.querySelectorAll(".priority-section button");
 
-// ▼▼▼ Anpassung: gewählte Priority IMMER im prioArray[0] speichern
+
 buttons.forEach(button => {
     button.addEventListener("click", () => {
         buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
         const priority = button.dataset.priority;
         button.classList.add(priority);
-        prioArray[0] = priority;                 // <--- NEU: damit Summary die Prio kennt
+        prioArray[0] = priority;                 
     });
 });
 
@@ -206,7 +206,7 @@ options.forEach(opt => {
 function formValidationAddTask() {
     const title = document.getElementById("title-add-task").value;
     const dueDate = document.getElementById("date-add-task").value;
-    const category = document.getElementById("categoryValue").value; // hidden input
+    const category = document.getElementById("categoryValue").value; 
 
     if (title === "" || dueDate === "" || category === "") {
         displayRequiredMessage();
@@ -300,7 +300,7 @@ document.addEventListener('click', (e) => {
     const categoryDrop = document.getElementById('dropIdNormal');
     const categoryTrigger = document.getElementById('IdForTaskChoiseNormal');
 
-    // Assigned-to schließen, wenn Klick außerhalb
+    
     if (!contactTrigger.contains(e.target) && !contactBox.contains(e.target)) {
         contactBox.classList.add('availibleContactsClose');
         contactBox.classList.remove('availibleContactsOpen');
@@ -308,7 +308,7 @@ document.addEventListener('click', (e) => {
          document.getElementById('filterContactsNormal').classList.add('dont-Show');
     }
 
-    // Category schließen, wenn Klick außerhalb
+    
     if (!categoryTrigger.contains(e.target) && !categoryDrop.contains(e.target)) {
         categoryDrop.classList.add('dropTasktypeClose');
         document.getElementById('arrowImgNormal').classList.remove('select-arrow-open');
@@ -370,8 +370,8 @@ function setContactAndPrioValue(newTask) {
         names = img.dataset.set;
         newTask.assignedTo.push(names)
     })
-    // ▼▼▼ Wichtig: hier landet jetzt die ausgewählte Prio
-    newTask.prio = prioArray[0] || '';       // falls nichts gewählt, leer lassen
+    
+    newTask.prio = prioArray[0] || '';       
 }
 
 
@@ -384,9 +384,9 @@ async function getTaskInformationNormal(index) {
     newTask.taskType = document.getElementById('selectedTaskNormal').innerText
     setContactAndPrioValue(newTask, index);
     getSubtaskFromTemplate();
-    createTemplate(); //create complete template of object with all data
-    subtaskArray = newTask.subtasks; //path from subtask Array where new subtasks should be pushed into
-    pushObject(subtaskvalue1, subtaskvalue2); // subtasks template with variable is pushed into subtaskArray
+    createTemplate(); 
+    subtaskArray = newTask.subtasks; 
+    pushObject(subtaskvalue1, subtaskvalue2); 
     newTask.category = 'Todo';
     await postData("task", newTask);
     tasks = [];

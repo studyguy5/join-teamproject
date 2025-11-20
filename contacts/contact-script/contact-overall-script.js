@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 
 
-//validation functions
 function formValidation() {
     const allInput = document.querySelectorAll('input');
     for (let index = 0; index < allInput.length; index++) {
@@ -54,7 +53,6 @@ function removeErrorMark(inputField) {
 }
 
 
-//view and interactions functions
 function contentCheck(inputField) {
     let booleansValue;
     const inputFieldvalue = inputField.value.trim()
@@ -138,7 +136,6 @@ async function showSuccessMessage(showIntervall, hideIntervall) {
 }
 
 
-//data in general functions     targetObject = let contacts in Zeile 1
 function objectToArray(contacts) {          
     const object = Object.entries(contacts)
     const arrayObject = object.map((member) => {
@@ -161,7 +158,6 @@ function arraySorting(array) {
 }
 
 
-//animation-functions
 async function switchContentWithSlide(targetID = '', id) {
     const container = document.getElementById(targetID)
     const slideOutAnimation = container.animate(transformArrayStart, animationAttributeObjectStart);
@@ -208,9 +204,8 @@ async function setTimer(time) {
 }
 
 
-//API and DOM connections functions
 function getObjectFromContactForm(nameId, emailId, phoneNumberId) {
-    const name = document.getElementById(nameId).value.trim()   // method removes whitespace from both sides of a string.
+    const name = document.getElementById(nameId).value.trim()   
     const email = document.getElementById(emailId).value.trim()
     const phoneNumber = document.getElementById(phoneNumberId).value.trim()
     let formJson = {
@@ -250,7 +245,6 @@ async function addContact(nameId, emailId, phoneNumberId) {
 
     await refreshContactList();
 
-    // wiederholtes prüfen bis es existiert
     waitForDOM(() => document.getElementById(newContactId))
         .then(() => scrollIntoView(newContactId));
 
@@ -310,9 +304,6 @@ async function deleteContact(id) {
 }
 
 
-/* --- dein vorhandener contact-overall-script.js Code bleibt komplett wie er ist --- */
-
-/* ===================== USERNAME & INITIALEN (wie in summary) ===================== */
 function getStoredUserName() {
   const name = localStorage.getItem('userFullName');
   if (name && name.trim()) return name.trim();
@@ -323,7 +314,7 @@ function getStoredUserName() {
 
 function getInitials(fullName) {
   const name = (fullName || '').trim().toLowerCase();
-  // Wenn Gast-User, immer "G"!
+  
   if (name === 'guest user' || name === 'guest') {
     return 'G';
   }

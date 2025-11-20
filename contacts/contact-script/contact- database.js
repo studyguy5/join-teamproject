@@ -1,5 +1,5 @@
 const BASE_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app"
-// um daten zu holen
+
 async function getObject(path = '') {
   let response = await fetch(BASE_URL + path + ".json")
   return responseToJson = await response.json()
@@ -57,10 +57,10 @@ async function getArray(pathAdresse = '') {
 }
 
 
-// nur für den Test oder Notfall
+
 async function sendAlltoFirebase(array, path = 'contact') {
   for (let index = 0; index < array.length; index++) {
     await postData(path = path, data = array[index])
   }
 }
-// nur für den Test oder Notfall
+

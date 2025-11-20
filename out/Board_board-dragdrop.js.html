@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Board/board-dragdrop.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Board/board-dragdrop.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let categorys = ['Todo', 'Inprogress', 'AwaitFeedback', 'Done'];
+const BASe_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/"
+
+let taskContainerArray = ['title', 'task-description', 'dueDate'];
+let taskObjectKey = ['title', 'description', 'DueDate'];
+
+let currentDraggedElement;
+window.index0 = 0;
+window.index1 = 1;
+
+let subtaskArray = [];
+
+let subtaskvalue1;
+let subtaskvalue2;
+
+/**basic function to post Data into firebase */
+async function postData(path = '', data = {}) {
+    let response = await fetch(BASe_URL + path + ".json", {
+        method: "POST",
+        headers: {
+            "content-type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    let responseToJson = await response.json();
+    return responseToJson.name
+}
+
+/**basic function to replace Data within firebase */
+async function putData(path = '', data = {}) {
+    let response = await fetch(BASe_URL + path + ".json", {
+        method: "PUT",
+        header: {
+            "content-type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+    return responseToJson = await response.json();
+}
+
+/**basic function to update Data within firebase */
+async function patchData(path = '', data = {}) {
+    const response = await fetch(BASe_URL + path + ".json", {
+        method: "PATCH",
+        mode: 'cors',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    return await response.json();
+}
+
+
+/**basic function to get Data from firebase */
+async function getData(path = '') {
+    let response = await fetch(BASe_URL + path + ".json")
+    return allTasks = await response.json();
+
+}
+
+/**send all Data into firebase as the name says */
+async function sendAlltoFirebase(contactsArray, path = 'contact') {
+    for (let index = 0; index &lt; contactsArray.length; index++) {
+        await postData(path = path, data = array[index])
+    }
+}
+
+
+let choosenCategory;
+/**this eventListener chanes the category if you add a Task on Inprogress or AwaitFeedback */
+let rightColumn = document.querySelectorAll('.categorys > div img')
+if (rightColumn)
+    rightColumn.forEach(el => {
+        el.addEventListener('click', () => {
+            console.log(el.dataset.categoryId)
+            choosenCategory = el.dataset.categoryId
+        })
+    })
+
+/**the same as above but for the categorys in the responsiv view, these are other divs made visible for responsiv design */
+let rigthColumnRe = document.querySelectorAll('.DragAndDropTaskAria > div img')
+if (rigthColumnRe)
+    rigthColumnRe.forEach(el => {
+        el.addEventListener('click', () => {
+            console.log(el.dataset.categoryId)
+            choosenCategory = el.dataset.categoryId
+        })
+    })
+
+/**the template for Task itself to post local and into firebase */
+function createTemplate() {
+    return {
+        'category': `${choosenCategory}`,
+        'id': '',
+        'taskType': '',
+        'title': '',
+        'description': '',
+        'DueDate': '',
+        'prio': '',
+        'progress': '0',
+        'cid': [
+        ],
+        'assignedTo': [
+        ],
+        'subtasks': [
+        ]
+    }
+}
+
+/**create a object with the value given and push it into the subtask array */
+function pushObject(subtaskvalue1, subtaskvalue2) {
+    console.log('popup object')
+    if (subtaskvalue1) {
+        let subTaskObject1 = { "value": `${subtaskvalue1}`, 'status': 'open' };
+        subtaskArray.push(subTaskObject1)
+    }
+    if (subtaskvalue2) {
+        let subTaskObject2 = {"value": `${subtaskvalue2}`, 'status': 'open'};
+        subtaskArray.push(subTaskObject2);
+    }
+}
+
+/**filter the subtask out of the div in order to work with and push it later */
+function getSubtaskFromTemplate() {
+    if (document.getElementById(`task-text-${index0}`)) {
+        subtaskvalue1 = document.getElementById(`task-text-${index0}`).innerHTML
+    };
+    if (document.getElementById(`task-text-${index1}`)) {
+        subtaskvalue2 = document.getElementById(`task-text-${index1}`).innerHTML
+    }
+}
+
+/**filter the data from dataset and id and push it separate inot arrays to display and work with it later */
+function setContactAndPrioValue(newTask) {
+    let checkedImg = document.querySelectorAll('#IdForContacts img.checked')
+    checkedImg.forEach(img => {
+        names = img.dataset.set;
+        let id = img.id;
+        newTask.cid.push(id);
+        console.log(id);
+        newTask.assignedTo.push(names)
+    })
+    newTask.prio = prioArray[0];
+}
+
+/**get all the typed in Data and push it into the created object structure (called template) */
+async function getTaskInformation(index) {
+    let newTask = createTemplate();
+    const allIds = tasks.map(ta => ta[1].id)
+    let rn = Math.floor(Math.random() * 50)
+    while (allIds.includes(rn)) {
+        rn = Math.floor(Math.random() * 10)
+    }
+    newTask.id = rn;
+    for (let valueIndex = 0; valueIndex &lt; taskObjectKey.length; valueIndex++) {
+        newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value
+    };
+    newTask.taskType = document.getElementById('IdForTaskChoise').innerText
+    setContactAndPrioValue(newTask, index);
+    getSubtaskFromTemplate();
+    createTemplate(); //create complete template of object with all data
+    subtaskArray = newTask.subtasks; //path from subtask Array where new subtasks should be pushed into
+    pushObject(subtaskvalue1, subtaskvalue2); // subtasks template with variable is pushed into subtaskArray
+    newTask.category = choosenCategory ? choosenCategory : 'Todo';
+    await postData("task", newTask);
+    tasks = [];
+    tasks.push(...Object.entries(await getData('task')));
+    filterAndShowTasks();
+};
+
+/**filter the results and sort it according to the category in each column */
+async function filterAndShowTasks() {
+    for (let idIndex = 0; idIndex &lt; categorys.length; idIndex++) {
+        document.getElementById(`${categorys[idIndex]}`).innerHTML = '';
+        let filteredTasks = tasks.filter(f => f[1].category == categorys[idIndex]);
+        if (filteredTasks == '' || filteredTasks == null) {
+            document.getElementById(`${categorys[idIndex]}`).innerHTML = `&lt;div id="emptyCategory" class="emptyCategory"> No Tasks ${categorys[idIndex]}&lt;/div>`
+        } else {
+            for (let catIndex = 0; catIndex &lt; filteredTasks.length; catIndex++) {
+                let element = filteredTasks[catIndex][1];
+                document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoard(element);
+                if (document.getElementById(`${categorys[idIndex]}`)) {
+                    renderContact(element);
+                }
+            }
+        }
+    }
+}
+
+
+let progress;
+let TaskDone;
+Taskavailable = document.querySelectorAll('.subTaskForBigView > subtaskImgDiv img')
+
+/**check if an subtask gets checked and update this on firebase in order to show it other Users in the world */
+function checkDone(id) {
+    let sort = tasks.filter(tasks => tasks[1].id === id);
+    let firebaseIde = sort[0][0];
+    TaskDone = document.querySelectorAll('.subTaskForBigView .subtaskImgDiv .checkedSubtask')
+    sort[0][1].progress = (TaskDone.length / sort[0][1].subtasks.length) * 128
+    putData(`task/${firebaseIde}/progress`, `${sort[0][1].progress}`)
+    filterAndShowTasks(id);
+}
+
+/**is in charge of the big View, checks the taskType in sets the color accordingly and renders after that the whole task */
+function bigViewOfTask(id) {
+    const elements = tasks.find(task => task[1].id === id);
+    if (elements[1].taskType === 'User Story') {
+        taskOption = 'darkblueBigView';
+    } else {
+        taskOption = 'türkisBigView';
+    }
+    let connectionToTaskWindow = document.getElementById('bigViewOfTask')
+    connectionToTaskWindow.classList.remove('dont-Show')
+    connectionToTaskWindow.innerHTML = renderBigViewHTML(elements, id);
+}
+
+/**switch Case to change the categorys in responsiv view and resplace the DragAndDrop system */
+function moveUpCategory(id) {
+    let curTask = tasks.filter(tasks => tasks[1].id === id);
+    console.log('moveUp')
+    switch (curTask[0][1].category) {
+        case 'Todo': 
+            break;
+        case 'Inprogress': curTask[0][1].category = 'Todo', filterAndShowTasks(id); 
+            break;
+        case 'AwaitFeedback': curTask[0][1].category = 'Inprogress', filterAndShowTasks(id); 
+            break;
+        case 'Done': curTask[0][1].category = 'AwaitFeedback', filterAndShowTasks(id);
+            break;
+        default: 
+            break;
+    }
+
+}
+
+
+function moveDownCategory(id) {
+    let CurTask = tasks.filter(tasks => tasks[1].id === id);
+    console.log('moveDown')
+    switch (CurTask[0][1].category) {
+        case 'Todo': CurTask[0][1].category = 'Inprogress', filterAndShowTasks(id);
+            break;
+        case 'Inprogress': CurTask[0][1].category = 'AwaitFeedback', filterAndShowTasks(id);
+            break;
+        case 'AwaitFeedback': CurTask[0][1].category = 'Done', filterAndShowTasks(id);
+            break;
+        case 'Done': 
+            break;
+        default: 
+            break;
+    }
+}
+
+/**renders the Edit and Delete area with the buttons on each bigView */
+function renderEditAndDeleteButton(id) {
+    let editandDelete = document.getElementById('editeDeleteArea')
+    editandDelete.innerHTML = renderHTMLForEditandDeleteButton(id);
+}
+
+/**renders the Contacts in the bigView */
+function renderContactForBigView(id) {
+    let rightContacts = tasks.find(task => task[1].id === id)
+    let contactForBig = document.getElementById('contactsBV')
+    for (let BVindex = 0; BVindex &lt; rightContacts[1].assignedTo?.length; BVindex++) {
+        let short = rightContacts[1].assignedTo.map(sh => sh.split(" ").map(c => c.charAt(0)))
+        contactForBig.innerHTML += renderContactHTMLForBigView(rightContacts, BVindex, short);
+    }
+}
+
+/**if the user wants to delete a Task, it will be updated local and in firebase */
+async function deleteTaskFromBoard(id) {
+    let openedTask = tasks.find(task => task[1].id === id)
+    console.log(openedTask);
+    let firebaseID = [openedTask[0]];
+    console.log(firebaseID[0]);
+    closeBigView();
+    await deleteData(firebaseID);
+    tasks = [];
+    tasks.push(...Object.entries(await getData('task')));
+    filterAndShowTasks();
+}
+
+/**delete in firebase */
+async function deleteData(firebaseID) {
+    const response = await fetch(`https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/task/${firebaseID[0]}.json`, {
+        method: "DELETE",
+    });
+    return await response.json();
+};
+
+/**renders the Edit View in the same div as the BigView */
+function activateEditModus(id) {
+    let edit = document.getElementById('bigViewOfTask')
+    edit.innerHTML = "";
+    edit.innerHTML = renderBigEditView(id);
+    getCurrentValues(id);
+    prioButtonactivate(id);
+    showContactsEdit(id);
+}
+
+/**changes the img if an user sets a Subtask as done in bigView */
+function confirmSubtask1(id) {
+    let RT1 = tasks.find(task => task[1].id === id)
+    let firebaseId = RT1[0]
+    let choSubtask1 = document.getElementById(`subtaskBigViewImg1`)
+    if (choSubtask1.src.includes("/img/icons/normalCheckContact.svg")) {
+        choSubtask1.classList.remove('checkboxS1')
+        choSubtask1.classList.add('checkedSubtask')
+        choSubtask1.src = "/img/icons/normalCheckedContact.svg"
+        putData(`task/${firebaseId}/subtasks/0/status`, 'closed')
+    } else {
+        choSubtask1.classList.add('checkboxS1')
+        choSubtask1.classList.remove('checkedSubtask')
+        choSubtask1.src = "/img/icons/normalCheckContact.svg"
+        putData(`task/${firebaseId}/subtasks/0/status`, 'open')
+    }
+}
+
+
+function confirmSubtask2(id) {
+    let RT2 = tasks.find(task => task[1].id === id)
+    let firebaseId = RT2[0]
+    let choSubtask2 = document.getElementById(`subtaskBigViewImg2`)
+    if (choSubtask2.src.includes("/img/icons/normalCheckContact.svg")) {
+        choSubtask2.classList.remove('checkboxS2')
+        choSubtask2.classList.add('checkedSubtask')
+        choSubtask2.src = "/img/icons/normalCheckedContact.svg"
+        putData(`task/${firebaseId}/subtasks/1/status`, 'closed')
+    } else {
+        choSubtask2.classList.add('checkboxS2')
+        choSubtask2.classList.remove('checkedSubtask')
+        choSubtask2.src = "/img/icons/normalCheckContact.svg"
+        putData(`task/${firebaseId}/subtasks/1/status`, 'open')
+    }
+}
+
+/**renders the Contacts in BigView */
+function renderContact(element) {
+    let contact = document.getElementById(`${element.id}`)
+    if (element.assignedTo)
+        for (let ContactIndex = 0; ContactIndex &lt; element.assignedTo.length; ContactIndex++) {
+            let slim = element.assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
+            contact.innerHTML += `
+    &lt;div id="contactscircle" class="contactsCircle">${slim[ContactIndex][0] + slim[ContactIndex][1]} &lt;/div>`
+        } else { contact.innerHTML = '' };
+}
+
+/**closes the bigView as the name says */
+async function closeBigView() {
+    let closefeature = document.getElementById('bigViewOfTask')
+    closefeature.classList.add('dont-Show')
+    tasks = [];
+    tasks.push(...Object.entries(await getData('task')));
+    filterAndShowTasks();
+};
+
+/**this function searches for the task id matching with currentDraggedElement and
+ * changes the category into the category the task is trying to drop on a new area (dragAndDrop)
+ */
+function moveTo(category) {
+    let er = tasks.find(ct => ct[1].id == [currentDraggedElement]);
+    er[1].category = category;
+    putData(`task/${er[0]}/category`, `${category}`);
+    filterAndShowTasks();
+}
+
+/**this is triggered if you start to pull a task out of its area */
+function startDragging(id) {
+    currentDraggedElement = id
+    document.getElementById(`TaskDiv-${id}`).style.transform = 'rotate(5deg)';
+}
+
+let once = false;
+
+/**this prevents the default setting in javascript in order to make drag and drop working */
+function preventDefault(ev, category) {
+    ev.preventDefault();
+    let re = tasks.find(ct => ct[1].id == [currentDraggedElement]);
+    let checkEmpty = document.querySelectorAll(`#${category} .emptyCategory`)
+    if (checkEmpty.length !== 0) { document.getElementById(`${category}`).innerHTML = ""; }
+    let demo = document.querySelectorAll(`.${category} .TaskDivDemo`)
+    if (demo.length == 0 &amp;&amp; re[1].category != category) {
+        document.getElementById(category).innerHTML += `
+    &lt;div class="TaskDivDemo" id="TaskDivDemo">Drop me here&lt;/div>`;
+        once = true;
+    }
+}
+
+/**if a task leaves a category,the info "no Tasks in this category" will be removed once */
+function leaveCategory(category) {
+    let clean = document.querySelectorAll(`.${category} .TaskDivDemo`);
+    if (clean.length === 1 &amp;&amp; once === true) {
+        clean[0].remove();
+        console.log(clean);
+        once = false;
+    }
+}
+
+
+function objectToArray(contacts) {
+    const object = Object.entries(contacts)
+    console.log(object);
+    const arrayObject = object.map((member) => {
+        return {
+            id: member[0],
+            ...member[1]
+        }
+    })
+    return arrayObject;
+}
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-database.html">database</a></li><li><a href="module-firebase.html">firebase</a></li><li><a href="module-login.html">login</a></li><li><a href="module-logoAnimation.html">logoAnimation</a></li><li><a href="module-showPassword.html">showPassword</a></li><li><a href="module-sign-up.html">sign-up</a></li></ul><h3>Classes</h3><ul><li><a href="module-database-Database.html">Database</a></li></ul><h3>Global</h3><ul><li><a href="global.html#BASE_URL">BASE_URL</a></li><li><a href="global.html#BASe_URL">BASe_URL</a></li><li><a href="global.html#activateEditModus">activateEditModus</a></li><li><a href="global.html#addContact">addContact</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#animationAttributeObjectFinish">animationAttributeObjectFinish</a></li><li><a href="global.html#animationAttributeObjectStart">animationAttributeObjectStart</a></li><li><a href="global.html#arraySorting">arraySorting</a></li><li><a href="global.html#beginSearching">beginSearching</a></li><li><a href="global.html#bigViewOfTask">bigViewOfTask</a></li><li><a href="global.html#buttons">buttons</a></li><li><a href="global.html#categoryDiv">categoryDiv</a></li><li><a href="global.html#categorys">categorys</a></li><li><a href="global.html#checkDone">checkDone</a></li><li><a href="global.html#chooseContact">chooseContact</a></li><li><a href="global.html#chooseContactEdit">chooseContactEdit</a></li><li><a href="global.html#chooseContactNormal">chooseContactNormal</a></li><li><a href="global.html#chooseFilteredContact">chooseFilteredContact</a></li><li><a href="global.html#chooseFilteredContactEdit">chooseFilteredContactEdit</a></li><li><a href="global.html#chooseFilteredContactNormal">chooseFilteredContactNormal</a></li><li><a href="global.html#chooseValue">chooseValue</a></li><li><a href="global.html#chooseValueNormal">chooseValueNormal</a></li><li><a href="global.html#clearSubtask">clearSubtask</a></li><li><a href="global.html#clearSubtaskEdit">clearSubtaskEdit</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#clearTaskNormal">clearTaskNormal</a></li><li><a href="global.html#closeBigView">closeBigView</a></li><li><a href="global.html#closeContactOverlay">closeContactOverlay</a></li><li><a href="global.html#closeMiniMen%25C3%25BC">closeMiniMenü</a></li><li><a href="global.html#closeOverlay">closeOverlay</a></li><li><a href="global.html#closePopup">closePopup</a></li><li><a href="global.html#computeGreeting">computeGreeting</a></li><li><a href="global.html#confirmSubtask1">confirmSubtask1</a></li><li><a href="global.html#constantCheck">constantCheck</a></li><li><a href="global.html#contacts">contacts</a></li><li><a href="global.html#contactsArray">contactsArray</a></li><li><a href="global.html#contentCheck">contentCheck</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#createTaskTemplate">createTaskTemplate</a></li><li><a href="global.html#createTemplate">createTemplate</a></li><li><a href="global.html#createaddTaskPopup">createaddTaskPopup</a></li><li><a href="global.html#deleteBulletpoint">deleteBulletpoint</a></li><li><a href="global.html#deleteBulletpointEdit">deleteBulletpointEdit</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteData">deleteData</a></li><li><a href="global.html#deleteRenderedContact">deleteRenderedContact</a></li><li><a href="global.html#deleteRenderedContactEdit">deleteRenderedContactEdit</a></li><li><a href="global.html#deleteRenderedContactNormal">deleteRenderedContactNormal</a></li><li><a href="global.html#deleteRenderedFilteredContactEdit">deleteRenderedFilteredContactEdit</a></li><li><a href="global.html#deleteTaskFromBoard">deleteTaskFromBoard</a></li><li><a href="global.html#deliverDataToSummary">deliverDataToSummary</a></li><li><a href="global.html#displayRequiredMessage">displayRequiredMessage</a></li><li><a href="global.html#displayRequiredMessageTemp">displayRequiredMessageTemp</a></li><li><a href="global.html#editBulletpoint">editBulletpoint</a></li><li><a href="global.html#editBulletpointEditView">editBulletpointEditView</a></li><li><a href="global.html#editFeedback">editFeedback</a></li><li><a href="global.html#enableEnterForSubtask">enableEnterForSubtask</a></li><li><a href="global.html#filterAndShowTasks">filterAndShowTasks</a></li><li><a href="global.html#filterAndShowTasksAlternate">filterAndShowTasksAlternate</a></li><li><a href="global.html#filterAndShowTasksEdit">filterAndShowTasksEdit</a></li><li><a href="global.html#filterContactsInNormal">filterContactsInNormal</a></li><li><a href="global.html#filteredContacts">filteredContacts</a></li><li><a href="global.html#filteredContactsEdit">filteredContactsEdit</a></li><li><a href="global.html#findNextUrgentDeadline">findNextUrgentDeadline</a></li><li><a href="global.html#finishedSearching">finishedSearching</a></li><li><a href="global.html#firstTime">firstTime</a></li><li><a href="global.html#formValidation">formValidation</a></li><li><a href="global.html#formValidationAddTask">formValidationAddTask</a></li><li><a href="global.html#formValidationAddTaskTemp">formValidationAddTaskTemp</a></li><li><a href="global.html#formatDateReadable">formatDateReadable</a></li><li><a href="global.html#getAddOverlayContent">getAddOverlayContent</a></li><li><a href="global.html#getArray">getArray</a></li><li><a href="global.html#getContactsDetails">getContactsDetails</a></li><li><a href="global.html#getCurrentValues">getCurrentValues</a></li><li><a href="global.html#getData">getData</a></li><li><a href="global.html#getEditOverlayContent">getEditOverlayContent</a></li><li><a href="global.html#getErrorLogic">getErrorLogic</a></li><li><a href="global.html#getErrorLogicIndex2">getErrorLogicIndex2</a></li><li><a href="global.html#getInitials">getInitials</a></li><li><a href="global.html#getNewContactData">getNewContactData</a></li><li><a href="global.html#getObject">getObject</a></li><li><a href="global.html#getObjectFromContactForm">getObjectFromContactForm</a></li><li><a href="global.html#getStoredUserName">getStoredUserName</a></li><li><a href="global.html#getSubtaskFromTemplate">getSubtaskFromTemplate</a></li><li><a href="global.html#getSubtaskFromTemplateEdit">getSubtaskFromTemplateEdit</a></li><li><a href="global.html#getTaskInformation">getTaskInformation</a></li><li><a href="global.html#getTaskInformationEdit">getTaskInformationEdit</a></li><li><a href="global.html#getTaskInformationNormal">getTaskInformationNormal</a></li><li><a href="global.html#hiddenInput">hiddenInput</a></li><li><a href="global.html#initContactToggle">initContactToggle</a></li><li><a href="global.html#init_beginSearching">init_beginSearching</a></li><li><a href="global.html#init_finishSearching">init_finishSearching</a></li><li><a href="global.html#leaveCategory">leaveCategory</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#moveUpCategory">moveUpCategory</a></li><li><a href="global.html#objectToArray">objectToArray</a></li><li><a href="global.html#openContactView">openContactView</a></li><li><a href="global.html#openContactViewNormal">openContactViewNormal</a></li><li><a href="global.html#openContactWithCounter">openContactWithCounter</a></li><li><a href="global.html#openTaskTypeDropDownNormal">openTaskTypeDropDownNormal</a></li><li><a href="global.html#openTasktypeDropDown">openTasktypeDropDown</a></li><li><a href="global.html#options">options</a></li><li><a href="global.html#outsideClick">outsideClick</a></li><li><a href="global.html#overlayAnimationAttributeObjectFinish">overlayAnimationAttributeObjectFinish</a></li><li><a href="global.html#overlayAnimationAttributeObjectStart">overlayAnimationAttributeObjectStart</a></li><li><a href="global.html#overlayShow">overlayShow</a></li><li><a href="global.html#overlayTransformArrayFinish">overlayTransformArrayFinish</a></li><li><a href="global.html#overlayTransformArrayStart">overlayTransformArrayStart</a></li><li><a href="global.html#parseDateSmart">parseDateSmart</a></li><li><a href="global.html#patchData">patchData</a></li><li><a href="global.html#postData">postData</a></li><li><a href="global.html#preventDefault">preventDefault</a></li><li><a href="global.html#prioArray">prioArray</a></li><li><a href="global.html#prioButton">prioButton</a></li><li><a href="global.html#pushObject">pushObject</a></li><li><a href="global.html#pushObjectEdit">pushObjectEdit</a></li><li><a href="global.html#pushSubtaskIntoArray">pushSubtaskIntoArray</a></li><li><a href="global.html#putData">putData</a></li><li><a href="global.html#randomFill">randomFill</a></li><li><a href="global.html#refFirstLetter">refFirstLetter</a></li><li><a href="global.html#refreshContactList">refreshContactList</a></li><li><a href="global.html#removeErrorMark">removeErrorMark</a></li><li><a href="global.html#renderBigEditView">renderBigEditView</a></li><li><a href="global.html#renderBigViewHTML">renderBigViewHTML</a></li><li><a href="global.html#renderChoosenContact">renderChoosenContact</a></li><li><a href="global.html#renderChoosenContactEdit">renderChoosenContactEdit</a></li><li><a href="global.html#renderChoosenContactNormal">renderChoosenContactNormal</a></li><li><a href="global.html#renderContact">renderContact</a></li><li><a href="global.html#renderContactForBigView">renderContactForBigView</a></li><li><a href="global.html#renderContactHTMLForBigView">renderContactHTMLForBigView</a></li><li><a href="global.html#renderContactList">renderContactList</a></li><li><a href="global.html#renderContactsInEdit">renderContactsInEdit</a></li><li><a href="global.html#renderEditAndDeleteButton">renderEditAndDeleteButton</a></li><li><a href="global.html#renderFilteredChoosenContact">renderFilteredChoosenContact</a></li><li><a href="global.html#renderFilteredChoosenContactNormal">renderFilteredChoosenContactNormal</a></li><li><a href="global.html#renderHTMLForEditandDeleteButton">renderHTMLForEditandDeleteButton</a></li><li><a href="global.html#renderHTMLForFilteredContactsInEdit">renderHTMLForFilteredContactsInEdit</a></li><li><a href="global.html#renderMiniMen%25C3%25BC">renderMiniMenü</a></li><li><a href="global.html#renderSubtask">renderSubtask</a></li><li><a href="global.html#renderTaskintoBoard">renderTaskintoBoard</a></li><li><a href="global.html#renderTaskintoBoardFilter">renderTaskintoBoardFilter</a></li><li><a href="global.html#renderText">renderText</a></li><li><a href="global.html#renderfilteredContactsInNormal">renderfilteredContactsInNormal</a></li><li><a href="global.html#renderfilteredContactsInPopup">renderfilteredContactsInPopup</a></li><li><a href="global.html#renderfilteredContactsInPopupEdit">renderfilteredContactsInPopupEdit</a></li><li><a href="global.html#resetContentWithSlide">resetContentWithSlide</a></li><li><a href="global.html#rightColumn">rightColumn</a></li><li><a href="global.html#rigthColumnRe">rigthColumnRe</a></li><li><a href="global.html#saveBulletpoint">saveBulletpoint</a></li><li><a href="global.html#saveBulletpointEdit">saveBulletpointEdit</a></li><li><a href="global.html#saveChanges">saveChanges</a></li><li><a href="global.html#scrollIntoView">scrollIntoView</a></li><li><a href="global.html#searchAndRender">searchAndRender</a></li><li><a href="global.html#searchTaskEventHandling">searchTaskEventHandling</a></li><li><a href="global.html#sectionCheck">sectionCheck</a></li><li><a href="global.html#selectedNameCheck">selectedNameCheck</a></li><li><a href="global.html#selectedTask">selectedTask</a></li><li><a href="global.html#sendAlltoFirebase">sendAlltoFirebase</a></li><li><a href="global.html#setAddOverlayContent">setAddOverlayContent</a></li><li><a href="global.html#setBadgeColor">setBadgeColor</a></li><li><a href="global.html#setCardZero">setCardZero</a></li><li><a href="global.html#setContactAndPrioValue">setContactAndPrioValue</a></li><li><a href="global.html#setContactAndPrioValueEdit">setContactAndPrioValueEdit</a></li><li><a href="global.html#setContactDetails">setContactDetails</a></li><li><a href="global.html#setContactList">setContactList</a></li><li><a href="global.html#setEditOverlayContent">setEditOverlayContent</a></li><li><a href="global.html#setFirstLetter">setFirstLetter</a></li><li><a href="global.html#setSecondFirstLetter">setSecondFirstLetter</a></li><li><a href="global.html#setSucessMessage">setSucessMessage</a></li><li><a href="global.html#setTimer">setTimer</a></li><li><a href="global.html#showContactDetails">showContactDetails</a></li><li><a href="global.html#showContacts">showContacts</a></li><li><a href="global.html#showContactsEdit">showContactsEdit</a></li><li><a href="global.html#showCurrentValue">showCurrentValue</a></li><li><a href="global.html#showInput">showInput</a></li><li><a href="global.html#showInputNormal">showInputNormal</a></li><li><a href="global.html#showReportAddedTask">showReportAddedTask</a></li><li><a href="global.html#showReportAddedTaskTemplate">showReportAddedTaskTemplate</a></li><li><a href="global.html#showSuccessMessage">showSuccessMessage</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#stopBubbling">stopBubbling</a></li><li><a href="global.html#summaryToBoard">summaryToBoard</a></li><li><a href="global.html#switchContentWithSlide">switchContentWithSlide</a></li><li><a href="global.html#switchMessageContentWithSlide">switchMessageContentWithSlide</a></li><li><a href="global.html#switchOverlayContentWithSlide">switchOverlayContentWithSlide</a></li><li><a href="global.html#taskContainerArray">taskContainerArray</a></li><li><a href="global.html#taskNotFound">taskNotFound</a></li><li><a href="global.html#taskObjectKey">taskObjectKey</a></li><li><a href="global.html#taskTemplate">taskTemplate</a></li><li><a href="global.html#toDoSummaryEventHandler">toDoSummaryEventHandler</a></li><li><a href="global.html#toggleContactMore">toggleContactMore</a></li><li><a href="global.html#toggleRequiredMessage">toggleRequiredMessage</a></li><li><a href="global.html#transformArrayFinish">transformArrayFinish</a></li><li><a href="global.html#transformArrayStart">transformArrayStart</a></li><li><a href="global.html#updateGreetingAndDate">updateGreetingAndDate</a></li><li><a href="global.html#waitForDOM">waitForDOM</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Nov 20 2025 17:41:54 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Board/board-addTaskWindow.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Board/board-addTaskWindow.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+let prioArray = [];
+window.contactsArray = [];
+document.addEventListener('DOMContentLoaded', () => {
+    try { renderUserInitials(); } catch (e) { }
+});
+
+/**
+ * DomContentLoaded initiates Popup, fills local Array, sort it and renders Contacts
+ */
+document.addEventListener('DOMContentLoaded', async () => {
+    init();
+    createaddTaskPopup();
+    sectionCheck('board');
+    tasks.push(...Object.entries(await getData('task')));
+    const allIds = tasks.map(ta => ta[1].id)
+    console.log(allIds);
+    let rn = Math.floor(Math.random() * 50)
+    while (allIds.includes(rn)) {
+        rn = Math.floor(Math.random() * 10)
+    }
+    console.log(rn);
+    filterAndShowTasks();
+    searchTaskEventHandling();
+    contacts = await getObject(path = '/contacts')
+    console.log(contacts);
+    contactsArray = objectToArray(contacts)
+    console.log(contactsArray);
+    showContacts();
+
+    /**checks which subwebsite is currently active on display */
+    function sectionCheck(idsecTrue) {
+        document.getElementById(idsecTrue).classList.add('active')
+    }
+    const buttons = document.querySelectorAll(".priority-section button");
+
+
+    if (buttons) {
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+                buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
+                const priority = button.dataset.priority;
+                button.classList.add(priority);
+                console.log(priority)
+                prioArray = [];
+                prioArray.push(priority);
+            });
+        })
+    };
+})
+
+
+async function getData(path = '') {
+    let response = await fetch(BASe_URL + path + ".json")
+    return allTasks = await response.json();
+
+}
+
+/** show User Feedback, if the User adds an new Task*/
+function showReportAddedTask() {
+    const popup = document.getElementById("report");
+    popup.classList.add("show");
+    setTimeout(() => {
+        window.location.href = "../board/board.html";
+    }, 900);
+    setTimeout(() => {
+        popup.classList.remove("show");
+    }, 1000);
+}
+/** renders the html for addTask Popup*/
+function createaddTaskPopup() {
+    let taskpopup = document.getElementById('add-task-popup')
+    taskpopup.innerHTML = renderHTMLOfPopup();
+}
+
+
+/**toggles the div to display the Popup */
+function addTask() {
+    const popup = document.getElementById("add-task-popup");
+    popup.classList.add("show");
+}
+
+
+/**close the AddTask Popup */
+function closePopup() {
+    const popup = document.getElementById("add-task-popup");
+    popup.classList.remove("show");
+}
+
+/**create the HTML for the task and check form-Validation */
+function createTaskTemplate() {
+    if (!formValidationAddTaskTemp()) return;
+    showReportAddedTaskTemplate();
+}
+
+/**check value lenght of input-Fields */
+function constantCheck() {
+    setTimeout(() => {
+        const title = document.getElementById("title").value;
+        const description = document.getElementById('task-description').value;
+        const dueDate = document.getElementById("dueDate").value;
+        const taskType = document.getElementById("selectedTask").innerText;
+        console.log("it check's")
+        if (title !== "" &amp;&amp; dueDate !== "" &amp;&amp; description !== "" &amp;&amp; taskType !== "Select Task Category") {
+        }
+    }, 500);
+}
+
+
+// function makeDisabled() {
+//     document.getElementById('creatButtonID').disabled = true;
+// }
+
+/**validate values and decide if it is true or error feedback is neccesery */
+function formValidationAddTaskTemp() {
+    const title = document.getElementById("title").value;
+    const dueDate = document.getElementById("dueDate").value;
+    const taskType = document.getElementById("selectedTask").innerText; // &lt;-- hidden input
+    if (title === "" || dueDate === "" || taskType === "Select Task Category") {
+        displayRequiredMessageTemp();
+        return false;
+    } else {
+        getTaskInformation();
+        return true;
+    }
+}
+
+/**display the specific error message */
+function displayRequiredMessageTemp() {
+    const titleInput = document.getElementById("title");
+    const dateInput = document.getElementById("dueDate");
+    const categoryInput = document.getElementById("categoryValue");
+    const categoryDiv = document.getElementById("IdForTaskChoise");
+    const titleMessage = titleInput.nextElementSibling;
+    const dateMessage = dateInput.nextElementSibling;
+    const categoryMessage = categoryDiv.nextElementSibling;
+    if (titleInput.value === "") {
+        titleMessage.classList.remove("d-none");
+        titleInput.classList.add("input-error");
+    } else {
+        titleMessage.classList.add("d-none");
+        titleInput.classList.remove("input-error");
+    }
+    if (dateInput.value === "") {
+        dateMessage.classList.remove("d-none");
+        dateInput.classList.add("input-error");
+    } else {
+        dateMessage.classList.add("d-none");
+        dateInput.classList.remove("input-error");
+    }
+    if (categoryInput.value === "") {
+        categoryMessage.classList.remove("d-none");
+        categoryDiv.classList.add("input-error");
+    } else {
+        categoryMessage.classList.add("d-none");
+        categoryDiv.classList.remove("input-error");
+    }
+}
+
+/**show the User some feedback, that the Task has been created */
+function showReportAddedTaskTemplate() {
+    const popup = document.getElementById("report");
+    popup.classList.add("show");
+    setTimeout(() => {
+        popup.classList.remove("show");
+        closePopup();
+    }, 1000);
+}
+
+
+const BASE_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app"
+
+/**basic function to fetch contacts from firebase */
+async function getObject(path = '') {
+    let response = await fetch(BASE_URL + path + ".json")
+    return responseToJson = await response.json()
+}
+
+/**trasform the json based Contacts into an array */
+function objectToArray(contacts) {
+    const object = Object.entries(contacts)
+    console.log(object);
+    const arrayObject = object.map((member) => {
+        return {
+            id: member[0],
+            ...member[1]
+        }
+    })
+    return arrayObject;
+}
+
+/**sort it cronologic from A to Z */
+function arraySorting(array) {
+    const sortedArray = array
+    sortedArray.sort((memberA, memberB) => {
+        return memberA.name.localeCompare(memberB.name)
+    })
+    return sortedArray
+}
+
+/**show the contacts in the reserved place within the dropdown Menü */
+function showContacts() {
+    let contacts = document.getElementById('IdForContacts')
+    contacts.innerHTML = "";
+    for (let index = 1; index &lt; contactsArray.length; index++) {
+        contacts.innerHTML += `&lt;div class="contactBox">
+        &lt;div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}&lt;/div>
+        &lt;span for="contactName" class="contactName"> ${contactsArray[index].name}&lt;/span> 
+        &lt;img  id="checkboxImg-${index}" onclick="chooseContact(${index})" class="checkbox" data-set="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
+        &lt;/div>`
+    }
+}
+
+/**checks if the Contacts have been rendered allready or not to save the choosen ones in the list */
+let firstTime = true;
+function openContactWithCounterForPopup(id) {
+    if (firstTime) {
+        showContacts(id);
+        openContactView();
+        showInput();
+        firstTime = false;
+    } else {
+        openContactView();
+        showInput();
+    }
+}
+
+/**it filters Contacts regarding to your specific typed letters*/
+let filteredContacts;
+function filterContactsInPopup() {
+    let r;
+    let typedValue = document.getElementById('filterContacts').value
+    if (typedValue.length > 0) {
+        let val = Object.values(contactsArray);
+        r = val.slice(1)
+        filteredContacts = r.filter(fn => { return fn.name.toLowerCase().includes(typedValue.toLowerCase()) })
+        renderfilteredContactsInPopup(filteredContacts);
+    } else if (typedValue.length &lt; 1) {
+        showContacts();
+    }
+}
+
+/**the filtered Contacts are rendered here */
+function renderfilteredContactsInPopup(filteredContacts) {
+    let filtContactInPopup = document.getElementById('IdForContacts')
+    filtContactInPopup.innerHTML = "";
+    for (let filterContactIndex = 0; filterContactIndex &lt; filteredContacts.length; filterContactIndex++) {
+        filtContactInPopup.innerHTML += `
+        &lt;div onclick="" class="contactBox">
+        &lt;div class="contactCirclePopup">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}&lt;/div>
+        &lt;span for="contactName" class="contactName"> ${filteredContacts[filterContactIndex].name}&lt;/span> 
+        &lt;img  id="checkboxImg-${filterContactIndex}" onclick="chooseFilteredContact(${filterContactIndex})" class="checkbox" data-set="${filteredContacts[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
+        &lt;/div>`}
+}
+
+/**if you click, the p-tag will be resplaced with an inputfield to filter */
+function showInput() {
+    console.log('show input')
+    if (document.getElementById('placeholderpTag')) {
+        document.getElementById('placeholderpTag').classList.toggle('dont-Show');
+        document.getElementById('filterContacts').classList.toggle('dont-Show');
+        document.getElementById('filterContacts').focus()
+    };
+}
+
+/**here the Contact DropDown will open and the arrow makes an 180deg move */
+function openContactView() {
+    let contactDrop = document.getElementById('IdForContacts')
+    if (contactDrop.classList.contains('availibleContactsClose')) {
+        contactDrop.classList.remove('availibleContactsClose');
+        contactDrop.classList.add('availibleContactsOpen');
+        let layer = document.getElementById('hiddenlayer2')
+        layer.classList.toggle('hiddenlayer2')
+    } else if (contactDrop.classList.contains('availibleContactsOpen')) {
+        contactDrop.classList.remove('availibleContactsOpen');
+        contactDrop.classList.add('availibleContactsClose');
+        let layer = document.getElementById('hiddenlayer2')
+        layer.classList.toggle('hiddenlayer2')
+    }
+    if (document.querySelectorAll('availibleContactsOpen')) {
+        let contact = document.getElementById('arrowImgC')
+        contact.classList.toggle('select-arrow-open')
+    }
+}
+
+/**here we check which Contacts have the checkbox img and change it into checked to make it visible */
+function chooseContact(index) {
+    let choContact = document.getElementById(`checkboxImg-${index}`)
+    if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
+        choContact.classList.remove('checkbox')
+        choContact.classList.add('checked')
+        renderChoosenContact(index);
+        choContact.src = "/img/icons/normalCheckedContact.svg"
+    } else {
+        choContact.classList.add('checkbox')
+        choContact.classList.remove('checked')
+        deleteRenderedContact(index);
+        choContact.src = "/img/icons/normalCheckContact.svg"
+    }
+}
+
+/**her we make the choosen Contacts within the filtered Contacts visible */
+function chooseFilteredContact(filterContactIndex) {
+    let choContactF = document.getElementById(`checkboxImg-${filterContactIndex}`)
+    if (choContactF.src.includes("/img/icons/normalCheckContact.svg")) {
+        choContactF.classList.remove('checkbox')
+        choContactF.classList.add('checked')
+        renderFilteredChoosenContact(filterContactIndex)
+        choContactF.src = "/img/icons/normalCheckedContact.svg"
+    } else {
+        choContactF.classList.add('checkbox')
+        choContactF.classList.remove('checked')
+        deleteRenderedContact(filterContactIndex);
+        choContactF.src = "/img/icons/normalCheckContact.svg"
+    }
+}
+
+/**the choosen Contacts are rendered on the below of the dropdown List  */
+function renderChoosenContact(index) {
+    let listContact = document.getElementById('choosenContacts')
+    listContact.innerHTML += `
+    &lt;div id="contactCirclePopupRender-${index}" class="contactCirclePopupRender">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}&lt;/div>`
+}
+
+/**here we render the filtered choosen Contacts below the dropdown */
+function renderFilteredChoosenContact(filterContactIndex) {
+    let listContact = document.getElementById('choosenContacts')
+    listContact.innerHTML += `
+    &lt;div id="contactCirclePopupRender-${filterContactIndex}" class="contactCirclePopupRender">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}&lt;/div>`
+}
+
+/**here we can delete a choosen Contacts if we decide we want another contact */
+function deleteRenderedContact(index) {
+    let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
+    renderedContact.remove(`contactCirclePopupRender-${index}`)
+    renderedContact.innerHTML = '';
+}
+
+/**here the dropdown Menü for the taskType will be opened */
+function openTasktypeDropDown() {
+    let drop = document.getElementById('dropId')
+    drop.classList.toggle('dropTasktypeClose')
+    let layer = document.getElementById('hiddenlayer')
+    layer.classList.toggle('hiddenlayer')
+    if (document.querySelectorAll('.dropTasktypeOpen')) {
+        let ch = document.getElementById('arrowImg')
+        ch.classList.toggle('select-arrow-open')
+    }
+}
+
+/**here we take the value you click on and render your choise into the input-field innerHTML */
+function chooseValue() {
+    let choise = document.querySelectorAll('.taskOption')
+    choise.forEach(b => b.addEventListener('click', () => {
+        const choiseOfTask = b.dataset.value
+        console.log(choiseOfTask);
+        document.getElementById('selectedTask').innerHTML = choiseOfTask;
+    }))
+}
+
+/**in order to not affect all onclicks by one click we need a tool to stop the recognition in a specific div */
+function stopBubbling(event) {
+    event.stopPropagation()
+}
+
+/** resets the typed values in the mask to zero or empty */
+function clearTask() {
+    const title = document.getElementById("title").value = "";
+    const description = document.getElementById('task-description').value = "";
+    const dueDate = document.getElementById("dueDate").value = "";
+    document.getElementById(`choosenContacts`).innerHTML = "";
+    const buttons = document.querySelectorAll(".priority-section button");
+    buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
+    const taskType = document.getElementById("selectedTask").innerText = "Select Task Category";
+    document.getElementById('subtask-list-1').innerHTML = "";
+}
+
+
+/* ===================== USERNAME &amp; INITIALEN (wie in summary) ===================== */
+/**we check the local storage and fetch the username */
+function getStoredUserName() {
+    const name = localStorage.getItem('userFullName');
+    if (name &amp;&amp; name.trim()) return name.trim();
+    if (sessionStorage.getItem('guest') === 'true') return 'Guest User';
+    return 'User';
+}
+/** here we take the fullName trim the whitespaces change all to low letters and return G if guest */
+function getInitials(fullName) {
+    const name = (fullName || '').trim().toLowerCase();
+    if (name === 'guest user' || name === 'guest') {
+        return 'G';
+    }
+    const parts = name.split(/\s+/).filter(Boolean);
+    if (!parts.length) return 'US';
+    const first = parts[0][0] || '';
+    const last = parts.length > 1 ? parts[parts.length - 1][0] : (parts[0][1] || '');
+    return (first + last).toUpperCase();
+}
+
+window.renderUserInitials = function renderUserInitials() {
+    const fullName = getStoredUserName();
+    const initials = getInitials(fullName);
+    const el = document.getElementById('userInitials');
+    if (el) {
+        el.textContent = initials;
+        el.setAttribute('title', fullName);
+        el.setAttribute('aria-label', fullName);
+    }
+};
+
+/**her this function is for developing purposes only to fill task with random values to speed up the testing part */
+function randomFill() {
+    document.getElementById('title').value = 'Beispieltitel';
+    document.getElementById('task-description').value = 'Meine Beschreibung hier...';
+    document.getElementById('dueDate').value = '12.05.2028';
+    document.getElementById('selectedTask').innerHTML = 'User Story';
+    prioButton()
+}
+
+/**here add to the Urgent button the class Urgent in order to have a prio choosen for testing */
+function prioButton() {
+    let buttonsEdit = document.querySelectorAll(".priority-section button");
+    console.log(buttonsEdit)
+    buttonsEdit.forEach((button) => {
+        if (button.innerText === 'Urgent') {
+            button.classList.add('Urgent')
+        }
+    })
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-database.html">database</a></li><li><a href="module-firebase.html">firebase</a></li><li><a href="module-login.html">login</a></li><li><a href="module-logoAnimation.html">logoAnimation</a></li><li><a href="module-showPassword.html">showPassword</a></li><li><a href="module-sign-up.html">sign-up</a></li></ul><h3>Classes</h3><ul><li><a href="module-database-Database.html">Database</a></li></ul><h3>Global</h3><ul><li><a href="global.html#BASE_URL">BASE_URL</a></li><li><a href="global.html#BASe_URL">BASe_URL</a></li><li><a href="global.html#activateEditModus">activateEditModus</a></li><li><a href="global.html#addContact">addContact</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#animationAttributeObjectFinish">animationAttributeObjectFinish</a></li><li><a href="global.html#animationAttributeObjectStart">animationAttributeObjectStart</a></li><li><a href="global.html#arraySorting">arraySorting</a></li><li><a href="global.html#beginSearching">beginSearching</a></li><li><a href="global.html#bigViewOfTask">bigViewOfTask</a></li><li><a href="global.html#buttons">buttons</a></li><li><a href="global.html#categoryDiv">categoryDiv</a></li><li><a href="global.html#categorys">categorys</a></li><li><a href="global.html#checkDone">checkDone</a></li><li><a href="global.html#chooseContact">chooseContact</a></li><li><a href="global.html#chooseContactEdit">chooseContactEdit</a></li><li><a href="global.html#chooseContactNormal">chooseContactNormal</a></li><li><a href="global.html#chooseFilteredContact">chooseFilteredContact</a></li><li><a href="global.html#chooseFilteredContactEdit">chooseFilteredContactEdit</a></li><li><a href="global.html#chooseFilteredContactNormal">chooseFilteredContactNormal</a></li><li><a href="global.html#chooseValue">chooseValue</a></li><li><a href="global.html#chooseValueNormal">chooseValueNormal</a></li><li><a href="global.html#clearSubtask">clearSubtask</a></li><li><a href="global.html#clearSubtaskEdit">clearSubtaskEdit</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#clearTaskNormal">clearTaskNormal</a></li><li><a href="global.html#closeBigView">closeBigView</a></li><li><a href="global.html#closeContactOverlay">closeContactOverlay</a></li><li><a href="global.html#closeMiniMen%25C3%25BC">closeMiniMenü</a></li><li><a href="global.html#closeOverlay">closeOverlay</a></li><li><a href="global.html#closePopup">closePopup</a></li><li><a href="global.html#computeGreeting">computeGreeting</a></li><li><a href="global.html#confirmSubtask1">confirmSubtask1</a></li><li><a href="global.html#constantCheck">constantCheck</a></li><li><a href="global.html#contacts">contacts</a></li><li><a href="global.html#contactsArray">contactsArray</a></li><li><a href="global.html#contentCheck">contentCheck</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#createTaskTemplate">createTaskTemplate</a></li><li><a href="global.html#createTemplate">createTemplate</a></li><li><a href="global.html#createaddTaskPopup">createaddTaskPopup</a></li><li><a href="global.html#deleteBulletpoint">deleteBulletpoint</a></li><li><a href="global.html#deleteBulletpointEdit">deleteBulletpointEdit</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteData">deleteData</a></li><li><a href="global.html#deleteRenderedContact">deleteRenderedContact</a></li><li><a href="global.html#deleteRenderedContactEdit">deleteRenderedContactEdit</a></li><li><a href="global.html#deleteRenderedContactNormal">deleteRenderedContactNormal</a></li><li><a href="global.html#deleteRenderedFilteredContactEdit">deleteRenderedFilteredContactEdit</a></li><li><a href="global.html#deleteTaskFromBoard">deleteTaskFromBoard</a></li><li><a href="global.html#deliverDataToSummary">deliverDataToSummary</a></li><li><a href="global.html#displayRequiredMessage">displayRequiredMessage</a></li><li><a href="global.html#displayRequiredMessageTemp">displayRequiredMessageTemp</a></li><li><a href="global.html#editBulletpoint">editBulletpoint</a></li><li><a href="global.html#editBulletpointEditView">editBulletpointEditView</a></li><li><a href="global.html#editFeedback">editFeedback</a></li><li><a href="global.html#enableEnterForSubtask">enableEnterForSubtask</a></li><li><a href="global.html#filterAndShowTasks">filterAndShowTasks</a></li><li><a href="global.html#filterAndShowTasksAlternate">filterAndShowTasksAlternate</a></li><li><a href="global.html#filterAndShowTasksEdit">filterAndShowTasksEdit</a></li><li><a href="global.html#filterContactsInNormal">filterContactsInNormal</a></li><li><a href="global.html#filteredContacts">filteredContacts</a></li><li><a href="global.html#filteredContactsEdit">filteredContactsEdit</a></li><li><a href="global.html#findNextUrgentDeadline">findNextUrgentDeadline</a></li><li><a href="global.html#finishedSearching">finishedSearching</a></li><li><a href="global.html#firstTime">firstTime</a></li><li><a href="global.html#formValidation">formValidation</a></li><li><a href="global.html#formValidationAddTask">formValidationAddTask</a></li><li><a href="global.html#formValidationAddTaskTemp">formValidationAddTaskTemp</a></li><li><a href="global.html#formatDateReadable">formatDateReadable</a></li><li><a href="global.html#getAddOverlayContent">getAddOverlayContent</a></li><li><a href="global.html#getArray">getArray</a></li><li><a href="global.html#getContactsDetails">getContactsDetails</a></li><li><a href="global.html#getCurrentValues">getCurrentValues</a></li><li><a href="global.html#getData">getData</a></li><li><a href="global.html#getEditOverlayContent">getEditOverlayContent</a></li><li><a href="global.html#getErrorLogic">getErrorLogic</a></li><li><a href="global.html#getErrorLogicIndex2">getErrorLogicIndex2</a></li><li><a href="global.html#getInitials">getInitials</a></li><li><a href="global.html#getNewContactData">getNewContactData</a></li><li><a href="global.html#getObject">getObject</a></li><li><a href="global.html#getObjectFromContactForm">getObjectFromContactForm</a></li><li><a href="global.html#getStoredUserName">getStoredUserName</a></li><li><a href="global.html#getSubtaskFromTemplate">getSubtaskFromTemplate</a></li><li><a href="global.html#getSubtaskFromTemplateEdit">getSubtaskFromTemplateEdit</a></li><li><a href="global.html#getTaskInformation">getTaskInformation</a></li><li><a href="global.html#getTaskInformationEdit">getTaskInformationEdit</a></li><li><a href="global.html#getTaskInformationNormal">getTaskInformationNormal</a></li><li><a href="global.html#hiddenInput">hiddenInput</a></li><li><a href="global.html#initContactToggle">initContactToggle</a></li><li><a href="global.html#init_beginSearching">init_beginSearching</a></li><li><a href="global.html#init_finishSearching">init_finishSearching</a></li><li><a href="global.html#leaveCategory">leaveCategory</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#moveUpCategory">moveUpCategory</a></li><li><a href="global.html#objectToArray">objectToArray</a></li><li><a href="global.html#openContactView">openContactView</a></li><li><a href="global.html#openContactViewNormal">openContactViewNormal</a></li><li><a href="global.html#openContactWithCounter">openContactWithCounter</a></li><li><a href="global.html#openTaskTypeDropDownNormal">openTaskTypeDropDownNormal</a></li><li><a href="global.html#openTasktypeDropDown">openTasktypeDropDown</a></li><li><a href="global.html#options">options</a></li><li><a href="global.html#outsideClick">outsideClick</a></li><li><a href="global.html#overlayAnimationAttributeObjectFinish">overlayAnimationAttributeObjectFinish</a></li><li><a href="global.html#overlayAnimationAttributeObjectStart">overlayAnimationAttributeObjectStart</a></li><li><a href="global.html#overlayShow">overlayShow</a></li><li><a href="global.html#overlayTransformArrayFinish">overlayTransformArrayFinish</a></li><li><a href="global.html#overlayTransformArrayStart">overlayTransformArrayStart</a></li><li><a href="global.html#parseDateSmart">parseDateSmart</a></li><li><a href="global.html#patchData">patchData</a></li><li><a href="global.html#postData">postData</a></li><li><a href="global.html#preventDefault">preventDefault</a></li><li><a href="global.html#prioArray">prioArray</a></li><li><a href="global.html#prioButton">prioButton</a></li><li><a href="global.html#pushObject">pushObject</a></li><li><a href="global.html#pushObjectEdit">pushObjectEdit</a></li><li><a href="global.html#pushSubtaskIntoArray">pushSubtaskIntoArray</a></li><li><a href="global.html#putData">putData</a></li><li><a href="global.html#randomFill">randomFill</a></li><li><a href="global.html#refFirstLetter">refFirstLetter</a></li><li><a href="global.html#refreshContactList">refreshContactList</a></li><li><a href="global.html#removeErrorMark">removeErrorMark</a></li><li><a href="global.html#renderBigEditView">renderBigEditView</a></li><li><a href="global.html#renderBigViewHTML">renderBigViewHTML</a></li><li><a href="global.html#renderChoosenContact">renderChoosenContact</a></li><li><a href="global.html#renderChoosenContactEdit">renderChoosenContactEdit</a></li><li><a href="global.html#renderChoosenContactNormal">renderChoosenContactNormal</a></li><li><a href="global.html#renderContact">renderContact</a></li><li><a href="global.html#renderContactForBigView">renderContactForBigView</a></li><li><a href="global.html#renderContactHTMLForBigView">renderContactHTMLForBigView</a></li><li><a href="global.html#renderContactList">renderContactList</a></li><li><a href="global.html#renderContactsInEdit">renderContactsInEdit</a></li><li><a href="global.html#renderEditAndDeleteButton">renderEditAndDeleteButton</a></li><li><a href="global.html#renderFilteredChoosenContact">renderFilteredChoosenContact</a></li><li><a href="global.html#renderFilteredChoosenContactNormal">renderFilteredChoosenContactNormal</a></li><li><a href="global.html#renderHTMLForEditandDeleteButton">renderHTMLForEditandDeleteButton</a></li><li><a href="global.html#renderHTMLForFilteredContactsInEdit">renderHTMLForFilteredContactsInEdit</a></li><li><a href="global.html#renderMiniMen%25C3%25BC">renderMiniMenü</a></li><li><a href="global.html#renderSubtask">renderSubtask</a></li><li><a href="global.html#renderTaskintoBoard">renderTaskintoBoard</a></li><li><a href="global.html#renderTaskintoBoardFilter">renderTaskintoBoardFilter</a></li><li><a href="global.html#renderText">renderText</a></li><li><a href="global.html#renderfilteredContactsInNormal">renderfilteredContactsInNormal</a></li><li><a href="global.html#renderfilteredContactsInPopup">renderfilteredContactsInPopup</a></li><li><a href="global.html#renderfilteredContactsInPopupEdit">renderfilteredContactsInPopupEdit</a></li><li><a href="global.html#resetContentWithSlide">resetContentWithSlide</a></li><li><a href="global.html#rightColumn">rightColumn</a></li><li><a href="global.html#rigthColumnRe">rigthColumnRe</a></li><li><a href="global.html#saveBulletpoint">saveBulletpoint</a></li><li><a href="global.html#saveBulletpointEdit">saveBulletpointEdit</a></li><li><a href="global.html#saveChanges">saveChanges</a></li><li><a href="global.html#scrollIntoView">scrollIntoView</a></li><li><a href="global.html#searchAndRender">searchAndRender</a></li><li><a href="global.html#searchTaskEventHandling">searchTaskEventHandling</a></li><li><a href="global.html#sectionCheck">sectionCheck</a></li><li><a href="global.html#selectedNameCheck">selectedNameCheck</a></li><li><a href="global.html#selectedTask">selectedTask</a></li><li><a href="global.html#sendAlltoFirebase">sendAlltoFirebase</a></li><li><a href="global.html#setAddOverlayContent">setAddOverlayContent</a></li><li><a href="global.html#setBadgeColor">setBadgeColor</a></li><li><a href="global.html#setCardZero">setCardZero</a></li><li><a href="global.html#setContactAndPrioValue">setContactAndPrioValue</a></li><li><a href="global.html#setContactAndPrioValueEdit">setContactAndPrioValueEdit</a></li><li><a href="global.html#setContactDetails">setContactDetails</a></li><li><a href="global.html#setContactList">setContactList</a></li><li><a href="global.html#setEditOverlayContent">setEditOverlayContent</a></li><li><a href="global.html#setFirstLetter">setFirstLetter</a></li><li><a href="global.html#setSecondFirstLetter">setSecondFirstLetter</a></li><li><a href="global.html#setSucessMessage">setSucessMessage</a></li><li><a href="global.html#setTimer">setTimer</a></li><li><a href="global.html#showContactDetails">showContactDetails</a></li><li><a href="global.html#showContacts">showContacts</a></li><li><a href="global.html#showContactsEdit">showContactsEdit</a></li><li><a href="global.html#showCurrentValue">showCurrentValue</a></li><li><a href="global.html#showInput">showInput</a></li><li><a href="global.html#showInputNormal">showInputNormal</a></li><li><a href="global.html#showReportAddedTask">showReportAddedTask</a></li><li><a href="global.html#showReportAddedTaskTemplate">showReportAddedTaskTemplate</a></li><li><a href="global.html#showSuccessMessage">showSuccessMessage</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#stopBubbling">stopBubbling</a></li><li><a href="global.html#summaryToBoard">summaryToBoard</a></li><li><a href="global.html#switchContentWithSlide">switchContentWithSlide</a></li><li><a href="global.html#switchMessageContentWithSlide">switchMessageContentWithSlide</a></li><li><a href="global.html#switchOverlayContentWithSlide">switchOverlayContentWithSlide</a></li><li><a href="global.html#taskContainerArray">taskContainerArray</a></li><li><a href="global.html#taskNotFound">taskNotFound</a></li><li><a href="global.html#taskObjectKey">taskObjectKey</a></li><li><a href="global.html#taskTemplate">taskTemplate</a></li><li><a href="global.html#toDoSummaryEventHandler">toDoSummaryEventHandler</a></li><li><a href="global.html#toggleContactMore">toggleContactMore</a></li><li><a href="global.html#toggleRequiredMessage">toggleRequiredMessage</a></li><li><a href="global.html#transformArrayFinish">transformArrayFinish</a></li><li><a href="global.html#transformArrayStart">transformArrayStart</a></li><li><a href="global.html#updateGreetingAndDate">updateGreetingAndDate</a></li><li><a href="global.html#waitForDOM">waitForDOM</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Nov 20 2025 17:41:54 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

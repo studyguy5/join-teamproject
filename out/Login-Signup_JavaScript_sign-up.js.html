@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Login-Signup/JavaScript/sign-up.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Login-Signup/JavaScript/sign-up.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Registrierungs-Formular für neuen Benutzer, mit Validierung und UI-Fehleranzeige.
+ * Erstellt anschließend einen neuen Benutzer über Firebase und speichert die Daten lokal.
+ * 
+ * @module sign-up
+ */
+
+import { auth } from './firebase.js';
+import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import database from './database.js';
+
+/** @type {HTMLFormElement|null} */
+const form = document.getElementById('signupForm');
+/** @type {HTMLButtonElement|null} */
+const signupButton = document.getElementById('signupButton');
+/** @type {HTMLInputElement|null} */
+const nameInput = document.getElementById('name');
+/** @type {HTMLInputElement|null} */
+const emailInput = document.getElementById('email');
+/** @type {HTMLInputElement|null} */
+const passwordInput = document.getElementById('password');
+/** @type {HTMLInputElement|null} */
+const confirmInput = document.getElementById('confirmPassword');
+/** @type {HTMLInputElement|null} */
+const privacyCheckbox = document.getElementById('privacy-policy');
+/** @type {HTMLElement|null} */
+const nameErr = document.getElementById('name-error');
+/** @type {HTMLElement|null} */
+const emailErr = document.getElementById('email-error');
+/** @type {HTMLElement|null} */
+const emailFormatErr = document.getElementById('email-format-error');
+/** @type {HTMLElement|null} */
+const pwdErr = document.getElementById('password-error');
+/** @type {HTMLElement|null} */
+const pwdLenErr = document.getElementById('password-length-error');
+/** @type {HTMLElement|null} */
+const pwdWeakErr = document.getElementById('password-weak-error');
+/** @type {HTMLElement|null} */
+const confirmErr = document.getElementById('confirm-password-error');
+/** @type {HTMLElement|null} */
+const pwdMatchErr = document.getElementById('password-match-error');
+/** @type {HTMLElement|null} */
+const privacyErr = document.getElementById('privacy-error');
+/** @type {HTMLElement|null} */
+const generalError = document.getElementById('general-error');
+/** @type {HTMLElement|null} */
+const networkError = document.getElementById('network-error');
+/** @type {HTMLElement|null} */
+const successMessage = document.getElementById('success-message');
+
+
+// ========== Helpers ==========
+
+/**
+ * Zeigt ein Element an (macht sichtbar, entfernt hidden und setzt opacity).
+ * @param {HTMLElement} element
+ */
+function showElement(element) {
+  if (!element) return;
+  element.classList.add('is-visible');
+  element.style.display = 'block';
+  element.removeAttribute('hidden');
+  requestAnimationFrame(() => { element.style.opacity = '1'; });
+}
+
+/**
+ * Blendet ein Element aus und setzt opacity zurück.
+ * @param {HTMLElement} element
+ */
+function hideElement(element) {
+  if (!element) return;
+  element.classList.remove('is-visible');
+  element.style.opacity = '0';
+  setTimeout(() => {
+    element.style.display = 'none';
+    element.setAttribute('hidden', '');
+  }, 200);
+}
+
+/**
+ * Markiert ein Eingabefeld als Fehler/valide, setzt aria-invalid entsprechend.
+ * @param {HTMLInputElement} input
+ * @param {boolean} isError
+ */
+function setFieldError(input, isError) {
+  if (!input) return;
+  input.classList.toggle('error', !!isError);
+  input.classList.toggle('valid', !isError &amp;&amp; !!input.value);
+  input.setAttribute('aria-invalid', isError ? 'true' : 'false');
+}
+
+/**
+ * Zeigt eine allgemeine Fehlermeldung an.
+ * @param {string} msg
+ */
+function showGeneralError(msg) {
+  if (generalError) {
+    generalError.textContent = msg || 'Es ist ein Fehler aufgetreten.';
+    showElement(generalError);
+  }
+}
+
+/**
+ * Blendet alle generellen Fehlermeldungen aus.
+ */
+function clearGeneralErrors() {
+  hideElement(generalError);
+  hideElement(networkError);
+}
+
+
+// ========== Pure Checks ==========
+
+/**
+ * Prüfung ob Name gültig ist (nicht leer).
+ * @param {string} val
+ * @returns {boolean}
+ */
+function isNameValid(val) {
+  return (val?.trim()?.length ?? 0) >= 1;
+}
+
+/**
+ * Prüfung ob Email angegeben ist.
+ * @param {string} val
+ * @returns {boolean}
+ */
+function isEmailProvided(val) {
+  return (val?.trim()?.length ?? 0) > 0;
+}
+
+/**
+ * Prüfung ob Email-Format gültig ist.
+ * @param {string} val
+ * @returns {boolean}
+ */
+function isEmailFormatOk(val) {
+  return /^[^\s@]+@[^\s@]+$/.test(val?.trim() || '');
+}
+
+/**
+ * Mindestlänge eines Strings prüfen.
+ * @param {string} val
+ * @param {number} [min=6]
+ * @returns {boolean}
+ */
+function hasMinLen(val, min = 6) {
+  return (val?.length ?? 0) >= min;
+}
+
+/**
+ * Prüft, ob Zeichen im Passwort enthalten sind.
+ * @param {string} val
+ * @returns {boolean}
+ */
+function hasLetters(val) {
+  return /[A-Za-z]/.test(val || '');
+}
+
+/**
+ * Prüft, ob Zahlen im Passwort enthalten sind.
+ * @param {string} val
+ * @returns {boolean}
+ */
+function hasNumbers(val) {
+  return /\d/.test(val || '');
+}
+
+/**
+ * Prüft, ob das Passwort stark genug ist.
+ * @param {string} val
+ * @returns {boolean}
+ */
+function isPasswordStrong(val) {
+  return hasMinLen(val, 6) &amp;&amp; hasLetters(val) &amp;&amp; hasNumbers(val);
+}
+
+/**
+ * Bestätigungsfeld muss ausgefüllt sein.
+ * @param {string} val
+ * @returns {boolean}
+ */
+function isConfirmProvided(val) {
+  return (val?.length ?? 0) > 0;
+}
+
+
+// ========== Validations ==========
+
+/**
+ * Validiert das Name-Feld und zeigt ggf. Fehlermeldung.
+ * @returns {boolean}
+ */
+function validateName() {
+  const val = nameInput.value || '';
+  const ok = isNameValid(val);
+  ok ? hideElement(nameErr) : showElement(nameErr);
+  setFieldError(nameInput, !ok);
+  return ok;
+}
+
+/**
+ * Validiert das Email-Feld und zeigt ggf. Fehlermeldung/Format-Fehler.
+ * @returns {boolean}
+ */
+function validateEmail() {
+  const val = emailInput.value || '';
+  let ok = true;
+  if (!isEmailProvided(val)) {
+    showElement(emailErr);
+    hideElement(emailFormatErr);
+    ok = false;
+  } else if (!isEmailFormatOk(val)) {
+    hideElement(emailErr);
+    showElement(emailFormatErr);
+    ok = false;
+  } else {
+    hideElement(emailErr);
+    hideElement(emailFormatErr);
+  }
+  setFieldError(emailInput, !ok);
+  return ok;
+}
+
+/**
+ * Validiert das Passwortfeld und zeigt ggf. Fehlermeldungen zu Länge/Stärke.
+ * @returns {boolean}
+ */
+function validatePassword() {
+  const val = passwordInput.value || '';
+  let ok = true;
+  if (!val) {
+    showElement(pwdErr);
+    hideElement(pwdLenErr);
+    hideElement(pwdWeakErr);
+    ok = false;
+  } else if (!hasMinLen(val, 6)) {
+    hideElement(pwdErr);
+    showElement(pwdLenErr);
+    hideElement(pwdWeakErr);
+    ok = false;
+  } else if (!isPasswordStrong(val)) {
+    hideElement(pwdErr);
+    hideElement(pwdLenErr);
+    showElement(pwdWeakErr);
+    ok = false;
+  } else {
+    hideElement(pwdErr);
+    hideElement(pwdLenErr);
+    hideElement(pwdWeakErr);
+  }
+  setFieldError(passwordInput, !ok);
+  return ok;
+}
+
+/**
+ * Validiert das Bestätigungsfeld für das Passwort.
+ * @returns {boolean}
+ */
+function validateConfirm() {
+  const pwd = passwordInput.value || '';
+  const conf = confirmInput.value || '';
+  let ok = true;
+  if (!isConfirmProvided(conf)) {
+    showElement(confirmErr);
+    hideElement(pwdMatchErr);
+    ok = false;
+  } else if (pwd !== conf) {
+    hideElement(confirmErr);
+    showElement(pwdMatchErr);
+    ok = false;
+  } else {
+    hideElement(confirmErr);
+    hideElement(pwdMatchErr);
+  }
+  setFieldError(confirmInput, !ok);
+  return ok;
+}
+
+/**
+ * Validiert die Checkbox für Datenschutz.
+ * @returns {boolean}
+ */
+function validatePrivacy() {
+  const ok = !!privacyCheckbox.checked;
+  ok ? hideElement(privacyErr) : showElement(privacyErr);
+  return ok;
+}
+
+
+// ========== Step Access (Silent) ==========
+
+/**
+ * Erlaubt/verbietet die nächsten Schritte je nach Formstatus.
+ */
+function updateStepAccessSilent() {
+  const nameValid = isNameValid(nameInput.value);
+  emailInput.disabled = !nameValid;
+
+  const emailValid = nameValid &amp;&amp; isEmailProvided(emailInput.value) &amp;&amp; isEmailFormatOk(emailInput.value);
+  passwordInput.disabled = !emailValid;
+
+  const pwdValid = emailValid &amp;&amp; isPasswordStrong(passwordInput.value);
+  confirmInput.disabled = !pwdValid;
+
+  const confirmValid = pwdValid &amp;&amp; isConfirmProvided(confirmInput.value) &amp;&amp; (passwordInput.value === confirmInput.value);
+  const allInputsValid = nameValid &amp;&amp; emailValid &amp;&amp; pwdValid &amp;&amp; confirmValid;
+  signupButton.disabled = !(allInputsValid &amp;&amp; privacyCheckbox.checked);
+}
+
+
+// ========== Events ==========
+
+nameInput?.addEventListener('input', () => {
+  hideElement(nameErr);
+  setFieldError(nameInput, false);
+  updateStepAccessSilent();
+});
+
+emailInput?.addEventListener('input', () => {
+  hideElement(emailErr);
+  hideElement(emailFormatErr);
+  setFieldError(emailInput, false);
+  updateStepAccessSilent();
+});
+
+passwordInput?.addEventListener('input', () => {
+  hideElement(pwdErr);
+  hideElement(pwdLenErr);
+  hideElement(pwdWeakErr);
+  setFieldError(passwordInput, false);
+  updateStepAccessSilent();
+});
+
+confirmInput?.addEventListener('input', () => {
+  hideElement(confirmErr);
+  hideElement(pwdMatchErr);
+  setFieldError(confirmInput, false);
+  updateStepAccessSilent();
+});
+
+nameInput?.addEventListener('blur', () => {
+  validateName();
+  updateStepAccessSilent();
+});
+
+emailInput?.addEventListener('blur', () => {
+  validateEmail();
+  updateStepAccessSilent();
+});
+
+passwordInput?.addEventListener('blur', () => {
+  validatePassword();
+  updateStepAccessSilent();
+});
+
+confirmInput?.addEventListener('blur', () => {
+  validateConfirm();
+  updateStepAccessSilent();
+});
+
+privacyCheckbox?.addEventListener('change', () => {
+  validatePrivacy();
+  updateStepAccessSilent();
+});
+
+
+// ========== Network Status ==========
+
+/**
+ * Prüft Netzwerkstatus und zeigt ggf. Hinweis an.
+ */
+function updateNetworkStatus() {
+  if (!navigator.onLine) {
+    showElement(networkError);
+  } else {
+    hideElement(networkError);
+  }
+}
+
+window.addEventListener('online', updateNetworkStatus);
+window.addEventListener('offline', updateNetworkStatus);
+updateNetworkStatus();
+
+
+// ========== Initial Button States ==========
+
+emailInput.disabled = true;
+passwordInput.disabled = true;
+confirmInput.disabled = true;
+signupButton.disabled = true;
+updateStepAccessSilent();
+
+
+// ========== Submit Handler ==========
+
+form?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  clearGeneralErrors();
+
+  const checks = [
+    () => [validateName(), nameInput],
+    () => [validateEmail(), emailInput],
+    () => [validatePassword(), passwordInput],
+    () => [validateConfirm(), confirmInput],
+    () => [validatePrivacy(), privacyCheckbox],
+  ];
+
+  for (const fn of checks) {
+    const [ok, el] = fn();
+    if (!ok) {
+      el?.focus?.({ preventScroll: true });
+      el?.scrollIntoView?.({ behavior: 'smooth', block: 'center' });
+      updateStepAccessSilent();
+      return;
+    }
+  }
+
+  if (!navigator.onLine) {
+    showElement(networkError);
+    return;
+  }
+
+  signupButton.disabled = true;
+  const name = nameInput.value.trim();
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, password);
+    try { await updateProfile(cred.user, { displayName: name }); } catch { }
+    await database.addUser({ email, name });
+    localStorage.setItem('userFullName', name);
+    showElement(successMessage);
+    setTimeout(() => { window.location.href = 'Index.html'; }, 1800);
+  } catch (error) {
+    let msg = 'Registrierung fehlgeschlagen.';
+    if (error.code === 'auth/email-already-in-use') msg = 'Diese Email wird bereits verwendet.';
+    else if (error.code === 'auth/invalid-email') msg = 'Ungültige Email-Adresse.';
+    else if (error.code === 'auth/weak-password') msg = 'Passwort ist zu schwach (mind. 6 Zeichen, Buchstaben und Zahlen).';
+    else if (error.message) msg += ` (${error.message})`;
+    showGeneralError(`${msg}${error.code ? ` [${error.code}]` : ''}`);
+  } finally {
+    updateStepAccessSilent();
+  }
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-database.html">database</a></li><li><a href="module-firebase.html">firebase</a></li><li><a href="module-login.html">login</a></li><li><a href="module-logoAnimation.html">logoAnimation</a></li><li><a href="module-showPassword.html">showPassword</a></li><li><a href="module-sign-up.html">sign-up</a></li></ul><h3>Classes</h3><ul><li><a href="module-database-Database.html">Database</a></li></ul><h3>Global</h3><ul><li><a href="global.html#BASE_URL">BASE_URL</a></li><li><a href="global.html#BASe_URL">BASe_URL</a></li><li><a href="global.html#activateEditModus">activateEditModus</a></li><li><a href="global.html#addContact">addContact</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#animationAttributeObjectFinish">animationAttributeObjectFinish</a></li><li><a href="global.html#animationAttributeObjectStart">animationAttributeObjectStart</a></li><li><a href="global.html#arraySorting">arraySorting</a></li><li><a href="global.html#beginSearching">beginSearching</a></li><li><a href="global.html#bigViewOfTask">bigViewOfTask</a></li><li><a href="global.html#buttons">buttons</a></li><li><a href="global.html#categoryDiv">categoryDiv</a></li><li><a href="global.html#categorys">categorys</a></li><li><a href="global.html#checkDone">checkDone</a></li><li><a href="global.html#chooseContact">chooseContact</a></li><li><a href="global.html#chooseContactEdit">chooseContactEdit</a></li><li><a href="global.html#chooseContactNormal">chooseContactNormal</a></li><li><a href="global.html#chooseFilteredContact">chooseFilteredContact</a></li><li><a href="global.html#chooseFilteredContactEdit">chooseFilteredContactEdit</a></li><li><a href="global.html#chooseFilteredContactNormal">chooseFilteredContactNormal</a></li><li><a href="global.html#chooseValue">chooseValue</a></li><li><a href="global.html#chooseValueNormal">chooseValueNormal</a></li><li><a href="global.html#clearSubtask">clearSubtask</a></li><li><a href="global.html#clearSubtaskEdit">clearSubtaskEdit</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#clearTaskNormal">clearTaskNormal</a></li><li><a href="global.html#closeBigView">closeBigView</a></li><li><a href="global.html#closeContactOverlay">closeContactOverlay</a></li><li><a href="global.html#closeMiniMen%25C3%25BC">closeMiniMenü</a></li><li><a href="global.html#closeOverlay">closeOverlay</a></li><li><a href="global.html#closePopup">closePopup</a></li><li><a href="global.html#computeGreeting">computeGreeting</a></li><li><a href="global.html#confirmSubtask1">confirmSubtask1</a></li><li><a href="global.html#constantCheck">constantCheck</a></li><li><a href="global.html#contacts">contacts</a></li><li><a href="global.html#contactsArray">contactsArray</a></li><li><a href="global.html#contentCheck">contentCheck</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#createTaskTemplate">createTaskTemplate</a></li><li><a href="global.html#createTemplate">createTemplate</a></li><li><a href="global.html#createaddTaskPopup">createaddTaskPopup</a></li><li><a href="global.html#deleteBulletpoint">deleteBulletpoint</a></li><li><a href="global.html#deleteBulletpointEdit">deleteBulletpointEdit</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteData">deleteData</a></li><li><a href="global.html#deleteRenderedContact">deleteRenderedContact</a></li><li><a href="global.html#deleteRenderedContactEdit">deleteRenderedContactEdit</a></li><li><a href="global.html#deleteRenderedContactNormal">deleteRenderedContactNormal</a></li><li><a href="global.html#deleteRenderedFilteredContactEdit">deleteRenderedFilteredContactEdit</a></li><li><a href="global.html#deleteTaskFromBoard">deleteTaskFromBoard</a></li><li><a href="global.html#deliverDataToSummary">deliverDataToSummary</a></li><li><a href="global.html#displayRequiredMessage">displayRequiredMessage</a></li><li><a href="global.html#displayRequiredMessageTemp">displayRequiredMessageTemp</a></li><li><a href="global.html#editBulletpoint">editBulletpoint</a></li><li><a href="global.html#editBulletpointEditView">editBulletpointEditView</a></li><li><a href="global.html#editFeedback">editFeedback</a></li><li><a href="global.html#enableEnterForSubtask">enableEnterForSubtask</a></li><li><a href="global.html#filterAndShowTasks">filterAndShowTasks</a></li><li><a href="global.html#filterAndShowTasksAlternate">filterAndShowTasksAlternate</a></li><li><a href="global.html#filterAndShowTasksEdit">filterAndShowTasksEdit</a></li><li><a href="global.html#filterContactsInNormal">filterContactsInNormal</a></li><li><a href="global.html#filteredContacts">filteredContacts</a></li><li><a href="global.html#filteredContactsEdit">filteredContactsEdit</a></li><li><a href="global.html#findNextUrgentDeadline">findNextUrgentDeadline</a></li><li><a href="global.html#finishedSearching">finishedSearching</a></li><li><a href="global.html#firstTime">firstTime</a></li><li><a href="global.html#formValidation">formValidation</a></li><li><a href="global.html#formValidationAddTask">formValidationAddTask</a></li><li><a href="global.html#formValidationAddTaskTemp">formValidationAddTaskTemp</a></li><li><a href="global.html#formatDateReadable">formatDateReadable</a></li><li><a href="global.html#getAddOverlayContent">getAddOverlayContent</a></li><li><a href="global.html#getArray">getArray</a></li><li><a href="global.html#getContactsDetails">getContactsDetails</a></li><li><a href="global.html#getCurrentValues">getCurrentValues</a></li><li><a href="global.html#getData">getData</a></li><li><a href="global.html#getEditOverlayContent">getEditOverlayContent</a></li><li><a href="global.html#getErrorLogic">getErrorLogic</a></li><li><a href="global.html#getErrorLogicIndex2">getErrorLogicIndex2</a></li><li><a href="global.html#getInitials">getInitials</a></li><li><a href="global.html#getNewContactData">getNewContactData</a></li><li><a href="global.html#getObject">getObject</a></li><li><a href="global.html#getObjectFromContactForm">getObjectFromContactForm</a></li><li><a href="global.html#getStoredUserName">getStoredUserName</a></li><li><a href="global.html#getSubtaskFromTemplate">getSubtaskFromTemplate</a></li><li><a href="global.html#getSubtaskFromTemplateEdit">getSubtaskFromTemplateEdit</a></li><li><a href="global.html#getTaskInformation">getTaskInformation</a></li><li><a href="global.html#getTaskInformationEdit">getTaskInformationEdit</a></li><li><a href="global.html#getTaskInformationNormal">getTaskInformationNormal</a></li><li><a href="global.html#hiddenInput">hiddenInput</a></li><li><a href="global.html#initContactToggle">initContactToggle</a></li><li><a href="global.html#init_beginSearching">init_beginSearching</a></li><li><a href="global.html#init_finishSearching">init_finishSearching</a></li><li><a href="global.html#leaveCategory">leaveCategory</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#moveUpCategory">moveUpCategory</a></li><li><a href="global.html#objectToArray">objectToArray</a></li><li><a href="global.html#openContactView">openContactView</a></li><li><a href="global.html#openContactViewNormal">openContactViewNormal</a></li><li><a href="global.html#openContactWithCounter">openContactWithCounter</a></li><li><a href="global.html#openTaskTypeDropDownNormal">openTaskTypeDropDownNormal</a></li><li><a href="global.html#openTasktypeDropDown">openTasktypeDropDown</a></li><li><a href="global.html#options">options</a></li><li><a href="global.html#outsideClick">outsideClick</a></li><li><a href="global.html#overlayAnimationAttributeObjectFinish">overlayAnimationAttributeObjectFinish</a></li><li><a href="global.html#overlayAnimationAttributeObjectStart">overlayAnimationAttributeObjectStart</a></li><li><a href="global.html#overlayShow">overlayShow</a></li><li><a href="global.html#overlayTransformArrayFinish">overlayTransformArrayFinish</a></li><li><a href="global.html#overlayTransformArrayStart">overlayTransformArrayStart</a></li><li><a href="global.html#parseDateSmart">parseDateSmart</a></li><li><a href="global.html#patchData">patchData</a></li><li><a href="global.html#postData">postData</a></li><li><a href="global.html#preventDefault">preventDefault</a></li><li><a href="global.html#prioArray">prioArray</a></li><li><a href="global.html#prioButton">prioButton</a></li><li><a href="global.html#pushObject">pushObject</a></li><li><a href="global.html#pushObjectEdit">pushObjectEdit</a></li><li><a href="global.html#pushSubtaskIntoArray">pushSubtaskIntoArray</a></li><li><a href="global.html#putData">putData</a></li><li><a href="global.html#randomFill">randomFill</a></li><li><a href="global.html#refFirstLetter">refFirstLetter</a></li><li><a href="global.html#refreshContactList">refreshContactList</a></li><li><a href="global.html#removeErrorMark">removeErrorMark</a></li><li><a href="global.html#renderBigEditView">renderBigEditView</a></li><li><a href="global.html#renderBigViewHTML">renderBigViewHTML</a></li><li><a href="global.html#renderChoosenContact">renderChoosenContact</a></li><li><a href="global.html#renderChoosenContactEdit">renderChoosenContactEdit</a></li><li><a href="global.html#renderChoosenContactNormal">renderChoosenContactNormal</a></li><li><a href="global.html#renderContact">renderContact</a></li><li><a href="global.html#renderContactForBigView">renderContactForBigView</a></li><li><a href="global.html#renderContactHTMLForBigView">renderContactHTMLForBigView</a></li><li><a href="global.html#renderContactList">renderContactList</a></li><li><a href="global.html#renderContactsInEdit">renderContactsInEdit</a></li><li><a href="global.html#renderEditAndDeleteButton">renderEditAndDeleteButton</a></li><li><a href="global.html#renderFilteredChoosenContact">renderFilteredChoosenContact</a></li><li><a href="global.html#renderFilteredChoosenContactNormal">renderFilteredChoosenContactNormal</a></li><li><a href="global.html#renderHTMLForEditandDeleteButton">renderHTMLForEditandDeleteButton</a></li><li><a href="global.html#renderHTMLForFilteredContactsInEdit">renderHTMLForFilteredContactsInEdit</a></li><li><a href="global.html#renderMiniMen%25C3%25BC">renderMiniMenü</a></li><li><a href="global.html#renderSubtask">renderSubtask</a></li><li><a href="global.html#renderTaskintoBoard">renderTaskintoBoard</a></li><li><a href="global.html#renderTaskintoBoardFilter">renderTaskintoBoardFilter</a></li><li><a href="global.html#renderText">renderText</a></li><li><a href="global.html#renderfilteredContactsInNormal">renderfilteredContactsInNormal</a></li><li><a href="global.html#renderfilteredContactsInPopup">renderfilteredContactsInPopup</a></li><li><a href="global.html#renderfilteredContactsInPopupEdit">renderfilteredContactsInPopupEdit</a></li><li><a href="global.html#resetContentWithSlide">resetContentWithSlide</a></li><li><a href="global.html#rightColumn">rightColumn</a></li><li><a href="global.html#rigthColumnRe">rigthColumnRe</a></li><li><a href="global.html#saveBulletpoint">saveBulletpoint</a></li><li><a href="global.html#saveBulletpointEdit">saveBulletpointEdit</a></li><li><a href="global.html#saveChanges">saveChanges</a></li><li><a href="global.html#scrollIntoView">scrollIntoView</a></li><li><a href="global.html#searchAndRender">searchAndRender</a></li><li><a href="global.html#searchTaskEventHandling">searchTaskEventHandling</a></li><li><a href="global.html#sectionCheck">sectionCheck</a></li><li><a href="global.html#selectedNameCheck">selectedNameCheck</a></li><li><a href="global.html#selectedTask">selectedTask</a></li><li><a href="global.html#sendAlltoFirebase">sendAlltoFirebase</a></li><li><a href="global.html#setAddOverlayContent">setAddOverlayContent</a></li><li><a href="global.html#setBadgeColor">setBadgeColor</a></li><li><a href="global.html#setCardZero">setCardZero</a></li><li><a href="global.html#setContactAndPrioValue">setContactAndPrioValue</a></li><li><a href="global.html#setContactAndPrioValueEdit">setContactAndPrioValueEdit</a></li><li><a href="global.html#setContactDetails">setContactDetails</a></li><li><a href="global.html#setContactList">setContactList</a></li><li><a href="global.html#setEditOverlayContent">setEditOverlayContent</a></li><li><a href="global.html#setFirstLetter">setFirstLetter</a></li><li><a href="global.html#setSecondFirstLetter">setSecondFirstLetter</a></li><li><a href="global.html#setSucessMessage">setSucessMessage</a></li><li><a href="global.html#setTimer">setTimer</a></li><li><a href="global.html#showContactDetails">showContactDetails</a></li><li><a href="global.html#showContacts">showContacts</a></li><li><a href="global.html#showContactsEdit">showContactsEdit</a></li><li><a href="global.html#showCurrentValue">showCurrentValue</a></li><li><a href="global.html#showInput">showInput</a></li><li><a href="global.html#showInputNormal">showInputNormal</a></li><li><a href="global.html#showReportAddedTask">showReportAddedTask</a></li><li><a href="global.html#showReportAddedTaskTemplate">showReportAddedTaskTemplate</a></li><li><a href="global.html#showSuccessMessage">showSuccessMessage</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#stopBubbling">stopBubbling</a></li><li><a href="global.html#summaryToBoard">summaryToBoard</a></li><li><a href="global.html#switchContentWithSlide">switchContentWithSlide</a></li><li><a href="global.html#switchMessageContentWithSlide">switchMessageContentWithSlide</a></li><li><a href="global.html#switchOverlayContentWithSlide">switchOverlayContentWithSlide</a></li><li><a href="global.html#taskContainerArray">taskContainerArray</a></li><li><a href="global.html#taskNotFound">taskNotFound</a></li><li><a href="global.html#taskObjectKey">taskObjectKey</a></li><li><a href="global.html#taskTemplate">taskTemplate</a></li><li><a href="global.html#toDoSummaryEventHandler">toDoSummaryEventHandler</a></li><li><a href="global.html#toggleContactMore">toggleContactMore</a></li><li><a href="global.html#toggleRequiredMessage">toggleRequiredMessage</a></li><li><a href="global.html#transformArrayFinish">transformArrayFinish</a></li><li><a href="global.html#transformArrayStart">transformArrayStart</a></li><li><a href="global.html#updateGreetingAndDate">updateGreetingAndDate</a></li><li><a href="global.html#waitForDOM">waitForDOM</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Nov 20 2025 17:41:54 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

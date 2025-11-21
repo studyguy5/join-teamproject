@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="/global/global-responsiv.css">
     <link rel="stylesheet" href="/summary/summary.css">
     <link rel="stylesheet" href="/summary/summary-responsiv.css">
-    
-    
+    <link rel="icon" type="image/x-icon" href="/login-signup/svg/Capa 2.svg">
+
     <script src="/global/includeHTML.js"></script>
-    <script src="/board/taskArrayFilter.js" width= 100%;></script>
+    <script src="/board/taskArrayFilter.js" width=100%;></script>
 </head>
 
 <body>
@@ -27,9 +27,15 @@
                 </div>
             </div>
             <div id="profileMenu" class="dontShow">
-                <a href="/privacy-policy/privacy-policy.html"><h4 class="userOptions">Privacy-Policy</h4></a>
-                <a href="/legal-Notice/legal-notice.html"><h4 class="userOptions">Legal-Notice</h4></a>
-                <a onclick="deleteSession()" href="/login-signup/index.html"><h4 class="userOptions">Log out</h4></a>
+                <a href="/privacy-policy/privacy-policy.html">
+                    <h4 class="userOptions">Privacy-Policy</h4>
+                </a>
+                <a href="/legal-Notice/legal-notice.html">
+                    <h4 class="userOptions">Legal-Notice</h4>
+                </a>
+                <a onclick="deleteSession()" href="/login-signup/index.html">
+                    <h4 class="userOptions">Log out</h4>
+                </a>
             </div>
         </section>
 
@@ -58,19 +64,16 @@
                     <div class="box-upper">
                         <div onclick="summaryToBoard()" class="box-upper-left">
                             <img src="../img/icons/summary-pencil-default.svg" alt="">
-                            <div id="todoTask" class="box-upper-text">
-                                0<span>To-Do</span>
-                            </div>
+                            <div id="todoTask" class="box-upper-text"><span>To-Do</span></div>
+                            
                         </div>
 
 
 
                         <div onclick="summaryToBoard()" class="box-upper-right">
                             <img src="../img/icons/summary-done-icon-default.svg" alt="">
-                            <div id="doneTask" class="box-upper-text">
-                                0<span>Done</span>
-                            </div>
-
+                            <div id="doneTask" class="box-upper-text"><span>Done</span></div>
+                            
                         </div>
 
                     </div>
@@ -123,5 +126,6 @@
         </div>
     </main>
 </body>
- <script src="/summary/summary-basic.js"></script>
+<script src="/summary/summary-basic.js"></script>
+
 </html>

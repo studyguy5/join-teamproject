@@ -49,12 +49,12 @@
 
     .box-upper-left{
         padding: 38px 10px;
-        /* max-width:160px; */
+        flex-flow: wrap;
     }
 
     .box-upper-right{
         padding: 38px 10px;
-        /* max-width:160px; */
+        flex-flow: wrap;
     }
 
     .box-upper{

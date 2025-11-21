@@ -76,6 +76,8 @@
     background: #FFFFFF;
     transition: all 100ms ease-in-out;
 }
+
+
 .box-upper-left:hover {
     background: #2A3647;
     cursor: pointer;
@@ -91,7 +93,7 @@
 
 .box-upper-text {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
     font-weight: 600;
@@ -104,6 +106,7 @@
 }
 .box-upper-right {
     display: flex;
+    /* flex-direction: column; */
     align-items: center;
     justify-content: center;
     gap: 18px;

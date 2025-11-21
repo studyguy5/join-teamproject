@@ -19,10 +19,7 @@
     font-style: normal;
 }
 
-html{
-    scroll-behavior: smooth;
-    overflow-y: auto!important;
-}
+
 html,
 body {
     /* display: flex; */
@@ -182,6 +179,7 @@ nav {
     z-index: 0;
     /* height: 1024px; */
     height:100vh;
+    min-height: fit-content;
 }
 
 .active {
@@ -231,7 +229,7 @@ nav {
     align-items: center;
     background-color: #2a3647;
     color: gray;
-    padding-top: 60px;
+    /* padding-top: 60px; */
     padding-bottom: 60px;
     gap: 4px;
 }

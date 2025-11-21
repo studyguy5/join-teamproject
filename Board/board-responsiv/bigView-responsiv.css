@@ -53,7 +53,7 @@
 
 @media(max-width:428px) {
 
-    html,
+    /* html,
     body {
         max-height: 926px;
     }
@@ -65,7 +65,7 @@
 
     .main-Contentsize {
         max-height: calc(926px - 80px - 80px);
-    }
+    } */
 
      .descriptionBigView p {
         max-width:300px;

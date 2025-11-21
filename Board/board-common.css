@@ -5,7 +5,7 @@
     width: 100%;
     max-width: 1208px;
     height: 100%;
-    max-height: calc(1007px - 80px);
+    max-height: 100vh;
     box-sizing: border-box;
 }
 
@@ -232,12 +232,12 @@ hr {
     display: flex;
     align-items: center;
     gap: 16px;
-    z-index: 10000;
+    z-index: 100;
 }
 
 .show {
     bottom: 500px;
     opacity: 1;
     transform: translate(-50%, 50%);
-    z-index: 100000000;
+    z-index: 100;
 }

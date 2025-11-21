@@ -111,9 +111,9 @@ function formatDateReadable(d, locale = 'en-US') {
 /**feeds the date from local array into summary to show the numbers correctly */
 function deliverDataToSummary(tasks) {
   let todo = tasks.filter(td => td[1].category === 'Todo');
-  document.getElementById('todoTask').innerHTML = todo.length;
+  document.getElementById('todoTask').innerHTML += todo.length;
   let done = tasks.filter(td => td[1].category === 'Done');
-  document.getElementById('doneTask').innerHTML = done.length;
+  document.getElementById('doneTask').innerHTML += done.length;
   let urgent = tasks.filter(td => td[1].prio === 'Urgent');
   document.getElementById('prioUrgent').innerHTML = urgent.length + `<span>Urgent</span>`;
 

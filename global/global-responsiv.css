@@ -128,7 +128,7 @@
         max-width: 1000px;
         width: 100%;
         /* max-height: calc(1024px - 80px - 80px); */
-        height: 100%;
+        max-height: calc(100% - 96px);
     }
 
     .desktop-logo-hide {

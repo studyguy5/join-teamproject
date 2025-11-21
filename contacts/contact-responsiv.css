@@ -125,12 +125,16 @@
         bottom: 40px;
         height: 40px;
     }
+    .content-body{
+        height: calc(100vh - 230px);
+    }
 }
 
 @media (min-width: 1000px) {
     .contact-body-list{
         display: flex!important;
     }
+    
 }
 
 @media (max-width: 780px) {
@@ -161,7 +165,7 @@
 
 @media (max-width: 428px) {
     .content-body{
-        height: 846px;
+        height: 780px;
     }
     .person-add{
         bottom: 120px;

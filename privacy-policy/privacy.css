@@ -1,8 +1,7 @@
 .privacy-wrapper {
-    /* margin-left: 96px;
-    margin-top: 110px; */
+    box-sizing: border-box;
     padding: 60px;
-    height:100vh;
+    height:calc(100vh - 96px);
     overflow-y: auto;
 }
 

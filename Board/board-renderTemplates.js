@@ -90,7 +90,6 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
           </div>
 
           <div class="footer-buttons-section">
-          <button onclick="randomFill()">R</button>
             <button onclick="clearTask()" class="clear-btn" type="reset">
               Clear<img src="/img/icons/x.svg" />
             </button>

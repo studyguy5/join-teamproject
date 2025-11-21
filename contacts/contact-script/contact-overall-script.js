@@ -26,23 +26,61 @@ document.addEventListener('DOMContentLoaded', async () => {
  * Validates all input fields in the form.
  * @returns {boolean} Returns true if all inputs are valid.
  */
+// function formValidation() {
+//     const allInput = document.querySelectorAll('input');
+//     for (let index = 0; index < allInput.length; index++) {
+//         const boolean = contentCheck(allInput[index]);
+//         if (!boolean) {
+//             if (index != 2) {
+//                 getErrorLogic(allInput[index]);
+//             } else {
+//                 getErrorLogicIndex2(allInput[index]);
+//             }
+//             return false;
+//         } else {
+//             removeErrorMark(allInput[index]);
+//         }
+//     }
+//     return true;
+// }
 function formValidation() {
-    const allInput = document.querySelectorAll('input');
-    for (let index = 0; index < allInput.length; index++) {
-        const boolean = contentCheck(allInput[index]);
-        if (!boolean) {
-            if (index != 2) {
-                getErrorLogic(allInput[index]);
-            } else {
-                getErrorLogicIndex2(allInput[index]);
-            }
-            return false;
-        } else {
-            removeErrorMark(allInput[index]);
-        }
-    }
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const phone = document.getElementById('phone');
+
+    if (!validateName(name.value)) return getErrorLogic(name), false;
+    removeErrorMark(name);
+
+    if (!validateEmail(email.value)) return getErrorLogic(email), false;
+    removeErrorMark(email);
+
+    if (!validatePhone(phone.value)) return getErrorLogic(phone), false;
+    removeErrorMark(phone);
+
     return true;
 }
+
+function validateName(value) {
+    const regex = /^[A-Za-zÄÖÜäöüß\s]+$/;
+    return regex.test(value.trim());
+}
+function validateEmail(value) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(value.trim());
+}
+function validatePhone(value) {
+    const regex = /^[0-9]{3,20}$/;
+    return regex.test(value.trim());
+}
+
+
+
+
+
+
+
+
+
 
 
 /**

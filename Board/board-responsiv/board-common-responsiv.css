@@ -103,8 +103,8 @@
 @media(max-width:428px) {
 
     .mainAria {
-        max-height: unset;
-        min-height: calc(1024px - 160px);
+        
+        min-height: calc(100vh - 160px);
         position: relative;
     }
 

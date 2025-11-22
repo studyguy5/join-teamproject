@@ -18,7 +18,7 @@
     .privacy-wrapper{
         margin-left:16px;
         margin-top:16px;
-        height: calc(1024px - 126px);
+        height: calc(100vh - 176px);
     }
 }
 
@@ -26,7 +26,7 @@
     .privacy-wrapper {
         margin-left: 16px;
         margin-top: 16px;
-        height: calc(1024px - 206px);
+        height: calc(100vh - 176px);
     }
     .privacy-headline a img{
         display: flex;

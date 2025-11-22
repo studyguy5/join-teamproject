@@ -18,6 +18,14 @@
     display: none;
 }
 
+@media(max-width:1000px){
+     .legal-wrapper {
+        margin-left: 16px;
+        margin-top: 16px;
+        height:calc(100vh - 176px);
+    }
+}
+
 @media (max-width: 428px) {
     .legal-wrapper {
         margin-left: 16px;

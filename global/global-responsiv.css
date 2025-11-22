@@ -363,6 +363,19 @@
         gap: 4px;
     }
 
+    .main-Contentsize {
+        max-width: 1000px;
+        width: 100%;
+        /* max-height: calc(1024px - 80px - 80px); */
+        max-height: calc(100vh - 96px - 64px);
+    }
+
+    .main-fullsize {
+    width: 100%;
+    max-height:calc(100vh - 96px - 64px);
+    max-width: 100%;
+}
+
 }
 
 

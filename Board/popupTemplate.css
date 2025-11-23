@@ -49,7 +49,8 @@
 }
 
 .add-task-popup.show {
-    right: 50%;
+    left: -100px;
+    top: 210px;
     z-index: 8;
     transform: translate(50%);
     opacity: 1;

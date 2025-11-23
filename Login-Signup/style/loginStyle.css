@@ -131,7 +131,7 @@ h1::after {
 }
 
 .input-group {
-    /* margin-bottom: 24px; */
+    /* margin-bottom: 20px; */
     text-align: left;
 }
 
@@ -198,7 +198,6 @@ h1::after {
     width: 100%;
     position: relative;
     left: 4px;
-    margin-top: 8px;
 }
 .error-message-login.is-visible { display: block !important; }
 

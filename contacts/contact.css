@@ -169,6 +169,7 @@ h1 {
     width: 456px;
     gap: 10px;
     padding-bottom: 16px;
+    height: 100vh;
 }
 
 .contact-list {
@@ -180,7 +181,6 @@ h1 {
     overflow-y: auto;
     gap: 10px;
     align-items: center;
-    height: 100vh;
 }
 
 .add-new-contact-button {

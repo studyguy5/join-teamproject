@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
   init();
   sectionCheck('summary');
+  getUserNameForAnimation();
   toDoSummaryEventHandler();
   doneSummaryEventHandler();
 
@@ -134,6 +135,14 @@ function deliverDataToSummary(tasks) {
 }
 
 /* ===================== USERNAME & INITIALEN ===================== */
+
+function getUserNameForAnimation(){
+  let userName = localStorage.getItem('userFullName')
+  if(userName !== 'Guest User' || 'guest User'){
+    let logUserName = document.getElementById('greetingUser')
+    logUserName.innerHTML += `<h2>${userName}</h2>`
+  }
+}
 
 /**get the stored User name and return user */
 function getStoredUserName() {

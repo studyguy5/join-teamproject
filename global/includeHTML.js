@@ -14,7 +14,8 @@ function deleteSession(){
 
 function checkSignUpStatus(){
     let signUpStatus = sessionStorage.getItem('guest')
-    if(signUpStatus){
+    let signUpStatus1 = localStorage.getItem('userFullName')
+    if(signUpStatus || signUpStatus1){
         includeNavLinks();
         includePrivacyLinks();
     }else{

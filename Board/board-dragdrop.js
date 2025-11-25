@@ -73,7 +73,6 @@ let rightColumn = document.querySelectorAll('.categorys > div img')
 if (rightColumn)
     rightColumn.forEach(el => {
         el.addEventListener('click', () => {
-            console.log(el.dataset.categoryId)
             choosenCategory = el.dataset.categoryId
         })
     })
@@ -83,7 +82,6 @@ let rigthColumnRe = document.querySelectorAll('.DragAndDropTaskAria > div img')
 if (rigthColumnRe)
     rigthColumnRe.forEach(el => {
         el.addEventListener('click', () => {
-            console.log(el.dataset.categoryId)
             choosenCategory = el.dataset.categoryId
         })
     })
@@ -110,7 +108,6 @@ function createTemplate() {
 
 /**create a object with the value given and push it into the subtask array */
 function pushObject(subtaskvalue1, subtaskvalue2) {
-    console.log('popup object')
     if (subtaskvalue1) {
         let subTaskObject1 = { "value": `${subtaskvalue1}`, 'status': 'open' };
         subtaskArray.push(subTaskObject1)
@@ -138,7 +135,6 @@ function setContactAndPrioValue(newTask) {
         names = img.dataset.set;
         let id = img.id;
         newTask.cid.push(id);
-        console.log(id);
         newTask.assignedTo.push(names)
     })
     newTask.prio = prioArray[0];
@@ -219,7 +215,6 @@ function bigViewOfTask(id) {
 /**switch Case to change the categorys in responsiv view and resplace the DragAndDrop system */
 function moveUpCategory(id) {
     let curTask = tasks.filter(tasks => tasks[1].id === id);
-    console.log('moveUp')
     switch (curTask[0][1].category) {
         case 'Todo': 
             break;
@@ -238,7 +233,6 @@ function moveUpCategory(id) {
 
 function moveDownCategory(id) {
     let CurTask = tasks.filter(tasks => tasks[1].id === id);
-    console.log('moveDown')
     switch (CurTask[0][1].category) {
         case 'Todo': CurTask[0][1].category = 'Inprogress', filterAndShowTasks(id);
             break;
@@ -272,9 +266,7 @@ function renderContactForBigView(id) {
 /**if the user wants to delete a Task, it will be updated local and in firebase */
 async function deleteTaskFromBoard(id) {
     let openedTask = tasks.find(task => task[1].id === id)
-    console.log(openedTask);
     let firebaseID = [openedTask[0]];
-    console.log(firebaseID[0]);
     closeBigView();
     await deleteData(firebaseID);
     tasks = [];
@@ -393,7 +385,6 @@ function leaveCategory(category) {
     let clean = document.querySelectorAll(`.${category} .TaskDivDemo`);
     if (clean.length === 1 && once === true) {
         clean[0].remove();
-        console.log(clean);
         once = false;
     }
 }
@@ -401,7 +392,6 @@ function leaveCategory(category) {
 
 function objectToArray(contacts) {
     const object = Object.entries(contacts)
-    console.log(object);
     const arrayObject = object.map((member) => {
         return {
             id: member[0],

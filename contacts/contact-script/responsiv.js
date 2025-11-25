@@ -40,15 +40,21 @@ function initContactToggle() {
  * @function closeContactOverlay
  * @returns {void}
  */
+
 function closeContactOverlay() {
-  const list = document.getElementById("contactList");
+  let size = window.screen.innerWidth;
+  // const list = document.getElementById("contactList");
   const bodyList = document.getElementById("contact-body-list");
   const bodyDetail = document.getElementById("contact-body-detail");
-
-  bodyList.style.display = "flex";
-  bodyDetail.style.display = "none";
-
-  window.location.reload();
+  if(size >= 1001){
+    bodyDetail.style.display = "none";
+    window.location.reload();
+  }else{
+  
+    bodyList.style.display = "flex";
+    bodyDetail.style.display = "none";
+    
+  }
 }
 
 

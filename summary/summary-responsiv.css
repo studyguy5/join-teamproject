@@ -30,7 +30,7 @@
     }
 
     .greeting-name {
-        font-size: 54px;
+        font-size: 64px;
     }
 
     .greetingAnimation {
@@ -45,7 +45,7 @@
     }
 
     .greeting-name {
-        font-size: 48px;
+        font-size: 64px;
     }
 
     .leftAria {
@@ -133,8 +133,11 @@
         font-size: 25px;
     }
 
+    .greeting{
+        width: 300px;
+    }
     .greeting-name {
-        font-size: 40px;
+        font-size: 56px;
     }
 
     .summary-header {
@@ -250,7 +253,7 @@
 
 @media(max-width:660px) {
     .summary-header {
-        margin: 28px 169px 28px -4px;
+        margin: 28px 169px 28px 40px;
         gap: 15px;
         display: block;
     }
@@ -276,6 +279,10 @@
 
     .greetingAnimation {
         display: none;
+    }
+
+    .leftAria{
+         padding-left:10px;
     }
 }
 
@@ -328,8 +335,9 @@
         opacity: 0;
         width: calc(100%);
         height: calc(100% - 160px);
-        animation: greeting 2s ease-out;
+        animation: greeting 4s ease-out;
         display: flex;
+        flex-direction:column;
         justify-content: center;
         align-items: center;
         background-color: white;
@@ -350,15 +358,15 @@
         }
 
         60% {
-            opacity: 0.7;
+            opacity: 1;
         }
 
         80% {
-            opacity: 0.5;
+            opacity: 0.7;
         }
 
         90% {
-            opacity: 0.3;
+            opacity: 0.5;
         }
 
         100% {
@@ -366,18 +374,27 @@
         }
     }
 
+    .greetingAnimation h2 {
+        color: rgba(41, 171, 226, 1);
+    }
+
 }
 
 @media(max-width:420px) {
     .leftAria {
         width: 63%;
+        padding-left:10px;
         margin: 0 auto;
     }
 
     .summary-counter {
         max-width: 314px;
         width: 90%;
-        margin-left: 0px;
+        margin-left: -5px;
+    }
+    .summary-counter {
+        padding-top: 0px;
+        margin-top: -10px;
     }
 
     .summary-header {
@@ -393,10 +410,6 @@
         top: 120px;
     }
 
-    .summary-counter {
-        padding-top: 0px;
-        margin-top: -10px;
-    }
 
     .p-left {
         font-size: 47px;

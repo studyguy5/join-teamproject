@@ -14,20 +14,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     sectionCheck('board');
     tasks.push(...Object.entries(await getData('task')));
     const allIds = tasks.map(ta => ta[1].id)
-    console.log(allIds);
     let rn = Math.floor(Math.random() * 50)
     while (allIds.includes(rn)) {
         rn = Math.floor(Math.random() * 10)
     }
-    console.log(rn);
     filterAndShowTasks();
     searchTaskEventHandling();
     contacts = await getObject(path = '/contacts')
-    console.log(contacts);
     contactsArray = objectToArray(contacts)
-    console.log(contactsArray);
     showContacts();
-
     /**checks which subwebsite is currently active on display */
     function sectionCheck(idsecTrue) {
         document.getElementById(idsecTrue).classList.add('active')
@@ -41,7 +36,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
                 const priority = button.dataset.priority;
                 button.classList.add(priority);
-                console.log(priority)
                 prioArray = [];
                 prioArray.push(priority);
             });
@@ -85,6 +79,7 @@ function addTask() {
 function closePopup() {
     const popup = document.getElementById("add-task-popup");
     popup.classList.remove("show");
+    clearTask();
 }
 
 /**create the HTML for the task and check form-Validation */
@@ -100,7 +95,6 @@ function constantCheck() {
         const description = document.getElementById('task-description').value;
         const dueDate = document.getElementById("dueDate").value;
         const taskType = document.getElementById("selectedTask").innerText;
-        console.log("it check's")
         if (title !== "" && dueDate !== "" && description !== "" && taskType !== "Select Task Category") {
         }
     }, 500);
@@ -179,7 +173,6 @@ async function getObject(path = '') {
 /**trasform the json based Contacts into an array */
 function objectToArray(contacts) {
     const object = Object.entries(contacts)
-    console.log(object);
     const arrayObject = object.map((member) => {
         return {
             id: member[0],
@@ -255,7 +248,6 @@ function renderfilteredContactsInPopup(filteredContacts) {
 
 /**if you click, the p-tag will be resplaced with an inputfield to filter */
 function showInput() {
-    console.log('show input')
     if (document.getElementById('placeholderpTag')) {
         document.getElementById('placeholderpTag').classList.toggle('dont-Show');
         document.getElementById('filterContacts').classList.toggle('dont-Show');
@@ -353,7 +345,6 @@ function chooseValue() {
     let choise = document.querySelectorAll('.taskOption')
     choise.forEach(b => b.addEventListener('click', () => {
         const choiseOfTask = b.dataset.value
-        console.log(choiseOfTask);
         document.getElementById('selectedTask').innerHTML = choiseOfTask;
     }))
 }
@@ -420,7 +411,6 @@ function randomFill() {
 /**here add to the Urgent button the class Urgent in order to have a prio choosen for testing */
 function prioButton() {
     let buttonsEdit = document.querySelectorAll(".priority-section button");
-    console.log(buttonsEdit)
     buttonsEdit.forEach((button) => {
         if (button.innerText === 'Urgent') {
             button.classList.add('Urgent')

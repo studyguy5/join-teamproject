@@ -51,12 +51,14 @@
 @media (max-width:680px) {
     .footer{
         flex-direction: column;
+        margin-top:35px;
     }
     .footer-buttons-section{
         justify-content: center;
         margin-bottom: 30px;
     }
 }
+
 
 @media(max-width:570px) {
     .input-section-left{
@@ -119,9 +121,13 @@
     }
 
     .mainAreaRight{
-        height: 846px;
+        height: calc(100vh - 160px);
     }
     .input-container{
         padding-bottom: 0;
+    }
+
+    .footer{
+        margin: 50px 0px 20px 0px;
     }
 }

@@ -1,104 +1,329 @@
+@media(max-width: 1630px) {
+    .add-task-popup.show {
+        left: -280px;
+        top: 210px;
+        z-index: 8;
+        transform: translate(50%);
+        overflow-y: hidden;
+        opacity: 1;
+    }
+}
+
+@media(max-width: 1430px) {
+    .add-task-popup.show {
+        left: -400px;
+        top: 210px;
+        z-index: 8;
+        transform: translate(50%);
+        overflow-y: hidden;
+        opacity: 1;
+    }
+}
+
+@media(max-width: 1300px) {
+    .add-task-popup.show {
+        left: -490px;
+        top: 210px;
+        z-index: 8;
+        transform: translate(50%);
+        overflow-y: hidden;
+        opacity: 1;
+    }
+}
+
+
+
 @media (max-width: 1200px) {
+
+    .addTaskPopupMain {
+        max-width: 970px;
+
+    }
+
+    .add-task-popup.show {
+        max-width: 970px;
+        left: -420px;
+    }
+
+    .popup-header {
+        align-items: center;
+        max-width: 1002px;
+        display: flex;
+        justify-content: space-between;
+        padding: 64px 40px 32px 74px;
+    }
+
+    .input-containerPopup {
+        display: flex;
+        align-items: center;
+        gap: 48.12px;
+    }
+
+    .footerPopup {
+        gap: 537.75px;
+        width: 100%;
+        max-width: 976.25px;
+        margin-bottom: 64px;
+        margin-left: 74px;
+        margin-right: 65.75px;
+        margin-top: 176px;
+        display: flex;
+        align-items: center;
+    }
+
     .input-section-leftPopup {
         width: 340px;
         margin-left: unset;
     }
+
     .input-section-rightPopup {
         width: 340px;
     }
-    .input-containerPopup{
+
+    .input-containerPopup {
         justify-content: center;
     }
-    .add-task-popup{
+
+    /* .add-task-popup{
         width: auto;
-    }
-    .footerPopup{
+    } */
+    .footerPopup {
         width: auto;
+        gap: 400px;
     }
-    .inputPopup{
+
+    .inputPopup {
         width: 295px;
     }
 }
 
+@media(max-width: 1060px) {
+    .add-task-popup.show {
+        max-width: 930px;
+        left: -420px;
+    }
+
+    .footerPopup {
+        width: 800px;
+        gap: 370px;
+    }
+}
+
 @media (max-width: 1000px) {
-    .input-containerPopup{
+
+    .addTaskPopupMain {
+        max-width: 770px;
+
+    }
+
+    .add-task-popup.show {
+        max-width: 770px;
+        left: -320px;
+    }
+
+    .input-containerPopup {
         flex-direction: column;
     }
-    .line{
+
+    .line {
         display: none;
     }
-    .addTaskPopupMain{
+
+    .addTaskPopupMain {
         overflow-x: hidden;
         overflow-y: auto;
         width: 100vw;
     }
-    .popup-header{
+
+    .popup-header {
         width: unset;
     }
-    .footerPopup{
-        gap: unset;
+
+    .footerPopup {
+        width: 670px;
+        gap: 240px;
         justify-content: center;
     }
 }
 
-@media(max-width:590px) {
-    .footerPopup{
-        flex-direction: column;
+@media(max-width:860px) {
+    .addTaskPopupMain {
+        max-width: 560px;
     }
-    .footer-buttons-section {
-        width: unset!important;
+
+    .add-task-popup.show {
+        max-width: 560px;
+        left: -250px;
+        top: 60px;
+    }
+
+    .popup-header {
+        max-width: 470px;
+    }
+
+    .footerPopup {
+        max-width: 440px;
+        gap: 20px;
+        margin-top: 50px;
+        margin-bottom: 10px;
     }
 }
 
-@media (max-width:430px){
+@media(max-width:600px) {
+    .addTaskPopupMain {
+        max-width: 460px;
+    }
+
+    .add-task-popup.show {
+        max-width: 460px;
+        left: -190px;
+    }
+
+    .footerPopup {
+        flex-direction: column;
+        max-width: 360px;
+        font-size: 12px;
+        margin-bottom: 64px;
+        margin-left: -13px;
+        margin-right: 0.75px;
+        margin-top: 4px;
+    }
+
+    .clear-btnPopup {
+        font-size: 16px;
+        width: 90px;
+    }
+
+    .create-task-btnPopup {
+        font-size: 14px;
+        width: 120px;
+    }
+}
+
+@media(max-width:590px) {
+    .footerPopup {
+        flex-direction: column;
+    }
+
+    .footer-buttons-section {
+        width: unset !important;
+    }
+}
+
+@media(max-width:540px) {
+    .add-task-popup.show {
+        max-width: 460px;
+        left: -215px;
+        top: 170px;
+    }
+}
+
+@media(max-width:485px) {
+    .addTaskPopupMain {
+        max-width: 400px;
+    }
+
+    .add-task-popup.show {
+        max-width: 400px;
+        left: -180px;
+        top: 160px;
+    }
+}
+
+@media (max-width:430px) {
     .add-task-popup {
-        top:20px;
+        top: 20px;
     }
-    .input-section-leftPopup label{
-        font-size: 16px!important;
+
+    .addTaskPopupMain {
+        max-width: 350px;
     }
-    .input-section-left-input{
-        font-size: 16px!important;
+
+    .add-task-popup.show {
+        max-width: 350px;
+        left: -160px;
+        top: 130px;
+         max-height: 615px;
     }
-    textarea{
-        font-size: 16px!important;
+
+    .footerPopup {
+        margin-bottom: 64px;
+        margin-left: -25px;
+        margin-right: 0.75px;
+        margin-top: 4px;
     }
-    .date-input{
-        font-size: 16px!important;
+
+    .input-section-leftPopup label {
+        font-size: 16px !important;
     }
-    .input-section-rightPopup label{
-        font-size: 16px!important;
+
+    .input-section-left-input {
+        font-size: 16px !important;
     }
-    .priority-section button{
-        font-size: 16px!important;
+
+    textarea {
+        font-size: 16px !important;
     }
-    .section-right-select{
-        font-size: 16px!important;
+
+    .date-input {
+        font-size: 16px !important;
     }
-    .input-section-leftPopup{
+
+    .input-section-rightPopup label {
+        font-size: 16px !important;
+    }
+
+    .priority-section button {
+        font-size: 16px !important;
+    }
+
+    .section-right-select {
+        font-size: 16px !important;
+    }
+
+    .input-section-leftPopup {
         width: 260px;
     }
-    .input-section-rightPopup{
+
+    .input-section-rightPopup {
         width: 260px;
     }
-    .priority-section{
-        gap: unset!important;
+
+    .priority-section {
+        gap: unset !important;
     }
-    .priority-section button{
-        gap: 4px!important;
+
+    .priority-section button {
+        gap: 4px !important;
     }
-    .inputPopup{
+
+    .inputPopup {
         width: 218px;
-        font-size: 16px!important;
+        font-size: 16px !important;
     }
+
     .clear-btn {
-        font-size: 16px!important;
+        font-size: 16px !important;
     }
-    .create-task-btn{
-        font-size: 16px!important;
+
+    .create-task-btn {
+        font-size: 16px !important;
     }
-    .popup-header{
+
+    .popup-header {
         padding-left: 44px;
     }
 }
 
+@media(max-width:375px) {
+    .addTaskPopupMain {
+        max-width: 300px;
+    }
+
+    .add-task-popup.show {
+        max-width: 300px;
+        left: -135px;
+        top: 120px;
+        max-height: 458px;
+    }
+}

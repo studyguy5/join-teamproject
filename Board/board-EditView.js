@@ -23,14 +23,12 @@ async function deleteData(firebaseID) {
 
 function objectToArray(contacts) {
     const object = Object.entries(contacts)
-    console.log(object);
     const arrayObject = object.map((member) => {
         return {
             id: member[0],
             ...member[1]
         }
     })
-    console.log(arrayObject);
     return arrayObject;
 }
 
@@ -143,7 +141,6 @@ function showReportAddedTaskTemplateEdit() {
 /**show an User Feedback if the User saves a edited Task */
 function editFeedback() {
     const feedback = document.getElementById("edit-feedback");
-    console.log("adding class to feedback", feedback); // Test
     feedback.classList.add("show");
     setTimeout(() => {
         feedback.classList.remove("show");
@@ -163,7 +160,7 @@ function setContactAndPrioValueEdit(taskToEdit) {
         let id = img.id;
             taskToEdit[1].cid.push(id);
         taskToEdit[1].assignedTo.push(names)
-    console.log('contacts are been pushed')})
+    })
     taskToEdit[1].prio = prioArray[0];
 }
 
@@ -208,7 +205,6 @@ let first = true;
 
 /**main function to get all the values, this function is used more times */
 async function getTaskInformationEdit(id) {
-    console.log('editgetTask');
     const taskToEdit = tasks.find(task => task[1].id === id);
     let firebaseID = [taskToEdit[0]];
     await deleteData(firebaseID);
@@ -274,7 +270,6 @@ function openContactViewEdit() {
 
 
 function showInputFilter() {
-    console.log('show input')
     if (document.getElementById('placeholderpTagEdit')) {
         document.getElementById('placeholderpTagEdit').classList.toggle('dont-Show');
         document.getElementById('filterContactsEdit').classList.toggle('dont-Show');
@@ -388,7 +383,6 @@ let thisTask;
 function renderChoosenContactEdit(id, index) {
     let Choosen = document.getElementById('choosenContactsEdit')
     const RightTask = tasks.find(task => task[1].id === id);
-    console.log('die Länge von RightTask: ', RightTask[1]);
     if (index && RightTask[1].assignedTo?.length < 5) {
         const list = contactsArray[index].name
         RightTask[1].assignedTo = [];
@@ -397,7 +391,6 @@ function renderChoosenContactEdit(id, index) {
             thisTask = RightTask[1].assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
             Choosen.innerHTML += `
           <div id="contactCirclePopupRender-${index}" class="contactCirclePopupRender">${thisTask[preIndex][0] + thisTask[preIndex][1]}</div>`;
-            console.log('mit Index arbeitet')
         }
     } else if (index && RightTask[1]?.assignedTo?.length >= 5) {
         Choosen.innerHTML += `<h6>max of length reached</h6>`
@@ -408,7 +401,6 @@ function renderChoosenContactEdit(id, index) {
             Choosen.innerHTML += `
     <div id="contactCirclePopupRender-${num}" class="contactCirclePopupRender">${thisTask[preIndex][0] + thisTask[preIndex][1]}</div>`;
             index++
-            console.log('ohne neuen Index arbeitet')
         }
     }
 }

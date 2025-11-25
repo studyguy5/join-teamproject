@@ -153,13 +153,13 @@
 }
 
 .overlay {
-    position: absolute;
+    position: fixed;
     background-color: rgba(0, 0, 0, 0.16);
-    top: 0;
-    left: 0;
+    top: 150px;
+    left: 200px;
     right: 0;
-    height: 928px;
-    min-height: 793px;
+    height: 592px;
+    /* min-height: 793px; */
     display: none;
     flex-direction: row;
     max-width: 1440px;

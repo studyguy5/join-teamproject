@@ -77,11 +77,12 @@ function hideElement(element) {
   }, 200);
 }
 
+
 /**
  * Markiert ein Eingabefeld als Fehler/valide, setzt aria-invalid entsprechend.
  * @param {HTMLInputElement} input
  * @param {boolean} isError
- */
+*/
 function setFieldError(input, isError) {
   if (!input) return;
   input.classList.toggle('error', !!isError);
@@ -92,7 +93,7 @@ function setFieldError(input, isError) {
 /**
  * Zeigt eine allgemeine Fehlermeldung an.
  * @param {string} msg
- */
+*/
 function showGeneralError(msg) {
   if (generalError) {
     generalError.textContent = msg || 'Es ist ein Fehler aufgetreten.';
@@ -102,7 +103,7 @@ function showGeneralError(msg) {
 
 /**
  * Blendet alle generellen Fehlermeldungen aus.
- */
+*/
 function clearGeneralErrors() {
   hideElement(generalError);
   hideElement(networkError);
@@ -115,7 +116,7 @@ function clearGeneralErrors() {
  * Prüfung ob Name gültig ist (nicht leer).
  * @param {string} val
  * @returns {boolean}
- */
+*/
 function isNameValid(val) {
   return (val?.trim()?.length ?? 0) >= 1;
 }
@@ -124,7 +125,7 @@ function isNameValid(val) {
  * Prüfung ob Email angegeben ist.
  * @param {string} val
  * @returns {boolean}
- */
+*/
 function isEmailProvided(val) {
   return (val?.trim()?.length ?? 0) > 0;
 }
@@ -133,7 +134,7 @@ function isEmailProvided(val) {
  * Prüfung ob Email-Format gültig ist.
  * @param {string} val
  * @returns {boolean}
- */
+*/
 function isEmailFormatOk(val) {
   return /^[^\s@]+@[^\s@]+$/.test(val?.trim() || '');
 }
@@ -143,7 +144,7 @@ function isEmailFormatOk(val) {
  * @param {string} val
  * @param {number} [min=6]
  * @returns {boolean}
- */
+*/
 function hasMinLen(val, min = 6) {
   return (val?.length ?? 0) >= min;
 }
@@ -152,7 +153,7 @@ function hasMinLen(val, min = 6) {
  * Prüft, ob Zeichen im Passwort enthalten sind.
  * @param {string} val
  * @returns {boolean}
- */
+*/
 function hasLetters(val) {
   return /[A-Za-z]/.test(val || '');
 }
@@ -161,7 +162,7 @@ function hasLetters(val) {
  * Prüft, ob Zahlen im Passwort enthalten sind.
  * @param {string} val
  * @returns {boolean}
- */
+*/
 function hasNumbers(val) {
   return /\d/.test(val || '');
 }
@@ -179,7 +180,7 @@ function isPasswordStrong(val) {
  * Bestätigungsfeld muss ausgefüllt sein.
  * @param {string} val
  * @returns {boolean}
- */
+*/
 function isConfirmProvided(val) {
   return (val?.length ?? 0) > 0;
 }
@@ -190,7 +191,7 @@ function isConfirmProvided(val) {
 /**
  * Validiert das Name-Feld und zeigt ggf. Fehlermeldung.
  * @returns {boolean}
- */
+*/
 function validateName() {
   const val = nameInput.value || '';
   const ok = isNameValid(val);
@@ -202,7 +203,7 @@ function validateName() {
 /**
  * Validiert das Email-Feld und zeigt ggf. Fehlermeldung/Format-Fehler.
  * @returns {boolean}
- */
+*/
 function validateEmail() {
   const val = emailInput.value || '';
   let ok = true;
@@ -225,7 +226,7 @@ function validateEmail() {
 /**
  * Validiert das Passwortfeld und zeigt ggf. Fehlermeldungen zu Länge/Stärke.
  * @returns {boolean}
- */
+*/
 function validatePassword() {
   const val = passwordInput.value || '';
   let ok = true;

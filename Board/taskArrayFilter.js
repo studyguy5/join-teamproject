@@ -85,7 +85,6 @@ function searchTaskEventHandling() {
 
 /**shows the filtered results in the board page */
 async function filterAndShowTasksAlternate(array) {
-    console.log(array)
     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
         document.getElementById(`${categorys[idIndex]}`).innerHTML = '';
         let filteredTasks = array.filter(f => f[1].category == categorys[idIndex]);

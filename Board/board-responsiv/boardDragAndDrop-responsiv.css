@@ -130,7 +130,8 @@
     .miniMenüResponsiv {
         display: block;
         position: absolute;
-        right: -98px;
+        right: -38px;
+        top: 45px;
         width: 106px;
         height: 113px;
         color: white;
@@ -138,7 +139,7 @@
         border-top-right-radius: 15px;
         border-bottom-right-radius: 15px;
         border-bottom-left-radius: 15px;
-        z-index: 25;
+        z-index: 250;
     }
 
     .miniMenüResponsiv>p>img {
@@ -204,6 +205,7 @@
         position: relative;
         max-width: 212px;
         height: 325px;
+        box-sizing: border-box;
         /* margin: 16px 0px 26px 4px; */
     }
 
@@ -257,11 +259,13 @@
         grid-row: 2;
         grid-column: 1;
         height: 100%;
-        max-height: 335px;
+        /* max-height: 335px; */
         width: 100%;
         max-width: 97vw;
-        min-height:310px;
+        min-height:290px;
         overflow-x: scroll;
+        overflow-y: unset;
+        box-sizing: border-box;
     }
 
     .Inprogress {
@@ -274,7 +278,7 @@
         min-width: 450px;
         scrollbar-width: none;
         max-width: 100vw;
-        min-height: 310px;
+        min-height: 290px;
         overflow-x: scroll;
     }
 
@@ -287,7 +291,7 @@
         height: max-content;
         width: 104%;
         max-width: 100vw;
-        min-height: 310px;
+        min-height: 290px;
         overflow-x: scroll;
     }
 
@@ -297,7 +301,7 @@
         width: 100%;
         max-width: 100vw;
         height: 100%;
-        min-height: 310px;
+        min-height: 290px;
         overflow-x: scroll;
         max-height: 688px;
         gap: 34px;

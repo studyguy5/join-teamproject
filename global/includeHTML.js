@@ -8,7 +8,6 @@ function init() {
 }
 
 function deleteSession(){
-    console.log('it clears session')
     let clear = sessionStorage.removeItem('guest')
 }
 

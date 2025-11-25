@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     showMainContent(mainContent, splashScreen);
   }
+  localStorage.setItem('signIn', false)
 });
 
 /**

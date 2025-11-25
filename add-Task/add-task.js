@@ -51,6 +51,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     function sectionCheck(idsecTrue) {
         document.getElementById(idsecTrue).classList.add('active')
     }
+    
+    
 })
 
 

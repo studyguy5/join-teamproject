@@ -303,6 +303,38 @@
     background-color: rgb(255, 0, 0);
 }
 
+.contactBox:nth-child(7) .contactCirclePopup {
+    background-color: rgba(110, 82, 255, 1);
+}
+
+.contactBox:nth-child(8) .contactCirclePopup {
+    background-color: rgba(31, 215, 193, 1);
+}
+
+.contactBox:nth-child(9) .contactCirclePopup {
+    background-color: rgba(252, 113, 255, 1);
+}
+
+.contactBox:nth-child(10) .contactCirclePopup {
+    background-color: rgba(195, 255, 43, 1);
+}
+
+.contactBox:nth-child(11) .contactCirclePopup {
+    background-color: rgba(255, 187, 43, 1);
+}
+
+.contactBox:nth-child(12) .contactCirclePopup {
+    background-color: rgb(255, 0, 0);
+}
+
+.contactBox:nth-child(13) .contactCirclePopup {
+    background-color: greenyellow;
+}
+
+.contactBox:nth-child(14) .contactCirclePopup {
+    background-color: purple;
+}
+
 .contactCirclePopupRender:first-child {
     background-color: rgba(110, 82, 255, 1);
 }

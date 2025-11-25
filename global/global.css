@@ -19,9 +19,9 @@
     font-style: normal;
 }
 
-body {
+/* body {
     overflow-y: auto!important;
-}
+} */
 html,
 body {
     /* display: flex; */
@@ -156,7 +156,7 @@ body {
     display: flex;
     justify-content: flex-start;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 96px);
     max-width: 1920px;
     }
 

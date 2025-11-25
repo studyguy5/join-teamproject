@@ -4,7 +4,7 @@
 
 .flex-content-size {
     display: flex;
-    height:100vh;
+    height:calc(100vh - 160px);
     position: relative;
     justify-content: left !important;
 }
@@ -41,6 +41,15 @@ h1 {
     height: 100vh;
     max-height: 1024px;
     min-width: 154px;
+}
+
+.leftDivForNavBar{
+    height:calc(100vh - 96px);
+}
+
+.rightDivForContacts{
+    height:calc(100vh - 80px);
+    margin-top:1px;
 }
 
 .main-content-body {
@@ -169,7 +178,8 @@ h1 {
     width: 456px;
     gap: 10px;
     padding-bottom: 16px;
-    height: 100vh;
+    height: calc(100vh - 127px);
+    /* overflow-y: scroll; */
 }
 
 .contact-list {
@@ -344,13 +354,17 @@ h1 {
     gap: 4px;
     width: 160px;
     height: 48px;
+    
 }
 
 .profile-name {
     font-size: 20px;
     font-weight: 400;
-    width: max-content;
-}
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    min-height:24px;
+    }
 
 .profile-email {
     font-size: 14px;

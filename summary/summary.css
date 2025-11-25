@@ -250,7 +250,6 @@
     height: 136px;
     opacity: 1;
     top: 550px;
-    /* left: 800px; */
     gap: 3px;
     display: flex;
     flex-direction: column;
@@ -267,6 +266,9 @@
     font-size: 64px;
     color: #29ABE2;
     margin: 0;
+    /* overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; */
 }
 
 

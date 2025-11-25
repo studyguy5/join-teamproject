@@ -90,10 +90,10 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
           </div>
 
           <div class="footer-buttons-section">
-            <button onclick="clearTask()" class="clear-btn" type="reset">
+            <button onclick="clearTask()" class="clear-btnPopup" type="reset">
               Clear<img src="/img/icons/x.svg" />
             </button>
-            <button id="creatButtonID" type="button" onclick="constantCheck(); createTaskTemplate(); " class="create-task-btn">
+            <button id="creatButtonID" type="button" onclick="constantCheck(); createTaskTemplate(); " class="create-task-btnPopup">
               Create Task<img src="/img/icons/doneSymbol.svg" />
             </button>
           </div>

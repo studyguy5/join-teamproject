@@ -136,13 +136,6 @@ function deliverDataToSummary(tasks) {
 
 /* ===================== USERNAME & INITIALEN ===================== */
 
-function getUserNameForAnimation(){
-  let userName = localStorage.getItem('userFullName')
-  if(userName !== 'Guest User' || 'guest User'){
-    let logUserName = document.getElementById('greetingUser')
-    logUserName.innerHTML += `<h2>${userName}</h2>`
-  }
-}
 
 /**get the stored User name and return user */
 function getStoredUserName() {
@@ -189,6 +182,7 @@ function computeGreeting() {
   return 'Good evening';
 }
 
+
 function formatTodayDate(locale = 'en-US') {
   const d = new Date();
   return new Intl.DateTimeFormat(locale, { month: 'long', day: 'numeric', year: 'numeric' }).format(d);
@@ -211,7 +205,7 @@ function setUpcomingDate(text) {
   if (el1) { el1.textContent = text; return true; }
   const el2 = document.querySelector('.date');
   if (el2) { el2.textContent = text; return true; }
-
+  
   return false;
 }
 
@@ -219,20 +213,42 @@ window.greetingUser = function greetingUser() {
   updateGreetingAndDate();
 };
 
-
+let greeting;
 /**updates the greeting and date according to the current Time and current Date */
 function updateGreetingAndDate() {
   const fullName = getStoredUserName();
-  const greeting = computeGreeting();
+  let greeting = computeGreeting();
   const today = formatTodayDate('en-US');
-
+  
   const timeEl = document.getElementById('greeting-time');
   const nameEl = document.getElementById('greeting-name');
   if (timeEl) timeEl.textContent = greeting + ',';
   if (nameEl) { nameEl.textContent = fullName; nameEl.classList.remove('d-none'); }
-
+  
   // Nur heutiges Datum setzen, wenn kein Urgent-Datum angezeigt wird
   if (!hasUrgentDeadline) {
     setUpcomingDate(today);
   }
+}
+let signIn;
+
+function getUserNameForAnimation(){
+  if(localStorage.getItem('signIn') === 'false'){
+  let time;
+  let h = new Date().getHours();
+  if (h < 12) {time = 'Good Morning'};
+  if (h >= 12 && h < 18) {time = 'Good afternoon'};
+  if (h >= 18) {time =  'Good evening'};
+  let userName = localStorage.getItem('userFullName')
+  if(userName !== 'Guest User' || 'guest User'){
+    let logUserName = document.getElementById('greetingUser')
+    logUserName.innerHTML += `
+    <h2>${time}</h2>
+    <h2>${userName}</h2>`
+  }
+  localStorage.removeItem('signIn');
+}else{
+  document.getElementById('greetingUser').style.display = "none";
+  console.log('works')
+}
 }

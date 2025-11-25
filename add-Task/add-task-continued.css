@@ -85,19 +85,51 @@
 }
 
 .contactBox:nth-child(3) .contactCircleNormal {
-    background-color:rgba(252, 113, 255, 1);
+    background-color: rgba(252, 113, 255, 1);
 }
 
 .contactBox:nth-child(4) .contactCircleNormal {
-    background-color:rgba(195, 255, 43, 1);
+    background-color: rgba(195, 255, 43, 1);
 }
 
 .contactBox:nth-child(5) .contactCircleNormal {
-    background-color:rgba(255, 187, 43, 1);
+    background-color: rgba(255, 187, 43, 1);
 }
 
 .contactBox:nth-child(6) .contactCircleNormal {
     background-color: rgb(255, 0, 0);
+}
+
+.contactBox:nth-child(7) .contactCircleNormal {
+    background-color: rgba(110, 82, 255, 1);
+}
+
+.contactBox:nth-child(8) .contactCircleNormal {
+    background-color: rgba(31, 215, 193, 1);
+}
+
+.contactBox:nth-child(9) .contactCircleNormal {
+    background-color: rgba(252, 113, 255, 1);
+}
+
+.contactBox:nth-child(10) .contactCircleNormal {
+    background-color: rgba(195, 255, 43, 1);
+}
+
+.contactBox:nth-child(11) .contactCircleNormal {
+    background-color: rgba(255, 187, 43, 1);
+}
+
+.contactBox:nth-child(12) .contactCircleNormal {
+    background-color: rgb(255, 0, 0);
+}
+
+.contactBox:nth-child(13) .contactCircleNormal {
+    background-color: greenyellow;
+}
+
+.contactBox:nth-child(14) .contactCircleNormal {
+    background-color: purple;
 }
 
 .contactCircleNormalRender:first-child {

@@ -224,8 +224,9 @@ function closeOverlay() {
  */
 function overlayShow() {
     document.querySelector('.overlay').classList.add('showed');
-    document.getElementById('overlay-content').scrollIntoView({ behavior: "smooth", block: "center" });
-    document.body.style.overflowY = 'hidden';
+    document.querySelector('.overlay-content').classList.add('Showed');
+    
+    // document.body.style.overflowY = 'hidden';
 }
 
 

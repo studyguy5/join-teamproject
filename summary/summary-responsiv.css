@@ -304,7 +304,6 @@
     }
 
     .nav-container {
-        /* position:fixed; */
         top: calc(100vh - 80px);
     }
 
@@ -315,17 +314,17 @@
     .box-upper-left {
         flex-flow: nowrap;
     }
-
+    
     .box-upper-right img,
     .box-upper-left img {
         width: 30px;
         height: 30px;
     }
-
+    
     .box-upper-text span {
         font-size: 9px;
     }
-
+    
     .greetingAnimation {
         font-size: 22px;
         font-weight: bold;
@@ -348,11 +347,11 @@
         0% {
             opacity: 1;
         }
-
+        
         20% {
             opacity: 1;
         }
-
+        
         40% {
             opacity: 1;
         }
@@ -368,19 +367,21 @@
         90% {
             opacity: 0.5;
         }
-
+        
         100% {
             opacity: 0;
         }
     }
-
+    
     .greetingAnimation h2 {
         color: rgba(41, 171, 226, 1);
     }
-
+    
 }
 
 @media(max-width:420px) {
+
+
     .leftAria {
         width: 63%;
         padding-left:10px;
@@ -391,14 +392,16 @@
         max-width: 314px;
         width: 90%;
         margin-left: -5px;
+        padding-bottom: 0px;
     }
     .summary-counter {
         padding-top: 0px;
         margin-top: -10px;
+        gap:15px;
     }
-
+    
     .summary-header {
-        margin: -22px 169px 16px -50px;
+        margin: -22px 10px 15px -50px;
         gap: 10px;
         padding: 20px;
     }
@@ -416,7 +419,7 @@
     }
 
     .p-right {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .box-upper img {
@@ -428,17 +431,21 @@
         font-size: 44px;
     }
 
-    /* .box-upper-left{
-        padding: 15px 5px;
-        width:120px;
-        height:150px;
+    .box-upper-text span{
+        font-size: 16px;
+    }
+
+    .box-upper-left{
+        padding: 5px 5px;
+       
     }
 
     .box-upper-right{
-        padding: 15px 5px;
-        width:120px;
-        height:150px;
-    } */
+        padding: 5px 5px;
+        /* width:120px; */
+        /* height:150px; */
+    }
+
     .box-upper {
         width: 300px;
     }
@@ -457,7 +464,7 @@
     }
 
     .upcoming {
-        font-size: 13px;
+        font-size: 16px;
         max-width: 120px;
     }
 
@@ -466,17 +473,24 @@
         gap: 18px;
     }
 
+    .box-lower-content {
+        
+        padding: 10px 3px;
+        height: 114px;
+        box-sizing: border-box;
+    }
+
     .box-lower-content-num {
         font-size: 34px;
     }
 
     .box-lower-content-text {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .box-lower {
         width: 300px;
+        gap: 20px;
     }
-
 
 }

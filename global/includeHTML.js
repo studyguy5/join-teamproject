@@ -8,7 +8,9 @@ function init() {
 }
 
 function deleteSession(){
-    let clear = sessionStorage.removeItem('guest')
+    localStorage.removeItem('guest')
+    sessionStorage.removeItem('guest')
+    localStorage.removeItem('userFullName')
 }
 
 function checkSignUpStatus(){

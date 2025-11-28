@@ -1,7 +1,8 @@
 .legal-wrapper {
-    margin-left: 96px;
-    margin-top: 110px;
-    height:calc(100vh - 206px);
+    /* margin-left: 96px; */
+    /* margin-top: 110px; */
+    padding: 60px;
+    height:calc(100vh - 216px);
     overflow-y: auto;
 }
 
@@ -20,6 +21,7 @@
 
 @media(max-width:1000px){
      .legal-wrapper {
+        padding: 0px;
         margin-left: 16px;
         margin-top: 16px;
         height:calc(100vh - 176px);
@@ -33,5 +35,11 @@
     }
     .legal-headline a img{
         display: flex;
+    }
+}
+
+@media(max-width: 360px){
+    .legal-wrapper {
+        margin: 6px 6px 0px 6px;
     }
 }

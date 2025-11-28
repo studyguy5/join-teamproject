@@ -154,7 +154,7 @@
 
 .overlay {
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.16);
+    background-color: rgba(0, 0, 0, 0.4);
     top: 150px;
     left: 200px;
     right: 0;
@@ -170,6 +170,7 @@
 
 .showed {
     display: flex;
+    transform:translateY(0)
 }
 
 .overlay-content {
@@ -187,7 +188,7 @@
     background-color: #2A3647;
     width: 40%;
     height: 100%;
-    border-radius: 30px;
+    border-radius: 25px;
     border-bottom-right-radius: 0px;
     border-top-right-radius: 0px;
     display: flex;
@@ -327,8 +328,8 @@
 }
 
 .add-contact-text-submit div p {
-    font-size: 18px !important;
-    width: 72px !important;
+    font-size: 18px;
+    width: 72px;
 }
 
 .overlay-logo img {
@@ -402,8 +403,16 @@
 }
 
 #createContactOverlay p {
-    font-size: 17px !important;
+    font-size: 17px;
     font-weight: 700;
+}
+
+#createContactOverlay p {
+    font-size: 16px;
+}
+
+.close-icon-containerResp{
+    display:none;
 }
 
 .contact-resp-arrow{

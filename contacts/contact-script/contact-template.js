@@ -161,7 +161,7 @@ function setAddOverlayContent() {
                     </div>
                     <div class="add-contact-text">
                         <div class="overlay-close">
-                            <div class="close-icon-container" onclick="closeOverlay()">
+                            <div class="close-icon-containerNC" onclick="closeOverlay()">
                                 <img src="../img/icons/Close.svg" alt="">
                             </div>
                         </div>
@@ -208,7 +208,7 @@ function setAddOverlayContent() {
                             </div>
                             <div id="createContactOverlay" onclick= "addContact('name', 'email', 'phone')">
                                 <p>Create contact</p>
-                                <img src="../img/icons/check.svg" alt="">
+                                <img class="chekImgNC" src="../img/icons/check.svg" alt="">
                             </div>
                         </div>
                     </div>
@@ -237,6 +237,9 @@ function setEditOverlayContent(id) {
                             <div class="separator-box-overlay"></div>
                         </div>
                     </div>
+                    <div class="close-icon-containerResp" onclick="closeOverlay()">
+                                <img src="../img/icons/Close.svg" alt="">
+                            </div>
                 </div>
                 <div class="overlay-form">
                     <div class="overlay-icon">

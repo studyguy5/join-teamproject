@@ -350,7 +350,7 @@
         display: none;
     }
     .privacy-legal-sectionNonUser {
-        width: 182px;
+        width: 255px;
         height: 68px;
         display: flex;
         flex-direction: row;
@@ -415,12 +415,21 @@
     }
 
     .nav-elements span {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .nav-elements>li>a>img {
         width: 25px;
         height: 25px;
+    }
+
+    .privacy-legal-sectionNonUser {
+        width: 242px;
+    }
+    
+    .privacy-legal-sectionNonUser a {
+        width:105px;
+        padding:0px 5px 0px 5px;
     }
 }
 

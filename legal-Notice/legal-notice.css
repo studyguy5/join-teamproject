@@ -24,7 +24,7 @@
         padding: 0px;
         margin-left: 16px;
         margin-top: 16px;
-        height:calc(100vh - 176px);
+        height:calc(100vh - 165px);
     }
 }
 
@@ -40,6 +40,6 @@
 
 @media(max-width: 360px){
     .legal-wrapper {
-        margin: 6px 6px 0px 6px;
+        margin: 5px 5px 0px 5px;
     }
 }

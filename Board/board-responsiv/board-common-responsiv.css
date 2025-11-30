@@ -11,6 +11,7 @@
     .headline_searchAddTask {
         padding-left: 40px;
         padding-right: 76px;
+        /* height:259px; */
     }
 
     .headline_searchAddTask p {
@@ -86,7 +87,7 @@
         padding-right: 10px;
         padding-left: 10px;
         flex-direction: row-reverse;
-        height:216px;
+        height:232px;
     }
 
     .headline_searchAddTask p {

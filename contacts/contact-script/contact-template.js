@@ -152,6 +152,9 @@ function setAddOverlayContent() {
                             <div class="separator-box-overlay"></div>
                         </div>
                     </div>
+                     <div class="close-icon-containerResp" onclick="closeOverlay()">
+                                <img src="../img/icons/Close.svg" alt="">
+                            </div>
                 </div>
                 <div class="overlay-form">
                     <div class="overlay-icon">

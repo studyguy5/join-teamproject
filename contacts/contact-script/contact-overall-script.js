@@ -295,6 +295,7 @@ function arraySorting(array) {
  * @param {string} id 
  */
 async function switchContentWithSlide(targetID = '', id) {
+
     const container = document.getElementById(targetID);
     const slideOutAnimation = container.animate(transformArrayStart, animationAttributeObjectStart);
     await slideOutAnimation.finished;
@@ -344,11 +345,20 @@ async function resetContentWithSlide(targetID = '') {
  * @returns {Promise<void>}
  */
 async function switchOverlayContentWithSlide(targetID = '', htmlContent) {
+    let sizeOfWindow = window.innerWidth;
+    if(sizeOfWindow > 428){
     const container = document.getElementById(targetID)
     const slideOutAnimation = container.animate(overlayTransformArrayStart, overlayAnimationAttributeObjectStart);
     await slideOutAnimation.finished;
     container.innerHTML = htmlContent
     container.animate(overlayTransformArrayFinish, overlayAnimationAttributeObjectFinish);
+    }else{
+         const container = document.getElementById(targetID)
+    const slideOutAnimation = container.animate(overlayTransformArrayStartVertical, overlayAnimationAttributeObjectStart);
+    await slideOutAnimation.finished;
+    container.innerHTML = htmlContent
+    container.animate(overlayTransformArrayFinishVertical, overlayAnimationAttributeObjectFinish);
+    }
 }
 
 

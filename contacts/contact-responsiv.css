@@ -1,4 +1,4 @@
-@media (max-width: 3820px) {
+@media (max-width: 3840px) {
     .contact-body-list {
         display: flex !important;
     }
@@ -69,7 +69,7 @@
 
     .overlay {
         width: 900px;
-        top: 200px;
+        top: 128px;
         left: 80px;
         height: 460px;
     }
@@ -132,16 +132,35 @@
 
     }
 
+    .overlay-logo img {
+        padding: 10px;
+        margin-top: 20px;
+    }
+
     .close-icon-containerResp {
         display: flex;
         position: relative;
-        top: -150px;
+        top: -100px;
         right: -230px;
+    }
+
+    .close-icon-containerResp img {
+        width: 35px;
+        height:35px;
+        padding:0px;
+    }
+
+    .close-icon-containerResp img:hover {
+        border-radius: 50%;
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.205);
     }
 
     .close-icon-containerResp img {
         filter: brightness(0) invert(1);
     }
+
+    .close-icon-containerResp img:hover {}
 
     .overlay-img-container {
         display: none;
@@ -155,12 +174,12 @@
         background: none;
     }
 
-    .close-icon-containerNC{
+    /* .close-icon-containerNC{
         display:flex;
         position:relative;
         top:-270px;
         right:30px;
-    }
+    } */
 
     .close-icon-containerNC img {
         filter: brightness(0) invert(1);
@@ -243,6 +262,11 @@
 
     .contact-body-list {
         height: calc(100vh - 194px);
+    }
+
+    #overlayTitle {
+        width: 300px;
+        height: 53px;
     }
 }
 
@@ -329,16 +353,16 @@
     }
 
     #createContactOverlay {
-        width:188px;
+        width: 188px;
     }
 
     .cancel-icon {
         display: none;
     }
 
-    .chekImgNC{
-        height:24px;
-        width:24px;
+    .chekImgNC {
+        height: 24px;
+        width: 24px;
     }
 
     .add-contact-text-submit div img {
@@ -350,6 +374,11 @@
 @media(max-width:769px) {
     .overlay {
         top: 148px;
+    }
+
+    #overlayTitle {
+        width: 300px;
+        height: 53px;
     }
 
     .add-contact-text-submit {
@@ -368,13 +397,13 @@
     .add-contact-text-submit div img {
         height: 11px;
         width: 15px;
-        margin-left:15px;
+        margin-left: 15px;
     }
 }
 
 @media(max-width: 630px) {
     .overlay {
-        left: 0px;
+        left: 5px;
     }
 
     .add-contact-text-submit {
@@ -403,21 +432,27 @@
     }
 
     .overlay {
-        left: 10px;
+        left: 20px;
         top: 120px;
         width: 400px;
         border-radius: 30px;
     }
 
+    .overlay-logo img {
+        padding: 10px;
+        margin-top: 20px;
+    }
+
     .close-icon-containerResp {
         display: flex;
         position: relative;
-        top: -150px;
+        top: -80px;
         right: -170px;
     }
 
-        .close-icon-containerResp img {
+    .close-icon-containerResp img {
         filter: brightness(0) invert(1);
+        padding:0px;
     }
 
     .floating-profile-name {
@@ -505,8 +540,8 @@
     }
 
     .close-icon-containerResp {
-       
-        top: -150px;
+
+        top: -125px;
         right: -140px;
     }
 
@@ -587,14 +622,20 @@
         width: 100px;
         height: 58px;
     }
+
     .close-icon-containerResp {
-       
-        top: -150px;
+        padding: 10px;
+        top: -90px;
         right: -135px;
     }
 
     .cancel-icon {
         display: none;
+    }
+
+    #overlayTitle {
+        width: 300px;
+        height: 32px;
     }
 }
 
@@ -626,6 +667,10 @@
         height: calc(100vh - 160px);
     }
 
+    .overlay-close {
+        height: 23px;
+    }
+
     .overlay {
         height: calc(95vh - 140px);
         top: 81px;
@@ -633,13 +678,13 @@
     }
 
     .overlay-content {
-        height: calc(95vh - 140px);
+        height: calc(97vh - 150px);
         border-top-left-radius: 30px;
         border-top-right-radius: 30px;
     }
 
     .overlay-logo {
-        height: 245px;
+        height: 135px;
     }
 
     .overlay-icon {
@@ -649,7 +694,12 @@
 
     .cancel-icon {
         display: none;
+    }
 
+    #overlayTitle {
+        width: 300px;
+        height: 46px;
+        margin-top: 40px;
     }
 
     .add-contact-text-submit {
@@ -700,21 +750,22 @@
 
     .overlay-content {
         /* top:0px; */
-        width: 100vw;
+        width: 98vw;
         transition: transform 5s ease-in-out;
         transform: translateY(100px);
     }
 
     .close-icon-containerNC {
-        display: flex;
+        display: none;
         position: relative;
-        top: -250px;
+        top: -200px;
         right: 30px;
     }
 
     .close-icon-containerResp {
-        top: -150px;
+        top: -55px;
         right: -130px;
+        padding: 0px;
     }
 
     .Showed {
@@ -723,7 +774,7 @@
 
     .add-contact-text-form {
         gap: 10px;
-        margin: 0px;
+        margin-top: 30px;
     }
 
     .overlay-title-text {
@@ -736,6 +787,7 @@
 
     #overlayTitle {
         margin-left: 15px;
+        margin-top: -10px;
     }
 
     #overlayIcon {
@@ -802,6 +854,24 @@
     #cancel-overlay {
         width: 80px;
         height: 51px;
+    }
+
+    .overlay-logo img {
+        padding: 0px;
+        margin-top: 0px;
+    }
+
+}
+
+@media(max-width:330px) {
+    #overlayTitle {
+        width: 300px;
+        margin-top: -15px;
+    }
+
+    .close-icon-containerResp {
+        top: -60px;
+        right: -130px;
     }
 
 }

@@ -154,7 +154,7 @@
 
 .overlay {
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.4);
+    /* background-color: rgba(0, 0, 0, 0.4); */
     top: 150px;
     left: 200px;
     right: 0;
@@ -258,7 +258,21 @@
     transition: all 100ms ease-in-out;
 }
 
+.close-icon-containerNC {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: all 100ms ease-in-out;
+}
+
 .close-icon-container:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.205);
+}
+
+.close-icon-containerNC:hover {
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.205);
 }
@@ -333,8 +347,8 @@
 }
 
 .overlay-logo img {
-    width: 56px;
-    height: 67px;
+    width: 45px;
+    height: 45px;
     align-self: flex-start;
 }
 

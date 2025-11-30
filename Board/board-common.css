@@ -16,6 +16,7 @@
     height: 232px;
     padding-left: 64px;
     padding-right: 88px;
+    box-sizing: border-box;
 }
 
 .headline_searchAddTask p {

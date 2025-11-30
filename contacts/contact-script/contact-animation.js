@@ -47,13 +47,18 @@ let overlayTransformArrayStart = [
     { transform: 'translateX(16%)', opacity: 0 }
 ]
 
+let overlayTransformArrayStartVertical = [
+    { transform: 'translateY(0)', opacity: 0 },
+    { transform: 'translateY(86%)', opacity: 0 }
+]
+
 
 /**
  * Animation options for the starting animation of the overlay element.
  * @type {{ duration: number, easing: string }}
  */
 let overlayAnimationAttributeObjectStart = {
-    duration: 300,
+    duration: 150,
     easing: 'ease-in'
 }
 
@@ -65,6 +70,11 @@ let overlayAnimationAttributeObjectStart = {
 let overlayTransformArrayFinish = [
     { transform: 'translateX(16%)', opacity: 1 },
     { transform: 'translateX(0)', opacity: 1 }
+]
+
+let overlayTransformArrayFinishVertical = [
+    { transform: 'translateY(86%)', opacity: 1 },
+    { transform: 'translateY(0)', opacity: 1 }
 ]
 
 

@@ -170,15 +170,15 @@ function setAddOverlayContent() {
                         </div>
                         <div class="add-contact-text-form">
                             <div>
-                                <input type="text" id="name" placeholder="name">
+                                <input onchange ="formValidationName()" type="text" id="name" placeholder="name">
                                 <img src="../img/icons/person (2).svg" alt="" class="name-icon">
                             </div>
                             <div>
-                                <input type="text" id="email" placeholder="email">
+                                <input onchange ="formValidationEmail()" type="text" id="email" placeholder="email">
                                 <img src="../img/icons/mail.svg" alt="" class="mail-icon">
                             </div>
                             <div>
-                                <input type="text" id="phone" placeholder="phone">
+                                <input onchange ="formValidationPhone()" type="text" id="phone" placeholder="phone">
                                 <img src="../img/icons/call.svg" alt="" class="phoneNumber-icon">
                             </div>
                         </div>
@@ -258,15 +258,15 @@ function setEditOverlayContent(id) {
                         </div>
                         <div class="add-contact-text-form">
                             <div>
-                                <input type="text" id="name" placeholder="Name">
+                                <input onchange="formValidationName()" type="text" id="name" placeholder="Name">
                                 <img src="../img/icons/person (2).svg" alt="" class="name-icon">
                             </div>
                             <div>
-                                <input type="text" id="email" placeholder="Email">
+                                <input onchange="formValidationEmail()" type="text" id="email" placeholder="Email">
                                 <img src="../img/icons/mail.svg" alt="" class="mail-icon">
                             </div>
                             <div>
-                                <input type="text" id="phone" placeholder="Phone">
+                                <input onchange="formValidationPhone()" type="text" id="phone" placeholder="Phone">
                                 <img src="../img/icons/call.svg" alt="" class="phoneNumber-icon">
                             </div>
                         </div>

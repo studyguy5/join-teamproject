@@ -118,7 +118,7 @@ function clearGeneralErrors() {
  * @returns {boolean}
 */
 function isNameValid(val) {
-  return (val?.trim()?.length ?? 0) >= 1;
+  return (val?.trim()?.length ?? 0) >= 5;
 }
 
 /**
@@ -127,7 +127,7 @@ function isNameValid(val) {
  * @returns {boolean}
 */
 function isEmailProvided(val) {
-  return (val?.trim()?.length ?? 0) > 0;
+  return (val?.trim()?.length ?? 0) > 10;
 }
 
 /**

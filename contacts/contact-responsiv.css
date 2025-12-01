@@ -160,7 +160,7 @@
         filter: brightness(0) invert(1);
     }
 
-    .close-icon-containerResp img:hover {}
+    /* .close-icon-containerResp img:hover {} */
 
     .overlay-img-container {
         display: none;

@@ -26,37 +26,51 @@ document.addEventListener('DOMContentLoaded', async () => {
  * Validates all input fields in the form.
  * @returns {boolean} Returns true if all inputs are valid.
  */
-// function formValidation() {
-//     const allInput = document.querySelectorAll('input');
-//     for (let index = 0; index < allInput.length; index++) {
-//         const boolean = contentCheck(allInput[index]);
-//         if (!boolean) {
-//             if (index != 2) {
-//                 getErrorLogic(allInput[index]);
-//             } else {
-//                 getErrorLogicIndex2(allInput[index]);
-//             }
-//             return false;
-//         } else {
-//             removeErrorMark(allInput[index]);
-//         }
-//     }
-//     return true;
-// }
+
+
+// Validation for newContatc Window
+
+function formValidationName(){
+    const name = document.getElementById('name');
+    if (!validateName(name.value) || name.value.length < 2) 
+        return  getErrorLogic(name), document.getElementById('email').disabled = true;
+    removeErrorMark(name);
+    document.getElementById('email').disabled = false;
+    console.log('überprüft')
+}
+
+function formValidationEmail(){
+    const email = document.getElementById('email');
+    if (!validateEmail(email.value) || email.value.length < 10) 
+        return getErrorLogic(email), document.getElementById('phone').disabled = true; 
+    removeErrorMark(email);
+    document.getElementById('phone').disabled = false;
+    console.log('überprüft')
+}
+
+function formValidationPhone(){
+    const phone = document.getElementById('phone');
+    if (!validatePhone(phone.value) || phone.value.length < 12) return getErrorLogicIndex2(phone), false;
+    removeErrorMark(phone);
+    console.log('überprüft')
+}
+
+
 function formValidation() {
     const name = document.getElementById('name');
     const email = document.getElementById('email');
     const phone = document.getElementById('phone');
-
-    if (!validateName(name.value)) return getErrorLogic(name), false;
+    
+    if (!validateName(name.value) || name.value.length < 2) return getErrorLogic(name), false;
     removeErrorMark(name);
-
-    if (!validateEmail(email.value)) return getErrorLogic(email), false;
+    
+    if (!validateEmail(email.value) || email.value.length < 10) return getErrorLogic(email), false;
     removeErrorMark(email);
-
-    if (!validatePhone(phone.value)) return getErrorLogic(phone), false;
+    
+    if (!validatePhone(phone.value) || phone.value.length < 12) return getErrorLogic(phone), false;
     removeErrorMark(phone);
-
+    
+    console.log('überprüft')
     return true;
 }
 
@@ -88,6 +102,8 @@ function validatePhone(value) {
  * @param {HTMLInputElement} inputField 
  */
 function getErrorLogic(inputField) {
+    // inputField.placeholder = 'please write your ' + `${inputField.id}`;
+    inputField.value = "";
     inputField.setAttribute('placeholder', 'please write your ' + `${inputField.id}`);
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');

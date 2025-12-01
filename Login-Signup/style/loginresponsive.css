@@ -46,7 +46,7 @@
     .login-container{
         width: 300px;
         margin-top: 15px;
-        padding: 30px 20px 0px 20px;
+        padding: 20px 20px 0px 20px;
     }
 
     .signup-button-login {
@@ -60,7 +60,7 @@
         position: static;
         text-align: left;
         align-self: flex-start;
-        margin-bottom: 12px;
+        margin-bottom: 8px;
     }
 
     .page-logo img {
@@ -74,6 +74,7 @@
         text-align: center;
         font-weight: bold;
         padding-bottom: 0;
+        height:60px;
     }
 
     h1::after {
@@ -98,6 +99,7 @@
 
     .input-icon {
         right: 15px;
+        top:24px;
     }
 
     .input-wrapper img{

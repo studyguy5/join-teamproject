@@ -161,7 +161,7 @@ body {
 .visibility-icon {
   position: absolute;
   right: 15px;
-  top: 35%;
+  top: 26px;
   transform: translateY(-50%);
   width: 20px;
   cursor: pointer;

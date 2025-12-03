@@ -173,14 +173,17 @@ function setAddOverlayContent() {
                                 <input onchange ="formValidationName()" type="text" id="name" placeholder="name">
                                 <img src="../img/icons/person (2).svg" alt="" class="name-icon">
                             </div>
+                            <p id="nameUserFeedback" class="nameUserFeedback"></p>
                             <div>
                                 <input onchange ="formValidationEmail()" type="text" id="email" placeholder="email">
                                 <img src="../img/icons/mail.svg" alt="" class="mail-icon">
                             </div>
+                            <p id="emailUserFeedback" class="emailUserFeedback"></p>
                             <div>
                                 <input onchange ="formValidationPhone()" type="text" id="phone" placeholder="phone">
                                 <img src="../img/icons/call.svg" alt="" class="phoneNumber-icon">
                             </div>
+                            <p id="phoneUserFeedback" class="phoneUserFeedback"></p>
                         </div>
                         <div class="add-contact-text-submit">
                             <div class="add-overlay-cancel" id="cancel-overlay" onclick="closeOverlay()">

@@ -102,9 +102,8 @@ function validatePhone(value) {
  * @param {HTMLInputElement} inputField 
  */
 function getErrorLogic(inputField) {
-    // inputField.placeholder = 'please write your ' + `${inputField.id}`;
-    inputField.value = "";
-    inputField.setAttribute('placeholder', 'please write your ' + `${inputField.id}`);
+    let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
+    userFeedback.innerText = ('placeholder', 'please write your ' + `${inputField.id}`);
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
     return;
@@ -116,7 +115,8 @@ function getErrorLogic(inputField) {
  * @param {HTMLInputElement} inputField 
  */
 function getErrorLogicIndex2(inputField) {
-    inputField.setAttribute('placeholder', 'please write your phone number ');
+     let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
+    userFeedback.innerText = ('placeholder', 'please write your phone number ');
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
 }
@@ -128,6 +128,8 @@ function getErrorLogicIndex2(inputField) {
  */
 function removeErrorMark(inputField) {
     inputField.setAttribute('placeholder', `${inputField.id}`);
+    let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
+    userFeedback.innerText = "";
     const container = inputField.closest('div');
     container.classList.remove('input-empty');
 }

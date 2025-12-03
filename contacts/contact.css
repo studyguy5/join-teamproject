@@ -236,6 +236,25 @@ h1 {
     padding: 16px;
 }
 
+.dontShowFeedback{
+    display:none;
+}
+
+.nameUserFeedback{
+    width:200px;
+    height:25px;
+}
+
+.emailUserFeedback{
+    width:200px;
+    height:25px;
+}
+
+.phoneUserFeedback{
+    width:200px;
+    height:25px;
+}
+
 .flex-success {
     display: flex;
 }

@@ -236,22 +236,28 @@ h1 {
     padding: 16px;
 }
 
-.dontShowFeedback{
+/* .dontShowFeedback{
     display:none;
-}
+} */
 
 .nameUserFeedback{
-    width:200px;
+    margin-left:10px;
+    color:red;
+    width:350px;
     height:25px;
 }
 
 .emailUserFeedback{
-    width:200px;
+    margin-left:10px;
+    color:red;
+    width:350px;
     height:25px;
 }
 
 .phoneUserFeedback{
-    width:200px;
+    margin-left:10px;
+    color:red;
+    width:380px;
     height:25px;
 }
 

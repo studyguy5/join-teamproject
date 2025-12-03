@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 function formValidationName(){
     const name = document.getElementById('name');
     if (!validateName(name.value) || name.value.length < 2) 
-        return  getErrorLogic(name), document.getElementById('email').disabled = true;
+        return  getErrorLogic(name), document.getElementById('email').disabled = true, document.getElementById('phone').disabled = true;
     removeErrorMark(name);
     document.getElementById('email').disabled = false;
     console.log('überprüft')
@@ -42,7 +42,7 @@ function formValidationName(){
 function formValidationEmail(){
     const email = document.getElementById('email');
     if (!validateEmail(email.value) || email.value.length < 10) 
-        return getErrorLogic(email), document.getElementById('phone').disabled = true; 
+        return getErrorLogicEmail(email), document.getElementById('phone').disabled = true; 
     removeErrorMark(email);
     document.getElementById('phone').disabled = false;
     console.log('überprüft')
@@ -67,7 +67,7 @@ function formValidation() {
     if (!validateEmail(email.value) || email.value.length < 10) return getErrorLogic(email), false;
     removeErrorMark(email);
     
-    if (!validatePhone(phone.value) || phone.value.length < 12) return getErrorLogic(phone), false;
+    if (!validatePhone(phone.value) || !validatePhone(phone.value) && phone.value.length < 12) return getErrorLogic(phone), false;
     removeErrorMark(phone);
     
     console.log('überprüft')
@@ -89,21 +89,21 @@ function validatePhone(value) {
 
 
 
-
-
-
-
-
-
-
-
 /**
  * Sets placeholder and marks input as empty.
  * @param {HTMLInputElement} inputField 
  */
 function getErrorLogic(inputField) {
     let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
-    userFeedback.innerText = ('placeholder', 'please write your ' + `${inputField.id}`);
+    userFeedback.innerText = ('please write your ' + `${inputField.id}`);
+    const errorContainer = inputField.closest('div');
+    errorContainer.classList.add('input-empty');
+    return;
+}
+
+function getErrorLogicEmail(inputField) {
+    let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
+    userFeedback.innerText = 'please write '+ `${10 -(inputField.value.length)}` + ' more Character ' + `${inputField.id}`;
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
     return;
@@ -116,7 +116,7 @@ function getErrorLogic(inputField) {
  */
 function getErrorLogicIndex2(inputField) {
      let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
-    userFeedback.innerText = ('placeholder', 'please write your phone number ');
+    userFeedback.innerText = 'please add ' + `${12 - (inputField.value.length)}` + ' more digits to your phone number';
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
 }

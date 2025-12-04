@@ -116,7 +116,7 @@ function getErrorLogicEmail(inputField) {
  */
 function getErrorLogicIndex2(inputField) {
      let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
-    userFeedback.innerText = 'please add ' + `${12 - (inputField.value.length)}` + ' more digits to your phone number';
+    userFeedback.innerText = 'please write right type/amount of numbers to your phone number';
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
 }

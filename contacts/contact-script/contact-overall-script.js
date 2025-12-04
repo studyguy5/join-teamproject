@@ -103,7 +103,7 @@ function getErrorLogic(inputField) {
 
 function getErrorLogicEmail(inputField) {
     let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
-    userFeedback.innerText = 'please write '+ `${10 -(inputField.value.length)}` + ' more Character ' + `${inputField.id}`;
+    userFeedback.innerText = 'please write '+ ' right type/amount of caracters for ' + `${inputField.id}`;
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
     return;

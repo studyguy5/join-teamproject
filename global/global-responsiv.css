@@ -94,8 +94,8 @@
     }
 
     .headerProfileCircle {
-        width: 40px;
-        height: 40px;
+        width: 56px;
+        height: 56px;
         box-sizing: border-box;
     }
 
@@ -118,7 +118,7 @@
     }
     
     .headline {
-        display: none;
+        display:none;
     }
     
     .main-Contentsize {

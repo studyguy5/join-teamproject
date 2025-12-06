@@ -36,6 +36,10 @@
     .legal-headline a img{
         display: flex;
     }
+
+    .legal-wrapper ul {
+        padding-left:0px;
+    }
 }
 
 @media(max-width: 360px){

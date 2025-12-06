@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Privacy-Policy</title>
 
     <link rel="stylesheet" href="/global/global.css">
     <link rel="stylesheet" href="/global/global-responsiv.css">
@@ -14,11 +14,24 @@
 <body onload="init()">
     <header class="header-fullsize">
         <section class="header-content">
+            <img class="joinMobile" src="/img/icons/join-mobileLogo.svg">
             <h2 class="headline">Kanban Projekt Management Tool</h2>
-            <!-- <div class="profile_help-aria">
-                <img src="/img/icons/help.svg">
-                <img onclick="abc()" src="/img/icons/Ellipse 3.svg" alt="Profile-Button" class="profileButton">
-            </div> -->
+            <div class="profile_help-aria">
+                <a href="/help/help.html"><img src="/img/icons/help.svg"></a>
+                <div onclick="renderUserInitials(); openMenu()" id="userInitials" class="headerProfileCircle">
+                </div>
+            </div>
+            <div id="profileMenu" class="dontShow">
+                <a href="/privacy-policy/privacy-policy.html">
+                    <h4 class="userOptions">Privacy-Policy</h4>
+                </a>
+                <a href="/legal-Notice/legal-notice.html">
+                    <h4 class="userOptions">Legal-Notice</h4>
+                </a>
+                <a onclick="deleteSession()" href="/login-signup/index.html">
+                    <h4 class="userOptions">Log out</h4>
+                </a>
+            </div>
         </section>
     </header>
     <main class="main-fullsize">

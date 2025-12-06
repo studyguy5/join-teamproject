@@ -7,6 +7,38 @@ function init() {
     renderUserInitials();
 }
 
+/**render the Initials from the User name */
+window.renderUserInitials = function renderUserInitials() {
+  const fullName = getStoredUserName();
+  const initials = getInitials(fullName);
+  const el = document.getElementById('userInitials');
+  if (el) {
+    el.textContent = initials;
+    el.setAttribute('title', fullName);
+    el.setAttribute('aria-label', fullName);
+  }
+};
+
+function getInitials(fullName) {
+  const name = (fullName || '').trim().toLowerCase();
+  // Wenn Gast-User, immer "G"!
+  if (name === 'guest user' || name === 'guest') {
+    return 'G';
+  }
+  const parts = name.split(/\s+/).filter(Boolean);
+  if (!parts.length) return 'US';
+  const first = parts[0][0] || '';
+  const last = parts.length > 1 ? parts[parts.length - 1][0] : (parts[0][1] || '');
+  return (first + last).toUpperCase();
+}
+
+function getStoredUserName() {
+  const name = localStorage.getItem('userFullName');
+  if (name && name.trim()) return name.trim();
+  if (sessionStorage.getItem('guest') === 'true') return 'Guest User';
+  return 'User';
+}
+
 function deleteSession(){
     localStorage.removeItem('guest')
     sessionStorage.removeItem('guest')
@@ -22,6 +54,7 @@ function checkSignUpStatus(){
     }else{
         includeNavLinksWithoutUser();
         includePrivacyLinksWithoutUser();
+        document.getElementById('userInitials').style.display= "none";
     }
 }
 
@@ -74,15 +107,15 @@ function includePrivacyLinksWithoutUser() {
 
 
 // muss noch aufgerufen werden
-function renderUserInitials() {
-    if (window.location.pathname !== "/privacy-policy/privacy-policy.html" || "/legal-notice/legal-notice.html") {
-        let profileInfo = document.getElementById('userInitials')
-        if (!profileInfo) {
-            return
-        } 
-        profileInfo.innerHTML = `<h2>RG</h2>`
-    } else {}
-}
+// function renderUserInitials() {
+//     if (window.location.pathname !== "/privacy-policy/privacy-policy.html" || "/legal-notice/legal-notice.html") {
+//         let profileInfo = document.getElementById('userInitials')
+//         if (!profileInfo) {
+//             return
+//         } 
+//         // profileInfo.innerHTML = `<h2>RG</h2>`
+//     } else {}
+// }
 
 
 let isOpen = false;

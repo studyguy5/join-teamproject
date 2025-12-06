@@ -153,10 +153,10 @@
 }
 
 .overlay {
-    position: fixed;
+    position: absolute;
     /* background-color: rgba(0, 0, 0, 0.4); */
-    top: 150px;
-    left: 200px;
+    top: calc((100vh - 592px)/2);
+    left: calc((100vw - 1212px)/2);
     right: 0;
     height: 592px;
     /* min-height: 793px; */
@@ -326,9 +326,21 @@
     gap: 24px;
 }
 
-.add-contact-text-submit div {
+#createContactOverlay {
     height: 56px;
     width: 126px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 18px;
+    width: 128px;
+}
+
+.add-overlay-cancel {
+    height: 56px;
+    width: 160px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -339,11 +351,6 @@
 .add-contact-text-submit div img {
     height: 24px;
     width: 24px;
-}
-
-.add-contact-text-submit div p {
-    font-size: 18px;
-    width: 72px;
 }
 
 .overlay-logo img {
@@ -404,7 +411,7 @@
 
 #createContactOverlay {
     height: 56px;
-    width: 160px;
+    width: 220px;
     background-color: rgba(42, 54, 71, 1);
     color: white;
     transition: all 100ms ease-in-out;
@@ -423,6 +430,7 @@
 
 #createContactOverlay p {
     font-size: 16px;
+    margin-right:15px;
 }
 
 .close-icon-containerResp{

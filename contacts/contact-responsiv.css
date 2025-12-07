@@ -841,11 +841,12 @@
     .overlay {
         margin: 0px 10px 0px -5px;
         width:330px;
+        height:465px;
         left: calc((100vw - 330px)/2);
     }
 
     .overlay-content {
-        height: 495px;
+        height: 505px;
         width:330px;
         border-top-left-radius: 30px;
         border-top-right-radius: 30px;

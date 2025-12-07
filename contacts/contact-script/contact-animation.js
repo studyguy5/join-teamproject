@@ -3,9 +3,30 @@
  * @type {Array<{ transform: string, opacity: number }>}
  */
 let transformArrayStart = [
-    { transform: 'translateX(0)', opacity: 1 },
+    { transform: 'translateX(0%)', opacity: 1 },
     { transform: 'translateX(25%)', opacity: 0 }
 ]
+
+let transformArrayStartVertical = [
+    { transform: 'translateY(200px)', opacity: 1 },
+    { transform: 'translateY(0)', opacity: 1 }
+]
+
+let animationAttributeObjectStartVertical = {
+    duration: 500,
+    easing: 'ease-in'
+}
+
+let transformArrayFinishVertical = [
+    { transform: 'translateY(0)', opacity: 1 },
+    { transform: 'translateY(200px)', opacity: 1 }
+]
+
+let animationAttributeObjectFinishVertical = {
+    duration: 5000,
+    easing: 'ease-out'
+}
+
 
 
 /**
@@ -26,6 +47,7 @@ let transformArrayFinish = [
     { transform: 'translateX(25%)', opacity: 0 },
     { transform: 'translateX(0)', opacity: 1 }
 ]
+
 
 
 /**

@@ -11,15 +11,15 @@
     <link rel="stylesheet" href="/help/helpText.css">
 
     <script src="/global/includeHTML.js"></script>
-    <script src="/renderHelpText.js"></script>
+    <script src="/help/renderHelpText.js"></script>
 </head>
 
-<body onload="init()">
+<body onload="initHelp()">
     <header class="header-fullsize">
         <section class="header-content">
             <h2 class="headline">Kanban Projekt Management Tool</h2>
-            <div class="profile_help-aria">
-                <img src="/img/icons/help.svg">
+            <div id="help-Page" class="profile_help-aria">
+                <img id="helpImage" src="/img/icons/help.svg">
                 <div onclick="renderUserInitials(); openMenu()" id="userInitials" class="headerProfileCircle">
                 </div>
             </div>
@@ -45,7 +45,7 @@
             <section id="mainTextAria" class="mainTextAria">
                 <div class="headlineHelpSite">
                     <p>Help</p>
-                    <a href="/summary/summary.html"><img src="/img/icons/arrow-left-line.svg"
+                    <a href="/login-signup/signUp.html"><img src="/img/icons/arrow-left-line.svg"
                             alt="back to homepage"></a>
                 </div>
                 <div class="welcomeDiv">

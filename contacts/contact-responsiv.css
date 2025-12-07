@@ -14,13 +14,21 @@
         height: 592px;
         /* border-radius: unset; */
     }
+
+    #cancel-overlayEdit{
+        width:110px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        border:1px solid black;
+    }
 }
 
 @media(max-width: 1450px) {
-    /* .overlay {
-        width: 1100px;
-        left: 110px;
-    } */
+    #createContactOverlay{
+        width:180px;
+    }
 
     .overlay-content {
         width: 1100px;
@@ -47,6 +55,14 @@
     .overlay-content {
         width: 1000px;
         height: 500px;
+    }
+
+    #createContactOverlay{
+        width:160px;
+    }
+
+    .add-overlay-cancel {
+        width:140px;
     }
 }
 
@@ -362,16 +378,27 @@
     }
 
     .add-contact-text-submit div p {
-        width: 115px;
+        width: 58px;
     }
 
     .add-contact-text-submit div {
         width: 184px;
+        border:1px solid black;
+        border-radius: 10px;
     }
 
     #createContactOverlay {
         width: 188px;
     }
+
+    #createContactOverlayEdit {
+        width: 100px;
+        display: flex;
+        align-items: center;
+    }
+
+    
+
 
     .cancel-icon {
         display: none;
@@ -398,6 +425,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .add-contact-successResp{
+        /* display:flex; */
     }
 }
 
@@ -434,10 +465,19 @@
         display: none;
     }
 
+    #cancel-overlayEdit{
+        width:100px;
+    }
+
+    #cancel-overlayEdit p{
+        width:50px;
+        justify-self: center;
+    }
+
     .add-contact-text-submit div img {
         height: 11px;
         width: 15px;
-        margin-left: 15px;
+        /* margin-left: -20px; */
     }
 
     .floating-contact-name {
@@ -620,8 +660,16 @@
         justify-content: center;
     }
 
+    .add-contact-text-submit div img {
+        margin-left:0px;
+    }
+
     #cancel-overlay p {
         width: 72px;
+    }
+
+    #createContactOverlayEdit p {
+        margin-left:0px;
     }
 
     .overlay {
@@ -638,8 +686,8 @@
 
     .close-icon-containerResp {
 
-        top: -110px;
-        right: -140px;
+        top: -100px;
+        right: -156px;
     }
 
     .close-icon-container {
@@ -731,7 +779,7 @@
 
     .close-icon-containerResp {
         padding: 10px;
-        top: -66px;
+        top: -65px;
         right: -135px;
     }
 
@@ -741,7 +789,7 @@
 
     #overlayTitle {
         width: 300px;
-        height: 32px;
+        height: 39px;
     }
 }
 
@@ -760,6 +808,10 @@
 
     .floating-profile-name {
         width: 64vw;
+    }
+
+    .close-icon-containerResp {
+        top: -80px;
     }
 
     .floating-contact-name {
@@ -787,13 +839,14 @@
     }
 
     .overlay {
-        /* height: calc(95vh - 140px); */
-        /* top: 3px; */
-        left: 10px;
+        margin: 0px 10px 0px -5px;
+        width:330px;
+        left: calc((100vw - 330px)/2);
     }
 
     .overlay-content {
-        height: 510px;
+        height: 495px;
+        width:330px;
         border-top-left-radius: 30px;
         border-top-right-radius: 30px;
     }
@@ -813,7 +866,7 @@
 
     #overlayTitle {
         width: 300px;
-        height: 80px;
+        height: 52px;
         margin-top: 40px;
     }
 
@@ -851,8 +904,8 @@
     .overlay {
         position: fixed;
         top: 0px;
-        left: 0px;
-        width: 100vw;
+        left: calc((100vw - 310px)/2);
+        width: 310px;
         height: 100vh;
         border-radius: unset;
         z-index: 12;
@@ -865,7 +918,7 @@
 
     .overlay-content {
         /* top:0px; */
-        width: 98vw;
+        width: 310px;
         transition: transform 5s ease-in-out;
         transform: translateY(100px);
     }
@@ -982,7 +1035,7 @@
     #overlayTitle {
         width: 300px;
         margin-top: 0px;
-        height: 80px;
+        height: 55px;
     }
 
     .close-icon-containerResp {

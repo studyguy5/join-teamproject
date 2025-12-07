@@ -55,6 +55,8 @@ function checkSignUpStatus(){
         includeNavLinksWithoutUser();
         includePrivacyLinksWithoutUser();
         document.getElementById('userInitials').style.display= "none";
+        let helpstyle = document.getElementById('help-Page')
+        helpstyle.style.justifyContent = "end";
     }
 }
 

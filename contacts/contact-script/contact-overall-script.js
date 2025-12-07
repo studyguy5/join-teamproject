@@ -36,7 +36,6 @@ function formValidationName(){
         return  getErrorLogic(name), document.getElementById('email').disabled = true, document.getElementById('phone').disabled = true;
     removeErrorMark(name);
     document.getElementById('email').disabled = false;
-    console.log('überprüft')
 }
 
 function formValidationEmail(){
@@ -45,34 +44,68 @@ function formValidationEmail(){
         return getErrorLogicEmail(email), document.getElementById('phone').disabled = true; 
     removeErrorMark(email);
     document.getElementById('phone').disabled = false;
-    console.log('überprüft')
 }
 
 function formValidationPhone(){
     const phone = document.getElementById('phone');
     if (!validatePhone(phone.value) || phone.value.length < 12) return getErrorLogicIndex2(phone), false;
     removeErrorMark(phone);
-    console.log('überprüft')
 }
-
 
 function formValidation() {
     const name = document.getElementById('name');
     const email = document.getElementById('email');
     const phone = document.getElementById('phone');
-    
     if (!validateName(name.value) || name.value.length < 2) return getErrorLogic(name), false;
     removeErrorMark(name);
-    
     if (!validateEmail(email.value) || email.value.length < 10) return getErrorLogic(email), false;
     removeErrorMark(email);
-    
     if (!validatePhone(phone.value) || !validatePhone(phone.value) && phone.value.length < 12) return getErrorLogic(phone), false;
     removeErrorMark(phone);
-    
-    console.log('überprüft')
     return true;
 }
+//===================== Validation for Edit-Mode ========================//
+
+function formValidationNameEdit(){
+    const name = document.getElementById('nameEdit');
+    if (!validateName(name.value) || name.value.length < 2) 
+        return  getErrorLogic(name), document.getElementById('emailEdit').disabled = true, document.getElementById('phoneEdit').disabled = true;
+    removeErrorMarkEdit(name);
+    document.getElementById('emailEdit').disabled = false;
+}
+
+function formValidationEmailEdit(){
+    const email = document.getElementById('emailEdit');
+    if (!validateEmail(email.value) || email.value.length < 10) 
+        return getErrorLogicEmail(email), document.getElementById('phoneEdit').disabled = true; 
+    removeErrorMarkEdit(email);
+    document.getElementById('phoneEdit').disabled = false;
+}
+
+function formValidationPhoneEdit(){
+    const phone = document.getElementById('phoneEdit');
+    if (!validatePhone(phone.value) || phone.value.length < 12) return getErrorLogicIndexPhone(phone), false;
+    removeErrorMarkEdit(phone);
+}
+
+
+
+function formValidationEdit() {
+    const name =  document.getElementById('nameEdit');
+    const nameFeedback = document.getElementById('nameEditFeedback');
+    const email = document.getElementById('emailEdit');
+    const emailFeedback =  document.getElementById('emailEditFeedback');
+    const phone = document.getElementById('phoneEdit');
+    const phoneFeedback =  document.getElementById('phoneEditFeedback');
+    if (!validateName(name.value) || name.value.length < 2) return getErrorLogic(name), false;
+    removeErrorMarkEdit(name);
+    if (!validateEmail(email.value) || email.value.length < 10) return getErrorLogic(email), false;
+    removeErrorMarkEdit(email);
+    if (!validatePhone(phone.value) || !validatePhone(phone.value) && phone.value.length < 12) return getErrorLogic(phone), false;
+    removeErrorMarkEdit(phone);
+    return true;
+}
+
 
 function validateName(value) {
     const regex = /^[A-Za-zÄÖÜäöüß\s]+$/;
@@ -109,6 +142,33 @@ function getErrorLogicEmail(inputField) {
     return;
 }
 
+// hier für Edit-Mode die Error-Logic//
+
+function getErrorLogic(inputField) {
+    let userFeedbackEdit =  document.getElementById(`${inputField.id}Feedback`)
+    userFeedbackEdit.style.display = "block";
+    userFeedbackEdit.innerText = ('please write your ' + `${inputField.id.split('Edit')}`);
+    const errorContainer = inputField.closest('div');
+    errorContainer.classList.add('input-empty');
+    return;
+}
+
+function getErrorLogicEmail(inputField) {
+    let userFeedbackEdit1 =  document.getElementById(`${inputField.id}Feedback`)
+    userFeedbackEdit1.style.display = "block";
+    userFeedbackEdit1.innerText = 'please write '+ ' right type/amount of caracters for ' + `${inputField.id.split('Edit')}`;
+    const errorContainer = inputField.closest('div');
+    errorContainer.classList.add('input-empty');
+    return;
+}
+
+function getErrorLogicIndexPhone(inputField) {
+     let userFeedbackEdit2 =  document.getElementById(`${inputField.id}Feedback`)
+    userFeedbackEdit2.innerText = 'please write right type/amount of numbers to your phone number';
+    const errorContainer = inputField.closest('div');
+    errorContainer.classList.add('input-empty');
+}
+
 
 /**
  * Error logic specifically for index 2 (phone number).
@@ -128,8 +188,15 @@ function getErrorLogicIndex2(inputField) {
  */
 function removeErrorMark(inputField) {
     inputField.setAttribute('placeholder', `${inputField.id}`);
-    let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
-    userFeedback.innerText = "";
+    let userFeedback1 =  document.getElementById(`${inputField.id}UserFeedback`)
+    userFeedback1.innerText = "";
+    const container = inputField.closest('div');
+    container.classList.remove('input-empty');
+}
+
+function removeErrorMarkEdit(inputField) {
+    let userFeedback1 =  document.getElementById(`${inputField.id}Feedback`)
+    userFeedback1.innerText = "";
     const container = inputField.closest('div');
     container.classList.remove('input-empty');
 }
@@ -300,7 +367,7 @@ function objectToArray(contacts) {
 function arraySorting(array) {
     const sortedArray = array;
     sortedArray.sort((memberA, memberB) => {
-        return memberA.name.localeCompare(memberB.name);
+        return memberA.name?.localeCompare(memberB.name);
     });
     return sortedArray;
 }
@@ -330,12 +397,22 @@ async function switchContentWithSlide(targetID = '', id) {
  * @returns {Promise<void>}
  */
 async function switchMessageContentWithSlide(targetQuerry = '') {
+    
+    let size = window.innerWidth;
+    if(size > 428){
     const container = document.querySelector(targetQuerry)
     const slideOutAnimation = container.animate(transformArrayStart, animationAttributeObjectStart);
     await slideOutAnimation.finished;
     container.innerHTML = setSucessMessage()
     container.animate(transformArrayFinish, animationAttributeObjectFinish);
     return;
+}else{
+    const container = document.getElementById('messageVertical')
+    const slideOutAnimation = container.animate(transformArrayStartVertical, animationAttributeObjectStartVertical);
+    await slideOutAnimation.finished;
+    // container.innerHTML = setSucessMessage()
+    container.animate(transformArrayFinishVertical, animationAttributeObjectFinishVertical);
+    }
 }
 
 
@@ -422,9 +499,9 @@ function getObjectFromContactForm(nameId, emailId, phoneNumberId) {
  * @returns {Object} Updated contact data object.
  */
 function getNewContactData(id) {
-    const name = document.getElementById('name').value.trim()
-    const email = document.getElementById('email').value.trim()
-    const phoneNumber = document.getElementById('phone').value.trim()
+    const name = document.getElementById('nameEdit').value.trim();
+    const email = document.getElementById('emailEdit').value.trim();
+    const phoneNumber = document.getElementById('phoneEdit').value
     let formJson = {
         "name": name,
         "email": email,
@@ -458,7 +535,7 @@ async function addContact(nameId, emailId, phoneNumberId) {
         .then(() => scrollIntoView(newContactId));
 
     closeOverlay();
-    showSuccessMessage(500, 3000);
+    showSuccessMessage(1000, 1000);
 }
 
 
@@ -499,7 +576,8 @@ async function refreshContactList() {
  * @returns {Promise<void>}
  */
 async function saveChanges(id) {
-    const validation = formValidation()
+    let validation = formValidationEdit()
+    validation = true;
     if (validation) {
         const savedContact = getNewContactData(id)
         await putData(path = ('/contacts/' + `${id}`), data = savedContact)
@@ -507,7 +585,7 @@ async function saveChanges(id) {
         showContactDetails(id)
         closeOverlay()
     } else {
-        formValidation()
+        formValidationEdit()
     }
     return
 }
@@ -519,9 +597,9 @@ async function saveChanges(id) {
  * @returns {void}
  */
 function showCurrentValue(id) {
-    document.getElementById('name').value = contacts[id].name
-    document.getElementById('email').value = contacts[id].email
-    document.getElementById('phone').value = contacts[id].telefon
+    document.getElementById('nameEdit').value = contacts[id].name
+    document.getElementById('emailEdit').value = contacts[id].email
+    document.getElementById('phoneEdit').value = contacts[id].telefon
     return
 }
 

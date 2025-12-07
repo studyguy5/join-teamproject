@@ -211,6 +211,47 @@ h1 {
     height: max-content;
     width: max-content;
     padding-left: 32px;
+    position:absolute;
+    bottom:100px;
+    left: calc((100vw - 250px)/2);
+}
+
+.add-contact-successResp {
+    display:flex;
+    height: max-content;
+    width: max-content;
+    padding-left: 32px;
+    position:fixed;
+    opacity: 0;
+    bottom: 250px;
+    transform:translateY(-200px);
+    left:calc((100vw - 280px)/2);
+    width:200px;
+    height:50px;
+    background-color: red;
+}
+
+.add-contact-successResp {
+    background-color: #2A3647;
+    width: 252px;
+    min-height: 34px;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: all 100ms ease-in-out;
+}
+
+.add-contact-successResp p {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
 }
 
 .add-contact-success {

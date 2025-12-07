@@ -261,20 +261,23 @@ function setEditOverlayContent(id) {
                         </div>
                         <div class="add-contact-text-form">
                             <div>
-                                <input onchange="formValidationName()" type="text" id="name" placeholder="Name">
+                                <input onchange="formValidationNameEdit()" type="text" id="nameEdit" placeholder="Name">
                                 <img src="../img/icons/person (2).svg" alt="" class="name-icon">
                             </div>
+                            <p id="nameEditFeedback"></p>
                             <div>
-                                <input onchange="formValidationEmail()" type="text" id="email" placeholder="Email">
+                                <input onchange="formValidationEmailEdit()" type="text" id="emailEdit" placeholder="Email">
                                 <img src="../img/icons/mail.svg" alt="" class="mail-icon">
                             </div>
+                            <p id="emailEditFeedback"></p>
                             <div>
-                                <input onchange="formValidationPhone()" type="text" id="phone" placeholder="Phone">
+                                <input onchange="formValidationPhoneEdit()" type="text" id="phoneEdit" placeholder="Phone">
                                 <img src="../img/icons/call.svg" alt="" class="phoneNumber-icon">
                             </div>
+                            <p id="phoneEditFeedback"></p>
                         </div>
                         <div class="add-contact-text-submit">
-                            <div id="cancel-overlay" onclick="deleteContact('${id}'); closeOverlay();">
+                            <div id="cancel-overlayEdit" onclick="deleteContact('${id}'); closeOverlay();">
                                 <p>Delete</p>
                                 <svg class="cancel-icon" width="32" height="32" viewBox="0 0 32 32" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -300,7 +303,7 @@ function setEditOverlayContent(id) {
                                     </g>
                                 </svg>
                             </div>
-                            <div id="createContactOverlay" onclick = "saveChanges('${id}')">
+                            <div id="createContactOverlayEdit" onclick = "saveChanges('${id}')">
                                 <p>Save</p>
                                 <img src="../img/icons/check.svg" alt="">
                             </div>
@@ -331,7 +334,7 @@ function setBadgeColor() {
  * @returns {string} The first letter in uppercase.
  */
 function setFirstLetter(string) {
-    const nameArray = string.trim().split(" ")
+    const nameArray = string;
     let firstLetter = nameArray[0][0].toUpperCase()
     return firstLetter
 }
@@ -344,8 +347,9 @@ function setFirstLetter(string) {
  * @returns {string} The first letter of the second name, or a space if none exists.
  */
 function setSecondFirstLetter(string) {
-    const nameArray = string.trim().split(" ")
-    const secondName = nameArray[1]
+    const nameArray = string.split(" ");
+    console.log(nameArray);
+    const secondName = nameArray[1][0]
     let secondFirstLetter;
     if (secondName) {
         secondFirstLetter = nameArray[1][0].toUpperCase()

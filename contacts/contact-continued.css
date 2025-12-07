@@ -2,7 +2,7 @@
     height: clamp(64px, calc(52.8px + 3.5vw), 120px);
     width: clamp(64px, calc(52.8px + 3.5vw), 120px);
     border-radius: 50%;
-    font-size: clamp(28px,3vw,47px);
+    font-size: clamp(28px, 3vw, 47px);
     font-weight: 500;
     display: flex;
     flex-direction: column;
@@ -170,7 +170,7 @@
 
 .showed {
     display: flex;
-    transform:translateY(0)
+    transform: translateY(0)
 }
 
 .overlay-content {
@@ -283,7 +283,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 5px;
+    gap: 10px;
 }
 
 .add-contact-text-submit {
@@ -300,7 +300,7 @@
     border-radius: 10px;
     justify-content: center;
     align-items: center;
-    height: 40px;
+    height: 45px;
 }
 
 .input-empty {
@@ -309,7 +309,7 @@
 
 .add-contact-text-form input {
     width: 80%;
-    height: 40%;
+    height: 50%;
     font-size: 16px;
     font-weight: 400;
     border: none;
@@ -366,7 +366,7 @@
 
 .overlay-title-text {
     width: 100%;
-    height: 72px;
+    height: 60px;
     font-size: 48px;
     font-weight: 700;
     color: white;
@@ -397,6 +397,8 @@
 #cancel-overlay,
 .cancel-icon path {
     transition: all 100ms ease-in-out;
+    display: flex;
+    align-items: center;
 }
 
 #cancel-overlay:hover {
@@ -418,9 +420,42 @@
     border: none;
 }
 
+#createContactOverlayEdit {
+    display:flex;
+    align-items: center;
+    height: 56px;
+    width: 100px;
+    background-color: rgba(42, 54, 71, 1);
+    color: white;
+    transition: all 100ms ease-in-out;
+    border: none;
+    border-radius: 10px;
+}
+
+#createContactOverlayEdit:hover {
+    height: 56px;
+    width: 100px;
+    background-color: rgba(42, 54, 71, 1);
+    color: white;
+    transition: all 100ms ease-in-out;
+    border: none;
+}
+
+#createContactOverlayEdit:hover {
+    cursor: pointer;
+    background-color: rgba(41, 171, 226, 1);
+}
+
 #createContactOverlay:hover {
     cursor: pointer;
     background-color: rgba(41, 171, 226, 1);
+}
+
+#createContactOverlayEdit p {
+    font-size: 17px;
+    font-weight: 700;
+    width: 52px;
+    margin-left: 15px;
 }
 
 #createContactOverlay p {
@@ -430,22 +465,23 @@
 
 #createContactOverlay p {
     font-size: 16px;
-    margin-right:15px;
+    margin-right: 15px;
 }
 
-.close-icon-containerResp{
-    display:none;
+.close-icon-containerResp {
+    display: none;
 }
 
-.contact-resp-arrow{
+.contact-resp-arrow {
     display: none;
     align-items: center;
 }
-.contact-resp-arrow:hover{
+
+.contact-resp-arrow:hover {
     cursor: pointer;
 }
 
-.person-add{
+.person-add {
     display: none;
     width: 40px;
     height: 40px;
@@ -457,11 +493,11 @@
     cursor: pointer;
 }
 
-.person-add:hover{
+.person-add:hover {
     background: #29ABE2;
 }
 
-.menu-contact-options{
+.menu-contact-options {
     display: none;
     width: fit-content;
     height: 56px;
@@ -474,11 +510,11 @@
     cursor: pointer;
 }
 
-.menu-contact-options:hover{
+.menu-contact-options:hover {
     background: #29ABE2;
 }
 
-.contact-more-wrapper{
+.contact-more-wrapper {
     gap: 20px;
     display: flex;
     flex-direction: column;
@@ -500,10 +536,10 @@
 }
 
 .contact-more-wrapper.active {
-    right: 10px;         
+    right: 10px;
 }
 
-.contact-more-edit{
+.contact-more-edit {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -513,15 +549,14 @@
 
 .contact-more-edit:hover,
 .contact-more-delete:hover {
-  color: #29ABE2;
+    color: #29ABE2;
 
-  img {
-    filter: brightness(0) saturate(100%) invert(48%) sepia(72%) saturate(2923%)
-            hue-rotate(181deg) brightness(95%) contrast(97%);
-  }
+    img {
+        filter: brightness(0) saturate(100%) invert(48%) sepia(72%) saturate(2923%) hue-rotate(181deg) brightness(95%) contrast(97%);
+    }
 }
 
-.contact-more-delete{
+.contact-more-delete {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -530,7 +565,38 @@
 }
 
 .contact-more-delete img,
-.contact-more-edit img{
+.contact-more-edit img {
     width: 24px;
     height: 24px;
+}
+
+#nameEditFeedback {
+    display: block;
+    width:300px;
+    height:15px;
+    color:red;
+}
+
+#nameEditFeedback p {
+    margin:0px;
+}
+
+#emailEditFeedback {
+    display: block;
+    width:400px;
+    height:15px;
+    margin-left:5px;
+    color:red;
+}
+
+#phoneEditFeedback {
+    display:block;
+    width:400px;
+    height:25px;
+    margin:0px;
+    color:red;
+}
+
+#phoneEditFeedback p {
+    margin:0px;
 }

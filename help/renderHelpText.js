@@ -1,3 +1,8 @@
+function initHelp(){
+    checkSignUpStatusHelp();
+}
+
+
 /**
  * Renders help text into the HTML element with the ID 'renderHelpText'.
  *
@@ -8,4 +13,21 @@ function renderText() {
     let helpText = document.getElementById('renderHelpText');
     helpText.innerHTML = `
     `;
+}
+
+
+function checkSignUpStatusHelp(){
+    let signUpStatus = sessionStorage.getItem('guest')
+    let signUpStatus1 = localStorage.getItem('userFullName')
+    if(signUpStatus || signUpStatus1){
+        includeNavLinks();
+        includePrivacyLinks();
+    }else{
+        includeNavLinksWithoutUser();
+        includePrivacyLinksWithoutUser();
+        let cir = document.querySelector('.headerProfileCircle')
+        cir.style.display = "none";
+        // let helpstyle = document.getElementsById('helpImage')
+        // helpstyle.style.justifyContent = "end";
+    }
 }

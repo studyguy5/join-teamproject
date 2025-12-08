@@ -49,10 +49,10 @@
 }
 
 .add-task-popup.show {
-    left:-100px;
+    left:calc((135vw - 1116px)/2);
     top:210px;
     z-index: 8;
-    transform:translate(50%);
+    /* transform:translate(50%); */
     overflow-y:hidden;
     opacity: 1;
 }

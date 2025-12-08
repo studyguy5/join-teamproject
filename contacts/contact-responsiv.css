@@ -427,9 +427,7 @@
         align-items: center;
     }
 
-    .add-contact-successResp{
-        /* display:flex; */
-    }
+    
 }
 
 @media(max-width:769px) {

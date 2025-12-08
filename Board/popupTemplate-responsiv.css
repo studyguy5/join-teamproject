@@ -1,9 +1,18 @@
+
+@media(max-width:3820px){
+    .add-task-popup.show{
+         top: calc((50vh - 870px));
+    }
+}
+
+
+
 @media(max-width: 1630px) {
     .add-task-popup.show {
-        left: -280px;
-        top: 210px;
+        left: calc((180vw - 1116px)/2);
+        top: calc((50vh - 870px));
         z-index: 8;
-        transform: translate(50%);
+        /* transform: translate(50%); */
         overflow-y: hidden;
         opacity: 1;
     }
@@ -11,10 +20,10 @@
 
 @media(max-width: 1430px) {
     .add-task-popup.show {
-        left: -400px;
-        top: 210px;
+        left: calc((180vw - 1116px)/2);
+        top: calc((50vh - 870px));
         z-index: 8;
-        transform: translate(50%);
+        /* transform: translate(50%); */
         overflow-y: hidden;
         opacity: 1;
     }
@@ -22,10 +31,10 @@
 
 @media(max-width: 1300px) {
     .add-task-popup.show {
-        left: -490px;
-        top: 210px;
+        left: calc((185vw - 1116px)/2);
+        top: calc((50vh - 870px));
         z-index: 8;
-        transform: translate(50%);
+        /* transform: translate(50%); */
         overflow-y: hidden;
         opacity: 1;
     }
@@ -42,7 +51,8 @@
 
     .add-task-popup.show {
         max-width: 970px;
-        left: -420px;
+        left: calc((185vw - 970px)/2);
+        top: calc((50vh - 870px));
     }
 
     .popup-header {
@@ -100,7 +110,8 @@
 @media(max-width: 1060px) {
     .add-task-popup.show {
         max-width: 930px;
-        left: -420px;
+        left: calc((210vw - 1116px)/2);
+        top: calc((50vh - 870px));
     }
 
     .footerPopup {
@@ -118,7 +129,8 @@
 
     .add-task-popup.show {
         max-width: 770px;
-        left: -320px;
+        left: calc((220vw - 1116px)/2);
+        top: calc(50vh - 870px);
     }
 
     .input-containerPopup {
@@ -153,8 +165,8 @@
 
     .add-task-popup.show {
         max-width: 560px;
-        left: -250px;
-        top: 60px;
+        left: calc((255vw - 1116px)/2);
+        top: calc((50vh - 870px));
     }
 
     .popup-header {
@@ -169,6 +181,14 @@
     }
 }
 
+@media(max-width:680px) {
+    .add-task-popup.show {
+        max-width: 560px;
+        left: calc((280vw - 1116px)/2);
+        top: calc((50vh - 870px));
+    }
+}
+
 @media(max-width:600px) {
     .addTaskPopupMain {
         max-width: 460px;
@@ -176,7 +196,10 @@
 
     .add-task-popup.show {
         max-width: 460px;
-        left: -190px;
+
+        left: calc((295vw - 1116px)/2);
+        top: calc((50vh - 870px));
+
     }
 
     .footerPopup {
@@ -210,23 +233,39 @@
     }
 }
 
-@media(max-width:540px) {
+@media(max-width:550px) {
     .add-task-popup.show {
         max-width: 460px;
-        left: -215px;
-        top: 170px;
+        left: calc((310vw - 1116px)/2);
+        top: calc((50vh - 870px));
     }
 }
 
-@media(max-width:485px) {
+@media(max-width:520px) {
+    .add-task-popup.show {
+        max-width: 460px;
+        left: calc((320vw - 1116px)/2);
+        top: calc((50vh - 870px));
+    }
+}
+
+@media(max-width:500px) {
     .addTaskPopupMain {
         max-width: 400px;
     }
 
     .add-task-popup.show {
         max-width: 400px;
-        left: -180px;
-        top: 160px;
+        left: calc((345vw - 1116px)/2);
+        top: calc((50vh - 870px));
+    }
+}
+
+@media(max-width:450px) {
+    .add-task-popup.show {
+        max-width: 400px;
+        left: calc((355vw - 1116px)/2);
+        top: calc((50vh - 870px));
     }
 }
 
@@ -241,9 +280,9 @@
 
     .add-task-popup.show {
         max-width: 350px;
-        left: -160px;
-        top: 130px;
-         max-height: 615px;
+        left: calc((297vw - 1116px)/2);
+        top: calc((100vh - 870px));
+
     }
 
     .footerPopup {
@@ -322,8 +361,16 @@
 
     .add-task-popup.show {
         max-width: 300px;
-        left: -135px;
-        top: 120px;
-        max-height: 458px;
+        left: calc((330vw - 1116px)/2);
+        top: calc((100vh - 870px));
+
+    }
+}
+
+@media(max-width:350px) {
+    .add-task-popup.show {
+        max-width: 300px;
+        left: calc((355vw - 1116px)/2);
+        top: calc((100vh - 870px));
     }
 }

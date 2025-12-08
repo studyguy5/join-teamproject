@@ -1,8 +1,8 @@
 .bigViewOfTask {
     z-index: 5;
     position: absolute;
-    top: -17px;
-    right: 440px;
+    top: calc((100vh - 868px)/2);
+    left: calc((50vw - 525px));
     max-width: 445px;
     width: 100%;
     /* max-height: 931px; */

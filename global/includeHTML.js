@@ -136,9 +136,9 @@ function sectionCheckWithUser() {
         let active = document.getElementById('privacy-policy')
         //     console.log(activeL);
         active.classList.add('active');
-    } else {
+    } else if(window.location.pathname == '/legal-Notice/legal-notice.html') {
         document.getElementById('legal-notice').classList.add('active')
-    }
+    }else{}
 }
 
 

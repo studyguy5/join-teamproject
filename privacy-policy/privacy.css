@@ -5,6 +5,12 @@
     overflow-y: auto;
 }
 
+.active {
+    background-color: #091931;
+    
+    padding: 5px 30px;
+}
+
 .privacy-headline{
     display: flex;
     justify-content: space-between;

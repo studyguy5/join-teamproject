@@ -6,6 +6,10 @@
     overflow-y: auto;
 }
 
+.active {
+    background-color: #091931;
+}
+
 .marked {
     color: #29ABE2;
 }

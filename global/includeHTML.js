@@ -2,6 +2,12 @@
 
 let links = ['summary', 'add-task', 'board', 'contacts'];
 
+document.addEventListener('DOMContentLoaded', async () => {
+    // sectionCheckWhitoutUser();
+
+}
+)
+
 function init() {
     checkSignUpStatus();
     renderUserInitials();
@@ -9,60 +15,61 @@ function init() {
 
 /**render the Initials from the User name */
 window.renderUserInitials = function renderUserInitials() {
-  const fullName = getStoredUserName();
-  const initials = getInitials(fullName);
-  const el = document.getElementById('userInitials');
-  if (el) {
-    el.textContent = initials;
-    el.setAttribute('title', fullName);
-    el.setAttribute('aria-label', fullName);
-  }
+    const fullName = getStoredUserName();
+    const initials = getInitials(fullName);
+    const el = document.getElementById('userInitials');
+    if (el) {
+        el.textContent = initials;
+        el.setAttribute('title', fullName);
+        el.setAttribute('aria-label', fullName);
+    }
 };
 
 function getInitials(fullName) {
-  const name = (fullName || '').trim().toLowerCase();
-  // Wenn Gast-User, immer "G"!
-  if (name === 'guest user' || name === 'guest') {
-    return 'G';
-  }
-  const parts = name.split(/\s+/).filter(Boolean);
-  if (!parts.length) return 'US';
-  const first = parts[0][0] || '';
-  const last = parts.length > 1 ? parts[parts.length - 1][0] : (parts[0][1] || '');
-  return (first + last).toUpperCase();
+    const name = (fullName || '').trim().toLowerCase();
+    // Wenn Gast-User, immer "G"!
+    if (name === 'guest user' || name === 'guest') {
+        return 'G';
+    }
+    const parts = name.split(/\s+/).filter(Boolean);
+    if (!parts.length) return 'US';
+    const first = parts[0][0] || '';
+    const last = parts.length > 1 ? parts[parts.length - 1][0] : (parts[0][1] || '');
+    return (first + last).toUpperCase();
 }
 
 function getStoredUserName() {
-  const name = localStorage.getItem('userFullName');
-  if (name && name.trim()) return name.trim();
-  if (sessionStorage.getItem('guest') === 'true') return 'Guest User';
-  return 'User';
+    const name = localStorage.getItem('userFullName');
+    if (name && name.trim()) return name.trim();
+    if (sessionStorage.getItem('guest') === 'true') return 'Guest User';
+    return 'User';
 }
 
-function deleteSession(){
+function deleteSession() {
     localStorage.removeItem('guest')
     sessionStorage.removeItem('guest')
     localStorage.removeItem('userFullName')
 }
 
-function checkSignUpStatus(){
+function checkSignUpStatus() {
     let signUpStatus = sessionStorage.getItem('guest')
     let signUpStatus1 = localStorage.getItem('userFullName')
-    if(signUpStatus || signUpStatus1){
+    if (signUpStatus || signUpStatus1) {
         includeNavLinks();
         includePrivacyLinks();
+        sectionCheckWithUser()
         let size = window.innerWidth;
-        if(size < 428){
-         let helpstyle = document.getElementById('helpImage')
-        console.log(helpstyle);
-        helpstyle.style.display = "none";   
+        if (size < 428) {
+            let helpstyle = document.getElementById('helpImage')
+            helpstyle.style.display = "none";
         }
-    }else{
+    } else {
         includeNavLinksWithoutUser();
         includePrivacyLinksWithoutUser();
-        document.getElementById('userInitials').style.display= "none";
-        
-    
+        sectionCheckWhitoutUser()
+        document.getElementById('userInitials').style.display = "none";
+
+
     }
 }
 
@@ -83,7 +90,7 @@ function includeNavLinks() {
 
 function includeNavLinksWithoutUser() {
     let includeElements = document.getElementById('nav-container');
-        includeElements.innerHTML += `
+    includeElements.innerHTML += `
         <ul id="LogIn" class="nav-elements LogIn">
         <li>
             <a href="/login-signup/index.html">
@@ -99,8 +106,8 @@ function includePrivacyLinks() {
     let include = document.getElementById('nav-container')
     include.innerHTML += `
     <section class="privacy-legal-section">
-                <a href="/privacy-policy/privacy-policy.html"><h4>Privacy Policy</h4></a>
-                <a href="/legal-Notice/legal-notice.html"><h4>Legal notice</h4></a>
+                <a id="privacy-policy" href="/privacy-policy/privacy-policy.html"><h4>Privacy Policy</h4></a>
+                <a id="legal-notice" href="/legal-Notice/legal-notice.html"><h4>Legal notice</h4></a>
             </section>`
 }
 
@@ -108,22 +115,31 @@ function includePrivacyLinksWithoutUser() {
     let include = document.getElementById('nav-container')
     include.innerHTML += `
     <section class="privacy-legal-sectionNonUser">
-                <a href="/privacy-policy/privacy-policy.html"><h4>Privacy Policy</h4></a>
-                <a href="/legal-Notice/legal-notice.html"><h4>Legal notice</h4></a>
+                <a id="privacyWhitoutUser" href="/privacy-policy/privacy-policy.html"><h4>Privacy Policy</h4></a>
+                <a id="legalWhitoutUser" href="/legal-Notice/legal-notice.html"><h4>Legal notice</h4></a>
             </section>`
 }
 
 
-// muss noch aufgerufen werden
-// function renderUserInitials() {
-//     if (window.location.pathname !== "/privacy-policy/privacy-policy.html" || "/legal-notice/legal-notice.html") {
-//         let profileInfo = document.getElementById('userInitials')
-//         if (!profileInfo) {
-//             return
-//         } 
-//         // profileInfo.innerHTML = `<h2>RG</h2>`
-//     } else {}
-// }
+function sectionCheckWhitoutUser() {
+    if (window.location.pathname == '/privacy-policy/privacy-policy.html') {
+        let activeL = document.getElementById('privacyWhitoutUser')
+        //     console.log(activeL);
+        activeL.classList.add('active');
+    } else {
+        document.getElementById('legalWhitoutUser').classList.add('active')
+    }
+}
+
+function sectionCheckWithUser() {
+    if (window.location.pathname == '/privacy-policy/privacy-policy.html') {
+        let active = document.getElementById('privacy-policy')
+        //     console.log(activeL);
+        active.classList.add('active');
+    } else {
+        document.getElementById('legal-notice').classList.add('active')
+    }
+}
 
 
 let isOpen = false;
@@ -135,8 +151,8 @@ function openMenu() {
         isOpen = true;
     } else if (isOpen) {
         menu.classList.add('slideback')
-        menu.classList.add('dontShow') 
-                isOpen = false;
+        menu.classList.add('dontShow')
+        isOpen = false;
     }
 
 }

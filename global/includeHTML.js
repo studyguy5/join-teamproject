@@ -51,12 +51,18 @@ function checkSignUpStatus(){
     if(signUpStatus || signUpStatus1){
         includeNavLinks();
         includePrivacyLinks();
+        let size = window.innerWidth;
+        if(size < 428){
+         let helpstyle = document.getElementById('helpImage')
+        console.log(helpstyle);
+        helpstyle.style.display = "none";   
+        }
     }else{
         includeNavLinksWithoutUser();
         includePrivacyLinksWithoutUser();
         document.getElementById('userInitials').style.display= "none";
-        let helpstyle = document.getElementById('help-Page')
-        helpstyle.style.justifyContent = "end";
+        
+    
     }
 }
 

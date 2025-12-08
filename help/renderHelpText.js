@@ -27,7 +27,7 @@ function checkSignUpStatusHelp(){
         includePrivacyLinksWithoutUser();
         let cir = document.querySelector('.headerProfileCircle')
         cir.style.display = "none";
-        // let helpstyle = document.getElementsById('helpImage')
-        // helpstyle.style.justifyContent = "end";
+        let helpstyle = document.getElementById('helpImage')
+        helpstyle.style.marginLeft = "88vw";
     }
 }

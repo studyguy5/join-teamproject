@@ -347,7 +347,7 @@
     }
     
     .profile_help-aria img {
-        display: none;
+        /* display: none; */
     }
     .privacy-legal-sectionNonUser {
         width: 255px;

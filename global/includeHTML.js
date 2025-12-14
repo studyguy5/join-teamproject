@@ -80,7 +80,7 @@ function includeNavLinks() {
         <ul id="${links[i]}" class="nav-elements ${links[i]}">
         <li>
             <a href="/${links[i]}/${links[i]}.html">
-                <img src="/img/icons/${links[i]}.svg"/>
+                <img class="${links[i]}-icon" src="/img/icons/${links[i]}.svg"/>
                 <span>${links[i].slice(0, 1).toUpperCase() + links[i].slice(1)}</span>
             </a>
         </li></ul>

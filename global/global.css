@@ -213,9 +213,32 @@ nav {
     cursor: pointer;
 }
 
-.nav-elements>li>a>img {
+/* .nav-elements>li>a>img {
     width: 30px;
     height: 30px;
+} */
+
+.summary-icon{
+    width:30px;
+    height:30px;
+    margin-left:3px;
+}
+
+.add-task-icon{
+    width:30px;
+    height:30px;
+    margin-left:3px;
+}
+
+.board-icon{
+    width:30px;
+    height:30px;
+    margin-left:3px;
+}
+
+.contacts-icon{
+    width:35px;
+    height:35px;
 }
 
 .nav-elements>li:hover {

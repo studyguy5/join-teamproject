@@ -716,7 +716,7 @@
 
     .overlay-content {
         width: 360px;
-        height: 500px;
+        height: 530px;
     }
 
     .contact-body-list {
@@ -1001,7 +1001,7 @@
 
     .add-contact-text-form {
         gap: 10px;
-        /* margin-top: 30px; */
+        margin-top: 10px;
     }
 
     .overlay-title-text {
@@ -1054,10 +1054,15 @@
         font-size: 16px;
     }
 
+    .add-contact-text{
+        padding:0px;
+        gap:0%;
+    }
+
     .add-contact-text-submit {
         width: 202px;
         gap: 10px;
-        margin-top: 28px;
+        /* margin-top: 28px; */
     }
 
     .add-contact-text-submit div p {

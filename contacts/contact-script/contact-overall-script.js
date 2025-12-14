@@ -32,23 +32,30 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 function formValidationName(){
     const name = document.getElementById('name');
-    if (!validateName(name.value) || name.value.length < 2) 
+    if (!validateName(name.value)) 
         return  getErrorLogicNewName(name), document.getElementById('email').disabled = true, document.getElementById('phone').disabled = true;
+    if (name.value.length < 2)
+        return getErrorLogicNewNameLength(name), document.getElementById('email').disabled = true, document.getElementById('phone').disabled = true;
     removeErrorMark(name);
     document.getElementById('email').disabled = false;
 }
 
 function formValidationEmail(){
     const email = document.getElementById('email');
-    if (!validateEmail(email.value) || email.value.length < 10) 
-        return getErrorLogicNewEmail(email), document.getElementById('phone').disabled = true; 
+    if (!validateEmail(email.value)) 
+        return getErrorLogicNewEmail(email), document.getElementById('phone').disabled = true;
+    if (email.value.length < 10)
+        return getErrorLogicNewEmailLength(email), document.getElementById('phone').disabled = true; 
     removeErrorMark(email);
     document.getElementById('phone').disabled = false;
 }
 
 function formValidationPhone(){
     const phone = document.getElementById('phone');
-    if (!validatePhone(phone.value) || phone.value.length < 12) return getErrorLogicIndex2(phone), false;
+    if (!validatePhone(phone.value)) 
+        return getErrorLogicPhone(phone), false;
+    if (phone.value.length < 12) 
+        return getErrorLogicPhoneLength(phone), false;
     removeErrorMark(phone);
 }
 
@@ -64,55 +71,13 @@ function formValidation() {
     removeErrorMark(phone);
     return true;
 }
-//===================== Validation for Edit-Mode ========================//
-
-function formValidationNameEdit(){
-    const name = document.getElementById('nameEdit');
-    if (!validateName(name.value) || name.value.length < 2) 
-        return  getErrorLogic(name), document.getElementById('emailEdit').disabled = true, document.getElementById('phoneEdit').disabled = true;
-    removeErrorMarkEdit(name);
-    document.getElementById('emailEdit').disabled = false;
-}
-
-function formValidationEmailEdit(){
-    const email = document.getElementById('emailEdit');
-    if (!validateEmail(email.value) || email.value.length < 10) 
-        return getErrorLogicEmail(email), document.getElementById('phoneEdit').disabled = true; 
-    removeErrorMarkEdit(email);
-    document.getElementById('phoneEdit').disabled = false;
-}
-
-function formValidationPhoneEdit(){
-    const phone = document.getElementById('phoneEdit');
-    if (!validatePhone(phone.value) || phone.value.length < 12) return getErrorLogicIndexPhone(phone), false;
-    removeErrorMarkEdit(phone);
-}
-
-
-
-function formValidationEdit() {
-    const name =  document.getElementById('nameEdit');
-    const nameFeedback = document.getElementById('nameEditFeedback');
-    const email = document.getElementById('emailEdit');
-    const emailFeedback =  document.getElementById('emailEditFeedback');
-    const phone = document.getElementById('phoneEdit');
-    const phoneFeedback =  document.getElementById('phoneEditFeedback');
-    if (!validateName(name.value) || name.value.length < 2) return getErrorLogic(name), false;
-    removeErrorMarkEdit(name);
-    if (!validateEmail(email.value) || email.value.length < 10) return getErrorLogic(email), false;
-    removeErrorMarkEdit(email);
-    if (!validatePhone(phone.value) || !validatePhone(phone.value) && phone.value.length < 12) return getErrorLogic(phone), false;
-    removeErrorMarkEdit(phone);
-    return true;
-}
-
 
 function validateName(value) {
     const regex = /^[A-Za-zÄÖÜäöüß\s]+$/;
     return regex.test(value.trim());
 }
 function validateEmail(value) {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regex = /^[^\s@]+@[^\s@]{3,}\.[^\s@]{2,}$/;
     return regex.test(value.trim());
 }
 function validatePhone(value) {
@@ -125,10 +90,18 @@ function validatePhone(value) {
 /**
  * Sets placeholder and marks input as empty.
  * @param {HTMLInputElement} inputField 
- */
+*/
 function getErrorLogicNewName(inputField) {
     let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
-    userFeedback.innerText = ('please write your ' + `${inputField.id}`);
+    userFeedback.innerText = ('form of ' + `${inputField.id}- Field is incorrect`);
+    const errorContainer = inputField.closest('div');
+    errorContainer.classList.add('input-empty');
+    return;
+}
+
+function getErrorLogicNewNameLength(inputField) {
+    let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
+    userFeedback.innerText = ('length of ' + `${inputField.id} - Field is too short`);
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
     return;
@@ -136,50 +109,138 @@ function getErrorLogicNewName(inputField) {
 
 function getErrorLogicNewEmail(inputField) {
     let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
-    userFeedback.innerText = 'please write '+ ' right type/amount of caracters for ' + `${inputField.id}`;
+    userFeedback.innerText = 'form of ' + `${inputField.id} incorrect`;
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
     return;
+}
+
+function getErrorLogicNewEmailLength(inputField) {
+    let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
+    userFeedback.innerText = 'length of ' + `${inputField.id} too short`;
+    const errorContainer = inputField.closest('div');
+    errorContainer.classList.add('input-empty');
+    return;
+}
+
+/**
+ * Error logic specifically for phone number
+ * @param {HTMLInputElement} inputField 
+*/
+function getErrorLogicPhone(inputField) {
+    let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
+    userFeedback.innerText = 'form of Phone Number incorrect';
+    const errorContainer = inputField.closest('div');
+    errorContainer.classList.add('input-empty');
+}
+
+function getErrorLogicPhoneLength(inputField) {
+    let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
+    userFeedback.innerText = 'length of Phone Number too short';
+    const errorContainer = inputField.closest('div');
+    errorContainer.classList.add('input-empty');
 }
 
 // hier für Edit-Mode die Error-Logic//
+//===================== Validation for Edit-Mode ========================//
 
-function getErrorLogic(inputField) {
+function formValidationNameEdit(){
+    const name = document.getElementById('nameEdit');
+    if (!validateName(name.value)) 
+        return  getErrorLogicNameEdit(name), document.getElementById('emailEdit').disabled = true, document.getElementById('phoneEdit').disabled = true;
+    if (name.value.length < 2)
+        return getErrorLogicNameLengthEdit(name), document.getElementById('email').disabled = true, document.getElementById('phone').disabled = true;
+    removeErrorMarkEdit(name);
+    document.getElementById('emailEdit').disabled = false;
+}
+
+function formValidationEmailEdit(){
+    const email = document.getElementById('emailEdit');
+    if (!validateEmail(email.value)) 
+        return getErrorLogicEmailEdit(email), document.getElementById('phoneEdit').disabled = true; 
+    if (email.value.length < 10)
+        return getErrorLogicEmailLengthEdit(email), document.getElementById('phoneEdit').disabled = true; 
+    removeErrorMarkEdit(email);
+    document.getElementById('phoneEdit').disabled = false;
+}
+
+function formValidationPhoneEdit(){
+    const phone = document.getElementById('phoneEdit');
+    if (!validatePhone(phone.value)) return getErrorLogicPhoneEdit(phone), false;
+    if (phone.value.length < 12) return getErrorLogicPhoneLengthEdit(phone), false;
+    removeErrorMarkEdit(phone);
+}
+
+
+
+// function formValidationEdit() {
+//     const name =  document.getElementById('nameEdit');
+//     const nameFeedback = document.getElementById('nameEditFeedback');
+//     const email = document.getElementById('emailEdit');
+//     const emailFeedback =  document.getElementById('emailEditFeedback');
+//     const phone = document.getElementById('phoneEdit');
+//     const phoneFeedback =  document.getElementById('phoneEditFeedback');
+//     if (!validateName(name.value) || name.value.length < 2) return getErrorLogic(name), false;
+//     removeErrorMarkEdit(name);
+//     if (!validateEmail(email.value) || email.value.length < 10) return getErrorLogic(email), false;
+//     removeErrorMarkEdit(email);
+//     if (!validatePhone(phone.value) || !validatePhone(phone.value) && phone.value.length < 12) return getErrorLogic(phone), false;
+//     removeErrorMarkEdit(phone);
+//     return true;
+// }
+// ==================== Validation for Edit-Mode Ende==============================//
+
+function getErrorLogicNameEdit(inputField) {
     let userFeedbackEdit =  document.getElementById(`${inputField.id}Feedback`)
     userFeedbackEdit.style.display = "block";
-    userFeedbackEdit.innerText = ('please write your ' + `${inputField.id.split('Edit')}`);
+    userFeedbackEdit.innerText = ('form of ' + `${inputField.id.split('Edit')} is incorrect`);
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
     return;
 }
 
-function getErrorLogicEmail(inputField) {
+function getErrorLogicNameLengthEdit(inputField) {
+    let userFeedbackEdit =  document.getElementById(`${inputField.id}Feedback`)
+    userFeedbackEdit.style.display = "block";
+    userFeedbackEdit.innerText = ('length of ' + `${inputField.id.split('Edit')} is incorrect`);
+    const errorContainer = inputField.closest('div');
+    errorContainer.classList.add('input-empty');
+    return;
+}
+
+function getErrorLogicEmailEdit(inputField) {
     let userFeedbackEdit1 =  document.getElementById(`${inputField.id}Feedback`)
     userFeedbackEdit1.style.display = "block";
-    userFeedbackEdit1.innerText = 'please write '+ ' right type/amount of caracters for ' + `${inputField.id.split('Edit')}`;
+    userFeedbackEdit1.innerText = 'form of ' + `${inputField.id.split('Edit')} is incorrect`;
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
     return;
 }
 
-function getErrorLogicIndexPhone(inputField) {
+function getErrorLogicEmailLengthEdit(inputField) {
+    let userFeedbackEdit1 =  document.getElementById(`${inputField.id}Feedback`)
+    userFeedbackEdit1.style.display = "block";
+    userFeedbackEdit1.innerText = 'length of ' + `${inputField.id.split('Edit')} is too short`;
+    const errorContainer = inputField.closest('div');
+    errorContainer.classList.add('input-empty');
+    return;
+}
+
+function getErrorLogicPhoneEdit(inputField) {
      let userFeedbackEdit2 =  document.getElementById(`${inputField.id}Feedback`)
-    userFeedbackEdit2.innerText = 'please write right type/amount of numbers to your phone number';
+    userFeedbackEdit2.innerText = 'form of phone-number is incorrect';
+    const errorContainer = inputField.closest('div');
+    errorContainer.classList.add('input-empty');
+}
+
+function getErrorLogicPhoneLengthEdit(inputField) {
+     let userFeedbackEdit2 =  document.getElementById(`${inputField.id}Feedback`)
+    userFeedbackEdit2.innerText = 'length of phone-number is too short';
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
 }
 
 
-/**
- * Error logic specifically for index 2 (phone number).
- * @param {HTMLInputElement} inputField 
- */
-function getErrorLogicIndex2(inputField) {
-     let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
-    userFeedback.innerText = 'please write right type/amount of numbers to your phone number';
-    const errorContainer = inputField.closest('div');
-    errorContainer.classList.add('input-empty');
-}
 
 
 /**
@@ -523,8 +584,8 @@ function getNewContactData(id) {
  * @returns {Promise<void>}
  */
 async function addContact(nameId, emailId, phoneNumberId) {
-    const validation = formValidation();
-    if (!validation) return formValidation();
+    // const validation = formValidation();
+    // if (!validation) return formValidation();
 
     const newContact = getObjectFromContactForm(nameId, emailId, phoneNumberId);
     const newContactId = await postData('/contacts', newContact);
@@ -576,7 +637,7 @@ async function refreshContactList() {
  * @returns {Promise<void>}
  */
 async function saveChanges(id) {
-    let validation = formValidationEdit()
+    // let validation = formValidationEdit()
     validation = true;
     if (validation) {
         const savedContact = getNewContactData(id)
@@ -584,9 +645,10 @@ async function saveChanges(id) {
         await refreshContactList()
         showContactDetails(id)
         closeOverlay()
-    } else {
-        formValidationEdit()
     }
+    // } else {
+    //     formValidationEdit()
+    // }
     return
 }
 

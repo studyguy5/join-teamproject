@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 function formValidationName(){
     const name = document.getElementById('name');
     if (!validateName(name.value) || name.value.length < 2) 
-        return  getErrorLogic(name), document.getElementById('email').disabled = true, document.getElementById('phone').disabled = true;
+        return  getErrorLogicNewName(name), document.getElementById('email').disabled = true, document.getElementById('phone').disabled = true;
     removeErrorMark(name);
     document.getElementById('email').disabled = false;
 }
@@ -41,7 +41,7 @@ function formValidationName(){
 function formValidationEmail(){
     const email = document.getElementById('email');
     if (!validateEmail(email.value) || email.value.length < 10) 
-        return getErrorLogicEmail(email), document.getElementById('phone').disabled = true; 
+        return getErrorLogicNewEmail(email), document.getElementById('phone').disabled = true; 
     removeErrorMark(email);
     document.getElementById('phone').disabled = false;
 }
@@ -126,7 +126,7 @@ function validatePhone(value) {
  * Sets placeholder and marks input as empty.
  * @param {HTMLInputElement} inputField 
  */
-function getErrorLogic(inputField) {
+function getErrorLogicNewName(inputField) {
     let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
     userFeedback.innerText = ('please write your ' + `${inputField.id}`);
     const errorContainer = inputField.closest('div');
@@ -134,7 +134,7 @@ function getErrorLogic(inputField) {
     return;
 }
 
-function getErrorLogicEmail(inputField) {
+function getErrorLogicNewEmail(inputField) {
     let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
     userFeedback.innerText = 'please write '+ ' right type/amount of caracters for ' + `${inputField.id}`;
     const errorContainer = inputField.closest('div');

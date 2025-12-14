@@ -81,7 +81,7 @@ function includeNavLinks() {
         <li>
             <a href="/${links[i]}/${links[i]}.html">
                 <img src="/img/icons/${links[i]}.svg"/>
-                <span>${links[i]}</span>
+                <span>${links[i].slice(0, 1).toUpperCase() + links[i].slice(1)}</span>
             </a>
         </li></ul>
         `
@@ -125,9 +125,9 @@ function sectionCheckWhitoutUser() {
     if (window.location.pathname == '/privacy-policy/privacy-policy.html') {
         let activeL = document.getElementById('privacyWhitoutUser')
         //     console.log(activeL);
-        activeL.classList.add('active');
+        activeL.classList.add('activeGlobal');
     } else {
-        document.getElementById('legalWhitoutUser').classList.add('active')
+        document.getElementById('legalWhitoutUser').classList.add('activeGlobal')
     }
 }
 
@@ -135,9 +135,9 @@ function sectionCheckWithUser() {
     if (window.location.pathname == '/privacy-policy/privacy-policy.html') {
         let active = document.getElementById('privacy-policy')
         //     console.log(activeL);
-        active.classList.add('active');
+        active.classList.add('activeGlobal');
     } else if(window.location.pathname == '/legal-Notice/legal-notice.html') {
-        document.getElementById('legal-notice').classList.add('active')
+        document.getElementById('legal-notice').classList.add('activeGlobal')
     }else{}
 }
 

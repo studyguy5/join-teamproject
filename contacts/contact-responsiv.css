@@ -1,12 +1,12 @@
 @media (max-width: 3840px) {
-    .contact-body-list {
+    /* .contact-body-list {
         display: flex !important;
-    }
+    } */
 
     .overlay {
-        width: 1212px;
-        height: 592px;
-        border-radius: 30px;
+        width: calc(100vw);
+        height: 100vh;
+        /* border-radius: 30px; */
     }
 
     .overlay-content {
@@ -15,19 +15,19 @@
         /* border-radius: unset; */
     }
 
-    #cancel-overlayEdit{
-        width:110px;
+    #cancel-overlayEdit {
+        width: 110px;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 10px;
-        border:1px solid black;
+        border: 1px solid black;
     }
 }
 
 @media(max-width: 1450px) {
-    #createContactOverlay{
-        width:180px;
+    #createContactOverlay {
+        width: 180px;
     }
 
     .overlay-content {
@@ -46,10 +46,10 @@
     }
 
     .overlay {
-        width: 1000px;
-        top: calc((100vh - 500px) / 2);
-        left: calc((100vw - 1000px) / 2);
-        height: 500px;
+        width: 100vw;
+        top: -96px;
+        left: 0px;
+        height: 100vh;
     }
 
     .overlay-content {
@@ -57,18 +57,22 @@
         height: 500px;
     }
 
-    #createContactOverlay{
-        width:160px;
+    #createContactOverlay {
+        width: 160px;
     }
 
     .add-overlay-cancel {
-        width:140px;
+        width: 140px;
     }
 }
 
 @media (max-width: 1140px) {
     .detail-body {
         margin-top: 140px;
+    }
+
+    .floating-contact-header {
+        gap: 15px;
     }
 
     .detail-header {
@@ -84,26 +88,42 @@
     }
 
     .overlay {
-        width: 900px;
-        top: calc((100vh - 460px) / 2);
-        left: calc((100vw - 900px) / 2);
-        height: 460px;
+        width: calc(100vw - 0px);
+        top: -96px;
+        left: 0px;
+        height: 100vh;
     }
 
     .overlay-content {
         width: 900px;
         height: 460px;
     }
+
+    .add-contact-text-form p {
+        width: 350px;
+    }
 }
 
-@media (max-width: 1054px) {
+@media (max-width: 1058px) {
     .floating-contact {
         margin-left: 15px;
+        width: 400px;
+    }
+
+    .floating-contact-header {
+        width: 400px;
     }
 
     .floating-profile-name {
         font-size: 34px;
     }
+
+    .contact-body-detail {
+        width: 100%;
+        /* max-width:calc(100vw - 369px - 202px); */
+    }
+
+
 }
 
 @media (max-width: 1000px) {
@@ -125,15 +145,15 @@
     .overlay-content {
         flex-direction: column;
         width: 540px;
-        height: 560px;
+        height: 700px;
         position: relative;
     }
 
     .overlay {
-        width: 540px;
-        top: calc((100vh - 642px) / 2);
-        left: calc((100vw - 540px) / 2);
-        height: 460px;
+        width: 100vw;
+        top: -96px;
+        left: 0px;
+        height: 100vh;
     }
 
     .overlay-logo {
@@ -227,8 +247,8 @@
     }
 
     .add-contact-text {
-        width: 100%;
-        padding: 0 20px 20px 20px;
+        width: 95%;
+        padding: 0px 0px 20px 0px;
     }
 
     .add-overlay-cancel {
@@ -253,6 +273,10 @@
 
     .add-contact-text-form {
         align-items: center;
+    }
+
+    .add-contact-text-form p {
+        width: 400px;
     }
 
     .add-contact-text-form div {
@@ -352,15 +376,15 @@
     }
 
     .overlay-content {
-        width: 100%;
+        width: 540px;
         /* height: calc(100vh - 650px); */
         border-radius: 30px;
     }
 
     .overlay {
-        top: calc((100vh - 592px) / 2);
-        left: calc((100vw - 540px) / 2);
-        border-radius: 30px;
+        top: -96px;
+        left: 0px;
+
         /* height: calc(100vh - 582px); */
     }
 
@@ -383,12 +407,13 @@
 
     .add-contact-text-submit div {
         width: 184px;
-        border:1px solid black;
+        border: 1px solid black;
         border-radius: 10px;
     }
 
     #createContactOverlay {
         width: 188px;
+        margin-top: 30px;
     }
 
     #createContactOverlayEdit {
@@ -396,9 +421,6 @@
         display: flex;
         align-items: center;
     }
-
-    
-
 
     .cancel-icon {
         display: none;
@@ -427,12 +449,13 @@
         align-items: center;
     }
 
-    
+
 }
 
 @media(max-width:769px) {
     .overlay {
-        top: calc((100vh - 592px) / 2);
+        top: -96px;
+        left: 0px;
     }
 
     #overlayTitle {
@@ -463,12 +486,12 @@
         display: none;
     }
 
-    #cancel-overlayEdit{
-        width:100px;
+    #cancel-overlayEdit {
+        width: 100px;
     }
 
-    #cancel-overlayEdit p{
-        width:50px;
+    #cancel-overlayEdit p {
+        width: 50px;
         justify-self: center;
     }
 
@@ -495,8 +518,8 @@
 
 @media(max-width: 630px) {
     .overlay {
-        top: calc((100vh - 592px) / 2);
-        left: calc((100vw - 540px) / 2);
+        top: -96px;
+        left: 0px;
     }
 
     .add-contact-text-submit {
@@ -539,11 +562,11 @@
     }
 
     .overlay {
-       top: calc((100vh - 650px) / 2);
-        left: calc((100vw - 400px) / 2);
-        width: 400px;
+        top: -96px;
+        left: 0px;
+        width: 100vw;
         /* height: calc(100vh - 722px); */
-        border-radius: 30px;
+
     }
 
     .overlay-logo img {
@@ -589,6 +612,10 @@
     .add-contact-text-submit {
         margin-top: -18px;
         width: 250px;
+    }
+
+    .add-contact-text-form p {
+        width: 300px;
     }
 
     .cancel-icon {
@@ -652,6 +679,10 @@
         justify-content: center;
     }
 
+    .add-contact-text-form p {
+        width: 280px;
+    }
+
     .add-contact-text-submit div {
         width: 100px;
         display: flex;
@@ -659,7 +690,7 @@
     }
 
     .add-contact-text-submit div img {
-        margin-left:0px;
+        margin-left: 0px;
     }
 
     #cancel-overlay p {
@@ -667,13 +698,25 @@
     }
 
     #createContactOverlayEdit p {
-        margin-left:0px;
+        margin-left: 0px;
     }
 
     .overlay {
-        left: calc((100vw - 360px) / 2);
-        width: 350px;
-        border-radius: 30px;
+        left: 0px;
+        width: 100vw;
+        /* border-radius: 30px; */
+    }
+    .overlay-form{
+        padding-bottom:30px;
+    }
+
+    .overlay-close {
+        height: 5px;
+    }
+
+    .overlay-content {
+        width: 360px;
+        height: 500px;
     }
 
     .contact-body-list {
@@ -722,7 +765,16 @@
     }
 
     .overlay {
-        top: calc((100vh - 650px) / 2);
+        top: -96px;
+    }
+
+    #overlayIcon{
+        width:85px;
+        height:85px;
+    }
+
+    .overlay-form{
+        padding-bottom: 35px;
     }
 
     .close-icon-container {
@@ -787,7 +839,7 @@
 
     #overlayTitle {
         width: 300px;
-        height: 39px;
+        height: 50px;
     }
 }
 
@@ -833,21 +885,26 @@
     }
 
     .overlay-close {
-        height: 23px;
+        height: 5px;
     }
 
     .overlay {
-        margin: 0px 10px 0px -5px;
-        width:330px;
-        height:465px;
-        left: calc((100vw - 330px)/2);
+        /* margin: 0px 10px 0px -5px; */
+        width: 100vw;
+        height: 100vh;
+        top: -80px;
+        left: 0px;
     }
 
     .overlay-content {
         height: 500px;
-        width:330px;
+        width: 330px;
         border-top-left-radius: 30px;
         border-top-right-radius: 30px;
+    }
+
+    .contact-list {
+        width: calc(100vw - 5px);
     }
 
     .overlay-logo {
@@ -872,6 +929,10 @@
     .add-contact-text-submit {
         margin-top: -18px;
         width: 220px;
+    }
+
+    .add-contact-text-form p {
+        width: 260px;
     }
 
     .add-contact-text-submit div {
@@ -903,8 +964,8 @@
     .overlay {
         position: fixed;
         top: 0px;
-        left: calc((100vw - 310px)/2);
-        width: 310px;
+        left: 0px;
+        width: 100vw;
         height: 100vh;
         border-radius: unset;
         z-index: 12;
@@ -916,7 +977,6 @@
     }
 
     .overlay-content {
-        /* top:0px; */
         width: 310px;
         transition: transform 5s ease-in-out;
         transform: translateY(100px);
@@ -931,7 +991,7 @@
 
     .close-icon-containerResp {
         top: -55px;
-        right: -130px;
+        right: -120px;
         padding: 0px;
     }
 
@@ -941,7 +1001,7 @@
 
     .add-contact-text-form {
         gap: 10px;
-        margin-top: 30px;
+        /* margin-top: 30px; */
     }
 
     .overlay-title-text {
@@ -953,7 +1013,7 @@
     }
 
     #overlayTitle {
-        margin-left: 15px;
+        margin-left: 35px;
         margin-top: -10px;
     }
 
@@ -997,11 +1057,16 @@
     .add-contact-text-submit {
         width: 202px;
         gap: 10px;
+        margin-top: 28px;
     }
 
     .add-contact-text-submit div p {
         font-size: 16px;
         width: 110px;
+    }
+
+    .add-contact-text-form p {
+        width: 230px;
     }
 
     .add-contact-text-submit div img {
@@ -1028,6 +1093,11 @@
         margin-top: 0px;
     }
 
+    .overlay-content {
+        width: 290px;
+        height: 500px;
+    }
+
 }
 
 @media(max-width:330px) {
@@ -1039,7 +1109,27 @@
 
     .close-icon-containerResp {
         top: -60px;
-        right: -130px;
+        right: -120px;
     }
+
+    .contact-name,
+    .contact-separator {
+        width: 308px;
+        gap: 30px;
+        /* min-width:310px; */
+    }
+
+    .contact-name:hover {
+        width: 290px;
+
+    }
+
+    .contact-separator-box {
+        width: 290px;
+    }
+
+    /* .rightDivForContacts {
+        width:60px;
+    } */
 
 }

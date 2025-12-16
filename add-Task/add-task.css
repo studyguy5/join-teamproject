@@ -406,14 +406,28 @@ textarea:focus::placeholder {
 
 .required {
     color: #E60026;
-    font-size: 12px;
-    margin-top: 0px;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-bottom: 0px;
     font-weight: 400;
+    min-height:15px;
+    width:200px;
 }
 
-.d-none{
-    display: none;
+.requiredDate {
+    color: #E60026;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-bottom: 0px;
+    font-weight: 400;
+    min-height:15px;
+    width:250px;
 }
+
+
+
 
 .input-error {
     border: 1px solid #E60026!important;

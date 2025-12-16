@@ -48,17 +48,17 @@
 
                     <section class="input-section-left">
                         <label>Title<span class="requiredStar">*</span></label>
-                        <input oninput="constantCheck()" id="title-add-task" class="input-section-left-input" type="text"
+                        <input onchange="constantCheckTitle()" id="title-add-task" class="input-section-left-input" type="text"
                             placeholder="Enter a title">
-                        <p class="required d-none">This field is required</p>
+                        <p id="UserFeedbackTitle" class="required"></p>
 
                         <label for="">Description</label>
-                        <textarea oninput="constantCheck()" rows="5" id="task-description" placeholder="Enter a description"></textarea>
+                        <textarea oninput="constantCheckDate()" rows="5" id="task-description" placeholder="Enter a description"></textarea>
 
                         <label for="date">Due Date<span class="requiredStar">*</span></label>
-                        <input oninput="constantCheck()" id="date-add-task" type="text" placeholder="dd/mm/yyyy"
+                        <input onchange="constantCheckDate()" id="date-add-task" type="text" placeholder="dd/mm/yyyy"
                             class="input-section-left-input date-input">
-                        <p class="required d-none">This field is required</p>
+                        <p id="UserFeedbackDate" class="requiredDate"></p>
 
                     </section>
 
@@ -86,14 +86,16 @@
                         <div id="IdForContactsNormal" class="availibleContactsClose">
 
                         </div>
-                        <div id="choosenContacts" class="choosenContacts"></div>
+                        <div id="choosenContacts" class="choosenContacts">
+                            <div id="countInfo" class="countInfo"></div>
+                        </div>
 
                         <label>Category<span class="requiredStar">*</span></label>
                         <div onclick="event.stopPropagation(); openTaskTypeDropDownNormal()" class="ForTaskChoise" id="IdForTaskChoiseNormal">
                             <p id="selectedTaskNormal" class="selectedTaskNormal">Select Task Category</p>
                             <img id="arrowImgNormal" class="select-arrow-downT" src="/img/icons/select-arrow-down.svg">
                         </div>
-                        <p class="required d-none">This field is required</p>
+                        
                         <div id="dropIdNormal" class="dropTasktypeClose dropTasktypeOpen">
 
                             <div onmousedown="chooseValueNormal()" onclick="constantCheck(); openTaskTypeDropDownNormal()" id="option" class="taskOption" data-value="Technical Task">
@@ -102,7 +104,7 @@
                                 Story</div>
                         </div>
                         <input type="hidden" id="categoryValue" name="category" class="hidden-input"> 
-                        <p class="required d-none">This field is required</p>
+                        <p class="required"></p>
                         
                         
                         <label for="subtask">Subtask</label>

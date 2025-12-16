@@ -43,6 +43,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     contactsArray = objectToArray(contacts)
     showContacts();
     sectionCheck('add-task')
+    const buttons = document.querySelectorAll(".priority-section button");
+    console.log(buttons);
+    let createdArray =  Array.from(buttons)
+    createdArray[1].classList.add('Medium')
+    
 
     /**
      * Adds the 'active' class to a section by ID.
@@ -51,8 +56,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     function sectionCheck(idsecTrue) {
         document.getElementById(idsecTrue).classList.add('active')
     }
-    
-    
+
+
 })
 
 
@@ -70,7 +75,7 @@ buttons.forEach(button => {
         buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
         const priority = button.dataset.priority;
         button.classList.add(priority);
-        prioArray[0] = priority;                 
+        prioArray[0] = priority;
     });
 });
 
@@ -179,8 +184,13 @@ function chooseContactNormal(index) {
     if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
         choContact.classList.remove('checkbox')
         choContact.classList.add('checked')
+        let count = document.querySelectorAll('.contactCircleNormalRender')
+        console.log(count);
+        if((count)+1 > 6){
+            document.getElementById('countInfo').innerHTML = `+ ${count.length - 6} Contacts`
+        }else{
         renderChoosenContactNormal(index);
-        choContact.src = "/img/icons/normalCheckedContact.svg"
+        choContact.src = "/img/icons/normalCheckedContact.svg"}
     } else {
         choContact.classList.add('checkbox')
         choContact.classList.remove('checked')
@@ -309,7 +319,7 @@ options.forEach(opt => {
 function formValidationAddTask() {
     const title = document.getElementById("title-add-task").value;
     const dueDate = document.getElementById("date-add-task").value;
-    const category = document.getElementById("categoryValue").value; 
+    const category = document.getElementById("categoryValue").value;
 
     if (title === "" || dueDate === "" || category === "") {
         displayRequiredMessage();
@@ -325,17 +335,46 @@ function formValidationAddTask() {
  * Continuously checks form inputs and enables the create button when valid.
  * @returns {void}
  */
-function constantCheck() {
-    setTimeout(() => {
-        const title = document.getElementById("title-add-task").value;
-        const description = document.getElementById('task-description').value;
-        const dueDate = document.getElementById("date-add-task").value;
-        const taskType = document.getElementById("selectedTaskNormal").innerText;
-        if (title !== "" && dueDate !== "" && description !== "" && taskType !== "Select Task Category") {
+function constantCheckTitle() {
+    console.log('validation läuft')
+    const title = document.getElementById("title-add-task").value;
+    if (title.length < 2)
+        return showUserFeedbackTitle(title);
+    document.getElementById('task-description').disabled = true, false;
+    document.getElementById("UserFeedbackTitle").innerHTML = "";
+    document.getElementById('task-description').disabled = false;
 
-            document.getElementById('creatButtonIDNormal').disabled = false;
-        }
-    }, 500);
+    if (!validateTitleAddTaskNormal(title))
+        return showUserFeedbackTitleForm(title);
+    document.getElementById('task-description').disabled = true, false;
+    document.getElementById("UserFeedbackTitle").innerHTML = "";
+    document.getElementById('task-description').disabled = false;
+
+}
+
+let attribute = true;
+
+function constantCheckDate() {
+
+    const dueDate = document.getElementById("date-add-task").value;
+    if (dueDate !== "")
+        document.getElementById('creatButtonIDNormal').disabled = false;
+    if (!validateDateAddTaskNormal(dueDate))
+        return showUserFeedbackDueDate();
+    if (validateDateAddTaskNormal(dueDate))
+        clearUserFeedback = document.getElementById("UserFeedbackDate");
+    clearUserFeedback.innerHTML = '';
+
+}
+
+function validateTitleAddTaskNormal(title) {
+    const titleRegex = /^[A-Za-zÄÖÜäöüß\s]+$/;
+    return titleRegex.test(title.trim());
+}
+
+function validateDateAddTaskNormal(dueDate) {
+    const dateRegex = /^\d{2}\.\d{2}\.\d{4}$/;
+    return dateRegex.test(dueDate.trim());
 }
 
 
@@ -366,34 +405,33 @@ function filterContactsInNormal() {
 
 
 /**
- * Toggles error message visibility for a specific input.
- * @param {HTMLElement} input - Input element to modify
- * @param {HTMLElement} message - Message element to toggle
- * @param {boolean} hasError - Whether an error should be shown
- */
-function toggleRequiredMessage(input, message, hasError) {
-    message.classList.toggle("d-none", !hasError);
-    input.classList.toggle("input-error", hasError);
-}
-
-
-/**
  * Displays required field messages for task creation form.
  * @returns {void}
  */
+function showUserFeedbackTitle() {
+    const titleUserFeedbackLength = document.getElementById("UserFeedbackTitle");
+    titleUserFeedbackLength.innerHTML = `title is too short`;
+}
+
+function showUserFeedbackTitleForm() {
+    const titleUserFeedbackForm = document.getElementById("UserFeedbackTitle");
+    titleUserFeedbackForm.innerHTML = `form of Title is incorrect`
+}
+
+function showUserFeedbackDueDate() {
+
+    const dateInput = document.getElementById("UserFeedbackDate");
+    dateInput.innerHTML = `form of DueDate is incorrect`;
+    const categoryInput = document.getElementById("categoryValue");
+
+}
+
 function displayRequiredMessage() {
     const titleInput = document.getElementById("title-add-task");
     const dateInput = document.getElementById("date-add-task");
     const categoryDiv = document.getElementById("IdForTaskChoiseNormal");
     const categoryInput = document.getElementById("categoryValue");
 
-    toggleRequiredMessage(titleInput, titleInput.nextElementSibling, titleInput.value === "");
-    toggleRequiredMessage(dateInput, dateInput.nextElementSibling, dateInput.value === "");
-    toggleRequiredMessage(
-        categoryDiv,
-        categoryDiv.parentElement.querySelector(".required"),
-        categoryInput.value === ""
-    );
 }
 
 
@@ -437,15 +475,15 @@ document.addEventListener('click', (e) => {
     const categoryDrop = document.getElementById('dropIdNormal');
     const categoryTrigger = document.getElementById('IdForTaskChoiseNormal');
 
-    
+
     if (!contactTrigger.contains(e.target) && !contactBox.contains(e.target)) {
         contactBox.classList.add('availibleContactsClose');
         contactBox.classList.remove('availibleContactsOpen');
-         document.getElementById('placeholderptag').classList.remove('dont-Show');
-         document.getElementById('filterContactsNormal').classList.add('dont-Show');
+        document.getElementById('placeholderptag').classList.remove('dont-Show');
+        document.getElementById('filterContactsNormal').classList.add('dont-Show');
     }
 
-    
+
     if (!categoryTrigger.contains(e.target) && !categoryDrop.contains(e.target)) {
         categoryDrop.classList.add('dropTasktypeClose');
         document.getElementById('arrowImgNormal').classList.remove('select-arrow-open');
@@ -531,8 +569,8 @@ function setContactAndPrioValue(newTask) {
         names = img.dataset.set;
         newTask.assignedTo.push(names)
     })
-    
-    newTask.prio = prioArray[0] || '';       
+
+    newTask.prio = prioArray[0] || '';
 }
 
 
@@ -551,9 +589,9 @@ async function getTaskInformationNormal(index) {
     newTask.taskType = document.getElementById('selectedTaskNormal').innerText
     setContactAndPrioValue(newTask, index);
     getSubtaskFromTemplate();
-    createTemplate(); 
-    subtaskArray = newTask.subtasks; 
-    pushObject(subtaskvalue1, subtaskvalue2); 
+    createTemplate();
+    subtaskArray = newTask.subtasks;
+    pushObject(subtaskvalue1, subtaskvalue2);
     newTask.category = 'Todo';
     await postData("task", newTask);
     tasks = [];

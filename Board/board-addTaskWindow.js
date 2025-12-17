@@ -82,28 +82,57 @@ function closePopup() {
     clearTask();
 }
 
-/**create the HTML for the task and check form-Validation */
-function createTaskTemplate() {
-    if (!formValidationAddTaskTemp()) return;
-    showReportAddedTaskTemplate();
-}
 
 /**check value lenght of input-Fields */
 function constantCheck() {
-    setTimeout(() => {
-        const title = document.getElementById("title").value;
+    
+    const title = document.getElementById("title").value;
         const description = document.getElementById('task-description').value;
         const dueDate = document.getElementById("dueDate").value;
         const taskType = document.getElementById("selectedTask").innerText;
-        if (title !== "" && dueDate !== "" && description !== "" && taskType !== "Select Task Category") {
-        }
-    }, 500);
+            
 }
 
+function constantCheckTitle() {
+    console.log('validation läuft')
+    const title = document.getElementById("title").value;
+    if (title.length < 2)
+        return showUserFeedbackTitle(title);
+    document.getElementById('task-description').disabled = true, false;
+    document.getElementById("UserFeedbackTitle").innerHTML = "";
+    document.getElementById('task-description').disabled = false;
 
-// function makeDisabled() {
-//     document.getElementById('creatButtonID').disabled = true;
-// }
+    if (!validateTitleAddTaskNormal(title))
+        return showUserFeedbackTitleForm(title);
+    document.getElementById('task-description').disabled = true, false;
+    document.getElementById("UserFeedbackTitle").innerHTML = "";
+    document.getElementById('task-description').disabled = false;
+    
+}
+
+function constantCheckDate() {
+
+    const dueDate = document.getElementById("date-add-task").value;
+    if (dueDate !== "")
+        document.getElementById('creatButtonIDNormal').disabled = false;
+    if (!validateDateAddTaskNormal(dueDate))
+        return showUserFeedbackDueDate();
+    if (validateDateAddTaskNormal(dueDate))
+        clearUserFeedback = document.getElementById("UserFeedbackDate");
+    clearUserFeedback.innerHTML = '';
+
+}
+
+function validateTitleAddTaskNormal(title) {
+    const titleRegex = /^[A-Za-zÄÖÜäöüß\s]+$/;
+    return titleRegex.test(title.trim());
+}
+
+function validateDateAddTaskNormal(dueDate) {
+    const dateRegex = /^\d{2}\.\d{2}\.\d{4}$/;
+    return dateRegex.test(dueDate.trim());
+}
+
 
 /**validate values and decide if it is true or error feedback is neccesery */
 function createTaskTemplate() {
@@ -116,6 +145,7 @@ function createTaskTemplate() {
         document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`
     } else {
         getTaskInformation();
+        showReportAddedTaskTemplate();
     }
 }
 

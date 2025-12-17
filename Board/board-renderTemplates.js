@@ -12,7 +12,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
           <section class="input-section-leftPopup">
 
               <label>Title<span class="requiredStar">*</span></label>
-              <input oninput="constantCheck()" class="input-section-left-input" id="title" type="text" placeholder="Enter a title" />
+              <input oninput="constantCheckTitle()" class="input-section-left-input" id="title" type="text" placeholder="Enter a title" />
               <p id="UserFeedbackTitle" class="required"></p>
 
               <label>Description</label>
@@ -93,7 +93,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
             <button onclick="clearTask()" class="clear-btnPopup" type="reset">
               Clear<img src="/img/icons/x.svg" />
             </button>
-            <button id="creatButtonID" type="button" onclick="constantCheck(); createTaskTemplate(); " class="create-task-btnPopup">
+            <button id="creatButtonID" type="button" onclick="createTaskTemplate()" class="create-task-btnPopup">
               Create Task<img src="/img/icons/doneSymbol.svg" />
             </button>
           </div>

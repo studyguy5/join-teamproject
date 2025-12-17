@@ -336,7 +336,9 @@ function formValidationAddTask() {
 
 
 function commonConstantCheck(){
-    if(constantCheckTitle() && constantCheckDate()){}
+    if(!constantCheckTitle() && !constantCheckDate()){}else{
+        
+    }
 }
 
 /**

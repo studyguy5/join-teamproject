@@ -335,6 +335,10 @@ function formValidationAddTask() {
 }
 
 
+function commonConstantCheck(){
+    if(constantCheckTitle() && constantCheckDate()){}
+}
+
 /**
  * Continuously checks form inputs and enables the create button when valid.
  * @returns {void}

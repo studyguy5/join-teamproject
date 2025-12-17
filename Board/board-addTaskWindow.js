@@ -93,31 +93,31 @@ function constantCheck() {
             
 }
 
-function constantCheckTitle() {
+function constantCheckTitlePopup() {
     console.log('validation läuft')
     const title = document.getElementById("title").value;
     if (title.length < 2)
-        return showUserFeedbackTitle(title);
+        return showUserFeedbackTitlePopup(title);
     document.getElementById('task-description').disabled = true, false;
     document.getElementById("UserFeedbackTitle").innerHTML = "";
     document.getElementById('task-description').disabled = false;
 
     if (!validateTitleAddTaskNormal(title))
-        return showUserFeedbackTitleForm(title);
+        return showUserFeedbackTitleFormPopup(title);
     document.getElementById('task-description').disabled = true, false;
     document.getElementById("UserFeedbackTitle").innerHTML = "";
     document.getElementById('task-description').disabled = false;
     
 }
 
-function constantCheckDate() {
+function constantCheckDatePopup() {
 
-    const dueDate = document.getElementById("date-add-task").value;
+    const dueDate = document.getElementById("dueDate").value;
     if (dueDate !== "")
         document.getElementById('creatButtonIDNormal').disabled = false;
-    if (!validateDateAddTaskNormal(dueDate))
-        return showUserFeedbackDueDate();
-    if (validateDateAddTaskNormal(dueDate))
+    if (!validateDateAddTaskPopup(dueDate))
+        return showUserFeedbackDueDatePopup();
+    if (validateDateAddTaskPopup(dueDate))
         clearUserFeedback = document.getElementById("UserFeedbackDate");
     clearUserFeedback.innerHTML = '';
 
@@ -128,9 +128,24 @@ function validateTitleAddTaskNormal(title) {
     return titleRegex.test(title.trim());
 }
 
-function validateDateAddTaskNormal(dueDate) {
+function validateDateAddTaskPopup(dueDate) {
     const dateRegex = /^\d{2}\.\d{2}\.\d{4}$/;
     return dateRegex.test(dueDate.trim());
+}
+
+function showUserFeedbackTitlePopup() {
+    const titleUserFeedbackLength = document.getElementById("UserFeedbackTitle");
+    titleUserFeedbackLength.innerHTML = `title is too short`;
+}
+
+function showUserFeedbackTitleFormPopup() {
+    const titleUserFeedbackForm = document.getElementById("UserFeedbackTitle");
+    titleUserFeedbackForm.innerHTML = `form of Title is incorrect`
+}
+
+function showUserFeedbackDueDatePopup() {
+    const dateInput = document.getElementById("UserFeedbackDate");
+    dateInput.innerHTML = `form of DueDate is incorrect`;
 }
 
 

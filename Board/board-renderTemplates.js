@@ -12,14 +12,14 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
           <section class="input-section-leftPopup">
 
               <label>Title<span class="requiredStar">*</span></label>
-              <input oninput="constantCheckTitle()" class="input-section-left-input" id="title" type="text" placeholder="Enter a title" />
+              <input onchange="constantCheckTitlePopup()" class="input-section-left-input" id="title" type="text" placeholder="Enter a title" />
               <p id="UserFeedbackTitle" class="required"></p>
 
               <label>Description</label>
               <textarea oninput="constantCheck()" rows="5" id="task-description" placeholder="Enter a description"></textarea>
 
               <label>Due Date<span class="requiredStar">*</span></label>
-              <input oninput="constantCheck()" class="input-section-left-input date-input" id="dueDate" placeholder="dd/mm/yyyy">
+              <input onchange="constantCheckDatePopup()" class="input-section-left-input date-input" id="dueDate" placeholder="dd/mm/yyyy">
               <p id="UserFeedbackDate" class="required"></p>
             </section>
 

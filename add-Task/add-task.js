@@ -280,7 +280,7 @@ function chooseValueNormal() {
  * @returns {void}
  */
 function createTask() {
-    if (!formValidationAddTask()) return;
+    if (!commonConstantCheck()) return;
 
     const popup = document.getElementById("report");
     popup.classList.add("show");
@@ -320,26 +320,23 @@ options.forEach(opt => {
  * Validates required fields for task creation.
  * @returns {boolean} True if valid, otherwise false.
  */
-function formValidationAddTask() {
+function commonConstantCheck() {
     const title = document.getElementById("title-add-task").value;
     const dueDate = document.getElementById("date-add-task").value;
-    const category = document.getElementById("categoryValue").value;
+    const category = document.getElementById("selectedTaskNormal").value;
 
     if (title === "" || dueDate === "" || category === "") {
-        displayRequiredMessage();
-        return false;
+        commonUserFeedback();
     } else {
         getTaskInformationNormal();
-        return true;
     }
 }
 
-
-function commonConstantCheck(){
-    if(!constantCheckTitle() && !constantCheckDate()){}else{
-        
-    }
+function commonUserFeedback(){
+    document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
+    document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
 }
+
 
 /**
  * Continuously checks form inputs and enables the create button when valid.
@@ -432,14 +429,6 @@ function showUserFeedbackDueDate() {
 
     const dateInput = document.getElementById("UserFeedbackDate");
     dateInput.innerHTML = `form of DueDate is incorrect`;
-    const categoryInput = document.getElementById("categoryValue");
-
-}
-
-function displayRequiredMessage() {
-    const titleInput = document.getElementById("title-add-task");
-    const dateInput = document.getElementById("date-add-task");
-    const categoryDiv = document.getElementById("IdForTaskChoiseNormal");
     const categoryInput = document.getElementById("categoryValue");
 
 }

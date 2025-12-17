@@ -106,16 +106,16 @@ function constantCheck() {
 // }
 
 /**validate values and decide if it is true or error feedback is neccesery */
-function formValidationAddTaskTemp() {
+function createTaskTemplate() {
     const title = document.getElementById("title").value;
     const dueDate = document.getElementById("dueDate").value;
     const taskType = document.getElementById("selectedTask").innerText; // <-- hidden input
     if (title === "" || dueDate === "" || taskType === "Select Task Category") {
-        displayRequiredMessageTemp();
-        return false;
+        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
+        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
+        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`
     } else {
         getTaskInformation();
-        return true;
     }
 }
 

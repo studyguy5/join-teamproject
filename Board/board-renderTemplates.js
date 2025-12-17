@@ -13,14 +13,14 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
 
               <label>Title<span class="requiredStar">*</span></label>
               <input oninput="constantCheck()" class="input-section-left-input" id="title" type="text" placeholder="Enter a title" />
-              <p class="required d-none">This field is required</p>
+              <p id="UserFeedbackTitle" class="required"></p>
 
               <label>Description</label>
               <textarea oninput="constantCheck()" rows="5" id="task-description" placeholder="Enter a description"></textarea>
 
               <label>Due Date<span class="requiredStar">*</span></label>
               <input oninput="constantCheck()" class="input-section-left-input date-input" id="dueDate" placeholder="dd/mm/yyyy">
-              <p class="required d-none">This field is required</p>
+              <p id="UserFeedbackDate" class="required"></p>
             </section>
 
           <div class="line"></div>
@@ -58,7 +58,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
             <p id="selectedTask">Select Task Category</p>
               <img id="arrowImg" class="select-arrow-downT" src="/img/icons/select-arrow-down.svg">
             </div>
-            <p class="required d-none">This field is required</p>
+            <p id="UserFeedbackTaskType" class="required"></p>
               <div id="dropId" class="dropTasktypeClose dropTasktypeOpen" >
 
               <input  type="hidden" id="categoryValue" name="category" class="hidden-input"> 

@@ -184,10 +184,10 @@ function chooseContactNormal(index) {
     if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
         choContact.classList.remove('checkbox')
         choContact.classList.add('checked')
-        let count = document.querySelectorAll('.contactCircleNormalRender')
+        let count = document.querySelectorAll('.contactBox .checked')
         console.log(count);
-        if((count)+1 > 6){
-            document.getElementById('countInfo').innerHTML = `+ ${count.length - 6} Contacts`
+        if((count.length) > 6){
+            document.getElementById('countInfo').innerHTML = `+ ${(count.length) - 6} Contacts`
         }else{
         renderChoosenContactNormal(index);
         choContact.src = "/img/icons/normalCheckedContact.svg"}
@@ -209,6 +209,10 @@ function chooseFilteredContactNormal(filterContactIndex) {
     if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
         choContact.classList.remove('checkbox')
         choContact.classList.add('checked')
+        let countFilter = document.querySelectorAll('.contactBox .checked')
+        console.log(countFilter)
+        if((countFilter.length) > 6)
+          document.getElementById('countInfo').innerHTML = `+ ${(countFilter.length) - 6} Contacts`  
         renderFilteredChoosenContactNormal(filterContactIndex)
         choContact.src = "/img/icons/normalCheckedContact.svg"
     } else {

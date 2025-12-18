@@ -146,6 +146,10 @@
     
 }
 
+.countInfoPopup{
+    display:flex;
+}
+
 .taskOption:hover{
     background-color: rgb(194, 194, 194);
     border-radius: 7px;

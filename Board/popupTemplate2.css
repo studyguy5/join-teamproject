@@ -278,6 +278,17 @@
 .contactCirclePopupRender:nth-child(6) {
     background-color: rgb(255, 0, 0);
 }
+.contactCirclePopupRender:nth-child(7) {
+    background-color:rgba(195, 255, 43, 1);
+}
+
+.contactCirclePopupRender:nth-child(8) {
+    background-color:rgba(255, 187, 43, 1);
+}
+
+.contactCirclePopupRender:nth-child(9) {
+    background-color: rgb(255, 0, 0);
+}
 
 /* abschnitt für subtask optionen */
 .subtask-wrapper {

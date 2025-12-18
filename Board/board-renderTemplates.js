@@ -50,7 +50,9 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
             <div id="IdForContacts" class="availibleContactsClose">
               
             </div>
-            <div id="choosenContacts" class="choosenContacts"></div>
+            <div id="choosenContacts" class="choosenContacts">
+            <div id="countInfoPopup" class="countInfoPopup"></div>
+            </div>
 
             <label >Category<span class="requiredStar">*</span></label>
             <div id="IdForTaskChoise" class="section-right-select"  onclick="event.stopPropagation(); openTasktypeDropDown()">

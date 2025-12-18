@@ -148,6 +148,7 @@
 
 .countInfoPopup{
     display:flex;
+    width:150px;
 }
 
 .taskOption:hover{

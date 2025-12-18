@@ -28,7 +28,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById(idsecTrue).classList.add('active')
     }
     const buttons = document.querySelectorAll(".priority-section button");
-
+    let createdArray =  Array.from(buttons)
+    createdArray[1].classList.add('Medium')
 
     if (buttons) {
         buttons.forEach(button => {
@@ -114,7 +115,7 @@ function constantCheckDatePopup() {
 
     const dueDate = document.getElementById("dueDate").value;
     if (dueDate !== "")
-        document.getElementById('creatButtonIDNormal').disabled = false;
+        document.getElementById('creatButtonID').disabled = false;
     if (!validateDateAddTaskPopup(dueDate))
         return showUserFeedbackDueDatePopup();
     if (validateDateAddTaskPopup(dueDate))
@@ -154,10 +155,21 @@ function createTaskTemplate() {
     const title = document.getElementById("title").value;
     const dueDate = document.getElementById("dueDate").value;
     const taskType = document.getElementById("selectedTask").innerText; // <-- hidden input
-    if (title === "" || dueDate === "" || taskType === "Select Task Category") {
+    if (title === "" && dueDate === "") {
         document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
         document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
-        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`
+    }else if(dueDate === "" && taskType === 'Select Task Category'){
+        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
+        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
+    }else if(title === "" && taskType ==='Select Task Category'){
+        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
+        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
+    }else if(taskType === 'Select Task Category'){
+        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
+    }else if(title === ''){
+        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
+    }else if(dueDate === ''){
+        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
     } else {
         getTaskInformation();
         showReportAddedTaskTemplate();

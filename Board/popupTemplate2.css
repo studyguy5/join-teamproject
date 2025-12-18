@@ -167,6 +167,94 @@
     background-color: purple;
 }
 
+.contactBox:nth-child(15) .contactCirclePopup {
+    background-color: rgba(31, 215, 193, 1);
+}
+
+.contactBox:nth-child(16) .contactCirclePopup {
+    background-color: rgba(252, 113, 255, 1);
+}
+
+.contactBox:nth-child(17) .contactCirclePopup {
+    background-color: rgba(195, 255, 43, 1);
+}
+
+.contactBox:nth-child(18) .contactCirclePopup {
+    background-color: rgba(255, 187, 43, 1);
+}
+
+.contactBox:nth-child(19) .contactCirclePopup {
+    background-color: rgb(255, 0, 0);
+}
+
+.contactBox:nth-child(20) .contactCirclePopup {
+    background-color: greenyellow;
+}
+
+.contactBox:nth-child(21) .contactCirclePopup {
+    background-color: purple;
+}
+
+.contactBox:nth-child(22) .contactCirclePopup {
+    background-color: rgba(255, 187, 43, 1);
+}
+
+.contactBox:nth-child(23) .contactCirclePopup {
+    background-color: rgb(255, 0, 0);
+}
+
+.contactBox:nth-child(24) .contactCirclePopup {
+    background-color: rgba(110, 82, 255, 1);
+}
+
+.contactBox:nth-child(25) .contactCirclePopup {
+    background-color: rgba(31, 215, 193, 1);
+}
+
+.contactBox:nth-child(26) .contactCirclePopup {
+    background-color: rgba(252, 113, 255, 1);
+}
+
+.contactBox:nth-child(27) .contactCirclePopup {
+    background-color: rgba(195, 255, 43, 1);
+}
+
+.contactBox:nth-child(28) .contactCirclePopup {
+    background-color: rgba(255, 187, 43, 1);
+}
+
+.contactBox:nth-child(29) .contactCirclePopup {
+    background-color: rgb(255, 0, 0);
+}
+
+.contactBox:nth-child(30) .contactCirclePopup {
+    background-color: greenyellow;
+}
+
+.contactBox:nth-child(31) .contactCirclePopup {
+    background-color: rgba(31, 215, 193, 1);
+}
+
+.contactBox:nth-child(32) .contactCirclePopup {
+    background-color: rgba(252, 113, 255, 1);
+}
+
+.contactBox:nth-child(33) .contactCirclePopup {
+    background-color: rgba(195, 255, 43, 1);
+}
+
+.contactBox:nth-child(34) .contactCirclePopup {
+    background-color: rgba(255, 187, 43, 1);
+}
+
+.contactBox:nth-child(35) .contactCirclePopup {
+    background-color: rgb(255, 0, 0);
+}
+
+.contactBox:nth-child(36) .contactCirclePopup {
+    background-color: greenyellow;
+}
+
 .contactCirclePopupRender:first-child {
     background-color: rgba(110, 82, 255, 1);
 }

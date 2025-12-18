@@ -279,9 +279,7 @@ function chooseValueNormal() {
  * Shows a popup and redirects to the board page.
  * @returns {void}
  */
-function createTask() {
-    if (!commonConstantCheck()) return;
-
+function showSuccessMessage() {
     const popup = document.getElementById("report");
     popup.classList.add("show");
 
@@ -323,12 +321,26 @@ options.forEach(opt => {
 function commonConstantCheck() {
     const title = document.getElementById("title-add-task").value;
     const dueDate = document.getElementById("date-add-task").value;
-    const category = document.getElementById("selectedTaskNormal").value;
+    const taskType = document.getElementById("selectedTaskNormal").innerText;
 
-    if (title === "" || dueDate === "" || category === "") {
-        commonUserFeedback();
+    if (title === "" && dueDate === "") {
+        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
+        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
+    }else if(dueDate === "" && taskType === 'Select Task Category'){
+        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
+        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
+    }else if(title === "" && taskType ==='Select Task Category'){
+        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
+        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
+    }else if(taskType === 'Select Task Category'){
+        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
+    }else if(title === ''){
+        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
+    }else if(dueDate === ''){
+        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
     } else {
         getTaskInformationNormal();
+        showSuccessMessage();
     }
 }
 

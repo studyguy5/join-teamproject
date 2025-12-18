@@ -59,7 +59,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
               <img id="arrowImg" class="select-arrow-downT" src="/img/icons/select-arrow-down.svg">
             </div>
             <p id="UserFeedbackTaskType" class="required"></p>
-              <div id="dropId" class="dropTasktypeClose dropTasktypeOpen" >
+              <div id="dropId" class="dropTasktypeClose dropTasktypeOpenPopup" >
 
               <input  type="hidden" id="categoryValue" name="category" class="hidden-input"> 
                 

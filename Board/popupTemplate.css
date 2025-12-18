@@ -113,7 +113,7 @@
     padding: 0px;
 }
 
-.dropTasktypeOpen{
+.dropTasktypeOpenPopup{
     display:flex;
     flex-direction: column;
     justify-content: start;
@@ -126,7 +126,7 @@
     height: 105px;
     padding-top:8px;
     position:relative;
-    top: -8px;
+    top: -24px;
     background-color: white;
     opacity: 1;
 }

@@ -322,7 +322,11 @@ function commonConstantCheck() {
     const title = document.getElementById("title-add-task").value;
     const dueDate = document.getElementById("date-add-task").value;
     const taskType = document.getElementById("selectedTaskNormal").innerText;
-
+    if(title === "" && dueDate === "" && taskType === "Select Task Category"){
+        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
+        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
+        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
+    }
     if (title === "" && dueDate === "") {
         document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
         document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;

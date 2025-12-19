@@ -45,7 +45,7 @@
 @media (max-width: 1200px) {
 
     .addTaskPopupMain {
-        max-width: 970px;
+        max-width: 960px;
 
     }
 
@@ -53,6 +53,7 @@
         max-width: 970px;
         left: calc((185vw - 970px)/2);
         top: calc((50vh - 870px));
+        
     }
 
     .popup-header {
@@ -109,9 +110,10 @@
 
 @media(max-width: 1060px) {
     .add-task-popup.show {
-        max-width: 930px;
+        max-width: 970px;
         left: calc((210vw - 1116px)/2);
         top: calc((50vh - 870px));
+        width:100%;
     }
 
     .footerPopup {

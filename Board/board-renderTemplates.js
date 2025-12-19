@@ -60,14 +60,14 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
             <p id="selectedTask">Select Task Category</p>
               <img id="arrowImg" class="select-arrow-downT" src="/img/icons/select-arrow-down.svg">
             </div>
+            <div id="dropId" class="dropTasktypeClose dropTasktypeOpenPopup" >
+            
+            <input  type="hidden" id="categoryValue" name="category" class="hidden-input"> 
+            
+            <div onmousedown="chooseValue()" onclick="openTasktypeDropDown(); constantCheck()"  id="option" class="taskOption" data-value="Technical Task">Technical Task</div>
+            <div onmousedown="chooseValue()" onclick="openTasktypeDropDown(); constantCheck()"  id="option" class="taskOption" data-value="User Story">User Story</div>
+            </div>
             <p id="UserFeedbackTaskType" class="required"></p>
-              <div id="dropId" class="dropTasktypeClose dropTasktypeOpenPopup" >
-
-              <input  type="hidden" id="categoryValue" name="category" class="hidden-input"> 
-                
-                <div onmousedown="chooseValue()" onclick="openTasktypeDropDown(); constantCheck()"  id="option" class="taskOption" data-value="Technical Task">Technical Task</div>
-                <div onmousedown="chooseValue()" onclick="openTasktypeDropDown(); constantCheck()"  id="option" class="taskOption" data-value="User Story">User Story</div>
-              </div>
               
             
 

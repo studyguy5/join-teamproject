@@ -160,7 +160,12 @@ function showUserFeedbackDueDatePopup() {
 function createTaskTemplate() {
     const title = document.getElementById("title").value;
     const dueDate = document.getElementById("dueDate").value;
-    const taskType = document.getElementById("selectedTask").innerText; // <-- hidden input
+    const taskType = document.getElementById("selectedTask").innerText;
+    if(title === "" && dueDate === "" && taskType === "Select Task Category"){
+        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
+        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
+        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
+    }
     if (title === "" && dueDate === "") {
         document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
         document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
@@ -347,7 +352,7 @@ function chooseContact(index) {
         let countPopup = document.querySelectorAll('.contactBox .checked')
         console.log(countPopup);
         if((countPopup.length) > 6){
-            document.getElementById('countInfoPopup').innerHTML = `+ ${(countPopup.length) - 6} Contacts`;}
+            document.getElementById('countInfoPopup').innerHTML = `+ ${(countPopup.length) - 6} Contact(s)`;}
         else{renderChoosenContact(index);
         choContact.src = "/img/icons/normalCheckedContact.svg"}
     } else {
@@ -413,6 +418,7 @@ function chooseValue() {
     choise.forEach(b => b.addEventListener('click', () => {
         const choiseOfTask = b.dataset.value
         document.getElementById('selectedTask').innerHTML = choiseOfTask;
+        document.getElementById('UserFeedbackTaskType').innerHTML = "";
     }))
 }
 

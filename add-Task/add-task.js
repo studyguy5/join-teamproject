@@ -187,7 +187,7 @@ function chooseContactNormal(index) {
         let count = document.querySelectorAll('.contactBox .checked')
         console.log(count);
         if((count.length) > 6){
-            document.getElementById('countInfo').innerHTML = `+ ${(count.length) - 6} Contacts`
+            document.getElementById('countInfo').innerHTML = `+ ${(count.length) - 6} Contact(s)`
         }else{
         renderChoosenContactNormal(index);
         choContact.src = "/img/icons/normalCheckedContact.svg"}
@@ -270,6 +270,7 @@ function chooseValueNormal() {
     choise.forEach(b => b.addEventListener('click', () => {
         const choiseOfTask = b.dataset.value
         document.getElementById('selectedTaskNormal').innerHTML = choiseOfTask;
+        document.getElementById('UserFeedbackTaskType').innerHTML = "";
     }))
 }
 

@@ -48,7 +48,8 @@ function prioButtonactivate(id) {
     let thisprio = rightTask?.[1].prio;
     buttonsEdit.forEach((button) => {
         if (button.innerText === thisprio) {
-            button.classList.add(thisprio)}
+            button.classList.add(thisprio)
+        }
     })
     if (buttonsEdit) {
         buttonsEdit.forEach(button => {
@@ -89,43 +90,74 @@ function getCurrentValues(id) {
 
 
 function createTaskTemplateEdit(id) {
-    if (!formValidationAddTaskTempEdit(id)) return;
-    showReportAddedTaskTemplateEdit();
-}
-
-
-function formValidationAddTaskTempEdit(id) {
     const title = document.getElementById("titleEdit").value;
     const dueDate = document.getElementById("dueDateEdit").value;
-    if (title === "" || dueDate === "") {
-        displayRequiredMessageTempEdit();
-        return false;
+    if (title === "" && dueDate === "") {
+        document.getElementById("UserFeedbackTitleEditMode").innerHTML = `This Field is required`;
+        document.getElementById("UserFeedbackDateEditMode").innerHTML = `This Field is required`;
+    } else if (title === '') {
+        document.getElementById("UserFeedbackTitleEditMode").innerHTML = `This Field is required`;
+    } else if (dueDate === '') {
+        document.getElementById("UserFeedbackDateEditMode").innerHTML = `This Field is required`;
     } else {
+        showReportAddedTaskTemplateEdit();
         getTaskInformationEdit(id);
-        return true;
     }
 }
 
+function constantCheckTitleEdit() {
+    const titleEdit = document.getElementById("titleEdit").value;
+    console.log('validation works')
+    if (titleEdit.length < 2)
+        return showUserFeedbackTitleEdit(title),
+    document.getElementById('task-descriptionEdit').disabled = true, false;
+    document.getElementById("UserFeedbackTitleEditMode").innerHTML = "";
+    document.getElementById('task-descriptionEdit').disabled = false;
 
-function displayRequiredMessageTempEdit() {
-    const titleInput = document.getElementById("titleEdit");
-    const dateInput = document.getElementById("dueDateEdit");
-    const titleMessage = titleInput.nextElementSibling;
-    const dateMessage = dateInput.nextElementSibling;
-    if (titleInput.value === "") {
-        titleMessage.classList.remove("d-none");
-        titleInput.classList.add("input-error");
-    } else {
-        titleMessage.classList.add("d-none");
-        titleInput.classList.remove("input-error");
-    }
-    if (dateInput.value === "") {
-        dateMessage.classList.remove("d-none");
-        dateInput.classList.add("input-error");
-    } else {
-        dateMessage.classList.add("d-none");
-        dateInput.classList.remove("input-error");
-    }
+    if (!validateTitleEdit(titleEdit))
+        return showUserFeedbackTitleEditForm(title),
+    document.getElementById('task-descriptionEdit').disabled = true, false;
+    document.getElementById("UserFeedbackTitleEditMode").innerHTML = "";
+    document.getElementById('task-descriptionEdit').disabled = false;
+
+}
+
+function constantCheckDateEdit() {
+    const dueDateEdit = document.getElementById("dueDateEdit").value;
+    console.log('validation works')
+    if (!validateDateEdit(dueDateEdit))
+        return showUserFeedbackDueDateEdit();
+    if (validateDateAddTaskNormal(dueDateEdit))
+        document.getElementById('creatButtonIDEdit').disabled = false;
+    clearUserFeedback = document.getElementById("UserFeedbackDate");
+    clearUserFeedback.innerHTML = '';
+}
+
+function validateTitleEdit(title) {
+    const titleRegex = /^[A-Za-zÄÖÜäöüß\s]+$/;
+    return titleRegex.test(title.trim());
+}
+
+function validateDateEdit(dueDate) {
+    const dateRegex = /^\d{2}\.\d{2}\.\d{4}$/;
+    return dateRegex.test(dueDate.trim());
+}
+
+function showUserFeedbackTitleEdit() {
+    const titleUserFeedbackLength = document.getElementById("UserFeedbackTitleEditMode");
+    titleUserFeedbackLength.innerHTML = `title is too short`;
+}
+
+function showUserFeedbackTitleEditForm() {
+    const titleUserFeedbackForm = document.getElementById("UserFeedbackTitleEditMode");
+    titleUserFeedbackForm.innerHTML = `form of Title is incorrect`
+}
+
+function showUserFeedbackDueDateEdit() {
+    const dateInput = document.getElementById("UserFeedbackDateEditMode");
+    dateInput.innerHTML = `form of DueDate is incorrect`;
+    const categoryInput = document.getElementById("categoryValue");
+
 }
 
 
@@ -158,7 +190,7 @@ function setContactAndPrioValueEdit(taskToEdit) {
     checkedImg.forEach(img => {
         names = img.dataset.set;
         let id = img.id;
-            taskToEdit[1].cid.push(id);
+        taskToEdit[1].cid.push(id);
         taskToEdit[1].assignedTo.push(names)
     })
     taskToEdit[1].prio = prioArray[0];
@@ -211,7 +243,7 @@ async function getTaskInformationEdit(id) {
     for (let makeEmptyIndex = 0; makeEmptyIndex < existingFilledObjects.length; makeEmptyIndex++) {
         taskToEdit[1][existingFilledObjects[makeEmptyIndex]] = '';
     }
-   
+
     for (let valueIndex = 0; valueIndex < editInputId.length; valueIndex++) { //Arrays überarbeiten
         taskToEdit[1][existingObjects[valueIndex]] = document.getElementById(`${editInputId[valueIndex]}`).value
     };
@@ -247,8 +279,8 @@ async function filterAndShowTasksEdit() {
 
 /**opens the Contact view and switches from p-tag to input field */
 function openContactWithCounter() {
-        openContactViewEdit();  //open the div for contacts
-        showInputFilter();  // change from p-tag to input ready to write and search
+    openContactViewEdit();  //open the div for contacts
+    showInputFilter();  // change from p-tag to input ready to write and search
 }
 
 
@@ -321,8 +353,12 @@ function chooseFilteredContactEdit(id, filterContactIndex) {
     if (choContactFilter.classList.contains("checkboxEdit")) {
         choContactFilter.classList.remove('checkboxEdit')
         choContactFilter.classList.add('checkedEdit')
-        renderFilteredChoosenContact(id, filterContactIndex)
-        choContactFilter.src = "/img/icons/normalCheckedContact.svg"
+        let countEditFiltered = document.querySelectorAll('.contactBox .checked')
+        if ((countEditFiltered.length) > 6) {
+            document.getElementById('countInfo').innerHTML = `+ ${(countEditFiltered.length) - 6} Contact(s)`
+            renderFilteredChoosenContact(id, filterContactIndex)
+        }
+        else { choContactFilter.src = "/img/icons/normalCheckedContact.svg" }
     } else {
         choContactFilter.classList.add('checkboxEdit')
         choContactFilter.classList.remove('checkedEdit')
@@ -365,8 +401,12 @@ function chooseContactEdit(id, index) {
     if (choContact.classList.contains("checkboxEdit")) {
         choContact.classList.remove('checkboxEdit')
         choContact.classList.add('checkedEdit')
-        renderChoosenContactEdit(id, index);
-        choContact.src = "/img/icons/normalCheckedContact.svg"
+        let countEditNormal = document.querySelectorAll('.contactBox .checkedEdit')
+        if ((countEditNormal.length) > 6) {
+            document.getElementById('countInfo').innerHTML = `+ ${(countEditNormal.length) - 6} Contact(s)`
+            renderChoosenContactEdit(id, index);
+        }
+        else { choContact.src = "/img/icons/normalCheckedContact.svg" }
     } else {
         choContact.classList.add('checkboxEdit')
         choContact.classList.remove('checkedEdit')

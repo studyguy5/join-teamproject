@@ -124,8 +124,7 @@ function includePrivacyLinksWithoutUser() {
 function sectionCheckWhitoutUser() {
     if (window.location.pathname == '/privacy-policy/privacy-policy.html') {
         let activeL = document.getElementById('privacyWhitoutUser')
-        //     console.log(activeL);
-        activeL.classList.add('activeGlobal');
+              activeL.classList.add('activeGlobal');
     } else {
         document.getElementById('legalWhitoutUser').classList.add('activeGlobal')
     }
@@ -134,7 +133,6 @@ function sectionCheckWhitoutUser() {
 function sectionCheckWithUser() {
     if (window.location.pathname == '/privacy-policy/privacy-policy.html') {
         let active = document.getElementById('privacy-policy')
-        //     console.log(activeL);
         active.classList.add('activeGlobal');
     } else if(window.location.pathname == '/legal-Notice/legal-notice.html') {
         document.getElementById('legal-notice').classList.add('activeGlobal')

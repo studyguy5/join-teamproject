@@ -29,6 +29,19 @@
     overflow-x: hidden;
 }
 
+.requiredEdit {
+    color: #E60026;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-bottom: 0px;
+    font-weight: 400;
+    min-height:15px;
+    width:250px;
+    position: relative;
+    top:-23px;
+}
+
 .editViewHeader {
     width: 100%;
     max-width: 445px;
@@ -70,7 +83,7 @@
 .input-section-left-inputEditView {
     border: 1px solid #c8c8c8;
     padding: 12px 21px;
-    margin-bottom: 32px;
+    margin-bottom: 22px;
     font-size: 18px;
     border-radius: 10px;
 }
@@ -99,7 +112,7 @@
     background-size: 24px;
     padding-right: 30px;
     background-color: #ffffff;
-    margin-bottom: 40px;
+    margin-bottom: 2s0px;
 }
 
 .input-section-right-EditView {

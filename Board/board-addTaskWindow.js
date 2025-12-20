@@ -74,7 +74,7 @@ function addTask() {
     const popup = document.getElementById("add-task-popup");
     popup.classList.add("show");
     const buttons = document.querySelectorAll(".priority-section button");
-    let createdArray =  Array.from(buttons)
+    let createdArray = Array.from(buttons)
     createdArray[1].classList.add('Medium')
 }
 
@@ -83,8 +83,8 @@ function addTask() {
 function closePopup() {
     const popup = document.getElementById("add-task-popup");
     popup.classList.remove("show");
-     const buttons = document.querySelectorAll(".priority-section button");
-    let createdArray =  Array.from(buttons)
+    const buttons = document.querySelectorAll(".priority-section button");
+    let createdArray = Array.from(buttons)
     createdArray[1].classList.remove('Medium')
     clearTask();
 }
@@ -92,12 +92,12 @@ function closePopup() {
 
 /**check value lenght of input-Fields */
 function constantCheck() {
-    
+
     const title = document.getElementById("title").value;
-        const description = document.getElementById('task-description').value;
-        const dueDate = document.getElementById("dueDate").value;
-        const taskType = document.getElementById("selectedTask").innerText;
-            
+    const description = document.getElementById('task-description').value;
+    const dueDate = document.getElementById("dueDate").value;
+    const taskType = document.getElementById("selectedTask").innerText;
+
 }
 
 function constantCheckTitlePopup() {
@@ -114,7 +114,7 @@ function constantCheckTitlePopup() {
     document.getElementById('task-description').disabled = true, false;
     document.getElementById("UserFeedbackTitle").innerHTML = "";
     document.getElementById('task-description').disabled = false;
-    
+
 }
 
 function constantCheckDatePopup() {
@@ -161,7 +161,7 @@ function createTaskTemplate() {
     const title = document.getElementById("title").value;
     const dueDate = document.getElementById("dueDate").value;
     const taskType = document.getElementById("selectedTask").innerText;
-    if(title === "" && dueDate === "" && taskType === "Select Task Category"){
+    if (title === "" && dueDate === "" && taskType === "Select Task Category") {
         document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
         document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
         document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
@@ -169,17 +169,17 @@ function createTaskTemplate() {
     if (title === "" && dueDate === "") {
         document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
         document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
-    }else if(dueDate === "" && taskType === 'Select Task Category'){
+    } else if (dueDate === "" && taskType === 'Select Task Category') {
         document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
         document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
-    }else if(title === "" && taskType ==='Select Task Category'){
+    } else if (title === "" && taskType === 'Select Task Category') {
         document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
         document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
-    }else if(taskType === 'Select Task Category'){
+    } else if (taskType === 'Select Task Category') {
         document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
-    }else if(title === ''){
+    } else if (title === '') {
         document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
-    }else if(dueDate === ''){
+    } else if (dueDate === '') {
         document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
     } else {
         getTaskInformation();
@@ -187,37 +187,7 @@ function createTaskTemplate() {
     }
 }
 
-/**display the specific error message */
-// function displayRequiredMessageTemp() {
-//     const titleInput = document.getElementById("title");
-//     const dateInput = document.getElementById("dueDate");
-//     const categoryInput = document.getElementById("categoryValue");
-//     const categoryDiv = document.getElementById("IdForTaskChoise");
-//     const titleMessage = titleInput.nextElementSibling;
-//     const dateMessage = dateInput.nextElementSibling;
-//     const categoryMessage = categoryDiv.nextElementSibling;
-//     if (titleInput.value === "") {
-//         titleMessage.classList.remove("d-none");
-//         titleInput.classList.add("input-error");
-//     } else {
-//         titleMessage.classList.add("d-none");
-//         titleInput.classList.remove("input-error");
-//     }
-//     if (dateInput.value === "") {
-//         dateMessage.classList.remove("d-none");
-//         dateInput.classList.add("input-error");
-//     } else {
-//         dateMessage.classList.add("d-none");
-//         dateInput.classList.remove("input-error");
-//     }
-//     if (categoryInput.value === "") {
-//         categoryMessage.classList.remove("d-none");
-//         categoryDiv.classList.add("input-error");
-//     } else {
-//         categoryMessage.classList.add("d-none");
-//         categoryDiv.classList.remove("input-error");
-//     }
-// }
+
 
 /**show the User some feedback, that the Task has been created */
 function showReportAddedTaskTemplate() {
@@ -351,10 +321,13 @@ function chooseContact(index) {
         choContact.classList.add('checked')
         let countPopup = document.querySelectorAll('.contactBox .checked')
         console.log(countPopup);
-        if((countPopup.length) > 6){
-            document.getElementById('countInfoPopup').innerHTML = `+ ${(countPopup.length) - 6} Contact(s)`;}
-        else{renderChoosenContact(index);
-        choContact.src = "/img/icons/normalCheckedContact.svg"}
+        if ((countPopup.length) > 6) {
+            document.getElementById('countInfoPopup').innerHTML = `+ ${(countPopup.length) - 6} Contact(s)`;
+        }
+        else {
+            renderChoosenContact(index);
+            choContact.src = "/img/icons/normalCheckedContact.svg"
+        }
     } else {
         choContact.classList.add('checkbox')
         choContact.classList.remove('checked')
@@ -369,8 +342,15 @@ function chooseFilteredContact(filterContactIndex) {
     if (choContactF.src.includes("/img/icons/normalCheckContact.svg")) {
         choContactF.classList.remove('checkbox')
         choContactF.classList.add('checked')
-        renderFilteredChoosenContact(filterContactIndex)
-        choContactF.src = "/img/icons/normalCheckedContact.svg"
+        let countFilteredPopup = document.querySelectorAll('.contactBox .checked')
+        console.log(countFilteredPopup);
+        if ((countFilteredPopup.length) > 6) {
+            document.getElementById('countInfoPopup').innerHTML = `+ ${(countFilteredPopup.length) - 6} Contact(s)`;
+        }
+        else {
+            renderFilteredChoosenContactPopup(filterContactIndex)
+            choContactF.src = "/img/icons/normalCheckedContact.svg"
+        }
     } else {
         choContactF.classList.add('checkbox')
         choContactF.classList.remove('checked')
@@ -387,7 +367,7 @@ function renderChoosenContact(index) {
 }
 
 /**here we render the filtered choosen Contacts below the dropdown */
-function renderFilteredChoosenContact(filterContactIndex) {
+function renderFilteredChoosenContactPopup(filterContactIndex) {
     let listContact = document.getElementById('choosenContacts')
     listContact.innerHTML += `
     <div id="contactCirclePopupRender-${filterContactIndex}" class="contactCirclePopupRender">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>`

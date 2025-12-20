@@ -249,6 +249,5 @@ function getUserNameForAnimation(){
   localStorage.removeItem('signIn');
 }else{
   document.getElementById('greetingUser').style.display = "none";
-  console.log('works')
 }
 }

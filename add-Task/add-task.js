@@ -44,7 +44,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     showContacts();
     sectionCheck('add-task')
     const buttons = document.querySelectorAll(".priority-section button");
-    console.log(buttons);
     let createdArray =  Array.from(buttons)
     createdArray[1].classList.add('Medium')
     
@@ -185,7 +184,6 @@ function chooseContactNormal(index) {
         choContact.classList.remove('checkbox')
         choContact.classList.add('checked')
         let count = document.querySelectorAll('.contactBox .checked')
-        console.log(count);
         if((count.length) > 6){
             document.getElementById('countInfo').innerHTML = `+ ${(count.length) - 6} Contact(s)`
         }else{
@@ -210,11 +208,10 @@ function chooseFilteredContactNormal(filterContactIndex) {
         choContact.classList.remove('checkbox')
         choContact.classList.add('checked')
         let countFilter = document.querySelectorAll('.contactBox .checked')
-        console.log(countFilter)
-        if((countFilter.length) > 6)
-          document.getElementById('countInfo').innerHTML = `+ ${(countFilter.length) - 6} Contacts`  
-        renderFilteredChoosenContactNormal(filterContactIndex)
-        choContact.src = "/img/icons/normalCheckedContact.svg"
+        if((countFilter.length) > 6){
+          document.getElementById('countInfo').innerHTML = `+ ${(countFilter.length) - 6} Contact(s)`  
+    }else{renderFilteredChoosenContactNormal(filterContactIndex)
+        choContact.src = "/img/icons/normalCheckedContact.svg"}
     } else {
         choContact.classList.add('checkbox')
         choContact.classList.remove('checked')
@@ -360,7 +357,6 @@ function commonUserFeedback(){
  * @returns {void}
  */
 function constantCheckTitle() {
-    console.log('validation läuft')
     const title = document.getElementById("title-add-task").value;
     if (title.length < 2)
         return showUserFeedbackTitle(title);
@@ -379,7 +375,6 @@ function constantCheckTitle() {
 let attribute = true;
 
 function constantCheckDate() {
-
     const dueDate = document.getElementById("date-add-task").value;
     if (dueDate !== "")
         document.getElementById('creatButtonIDNormal').disabled = false;
@@ -411,17 +406,12 @@ let filteredContacts;
  */
 function filterContactsInNormal() {
     let r;
-
     let typedValue = document.getElementById('filterContactsNormal').value
-
     if (typedValue.length > 0) {
         let val = Object.values(contactsArray);
-
         r = val.slice(1)
         filteredContacts = r.filter(fn => { return fn.name.toLowerCase().includes(typedValue.toLowerCase()) })
-
         renderfilteredContactsInNormal(filteredContacts);
-
     } else if (typedValue.length < 1) {
         showContacts();
     }
@@ -443,7 +433,6 @@ function showUserFeedbackTitleForm() {
 }
 
 function showUserFeedbackDueDate() {
-
     const dateInput = document.getElementById("UserFeedbackDate");
     dateInput.innerHTML = `form of DueDate is incorrect`;
     const categoryInput = document.getElementById("categoryValue");

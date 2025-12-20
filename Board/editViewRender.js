@@ -15,15 +15,15 @@ function renderBigEditView(id) {
           <section class="input-section-leftEditView">
 
               <label>Title<span class="requiredStar">*</span></label>
-              <input oninput="constantCheck()" class="input-section-left-inputEditView" id="titleEdit" type="text" placeholder="Enter a title" />
-              <p class="required d-none">This field is required</p>
+              <input onchange="constantCheckTitleEdit()" class="input-section-left-inputEditView" id="titleEdit" type="text" placeholder="Enter a title" />
+              <p id="UserFeedbackTitleEditMode" class="requiredEdit"></p>
 
               <label>Description</label>
-              <textarea id="task-descriptionEdit" oninput="constantCheck()" rows="5" id="task-descriptionEdit" placeholder="Enter a description"></textarea>
+              <textarea id="task-descriptionEdit" oninput="constantCheck()" rows="5"  placeholder="Enter a description"></textarea>
 
               <label>Due Date<span class="requiredStar">*</span></label>
-              <input oninput="constantCheck()" class="input-section-left-inputEditView dateEditView" id="dueDateEdit" placeholder="dd/mm/yyyy">
-              <p class="required d-none">This field is required</p>
+              <input onchange="constantCheckDateEdit()" class="input-section-left-inputEditView dateEditView" id="dueDateEdit" placeholder="dd/mm/yyyy">
+              <p id="UserFeedbackDateEditMode" class="requiredEdit"></p>
             </section>
 
           
@@ -80,7 +80,7 @@ function renderBigEditView(id) {
 
 <div class="footerPopupEditView">
           <div class="footer-buttons-sectionEditView">
-            <button id="creatButtonID" type="button" onclick="createTaskTemplateEdit(${id})" class="ok-btn-edit-view">
+            <button id="creatButtonIDEdit" type="button" onclick="createTaskTemplateEdit(${id})" class="ok-btn-edit-view">
               Ok<img class="checkEditView" src="/img/icons/doneSymbol.svg" />
             </button>
           </div>

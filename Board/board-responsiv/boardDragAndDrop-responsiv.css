@@ -193,7 +193,7 @@
         display: grid;
         grid-template-columns: 1fr;
         box-sizing: border-box;
-        max-height: calc(100vh - 335.13px);
+        max-height: calc(74vh - 80.13px);
         height: 100%;
         padding: 8px 0px 0px 24px;
         gap: 0px;
@@ -344,7 +344,7 @@
         /* Headers + Content für 2 Spalten */
         box-sizing: border-box;
         /* min-height: 632px; */
-        max-height: calc(77vh - 90px);
+        max-height: calc(77vh - 160px);
         padding: 8px 0px 0px 24px;
         gap: 0px;
     }

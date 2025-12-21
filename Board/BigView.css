@@ -1,7 +1,7 @@
 .bigViewOfTask {
     z-index: 5;
     position: absolute;
-    top: calc((100vh - 868px)/2);
+    top: calc((100vh - 978px)/2);
     left: calc((50vw - 525px));
     max-width: 445px;
     width: 100%;
@@ -109,7 +109,9 @@
 
 .subTaskForBigView {
     display: block;
-    margin-bottom: 20px;
+    min-height:60px;
+    max-height:100px;
+    margin-bottom: 10px;
 }
 
 .subtaskImgDiv {

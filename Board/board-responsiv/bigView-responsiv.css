@@ -1,7 +1,51 @@
 @media(max-width:1135px) {
     .bigViewOfTask {
         right: 140px;
-        max-height: 810px;
+        max-height: 930px;
+    }
+}
+
+@media(max-width:1000px){
+    .bigViewOfTask {
+        top:calc((90vh - 1035px)/2);
+        left:calc((100vw - 525px)/2);
+    }
+
+    .titleBigView h2 {
+        font-size: 40px;
+    }
+
+    .subtaskBigView {
+        max-height:120px;
+    }
+
+    .dueDateBigView{
+        margin: 0px 0px 10px 0px;
+    }
+
+    .priorityBigView {
+        margin: 0px 0px 10px 0px;
+    }
+
+    .descriptionBigView p{
+        margin: 0px 0px 14px 0px;
+    }
+
+    .priorityBigView p {
+        margin: 15px 0px 15px 0px;
+    }
+
+    .assignedToBigView{
+        margin: 5px 0px 5px 0px;
+    }
+    
+    .contactCircleBigView{
+        width: 35px;
+        height:35px;
+    }
+
+    .singleContactBoxForBigView{
+        height:56px;
     }
 }
 
@@ -12,21 +56,28 @@
     }
 
     .titleBigView h2 {
-        font-size: 50px;
+        font-size: 30px;
     }
 
     .descriptionBigView p {
         font-size: 18px;
     }
+
+    .dueDateBigView p {
+        margin: 5px 0px 5px 0px;
+    }
 }
 
 @media(max-width:570px) {
     .bigViewOfTask {
-        right: 50px;
+        top:calc((100vh - 1050px)/2);
+        left:calc((100vw - 380px)/2);
         max-width: 320px;
+        max-height:650px;
         padding: 48px 32px;
+        overflow-y:scroll;
+        scrollbar-width: none;
     }
-
 
     .titleBigView h2 {
         font-size: 36px;
@@ -51,21 +102,21 @@
     }
 }
 
+@media(max-width:430px){
+    .bigViewOfTask {
+        top:calc((100vh - 905px)/2);
+    }
+}
+
 @media(max-width:428px) {
 
-    /* html,
-    body {
-        max-height: 926px;
-    }
-
-    .mainAria {
-        max-height: 926px;
-        min-height: calc(926px - 160px);
-    }
-
-    .main-Contentsize {
-        max-height: calc(926px - 80px - 80px);
-    } */
+     .bigViewOfTask {
+        top:calc((100vh - 650px)/2);
+        left:calc((100vw - 360px)/2);
+        padding: 25px 20px;
+        max-height:440px;
+        overflow-y:scroll;
+     }
 
      .descriptionBigView p {
         max-width:300px;
@@ -81,12 +132,6 @@
         font-size: 16px;
     }
 
-    .bigViewOfTask {
-        right: 10px;
-        top:-40px;
-        padding: 10px 20px
-    }
-
     .titleBigView{
         max-width:300px;
     }
@@ -100,7 +145,7 @@
         max-width:300px;
     }
     .descriptionBigView p {
-        font-size: 12px;
+        font-size: 16px;
     }
 
     .dueDateBigView {
@@ -109,6 +154,8 @@
 
     .bigViewHeadlineCloseArea {
         max-width:300px;
+        position:sticky;
+        top:0px;
     }
 
     .subtaskBigView{
@@ -120,7 +167,10 @@
     }
 
     .footerPopupEditView{
-        bottom:90px;
+        bottom:-26px;
+        z-index: 3;
+        display: flex;
+        align-items: center;;
     }
 
     .ok-btn-edit-view {
@@ -130,10 +180,11 @@
 
 @media(max-width:370px){
     .bigViewOfTask{
-        right:5px;
-        top:-55px;
+        top:calc((100vh - 646px)/2);
+        left:calc((100vw - 310px)/2);
         max-width:290px;
         padding:20px 10px;
+        max-height:445px;
     }
 
     .bigViewHeadlineCloseArea{

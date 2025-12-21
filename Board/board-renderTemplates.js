@@ -184,7 +184,7 @@ function renderBigViewHTML(elements, id) {
      <div id="contactsBV" class="contactsBV"></div>
      </div>
      
-     <div class="subtaskBigView"><p>${elements[1].subtasks != null ? `Subtasks` : ''}</p>
+     <div class="subtaskBigView"><p>${elements[1].subtasks != null ? `Subtasks` : 'No Subtasks yet'}</p>
      <div id="subTaskForBigView" class="subTaskForBigView"> 
      <div id="subtaskBigView1" class="subtaskImgDiv">  ${elements[1]?.subtasks?.[0] != null ? elements[1]?.subtasks?.[0].status === 'open' ?
       `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` :

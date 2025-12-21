@@ -454,7 +454,7 @@ function deleteRenderedContactEdit(index) {
     if (counted.length > 6) {
         counted.length - 1
         document.getElementById('countInfoEdit').innerHTML = `+ ${(counted.length) - 6} Contact(s)`
-    } else if (counted.length <= 6 && deleteOnetime) { document.getElementById('countInfoEdit').innerHTML = ""; deleteOnetime = false }
+    } else if (counted.length <= 6 && deleteOnetime && document.getElementById('countInfoEdit').innerHTML != "") { document.getElementById('countInfoEdit').innerHTML = ""; deleteOnetime = false }
     else {
         let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
         if (renderedContact) renderedContact.remove();

@@ -226,10 +226,10 @@ function renderHTMLForEditandDeleteButton(id) {
 
 /**renders the contacts in Edit-Mode */
 function renderContactsInEdit(id, contactsArray, index, onlyNumber) {
-  return `<div class="contactBox">
+  return `<div onclick="chooseContactEdit(${id}, ${index})" class="contactBox">
         <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
-        <img  id="checkboxImgEdit-${index}" onclick="chooseContactEdit(${id}, ${index})" 
+        <img  id="checkboxImgEdit-${index}"  
         class="${onlyNumber?.includes(index) ? 'checkedEdit' : 'checkboxEdit'}" data-set="${contactsArray[index].name}"
          src="/img/icons/normalCheckContact.svg">
         </div>`

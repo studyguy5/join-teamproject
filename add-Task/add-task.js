@@ -115,10 +115,10 @@ function showContacts() {
     let contacts = document.getElementById('IdForContactsNormal')
     contacts.innerHTML = "";
     for (let index = 1; index < contactsArray.length; index++) {
-        contacts.innerHTML += `<div class="contactBox">
+        contacts.innerHTML += `<div onclick="chooseContactNormal(${index})" class="contactBox">
         <div class="contactCircleNormal">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
-        <img  id="checkboxImg-${index}" onclick="chooseContactNormal(${index})" class="checkbox" data-set="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
+        <img  id="checkboxImg-${index}"  class="checkbox" data-set="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
         </div>`
     }
 }
@@ -261,7 +261,7 @@ function deleteRenderedContactNormal(index) {
     if (countedInNormal.length > 6) {
         countedInNormal.length - 1
         document.getElementById('countInfo').innerHTML = `+ ${(countedInNormal.length) - 6} Contact(s)`;
-    } else if (countedInNormal.length <= 6 && deleteONETime) {
+    } else if (countedInNormal.length <= 6 && deleteONETime && document.getElementById('countInfo').innerHTML != "") {
         document.getElementById('countInfo').innerHTML = ""; deleteONETime = false;
     } else {
         let renderedContact = document.getElementById(`contactCircleNormalRender-${index}`)

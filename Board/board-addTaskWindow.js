@@ -234,10 +234,10 @@ function showContacts() {
     let contacts = document.getElementById('IdForContacts')
     contacts.innerHTML = "";
     for (let index = 1; index < contactsArray.length; index++) {
-        contacts.innerHTML += `<div class="contactBox">
+        contacts.innerHTML += `<div onclick="chooseContact(${index})" class="contactBox">
         <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
-        <img  id="checkboxImg-${index}" onclick="chooseContact(${index})" class="checkbox" data-set="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
+        <img  id="checkboxImg-${index}"  class="checkbox" data-set="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
         </div>`
     }
 }
@@ -382,7 +382,7 @@ function deleteRenderedContact(index) {
     if (countedPopup.length > 6) {
         countedPopup.length - 1
         document.getElementById('countInfoPopup').innerHTML = `+ ${(countedPopup.length) - 6} Contact(s)`;
-    } else if (countedPopup.length <= 6 && deleteOneTime) { document.getElementById('countInfoPopup').innerHTML = ""; deleteOneTime = false }
+    } else if (countedPopup.length <= 6 && deleteOneTime && document.getElementById('countInfoPopup').innerHTML != "") { document.getElementById('countInfoPopup').innerHTML = ""; deleteOneTime = false }
     else {
         let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
         renderedContact.remove(`contactCirclePopupRender-${index}`)

@@ -110,13 +110,13 @@ function constantCheckTitleEdit() {
     console.log('validation works')
     if (titleEdit.length < 2)
         return showUserFeedbackTitleEdit(title),
-    document.getElementById('task-descriptionEdit').disabled = true, false;
+            document.getElementById('task-descriptionEdit').disabled = true, false;
     document.getElementById("UserFeedbackTitleEditMode").innerHTML = "";
     document.getElementById('task-descriptionEdit').disabled = false;
 
     if (!validateTitleEdit(titleEdit))
         return showUserFeedbackTitleEditForm(title),
-    document.getElementById('task-descriptionEdit').disabled = true, false;
+            document.getElementById('task-descriptionEdit').disabled = true, false;
     document.getElementById("UserFeedbackTitleEditMode").innerHTML = "";
     document.getElementById('task-descriptionEdit').disabled = false;
 
@@ -403,10 +403,12 @@ function chooseContactEdit(id, index) {
         choContact.classList.add('checkedEdit')
         let countEditNormal = document.querySelectorAll('.contactBox .checkedEdit')
         if ((countEditNormal.length) > 6) {
-            document.getElementById('countInfo').innerHTML = `+ ${(countEditNormal.length) - 6} Contact(s)`
+            deleteOnetime = true;
+            document.getElementById('countInfoEdit').innerHTML = `+ ${(countEditNormal.length) - 6} Contact(s)`
+        } else {
             renderChoosenContactEdit(id, index);
+            choContact.src = "/img/icons/normalCheckedContact.svg"
         }
-        else { choContact.src = "/img/icons/normalCheckedContact.svg" }
     } else {
         choContact.classList.add('checkboxEdit')
         choContact.classList.remove('checkedEdit')
@@ -445,11 +447,19 @@ function renderChoosenContactEdit(id, index) {
     }
 }
 
+let deleteOnetime = true;
 /**deletes a rendered Contact in Edit Mode */
 function deleteRenderedContactEdit(index) {
-    let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
-    if (renderedContact) renderedContact.remove();
-    renderedContact.innerHTML = '';
+    let counted = document.querySelectorAll('.contactBox .checkedEdit')
+    if (counted.length > 6) {
+        counted.length - 1
+        document.getElementById('countInfoEdit').innerHTML = `+ ${(counted.length) - 6} Contact(s)`
+    } else if (counted.length <= 6 && deleteOnetime) { document.getElementById('countInfoEdit').innerHTML = ""; deleteOnetime = false }
+    else {
+        let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
+        if (renderedContact) renderedContact.remove();
+        renderedContact.innerHTML = '';
+    }
 }
 
 /**deletes a filtered Contacts in Edit-Mode */

@@ -29,6 +29,10 @@
     overflow-x: hidden;
 }
 
+.countInfoEdit{
+    display: flex;
+}
+
 .requiredEdit {
     color: #E60026;
     font-size: 16px;
@@ -259,9 +263,12 @@
 }
 
 .choosenContactsEdit {
-    height: 30px;
+    height: 40px;
     width: 440px;
     display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .contactCirclePopup {

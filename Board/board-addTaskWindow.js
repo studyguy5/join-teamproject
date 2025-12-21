@@ -315,8 +315,9 @@ function openContactView() {
 
 /**here we check which Contacts have the checkbox img and change it into checked to make it visible */
 function chooseContact(index) {
+    console.log('wird aufgerufen')
     let choContact = document.getElementById(`checkboxImg-${index}`)
-    if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
+    if (choContact.classList.contains('checkbox')) {
         choContact.classList.remove('checkbox')
         choContact.classList.add('checked')
         let countPopup = document.querySelectorAll('.contactBox .checked')
@@ -339,12 +340,13 @@ function chooseContact(index) {
 /**her we make the choosen Contacts within the filtered Contacts visible */
 function chooseFilteredContact(filterContactIndex) {
     let choContactF = document.getElementById(`checkboxImg-${filterContactIndex}`)
-    if (choContactF.src.includes("/img/icons/normalCheckContact.svg")) {
+    if (choContactF.classList.contains('checkbox')) {
         choContactF.classList.remove('checkbox')
         choContactF.classList.add('checked')
         let countFilteredPopup = document.querySelectorAll('.contactBox .checked')
         console.log(countFilteredPopup);
         if ((countFilteredPopup.length) > 6) {
+            deleteOneTime = true;
             document.getElementById('countInfoPopup').innerHTML = `+ ${(countFilteredPopup.length) - 6} Contact(s)`;
         }
         else {
@@ -373,11 +375,19 @@ function renderFilteredChoosenContactPopup(filterContactIndex) {
     <div id="contactCirclePopupRender-${filterContactIndex}" class="contactCirclePopupRender">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>`
 }
 
+let deleteOneTime = true;
 /**here we can delete a choosen Contacts if we decide we want another contact */
 function deleteRenderedContact(index) {
-    let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
-    renderedContact.remove(`contactCirclePopupRender-${index}`)
-    renderedContact.innerHTML = '';
+    let countedPopup = document.querySelectorAll('.contactBox .checked')
+    if (countedPopup.length > 6) {
+        countedPopup.length - 1
+        document.getElementById('countInfoPopup').innerHTML = `+ ${(countedPopup.length) - 6} Contact(s)`;
+    } else if (countedPopup.length <= 6 && deleteOneTime) { document.getElementById('countInfoPopup').innerHTML = ""; deleteOneTime = false }
+    else {
+        let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
+        renderedContact.remove(`contactCirclePopupRender-${index}`)
+        renderedContact.innerHTML = '';
+    }
 }
 
 /**here the dropdown Menü for the taskType will be opened */

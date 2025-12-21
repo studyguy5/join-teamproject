@@ -53,7 +53,9 @@ function renderBigEditView(id) {
             <div id="IdForContactsEdit" class="availibleContactsCloseEdit">
               
             </div>
-            <div id="choosenContactsEdit" class="choosenContactsEdit"></div>
+            <div id="choosenContactsEdit" class="choosenContactsEdit">
+            <div id="countInfoEdit" class="countInfoEdit"></div>
+            </div>
 
             <p class="subtaskEdit">Subtask</p>
             <div class="subtask-wrapperEditView">

@@ -44,9 +44,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     showContacts();
     sectionCheck('add-task')
     const buttons = document.querySelectorAll(".priority-section button");
-    let createdArray =  Array.from(buttons)
+    let createdArray = Array.from(buttons)
     createdArray[1].classList.add('Medium')
-    
+
 
     /**
      * Adds the 'active' class to a section by ID.
@@ -180,15 +180,17 @@ function openContactViewNormal() {
  */
 function chooseContactNormal(index) {
     let choContact = document.getElementById(`checkboxImg-${index}`)
-    if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
+    if (choContact.classList.contains('checkbox')) {
         choContact.classList.remove('checkbox')
         choContact.classList.add('checked')
         let count = document.querySelectorAll('.contactBox .checked')
-        if((count.length) > 6){
+        if ((count.length) > 6) {
+            deleteONETime = true;
             document.getElementById('countInfo').innerHTML = `+ ${(count.length) - 6} Contact(s)`
-        }else{
-        renderChoosenContactNormal(index);
-        choContact.src = "/img/icons/normalCheckedContact.svg"}
+        } else {
+            renderChoosenContactNormal(index);
+            choContact.src = "/img/icons/normalCheckedContact.svg"
+        }
     } else {
         choContact.classList.add('checkbox')
         choContact.classList.remove('checked')
@@ -204,14 +206,17 @@ function chooseContactNormal(index) {
  */
 function chooseFilteredContactNormal(filterContactIndex) {
     let choContact = document.getElementById(`checkboxImg-${filterContactIndex}`)
-    if (choContact.src.includes("/img/icons/normalCheckContact.svg")) {
+    if (choContact.classList.contains('checkbox')) {
         choContact.classList.remove('checkbox')
         choContact.classList.add('checked')
         let countFilter = document.querySelectorAll('.contactBox .checked')
-        if((countFilter.length) > 6){
-          document.getElementById('countInfo').innerHTML = `+ ${(countFilter.length) - 6} Contact(s)`  
-    }else{renderFilteredChoosenContactNormal(filterContactIndex)
-        choContact.src = "/img/icons/normalCheckedContact.svg"}
+        if ((countFilter.length) > 6) {
+            deleteONETime = true;
+            document.getElementById('countInfo').innerHTML = `+ ${(countFilter.length) - 6} Contact(s)`
+        } else {
+            renderFilteredChoosenContactNormal(filterContactIndex)
+            choContact.src = "/img/icons/normalCheckedContact.svg"
+        }
     } else {
         choContact.classList.add('checkbox')
         choContact.classList.remove('checked')
@@ -246,15 +251,23 @@ function renderFilteredChoosenContactNormal(filterContactIndex) {
     `
 }
 
-
+let deleteONETime = true;
 /**
  * Removes a rendered chosen contact circle.
  * @param {number} index - Contact index.
  */
 function deleteRenderedContactNormal(index) {
-    let renderedContact = document.getElementById(`contactCircleNormalRender-${index}`)
-    renderedContact.remove(`contactCircleNormalRender-${index}`)
-    renderedContact.innerHTML = '';
+    let countedInNormal = document.querySelectorAll('.contactBox .checked')
+    if (countedInNormal.length > 6) {
+        countedInNormal.length - 1
+        document.getElementById('countInfo').innerHTML = `+ ${(countedInNormal.length) - 6} Contact(s)`;
+    } else if (countedInNormal.length <= 6 && deleteONETime) {
+        document.getElementById('countInfo').innerHTML = ""; deleteONETime = false;
+    } else {
+        let renderedContact = document.getElementById(`contactCircleNormalRender-${index}`)
+        renderedContact.remove(`contactCircleNormalRender-${index}`)
+        renderedContact.innerHTML = '';
+    }
 }
 
 
@@ -320,7 +333,7 @@ function commonConstantCheck() {
     const title = document.getElementById("title-add-task").value;
     const dueDate = document.getElementById("date-add-task").value;
     const taskType = document.getElementById("selectedTaskNormal").innerText;
-    if(title === "" && dueDate === "" && taskType === "Select Task Category"){
+    if (title === "" && dueDate === "" && taskType === "Select Task Category") {
         document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
         document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
         document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
@@ -328,17 +341,17 @@ function commonConstantCheck() {
     if (title === "" && dueDate === "") {
         document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
         document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
-    }else if(dueDate === "" && taskType === 'Select Task Category'){
+    } else if (dueDate === "" && taskType === 'Select Task Category') {
         document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
         document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
-    }else if(title === "" && taskType ==='Select Task Category'){
+    } else if (title === "" && taskType === 'Select Task Category') {
         document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
         document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
-    }else if(taskType === 'Select Task Category'){
+    } else if (taskType === 'Select Task Category') {
         document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
-    }else if(title === ''){
+    } else if (title === '') {
         document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
-    }else if(dueDate === ''){
+    } else if (dueDate === '') {
         document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
     } else {
         getTaskInformationNormal();
@@ -346,7 +359,7 @@ function commonConstantCheck() {
     }
 }
 
-function commonUserFeedback(){
+function commonUserFeedback() {
     document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
     document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
 }

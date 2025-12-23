@@ -167,8 +167,9 @@
 
     .add-task-popup.show {
         max-width: 560px;
+        height:850px;
         left: calc((255vw - 1116px)/2);
-        top: calc((50vh - 870px));
+        top: calc(50vh - 850px);
     }
 
     .popup-header {
@@ -238,14 +239,16 @@
 @media(max-width:550px) {
     .add-task-popup.show {
         max-width: 460px;
-        left: calc((310vw - 1116px)/2);
-        top: calc((50vh - 870px));
+        height:550px;
+        left: calc((100vw - 0px)/2);
+        top: calc((50vh - 550px));
     }
 }
 
 @media(max-width:520px) {
     .add-task-popup.show {
         max-width: 460px;
+        height:870px;
         left: calc((320vw - 1116px)/2);
         top: calc((50vh - 870px));
     }
@@ -258,6 +261,7 @@
 
     .add-task-popup.show {
         max-width: 400px;
+        height:870px;
         left: calc((345vw - 1116px)/2);
         top: calc((50vh - 870px));
     }
@@ -266,8 +270,9 @@
 @media(max-width:450px) {
     .add-task-popup.show {
         max-width: 400px;
+        height:750px;
         left: calc((355vw - 1116px)/2);
-        top: calc((50vh - 870px));
+        top: calc((50vh - 750px));
     }
 }
 
@@ -282,8 +287,9 @@
 
     .add-task-popup.show {
         max-width: 350px;
-        left: calc((297vw - 1116px)/2);
-        top: calc((100vh - 870px));
+        height:750px;
+        left: calc((100vw - 0px)/2);
+        top: calc((100vh - 1500px)/2);
 
     }
 
@@ -356,15 +362,89 @@
     }
 }
 
-@media(max-width:375px) {
+@media(min-width:415px) and (max-width:429px) {
+    .addTaskPopupMain {
+        max-width: 350px;
+        border-radius: unset;
+    }
+
+    .add-task-popup.show {
+        max-width: 350px;
+        height:725px;
+        left: calc((100vw - 0px)/2);
+        top: calc((50vh - 725px));
+    }
+}
+
+@media(min-width:412px) and (max-width:414px){
+    .add-task-popup.show {
+        max-width: 350px;
+        height:725px;
+        left: calc((100vw - 350px) / 2);
+        top: calc((100vh - 450px));
+    }
+
+    .addTaskPopupMain {
+        border-radius: unset;
+    }
+}
+
+@media(min-width:393px) and (max-width:411px) {
+    .addTaskPopupMain {
+        max-width: 350px;
+        border-radius: unset;
+    }
+
+    .add-task-popup.show {
+        max-width: 350px;
+        height:700px;
+        left: calc((100vw - 350px)/2);
+        top: calc((100vh - 200px)/2);
+
+    }
+}
+
+@media(min-width: 390px) and (max-width:392px) {
+    .addTaskPopupMain {
+        max-width: 350px;
+        border-radius: unset;
+    }
+
+    .add-task-popup.show {
+        max-width: 350px;
+        height:650px;
+        left: calc((100vw - 350px)/2);
+        top: calc((100vh - 20px)/2);
+
+    }
+}
+
+@media(min-width:376px) and (max-width:389px) {
     .addTaskPopupMain {
         max-width: 300px;
+        border-radius: unset;
     }
 
     .add-task-popup.show {
         max-width: 300px;
-        left: calc((330vw - 1116px)/2);
-        top: calc((100vh - 870px));
+        height:600px;
+        left: calc((100vw - 300px)/2);
+        top: calc((100vh - 60px)/2);
+
+    }
+}
+
+@media(max-width:375px) {
+    .addTaskPopupMain {
+        max-width: 300px;
+        border-radius: unset;
+    }
+
+    .add-task-popup.show {
+        max-width: 300px;
+        height:500px;
+        left: calc((100vw - 300px)/2);
+        top: calc((100vh - 60px)/2);
 
     }
 }
@@ -372,7 +452,23 @@
 @media(max-width:350px) {
     .add-task-popup.show {
         max-width: 300px;
+        height:480px;
         left: calc((355vw - 1116px)/2);
-        top: calc((100vh - 870px));
+        top: calc((100vh - 325px));
+    }
+}
+
+@media(min-width:343px) and (max-width:345px) {
+    .addTaskPopupMain {
+        max-width: 300px;
+        border-radius: unset;
+    }
+
+    .add-task-popup.show {
+        max-width: 300px;
+        height:650px;
+        left: calc((100vw - 280px)/2);
+        top: calc((100vh - 0px)/2);
+
     }
 }

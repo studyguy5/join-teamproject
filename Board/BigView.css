@@ -1,24 +1,40 @@
-.bigViewOfTask {
-    z-index: 5;
-    position: absolute;
-    top: calc((100vh - 978px)/2);
-    left: calc((50vw - 525px));
-    max-width: 445px;
+.bigViewContent {
+    z-index: 6;
+    position:static;
+    /* top: calc((100vh - 800px));
+    left: calc((100vw - 525px)); */
+    max-width: 545px;
     width: 100%;
-    /* max-height: 931px; */
-    max-height:max-content;
-    height: fit-content;
+    max-height: 931px;
+    height:100%;
+    /* transform: translate(-50%, -50%); */
     background: rgba(255, 255, 255, 1);
     border-radius: 30px;
     padding: 48px 40px;
     box-shadow: 0px 0px 3px 2px grey;
+
 }
 
-.contactsBV{
-    height:fit-content;
-    max-height:300px;
-    overflow-y:scroll;
+.bigViewOfTask {
+    position:fixed;
+    top: calc((100vh - 978px)/2);
+    left: calc((100vw - 323px)/2);
+    max-width: 545px;
+    width: 100%;
+    z-index: 5;
+    max-height: 931px;
+    height: 100%;
+    border-radius: 30px;
+    /* padding: 48px 40px; */
+    background-color: rgb(0, 0, 0, 0.5);
 }
+
+.contactsBV {
+    height: fit-content;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
 
 
 .bigViewHeadlineCloseArea {
@@ -27,15 +43,15 @@
     align-items: center;
     margin: 0px 0px 24px 0px;
     background-color: white;
-    height:60px;
+    height: 60px;
     /* padding-top:20px; */
 }
 
-.titleBigView{
-    max-width:fit-content;
+.titleBigView {
+    max-width: fit-content;
     max-height: 290px;
-    height:100%;
-    
+    height: fit-content;;
+
 }
 
 .titleBigView h2 {
@@ -47,7 +63,7 @@
     line-height: 120%;
     letter-spacing: 0%;
     /* min-width:300px; */
-    width:100%;
+    width: 100%;
 }
 
 .descriptionBigView p {
@@ -112,8 +128,8 @@
 
 .subTaskForBigView {
     display: block;
-    min-height:60px;
-    max-height:100px;
+    min-height: 60px;
+    max-height: 100px;
     margin-bottom: 10px;
 }
 

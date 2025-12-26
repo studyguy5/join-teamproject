@@ -1,4 +1,4 @@
-.bigViewOfTask {
+.bigViewContent {
     z-index: 4;
     position: absolute;
     top: 120px;
@@ -9,8 +9,8 @@
     height: fit-content;
     background: rgba(255, 255, 255, 1);
     border-radius: 30px;
-    padding: 48px 30px 48px 40px;
-}
+    /* padding: 48px 30px 48px 40px; */
+ }
 
 .editBigView {
     max-width: 455px;

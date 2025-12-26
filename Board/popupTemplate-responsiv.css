@@ -122,17 +122,31 @@
     }
 }
 
+@media(min-width:1024px) and (max-width:1025px) {
+    .add-task-popup.show {
+        max-width: 960px;
+        left: calc((100vw - 0px)/2);
+        top: calc((50vh - 870px));
+        box-sizing: border-box;
+        overflow-x:hidden;
+    }
+}
+
 @media (max-width: 1000px) {
 
     .addTaskPopupMain {
-        max-width: 770px;
-
+        max-width: 862px;
+        height:1150px;
+        margin:27.5px auto;
     }
 
     .add-task-popup.show {
-        max-width: 770px;
-        left: calc((220vw - 1116px)/2);
-        top: calc(50vh - 870px);
+        max-width: 912px;
+        height:calc(100vh - 163px);
+        left: calc((100vw - 0px)/2);
+        top: calc(50vh - 1203px);
+        border-radius: unset;
+        background-color: rgb(0, 0, 0, 0.5);
     }
 
     .input-containerPopup {
@@ -184,6 +198,56 @@
     }
 }
 
+@media(min-width:852px) and (max-width:859px) {
+    .addTaskPopupMain {
+        max-width: 823px;
+        height: 1080px;
+    }
+
+    .add-task-popup.show {
+        max-width: 853px;
+        height:1120px;
+        left: calc((100vw - 0px)/2);
+        top: calc((50vh - 1120px));
+        background-color: rgb(0, 0, 0, 0.5);
+        border-radius: unset;
+    }
+}
+
+@media(min-width:820px) and (max-width:821px) {
+    .add-task-popup.show {
+        max-width: 820px;
+        height:1019px;
+        left: calc((100vw - 0px)/2);
+        top: calc((50vh - 1018px));
+        background-color: rgb(0, 0, 0, 0.5);
+        border-radius: unset;
+    }
+
+    .addTaskPopupMain {
+        max-width: 560px;
+        height:810px;
+        margin: 104px auto;
+    }
+}
+
+@media(min-width:768px) and (max-width:770px) {
+    .add-task-popup.show {
+        max-width: 768px;
+        height:864px;
+        left: calc((100vw - 0px)/2);
+        top: calc((50vh - 864px));
+        background-color: rgb(0, 0, 0, 0.5);
+        border-radius: unset;
+    }
+
+    .addTaskPopupMain {
+        max-width: 560px;
+        height:820px;
+        margin: 22px auto;
+    }
+}
+
 @media(max-width:680px) {
     .add-task-popup.show {
         max-width: 560px;
@@ -199,7 +263,6 @@
 
     .add-task-popup.show {
         max-width: 460px;
-
         left: calc((295vw - 1116px)/2);
         top: calc((50vh - 870px));
 
@@ -238,10 +301,10 @@
 
 @media(max-width:550px) {
     .add-task-popup.show {
-        max-width: 460px;
-        height:550px;
+        max-width: 540px;
+        height:557px;
         left: calc((100vw - 0px)/2);
-        top: calc((50vh - 550px));
+        top: calc((50vh - 555px));
     }
 }
 
@@ -282,15 +345,18 @@
     }
 
     .addTaskPopupMain {
-        max-width: 350px;
+        max-width: 400px;
+        margin: 14px auto;
+        border-radius: 30px;
     }
 
     .add-task-popup.show {
-        max-width: 350px;
-        height:750px;
+        max-width: 430px;
+        height:772px;
         left: calc((100vw - 0px)/2);
-        top: calc((100vh - 1500px)/2);
-
+        top: calc((100vh - 1545px)/2);
+        background-color: rgb(0, 0, 0, 0.5);
+        border-radius: unset;
     }
 
     .footerPopup {
@@ -378,44 +444,52 @@
 
 @media(min-width:412px) and (max-width:414px){
     .add-task-popup.show {
-        max-width: 350px;
-        height:725px;
-        left: calc((100vw - 350px) / 2);
-        top: calc((100vh - 450px));
+        max-width: 415px;
+        height:755px;
+        left: calc((100vw - 413px) / 2);
+        top: calc((100vh - 458px));
+        background-color: rgb(0, 0, 0, 0.5);
+        border-radius: unset;
     }
 
     .addTaskPopupMain {
-        border-radius: unset;
+        border-radius: 30px;
+        max-width:400px;
+        height:700px;
+        margin: 14px auto;
     }
 }
 
-@media(min-width:393px) and (max-width:411px) {
+@media(min-width:392px) and (max-width:411px) {
     .addTaskPopupMain {
         max-width: 350px;
         border-radius: unset;
     }
 
     .add-task-popup.show {
-        max-width: 350px;
+        max-width: 390px;
         height:700px;
-        left: calc((100vw - 350px)/2);
+        left: calc((100vw - 390px)/2);
         top: calc((100vh - 200px)/2);
-
+        background-color: rgb(0, 0, 0, 0.5);
     }
 }
 
 @media(min-width: 390px) and (max-width:392px) {
     .addTaskPopupMain {
-        max-width: 350px;
-        border-radius: unset;
+        max-width: 360px;
+        height:670px;
+        border-radius: 30px;
+        margin:14px auto;
     }
 
     .add-task-popup.show {
-        max-width: 350px;
-        height:650px;
-        left: calc((100vw - 350px)/2);
-        top: calc((100vh - 20px)/2);
-
+        max-width: 390px;
+        height:685px;
+        left: calc((100vw - 390px)/2);
+        top: calc((100vh - 0px)/2);
+        background-color: rgb(0, 0, 0, 0.5);
+        border-radius:unset;
     }
 }
 
@@ -434,18 +508,39 @@
     }
 }
 
-@media(max-width:375px) {
+@media(min-width:374px) and (max-width:375px) {
     .addTaskPopupMain {
-        max-width: 300px;
-        border-radius: unset;
+        max-width: 330px;
+        height:590px;
+        margin: 14px auto;
+        border-radius: 30px;
     }
 
     .add-task-popup.show {
-        max-width: 300px;
-        height:500px;
-        left: calc((100vw - 300px)/2);
-        top: calc((100vh - 60px)/2);
+        max-width: 375px;
+        height:calc(100vh - 160px);
+        left: calc((100vw - 375px)/2);
+        top: calc((100vh - 0px)/2);
+        background-color: rgb(0, 0, 0, 0.5);
+        border-radius: unset;
+    }
+}
 
+@media(max-width:373px) {
+    .addTaskPopupMain {
+        max-width: 330px;
+        height:590px;
+        margin: 14px auto;
+        border-radius: 30px;
+    }
+
+    .add-task-popup.show {
+        max-width: 373px;
+        height:calc(100vh - 160px);
+        left: calc((100vw - 360px)/2);
+        top: calc((100vh - 0px)/2);
+        background-color: rgb(0, 0, 0, 0.5);
+        border-radius: unset;
     }
 }
 
@@ -461,13 +556,30 @@
 @media(min-width:343px) and (max-width:345px) {
     .addTaskPopupMain {
         max-width: 300px;
-        border-radius: unset;
+        border-radius: 30px;
+        height:680px;
+        margin: 21px auto;
     }
 
     .add-task-popup.show {
+        max-width: 344px;
+        height:722px;
+        left: calc((100vw - 344px)/2);
+        top: calc((100vh - 0px)/2);
+
+    }
+}
+
+@media(min-width:320px) and (max-width:342px) {
+    .addTaskPopupMain {
         max-width: 300px;
-        height:650px;
-        left: calc((100vw - 280px)/2);
+        border-radius: 30px;
+    }
+
+    .add-task-popup.show {
+        max-width: 320px;
+        height:497px;
+        left: calc((100vw - 320px)/2);
         top: calc((100vh - 0px)/2);
 
     }

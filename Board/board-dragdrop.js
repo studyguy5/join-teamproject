@@ -207,8 +207,11 @@ function bigViewOfTask(id) {
     } else {
         taskOption = 'türkisBigView';
     }
-    let connectionToTaskWindow = document.getElementById('bigViewOfTask')
-    connectionToTaskWindow.classList.remove('dont-Show')
+    // let connectionToTaskWindow = document.getElementById('bigViewContent')
+    // connectionToTaskWindow.classList.remove('dont-Show')
+    let connectionToTaskBackground = document.getElementById('bigViewOfTask')
+    connectionToTaskBackground.classList.remove('dont-Show')
+    let connectionToTaskWindow = document.getElementById('bigViewContent')
     connectionToTaskWindow.innerHTML = renderBigViewHTML(elements, id);
 }
 
@@ -284,7 +287,7 @@ async function deleteData(firebaseID) {
 
 /**renders the Edit View in the same div as the BigView */
 function activateEditModus(id) {
-    let edit = document.getElementById('bigViewOfTask')
+    let edit = document.getElementById('bigViewContent')
     edit.innerHTML = "";
     edit.innerHTML = renderBigEditView(id);
     getCurrentValues(id);

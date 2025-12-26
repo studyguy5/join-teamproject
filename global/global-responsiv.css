@@ -343,7 +343,7 @@
 
 @media(max-width: 428px) {
     nav {
-        top: calc(100vh - 80px);
+        top: calc(100vh - 79px);
     }
     
     .profile_help-aria img {

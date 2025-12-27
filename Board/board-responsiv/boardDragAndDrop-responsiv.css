@@ -1,3 +1,4 @@
+
 @media(max-width:1280px) {
     .DragAndDropTaskAria {
         gap: 26px;
@@ -5,7 +6,7 @@
         height: 100vh;
         max-height: calc(100vh - 352.13px);
     }
-
+    
     .Todo {
         width: 100%;
         max-width: 222px;
@@ -14,7 +15,7 @@
         overflow-y: scroll;
         scrollbar-width: none;
     }
-
+    
     .Inprogress {
         width: 100%;
         max-width: 222px;
@@ -23,7 +24,7 @@
         overflow-y: scroll;
         scrollbar-width: none;
     }
-
+    
     .AwaitFeedback {
         width: 100%;
         max-width: 222px;
@@ -32,7 +33,7 @@
         overflow-y: scroll;
         scrollbar-width: none;
     }
-
+    
     .Done {
         width: 100%;
         max-width: 222px;
@@ -41,7 +42,7 @@
         overflow-y: scroll;
         scrollbar-width: none;
     }
-
+    
     .TaskDiv {
         cursor: pointer;
         margin: 4px 4px 16px 4px;
@@ -51,11 +52,11 @@
         border-radius: 24px;
         box-shadow: 0px 0px 10px 3px rgb(0, 0, 0, 0.08);
     }
-
+    
     .back {
         width: 88px;
     }
-
+    
     .türkis {
         display: flex;
         justify-content: center;
@@ -69,18 +70,35 @@
         color: white;
         font-size: 12px;
     }
-
+    
     .MiniMenüButton {
         display: none;
     }
 }
+
+@media(min-width:1280px) and (max-width:1280px) and (min-height:800px) and (max-height:800px) {
+    .Todo{
+        height:100%;
+    }
+
+    .Inprogress {
+        height:100%;
+    }
+    .AwaitFeedback {
+        height:100%;
+    }
+    .Done {
+        height:100%;
+    }
+}
+
 
 @media(max-width:1180px) {
     .emptyCategory {
         font-size: 12px;
         margin: 16px 0px 26px 4px;
     }
-
+    
     .MiniMenüButton {
         display: none;
     }

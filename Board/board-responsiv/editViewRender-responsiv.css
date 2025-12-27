@@ -119,22 +119,22 @@
     }
 
     .input-section-left-inputEditView {
-        max-width: 230px;
+        max-width: 255px;
     }
 
     .input-section-leftEditView textarea {
         margin-bottom: 15px;
-        max-width: 230px;
+        max-width: 255px;
     }
 
     .dateEditView {
         margin-bottom: 20px;
-        max-width: 221px;
+        max-width: 246px;
     }
 
     .priority-sectionEdit {
         gap: 10px;
-        max-width: 274px;
+        max-width: 299px;
     }
 
     .priority-sectionEdit button {
@@ -143,11 +143,51 @@
     }
 
     .section-right-selectEditView {
-        max-width: 240px;
+        max-width: 299px;
     }
 
     .subtask-wrapperEditView {
         max-width: 240px;
+        align-items: baseline;
+    }
+}
+
+@media(max-width:340px) {
+    .editBigView {
+        height: 600px;
+        width: calc(95% + 10px);
+    }
+
+    .input-section-left-inputEditView {
+        max-width: 220px;
+    }
+
+    .input-section-leftEditView textarea {
+        margin-bottom: 15px;
+        max-width: 220px;
+    }
+
+    .dateEditView {
+        margin-bottom: 20px;
+        max-width: 211px;
+    }
+
+    .priority-sectionEdit {
+        gap: 8px;
+        max-width: 250px;
+    }
+
+    .priority-sectionEdit button {
+        max-width: 200px;
+        font-size: 14px;
+    }
+
+    .section-right-selectEditView {
+        max-width: 250px;
+    }
+
+    .subtask-wrapperEditView {
+        max-width: 200px;
         align-items: baseline;
     }
 }

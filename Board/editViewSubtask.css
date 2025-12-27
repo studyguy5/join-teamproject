@@ -1,7 +1,7 @@
 
 .inputPopupEditView {
-    width: 100%;
-    max-width: 411px;
+    width: 130%;
+    max-width: 360px;
     border-radius: 10px;
     border: 1px solid #c8c8c8;
     padding: 12px 16px;
@@ -111,4 +111,51 @@
 
 .edit-input:focus {
     border-bottom: 1px solid #29ABE2;
+}
+
+@media(min-width:371px) and (max-width:475px) {
+    .editBigView {
+        height: 512px;
+    }
+
+    .input-section-leftEditView {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 320px;
+        height: 376px;
+    }
+
+    .input-section-right-EditView {
+        max-width: 320px;
+        width: 110%;
+        font-size: 20px;
+    }
+
+    .inputPopupEditView{
+        max-width: 286px;
+    }
+}
+
+@media(max-width:400px){
+    .input-section-leftEditView {
+        width: 300px;
+        height: 376px;
+    }
+
+    .input-section-right-EditView {
+        max-width: 300px;
+        width: 110%;
+        font-size: 20px;
+    }
+
+    .inputPopupEditView{
+        max-width: 266px;
+    }
+}
+
+@media(max-width:370px){
+    .inputPopupEditView{
+        max-width: 240px;
+    }
 }

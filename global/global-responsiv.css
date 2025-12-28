@@ -385,9 +385,7 @@
         top: calc(100vh - 79px);
     }
     
-    .profile_help-aria img {
-        /* display: none; */
-    }
+    
     .privacy-legal-sectionNonUser {
         width: 255px;
         height: 68px;

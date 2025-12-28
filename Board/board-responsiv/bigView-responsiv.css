@@ -570,11 +570,11 @@
     }
 
     .bigViewHeadlineCloseArea {
-        max-width: 300px;
+        max-width: 330px;
         height: 60px;
         position: sticky;
         top: -10px;
-        padding-top: 20px;
+        /* padding-top: 20px; */
         background-color: white;
     }
 
@@ -829,8 +829,8 @@
     }
 
     .bigViewHeadlineCloseArea {
-        max-width: 290px;
-        padding: 20px 25px 0px 25px;
+        max-width: 330px;
+        /* padding: 20px 25px 0px 25px; */
         position:sticky;
         top:-10px;
         z-index: 3;

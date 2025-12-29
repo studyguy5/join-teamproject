@@ -37,7 +37,7 @@
     height: 870px;
     position: fixed;
     right: -10000px;
-    transform: translateY(-50%);
+    /* transform: translateY(-50%); */
     padding: 64px 65, 75px 64px 74px;
     border-radius: 30px;
     opacity: 0;

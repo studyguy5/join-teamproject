@@ -107,7 +107,6 @@ function createTaskTemplateEdit(id) {
 
 function constantCheckTitleEdit() {
     const titleEdit = document.getElementById("titleEdit").value;
-    console.log('validation works')
     if (titleEdit.length < 2)
         return showUserFeedbackTitleEdit(title),
             document.getElementById('task-descriptionEdit').disabled = true, false;
@@ -124,7 +123,6 @@ function constantCheckTitleEdit() {
 
 function constantCheckDateEdit() {
     const dueDateEdit = document.getElementById("dueDateEdit").value;
-    console.log('validation works')
     if (!validateDateEdit(dueDateEdit))
         return showUserFeedbackDueDateEdit();
     if (validateDateAddTaskNormal(dueDateEdit))

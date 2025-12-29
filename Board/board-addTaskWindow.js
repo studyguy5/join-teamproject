@@ -101,7 +101,6 @@ function constantCheck() {
 }
 
 function constantCheckTitlePopup() {
-    console.log('validation läuft')
     const title = document.getElementById("title").value;
     if (title.length < 2)
         return showUserFeedbackTitlePopup(title);
@@ -315,13 +314,11 @@ function openContactView() {
 
 /**here we check which Contacts have the checkbox img and change it into checked to make it visible */
 function chooseContact(index) {
-    console.log('wird aufgerufen')
     let choContact = document.getElementById(`checkboxImg-${index}`)
     if (choContact.classList.contains('checkbox')) {
         choContact.classList.remove('checkbox')
         choContact.classList.add('checked')
         let countPopup = document.querySelectorAll('.contactBox .checked')
-        console.log(countPopup);
         if ((countPopup.length) > 6) {
             document.getElementById('countInfoPopup').innerHTML = `+ ${(countPopup.length) - 6} Contact(s)`;
         }
@@ -344,7 +341,6 @@ function chooseFilteredContact(filterContactIndex) {
         choContactF.classList.remove('checkbox')
         choContactF.classList.add('checked')
         let countFilteredPopup = document.querySelectorAll('.contactBox .checked')
-        console.log(countFilteredPopup);
         if ((countFilteredPopup.length) > 6) {
             deleteOneTime = true;
             document.getElementById('countInfoPopup').innerHTML = `+ ${(countFilteredPopup.length) - 6} Contact(s)`;

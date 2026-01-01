@@ -1,7 +1,60 @@
+@media(min-width:2000px) and (max-width:3840px) {
+    .editBigView {
+    max-width: 455px;
+    width: 100%;
+    height: 885px;
+    padding: 64px, 75px 64px 74px;
+    overflow-y: unset;
+    scrollbar-width: none;
+    
+    overflow-x: hidden;
+}
+}
+
+
+@media(max-width:1024px) {
+    .editBigView {
+        height: 770px;
+    }
+}
+
+@media(max-width:1000px) {
+    .editBigView {
+        height: 720px;
+        width: 462px;
+    }
+
+    .editView-mainInput {
+        width: 352px;
+    }
+
+    .input-section-leftEditView {
+        width: 445px;
+        height: 376px;
+    }
+
+    .priority-sectionEdit {
+        width: 445px;
+    }
+
+    .section-right-selectEditView {
+        width: 411px;
+    }
+
+    .subtask-wrapperEditView {
+        width: 445px;
+    }
+
+    .availibleContactsOpenEdit {
+        width: 445px;
+        scrollbar-width: none;
+    }
+}
+
 @media(max-width:710px) {
     .editBigView {
         height: 590px;
-        overflow-y: scroll;
+        /* overflow-y: scroll; */
     }
 
     .input-section-left-inputEditView {
@@ -29,6 +82,9 @@
         align-items: baseline;
     }
 
+    .inputPopupEditView {
+        width: 385px;
+    }
 
 }
 
@@ -40,12 +96,12 @@
     }
 
     .input-section-left-inputEditView {
-        max-width: 350px;
+        max-width: 375px;
     }
 
     .input-section-leftEditView textarea {
         margin-bottom: 15px;
-        max-width: 350px;
+        max-width: 375px;
     }
 
     #task-descriptionEdit {
@@ -58,20 +114,52 @@
 
     .dateEditView {
         margin-bottom: 20px;
-        max-width: 340px;
+        max-width: 366px;
     }
 
     .priority-sectionEdit {
-        max-width: 394px;
+        max-width: 419px;
     }
 
     .section-right-selectEditView {
-        max-width: 360px;
+        max-width: 385px;
     }
 
     .subtask-wrapperEditView {
         max-width: 284px;
         align-items: baseline;
+    }
+}
+
+@media(min-width:540px) and (max-width:540px) and (min-height:720px) and (max-height:720px) {
+    .input-section-leftEditView {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 370px;
+        height: 376px;
+    }
+
+    .input-section-right-EditView {
+        max-width: 370px;
+        width: 110%;
+        font-size: 20px;
+    }
+
+    .inputPopupEditView {
+        max-width: 336px;
+    }
+
+    .priority-sectionEdit {
+        max-width: 370px;
+    }
+
+    .section-right-selectEditView {
+        max-width: 336px;
+    }
+
+    .availibleContactsOpenEdit {
+        width: 370px;
     }
 }
 
@@ -94,14 +182,108 @@
         font-size: 20px;
     }
 
-    .inputPopupEditView{
-        max-width: 280px;
+    .inputPopupEditView {
+        max-width: 286px;
+    }
+
+    .priority-sectionEdit {
+        max-width: 320px;
+    }
+
+    .section-right-selectEditView {
+        max-width: 286px;
+    }
+
+    .availibleContactsOpenEdit {
+        width: 320px;
+    }
+
+    #placeholderpTagEdit {
+        font-size: 17px;
+    }
+
+    .contactName {
+        font-size: 17px;
     }
 }
 
 @media(max-width:428px) {
     .editBigView {
         height: 660px;
+    }
+}
+
+@media(min-width:414px) and (max-width:414px) and (min-height:896px) and (max-height:896px) {
+    .input-section-leftEditView {
+        width: 330px;
+    }
+
+    .input-section-right-EditView {
+        max-width: 330px;
+    }
+
+    .priority-sectionEdit {
+        max-width: 330px;
+    }
+
+    .section-right-selectEditView {
+        max-width: 296px;
+    }
+
+    .inputPopupEditView {
+        max-width: 296px;
+    }
+
+    .availibleContactsOpenEdit {
+        width: 330px;
+    }
+
+    .contactName {
+        font-size: 17px;
+    }
+
+    #placeholderpTagEdit {
+        font-size: 17px;
+    }
+
+    .inputPopupEditView::placeholder {
+        font-size: 17px;
+    }
+
+}
+
+@media(max-width:400px) {
+    .input-section-leftEditView {
+        width: 300px;
+    }
+
+    .input-section-right-EditView {
+        max-width: 300px;
+    }
+
+    .priority-sectionEdit {
+        max-width: 300px;
+        gap: 10px;
+    }
+
+    .section-right-selectEditView {
+        max-width: 266px;
+    }
+
+    .inputPopupEditView {
+        max-width: 266px;
+    }
+
+    .availibleContactsOpenEdit {
+        width: 300px;
+    }
+
+    .contactName {
+        font-size: 17px;
+    }
+
+    #placeholderpTagEdit {
+        font-size: 17px;
     }
 }
 
@@ -143,12 +325,35 @@
     }
 
     .section-right-selectEditView {
-        max-width: 299px;
+        max-width: 265px;
     }
 
     .subtask-wrapperEditView {
         max-width: 240px;
         align-items: baseline;
+    }
+}
+
+@media(max-width:345px) {
+    .input-section-leftEditView {
+        width: 270px;
+    }
+
+    .priority-sectionEdit {
+        gap: 10px;
+        max-width: 270px;
+    }
+
+    .section-right-selectEditView {
+        max-width: 236px;
+    }
+
+    .inputPopupEditView {
+        max-width: 236px;
+    }
+
+    .availibleContactsOpenEdit {
+        width: 270px;
     }
 }
 
@@ -189,5 +394,32 @@
     .subtask-wrapperEditView {
         max-width: 200px;
         align-items: baseline;
+    }
+}
+
+@media(min-width:320px) and (max-width:320px) and (min-height:658px) and (max-height:658px) {
+    .section-right-selectEditView {
+        max-width: 230px;
+    }
+
+    .inputPopupEditView {
+        max-width: 230px;
+    }
+
+    .subtask-wrapperEditView {
+        max-width: 262px;
+        align-items: baseline;
+    }
+
+    .availibleContactsOpenEdit {
+        width: 264px;
+    }
+
+    #placeholderpTagEdit {
+        font-size: 17px;
+    }
+
+    .contactName {
+        font-size: 17px;
     }
 }

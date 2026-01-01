@@ -15,7 +15,7 @@
 .editBigView {
     max-width: 455px;
     width: 100%;
-    height: 800px;
+    height: 1080px;
     padding: 64px, 75px 64px 74px;
     /* border-radius: 10px; */
     opacity: 1;
@@ -24,7 +24,8 @@
     flex-direction: column;
     background: white;
     width: calc(100% + 10px);
-    overflow-y: scroll;
+    overflow-y: unset;
+    scrollbar-width: none;
     padding-right: 10px;
     overflow-x: hidden;
 }

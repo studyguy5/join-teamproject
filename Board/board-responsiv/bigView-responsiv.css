@@ -16,9 +16,9 @@
         max-width: 460px;
         background-color: white;
         border-radius: 30px;
-        height:920px;
-        max-height:920px;
-        overflow-y:scroll;
+        height:1020px;
+        max-height:unset;
+        overflow-y:hidden;
         scrollbar-width: none;
         /* margin: auto auto; */
     }
@@ -69,7 +69,7 @@
         background-color: white;
         border-radius: 30px;
         height:920px;
-        max-height:920px;
+        max-height:fit-content;
         overflow-y:scroll;
         scrollbar-width: none;
     }
@@ -94,7 +94,7 @@
         background-color: white;
         border-radius: 30px;
         height:855px;
-        max-height:855px;
+        max-height:fit-content;
         overflow-y:scroll;
         scrollbar-width: none;
     }
@@ -119,8 +119,8 @@
         max-width: 460px;
         background-color: white;
         border-radius: 30px;
-        height:855px;
-        max-height:855px;
+        height:900px;
+        max-height:fit-content;
         overflow-y:scroll;
         scrollbar-width: none;
     }
@@ -407,7 +407,7 @@
         background-color: white;
         border-radius: 30px;
         height:820px;
-        max-height:820px;
+        max-height:fit-content;
         overflow-y:scroll;
         margin: auto auto;
     }
@@ -446,7 +446,7 @@
         background-color: white;
         border-radius: 30px;
         height:820px;
-        max-height:820px;
+        max-height:fit-content;
         overflow-y:scroll;
         margin: 100.5px auto;
     }
@@ -541,7 +541,7 @@
         background-color: white;
         border-radius: 30px;
         height:810px;
-        max-height:810px;
+        max-height:fit-content;
         overflow-y:scroll;
         margin: 130px auto;
     }
@@ -808,7 +808,7 @@
         background-color: white;
         border-radius: 30px;
         height:810px;
-        max-height:810px;
+        max-height:fit-content;
         overflow-y:scroll;
         margin:130px auto;
     }

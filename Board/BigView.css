@@ -13,6 +13,10 @@
 
 }
 
+.flexClass{
+    display:flex;
+}
+
 .bigViewOfTask {
     position:fixed;
     top: calc((100vh - 978px)/2);

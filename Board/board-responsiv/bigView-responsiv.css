@@ -7,6 +7,8 @@
         height:100%;
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
+        justify-content: center;
+        align-items: center;
     }
 
     .bigViewContent {
@@ -18,7 +20,7 @@
         max-height:920px;
         overflow-y:scroll;
         scrollbar-width: none;
-        margin: 156px auto;
+        /* margin: auto auto; */
     }
 }
 
@@ -32,6 +34,8 @@
         height:100%;
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
+        justify-content: center;
+        align-items: center;
     }
 
     .bigViewContent {
@@ -43,7 +47,6 @@
         max-height:920px;
         overflow-y:scroll;
         scrollbar-width: none;
-        margin: 156px auto;
     }
 }
 
@@ -56,6 +59,8 @@
         height:100%;
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
+        justify-content: center;
+        align-items: center;
     }
 
     .bigViewContent {
@@ -67,7 +72,6 @@
         max-height:920px;
         overflow-y:scroll;
         scrollbar-width: none;
-        margin: 156px auto;
     }
 }
 
@@ -80,6 +84,8 @@
         height:100%;
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
+        justify-content: center;
+        align-items: center;
     }
 
     .bigViewContent {
@@ -87,11 +93,36 @@
         max-width: 460px;
         background-color: white;
         border-radius: 30px;
-        height:850px;
-        max-height:920px;
+        height:855px;
+        max-height:855px;
         overflow-y:scroll;
         scrollbar-width: none;
-        margin: 156px auto;
+    }
+
+}
+
+@media(min-width:1000px) and (max-width:1024px) {
+    .bigViewOfTask {
+        top: calc(0px);
+        left: calc(0px);
+        max-width: 100vw;
+        max-height: calc(100vh);
+        height:100%;
+        background-color: rgb(0, 0, 0, 0.5);
+        border-radius: unset;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bigViewContent {
+        padding: 10px 10px 10px 20px;
+        max-width: 460px;
+        background-color: white;
+        border-radius: 30px;
+        height:855px;
+        max-height:855px;
+        overflow-y:scroll;
+        scrollbar-width: none;
     }
 
 }
@@ -118,7 +149,6 @@
         max-height:520px;
         overflow-y:scroll;
         scrollbar-width: none;
-        margin: 46px auto;
     }
 
      .editeDeleteArea {
@@ -133,6 +163,31 @@
         position:sticky;
         top:-10px;
         z-index: 3;
+    }
+}
+
+@media(min-width:1024px) and (max-width:1024px) and (min-height:1366px) and (max-height:1366px){
+    .bigViewOfTask {
+        top: calc(0px);
+        left: calc(0px);
+        max-width: 100vw;
+        max-height: calc(100vh);
+        height:100%;
+        background-color: rgb(0, 0, 0, 0.5);
+        border-radius: unset;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bigViewContent {
+        padding: 10px 10px 10px 20px;
+        max-width: 460px;
+        background-color: white;
+        border-radius: 30px;
+        height:920px;
+        max-height:920px;
+        overflow-y:scroll;
+        scrollbar-width: none;
     }
 }
 
@@ -156,7 +211,6 @@
         max-height:620px;
         overflow-y:scroll;
         scrollbar-width: none;
-        margin: 96px auto;
     }
 
      .editeDeleteArea {
@@ -178,6 +232,8 @@
     .bigViewOfTask {
         top: calc(0px);
         left: calc(0px);
+        justify-content: center;
+        align-items: center;
     }
 
     .titleBigView h2 {
@@ -228,17 +284,19 @@
         height:100%;
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
+        justify-content: center;
+        align-items: center;
     }
 
     .bigViewContent {
         padding: 10px 10px 10px 20px;
-        max-width: 446px;
+        max-width: 460px;
         background-color: white;
         border-radius: 30px;
         height:fit-content;
-        max-height:880px;
+        max-height:855px;
+        height:100%;
         overflow-y:unset;
-        margin: 90px auto;
     }
 }
 
@@ -251,6 +309,8 @@
         height:100%;
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
+        justify-content: center;
+        align-items: center;
     }
 
     .bigViewContent {
@@ -283,8 +343,8 @@
         max-width: 445px;
         background-color: white;
         border-radius: 30px;
-        height:935px;
-        max-height:unset;
+        height:870px;
+        max-height:870px;
         overflow-y:scroll;
         margin: 33px auto;
     }
@@ -337,6 +397,8 @@
         height:100%;
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
+        justify-content: center;
+        align-items: center;
     }
 
     .bigViewContent {
@@ -344,10 +406,10 @@
         max-width: 420px;
         background-color: white;
         border-radius: 30px;
-        height:810px;
-        max-height:810px;
+        height:820px;
+        max-height:820px;
         overflow-y:scroll;
-        margin: 100.5px auto;
+        margin: auto auto;
     }
 
 
@@ -357,7 +419,7 @@
     }
 
     .descriptionBigView p {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .dueDateBigView p {
@@ -374,6 +436,8 @@
         height:100%;
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
+        justify-content: center;
+        align-items: center;
     }
 
     .bigViewContent {
@@ -381,14 +445,14 @@
         max-width: 420px;
         background-color: white;
         border-radius: 30px;
-        height:810px;
-        max-height:810px;
+        height:820px;
+        max-height:820px;
         overflow-y:scroll;
         margin: 100.5px auto;
     }
 
     .titleBigView h2 {
-        font-size: 36px;
+        font-size: 30px;
     }
 
     .descriptionBigView p {
@@ -404,6 +468,12 @@
     }
 }
 
+@media(min-width:429px) and (max-width:541px){
+    .dueDateBigView p {
+        font-size: 17px;
+    }
+}
+
 @media(min-width:540px) and (max-width:540px) and (min-height:720px) and (max-height:721px) {
     
     .bigViewOfTask {
@@ -414,6 +484,8 @@
         height:100%;
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
+        justify-content: center;
+        align-items: center;
     }
 
     .bigViewContent {
@@ -459,6 +531,8 @@
         height:100%;
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
+        justify-content: center;
+        align-items: center;
     }
 
     .bigViewContent {
@@ -466,8 +540,8 @@
         max-width: 330px;
         background-color: white;
         border-radius: 30px;
-        height:650px;
-        max-height:650px;
+        height:810px;
+        max-height:810px;
         overflow-y:scroll;
         margin: 130px auto;
     }
@@ -521,6 +595,8 @@
         height:100%;
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
+        justify-content: center;
+        align-items: center;
     }
 
     .bigViewContent {
@@ -528,8 +604,8 @@
         max-width: 330px;
         background-color: white;
         border-radius: 30px;
-        height:650px;
-        max-height:650px;
+        height:810px;
+        max-height:810px;
         overflow-y:scroll;
         margin: 130px auto;
     }
@@ -553,7 +629,7 @@
     }
 
     .titleBigView h2 {
-        font-size: 32px;
+        font-size: 30px;
         max-width: 300px;
     }
 
@@ -567,6 +643,10 @@
 
     .dueDateBigView {
         max-width: 300px;
+    }
+
+    .dueDateBigView p{
+        font-size: 17px;
     }
 
     .bigViewHeadlineCloseArea {
@@ -616,6 +696,10 @@
         position:sticky;
         top:-10px;
         z-index: 3;
+    }
+
+    .dueDateBigView p {
+        font-size: 17px;
     }
 }
 
@@ -714,6 +798,8 @@
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
         box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
     }
     
     .bigViewContent {
@@ -721,8 +807,8 @@
         max-width: 310px;
         background-color: white;
         border-radius: 30px;
-        height:650px;
-        max-height:750px;
+        height:810px;
+        max-height:810px;
         overflow-y:scroll;
         margin:130px auto;
     }
@@ -815,6 +901,8 @@
         height:100%;
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
+        justify-content: center;
+        align-items: center;
     }
     
     .bigViewContent {
@@ -929,13 +1017,15 @@
 @media(min-width:360px) and (max-width:361px) and (min-height:780px) and (max-height:781px) {
     
     .bigViewOfTask {
-        top: calc(80px);
+        top: calc(81px);
         left: calc(0px);
         max-width: 100vw;
-        max-height: calc(100vh);
+        max-height: calc(100vh - 160px);
         height:100%;
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
+        justify-content: center;
+        /* align-items: unset; */
     }
 
     .bigViewContent {
@@ -946,7 +1036,7 @@
         height:515px;
         max-height:515px;
         overflow-y:scroll;
-        margin: 30.5px auto;
+        /* margin: auto auto; */
     }
 
 }
@@ -961,11 +1051,13 @@
         height:100%;
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
+        justify-content: center;
+        align-items: center;
     }
     
     .bigViewContent {
         padding: 10px 10px 10px 20px;
-        max-width: 290px;
+        max-width: 280px;
         background-color: white;
         border-radius: 30px;
         height:750px;
@@ -978,13 +1070,15 @@
 
 @media(min-width:344px) and (max-width:345px) and (min-height:882px) and (max-height:882px) {
     .bigViewOfTask {
-        top: calc(80px);
+        top: calc(81px);
         left: calc(0px);
         max-width: 100vw;
-        max-height: calc(100vh);
+        max-height: calc(100vh - 160px);
         height:100%;
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
+        justify-content: center;
+        align-items: center;
     }
 
     .bigViewContent {
@@ -992,15 +1086,14 @@
         max-width: 290px;
         background-color: white;
         border-radius: 30px;
-        height:750px;
+        height:650px;
         max-height:750px;
         overflow-y:scroll;
-        margin: 30px auto;
+        /* margin: auto auto; */
     }
 
 }
-
-@media(max-width:335px) {
+@media(max-width:343px) {
     .bigViewOfTask {
         top: calc(0px);
         left: calc(0px);
@@ -1009,6 +1102,8 @@
         height:100%;
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
+        justify-content: center;
+        align-items: center;
     }
     
     .bigViewContent {
@@ -1023,7 +1118,7 @@
     }
 }
 
-@media(max-width:343px) {
+@media(max-width:335px) {
     .bigViewOfTask {
         top: calc(0px);
         left: calc(0px);
@@ -1032,11 +1127,13 @@
         height:100%;
         background-color: rgb(0, 0, 0, 0.5);
         border-radius: unset;
+        justify-content: center;
+        align-items: center;
     }
     
     .bigViewContent {
         padding: 10px 10px 10px 20px;
-        max-width: 290px;
+        max-width: 280px;
         background-color: white;
         border-radius: 30px;
         height:750px;
@@ -1045,6 +1142,7 @@
         margin:130px auto;
     }
 }
+
 
 @media(max-width:330px) and (max-height:658px) {
     .bigViewOfTask {

@@ -1018,8 +1018,8 @@
     .addTaskPopupMain {
         border-radius: 30px;
         max-width: 370px;
-        height: 700px;
-        margin: 14px auto;
+        height: 1018px;
+        margin: auto auto;
     }
 }
 
@@ -1154,7 +1154,7 @@
     }
 
     .addTaskPopupMain {
-        max-width: 358px;
+        max-width: 330px;
         margin:auto auto;
     }
 }

@@ -211,6 +211,7 @@ function bigViewOfTask(id) {
     // connectionToTaskWindow.classList.remove('dont-Show')
     let connectionToTaskBackground = document.getElementById('bigViewOfTask')
     connectionToTaskBackground.classList.remove('dont-Show')
+    connectionToTaskBackground.classList.add('flexClass')
     let connectionToTaskWindow = document.getElementById('bigViewContent')
     connectionToTaskWindow.innerHTML = renderBigViewHTML(elements, id);
 }
@@ -346,6 +347,7 @@ function renderContact(element) {
 async function closeBigView() {
     let closefeature = document.getElementById('bigViewOfTask')
     closefeature.classList.add('dont-Show')
+    closefeature.classList.remove('flexClass')
     tasks = [];
     tasks.push(...Object.entries(await getData('task')));
     filterAndShowTasks();

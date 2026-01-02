@@ -131,12 +131,17 @@ function constantCheckDatePopup() {
 
 function validateTitleAddTaskNormal(title) {
     const titleRegex = /^[A-Za-zÄÖÜäöüß\s]+$/;
+    
     return titleRegex.test(title.trim());
 }
 
 function validateDateAddTaskPopup(dueDate) {
-    const dateRegex = /^\d{2}\.\d{2}\.\d{4}$/;
-    return dateRegex.test(dueDate.trim());
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    console.log('real string', JSON.stringify(dueDate));
+    console.log(dueDate.length);
+    let raw = dueDate.value.trim();
+    console.log('Regex test:', /^\d{4}-\d{2}-\d{2}$/.test(raw));
+    return dateRegex.test(dueDate.trim()), console.log(dueDate);
 }
 
 function showUserFeedbackTitlePopup() {

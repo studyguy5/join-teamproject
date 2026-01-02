@@ -16,6 +16,17 @@
     font-size: 20px;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position:absolute;
+  top:0px;
+  right:0px;
+  width: 100% !important; 
+  height: 100% !important;             
+  cursor: pointer;
+}
+
+
 .input-section-left-input{
     max-width:440px;
     border-radius: 7px;

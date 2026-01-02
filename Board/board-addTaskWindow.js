@@ -136,13 +136,14 @@ function validateTitleAddTaskNormal(title) {
 }
 
 function validateDateAddTaskPopup(dueDate) {
-    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-    console.log('real string', JSON.stringify(dueDate));
-    console.log(dueDate.length);
-    let raw = dueDate.trim();
-    console.log('Regex test:', /^\d{4}-\d{2}-\d{2}$/.test(raw));
-    return dateRegex.test(dueDate.trim()), console.log(dueDate);
+    let dateOb = new Date(dueDate);
+    return isDateValid(dateOb);
 }
+
+function isDateValid(dateOb) {
+  return !isNaN(new Date(dateOb));
+}
+
 
 function showUserFeedbackTitlePopup() {
     const titleUserFeedbackLength = document.getElementById("UserFeedbackTitle");

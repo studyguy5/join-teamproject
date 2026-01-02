@@ -405,9 +405,14 @@ function validateTitleAddTaskNormal(title) {
 }
 
 function validateDateAddTaskNormal(dueDate) {
-    const dateRegex = /^\d{2}\.\d{2}\.\d{4}$/;
-    return dateRegex.test(dueDate.trim());
+     let dateOb = new Date(dueDate);
+    return isDateValid(dateOb);
 }
+
+function isDateValid(dateOb) {
+  return !isNaN(new Date(dateOb));
+}
+
 
 
 /** @type {any[]} */

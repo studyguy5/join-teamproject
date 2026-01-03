@@ -125,7 +125,7 @@ function constantCheckDateEdit() {
     const dueDateEdit = document.getElementById("dueDateEdit").value;
     if (!validateDateEdit(dueDateEdit))
         return showUserFeedbackDueDateEdit();
-    if (validateDateAddTaskNormal(dueDateEdit))
+    if (validateDateEdit(dueDateEdit))
         document.getElementById('creatButtonIDEdit').disabled = false;
     clearUserFeedback = document.getElementById("UserFeedbackDate");
     clearUserFeedback.innerHTML = '';
@@ -136,9 +136,14 @@ function validateTitleEdit(title) {
     return titleRegex.test(title.trim());
 }
 
+
 function validateDateEdit(dueDate) {
-    const dateRegex = /^\d{2}\.\d{2}\.\d{4}$/;
-    return dateRegex.test(dueDate.trim());
+    let dateOb = new Date(dueDate);
+    return isDateValid(dateOb);
+}
+
+function isDateValid(dateOb) {
+  return !isNaN(new Date(dateOb));
 }
 
 function showUserFeedbackTitleEdit() {

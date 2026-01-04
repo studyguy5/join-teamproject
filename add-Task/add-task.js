@@ -389,13 +389,20 @@ let attribute = true;
 
 function constantCheckDate() {
     const dueDate = document.getElementById("date-add-task").value;
-    if (dueDate !== "")
-        document.getElementById('creatButtonIDNormal').disabled = false;
-    if (!validateDateAddTaskNormal(dueDate))
+    let current = new Date();
+    let dateOb = new Date(dueDate);
+    if (dateOb < current) {
+        const dateField = document.getElementById("UserFeedbackDate");
+        dateField.innerHTML = `Date is in the past`;
+    }
+    else if (!validateDateAddTaskNormal(dueDate)) {
         return showUserFeedbackDueDate();
-    if (validateDateAddTaskNormal(dueDate))
+    }
+    else if (validateDateAddTaskNormal(dueDate)) {
+        document.getElementById('creatButtonIDNormal').disabled = false;
         clearUserFeedback = document.getElementById("UserFeedbackDate");
-    clearUserFeedback.innerHTML = '';
+        clearUserFeedback.innerHTML = '';
+    }
 
 }
 
@@ -405,12 +412,12 @@ function validateTitleAddTaskNormal(title) {
 }
 
 function validateDateAddTaskNormal(dueDate) {
-     let dateOb = new Date(dueDate);
+    let dateOb = new Date(dueDate);
     return isDateValid(dateOb);
 }
 
 function isDateValid(dateOb) {
-  return !isNaN(new Date(dateOb));
+    return !isNaN(new Date(dateOb));
 }
 
 

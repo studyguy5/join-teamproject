@@ -166,14 +166,18 @@ function closeMiniMenü(id){
 
 /**renders the html for the BigView */
 function renderBigViewHTML(elements, id) {
+  let newD = new Date(elements[1]['DueDate']);
+  formatedDate = newD.toLocaleDateString('de-DE');
+  console.log(formatedDate);
   return `
-    <div class="bigViewHeadlineCloseArea" id="bigViewHeadlineCloseArea">
-    <div class="${taskOption}">${elements[1].taskType}</div>
-    <div class="closeIcon" id="closeIcon"><img onclick="closeBigView()" src="/img/icons/closeFrame.svg" alt="closeButton"></div>
-    </div>
-    <div class="titleBigView"><h2>${elements[1].title}</h2></div>
-    <div class="descriptionBigView"><p>${elements[1].description}</p></div>
-    <div class="dueDateBigView"> <p>Due Date:</p> ${elements[1]["DueDate"]}</div>
+  <div class="bigViewHeadlineCloseArea" id="bigViewHeadlineCloseArea">
+  <div class="${taskOption}">${elements[1].taskType}</div>
+  <div class="closeIcon" id="closeIcon"><img onclick="closeBigView()" src="/img/icons/closeFrame.svg" alt="closeButton"></div>
+  </div>
+  <div class="titleBigView"><h2>${elements[1].title}</h2></div>
+  <div class="descriptionBigView"><p>${elements[1].description}</p></div>
+  <div class="dueDateBigView"> <p>Due Date:</p> ${formatedDate
+  }</div>
     <div class="priorityBigView"><p>Priority:</p>${elements[1].prio == 'Urgent' ?
       `${elements[1].prio}<img src="/img/icons/urgent.svg">` :
       elements[1].prio == 'Medium' ?

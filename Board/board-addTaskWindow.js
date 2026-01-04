@@ -117,31 +117,34 @@ function constantCheckTitlePopup() {
 }
 
 function constantCheckDatePopup() {
-
     const dueDate = document.getElementById("dueDate").value;
-    if (dueDate !== "")
+    let current = new Date();
+    let dateOb = new Date(dueDate);
+    if (dateOb < current) {
+        const dateField = document.getElementById("UserFeedbackDate");
+        dateField.innerHTML = `Date is in the past`;
+    }else if (!validateDateAddTaskPopup(dueDate)){
+        return showUserFeedbackDueDatePopup();}
+    else if (validateDateAddTaskPopup(dueDate)){
         document.getElementById('creatButtonID').disabled = false;
-    if (!validateDateAddTaskPopup(dueDate))
-        return showUserFeedbackDueDatePopup();
-    if (validateDateAddTaskPopup(dueDate))
-        clearUserFeedback = document.getElementById("UserFeedbackDate");
-    clearUserFeedback.innerHTML = '';
+    clearUserFeedback = document.getElementById("UserFeedbackDate");
+    clearUserFeedback.innerHTML = '';}
 
 }
 
 function validateTitleAddTaskNormal(title) {
     const titleRegex = /^[A-Za-zÄÖÜäöüß\s]+$/;
-    
+
     return titleRegex.test(title.trim());
 }
 
 function validateDateAddTaskPopup(dueDate) {
-    let dateOb = new Date(dueDate);
-    return isDateValid(dateOb);
+    return isDateValid(dueDate);
 }
 
-function isDateValid(dateOb) {
-  return !isNaN(new Date(dateOb));
+
+function isDateValid(dueDate) {
+    return !isNaN(new Date(dueDate));
 }
 
 

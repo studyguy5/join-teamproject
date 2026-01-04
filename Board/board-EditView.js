@@ -123,12 +123,18 @@ function constantCheckTitleEdit() {
 
 function constantCheckDateEdit() {
     const dueDateEdit = document.getElementById("dueDateEdit").value;
-    if (!validateDateEdit(dueDateEdit))
+    let current = new Date();
+    let dateOb = new Date(dueDateEdit);
+    if (dateOb < current) {
+        const dateField = document.getElementById("UserFeedbackDateEditMode");
+        dateField.innerHTML = `Date is in the past`;}
+         else if (!validateDateEdit(dueDateEdit)) {
         return showUserFeedbackDueDateEdit();
-    if (validateDateEdit(dueDateEdit))
+    }else if (validateDateEdit(dueDateEdit)) {
         document.getElementById('creatButtonIDEdit').disabled = false;
-    clearUserFeedback = document.getElementById("UserFeedbackDate");
-    clearUserFeedback.innerHTML = '';
+        clearUserFeedback = document.getElementById("UserFeedbackDateEditMode");
+        clearUserFeedback.innerHTML = '';
+    }
 }
 
 function validateTitleEdit(title) {
@@ -143,7 +149,7 @@ function validateDateEdit(dueDate) {
 }
 
 function isDateValid(dateOb) {
-  return !isNaN(new Date(dateOb));
+    return !isNaN(new Date(dateOb));
 }
 
 function showUserFeedbackTitleEdit() {

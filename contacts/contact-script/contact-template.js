@@ -348,7 +348,6 @@ function setFirstLetter(string) {
  */
 function setSecondFirstLetter(string) {
     const nameArray = string.split(" ");
-    console.log(nameArray);
     const secondName = nameArray[1][0]
     let secondFirstLetter;
     if (secondName) {

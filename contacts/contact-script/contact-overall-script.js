@@ -30,31 +30,31 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // Validation for newContatc Window
 
-function formValidationName(){
+function formValidationName() {
     const name = document.getElementById('name');
-    if (!validateName(name.value)) 
-        return  getErrorLogicNewName(name), document.getElementById('email').disabled = true, document.getElementById('phone').disabled = true;
+    if (!validateName(name.value))
+        return getErrorLogicNewName(name), document.getElementById('email').disabled = true, document.getElementById('phone').disabled = true;
     if (name.value.length < 2)
         return getErrorLogicNewNameLength(name), document.getElementById('email').disabled = true, document.getElementById('phone').disabled = true;
     removeErrorMark(name);
     document.getElementById('email').disabled = false;
 }
 
-function formValidationEmail(){
+function formValidationEmail() {
     const email = document.getElementById('email');
-    if (!validateEmail(email.value)) 
+    if (!validateEmail(email.value))
         return getErrorLogicNewEmail(email), document.getElementById('phone').disabled = true;
     if (email.value.length < 10)
-        return getErrorLogicNewEmailLength(email), document.getElementById('phone').disabled = true; 
+        return getErrorLogicNewEmailLength(email), document.getElementById('phone').disabled = true;
     removeErrorMark(email);
     document.getElementById('phone').disabled = false;
 }
 
-function formValidationPhone(){
+function formValidationPhone() {
     const phone = document.getElementById('phone');
-    if (!validatePhone(phone.value)) 
+    if (!validatePhone(phone.value))
         return getErrorLogicPhone(phone), false;
-    if (phone.value.length < 12) 
+    if (phone.value.length < 12)
         return getErrorLogicPhoneLength(phone), false;
     removeErrorMark(phone);
 }
@@ -92,7 +92,7 @@ function validatePhone(value) {
  * @param {HTMLInputElement} inputField 
 */
 function getErrorLogicNewName(inputField) {
-    let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
+    let userFeedback = document.getElementById(`${inputField.id}UserFeedback`)
     userFeedback.innerText = ('form of ' + `${inputField.id}- Field is incorrect`);
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
@@ -100,7 +100,7 @@ function getErrorLogicNewName(inputField) {
 }
 
 function getErrorLogicNewNameLength(inputField) {
-    let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
+    let userFeedback = document.getElementById(`${inputField.id}UserFeedback`)
     userFeedback.innerText = ('length of ' + `${inputField.id} - Field is too short`);
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
@@ -108,7 +108,7 @@ function getErrorLogicNewNameLength(inputField) {
 }
 
 function getErrorLogicNewEmail(inputField) {
-    let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
+    let userFeedback = document.getElementById(`${inputField.id}UserFeedback`)
     userFeedback.innerText = 'form of ' + `${inputField.id} incorrect`;
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
@@ -116,7 +116,7 @@ function getErrorLogicNewEmail(inputField) {
 }
 
 function getErrorLogicNewEmailLength(inputField) {
-    let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
+    let userFeedback = document.getElementById(`${inputField.id}UserFeedback`)
     userFeedback.innerText = 'length of ' + `${inputField.id} too short`;
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
@@ -128,14 +128,14 @@ function getErrorLogicNewEmailLength(inputField) {
  * @param {HTMLInputElement} inputField 
 */
 function getErrorLogicPhone(inputField) {
-    let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
+    let userFeedback = document.getElementById(`${inputField.id}UserFeedback`)
     userFeedback.innerText = 'form of Phone Number incorrect';
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
 }
 
 function getErrorLogicPhoneLength(inputField) {
-    let userFeedback =  document.getElementById(`${inputField.id}UserFeedback`)
+    let userFeedback = document.getElementById(`${inputField.id}UserFeedback`)
     userFeedback.innerText = 'length of Phone Number too short';
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
@@ -144,27 +144,27 @@ function getErrorLogicPhoneLength(inputField) {
 // hier für Edit-Mode die Error-Logic//
 //===================== Validation for Edit-Mode ========================//
 
-function formValidationNameEdit(){
+function formValidationNameEdit() {
     const name = document.getElementById('nameEdit');
-    if (!validateName(name.value)) 
-        return  getErrorLogicNameEdit(name), document.getElementById('emailEdit').disabled = true, document.getElementById('phoneEdit').disabled = true;
+    if (!validateName(name.value))
+        return getErrorLogicNameEdit(name), document.getElementById('emailEdit').disabled = true, document.getElementById('phoneEdit').disabled = true;
     if (name.value.length < 2)
         return getErrorLogicNameLengthEdit(name), document.getElementById('email').disabled = true, document.getElementById('phone').disabled = true;
     removeErrorMarkEdit(name);
     document.getElementById('emailEdit').disabled = false;
 }
 
-function formValidationEmailEdit(){
+function formValidationEmailEdit() {
     const email = document.getElementById('emailEdit');
-    if (!validateEmail(email.value)) 
-        return getErrorLogicEmailEdit(email), document.getElementById('phoneEdit').disabled = true; 
+    if (!validateEmail(email.value))
+        return getErrorLogicEmailEdit(email), document.getElementById('phoneEdit').disabled = true;
     if (email.value.length < 10)
-        return getErrorLogicEmailLengthEdit(email), document.getElementById('phoneEdit').disabled = true; 
+        return getErrorLogicEmailLengthEdit(email), document.getElementById('phoneEdit').disabled = true;
     removeErrorMarkEdit(email);
     document.getElementById('phoneEdit').disabled = false;
 }
 
-function formValidationPhoneEdit(){
+function formValidationPhoneEdit() {
     const phone = document.getElementById('phoneEdit');
     if (!validatePhone(phone.value)) return getErrorLogicPhoneEdit(phone), false;
     if (phone.value.length < 12) return getErrorLogicPhoneLengthEdit(phone), false;
@@ -173,25 +173,21 @@ function formValidationPhoneEdit(){
 
 
 
-// function formValidationEdit() {
-//     const name =  document.getElementById('nameEdit');
-//     const nameFeedback = document.getElementById('nameEditFeedback');
-//     const email = document.getElementById('emailEdit');
-//     const emailFeedback =  document.getElementById('emailEditFeedback');
-//     const phone = document.getElementById('phoneEdit');
-//     const phoneFeedback =  document.getElementById('phoneEditFeedback');
-//     if (!validateName(name.value) || name.value.length < 2) return getErrorLogic(name), false;
-//     removeErrorMarkEdit(name);
-//     if (!validateEmail(email.value) || email.value.length < 10) return getErrorLogic(email), false;
-//     removeErrorMarkEdit(email);
-//     if (!validatePhone(phone.value) || !validatePhone(phone.value) && phone.value.length < 12) return getErrorLogic(phone), false;
-//     removeErrorMarkEdit(phone);
-//     return true;
-// }
-// ==================== Validation for Edit-Mode Ende==============================//
+function formValidationEdit() {
+    const nameFeedback = document.getElementById('nameEditFeedback').innerHTML;
+    const emailFeedback = document.getElementById('emailEditFeedback').innerHTML;
+    const phoneFeedback = document.getElementById('phoneEditFeedback').innerHTML;
+    if (nameFeedback || emailFeedback || phoneFeedback !== "") {
+        return false;
+    } else {
+        return true;
+    }
+}
+// ==================== Validatiion for Edit-Mode Ende==============================//
 
+// ==================== Validatiion Error Logic Start==============================//
 function getErrorLogicNameEdit(inputField) {
-    let userFeedbackEdit =  document.getElementById(`${inputField.id}Feedback`)
+    let userFeedbackEdit = document.getElementById(`${inputField.id}Feedback`)
     userFeedbackEdit.style.display = "block";
     userFeedbackEdit.innerText = ('form of ' + `${inputField.id.split('Edit')} is incorrect`);
     const errorContainer = inputField.closest('div');
@@ -200,7 +196,7 @@ function getErrorLogicNameEdit(inputField) {
 }
 
 function getErrorLogicNameLengthEdit(inputField) {
-    let userFeedbackEdit =  document.getElementById(`${inputField.id}Feedback`)
+    let userFeedbackEdit = document.getElementById(`${inputField.id}Feedback`)
     userFeedbackEdit.style.display = "block";
     userFeedbackEdit.innerText = ('length of ' + `${inputField.id.split('Edit')} is incorrect`);
     const errorContainer = inputField.closest('div');
@@ -209,7 +205,7 @@ function getErrorLogicNameLengthEdit(inputField) {
 }
 
 function getErrorLogicEmailEdit(inputField) {
-    let userFeedbackEdit1 =  document.getElementById(`${inputField.id}Feedback`)
+    let userFeedbackEdit1 = document.getElementById(`${inputField.id}Feedback`)
     userFeedbackEdit1.style.display = "block";
     userFeedbackEdit1.innerText = 'form of ' + `${inputField.id.split('Edit')} is incorrect`;
     const errorContainer = inputField.closest('div');
@@ -218,7 +214,7 @@ function getErrorLogicEmailEdit(inputField) {
 }
 
 function getErrorLogicEmailLengthEdit(inputField) {
-    let userFeedbackEdit1 =  document.getElementById(`${inputField.id}Feedback`)
+    let userFeedbackEdit1 = document.getElementById(`${inputField.id}Feedback`)
     userFeedbackEdit1.style.display = "block";
     userFeedbackEdit1.innerText = 'length of ' + `${inputField.id.split('Edit')} is too short`;
     const errorContainer = inputField.closest('div');
@@ -227,14 +223,14 @@ function getErrorLogicEmailLengthEdit(inputField) {
 }
 
 function getErrorLogicPhoneEdit(inputField) {
-     let userFeedbackEdit2 =  document.getElementById(`${inputField.id}Feedback`)
+    let userFeedbackEdit2 = document.getElementById(`${inputField.id}Feedback`)
     userFeedbackEdit2.innerText = 'form of phone-number is incorrect';
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
 }
 
 function getErrorLogicPhoneLengthEdit(inputField) {
-     let userFeedbackEdit2 =  document.getElementById(`${inputField.id}Feedback`)
+    let userFeedbackEdit2 = document.getElementById(`${inputField.id}Feedback`)
     userFeedbackEdit2.innerText = 'length of phone-number is too short';
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
@@ -249,14 +245,14 @@ function getErrorLogicPhoneLengthEdit(inputField) {
  */
 function removeErrorMark(inputField) {
     inputField.setAttribute('placeholder', `${inputField.id}`);
-    let userFeedback1 =  document.getElementById(`${inputField.id}UserFeedback`)
+    let userFeedback1 = document.getElementById(`${inputField.id}UserFeedback`)
     userFeedback1.innerText = "";
     const container = inputField.closest('div');
     container.classList.remove('input-empty');
 }
 
 function removeErrorMarkEdit(inputField) {
-    let userFeedback1 =  document.getElementById(`${inputField.id}Feedback`)
+    let userFeedback1 = document.getElementById(`${inputField.id}Feedback`)
     userFeedback1.innerText = "";
     const container = inputField.closest('div');
     container.classList.remove('input-empty');
@@ -371,7 +367,7 @@ function closeOverlay() {
 function overlayShow() {
     document.querySelector('.overlay').classList.add('showed');
     document.querySelector('.overlay-content').classList.add('Showed');
-    
+
     // document.body.style.overflowY = 'hidden';
 }
 
@@ -458,21 +454,21 @@ async function switchContentWithSlide(targetID = '', id) {
  * @returns {Promise<void>}
  */
 async function switchMessageContentWithSlide(targetQuerry = '') {
-    
+
     let size = window.innerWidth;
-    if(size > 428){
-    const container = document.querySelector(targetQuerry)
-    const slideOutAnimation = container.animate(transformArrayStart, animationAttributeObjectStart);
-    await slideOutAnimation.finished;
-    container.innerHTML = setSucessMessage()
-    container.animate(transformArrayFinish, animationAttributeObjectFinish);
-    return;
-}else{
-    const container = document.getElementById('messageVertical')
-    const slideOutAnimation = container.animate(transformArrayStartVertical, animationAttributeObjectStartVertical);
-    await slideOutAnimation.finished;
-    // container.innerHTML = setSucessMessage()
-    container.animate(transformArrayFinishVertical, animationAttributeObjectFinishVertical);
+    if (size > 428) {
+        const container = document.querySelector(targetQuerry)
+        const slideOutAnimation = container.animate(transformArrayStart, animationAttributeObjectStart);
+        await slideOutAnimation.finished;
+        container.innerHTML = setSucessMessage()
+        container.animate(transformArrayFinish, animationAttributeObjectFinish);
+        return;
+    } else {
+        const container = document.getElementById('messageVertical')
+        const slideOutAnimation = container.animate(transformArrayStartVertical, animationAttributeObjectStartVertical);
+        await slideOutAnimation.finished;
+        // container.innerHTML = setSucessMessage()
+        container.animate(transformArrayFinishVertical, animationAttributeObjectFinishVertical);
     }
 }
 
@@ -502,18 +498,18 @@ async function resetContentWithSlide(targetID = '') {
  */
 async function switchOverlayContentWithSlide(targetID = '', htmlContent) {
     let sizeOfWindow = window.innerWidth;
-    if(sizeOfWindow > 428){
-    const container = document.getElementById(targetID)
-    const slideOutAnimation = container.animate(overlayTransformArrayStart, overlayAnimationAttributeObjectStart);
-    await slideOutAnimation.finished;
-    container.innerHTML = htmlContent
-    container.animate(overlayTransformArrayFinish, overlayAnimationAttributeObjectFinish);
-    }else{
-         const container = document.getElementById(targetID)
-    const slideOutAnimation = container.animate(overlayTransformArrayStartVertical, overlayAnimationAttributeObjectStart);
-    await slideOutAnimation.finished;
-    container.innerHTML = htmlContent
-    container.animate(overlayTransformArrayFinishVertical, overlayAnimationAttributeObjectFinish);
+    if (sizeOfWindow > 428) {
+        const container = document.getElementById(targetID)
+        const slideOutAnimation = container.animate(overlayTransformArrayStart, overlayAnimationAttributeObjectStart);
+        await slideOutAnimation.finished;
+        container.innerHTML = htmlContent
+        container.animate(overlayTransformArrayFinish, overlayAnimationAttributeObjectFinish);
+    } else {
+        const container = document.getElementById(targetID)
+        const slideOutAnimation = container.animate(overlayTransformArrayStartVertical, overlayAnimationAttributeObjectStart);
+        await slideOutAnimation.finished;
+        container.innerHTML = htmlContent
+        container.animate(overlayTransformArrayFinishVertical, overlayAnimationAttributeObjectFinish);
     }
 }
 
@@ -539,7 +535,7 @@ async function setTimer(time) {
  * @returns {Object} Contact data object.
  */
 function getObjectFromContactForm(nameId, emailId, phoneNumberId) {
-    const name = document.getElementById(nameId).value.trim()   
+    const name = document.getElementById(nameId).value.trim()
     const email = document.getElementById(emailId).value.trim()
     const phoneNumber = document.getElementById(phoneNumberId).value.trim()
     let formJson = {
@@ -637,9 +633,8 @@ async function refreshContactList() {
  * @returns {Promise<void>}
  */
 async function saveChanges(id) {
-    // let validation = formValidationEdit()
-    validation = true;
-    if (validation) {
+
+    if (formValidationEdit()) {
         const savedContact = getNewContactData(id)
         await putData(path = ('/contacts/' + `${id}`), data = savedContact)
         await refreshContactList()
@@ -685,10 +680,10 @@ async function deleteContact(id) {
  * @returns {string} The determined username.
  */
 function getStoredUserName() {
-  const name = localStorage.getItem('userFullName');
-  if (name && name.trim()) return name.trim();
-  if (sessionStorage.getItem('guest') === 'true') return 'Guest User';
-  return 'User';
+    const name = localStorage.getItem('userFullName');
+    if (name && name.trim()) return name.trim();
+    if (sessionStorage.getItem('guest') === 'true') return 'Guest User';
+    return 'User';
 }
 
 
@@ -698,16 +693,16 @@ function getStoredUserName() {
  * @returns {string} Initials in uppercase.
  */
 function getInitials(fullName) {
-  const name = (fullName || '').trim().toLowerCase();
-  
-  if (name === 'guest user' || name === 'guest') {
-    return 'G';
-  }
-  const parts = name.split(/\s+/).filter(Boolean);
-  if (!parts.length) return 'US';
-  const first = parts[0][0] || '';
-  const last = parts.length > 1 ? parts[parts.length - 1][0] : (parts[0][1] || '');
-  return (first + last).toUpperCase();
+    const name = (fullName || '').trim().toLowerCase();
+
+    if (name === 'guest user' || name === 'guest') {
+        return 'G';
+    }
+    const parts = name.split(/\s+/).filter(Boolean);
+    if (!parts.length) return 'US';
+    const first = parts[0][0] || '';
+    const last = parts.length > 1 ? parts[parts.length - 1][0] : (parts[0][1] || '');
+    return (first + last).toUpperCase();
 }
 
 
@@ -717,16 +712,16 @@ function getInitials(fullName) {
  * @returns {void}
  */
 window.renderUserInitials = function renderUserInitials() {
-  const fullName = getStoredUserName();
-  const initials = getInitials(fullName);
-  const el = document.getElementById('userInitials');
-  if (el) {
-    el.textContent = initials;
-    el.setAttribute('title', fullName);
-    el.setAttribute('aria-label', fullName);
-  }
+    const fullName = getStoredUserName();
+    const initials = getInitials(fullName);
+    const el = document.getElementById('userInitials');
+    if (el) {
+        el.textContent = initials;
+        el.setAttribute('title', fullName);
+        el.setAttribute('aria-label', fullName);
+    }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  try { renderUserInitials(); } catch (e) {}
+    try { renderUserInitials(); } catch (e) { }
 });

@@ -28,8 +28,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById(idsecTrue).classList.add('active')
     }
     const buttons = document.querySelectorAll(".priority-section button");
-    // let createdArray =  Array.from(buttons)
-    // createdArray[1].classList.add('Medium')
 
     if (buttons) {
         buttons.forEach(button => {

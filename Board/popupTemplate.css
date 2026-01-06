@@ -108,12 +108,6 @@
   outline: 1px solid red;                 /* Rahmen zum Debuggen */
 }
 
-/* input[type="date"] {
-  background: url("/img/icons/event.svg") no-repeat right 8px center;
-  background-size: 18px 18px;
-  padding-right: 42px;      
-} */
-
 
 .hiddenlayer2{
     display: none;

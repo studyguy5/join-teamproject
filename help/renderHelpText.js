@@ -1,5 +1,6 @@
 function initHelp(){
     checkSignUpStatusHelp();
+    helpPageChecker()
 }
 
 
@@ -38,4 +39,13 @@ function dynamicBackButton(){
     if(signUpStatus || signUpStatus1){
         window.location = '/board/board.html';
     }else{window.location = '/login-signup/index.html'}
+}
+
+function helpPageChecker(){
+    if(window.location.pathname === "/help/help.html"){
+        let custom = document.getElementsByClassName('profile_help-aria')
+        if(custom.length > 0){
+        custom[0].style = 'margin-left: 220px'
+    }
+}
 }

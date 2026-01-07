@@ -570,7 +570,7 @@
 
 #nameEditFeedback {
     display: block;
-    width:300px;
+    width:220px;
     height:15px;
     color:red;
 }
@@ -581,7 +581,7 @@
 
 #emailEditFeedback {
     display: block;
-    width:400px;
+    width:220px;
     height:15px;
     margin-left:5px;
     color:red;
@@ -589,9 +589,9 @@
 
 #phoneEditFeedback {
     display:block;
-    width:400px;
+    width:220px;
     height:25px;
-    margin:0px;
+    /* margin:0px; */
     color:red;
 }
 

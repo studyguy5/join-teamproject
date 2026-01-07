@@ -3,14 +3,14 @@
 let links = ['summary', 'add-task', 'board', 'contacts'];
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // sectionCheckWhitoutUser();
-
+    
 }
 )
 
 function init() {
     checkSignUpStatus();
     renderUserInitials();
+    
 }
 
 /**render the Initials from the User name */
@@ -59,19 +59,19 @@ function checkSignUpStatus() {
         includePrivacyLinks();
         sectionCheckWithUser()
         let size = window.innerWidth;
-        if (size < 428) {
-            let helpstyle = document.getElementById('helpImage')
-            helpstyle.style.display = "none";
-        }
+        // if (size < 428) {
+        //     let helpstyle = document.getElementById('helpImage')
+        //     helpstyle.style.display = "none";
+        // }
     } else {
         includeNavLinksWithoutUser();
         includePrivacyLinksWithoutUser();
         sectionCheckWhitoutUser()
         document.getElementById('userInitials').style.display = "none";
-
-
     }
 }
+
+
 
 function includeNavLinks() {
     let includeElements = document.getElementById('nav-container');

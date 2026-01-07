@@ -1062,7 +1062,7 @@
     .add-contact-text-submit {
         width: 202px;
         gap: 10px;
-        /* margin-top: 28px; */
+        margin-top: 10px;
     }
 
     .add-contact-text-submit div p {

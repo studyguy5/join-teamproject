@@ -31,3 +31,11 @@ function checkSignUpStatusHelp(){
         helpstyle.style.marginLeft = "88vw";
     }
 }
+
+function dynamicBackButton(){
+    let signUpStatus = sessionStorage.getItem('guest')
+    let signUpStatus1 = localStorage.getItem('userFullName')
+    if(signUpStatus || signUpStatus1){
+        window.location = '/board/board.html';
+    }else{window.location = '/login-signup/index.html'}
+}

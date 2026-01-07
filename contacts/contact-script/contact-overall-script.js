@@ -74,7 +74,8 @@ function formValidation() {
 
 function validateName(value) {
     const regex = /^[A-Za-zÄÖÜäöüß\s]+$/;
-    return regex.test(value.trim());
+    const regex1 = /^\S+\s+\S+$/;  //validate first and lastname"
+    return regex.test(value.trim()), regex1.test(value);
 }
 function validateEmail(value) {
     const regex = /^[^\s@]+@[^\s@]{3,}\.[^\s@]{2,}$/;

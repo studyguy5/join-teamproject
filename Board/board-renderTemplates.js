@@ -168,7 +168,6 @@ function closeMiniMenü(id){
 function renderBigViewHTML(elements, id) {
   let newD = new Date(elements[1]['DueDate']);
   formatedDate = newD.toLocaleDateString('de-DE');
-  console.log(formatedDate);
   return `
   <div class="bigViewHeadlineCloseArea" id="bigViewHeadlineCloseArea">
   <div class="${taskOption}">${elements[1].taskType}</div>

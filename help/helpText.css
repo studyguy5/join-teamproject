@@ -26,6 +26,7 @@
     width:37px;
     height:37px;
     margin-top:20px;
+    cursor: pointer;
 }
 
 .headlineHelpSite img:hover{

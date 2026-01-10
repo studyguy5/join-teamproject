@@ -85,8 +85,8 @@ function toggleContactMore(event) {
  */
 function outsideClick(e) {
   const box = document.getElementById('contact-more-wrapper');
-  if (!box.contains(e.target)) {
-    box.classList.remove('active');
+  if (!box?.contains(e.target)) {
+  box?.classList.remove('active');
     document.removeEventListener('click', outsideClick);
   }
 }

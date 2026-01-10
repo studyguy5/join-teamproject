@@ -34,6 +34,8 @@ function formValidationName() {
     const name = document.getElementById('name');
     if (!validateName(name.value))
         return getErrorLogicNewName(name), document.getElementById('email').disabled = true, document.getElementById('phone').disabled = true;
+    if (!validateFirstSecondName(name.value))
+        return getErrorLogicFirstSureName(name), document.getElementById('email').disabled = true, document.getElementById('phone').disabled = true;
     if (name.value.length < 2)
         return getErrorLogicNewNameLength(name), document.getElementById('email').disabled = true, document.getElementById('phone').disabled = true;
     removeErrorMark(name);
@@ -74,9 +76,14 @@ function formValidation() {
 
 function validateName(value) {
     const regex = /^[A-Za-zÄÖÜäöüß\s]+$/;
-    const regex1 = /^\S+\s+\S+$/;  //validate first and lastname"
-    return regex.test(value.trim()), regex1.test(value);
+    return regex.test(value.trim());
 }
+
+function validateFirstSecondName(value) {
+    const regex1 = /^\S+\s+\S+$/;  //validate first and lastname"
+    return regex1.test(value.trim());
+}
+
 function validateEmail(value) {
     const regex = /^[^\s@]+@[^\s@]{3,}\.[^\s@]{2,}$/;
     return regex.test(value.trim());
@@ -95,6 +102,14 @@ function validatePhone(value) {
 function getErrorLogicNewName(inputField) {
     let userFeedback = document.getElementById(`${inputField.id}UserFeedback`)
     userFeedback.innerText = ('form of ' + `${inputField.id}- Field is incorrect`);
+    const errorContainer = inputField.closest('div');
+    errorContainer.classList.add('input-empty');
+    return;
+}
+
+function getErrorLogicFirstSureName(inputField) {
+    let userFeedback = document.getElementById(`${inputField.id}UserFeedback`)
+    userFeedback.innerText = ('please enter your full Name');
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
     return;
@@ -149,8 +164,10 @@ function formValidationNameEdit() {
     const name = document.getElementById('nameEdit');
     if (!validateName(name.value))
         return getErrorLogicNameEdit(name), document.getElementById('emailEdit').disabled = true, document.getElementById('phoneEdit').disabled = true;
+    if (!validateFirstSecondName(name.value))
+        return getErrorLogicFirstSureNameEdit(name), document.getElementById('emailEdit').disabled = true, document.getElementById('phoneEdit').disabled = true;
     if (name.value.length < 2)
-        return getErrorLogicNameLengthEdit(name), document.getElementById('email').disabled = true, document.getElementById('phone').disabled = true;
+        return getErrorLogicNameLengthEdit(name), document.getElementById('emailEdit').disabled = true, document.getElementById('phone').disabled = true;
     removeErrorMarkEdit(name);
     document.getElementById('emailEdit').disabled = false;
 }
@@ -200,6 +217,15 @@ function getErrorLogicNameLengthEdit(inputField) {
     let userFeedbackEdit = document.getElementById(`${inputField.id}Feedback`)
     userFeedbackEdit.style.display = "block";
     userFeedbackEdit.innerText = ('length of ' + `${inputField.id.split('Edit')} is incorrect`);
+    const errorContainer = inputField.closest('div');
+    errorContainer.classList.add('input-empty');
+    return;
+}
+
+function getErrorLogicFirstSureNameEdit(inputField) {
+    let userFeedbackEdit = document.getElementById(`${inputField.id}Feedback`)
+    userFeedbackEdit.style.display = "block";
+    userFeedbackEdit.innerText = ('please enter your Full Name');
     const errorContainer = inputField.closest('div');
     errorContainer.classList.add('input-empty');
     return;
@@ -672,7 +698,12 @@ async function deleteContact(id) {
     await deleteData(path = ('/contacts/' + `${id}`))
     await refreshContactList()
     await resetContentWithSlide(targetID = 'detailBody')
-    return
+    let resp = window.innerWidth;
+    if (resp > 780) {
+    } else {
+        closeContactOverlay();
+        return
+    }
 }
 
 

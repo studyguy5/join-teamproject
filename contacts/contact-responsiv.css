@@ -126,6 +126,7 @@
 
 }
 
+
 @media (max-width: 1000px) {
 
     .rightDivForContacts {
@@ -137,7 +138,7 @@
     }
 
     .contact-resp-arrow img {
-        position: absolute;
+        display: block;
         top: 50px;
         right: 40px;
     }
@@ -215,7 +216,7 @@
         position:relative;
         top:-270px;
         right:30px;
-    } */
+        } */
 
     .close-icon-containerNC img {
         filter: brightness(0) invert(1);
@@ -325,8 +326,17 @@
         justify-content: center;
         align-items: center;
     }
+
+
 }
 
+@media(min-width:781px) and (max-width:1000px) {
+    .contact-resp-arrow img {
+        display: none;
+        top: 50px;
+        right: 40px;
+    }
+}
 
 @media (max-width: 780px) {
     .contact-body-list {
@@ -334,6 +344,12 @@
         padding-top: 0px;
         padding-bottom: 0px;
         height: calc(100vh - 160px);
+    }
+
+    .contact-resp-arrow img {
+        position: absolute;
+        top: 50px;
+        right: 40px;
     }
 
     .contact-body-detail {
@@ -706,8 +722,9 @@
         width: 100vw;
         /* border-radius: 30px; */
     }
-    .overlay-form{
-        padding-bottom:30px;
+
+    .overlay-form {
+        padding-bottom: 30px;
     }
 
     .overlay-close {
@@ -768,12 +785,12 @@
         top: -96px;
     }
 
-    #overlayIcon{
-        width:85px;
-        height:85px;
+    #overlayIcon {
+        width: 85px;
+        height: 85px;
     }
 
-    .overlay-form{
+    .overlay-form {
         padding-bottom: 35px;
     }
 
@@ -904,7 +921,16 @@
     }
 
     .contact-list {
-        width: calc(100vw - 5px);
+        width: calc(90vw + 35px);
+    }
+
+    .contact-name,
+    .contact-separator {
+        width: 340px;
+    }
+
+    .contact-separator-box {
+        width: 330px;
     }
 
     .overlay-logo {
@@ -974,6 +1000,19 @@
 
     .showed {
         transform: translateY(0px);
+    }
+
+    .contact-list {
+        width: calc(90vw + 35px);
+    }
+
+    .contact-name,
+    .contact-separator {
+        width: 312px;
+    }
+
+    .contact-separator-box {
+        width: 312px;
     }
 
     .overlay-content {
@@ -1054,9 +1093,9 @@
         font-size: 16px;
     }
 
-    .add-contact-text{
-        padding:0px;
-        gap:0%;
+    .add-contact-text {
+        padding: 0px;
+        gap: 0%;
     }
 
     .add-contact-text-submit {

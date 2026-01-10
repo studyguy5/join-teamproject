@@ -24,13 +24,12 @@ function initContactToggle() {
 
   if (!list || !bodyList || !bodyDetail) return;
 
-  if (window.innerWidth <= 780) {
-    list.addEventListener("click", () => {
+  if (window.innerWidth <= 780) { 
       bodyList.style.display = "none";
       bodyDetail.style.display = "flex";
-    });
+    };
   }
-}
+
 
 
 /**
@@ -43,17 +42,15 @@ function initContactToggle() {
 
 function closeContactOverlay() {
   let size = window.screen.innerWidth;
-  // const list = document.getElementById("contactList");
+  const list = document.getElementById("contactList");
   const bodyList = document.getElementById("contact-body-list");
   const bodyDetail = document.getElementById("contact-body-detail");
   if(size >= 1001){
     bodyDetail.style.display = "none";
     window.location.reload();
   }else{
-  
     bodyList.style.display = "flex";
     bodyDetail.style.display = "none";
-    
   }
 }
 

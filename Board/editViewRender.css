@@ -15,7 +15,7 @@
 .editBigView {
     max-width: 455px;
     width: 100%;
-    height: 1080px;
+    /* height: 1080px; */
     padding: 64px, 75px 64px 74px;
     /* border-radius: 10px; */
     opacity: 1;

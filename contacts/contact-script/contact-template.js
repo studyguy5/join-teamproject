@@ -170,7 +170,7 @@ function setAddOverlayContent() {
                         </div>
                         <div class="add-contact-text-form">
                             <div>
-                                <input onchange ="formValidationName()" type="text" id="name" placeholder="Firstname Lastname">
+                                <input onchange ="formValidationName()" type="text" id="name" placeholder="firstname lastname">
                                 <img src="../img/icons/person (2).svg" alt="" class="name-icon">
                             </div>
                             <p id="nameUserFeedback" class="nameUserFeedback"></p>
@@ -261,7 +261,7 @@ function setEditOverlayContent(id) {
                         </div>
                         <div class="add-contact-text-form">
                             <div>
-                                <input onchange="formValidationNameEdit()" type="text" id="nameEdit" placeholder="Name">
+                                <input onchange="formValidationNameEdit()" type="text" id="nameEdit" placeholder="firstname lastname">
                                 <img src="../img/icons/person (2).svg" alt="" class="name-icon">
                             </div>
                             <p id="nameEditFeedback"></p>

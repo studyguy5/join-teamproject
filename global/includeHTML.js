@@ -71,6 +71,14 @@ function checkSignUpStatus() {
     }
 }
 
+function checkLoginStatus(){
+    let signUpStatus2 = sessionStorage.getItem('guest')
+    let signUpStatus3 = localStorage.getItem('userFullName')
+    if(signUpStatus2 || signUpStatus3){
+        window.locate = "/summary/summary.html";
+    }else {}
+}
+
 
 
 function includeNavLinks() {

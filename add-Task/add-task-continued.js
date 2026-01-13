@@ -8,6 +8,7 @@ function clearTaskNormal() {
     document.getElementById('choosenContacts').innerHTML = "";
     const buttons = document.querySelectorAll(".priority-section button");
     buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
+    buttons[1].classList.add('Medium');
     prioArray.length = 0; 
     const taskType = document.getElementById("selectedTaskNormal").innerText = "Select Task Category";
     document.getElementById('subtask-list-1').innerHTML = "";

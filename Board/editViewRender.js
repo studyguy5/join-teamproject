@@ -22,7 +22,7 @@ function renderBigEditView(id) {
               <textarea id="task-descriptionEdit" oninput="constantCheck()" rows="5"  placeholder="Enter a description"></textarea>
 
               <label>Due Date<span class="requiredStar">*</span></label>
-              <input onchange="constantCheckDateEdit()" class="input-section-left-inputEditView dateEditView" type="date" id="dueDateEdit" placeholder="dd/mm/yyyy">
+              <input onchange="constantCheckDateEdit()" onclick="dateInspect()" class="input-section-left-inputEditView dateEditView" type="date" id="dueDateEdit" placeholder="dd/mm/yyyy">
               <p id="UserFeedbackDateEditMode" class="requiredEdit"></p>
             </section>
 

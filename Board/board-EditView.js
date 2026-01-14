@@ -121,16 +121,21 @@ function constantCheckTitleEdit() {
 
 }
 
+function dateInspect() {
+    document.getElementById('dueDateEdit').min = new Date().toISOString().split('T')[0];
+}
+
 function constantCheckDateEdit() {
     const dueDateEdit = document.getElementById("dueDateEdit").value;
     let current = new Date();
     let dateOb = new Date(dueDateEdit);
     if (dateOb < current) {
         const dateField = document.getElementById("UserFeedbackDateEditMode");
-        dateField.innerHTML = `Date is in the past`;}
-         else if (!validateDateEdit(dueDateEdit)) {
+        dateField.innerHTML = `Date is in the past`;
+    }
+    else if (!validateDateEdit(dueDateEdit)) {
         return showUserFeedbackDueDateEdit();
-    }else if (validateDateEdit(dueDateEdit)) {
+    } else if (validateDateEdit(dueDateEdit)) {
         document.getElementById('creatButtonIDEdit').disabled = false;
         clearUserFeedback = document.getElementById("UserFeedbackDateEditMode");
         clearUserFeedback.innerHTML = '';

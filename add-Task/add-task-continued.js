@@ -5,11 +5,15 @@ function clearTaskNormal() {
     const title = document.getElementById("title-add-task").value = "";
     const description = document.getElementById('task-description').value = "";
     const dueDate = document.getElementById("date-add-task").value = "";
+    let count = document.querySelectorAll('.contactBox .checked')
+    count.forEach(ob => ob.classList.remove('checked')),
+        count.forEach(ob => ob.classList.add('checkbox')),
+        count.forEach(ob => ob.src = "/img/icons/normalCheckContact.svg");
     document.getElementById('choosenContacts').innerHTML = "";
     const buttons = document.querySelectorAll(".priority-section button");
     buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
     buttons[1].classList.add('Medium');
-    prioArray.length = 0; 
+    prioArray.length = 0;
     const taskType = document.getElementById("selectedTaskNormal").innerText = "Select Task Category";
     document.getElementById('subtask-list-1').innerHTML = "";
 }
@@ -60,7 +64,7 @@ function renderTaskintoBoard(element) {
         taskOption = 'darkblue';
     }
 
-    taskTemplate(element, taskOption); 
+    taskTemplate(element, taskOption);
 }
 
 
@@ -83,6 +87,10 @@ function getStoredUserName() {
     return 'User';
 }
 
+function dateInspectNormal() {
+    document.getElementById('date-add-task').min = new Date().toISOString().split('T')[0];
+}
+
 
 /**
  * Generates initials from a full name.
@@ -91,7 +99,7 @@ function getStoredUserName() {
  */
 function getInitials(fullName) {
     const name = (fullName || '').trim().toLowerCase();
-    
+
     if (name === 'guest user' || name === 'guest') {
         return 'G';
     }

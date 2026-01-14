@@ -18,9 +18,10 @@
 
 input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0;
+  background-color: red;
   position:absolute;
-  top:520px;
-  left:330px;
+  top:0px;
+  left:0px;
   width: 440px; 
   height: 50px;       
   cursor: pointer;
@@ -42,6 +43,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background-size: 24px; 
   padding-right: 30px;   
   background-color: #ffffff;
+  position:relative;
 }
 
 .section-right-select{

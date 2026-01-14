@@ -121,12 +121,14 @@ function constantCheckDatePopup() {
     if (dateOb < current) {
         const dateField = document.getElementById("UserFeedbackDate");
         dateField.innerHTML = `Date is in the past`;
-    }else if (!validateDateAddTaskPopup(dueDate)){
-        return showUserFeedbackDueDatePopup();}
-    else if (validateDateAddTaskPopup(dueDate)){
+    } else if (!validateDateAddTaskPopup(dueDate)) {
+        return showUserFeedbackDueDatePopup();
+    }
+    else if (validateDateAddTaskPopup(dueDate)) {
         document.getElementById('creatButtonID').disabled = false;
-    clearUserFeedback = document.getElementById("UserFeedbackDate");
-    clearUserFeedback.innerHTML = '';}
+        clearUserFeedback = document.getElementById("UserFeedbackDate");
+        clearUserFeedback.innerHTML = '';
+    }
 
 }
 
@@ -415,6 +417,10 @@ function chooseValue() {
     }))
 }
 
+function dateInspectPopup() {
+    document.getElementById('dueDate').min = new Date().toISOString().split('T')[0];
+}
+
 /**in order to not affect all onclicks by one click we need a tool to stop the recognition in a specific div */
 function stopBubbling(event) {
     event.stopPropagation()
@@ -425,6 +431,10 @@ function clearTask() {
     const title = document.getElementById("title").value = "";
     const description = document.getElementById('task-description').value = "";
     const dueDate = document.getElementById("dueDate").value = "";
+    let count = document.querySelectorAll('.contactBox .checked')
+    count.forEach(ob => ob.classList.remove('checked')),
+        count.forEach(ob => ob.classList.add('checkbox')),
+        count.forEach(ob => ob.src = "/img/icons/normalCheckContact.svg");
     document.getElementById(`choosenContacts`).innerHTML = "";
     const buttons = document.querySelectorAll(".priority-section button");
     buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));

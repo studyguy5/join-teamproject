@@ -19,8 +19,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
               <textarea oninput="constantCheck()" rows="5" id="task-description" placeholder="Enter a description"></textarea>
 
               <label>Due Date<span class="requiredStar">*</span></label>
-              <input onchange="constantCheckDatePopup()" type="date" min="2026-01-01"
-       max="2030-12-31" class="input-section-left-input date-input" id="dueDate" placeholder="dd/mm/yyyy">
+              <input onchange="constantCheckDatePopup()" type="date" onclick="dateInspectPopup()" class="input-section-left-input date-input" id="dueDate" placeholder="dd/mm/yyyy">
               <p id="UserFeedbackDate" class="required"></p>
             </section>
 

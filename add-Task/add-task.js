@@ -316,13 +316,13 @@ const selectedTask = document.getElementById("selectedTaskNormal");
 /**
  * Handles selection of task category options.
  */
-options.forEach(opt => {
-    opt.addEventListener("click", () => {
-        selectedTask.textContent = opt.dataset.value;
-        hiddenInput.value = opt.dataset.value;
-        document.getElementById("dropIdNormal").classList.remove("dropTasktypeOpen");
-    });
-});
+// options.forEach(opt => {
+//     opt.addEventListener("click", () => {
+//         selectedTask.textContent = opt.dataset.value;
+//         hiddenInput.value = opt.dataset.value;
+//         document.getElementById("dropIdNormal").classList.remove("dropTasktypeOpen");
+//     });
+// });
 
 
 /**
@@ -492,7 +492,11 @@ function openTaskTypeDropDownNormal() {
     let arrow = document.getElementById('arrowImgNormal')
     arrow.classList.toggle('select-arrow-open')
     let drop = document.getElementById('dropIdNormal')
-    drop.classList.toggle('dropTasktypeClose')
+    if (drop.classList.contains('dropTasktypeClose')) {
+        drop.classList.remove('dropTasktypeClose')
+    }else{
+        drop.classList.add('dropTasktypeClose')
+    }
 }
 
 

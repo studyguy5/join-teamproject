@@ -25,9 +25,15 @@
                 </div>
             </div>
             <div id="profileMenu" class="dontShow">
-                <a href="/privacy-policy/privacy-policy.html"><h4 class="userOptions">Privacy-Policy</h4></a>
-                <a href="/legal-Notice/legal-notice.html"><h4 class="userOptions">Legal-Notice</h4></a>
-                <a onclick="deleteSession()" href="/login-signup/index.html"><h4 class="userOptions">Log out</h4></a>
+                <a href="/privacy-policy/privacy-policy.html">
+                    <h4 class="userOptions">Privacy-Policy</h4>
+                </a>
+                <a href="/legal-Notice/legal-notice.html">
+                    <h4 class="userOptions">Legal-Notice</h4>
+                </a>
+                <a onclick="deleteSession()" href="/login-signup/index.html">
+                    <h4 class="userOptions">Log out</h4>
+                </a>
             </div>
         </section>
 
@@ -48,16 +54,16 @@
 
                     <section class="input-section-left">
                         <label>Title<span class="requiredStar">*</span></label>
-                        <input onchange="constantCheckTitle()" id="title-add-task" class="input-section-left-input" type="text"
-                            placeholder="Enter a title">
+                        <input onchange="constantCheckTitle()" id="title-add-task" class="input-section-left-input"
+                            type="text" placeholder="Enter a title">
                         <p id="UserFeedbackTitle" class="required"></p>
 
                         <label for="">Description</label>
-                        <textarea  rows="5" id="task-description" placeholder="Enter a description"></textarea>
+                        <textarea rows="5" id="task-description" placeholder="Enter a description"></textarea>
 
                         <label for="date">Due Date<span class="requiredStar">*</span></label>
-                        <input onchange="constantCheckDate()" onclick="dateInspectNormal()" id="date-add-task" type="date"  placeholder="dd/mm/yyyy"
-                            class="input-section-left-input date-input">
+                        <input onchange="constantCheckDate()" onclick="dateInspectNormal()" id="date-add-task"
+                            type="date" placeholder="dd/mm/yyyy" class="input-section-left-input date-input">
                         <p id="UserFeedbackDate" class="requiredDate"></p>
 
                     </section>
@@ -76,42 +82,49 @@
                             <button data-priority="Low" type="button">Low<img src="/img/icons/low.svg"></button>
                         </section>
 
-                        <label for="contactSelection">Assigned to</label> 
+                        <label for="contactSelection">Assigned to</label>
                         <div class="section-right-select" required tabindex="0"
                             onclick="openContactViewNormal(); showInputNormal()">
                             <p id="placeholderptag">Select contacts to assign</p>
-                            <input oninput="filterContactsInNormal()" type="text" id="filterContactsNormal"class="dont-Show hidden-input">
+                            <input oninput="filterContactsInNormal()" type="text" id="filterContactsNormal"
+                                class="dont-Show hidden-input">
                             <img id="arrowImgC" class="select-arrow-downC" src="/img/icons/select-arrow-down.svg">
                             <div id="IdForContactsNormal" class="availibleContactsClose">
 
+                            </div>
+
                         </div>
-                        </div>
-                        
+
+
                         <div id="choosenContacts" class="choosenContacts">
                             <div id="countInfo" class="countInfo"></div>
                         </div>
 
                         <label>Category<span class="requiredStar">*</span></label>
-                        <div onclick="event.stopPropagation(); openTaskTypeDropDownNormal()" class="ForTaskChoise" id="IdForTaskChoiseNormal">
+                        <div onclick="event.stopPropagation(); openTaskTypeDropDownNormal()" class="ForTaskChoise"
+                            id="IdForTaskChoiseNormal">
                             <p id="selectedTaskNormal" class="selectedTaskNormal">Select Task Category</p>
                             <img id="arrowImgNormal" class="select-arrow-downT" src="/img/icons/select-arrow-down.svg">
+                            <div id="dropIdNormal" class="dropTasktypeClose dropTasktypeOpen">
+                                <div onmousedown="chooseValueNormal()" onclick="event.stopPropagation(); openTaskTypeDropDownNormal()"
+                                    id="option" class="taskOption" data-value="Technical Task">
+                                    Technical Task</div>
+                                <div onmousedown="chooseValueNormal()" onclick="event.stopPropagation(); openTaskTypeDropDownNormal()"
+                                    id="option" class="taskOption" data-value="User Story">User
+                                    Story</div>
+                            </div>
                         </div>
-                        
-                        <div id="dropIdNormal" class="dropTasktypeClose dropTasktypeOpen">
 
-                            <div onmousedown="chooseValueNormal()" onclick="openTaskTypeDropDownNormal()" id="option" class="taskOption" data-value="Technical Task">
-                                Technical Task</div>
-                            <div onmousedown="chooseValueNormal()" onclick="openTaskTypeDropDownNormal()" id="option" class="taskOption" data-value="User Story">User
-                                Story</div>
-                        </div>
-                        <input type="hidden" id="categoryValue" name="category" class="hidden-input"> 
+
+
+                        <!-- <input type="hidden" id="categoryValue" name="category" class="hidden-input"> -->
                         <p id="UserFeedbackTaskType" class="required"></p>
-                        
-                        
+
+
                         <label for="subtask">Subtask</label>
                         <div class="subtask-wrapper ">
                             <input id="subtask" class="subtask input-section-right-input" type="text"
-                            placeholder="Enter new subtask">
+                                placeholder="Enter new subtask">
                             <span class="subtask-icon">
                                 <img onmousedown="clearSubtask()" class="x" src="/img/icons/subtasks-X.svg">
                                 <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
@@ -122,46 +135,47 @@
                         </ul>
                     </div>
 
-                    
+
                 </div>
-                
-                
 
 
-                
+
+
+
                 <div class="footer">
-                    
+
                     <div class="footer-left">
                         <p class="requiredStar">*</p>
                         <p>This field is required</p>
                     </div>
-                    
+
                     <div class="footer-buttons-section">
-                        <button onclick="clearTaskNormal()" class="clear-btn" type="reset">Clear<img src="/img/icons/x.svg"></button>
-                        <button id="creatButtonIDNormal" onclick="commonConstantCheck()" class="create-task-btn">Create Task<img
-                            src="/img/icons/doneSymbol.svg"></button>
-                        </div>
-                        
+                        <button onclick="clearTaskNormal()" class="clear-btn" type="reset">Clear<img
+                                src="/img/icons/x.svg"></button>
+                        <button id="creatButtonIDNormal" onclick="commonConstantCheck()" class="create-task-btn">Create
+                            Task<img src="/img/icons/doneSymbol.svg"></button>
                     </div>
 
+                </div>
 
 
-            <div class="report" id="report">
-                Task added to board <img src="/img/icons/board.svg">
+
+                <div class="report" id="report">
+                    Task added to board <img src="/img/icons/board.svg">
+                </div>
+
+
             </div>
-        
-
-        </div>
         </div>
     </main>
     <script src="/board/taskArrayFilter.js"></script>
-    
+
     <script src="/global/includeHTML.js"></script>
     <script src="/add-task/add-task.js" defer></script>
     <script src="/add-task/add-task-continued.js" defer></script>
     <script src="/add-task/add-task-template.js" defer></script>
     <script src="/add-task/subtask.js" defer></script>
-    
+
 </body>
 
 </html>

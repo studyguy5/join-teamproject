@@ -143,8 +143,9 @@
     width: 439px;
     height: 105px;
     padding-top:8px;
-    position:relative;
-    top: -8px;
+    position:absolute;
+    top: 50px;
+    left:0px;
     background-color: white;
     opacity: 1;
 }

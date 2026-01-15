@@ -1,15 +1,15 @@
-.mainAreaRight{
+.mainAreaRight {
     height: 100vh;
     width: 100%;
 }
 
-.mainAreaRight h1{
+.mainAreaRight h1 {
     font-size: clamp(40px, 3vw, 61px);
     margin-left: 80px;
 }
 
-.input-section-right-input{
-    max-width:440px;
+.input-section-right-input {
+    max-width: 440px;
     border-radius: 7px;
     border: 1px solid #c8c8c8;
     padding: 12px 21px;
@@ -17,19 +17,19 @@
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-  opacity: 0;
-  background-color: red;
-  position:absolute;
-  top:0px;
-  left:0px;
-  width: 440px; 
-  height: 50px;       
-  cursor: pointer;
+    opacity: 0;
+    background-color: red;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 440px;
+    height: 50px;
+    cursor: pointer;
 }
 
 
-.input-section-left-input{
-    max-width:440px;
+.input-section-left-input {
+    max-width: 440px;
     border-radius: 7px;
     border: 1px solid #c8c8c8;
     padding: 12px 21px;
@@ -37,69 +37,84 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .date-input {
-  background: url("../img/icons/event.svg");
-  background-position: right 16px center;
-  background-repeat: no-repeat;
-  background-size: 24px; 
-  padding-right: 30px;   
-  background-color: #ffffff;
-  position:relative;
+    background: url("../img/icons/event.svg");
+    background-position: right 16px center;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    padding-right: 30px;
+    background-color: #ffffff;
+    position: relative;
 }
 
 
 
-.section-right-select{
-    max-width:440px;
+.section-right-select {
+    max-width: 440px;
     border-radius: 7px;
     border: 1px solid #c8c8c8;
     padding: 12px 16px;
     font-size: 20px;
     background-color: white;
-    --my-z: 100;
+    --my-z: 3;
     z-index: var(--my-z);
     display: flex;
-    position:relative;
+    position: relative;
     justify-content: space-between;
 }
 
-.section-right-select p{
+/* .section-right-select:focus-within::after {
+    /* border-radius: 7px; */
+    /* content: ''; */
+    /* position: absolute; */
+    /* top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px; */
+    /* border: 1px solid #29ABE2; */
+    /* z-index: 3; */
+    /* background: transparent; */
+    /* pointer-events: none;  */
+    
+/* }  */
+
+.section-right-select p {
     margin: 0px;
     padding: 0px;
 }
 
-.section-right-select img:hover{
+.section-right-select img:hover {
     content: url(/img/icons/select-arrow-downHover.svg);
 }
 
 .input-section-left-input:focus,
 .input-section-right-input:focus,
-.section-right-select:focus{
+.section-right-select:focus {
     border-color: #29ABE2;
     outline: none;
 }
 
 .input-section-left-input:hover,
 .input-section-right-input:hover,
-.section-right-select:hover{
+.section-right-select:hover {
     cursor: pointer;
 }
 
-.subtask-wrapper{
+.subtask-wrapper {
     position: relative;
     display: flex;
-    flex-direction: column;  
+    flex-direction: column;
 }
 
-.subtask-wrapper .edit-input:focus{
-   border:unset;
+.subtask-wrapper .edit-input:focus {
+    border: unset;
 }
 
-.subtask-list{
+.subtask-list {
     padding: 12px 21px;
     display: flex;
 }
 
-.subtask-icon{
+.subtask-icon {
     position: absolute;
     right: 12px;
     top: 12px;
@@ -109,17 +124,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
 }
 
-.subtask:focus + .subtask-icon{
+
+.subtask:focus+.subtask-icon {
     display: flex !important;
 }
 
-.x:hover , .hook:hover{
+.x:hover,
+.hook:hover {
     cursor: pointer;
     background: #D1D1D1;
     border-radius: 56px;
 }
 
-.delimiter{
+.delimiter {
     width: 0px;
     height: 20px;
     border: 1px solid #D1D1D1;
@@ -132,9 +149,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding-left: 0;
     margin: 0;
     list-style: none;
+    width:100%;
+    max-width:440px;
+    min-height:90px;
+    height:100%;
+    max-height:50px;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 
-.listed{
+.scrollClass{
+    scrollbar-width: thin;
+}
+
+.listed {
     margin-top: 8px;
     display: flex;
     padding: 6px 16px;
@@ -142,51 +170,53 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-weight: 400;
     color: #000000;
     align-items: center;
-    height: 24px; 
+    height: 24px;
 }
 
-.listed:hover{
+.listed:hover {
     cursor: pointer;
     background: #e6e6e6;
     border-radius: 10px;
-    .list-icon{
+
+    .list-icon {
         display: flex !important;
     }
 }
 
-.dot{
+.dot {
     margin-right: 16px;
 }
 
-.list-icon{
+.list-icon {
     display: none;
     position: absolute;
     right: 12px;
     gap: 4px;
 }
 
-.pencil, .trash{
+.pencil,
+.trash {
     width: 20px;
     height: 20px;
 }
 
-.edit-input{
+.edit-input {
     height: 34px;
     border: none;
     outline: none;
     border-radius: 0;
     padding-left: 16px;
-    display: block;               
+    display: block;
     width: 436px;
-    margin-left: -16px;        
-    margin-right: -16px; 
+    margin-left: -16px;
+    margin-right: -16px;
 }
 
 .edit-input:focus {
     border-bottom: 1px solid #29ABE2 !important;
 }
 
-textarea{
+textarea {
     max-width: 1920px;
     height: 100px;
     border-radius: 7px;
@@ -197,25 +227,25 @@ textarea{
     resize: none;
 }
 
-textarea:hover{
+textarea:hover {
     cursor: pointer;
 }
 
-textarea:focus{
+textarea:focus {
     border-color: #29ABE2;
-    outline:none;
+    outline: none;
     outline: none;
 }
 
-.input-container{
+.input-container {
     width: 100%;
-    max-width: 976,25px;
+    max-width: 976, 25px;
     display: flex;
     align-items: center;
     gap: 30px;
 }
 
-.input-section-left{
+.input-section-left {
     display: flex;
     flex-direction: column;
     margin-left: 96px;
@@ -223,40 +253,40 @@ textarea:focus{
     height: 376px;
 }
 
-.input-section-left label{
+.input-section-left label {
     font-size: 20px;
     margin-top: 20px;
     margin-bottom: 4px;
 }
 
-.line{
+.line {
     margin-top: 40px;
     background-color: #c8c8c8;
     height: 300px;
     width: 2px;
 }
 
-.input-section-right{
+.input-section-right {
     display: flex;
     flex-direction: column;
     width: 440px;
     height: 400px;
-    
+
 }
 
-.input-section-right label{
+.input-section-right label {
     font-size: 20px;
     margin-top: 20px;
     margin-bottom: 4px;
 }
 
-.priority-section{
+.priority-section {
     display: flex;
     justify-content: space-between;
     gap: 16px;
 }
 
-.priority-section button{
+.priority-section button {
     width: 136px;
     height: 40px;
     border: none;
@@ -270,15 +300,15 @@ textarea:focus{
     padding: 16px 10px;
 }
 
-.priority-section button:hover{
+.priority-section button:hover {
     box-shadow: 0px 4px 4px 0px #00000040;
 }
 
-.requiredStar{
+.requiredStar {
     color: orangered;
 }
 
-.footer{
+.footer {
     width: auto;
     max-width: 1304px;
     /* padding: 0 160px; */
@@ -289,29 +319,29 @@ textarea:focus{
     justify-content: space-around;
 }
 
-.footer p{
+.footer p {
     font-size: 16px;
 }
 
-.footer-left{
+.footer-left {
     display: flex;
 }
 
-.footer-buttons-section{
+.footer-buttons-section {
     display: flex;
     flex-direction: row;
     justify-content: end;
-    width:100%;
+    width: 100%;
     max-width: 309px;
     gap: 8px;
     z-index: 10;
 }
 
-.create-task-btn{
+.create-task-btn {
     width: 140px;
     height: 40px;
     border-radius: 7px;
-    background-color:#2A3647;
+    background-color: #2A3647;
     color: white;
     font-size: 20px;
     cursor: pointer;
@@ -322,16 +352,16 @@ textarea:focus{
     border: none;
 }
 
-.create-task-btn:hover{
+.create-task-btn:hover {
     background-color: #29ABE2;
 }
 
-.footer-buttons-section img{
+.footer-buttons-section img {
     width: 10px;
     height: 10px;
 }
 
-.clear-btn{
+.clear-btn {
     width: 110px;
     height: 40px;
     border-radius: 7px;
@@ -345,14 +375,13 @@ textarea:focus{
     border: 1px solid #2A3647;
 }
 
-.clear-btn:hover{
+.clear-btn:hover {
     color: #29ABE2;
     border: 1px solid #29ABE2;
 }
 
 .clear-btn:hover img {
-  filter: brightness(0) saturate(100%) invert(58%) sepia(87%) 
-          saturate(2735%) hue-rotate(168deg) brightness(94%) contrast(92%);
+    filter: brightness(0) saturate(100%) invert(58%) sepia(87%) saturate(2735%) hue-rotate(168deg) brightness(94%) contrast(92%);
 }
 
 .priority-section button.Urgent {
@@ -373,15 +402,15 @@ textarea:focus{
 .priority-section button.Urgent img,
 .priority-section button.Medium img,
 .priority-section button.Low img {
-  filter: brightness(0) invert(1);
+    filter: brightness(0) invert(1);
 }
 
 input:focus::placeholder {
-  color: transparent;
+    color: transparent;
 }
 
 textarea:focus::placeholder {
-  color: transparent;
+    color: transparent;
 }
 
 .report {
@@ -389,7 +418,7 @@ textarea:focus::placeholder {
     bottom: -1000px;
     left: 50%;
     transform: translateX(-50%);
-    background-color:#2A3647;
+    background-color: #2A3647;
     color: #fff;
     padding: 15px 25px;
     border-radius: 10px;
@@ -428,8 +457,8 @@ textarea:focus::placeholder {
     margin-left: 5px;
     margin-bottom: 0px;
     font-weight: 400;
-    min-height:15px;
-    width:200px;
+    min-height: 15px;
+    width: 200px;
 }
 
 .requiredDate {
@@ -439,41 +468,39 @@ textarea:focus::placeholder {
     margin-left: 5px;
     margin-bottom: 0px;
     font-weight: 400;
-    min-height:15px;
-    width:250px;
+    min-height: 15px;
+    width: 250px;
 }
 
-
+.active {
+    background-color: #091931;
+}
 
 
 .input-error {
-    border: 1px solid #E60026!important;
+    border: 1px solid #E60026 !important;
 }
 
-.availibleContactsOpen{
-    z-index: calc( var(--my-z) - 10);
-    width:101%;
-    position:absolute;
+.availibleContactsOpen {
+    z-index: calc(var(--my-z) - 10);
+    width: 101%;
+    position: absolute;
     margin-top: -8px;
     padding-top: 8px;
     opacity: 1;
-    max-height:288px;
+    max-height: 288px;
     min-height: 288px;
-    transition:  100ms ease;
+    transition: 100ms ease;
     background-color: white;
     overflow-y: scroll;
-    top:58px;
-    left:-1px;
+    top: 58px;
+    left: -1px;
 }
 
-.availibleContactsClose{
+.availibleContactsClose {
     opacity: 0;
-    height:0px;
-    transition:  100ms ease;
-    overflow-y:hidden;
-    display:none;
+    height: 0px;
+    transition: 100ms ease;
+    overflow-y: hidden;
+    display: none;
 }
-
-
-
-

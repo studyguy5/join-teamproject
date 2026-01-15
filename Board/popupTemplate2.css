@@ -9,16 +9,39 @@
     border:none;
 }
 
+.section-right-selectContacts {
+    max-width: 440px;
+    border-radius: 7px;
+    border: 1px solid #c8c8c8;
+    padding: 12px 16px;
+    font-size: 20px;
+    background-color: white;
+    --my-z: 4;
+    z-index: var(--my-z);
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.section-right-selectContacts p{
+margin:0px;
+padding:0px;
+}
+
 .dont-Show{
     display:none;
 }
 
-.availibleContactsOpen{
+.availableContactsOpen{
     z-index:3;
-    position:relative;
+    position:absolute;
+    top: 58px;
+    left: 0px;
     margin-top: -8px;
     padding-top: 8px;
     opacity: 1;
+    width:100%;
     max-height:288px;
     min-height:288px;
     transition:  100ms ease;

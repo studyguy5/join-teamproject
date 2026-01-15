@@ -306,16 +306,16 @@ function openContactView() {
     let contactDrop = document.getElementById('IdForContacts')
     if (contactDrop.classList.contains('availibleContactsClose')) {
         contactDrop.classList.remove('availibleContactsClose');
-        contactDrop.classList.add('availibleContactsOpen');
+        contactDrop.classList.add('availableContactsOpen');
         let layer = document.getElementById('hiddenlayer2')
         layer.classList.toggle('hiddenlayer2')
-    } else if (contactDrop.classList.contains('availibleContactsOpen')) {
-        contactDrop.classList.remove('availibleContactsOpen');
+    } else if (contactDrop.classList.contains('availableContactsOpen')) {
+        contactDrop.classList.remove('availableContactsOpen');
         contactDrop.classList.add('availibleContactsClose');
         let layer = document.getElementById('hiddenlayer2')
         layer.classList.toggle('hiddenlayer2')
     }
-    if (document.querySelectorAll('availibleContactsOpen')) {
+    if (document.querySelectorAll('availableContactsOpen')) {
         let contact = document.getElementById('arrowImgC')
         contact.classList.toggle('select-arrow-open')
     }

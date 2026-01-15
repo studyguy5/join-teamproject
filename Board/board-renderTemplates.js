@@ -42,14 +42,15 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
             </section>
 
             <label>Assigned to</label>
-            <div  class="section-right-select"  required tabindex="0" onclick="openContactWithCounterForPopup()">
+            <div  class="section-right-selectContacts"  required tabindex="0" onclick="openContactWithCounterForPopup()">
               <p id="placeholderpTag">Select contacts to assign</p>
               <input oninput="filterContactsInPopup()"  type="text" id="filterContacts"  class="dont-Show hidden-input">
-              <img id="arrowImgC" class="select-arrow-downC" src="/img/icons/select-arrow-down.svg"> 
-            </div>
-            <div id="IdForContacts" class="availibleContactsClose">
+              <img id="arrowImgC" class="select-arrow-downC" src="/img/icons/select-arrow-down.svg">
+              <div id="IdForContacts" class="availibleContactsClose">
               
+            </div> 
             </div>
+            
             <div id="choosenContacts" class="choosenContacts">
             <div id="countInfoPopup" class="countInfoPopup"></div>
             </div>
@@ -59,14 +60,13 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
               
             <p id="selectedTask">Select Task Category</p>
               <img id="arrowImg" class="select-arrow-downT" src="/img/icons/select-arrow-down.svg">
-            </div>
-            <div id="dropId" class="dropTasktypeClose dropTasktypeOpenPopup" >
+              <div id="dropId" class="dropTasktypeClose dropTasktypeOpenPopup" >
             
-            <input  type="hidden" id="categoryValue" name="category" class="hidden-input"> 
-            
-            <div onmousedown="chooseValue()" onclick="openTasktypeDropDown(); constantCheck()"  id="option" class="taskOption" data-value="Technical Task">Technical Task</div>
-            <div onmousedown="chooseValue()" onclick="openTasktypeDropDown(); constantCheck()"  id="option" class="taskOption" data-value="User Story">User Story</div>
+                <div onmousedown="chooseValue()" onclick="event.stopPropagation(); openTasktypeDropDown(); constantCheck()"  id="option" class="taskOption" data-value="Technical Task">Technical Task</div>
+                <div onmousedown="chooseValue()" onclick="event.stopPropagation(); openTasktypeDropDown(); constantCheck()"  id="option" class="taskOption" data-value="User Story">User Story</div>
+              </div>
             </div>
+            
             <p id="UserFeedbackTaskType" class="required"></p>
               
             
@@ -150,14 +150,14 @@ function renderTaskintoBoard(element) {
 
 
 /**renders the mini Menü for changing the category in Responsiv View */
-function renderMiniMenü(id){
-   miniMenu = document.getElementById(`miniMenüResponsiv-${id}`)
+function renderMiniMenü(id) {
+  miniMenu = document.getElementById(`miniMenüResponsiv-${id}`)
   miniMenu.classList.toggle('miniMenüResponsiv')
 }
 
 
 /**closes the Mini Menü if you leave a Task */
-function closeMiniMenü(id){
+function closeMiniMenü(id) {
   closeM = document.getElementById(`miniMenüResponsiv-${id}`)
   closeM.classList.remove('miniMenüResponsiv')
 }
@@ -175,7 +175,7 @@ function renderBigViewHTML(elements, id) {
   <div class="titleBigView"><h2>${elements[1].title}</h2></div>
   <div class="descriptionBigView"><p>${elements[1].description}</p></div>
   <div class="dueDateBigView"> <p>Due Date:</p> ${formatedDate
-  }</div>
+    }</div>
     <div class="priorityBigView"><p>Priority:</p>${elements[1].prio == 'Urgent' ?
       `${elements[1].prio}<img src="/img/icons/urgent.svg">` :
       elements[1].prio == 'Medium' ?
@@ -240,7 +240,7 @@ function renderContactsInEdit(id, contactsArray, index, onlyNumber) {
 
 
 /**renders the filtered Contacts HTML into the div */
-function renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterContactIndex){
+function renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterContactIndex) {
   return `<div  class="contactBox">
         <div class="contactCirclePopup">${filteredContactsEdit[filterContactIndex].firstLetter + filteredContactsEdit[filterContactIndex].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${filteredContactsEdit[filterContactIndex].name}</span> 

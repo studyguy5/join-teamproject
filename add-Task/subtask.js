@@ -13,7 +13,7 @@ function renderSubtask(){
     let currentCount = list.getElementsByClassName("listed").length; 
     index = currentCount;
 
-    if (currentCount < 2 && subtask.value.trim() !==""){
+    if (currentCount < 10 && subtask.value.trim() !==""){
         list.innerHTML += `<li onclick="editBulletpoint(${index})" id="listed-${index}" class="listed"> 
                               <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
                                 <span class="list-icon">
@@ -24,6 +24,9 @@ function renderSubtask(){
                             </li>
         `;
         subtask.value = "";
+    }
+    if(currentCount > 1 ){
+        document.getElementById('subtask-list-1').classList.add('scrollClass')
     }
 }
 

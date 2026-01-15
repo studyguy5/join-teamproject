@@ -46,7 +46,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
               <p id="placeholderpTag">Select contacts to assign</p>
               <input oninput="filterContactsInPopup()"  type="text" id="filterContacts"  class="dont-Show hidden-input">
               <img id="arrowImgC" class="select-arrow-downC" src="/img/icons/select-arrow-down.svg">
-              <div id="IdForContacts" class="availibleContactsClose">
+              <div onclick="event.stopPropagation()" id="IdForContacts" class="availibleContactsClose">
               
             </div> 
             </div>

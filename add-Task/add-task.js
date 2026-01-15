@@ -186,7 +186,7 @@ function chooseContactNormal(index) {
         let count = document.querySelectorAll('.contactBox .checked')
         if ((count.length) > 6) {
             deleteONETime = true;
-            document.getElementById('countInfo').innerHTML = `+ ${(count.length) - 6} Contact(s)`
+            document.getElementById('countInfo').innerHTML = `+ ${(count.length) - 6} Con`
         } else {
             renderChoosenContactNormal(index);
             choContact.src = "/img/icons/normalCheckedContact.svg"
@@ -212,7 +212,7 @@ function chooseFilteredContactNormal(filterContactIndex) {
         let countFilter = document.querySelectorAll('.contactBox .checked')
         if ((countFilter.length) > 6) {
             deleteONETime = true;
-            document.getElementById('countInfo').innerHTML = `+ ${(countFilter.length) - 6} Contact(s)`
+            document.getElementById('countInfo').innerHTML = `+ ${(countFilter.length) - 6} Con`
         } else {
             renderFilteredChoosenContactNormal(filterContactIndex)
             choContact.src = "/img/icons/normalCheckedContact.svg"
@@ -260,7 +260,7 @@ function deleteRenderedContactNormal(index) {
     let countedInNormal = document.querySelectorAll('.contactBox .checked')
     if (countedInNormal.length > 6) {
         countedInNormal.length - 1
-        document.getElementById('countInfo').innerHTML = `+ ${(countedInNormal.length) - 6} Contact(s)`;
+        document.getElementById('countInfo').innerHTML = `+ ${(countedInNormal.length) - 6} Con`;
     } else if (countedInNormal.length <= 6 && deleteONETime && document.getElementById('countInfo').innerHTML != "") {
         document.getElementById('countInfo').innerHTML = ""; deleteONETime = false;
     } else {

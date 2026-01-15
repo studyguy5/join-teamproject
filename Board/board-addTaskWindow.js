@@ -329,7 +329,7 @@ function chooseContact(index) {
         choContact.classList.add('checked')
         let countPopup = document.querySelectorAll('.contactBox .checked')
         if ((countPopup.length) > 6) {
-            document.getElementById('countInfoPopup').innerHTML = `+ ${(countPopup.length) - 6} Contact(s)`;
+            document.getElementById('countInfoPopup').innerHTML = `+ ${(countPopup.length) - 6} Con`;
         }
         else {
             renderChoosenContact(index);

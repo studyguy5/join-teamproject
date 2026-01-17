@@ -7,11 +7,20 @@ let taskObjectKey = ['title', 'description', 'DueDate'];
 let currentDraggedElement;
 window.index0 = 0;
 window.index1 = 1;
+window.index2 = 3;
+window.index3 = 4;
+window.index4 = 5;
+window.index5 = 6;
+window.index6 = 7;
 
 let subtaskArray = [];
 
 let subtaskvalue1;
 let subtaskvalue2;
+let subtaskvalue3;
+let subtaskvalue4;
+let subtaskvalue5;
+let subtaskvalue6;
 
 /**basic function to post Data into firebase */
 async function postData(path = '', data = {}) {
@@ -107,7 +116,7 @@ function createTemplate() {
 }
 
 /**create a object with the value given and push it into the subtask array */
-function pushObject(subtaskvalue1, subtaskvalue2) {
+function pushObject(subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5, subtaskvalue6) {
     if (subtaskvalue1) {
         let subTaskObject1 = { "value": `${subtaskvalue1}`, 'status': 'open' };
         subtaskArray.push(subTaskObject1)
@@ -115,6 +124,22 @@ function pushObject(subtaskvalue1, subtaskvalue2) {
     if (subtaskvalue2) {
         let subTaskObject2 = {"value": `${subtaskvalue2}`, 'status': 'open'};
         subtaskArray.push(subTaskObject2);
+    }
+    if (subtaskvalue3) {
+        let subTaskObject3 = {"value": `${subtaskvalue3}`, 'status': 'open'};
+        subtaskArray.push(subTaskObject3);
+    }
+    if (subtaskvalue4) {
+        let subTaskObject4 = {"value": `${subtaskvalue4}`, 'status': 'open'};
+        subtaskArray.push(subTaskObject4);
+    }
+    if (subtaskvalue5) {
+        let subTaskObject5 = {"value": `${subtaskvalue5}`, 'status': 'open'};
+        subtaskArray.push(subTaskObject5);
+    }
+    if (subtaskvalue6) {
+        let subTaskObject6 = {"value": `${subtaskvalue6}`, 'status': 'open'};
+        subtaskArray.push(subTaskObject6);
     }
 }
 
@@ -125,6 +150,18 @@ function getSubtaskFromTemplate() {
     };
     if (document.getElementById(`task-text-${index1}`)) {
         subtaskvalue2 = document.getElementById(`task-text-${index1}`).innerHTML
+    }
+    if (document.getElementById(`task-text-${index2}`)) {
+        subtaskvalue3 = document.getElementById(`task-text-${index2}`).innerHTML
+    }
+    if (document.getElementById(`task-text-${index3}`)) {
+        subtaskvalue4 = document.getElementById(`task-text-${index3}`).innerHTML
+    }
+    if (document.getElementById(`task-text-${index4}`)) {
+        subtaskvalue5 = document.getElementById(`task-text-${index4}`).innerHTML
+    }
+    if (document.getElementById(`task-text-${index5}`)) {
+        subtaskvalue6 = document.getElementById(`task-text-${index5}`).innerHTML
     }
 }
 
@@ -157,7 +194,7 @@ async function getTaskInformation(index) {
     getSubtaskFromTemplate();
     createTemplate(); //create complete template of object with all data
     subtaskArray = newTask.subtasks; //path from subtask Array where new subtasks should be pushed into
-    pushObject(subtaskvalue1, subtaskvalue2); // subtasks template with variable is pushed into subtaskArray
+    pushObject(subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5, subtaskvalue6); // subtasks template with variable is pushed into subtaskArray
     newTask.category = choosenCategory ? choosenCategory : 'Todo';
     await postData("task", newTask);
     tasks = [];
@@ -294,6 +331,7 @@ function activateEditModus(id) {
     getCurrentValues(id);
     prioButtonactivate(id);
     showContactsEdit(id);
+    scrollInfo(id);
 }
 
 /**changes the img if an user sets a Subtask as done in bigView */
@@ -329,6 +367,57 @@ function confirmSubtask2(id) {
         choSubtask2.classList.remove('checkedSubtask')
         choSubtask2.src = "/img/icons/normalCheckContact.svg"
         putData(`task/${firebaseId}/subtasks/1/status`, 'open')
+    }
+}
+
+function confirmSubtask3(id) {
+    let RT2 = tasks.find(task => task[1].id === id)
+    let firebaseId = RT2[0]
+    let choSubtask2 = document.getElementById(`subtaskBigViewImg3`)
+    if (choSubtask2.src.includes("/img/icons/normalCheckContact.svg")) {
+        choSubtask2.classList.remove('checkboxS2')
+        choSubtask2.classList.add('checkedSubtask')
+        choSubtask2.src = "/img/icons/normalCheckedContact.svg"
+        putData(`task/${firebaseId}/subtasks/2/status`, 'closed')
+    } else {
+        choSubtask2.classList.add('checkboxS2')
+        choSubtask2.classList.remove('checkedSubtask')
+        choSubtask2.src = "/img/icons/normalCheckContact.svg"
+        putData(`task/${firebaseId}/subtasks/2/status`, 'open')
+    }
+}
+
+function confirmSubtask4(id) {
+    let RT2 = tasks.find(task => task[1].id === id)
+    let firebaseId = RT2[0]
+    let choSubtask2 = document.getElementById(`subtaskBigViewImg4`)
+    if (choSubtask2.src.includes("/img/icons/normalCheckContact.svg")) {
+        choSubtask2.classList.remove('checkboxS2')
+        choSubtask2.classList.add('checkedSubtask')
+        choSubtask2.src = "/img/icons/normalCheckedContact.svg"
+        putData(`task/${firebaseId}/subtasks/3/status`, 'closed')
+    } else {
+        choSubtask2.classList.add('checkboxS2')
+        choSubtask2.classList.remove('checkedSubtask')
+        choSubtask2.src = "/img/icons/normalCheckContact.svg"
+        putData(`task/${firebaseId}/subtasks/3/status`, 'open')
+    }
+}
+
+function confirmSubtask5(id) {
+    let RT2 = tasks.find(task => task[1].id === id)
+    let firebaseId = RT2[0]
+    let choSubtask2 = document.getElementById(`subtaskBigViewImg5`)
+    if (choSubtask2.src.includes("/img/icons/normalCheckContact.svg")) {
+        choSubtask2.classList.remove('checkboxS2')
+        choSubtask2.classList.add('checkedSubtask')
+        choSubtask2.src = "/img/icons/normalCheckedContact.svg"
+        putData(`task/${firebaseId}/subtasks/4/status`, 'closed')
+    } else {
+        choSubtask2.classList.add('checkboxS2')
+        choSubtask2.classList.remove('checkedSubtask')
+        choSubtask2.src = "/img/icons/normalCheckContact.svg"
+        putData(`task/${firebaseId}/subtasks/4/status`, 'open')
     }
 }
 

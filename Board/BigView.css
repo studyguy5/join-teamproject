@@ -134,6 +134,7 @@
     min-height: 60px;
     max-height: 100px;
     margin-bottom: 10px;
+    /* overflow-y:scroll; */
 }
 
 .subtaskImgDiv {
@@ -271,6 +272,7 @@
 
 .editField {
     display: flex;
+    cursor: pointer;
 }
 
 .editField:hover img {
@@ -287,6 +289,7 @@
 
 .deleteField {
     display: flex;
+    cursor: pointer;
 }
 
 .deleteField:hover img {

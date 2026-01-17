@@ -494,7 +494,7 @@ function openTaskTypeDropDownNormal() {
     let drop = document.getElementById('dropIdNormal')
     if (drop.classList.contains('dropTasktypeClose')) {
         drop.classList.remove('dropTasktypeClose')
-    }else{
+    } else {
         drop.classList.add('dropTasktypeClose')
     }
 }
@@ -555,7 +555,7 @@ function createTemplate() {
  * @param {string} subtaskvalue2 - Second subtask value
  * @returns {void}
  */
-function pushObject(subtaskvalue1, subtaskvalue2) {
+function pushObject(subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5, subtaskvalue6) {
     if (subtaskvalue1) {
         let subTaskObject1 = { "value": `${subtaskvalue1}`, 'status': 'open' };
         subtaskArray.push(subTaskObject1)
@@ -563,6 +563,22 @@ function pushObject(subtaskvalue1, subtaskvalue2) {
     if (subtaskvalue2) {
         let subTaskObject2 = { "value": `${subtaskvalue2}`, 'status': 'open' };
         subtaskArray.push(subTaskObject2);
+    }
+    if (subtaskvalue3) {
+        let subTaskObject3 = { "value": `${subtaskvalue3}`, 'status': 'open' };
+        subtaskArray.push(subTaskObject3);
+    }
+    if (subtaskvalue4) {
+        let subTaskObject4 = { "value": `${subtaskvalue4}`, 'status': 'open' };
+        subtaskArray.push(subTaskObject4);
+    }
+    if (subtaskvalue5) {
+        let subTaskObject5 = { "value": `${subtaskvalue5}`, 'status': 'open' };
+        subtaskArray.push(subTaskObject5);
+    }
+    if (subtaskvalue6) {
+        let subTaskObject6 = { "value": `${subtaskvalue6}`, 'status': 'open' };
+        subtaskArray.push(subTaskObject6);
     }
 }
 
@@ -588,6 +604,18 @@ function getSubtaskFromTemplate() {
     }
     if (document.getElementById(`task-text-${index1}`)) {
         subtaskvalue2 = document.getElementById(`task-text-${index1}`).innerHTML
+    }
+    if (document.getElementById(`task-text-${index2}`)) {
+        subtaskvalue3 = document.getElementById(`task-text-${index2}`).innerHTML
+    }
+    if (document.getElementById(`task-text-${index3}`)) {
+        subtaskvalue4 = document.getElementById(`task-text-${index3}`).innerHTML
+    }
+    if (document.getElementById(`task-text-${index4}`)) {
+        subtaskvalue5 = document.getElementById(`task-text-${index4}`).innerHTML
+    }
+    if (document.getElementById(`task-text-${index5}`)) {
+        subtaskvalue6 = document.getElementById(`task-text-${index5}`).innerHTML
     }
 }
 
@@ -625,7 +653,7 @@ async function getTaskInformationNormal(index) {
     getSubtaskFromTemplate();
     createTemplate();
     subtaskArray = newTask.subtasks;
-    pushObject(subtaskvalue1, subtaskvalue2);
+    pushObject(subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5, subtaskvalue6);
     newTask.category = 'Todo';
     await postData("task", newTask);
     tasks = [];

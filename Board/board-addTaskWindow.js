@@ -1,5 +1,5 @@
 
-let prioArray = [];
+let prioArray = ['Medium'];
 window.contactsArray = [];
 document.addEventListener('DOMContentLoaded', () => {
     try { renderUserInitials(); } catch (e) { }
@@ -387,7 +387,7 @@ function deleteRenderedContact(index) {
     if (countedPopup.length > 6) {
         countedPopup.length - 1
         document.getElementById('countInfoPopup').innerHTML = `+ ${(countedPopup.length) - 6} Contact(s)`;
-    } else if (countedPopup.length <= 6 && deleteOneTime && document.getElementById('countInfoPopup').innerHTML != "") { document.getElementById('countInfoPopup').innerHTML = ""; deleteOneTime = false }
+    } else if (countedPopup.length <= 6 && deleteOneTime && document.getElementById('countInfoPopup').innerHTML !== "") { document.getElementById('countInfoPopup').innerHTML = ""; deleteOneTime = false }
     else {
         let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
         renderedContact.remove(`contactCirclePopupRender-${index}`)

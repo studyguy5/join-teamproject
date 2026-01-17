@@ -883,8 +883,12 @@
         font-size: 16px !important;
     }
 
-    .section-right-select {
+    .section-right-selectContacts {
         font-size: 16px !important;
+    }
+
+    .section-right-select {
+        font-size: 16px;
     }
 
     .input-section-leftPopup {
@@ -901,6 +905,10 @@
 
     .priority-section button {
         gap: 4px !important;
+    }
+
+    .contactCirclePopup{
+        margin:5px;
     }
 
     .inputPopup {

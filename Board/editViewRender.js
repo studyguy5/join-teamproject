@@ -81,6 +81,7 @@ function renderBigEditView(id) {
 
 
 <div class="footerPopupEditView">
+          <p id="info"></p>
           <div class="footer-buttons-sectionEditView">
             <button id="creatButtonIDEdit" type="button" onclick="createTaskTemplateEdit(${id})" class="ok-btn-edit-view">
               Ok<img class="checkEditView" src="/img/icons/doneSymbol.svg" />

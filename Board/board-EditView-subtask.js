@@ -3,7 +3,7 @@ function renderSubtaskEdit() {
     let list = document.getElementById("subtaskEdit-list-1"); // das zusätzliche <ul> element
     let currentCount = list.getElementsByClassName("listedEdit").length; //klasse von li element
     index = currentCount;
-    if (currentCount < 2 && subtask.value.trim() === "") {
+    if (currentCount <= 5 && subtask.value.trim() === "") {
         list.innerHTML += `<li onclick="editBulletpointEditView(${index})" id="listed-${index}" class="listedEdit"> 
         <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
         <span class="list-icon">
@@ -13,7 +13,7 @@ function renderSubtaskEdit() {
                                     </span>
                                     </li>`;
         subtask.value = "";
-    } else if (currentCount < 2 && subtask.value.trim() !== "") {
+    } else if (currentCount <=5 && subtask.value.trim() !== "") {
         list.innerHTML += `<li onclick="editBulletpointEditView(${index})" id="listed-${index}" class="listedEdit"> 
         <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
         <span class="list-icon">
@@ -23,9 +23,15 @@ function renderSubtaskEdit() {
                                     </span>
                                     </li>`;
         subtask.value = "";
-    }
+    }else{document.getElementById('subtask').value = `max amount of subtask reached`}
 }
 
+function scrollInfo(id){
+    let info = tasks.find(inf => inf[1].id === id)
+    if(info[1].subtasks){
+        document.getElementById('info').innerHTML = `Please scroll down for Subtasks`;
+    }else{document.getElementById('info').innerHTML = ""}
+}
 
 /**makes the subtask input field empty */
 function clearSubtaskEdit() {

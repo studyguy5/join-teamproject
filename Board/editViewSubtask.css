@@ -21,6 +21,10 @@
     display: flex;
 }
 
+#info{
+    margin-right:30px;
+}
+
 .subtask-iconEdit {
     position: absolute;
     right: 12px;

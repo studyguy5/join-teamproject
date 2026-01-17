@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 
 
+let index0 = 0;
+let index1 = 1;
+let index2 = 2;
+let index3 = 3;
+let index4 = 4;
+
 async function getObject(path = '') {
     let response = await fetch(BAsE_URL + path + ".json")
     return responseToJson = await response.json()
@@ -86,6 +92,19 @@ function getCurrentValues(id) {
         renderSubtaskEdit();
         document.getElementById(`task-text-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[1] ? singleTask[1]?.subtasks?.[1].value : ''}`;
     }
+    
+    if (singleTask[1].subtasks?.[2]) {
+        renderSubtaskEdit();
+        document.getElementById(`task-text-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[2] ? singleTask[1]?.subtasks?.[2].value : ''}`;
+    }
+    if (singleTask[1].subtasks?.[3]) {
+        renderSubtaskEdit();
+        document.getElementById(`task-text-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[3] ? singleTask[1]?.subtasks?.[3].value : ''}`;
+    }
+    if (singleTask[1].subtasks?.[4]) {
+        renderSubtaskEdit();
+        document.getElementById(`task-text-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[4] ? singleTask[1]?.subtasks?.[4].value : ''}`;
+    }
 }
 
 
@@ -109,21 +128,22 @@ function constantCheckTitleEdit() {
     const titleEdit = document.getElementById("titleEdit").value;
     if (titleEdit.length < 2)
         return showUserFeedbackTitleEdit(title),
-            document.getElementById('task-descriptionEdit').disabled = true, false;
+    document.getElementById('task-descriptionEdit').disabled = true, false;
     document.getElementById("UserFeedbackTitleEditMode").innerHTML = "";
     document.getElementById('task-descriptionEdit').disabled = false;
-
+    
     if (!validateTitleEdit(titleEdit))
         return showUserFeedbackTitleEditForm(title),
-            document.getElementById('task-descriptionEdit').disabled = true, false;
+    document.getElementById('task-descriptionEdit').disabled = true, false;
     document.getElementById("UserFeedbackTitleEditMode").innerHTML = "";
     document.getElementById('task-descriptionEdit').disabled = false;
-
+    
 }
 
 function dateInspect() {
     document.getElementById('dueDateEdit').min = new Date().toISOString().split('T')[0];
 }
+
 
 function constantCheckDateEdit() {
     const dueDateEdit = document.getElementById("dueDateEdit").value;
@@ -171,7 +191,7 @@ function showUserFeedbackDueDateEdit() {
     const dateInput = document.getElementById("UserFeedbackDateEditMode");
     dateInput.innerHTML = `form of DueDate is incorrect`;
     const categoryInput = document.getElementById("categoryValue");
-
+    
 }
 
 
@@ -195,7 +215,7 @@ function editFeedback() {
 
 /**searches for checked img, empties all relevant arrays and takes all current choosen ones
  * in order to keep it up to date and prevent double pushing 
- */
+*/
 function setContactAndPrioValueEdit(taskToEdit) {
     let checkedImg = document.querySelectorAll('#IdForContactsEdit img.checkedEdit')
     taskToEdit[1].cid = [];
@@ -210,37 +230,72 @@ function setContactAndPrioValueEdit(taskToEdit) {
     taskToEdit[1].prio = prioArray[0];
 }
 
-/**taskes values and creates object with it and pushes it after that into subtasks */
-function pushObjectEdit(taskToEdit, subtaskvalue1, subtaskvalue2) {
-    let subTaskObject = {
-        "value":
-            `${subtaskvalue1 || subtaskvalue2}`,
-        'status': 'open'
-    };
-    taskToEdit[1].subtasks.push(subTaskObject);
+/**here we check if values are here and execute the function above to create and push */
+function pushSubtaskIntoArray(taskToEdit, subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5) {
+    if (subtaskvalue1) {
+        pushObjectEdit(taskToEdit, subtaskvalue1);
+    }
+    if (subtaskvalue2) {
+        pushObjectEdit(taskToEdit, subtaskvalue2);
+    }
+    if (subtaskvalue3) {
+        pushObjectEdit(taskToEdit, subtaskvalue3);
+    }
+    if (subtaskvalue4) {
+        pushObjectEdit(taskToEdit, subtaskvalue4);
+    }
+    if (subtaskvalue5) {
+        pushObjectEdit(taskToEdit, subtaskvalue5);
+    }
 }
 
+/**taskes values and creates object with it and pushes it after that into subtasks */
+function pushObjectEdit(taskToEdit, subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5) {
+    
+    if(subtaskvalue1){
+        let subTaskObject = { "value":`${subtaskvalue1 || subtaskvalue2 || subtaskvalue3 || subtaskvalue4 || subtaskvalue5}`,'status': 'open'};
+        taskToEdit[1].subtasks.push(subTaskObject);
+    }
+    // if (subtaskvalue2) {
+        //     let subTaskObject = { "value":`${subtaskvalue2}`,'status': 'open'};
+        //     taskToEdit[1].subtasks.push(subTaskObject);
+        // }
+        // if (subtaskvalue3) {
+            //     let subTaskObject = { "value":`${subtaskvalue3}`,'status': 'open'};
+            //     taskToEdit[1].subtasks.push(subTaskObject);
+            // }
+            // if (subtaskvalue4) {
+                //     let subTaskObject = { "value":`${subtaskvalue4}`,'status': 'open'};
+                //     taskToEdit[1].subtasks.push(subTaskObject);
+                // }
+                // if (subtaskvalue5) {
+                    //     let subTaskObject = { "value":`${subtaskvalue5}`,'status': 'open'};
+    //     taskToEdit[1].subtasks.push(subTaskObject);
+    // }
+}
+
+
 /**here we get the actual values out from innerHTML */
-function getSubtaskFromTemplateEdit(taskToEdit) {  //hole die Daten
+function getSubtaskFromTemplateEdit() {  //hole die Daten
     if (document.getElementById(`task-text-${index0}`)) {
         subtaskvalue1 = document.getElementById(`task-text-${index0}`).innerHTML
     };
     if (document.getElementById(`task-text-${index1}`)) {
         subtaskvalue2 = document.getElementById(`task-text-${index1}`).innerHTML
-    }
-    taskToEdit[1].subtasks = [];    // hier leere ich das Arry local, damit beide values aus dem Edit Modus eingefügt werden können, egal ob alt oder neu
+    };
+    if (document.getElementById(`task-text-${index2}`)) {
+        subtaskvalue3 = document.getElementById(`task-text-${index2}`).innerHTML
+    };
+    if (document.getElementById(`task-text-${index3}`)) {
+        subtaskvalue4 = document.getElementById(`task-text-${index3}`).innerHTML
+    };
+    if (document.getElementById(`task-text-${index4}`)) {
+        subtaskvalue5 = document.getElementById(`task-text-${index4}`).innerHTML
+    };
+    // taskToEdit[1].subtasks = "";    // hier leere ich das Arry local, damit beide values aus dem Edit Modus eingefügt werden können, egal ob alt oder neu
     // so entsteht kein doppelter Eintrag und es ist nach aktuellem Bearbeitungsstand im Edit-Mode
 }
 
-/**here we check if values are here and execute the function above to create and push */
-function pushSubtaskIntoArray(taskToEdit, subtaskvalue1, subtaskvalue2) {
-    if (subtaskvalue1) {
-        pushObjectEdit(taskToEdit, subtaskvalue1, null);
-    }
-    if (subtaskvalue2) {
-        pushObjectEdit(taskToEdit, null, subtaskvalue2);
-    }
-}
 
 
 let editInputId = ['titleEdit', 'task-descriptionEdit', 'dueDateEdit'];
@@ -262,8 +317,8 @@ async function getTaskInformationEdit(id) {
         taskToEdit[1][existingObjects[valueIndex]] = document.getElementById(`${editInputId[valueIndex]}`).value
     };
     setContactAndPrioValueEdit(taskToEdit);
-    getSubtaskFromTemplateEdit(taskToEdit);
-    pushSubtaskIntoArray(taskToEdit, subtaskvalue1, subtaskvalue2);
+    getSubtaskFromTemplateEdit(taskToEdit, subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5);
+    pushSubtaskIntoArray(taskToEdit, subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5);
     await postData("task", taskToEdit[1]);
     tasks = [];
     tasks.push(...Object.entries(await getData('task')));

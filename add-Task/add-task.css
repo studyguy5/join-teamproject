@@ -243,6 +243,7 @@ textarea:focus {
     display: flex;
     align-items: center;
     gap: 30px;
+    margin-bottom: 20px;
 }
 
 .input-section-left {
@@ -313,7 +314,7 @@ textarea:focus {
     max-width: 1304px;
     /* padding: 0 160px; */
     margin-bottom: 64px;
-    margin-top: 110px;
+    margin-top: 140px;
     display: flex;
     align-items: center;
     justify-content: space-around;

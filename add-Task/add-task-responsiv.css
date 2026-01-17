@@ -1,6 +1,16 @@
 @media(max-width:1272px) {
-    .input-section-left, .input-section-right {
+
+    .input-section-left,
+    .input-section-right {
         width: 400px;
+    }
+
+    .dropTasktypeOpen{
+        width:400px;
+    }
+
+    .taskOption:hover{
+        width:378px;
     }
 }
 
@@ -8,6 +18,14 @@
     .input-section-left {
         width: 340px;
         margin-left: 40px;
+    }
+
+    .dropTasktypeOpen{
+        width:340px;
+    }
+
+    .taskOption:hover{
+        width:318px;
     }
 }
 
@@ -18,42 +36,48 @@
 }
 
 @media (max-width:1000px) {
-    .mainAreaRight{
+    .mainAreaRight {
         overflow-x: hidden;
     }
-    .mainAreaRight h1{
+
+    .mainAreaRight h1 {
         font-size: 48px;
         margin-left: 40px;
     }
-    .input-container{
+
+    .input-container {
         flex-direction: column;
         max-width: none;
         gap: 0;
     }
-    .input-section-left{
+
+    .input-section-left {
         margin-left: 0;
     }
-    .line{
+
+    .line {
         display: none;
     }
 }
 
 
 @media (max-width:940px) {
-    .clear-btn{
+    .clear-btn {
         font-size: 16px;
     }
-    .create-task-btn{
+
+    .create-task-btn {
         font-size: 16px;
     }
 }
 
 @media (max-width:680px) {
-    .footer{
+    .footer {
         flex-direction: column;
-        margin-top:35px;
+        margin-top: 68px;
     }
-    .footer-buttons-section{
+
+    .footer-buttons-section {
         justify-content: center;
         margin-bottom: 30px;
     }
@@ -61,73 +85,100 @@
 
 
 @media(max-width:570px) {
-    .input-section-left{
+    .input-section-left {
         width: 300px;
     }
+
     .input-section-right {
         width: 300px;
     }
-    .mainAreaRight h1{
+
+    .mainAreaRight h1 {
         font-size: 44px;
     }
+
     .input-section-left label {
         font-size: 16px;
     }
-    .input-section-left-input{
+
+    .input-section-left-input {
         font-size: 16px;
     }
-    textarea{
+
+    textarea {
         font-size: 16px;
     }
-    .input-section-right label{
+
+    .dropTasktypeOpen{
+        width:300px;
+    }
+
+    .taskOption:hover{
+        width:278px;
+    }
+
+    .input-section-right label {
         font-size: 16px;
     }
-    .priority-section{
-        flex-direction: column;
-    }
-    .priority-section button{
+
+    .priority-section button {
         font-size: 16px;
         width: auto;
     }
-    .section-right-select{
+
+    .section-right-select {
         font-size: 16px;
     }
-    .ForTaskChoise{
+
+    .ForTaskChoise {
         font-size: 16px;
     }
-    .ForTaskChoise p{
+
+    .ForTaskChoise p {
         font-size: 16px;
     }
-    .input-section-right-input{
+
+    .input-section-right-input {
         font-size: 16px;
     }
-    .input-container {
-        padding-bottom: 120px;
+
+    .footer {
+      margin-top: 68px;
     }
 }
 
 @media(max-width:428px) {
-    .priority-section{
+    .priority-section {
         flex-direction: row;
         justify-content: center;
         gap: 8px;
     }
-    
-    .input-section-left{
-        width: 290px;
+
+    .dropTasktypeOpen{
+        width:290px;
     }
-    .input-section-right{
+
+    .taskOption:hover{
+        width:268px;
+    }
+
+    .input-section-left {
         width: 290px;
     }
 
-    .mainAreaRight{
+    .input-section-right {
+        width: 290px;
+    }
+
+    .mainAreaRight {
         height: calc(100vh - 160px);
     }
-    .input-container{
+
+    .input-container {
         padding-bottom: 0;
     }
 
-    .footer{
-        margin: 50px 0px 20px 0px;
+    .footer {
+        margin: 68px 0px 20px 0px;
     }
 }

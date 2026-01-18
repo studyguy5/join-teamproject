@@ -117,8 +117,7 @@ function renderTaskintoBoard(element) {
     taskOption = 'darkblue';
   }
   return `<div draggable="true"  onmouseleave="closeMiniMenü(${element.id})" ondragstart="startDragging(${element['id']})" 
-    id="TaskDiv-${element.id}" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderEditAndDeleteButton(${element.id}); checkSubtaskLenght(${element.id}); 
-    checkIfEditModeActive()" class="TaskDiv">
+    id="TaskDiv-${element.id}" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderEditAndDeleteButton(${element.id}); checkSubtaskLenght(${element.id})" class="TaskDiv">
     <button onclick="event.stopPropagation(); renderMiniMenü(${element.id})" class="MiniMenüButton"><img src="/img/icons/miniMenüButton.svg"></button>
     <div onclick="event.stopPropagation()" class=" dOntShow" id="miniMenüResponsiv-${element.id}">
     <p class="head">Move to</p>
@@ -229,16 +228,16 @@ function checkSubtaskLenght(elements){
   }
 }
 
-function checkIfEditModeActive(){
-  // let elementsOfTask = tasks.find(t => t[1].id === elements);
-  if(document.querySelectorAll('.editBigView')){
-  let ele = document.querySelectorAll('.editBigView')
-  ele.forEach(ele => 
-  ele.style.overflowY = 'scroll');
-  }else{
+// function checkIfEditModeActive(){
+//   // let elementsOfTask = tasks.find(t => t[1].id === elements);
+//   if(document.querySelectorAll('.editBigView')){
+//   let ele = document.querySelectorAll('.editBigView')
+//   ele.forEach(ele => 
+//   ele.style.overflowY = 'scroll');
+//   }else{
 
-  }
-}
+//   }
+// }
 
 /**renders the Contacts into BigView */
 function renderContactHTMLForBigView(rightContacts, BVindex, short) {

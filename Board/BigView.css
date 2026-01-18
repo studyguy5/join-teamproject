@@ -14,8 +14,9 @@
 }
 
 .flexClass{
-    display:flex;
+    display:flex;    
 }
+
 
 .bigViewOfTask {
     position:fixed;
@@ -30,6 +31,7 @@
     /* padding: 48px 40px; */
     background-color: rgb(0, 0, 0, 0.5);
 }
+
 
 .contactsBV {
     height: fit-content;

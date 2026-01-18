@@ -329,7 +329,7 @@ function chooseContact(index) {
         choContact.classList.add('checked')
         let countPopup = document.querySelectorAll('.contactBox .checked')
         if ((countPopup.length) > 6) {
-            document.getElementById('countInfoPopup').innerHTML = `+ ${(countPopup.length) - 6} Con`;
+            document.getElementById('countInfoPopup').innerHTML = `+ ${(countPopup.length) - 6}`;
         }
         else {
             renderChoosenContact(index);
@@ -352,7 +352,7 @@ function chooseFilteredContact(filterContactIndex) {
         let countFilteredPopup = document.querySelectorAll('.contactBox .checked')
         if ((countFilteredPopup.length) > 6) {
             deleteOneTime = true;
-            document.getElementById('countInfoPopup').innerHTML = `+ ${(countFilteredPopup.length) - 6} Contact(s)`;
+            document.getElementById('countInfoPopup').innerHTML = `+ ${(countFilteredPopup.length) - 6}`;
         }
         else {
             renderFilteredChoosenContactPopup(filterContactIndex)
@@ -386,7 +386,7 @@ function deleteRenderedContact(index) {
     let countedPopup = document.querySelectorAll('.contactBox .checked')
     if (countedPopup.length > 6) {
         countedPopup.length - 1
-        document.getElementById('countInfoPopup').innerHTML = `+ ${(countedPopup.length) - 6} Contact(s)`;
+        document.getElementById('countInfoPopup').innerHTML = `+ ${(countedPopup.length) - 6}`;
     } else if (countedPopup.length <= 6 && deleteOneTime && document.getElementById('countInfoPopup').innerHTML !== "") { document.getElementById('countInfoPopup').innerHTML = ""; deleteOneTime = false }
     else {
         let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)

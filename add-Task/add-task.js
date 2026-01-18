@@ -183,7 +183,7 @@ function chooseContactNormal(index) {
         let count = document.querySelectorAll('.contactBox .checked')
         if ((count.length) > 6) {
             deleteONETime = true;
-            document.getElementById('countInfo').innerHTML = `+ ${(count.length) - 6} Con`
+            document.getElementById('countInfo').innerHTML = `+ ${(count.length) - 6}`
         } else {
             renderChoosenContactNormal(index);
             choContact.src = "/img/icons/normalCheckedContact.svg"
@@ -209,7 +209,7 @@ function chooseFilteredContactNormal(filterContactIndex) {
         let countFilter = document.querySelectorAll('.contactBox .checked')
         if ((countFilter.length) > 6) {
             deleteONETime = true;
-            document.getElementById('countInfo').innerHTML = `+ ${(countFilter.length) - 6} Con`
+            document.getElementById('countInfo').innerHTML = `+ ${(countFilter.length) - 6}`
         } else {
             renderFilteredChoosenContactNormal(filterContactIndex)
             choContact.src = "/img/icons/normalCheckedContact.svg"
@@ -257,7 +257,7 @@ function deleteRenderedContactNormal(index) {
     let countedInNormal = document.querySelectorAll('.contactBox .checked')
     if (countedInNormal.length > 6) {
         countedInNormal.length - 1
-        document.getElementById('countInfo').innerHTML = `+ ${(countedInNormal.length) - 6} Con`;
+        document.getElementById('countInfo').innerHTML = `+ ${(countedInNormal.length) - 6}`;
     } else if (countedInNormal.length <= 6 && deleteONETime && document.getElementById('countInfo').innerHTML != "") {
         document.getElementById('countInfo').innerHTML = ""; deleteONETime = false;
     } else {
@@ -657,7 +657,7 @@ function setContactAndPrioValue(newTask) {
  */
 async function getTaskInformationNormal(index) {
     let newTask = createTemplate();
-    const allIds = tasks.map(ta => ta[1].id)
+    let allIds = tasks.map(ta => ta[1].id)
     let rn = Math.floor(Math.random() * 55)
     while (allIds.includes(rn)) {
         rn = Math.floor(Math.random() * 13)

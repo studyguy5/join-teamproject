@@ -180,7 +180,7 @@ function setContactAndPrioValue(newTask) {
 /**get all the typed in Data and push it into the created object structure (called template) */
 async function getTaskInformation(index) {
     let newTask = createTemplate();
-    const allIds = tasks.map(ta => ta[1].id)
+    let allIds = tasks.map(ta => ta[1].id)
     let rn = Math.floor(Math.random() * 50)
     while (allIds.includes(rn)) {
         rn = Math.floor(Math.random() * 10)

@@ -16,8 +16,8 @@
         max-width: 460px;
         background-color: white;
         border-radius: 30px;
-        height:1020px;
-        max-height:min-content;
+        height:min-content;
+        max-height:930px;
         overflow-y:scroll;
         scrollbar-width: none;
         /* margin: auto auto; */
@@ -43,8 +43,8 @@
         max-width: 460px;
         background-color: white;
         border-radius: 30px;
-        height:100%;
-        max-height:min-content;
+        height:min-content;
+        max-height:930px;
         overflow-y:scroll;
         scrollbar-width: none;
     }
@@ -69,6 +69,7 @@
         background-color: white;
         border-radius: 30px;
         height:min-content;
+        max-height:930px;
         overflow-y:scroll;
         scrollbar-width: none;
     }
@@ -92,8 +93,8 @@
         max-width: 460px;
         background-color: white;
         border-radius: 30px;
-        height:100%;
-        max-height:fit-content;
+        height:min-content;
+        max-height:930px;
         overflow-y:scroll;
         scrollbar-width: none;
     }

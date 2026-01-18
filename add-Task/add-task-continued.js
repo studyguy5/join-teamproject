@@ -21,7 +21,6 @@ function clearTaskNormal() {
 }
 
 async function filterAndShowTasks() {
-    console.log('filter AddTask')
     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
        let col =  document.getElementById(`${categorys[idIndex]}`)?.innerHTML;
        if(col){document.getElementById(`${categorys[idIndex]}`).innerHTML = ""}

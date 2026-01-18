@@ -1,3 +1,5 @@
+
+
 /**
  * Clears the input fields and resets the task form for normal tasks.
  */
@@ -18,23 +20,27 @@ function clearTaskNormal() {
     document.getElementById('subtask-list-1').innerHTML = "";
 }
 
-
-/**
- * Filters tasks by category and renders them on the board.
- */
 async function filterAndShowTasks() {
+    console.log('filter AddTask')
     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
-        document.getElementById(`${categorys[idIndex]}`).innerHTML = '';
+       let col =  document.getElementById(`${categorys[idIndex]}`)?.innerHTML;
+       if(col){document.getElementById(`${categorys[idIndex]}`).innerHTML = ""}
         let filteredTasks = tasks.filter(f => f[1].category == categorys[idIndex]);
         for (let catIndex = 0; catIndex < filteredTasks.length; catIndex++) {
             let element = filteredTasks[catIndex][1];
-            document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoard(element);
+            if(col){document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoardAddTask(element);}
             if (document.getElementById(`${categorys[idIndex]}`)) {
                 renderContact(element);
             }
         }
     }
 }
+
+
+/**
+ * Filters tasks by category and renders them on the board.
+ */
+
 
 
 let progress;
@@ -58,22 +64,21 @@ function checkDone(id) {
  * Renders a single task into the board with a color depending on its type.
  * @param {Object} element - The task object to render.
  */
-function renderTaskintoBoard(element) {
+function renderTaskintoBoardAddTask(element) {
+    console.log('arbeitet')
     let taskOption = 'türkis';
     if (element.taskType === 'User Story') {
         taskOption = 'darkblue';
     }
 
-    taskTemplate(element, taskOption);
+    taskTemplate(element);
 }
 
 
 let currentDraggedElement;
-let index0 = 0;
-let index1 = 1;
+
 let subtaskArray = [];
-let subtaskvalue1;
-let subtaskvalue2;
+
 
 
 /**

@@ -424,7 +424,7 @@ textarea:focus::placeholder {
     padding: 15px 25px;
     border-radius: 10px;
     opacity: 1;
-    transition: all 0.5s ease;
+    transition: all 1.2s ease-out;
     pointer-events: none;
     width: 326;
     height: 74;

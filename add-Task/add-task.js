@@ -1,15 +1,12 @@
-/** 
- * Array of available task categories.
- * @type {Array.<string>}
- */
-let categorys = ['Todo', 'Inprogress', 'AwaitFeedback', 'Done'];
 
+
+let categorys = ['Todo', 'Inprogress', 'AwaitFeedback', 'Done'];
 
 /**
  * Stores the selected priority.
  * @type {Array.<string>}
  */
-let prioArray = [];
+let prioArray = ['Medium'];
 
 
 /**
@@ -296,11 +293,11 @@ function showSuccessMessage() {
 
     setTimeout(() => {
         window.location.href = "../board/board.html";
-    }, 5000);
+    }, 3500);
 
     setTimeout(() => {
         popup.classList.remove("show");
-    }, 1000);
+    }, 2250);
 }
 
 
@@ -484,6 +481,20 @@ async function postData(path = '', data = {}) {
 }
 
 
+let index0 = 0;
+let index1 = 1;
+let index2 = 2;
+let index3 = 3;
+let index4 = 4;
+let index5 = 5;
+
+let subtaskvalue1;
+let subtaskvalue2;
+let subtaskvalue3;
+let subtaskvalue4;
+let subtaskvalue5;
+let subtaskvalue6;
+
 /**
  * Toggles the task-type dropdown menu.
  * @returns {void}
@@ -594,6 +605,7 @@ async function getData(path = '') {
 }
 
 
+
 /**
  * Reads subtask values from the template by index.
  * @returns {void}
@@ -626,13 +638,14 @@ function getSubtaskFromTemplate() {
  * @returns {void}
  */
 function setContactAndPrioValue(newTask) {
-    let checkedImg = document.querySelectorAll('#IdForContacts img.checked')
+    let checkedImg = document.querySelectorAll('#IdForContactsNormal img.checked')
     checkedImg.forEach(img => {
+        let id = img.id;
+        newTask.cid.push(id);
         names = img.dataset.set;
         newTask.assignedTo.push(names)
     })
-
-    newTask.prio = prioArray[0] || '';
+     newTask.prio = prioArray[0];
 }
 
 
@@ -644,7 +657,12 @@ function setContactAndPrioValue(newTask) {
  */
 async function getTaskInformationNormal(index) {
     let newTask = createTemplate();
-    newTask.id = (tasks.length) + 1;
+    const allIds = tasks.map(ta => ta[1].id)
+    let rn = Math.floor(Math.random() * 55)
+    while (allIds.includes(rn)) {
+        rn = Math.floor(Math.random() * 13)
+    }
+    newTask.id = rn;
     for (let valueIndex = 0; valueIndex < taskObjectKey.length; valueIndex++) {
         newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value
     };
@@ -660,3 +678,5 @@ async function getTaskInformationNormal(index) {
     tasks.push(...Object.entries(await getData('task')));
     filterAndShowTasks();
 };
+
+

@@ -17,6 +17,7 @@ function clearTaskNormal() {
     buttons[1].classList.add('Medium');
     prioArray.length = 0;
     const taskType = document.getElementById("selectedTaskNormal").innerText = "Select Task Category";
+    document.getElementById('subtask-list-1').classList.remove('scrollClass')
     document.getElementById('subtask-list-1').innerHTML = "";
 }
 

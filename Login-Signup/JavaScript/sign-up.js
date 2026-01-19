@@ -433,7 +433,7 @@ form?.addEventListener('submit', async (e) => {
     await database.addUser({ email, name });
     localStorage.setItem('userFullName', name);
     showElement(successMessage);
-    setTimeout(() => { window.location.href = 'Index.html'; }, 1800);
+    setTimeout(() => { window.location.href = 'index.html'; }, 1800);
   } catch (error) {
     let msg = 'Registrierung fehlgeschlagen.';
     if (error.code === 'auth/email-already-in-use') msg = 'Diese Email wird bereits verwendet.';

@@ -309,7 +309,7 @@
     box-shadow:1px 8px 14px 3px rgb(0, 0, 0, 0.04);
     width: auto;
     height: 105px;
-    padding-top:8px;
+    /* padding-top:8px; */
     position:relative;
     top: -8px;
     background-color: white;

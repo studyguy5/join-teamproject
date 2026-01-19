@@ -5,12 +5,12 @@
         width: 400px;
     }
 
-    .dropTasktypeOpen{
-        width:400px;
+    .dropTasktypeOpen {
+        width: 400px;
     }
 
-    .taskOption:hover{
-        width:378px;
+    .taskOption:hover {
+        width: 378px;
     }
 }
 
@@ -20,12 +20,12 @@
         margin-left: 40px;
     }
 
-    .dropTasktypeOpen{
-        width:340px;
+    .dropTasktypeOpen {
+        width: 340px;
     }
 
-    .taskOption:hover{
-        width:318px;
+    .taskOption:hover {
+        width: 318px;
     }
 }
 
@@ -71,6 +71,18 @@
     }
 }
 
+@media(min-width:820px) and (max-width:820px) and (max-height:1180px) {
+    .mainAreaRight {
+        height: 86vh;
+    }
+}
+
+@media(min-width:768px) and (max-width:768px) and (max-height:1024px) {
+    .mainAreaRight {
+        height: 86vh;
+    }
+}
+
 @media (max-width:680px) {
     .footer {
         flex-direction: column;
@@ -109,12 +121,12 @@
         font-size: 16px;
     }
 
-    .dropTasktypeOpen{
-        width:300px;
+    .dropTasktypeOpen {
+        width: 300px;
     }
 
-    .taskOption:hover{
-        width:278px;
+    .taskOption:hover {
+        width: 278px;
     }
 
     .input-section-right label {
@@ -143,42 +155,70 @@
     }
 
     .footer {
-      margin-top: 68px;
+        margin-top: 68px;
     }
 }
 
-@media(max-width:428px) {
-    .priority-section {
-        flex-direction: row;
-        justify-content: center;
-        gap: 8px;
-    }
-
-    .dropTasktypeOpen{
-        width:290px;
-    }
-
-    .taskOption:hover{
-        width:268px;
-    }
-
-    .input-section-left {
-        width: 290px;
-    }
-
-    .input-section-right {
-        width: 290px;
-    }
-
+@media(min-width:540px) and (max-width:540px) and (max-height:720px) {
     .mainAreaRight {
-        height: calc(100vh - 160px);
+        height: 86vh;
     }
 
-    .input-container {
-        padding-bottom: 0;
-    }
-
-    .footer {
-        margin: 68px 0px 20px 0px;
+    .footer{
+        margin-top: 110px;
     }
 }
+
+    @media(min-width:430px) and (max-width:430px) and (max-height:932px) {
+        .input-section-right {
+            height: 100%;
+        }
+
+        .input-container {
+            height: 100%;
+        }
+
+        .mainAreaRight {
+            height: 83vh;
+        }
+
+        .footer {
+            margin: 120px 0px 15px 0px;
+        }
+    }
+
+    @media(max-width:428px) {
+        .priority-section {
+            flex-direction: row;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .dropTasktypeOpen {
+            width: 290px;
+        }
+
+        .taskOption:hover {
+            width: 268px;
+        }
+
+        .input-section-left {
+            width: 290px;
+        }
+
+        .input-section-right {
+            width: 290px;
+        }
+
+        .mainAreaRight {
+            height: calc(100vh - 160px);
+        }
+
+        .input-container {
+            padding-bottom: 0;
+        }
+
+        .footer {
+            margin: 125px 0px 15px 0px;
+        }
+    }

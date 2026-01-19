@@ -13,7 +13,7 @@ function renderSubtask(){
     let currentCount = list.getElementsByClassName("listed").length; 
     index = currentCount;
 
-    if (currentCount <= 5 && subtask.value.trim() !==""){
+    if (subtask.value.trim() !==""){
         list.innerHTML += `<li onclick="editBulletpoint(${index})" id="listed-${index}" class="listed"> 
                               <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
                                 <span class="list-icon">
@@ -24,9 +24,8 @@ function renderSubtask(){
                             </li>
         `;
         subtask.value = "";
-    }else{
-        document.getElementById('subtask').value = `max amount of subtask reached`}
-    if(currentCount > 1 ){
+    }
+    if(currentCount > 2 ){
         document.getElementById('subtask-list-1').classList.add('scrollClass')
     }
 }

@@ -298,6 +298,7 @@ function showSuccessMessage() {
     setTimeout(() => {
         popup.classList.remove("show");
     }, 2250);
+    document.getElementById('creatButtonIDNormal').disabled = false;
 }
 
 
@@ -352,6 +353,7 @@ function commonConstantCheck() {
         document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
     } else {
         getTaskInformationNormal();
+        document.getElementById('creatButtonIDNormal').disabled = true;
         showSuccessMessage();
     }
 }

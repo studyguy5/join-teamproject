@@ -5,7 +5,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
     <div onclick="openContactView(); showInput()" id="hiddenlayer2" class="hiddenlayer2 show2" ></div>
         <div class="popup-header">
           <h1>Add Task</h1>
-          <img onclick="closePopup()" src="/img/icons/close-icon.svg" />
+          <img onclick="closePopup(); closeContactView(); resetTaskType()" src="/img/icons/close-icon.svg" />
         </div>
 
         <div class="input-containerPopup">
@@ -137,6 +137,7 @@ function renderTaskintoBoard(element) {
     </div>
     <div id="contacts-Priority-Container" class="contacts-Priority-Container" >
     <div id="${element.id}" class="contactsMiniView"></div>
+    <div id="${element.id}-additionalContactInfo" class="additionalContactInfo"></div>
     <div class="taskPriority">${element.prio == 'Urgent' ?
       `<img src="/img/icons/urgent.svg">` :
       element.prio == 'Medium' ?

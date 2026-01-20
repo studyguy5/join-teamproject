@@ -122,23 +122,23 @@ function pushObject(subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, 
         subtaskArray.push(subTaskObject1)
     }
     if (subtaskvalue2) {
-        let subTaskObject2 = {"value": `${subtaskvalue2}`, 'status': 'open'};
+        let subTaskObject2 = { "value": `${subtaskvalue2}`, 'status': 'open' };
         subtaskArray.push(subTaskObject2);
     }
     if (subtaskvalue3) {
-        let subTaskObject3 = {"value": `${subtaskvalue3}`, 'status': 'open'};
+        let subTaskObject3 = { "value": `${subtaskvalue3}`, 'status': 'open' };
         subtaskArray.push(subTaskObject3);
     }
     if (subtaskvalue4) {
-        let subTaskObject4 = {"value": `${subtaskvalue4}`, 'status': 'open'};
+        let subTaskObject4 = { "value": `${subtaskvalue4}`, 'status': 'open' };
         subtaskArray.push(subTaskObject4);
     }
     if (subtaskvalue5) {
-        let subTaskObject5 = {"value": `${subtaskvalue5}`, 'status': 'open'};
+        let subTaskObject5 = { "value": `${subtaskvalue5}`, 'status': 'open' };
         subtaskArray.push(subTaskObject5);
     }
     if (subtaskvalue6) {
-        let subTaskObject6 = {"value": `${subtaskvalue6}`, 'status': 'open'};
+        let subTaskObject6 = { "value": `${subtaskvalue6}`, 'status': 'open' };
         subtaskArray.push(subTaskObject6);
     }
 }
@@ -189,7 +189,7 @@ async function getTaskInformation(index) {
     for (let valueIndex = 0; valueIndex < taskObjectKey.length; valueIndex++) {
         newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value
     };
-    newTask.taskType = document.getElementById('IdForTaskChoise').innerText
+    newTask.taskType = document.getElementById('selectedTask').innerText
     setContactAndPrioValue(newTask, index);
     getSubtaskFromTemplate();
     createTemplate(); //create complete template of object with all data
@@ -257,15 +257,15 @@ function bigViewOfTask(id) {
 function moveUpCategory(id) {
     let curTask = tasks.filter(tasks => tasks[1].id === id);
     switch (curTask[0][1].category) {
-        case 'Todo': 
+        case 'Todo':
             break;
-        case 'Inprogress': curTask[0][1].category = 'Todo', filterAndShowTasks(id); 
+        case 'Inprogress': curTask[0][1].category = 'Todo', filterAndShowTasks(id);
             break;
-        case 'AwaitFeedback': curTask[0][1].category = 'Inprogress', filterAndShowTasks(id); 
+        case 'AwaitFeedback': curTask[0][1].category = 'Inprogress', filterAndShowTasks(id);
             break;
         case 'Done': curTask[0][1].category = 'AwaitFeedback', filterAndShowTasks(id);
             break;
-        default: 
+        default:
             break;
     }
 
@@ -281,9 +281,9 @@ function moveDownCategory(id) {
             break;
         case 'AwaitFeedback': CurTask[0][1].category = 'Done', filterAndShowTasks(id);
             break;
-        case 'Done': 
+        case 'Done':
             break;
-        default: 
+        default:
             break;
     }
 }
@@ -421,17 +421,21 @@ function confirmSubtask5(id) {
     }
 }
 
-/**renders the Contacts in BigView */
+/**renders the Contacts into Tasks====*/
 function renderContact(element) {
+    let addon = document.getElementById(`${element.id}-additionalContactInfo`);
+    // let maxVisible = 4
     let contact = document.getElementById(`${element.id}`)
-    if (element.assignedTo)
-        for (let ContactIndex = 0; ContactIndex < element.assignedTo.length; ContactIndex++) {
-            let slim = element.assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
-            contact.innerHTML += `
-    <div id="contactscircle" class="contactsCircle">${slim[ContactIndex][0] + slim[ContactIndex][1]} </div>`
-        } else { contact.innerHTML = '' };
+    for (let ContactIndex = 0; ContactIndex < element.assignedTo.length; ContactIndex++) {
+        if (ContactIndex >= 4) break;
+        let slim = element.assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
+        contact.innerHTML += `
+    <div id="contactscircle" class="contactsCircle">${slim[ContactIndex][0] + slim[ContactIndex][1]}</div>`
+    }
+    if (element.assignedTo.length > 4)
+        addon.innerText = `+${(element.assignedTo.length) - 4}`
+    // let astyle = document.querySelectorAll('.additionalContactInfo').forEach(astyle => astyle.style.display = "flex");
 }
-
 /**closes the bigView as the name says */
 async function closeBigView() {
     let closefeature = document.getElementById('bigViewOfTask')

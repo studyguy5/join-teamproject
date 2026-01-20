@@ -191,6 +191,8 @@ function createTaskTemplate() {
         document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
     } else {
         getTaskInformation();
+        document.getElementById('creatButtonID').disabled = true;
+        console.log('executed')
         showReportAddedTaskTemplate();
     }
 }
@@ -205,6 +207,7 @@ function showReportAddedTaskTemplate() {
         popup.classList.remove("show");
         closePopup();
     }, 1000);
+    // document.getElementById('creatButtonID').disabled = false;
 }
 
 
@@ -303,6 +306,7 @@ function showInput() {
 
 /**here the Contact DropDown will open and the arrow makes an 180deg move */
 function openContactView() {
+    console.log('standard arbeitet')
     let contactDrop = document.getElementById('IdForContacts')
     if (contactDrop.classList.contains('availibleContactsClose')) {
         contactDrop.classList.remove('availibleContactsClose');
@@ -319,6 +323,27 @@ function openContactView() {
         let contact = document.getElementById('arrowImgC')
         contact.classList.toggle('select-arrow-open')
     }
+}
+
+function closeContactView() {
+    console.log('arbeitet')
+    let contactDrop = document.getElementById('IdForContacts')
+    if (contactDrop.classList.contains('availableContactsOpen')) {
+        contactDrop.classList.remove('availableContactsOpen');
+        contactDrop.classList.add('availibleContactsClose');
+        showInput();
+        let layer = document.getElementById('hiddenlayer2')
+        layer.classList.toggle('hiddenlayer2')
+    } else if (contactDrop.classList.contains('availibleContactsClose')) {
+    }
+    if (document.querySelectorAll('availableContactsOpen')) {
+        let contact = document.getElementById('arrowImgC')
+        contact.classList.toggle('select-arrow-open')
+    }
+}
+
+function resetTaskType() {
+    resetTasktypeDropDown();
 }
 
 /**here we check which Contacts have the checkbox img and change it into checked to make it visible */
@@ -404,6 +429,21 @@ function openTasktypeDropDown() {
     if (document.querySelectorAll('.dropTasktypeOpen')) {
         let ch = document.getElementById('arrowImg')
         ch.classList.toggle('select-arrow-open')
+    }
+}
+
+function resetTasktypeDropDown() {
+    let drop = document.getElementById('dropId')
+    if (drop.classList.contains('dropTasktypeClose')) {
+    } else {
+        drop.classList.add('dropTasktypeClose');
+        drop.classList.remove('dropTasktypeOpen');
+        let layer = document.getElementById('hiddenlayer')
+        layer.classList.toggle('hiddenlayer')
+        if (document.querySelectorAll('.dropTasktypeOpen')) {
+            let ch = document.getElementById('arrowImg')
+            ch.classList.toggle('select-arrow-open')
+        }
     }
 }
 

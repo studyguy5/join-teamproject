@@ -154,6 +154,7 @@
     max-height:0px;
     opacity: 0;
     transition: max-height 100ms ease-out, opacity 100ms ease-out;
+    pointer-events: none;
 }
 /* listen elemente */
 .taskOption{

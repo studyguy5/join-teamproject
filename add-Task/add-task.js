@@ -298,7 +298,6 @@ function showSuccessMessage() {
     setTimeout(() => {
         popup.classList.remove("show");
     }, 2250);
-    document.getElementById('creatButtonIDNormal').disabled = false;
 }
 
 
@@ -353,7 +352,8 @@ function commonConstantCheck() {
         document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
     } else {
         getTaskInformationNormal();
-        document.getElementById('creatButtonIDNormal').disabled = true;
+        document.getElementById('creatButtonIDForNormal').disabled = true;
+        console.log('executed normal')
         showSuccessMessage();
     }
 }
@@ -398,7 +398,7 @@ function constantCheckDate() {
         return showUserFeedbackDueDate();
     }
     else if (validateDateAddTaskNormal(dueDate)) {
-        document.getElementById('creatButtonIDNormal').disabled = false;
+        document.getElementById('creatButtonIDForNormal').disabled = false;
         clearUserFeedback = document.getElementById("UserFeedbackDate");
         clearUserFeedback.innerHTML = '';
     }

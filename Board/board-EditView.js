@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 
 
-let index0 = 0;
-let index1 = 1;
-let index2 = 2;
-let index3 = 3;
-let index4 = 4;
+let indexE0 = 0;
+let indexE1 = 1;
+let indexE2 = 2;
+let indexE3 = 3;
+let indexE4 = 4;
 
 async function getObject(path = '') {
     let response = await fetch(BAsE_URL + path + ".json")
@@ -85,25 +85,25 @@ function getCurrentValues(id) {
     document.getElementById("dueDateEdit").value = `${singleTask[1].DueDate}`;
     renderChoosenContactEdit(id);
     if (singleTask[1].subtasks?.[0]) {
-        renderSubtaskEdit();
-        document.getElementById(`task-text-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[0] ? singleTask[1]?.subtasks?.[0].value : ''}`;
+        renderSubtaskEdit(id);
+        document.getElementById(`task-textEdit-${indexE0}`).innerHTML += `${singleTask[1]?.subtasks?.[0] ? singleTask[1]?.subtasks?.[0].value : ''}`;
     }
     if (singleTask[1].subtasks?.[1]) {
-        renderSubtaskEdit();
-        document.getElementById(`task-text-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[1] ? singleTask[1]?.subtasks?.[1].value : ''}`;
+        renderSubtaskEdit(id);
+        document.getElementById(`task-textEdit-${indexE1}`).innerHTML += `${singleTask[1]?.subtasks?.[1] ? singleTask[1]?.subtasks?.[1].value : ''}`;
     }
-    
+
     if (singleTask[1].subtasks?.[2]) {
-        renderSubtaskEdit();
-        document.getElementById(`task-text-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[2] ? singleTask[1]?.subtasks?.[2].value : ''}`;
+        renderSubtaskEdit(id);
+        document.getElementById(`task-textEdit-${indexE2}`).innerHTML += `${singleTask[1]?.subtasks?.[2] ? singleTask[1]?.subtasks?.[2].value : ''}`;
     }
     if (singleTask[1].subtasks?.[3]) {
-        renderSubtaskEdit();
-        document.getElementById(`task-text-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[3] ? singleTask[1]?.subtasks?.[3].value : ''}`;
+        renderSubtaskEdit(id);
+        document.getElementById(`task-textEdit-${indexE3}`).innerHTML += `${singleTask[1]?.subtasks?.[3] ? singleTask[1]?.subtasks?.[3].value : ''}`;
     }
     if (singleTask[1].subtasks?.[4]) {
-        renderSubtaskEdit();
-        document.getElementById(`task-text-${index}`).innerHTML += `${singleTask[1]?.subtasks?.[4] ? singleTask[1]?.subtasks?.[4].value : ''}`;
+        renderSubtaskEdit(id);
+        document.getElementById(`task-textEdit-${indexE4}`).innerHTML += `${singleTask[1]?.subtasks?.[4] ? singleTask[1]?.subtasks?.[4].value : ''}`;
     }
 }
 
@@ -128,16 +128,16 @@ function constantCheckTitleEdit() {
     const titleEdit = document.getElementById("titleEdit").value;
     if (titleEdit.length < 2)
         return showUserFeedbackTitleEdit(title),
-    document.getElementById('task-descriptionEdit').disabled = true, false;
+            document.getElementById('task-descriptionEdit').disabled = true, false;
     document.getElementById("UserFeedbackTitleEditMode").innerHTML = "";
     document.getElementById('task-descriptionEdit').disabled = false;
-    
+
     if (!validateTitleEdit(titleEdit))
         return showUserFeedbackTitleEditForm(title),
-    document.getElementById('task-descriptionEdit').disabled = true, false;
+            document.getElementById('task-descriptionEdit').disabled = true, false;
     document.getElementById("UserFeedbackTitleEditMode").innerHTML = "";
     document.getElementById('task-descriptionEdit').disabled = false;
-    
+
 }
 
 function dateInspect() {
@@ -191,7 +191,7 @@ function showUserFeedbackDueDateEdit() {
     const dateInput = document.getElementById("UserFeedbackDateEditMode");
     dateInput.innerHTML = `form of DueDate is incorrect`;
     const categoryInput = document.getElementById("categoryValue");
-    
+
 }
 
 
@@ -220,7 +220,7 @@ function setContactAndPrioValueEdit(taskToEdit) {
     let checkedImg = document.querySelectorAll('#IdForContactsEdit img.checkedEdit')
     taskToEdit[1].cid = [];
     taskToEdit[1].assignedTo = [];
-    taskToEdit[1].subtasks = [];
+    // taskToEdit[1].subtasks = [];
     checkedImg.forEach(img => {
         names = img.dataset.set;
         let id = img.id;
@@ -231,68 +231,58 @@ function setContactAndPrioValueEdit(taskToEdit) {
 }
 
 /**here we check if values are here and execute the function above to create and push */
-function pushSubtaskIntoArray(taskToEdit, subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5) {
-    if (subtaskvalue1) {
-        pushObjectEdit(taskToEdit, subtaskvalue1);
-    }
-    if (subtaskvalue2) {
-        pushObjectEdit(taskToEdit, subtaskvalue2);
-    }
-    if (subtaskvalue3) {
-        pushObjectEdit(taskToEdit, subtaskvalue3);
-    }
-    if (subtaskvalue4) {
-        pushObjectEdit(taskToEdit, subtaskvalue4);
-    }
-    if (subtaskvalue5) {
-        pushObjectEdit(taskToEdit, subtaskvalue5);
-    }
-}
+// function pushSubtaskIntoArray(taskToEdit, subtaskvalueEdit1, subtaskvalueEdit2, subtaskvalueEdit3, subtaskvalueEdit4, subtaskvalueEdit5) {
+//     if (subtaskvalueEdit1) {
+//         pushObjectEdit(taskToEdit, subtaskvalueEdit1);
+//     }
+//     if (subtaskvalueEdit2) {
+//         pushObjectEdit(taskToEdit, subtaskvalueEdit2);
+//     }
+//     if (subtaskvalueEdit3) {
+//         pushObjectEdit(taskToEdit, subtaskvalueEdit3);
+//     }
+//     if (subtaskvalueEdit4) {
+//         pushObjectEdit(taskToEdit, subtaskvalueEdit4);
+//     }
+//     if (subtaskvalueEdit5) {
+//         pushObjectEdit(taskToEdit, subtaskvalueEdit5);
+//     }
+// }
 
 /**taskes values and creates object with it and pushes it after that into subtasks */
-function pushObjectEdit(taskToEdit, subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5) {
-    
-    if(subtaskvalue1){
-        let subTaskObject = { "value":`${subtaskvalue1 || subtaskvalue2 || subtaskvalue3 || subtaskvalue4 || subtaskvalue5}`,'status': 'open'};
+function pushObjectEdit(taskToEdit, subtaskvalueEdit) {
+
+    if (subtaskvalueEdit) {
+        let subTaskObject = { "value": `${subtaskvalueEdit}`, 'status': 'open' };
         taskToEdit[1].subtasks.push(subTaskObject);
     }
-    // if (subtaskvalue2) {
-        //     let subTaskObject = { "value":`${subtaskvalue2}`,'status': 'open'};
-        //     taskToEdit[1].subtasks.push(subTaskObject);
-        // }
-        // if (subtaskvalue3) {
-            //     let subTaskObject = { "value":`${subtaskvalue3}`,'status': 'open'};
-            //     taskToEdit[1].subtasks.push(subTaskObject);
-            // }
-            // if (subtaskvalue4) {
-                //     let subTaskObject = { "value":`${subtaskvalue4}`,'status': 'open'};
-                //     taskToEdit[1].subtasks.push(subTaskObject);
-                // }
-                // if (subtaskvalue5) {
-                    //     let subTaskObject = { "value":`${subtaskvalue5}`,'status': 'open'};
-    //     taskToEdit[1].subtasks.push(subTaskObject);
-    // }
 }
 
-
 /**here we get the actual values out from innerHTML */
-function getSubtaskFromTemplateEdit() {  //hole die Daten
-    if (document.getElementById(`task-text-${index0}`)) {
-        subtaskvalue1 = document.getElementById(`task-text-${index0}`).innerHTML
+// Variablen enthalten werte, die nicht im innerHTML angezeigt werde, daher löschproblem=====================================================================================
+function getSubtaskFromTemplateEdit(taskToEdit) {  //hole die Daten
+    if (document.getElementById(`task-textEdit-${indexE0}`)) {
+        taskToEdit[1].subtasks = []; // Ensure subtasks array exists
+        subtaskvalueEdit1 = document.getElementById(`task-textEdit-${indexE0}`).innerHTML
+        pushObjectEdit(taskToEdit, subtaskvalueEdit1);
     };
-    if (document.getElementById(`task-text-${index1}`)) {
-        subtaskvalue2 = document.getElementById(`task-text-${index1}`).innerHTML
+    if (document.getElementById(`task-textEdit-${indexE1}`)) {
+        subtaskvalueEdit2 = document.getElementById(`task-textEdit-${indexE1}`).innerHTML
+        pushObjectEdit(taskToEdit, subtaskvalueEdit2);
     };
-    if (document.getElementById(`task-text-${index2}`)) {
-        subtaskvalue3 = document.getElementById(`task-text-${index2}`).innerHTML
+    if (document.getElementById(`task-textEdit-${indexE2}`)) {
+        subtaskvalueEdit3 = document.getElementById(`task-textEdit-${indexE2}`).innerHTML
+        pushObjectEdit(taskToEdit, subtaskvalueEdit3);
     };
-    if (document.getElementById(`task-text-${index3}`)) {
-        subtaskvalue4 = document.getElementById(`task-text-${index3}`).innerHTML
+    if (document.getElementById(`task-textEdit-${indexE3}`)) {
+        subtaskvalueEdit4 = document.getElementById(`task-textEdit-${indexE3}`).innerHTML
+        pushObjectEdit(taskToEdit, subtaskvalueEdit4);
     };
-    if (document.getElementById(`task-text-${index4}`)) {
-        subtaskvalue5 = document.getElementById(`task-text-${index4}`).innerHTML
+    if (document.getElementById(`task-textEdit-${indexE4}`)) {
+        subtaskvalueEdit5 = document.getElementById(`task-textEdit-${indexE4}`).innerHTML
+        pushObjectEdit(taskToEdit, subtaskvalueEdit5);
     };
-    // taskToEdit[1].subtasks = "";    // hier leere ich das Arry local, damit beide values aus dem Edit Modus eingefügt werden können, egal ob alt oder neu
+    // taskToEdit[1].subtasks = [];    // hier leere ich das Arry local, damit beide values aus dem Edit Modus eingefügt werden können, egal ob alt oder neu
     // so entsteht kein doppelter Eintrag und es ist nach aktuellem Bearbeitungsstand im Edit-Mode
 }
 
@@ -317,8 +307,8 @@ async function getTaskInformationEdit(id) {
         taskToEdit[1][existingObjects[valueIndex]] = document.getElementById(`${editInputId[valueIndex]}`).value
     };
     setContactAndPrioValueEdit(taskToEdit);
-    getSubtaskFromTemplateEdit(taskToEdit, subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5);
-    pushSubtaskIntoArray(taskToEdit, subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5);
+    getSubtaskFromTemplateEdit(taskToEdit);
+    // pushSubtaskIntoArray(taskToEdit, subtaskvalueEdit1, subtaskvalueEdit2, subtaskvalueEdit3, subtaskvalueEdit4, subtaskvalueEdit5);
     await postData("task", taskToEdit[1]);
     tasks = [];
     tasks.push(...Object.entries(await getData('task')));

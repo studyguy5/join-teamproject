@@ -15,7 +15,7 @@ function renderSubtask(){
 
     if (subtask.value.trim() !==""){
         list.innerHTML += `<li onclick="editBulletpoint(${index})" id="listed-${index}" class="listed"> 
-                              <span class="dot">•</span><p id="task-text-${index}">${subtask.value}</p>
+                              <span class="dot">•</span><p class="task-text-${index}">${subtask.value}</p>
                                 <span class="list-icon">
                                     <img onmousedown="clearSubtask()" class="pencil" src="/img/icons/pencil-edit.svg">
                                     <img class="delimiter" src="../img/icons/delimiter-vertical.svg">

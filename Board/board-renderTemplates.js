@@ -117,7 +117,7 @@ function renderTaskintoBoard(element) {
     taskOption = 'darkblue';
   }
   return `<div draggable="true"  onmouseleave="closeMiniMenü(${element.id})" ondragstart="startDragging(${element['id']})" 
-    id="TaskDiv-${element.id}" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderEditAndDeleteButton(${element.id}); checkSubtaskLenght(${element.id})" class="TaskDiv">
+    id="TaskDiv-${element.id}" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderEditAndDeleteButton(${element.id}); checkSubtaskLenght(${element.id}); renderSubtaskHTMLForBigView(${element.id})" class="TaskDiv">
     <button onclick="event.stopPropagation(); renderMiniMenü(${element.id})" class="MiniMenüButton"><img src="/img/icons/miniMenüButton.svg"></button>
     <div onclick="event.stopPropagation()" class=" dOntShow" id="miniMenüResponsiv-${element.id}">
     <p class="head">Move to</p>
@@ -190,56 +190,39 @@ function renderBigViewHTML(elements, id) {
      
      <div class="subtaskBigView"><p>${elements[1].subtasks != null ? `Subtasks` : 'No Subtasks yet'}</p>
      <div id="subTaskForBigView" class="subTaskForBigView"> 
-     <div id="subtaskBigView1" class="subtaskImgDiv">  ${elements[1]?.subtasks?.[0] != null ? elements[1]?.subtasks?.[0].status === 'open' ?
-      `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` :
-      `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckedContact.svg">` : ''}
-        <p>${elements[1]?.subtasks?.[0] != null ? elements[1].subtasks?.[0].value : ''}</p></div>
 
-        <div  class="subtaskImgDiv"> ${elements[1]?.subtasks?.[1] != null ? elements[1]?.subtasks?.[1].status === 'open' ?
-      `<img id="subtaskBigViewImg2" class="checkboxS2" onclick="confirmSubtask2(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` :
-      `<img id="subtaskBigViewImg2" class="checkboxS2" onclick="confirmSubtask2(${id}); checkDone(${elements, id})"src="/img/icons/normalCheckedContact.svg">` : ''}
-            <p>${elements[1]?.subtasks?.[1] != null ? elements[1].subtasks?.[1].value : ''}</p></div>
-
-            <div  class="subtaskImgDiv"> ${elements[1]?.subtasks?.[2] != null ? elements[1]?.subtasks?.[2].status === 'open' ?
-      `<img id="subtaskBigViewImg3" class="checkboxS3" onclick="confirmSubtask3(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` :
-      `<img id="subtaskBigViewImg3" class="checkboxS3" onclick="confirmSubtask3(${id}); checkDone(${elements, id})"src="/img/icons/normalCheckedContact.svg">` : ''}
-            <p>${elements[1]?.subtasks?.[2] != null ? elements[1].subtasks?.[2].value : ''}</p></div>
-
-            <div  class="subtaskImgDiv"> ${elements[1]?.subtasks?.[3] != null ? elements[1]?.subtasks?.[3].status === 'open' ?
-      `<img id="subtaskBigViewImg4" class="checkboxS4" onclick="confirmSubtask4(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` :
-      `<img id="subtaskBigViewImg4" class="checkboxS4" onclick="confirmSubtask4(${id}); checkDone(${elements, id})"src="/img/icons/normalCheckedContact.svg">` : ''}
-            <p>${elements[1]?.subtasks?.[3] != null ? elements[1].subtasks?.[3].value : ''}</p></div>
-
-            <div  class="subtaskImgDiv"> ${elements[1]?.subtasks?.[4] != null ? elements[1]?.subtasks?.[4].status === 'open' ?
-      `<img id="subtaskBigViewImg5" class="checkboxS5" onclick="confirmSubtask5(${id}); checkDone(${elements, id})" src="/img/icons/normalCheckContact.svg">` :
-      `<img id="subtaskBigViewImg5" class="checkboxS5" onclick="confirmSubtask5(${id}); checkDone(${elements, id})"src="/img/icons/normalCheckedContact.svg">` : ''}
-            <p>${elements[1]?.subtasks?.[4] != null ? elements[1].subtasks?.[4].value : ''}</p></div>
+    
             </div>
             </div>
             <div class="editeDeleteArea" id="editeDeleteArea"></div>`
 };
 
-function checkSubtaskLenght(elements){
+function checkSubtaskLenght(elements) {
   let elementsOfTask = tasks.find(t => t[1].id === elements);
-  if(elementsOfTask[1].subtasks?.length > 3){
-  let ele = document.getElementById('subTaskForBigView')
-  ele.style.overflowY = 'scroll';
-  }else{
+  if (elementsOfTask[1].subtasks?.length > 3) {
+    let ele = document.getElementById('subTaskForBigView')
+    ele.style.overflowY = 'scroll';
+  } else {
 
   }
 }
 
-// function checkIfEditModeActive(){
-//   // let elementsOfTask = tasks.find(t => t[1].id === elements);
-//   if(document.querySelectorAll('.editBigView')){
-//   let ele = document.querySelectorAll('.editBigView')
-//   ele.forEach(ele => 
-//   ele.style.overflowY = 'scroll');
-//   }else{
+// render Each Subtask into BigView
+function renderSubtaskHTMLForBigView(id) {
+  let allIds = tasks.filter(ta => ta[1].id === id)
+  console.log(allIds[0][1].subtasks);
+  document.getElementById('subTaskForBigView').innerHTML = '';
+  for (let subIndex = 0; subIndex < allIds[0][1].subtasks.length; subIndex++) {
+    document.getElementById('subTaskForBigView').innerHTML +=
 
-//   }
-// }
+      `<div id="subtaskBigView1" class="subtaskImgDiv">  ${allIds[0][1].subtasks?.[subIndex] != null ? allIds[0][1]?.subtasks?.[subIndex].status === 'open' ?
+        `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${allIds, id})" src="/img/icons/normalCheckContact.svg">` :
+        `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${allIds, id})" src="/img/icons/normalCheckedContact.svg">` : ''}
+        <p>${allIds[0][1]?.subtasks?.[subIndex] != null ? allIds[0][1]?.subtasks?.[subIndex].value : ''}</p></div>
+  `
 
+  }
+}
 /**renders the Contacts into BigView */
 function renderContactHTMLForBigView(rightContacts, BVindex, short) {
   return `<div class="singleContactBoxForBigView">

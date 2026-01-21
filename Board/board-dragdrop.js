@@ -7,11 +7,11 @@ let taskObjectKey = ['title', 'description', 'DueDate'];
 let currentDraggedElement;
 window.index0 = 0;
 window.index1 = 1;
-window.index2 = 3;
-window.index3 = 4;
-window.index4 = 5;
-window.index5 = 6;
-window.index6 = 7;
+window.index2 = 2;
+window.index3 = 3;
+window.index4 = 4;
+window.index5 = 5;
+window.index6 = 6;
 
 let subtaskArray = [];
 
@@ -116,53 +116,66 @@ function createTemplate() {
 }
 
 /**create a object with the value given and push it into the subtask array */
-function pushObject(subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5, subtaskvalue6) {
-    if (subtaskvalue1) {
-        let subTaskObject1 = { "value": `${subtaskvalue1}`, 'status': 'open' };
+function pushObject(subtaskArray, subtaskvalue) {
+    if (subtaskvalue) {
+        let subTaskObject1 = { "value": `${subtaskvalue}`, 'status': 'open' };
         subtaskArray.push(subTaskObject1)
     }
-    if (subtaskvalue2) {
-        let subTaskObject2 = { "value": `${subtaskvalue2}`, 'status': 'open' };
-        subtaskArray.push(subTaskObject2);
-    }
-    if (subtaskvalue3) {
-        let subTaskObject3 = { "value": `${subtaskvalue3}`, 'status': 'open' };
-        subtaskArray.push(subTaskObject3);
-    }
-    if (subtaskvalue4) {
-        let subTaskObject4 = { "value": `${subtaskvalue4}`, 'status': 'open' };
-        subtaskArray.push(subTaskObject4);
-    }
-    if (subtaskvalue5) {
-        let subTaskObject5 = { "value": `${subtaskvalue5}`, 'status': 'open' };
-        subtaskArray.push(subTaskObject5);
-    }
-    if (subtaskvalue6) {
-        let subTaskObject6 = { "value": `${subtaskvalue6}`, 'status': 'open' };
-        subtaskArray.push(subTaskObject6);
-    }
+    // if (subtaskvalue2) {
+    //     let subTaskObject2 = { "value": `${subtaskvalue2}`, 'status': 'open' };
+    //     subtaskArray.push(subTaskObject2);
+    // }
+    // if (subtaskvalue3) {
+    //     let subTaskObject3 = { "value": `${subtaskvalue3}`, 'status': 'open' };
+    //     subtaskArray.push(subTaskObject3);
+    // }
+    // if (subtaskvalue4) {
+    //     let subTaskObject4 = { "value": `${subtaskvalue4}`, 'status': 'open' };
+    //     subtaskArray.push(subTaskObject4);
+    // }
+    // if (subtaskvalue5) {
+    //     let subTaskObject5 = { "value": `${subtaskvalue5}`, 'status': 'open' };
+    //     subtaskArray.push(subTaskObject5);
+    // }
+    // if (subtaskvalue6) {
+    //     let subTaskObject6 = { "value": `${subtaskvalue6}`, 'status': 'open' };
+    //     subtaskArray.push(subTaskObject6);
+    // }
 }
 
 /**filter the subtask out of the div in order to work with and push it later */
-function getSubtaskFromTemplate() {
-    if (document.getElementById(`task-text-${index0}`)) {
-        subtaskvalue1 = document.getElementById(`task-text-${index0}`).innerHTML
-    };
-    if (document.getElementById(`task-text-${index1}`)) {
-        subtaskvalue2 = document.getElementById(`task-text-${index1}`).innerHTML
-    }
-    if (document.getElementById(`task-text-${index2}`)) {
-        subtaskvalue3 = document.getElementById(`task-text-${index2}`).innerHTML
-    }
-    if (document.getElementById(`task-text-${index3}`)) {
-        subtaskvalue4 = document.getElementById(`task-text-${index3}`).innerHTML
-    }
-    if (document.getElementById(`task-text-${index4}`)) {
-        subtaskvalue5 = document.getElementById(`task-text-${index4}`).innerHTML
-    }
-    if (document.getElementById(`task-text-${index5}`)) {
-        subtaskvalue6 = document.getElementById(`task-text-${index5}`).innerHTML
-    }
+function getSubtaskFromTemplate(subtaskArray) {
+        let inputs = document.querySelectorAll('.ul-div li p');
+        console.log(inputs.length);
+        inputs.forEach(inputs => {
+            let subInput = inputs.innerHTML.trim();
+            if(!subInput) return;
+            pushObject(subtaskArray, subInput);
+        });      
+    // if (document.getElementById(`task-text-${index0}`)) {
+    //     subtaskvalue1 = document.getElementById(`task-text-${index0}`).innerHTML
+    //     pushObject(subtaskArray, subtaskvalue1);
+    // };
+    // if (document.getElementById(`task-text-${index1}`)) {
+    //     subtaskvalue2 = document.getElementById(`task-text-${index1}`).innerHTML
+    //     pushObject(subtaskArray, subtaskvalue2);
+    // }
+    // if (document.getElementById(`task-text-${index2}`)) {
+    //     subtaskvalue3 = document.getElementById(`task-text-${index2}`).innerHTML
+    //     pushObject(subtaskArray, subtaskvalue3);  
+    // }
+    // if (document.getElementById(`task-text-${index3}`)) {
+    //     subtaskvalue4 = document.getElementById(`task-text-${index3}`).innerHTML
+    //     pushObject(subtaskArray, subtaskvalue4);  
+    // }
+    // if (document.getElementById(`task-text-${index4}`)) {
+    //     subtaskvalue5 = document.getElementById(`task-text-${index4}`).innerHTML
+    //     pushObject(subtaskArray, subtaskvalue5);
+    // }
+    // if (document.getElementById(`task-text-${index5}`)) {
+    //     subtaskvalue6 = document.getElementById(`task-text-${index5}`).innerHTML
+    //     pushObject(subtaskArray, subtaskvalue6);
+    // }
 }
 
 /**filter the data from dataset and id and push it separate inot arrays to display and work with it later */
@@ -191,10 +204,10 @@ async function getTaskInformation(index) {
     };
     newTask.taskType = document.getElementById('selectedTask').innerText
     setContactAndPrioValue(newTask, index);
-    getSubtaskFromTemplate();
-    createTemplate(); //create complete template of object with all data
     subtaskArray = newTask.subtasks; //path from subtask Array where new subtasks should be pushed into
-    pushObject(subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5, subtaskvalue6); // subtasks template with variable is pushed into subtaskArray
+    getSubtaskFromTemplate(subtaskArray);
+    createTemplate(); //create complete template of object with all data
+    // pushObject(subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5, subtaskvalue6); // subtasks template with variable is pushed into subtaskArray
     newTask.category = choosenCategory ? choosenCategory : 'Todo';
     await postData("task", newTask);
     tasks = [];
@@ -323,6 +336,13 @@ async function deleteData(firebaseID) {
     return await response.json();
 };
 
+// async function deleteSubtaskOnFirebase(firebasId, index){
+//     let response = await fetch(`https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/task/${firebasId}/subtasks/${index}.json`, {
+//         method: "DELETE",
+//     });
+//     return await response.json();
+// }
+
 /**renders the Edit View in the same div as the BigView */
 function activateEditModus(id) {
     let edit = document.getElementById('bigViewContent')
@@ -426,13 +446,13 @@ function renderContact(element) {
     let addon = document.getElementById(`${element.id}-additionalContactInfo`);
     // let maxVisible = 4
     let contact = document.getElementById(`${element.id}`)
-    for (let ContactIndex = 0; ContactIndex < element.assignedTo.length; ContactIndex++) {
+    for (let ContactIndex = 0; ContactIndex < element.assignedTo?.length; ContactIndex++) {
         if (ContactIndex >= 4) break;
         let slim = element.assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
         contact.innerHTML += `
     <div id="contactscircle" class="contactsCircle">${slim[ContactIndex][0] + slim[ContactIndex][1]}</div>`
     }
-    if (element.assignedTo.length > 4)
+    if (element.assignedTo?.length > 4)
         addon.innerText = `+${(element.assignedTo.length) - 4}`
     // let astyle = document.querySelectorAll('.additionalContactInfo').forEach(astyle => astyle.style.display = "flex");
 }

@@ -81,6 +81,7 @@ function addTask() {
 function closePopup() {
     const popup = document.getElementById("add-task-popup");
     popup.classList.remove("show");
+    document.getElementById("countInfoPopup").innerHTML = "";
     const buttons = document.querySelectorAll(".priority-section button");
     let createdArray = Array.from(buttons)
     createdArray[1].classList.remove('Medium')
@@ -409,7 +410,8 @@ function deleteRenderedContact(index) {
     if (countedPopup.length > 6) {
         countedPopup.length - 1
         document.getElementById('countInfoPopup').innerHTML = `+ ${(countedPopup.length) - 6}`;
-    } else if (countedPopup.length <= 6 && deleteOneTime && document.getElementById('countInfoPopup').innerHTML !== "") { document.getElementById('countInfoPopup').innerHTML = ""; deleteOneTime = false }
+    } else if (countedPopup.length <= 6 && deleteOneTime && document.getElementById('countInfoPopup').innerHTML !== "") 
+        { document.getElementById('countInfoPopup').innerHTML = ""; deleteOneTime = false }
     else {
         let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
         renderedContact.remove(`contactCirclePopupRender-${index}`)
@@ -473,10 +475,12 @@ function clearTask() {
         count.forEach(ob => ob.classList.add('checkbox')),
         count.forEach(ob => ob.src = "/img/icons/normalCheckContact.svg");
     document.getElementById(`choosenContacts`).innerHTML = "";
+    document.getElementById("countInfoPopup").innerHTML = "";
     const buttons = document.querySelectorAll(".priority-section button");
     buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
     buttons[1].classList.add('Medium');
     const taskType = document.getElementById("selectedTask").innerText = "Select Task Category";
+    document.getElementById("subtask").value = "";
     document.getElementById('subtask-list-1').classList.remove('scrollClass')
     document.getElementById('subtask-list-1').innerHTML = "";
 }

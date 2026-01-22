@@ -272,7 +272,7 @@ textarea:focus {
     flex-direction: column;
     width: 440px;
     height: 400px;
-
+    position: relative;
 }
 
 .input-section-right label {
@@ -314,7 +314,7 @@ textarea:focus {
     max-width: 1304px;
     /* padding: 0 160px; */
     margin-bottom: 64px;
-    margin-top: 160px;
+    margin-top: 190px;
     display: flex;
     align-items: center;
     justify-content: space-around;

@@ -107,7 +107,8 @@ padding:0px;
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-end;
-    align-items: baseline;  
+    align-items: baseline; 
+    /* position:relative;  */
 }
 
 .contactCirclePopup {

@@ -52,8 +52,9 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
             </div>
             
             <div id="choosenContacts" class="choosenContacts">
-            <div id="countInfoPopup" class="countInfoPopup"></div>
+            
             </div>
+            <div id="countInfoPopup" class="countInfoPopup"></div>
 
             <label >Category<span class="requiredStar">*</span></label>
             <div id="IdForTaskChoise" class="section-right-select"  onclick="event.stopPropagation(); openTasktypeDropDown()">
@@ -117,7 +118,7 @@ function renderTaskintoBoard(element) {
     taskOption = 'darkblue';
   }
   // TasksDone = tasks.find(t => t[1].id === element.id);
-  let done = element.subtasks.filter(st => st.status === 'closed')?.length || 0;
+  let done = element.subtasks?.filter(st => st.status === 'closed')?.length || 0;
   return `<div draggable="true"  onmouseleave="closeMiniMenü(${element.id})" ondragstart="startDragging(${element['id']})" 
     id="TaskDiv-${element.id}" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderEditAndDeleteButton(${element.id}); checkSubtaskLenght(${element.id}); renderSubtaskHTMLForBigView(${element.id})" class="TaskDiv">
     <button onclick="event.stopPropagation(); renderMiniMenü(${element.id})" class="MiniMenüButton"><img src="/img/icons/miniMenüButton.svg"></button>
@@ -213,7 +214,8 @@ function checkSubtaskLenght(elements) {
 function renderSubtaskHTMLForBigView(id) {
   let allIds = tasks.filter(ta => ta[1].id === id)
   document.getElementById('subTaskForBigView').innerHTML = '';
-  for (let subIndex = 0; subIndex < allIds[0][1].subtasks.length; subIndex++) {
+  if(allIds[0][1]?.subtasks){
+  for (let subIndex = 0; subIndex < allIds[0][1]?.subtasks?.length; subIndex++) {
     document.getElementById('subTaskForBigView').innerHTML +=
 
       `<div id="subtaskBigView1" class="subtaskImgDiv">  ${allIds[0][1].subtasks?.[subIndex] != null ? allIds[0][1]?.subtasks?.[subIndex].status === 'open' ?
@@ -222,7 +224,7 @@ function renderSubtaskHTMLForBigView(id) {
         <p>${allIds[0][1]?.subtasks?.[subIndex] != null ? allIds[0][1]?.subtasks?.[subIndex].value : ''}</p></div>
   `
 
-  }
+  }}else{}
 }
 /**renders the Contacts into BigView */
 function renderContactHTMLForBigView(rightContacts, BVindex, short) {

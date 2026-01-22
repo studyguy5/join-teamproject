@@ -12,11 +12,13 @@ function clearTaskNormal() {
         count.forEach(ob => ob.classList.add('checkbox')),
         count.forEach(ob => ob.src = "/img/icons/normalCheckContact.svg");
     document.getElementById('choosenContacts').innerHTML = "";
+    document.getElementById('countInfo').innerHTML = "";
     const buttons = document.querySelectorAll(".priority-section button");
     buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
     buttons[1].classList.add('Medium');
     prioArray.length = 0;
     const taskType = document.getElementById("selectedTaskNormal").innerText = "Select Task Category";
+    document.getElementById("subtask").value = "";
     document.getElementById('subtask-list-1').classList.remove('scrollClass')
     document.getElementById('subtask-list-1').innerHTML = "";
 }

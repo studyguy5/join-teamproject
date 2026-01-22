@@ -12,6 +12,11 @@
     .taskOption:hover {
         width: 378px;
     }
+
+    .countInfo {
+        top: 200px;
+        right: 120px;
+    }
 }
 
 @media(max-width:1196px) {
@@ -26,6 +31,11 @@
 
     .taskOption:hover {
         width: 318px;
+    }
+
+    .countInfo {
+        top: 200px;
+        right: 55px;
     }
 }
 
@@ -157,6 +167,11 @@
     .footer {
         margin-top: 68px;
     }
+
+    .countInfo {
+        top: 195px;
+        right: 25px;
+    }
 }
 
 @media(min-width:540px) and (max-width:540px) and (max-height:720px) {
@@ -164,61 +179,66 @@
         height: 86vh;
     }
 
-    .footer{
+    .footer {
         margin-top: 110px;
     }
 }
 
-    @media(min-width:430px) and (max-width:430px) and (max-height:932px) {
-        .input-section-right {
-            height: 100%;
-        }
-
-        .input-container {
-            height: 100%;
-        }
-
-        .mainAreaRight {
-            height: 83vh;
-        }
-
-        .footer {
-            margin: 120px 0px 15px 0px;
-        }
+@media(min-width:430px) and (max-width:430px) and (max-height:932px) {
+    .input-section-right {
+        height: 100%;
     }
 
-    @media(max-width:428px) {
-        .priority-section {
-            flex-direction: row;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .dropTasktypeOpen {
-            width: 290px;
-        }
-
-        .taskOption:hover {
-            width: 268px;
-        }
-
-        .input-section-left {
-            width: 290px;
-        }
-
-        .input-section-right {
-            width: 290px;
-        }
-
-        .mainAreaRight {
-            height: calc(100vh - 160px);
-        }
-
-        .input-container {
-            padding-bottom: 0;
-        }
-
-        .footer {
-            margin: 125px 0px 15px 0px;
-        }
+    .input-container {
+        height: 100%;
     }
+
+    .mainAreaRight {
+        height: 83vh;
+    }
+
+    .footer {
+        margin: 120px 0px 15px 0px;
+    }
+}
+
+@media(max-width:428px) {
+    .priority-section {
+        flex-direction: row;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .dropTasktypeOpen {
+        width: 290px;
+    }
+
+    .taskOption:hover {
+        width: 268px;
+    }
+
+    .input-section-left {
+        width: 290px;
+    }
+
+    .input-section-right {
+        width: 290px;
+    }
+
+    .mainAreaRight {
+        height: calc(100vh - 160px);
+    }
+
+    .input-container {
+        padding-bottom: 0;
+    }
+
+    .footer {
+        margin: 125px 0px 15px 0px;
+    }
+
+    .countInfo {
+        top: 195px;
+        right: 15px;
+    }
+}

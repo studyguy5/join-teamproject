@@ -43,6 +43,7 @@
 
 .choosenContacts{
     height:fit-content;
+    position:relative;
     width:470px;
     display: flex;
     justify-content:start;
@@ -253,6 +254,9 @@
 
 .countInfo{
     display:flex;
+    position:absolute;
+    top:200px;
+    right:160px;
 
 }
 

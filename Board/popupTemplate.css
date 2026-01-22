@@ -189,7 +189,10 @@
 }
 
 .countInfoPopup{
-    display:flex;
+    display:block;
+    position: absolute;
+    top:205px;
+    right: 140px;
     width:30px;
 }
 
@@ -245,6 +248,7 @@
     flex-direction: column;
     width: 440px;
     height: 400px;
+    position:relative;
 }
 
 .input-section-leftPopup label{

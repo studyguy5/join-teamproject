@@ -210,14 +210,13 @@ function checkSubtaskLenght(elements) {
 // render Each Subtask into BigView
 function renderSubtaskHTMLForBigView(id) {
   let allIds = tasks.filter(ta => ta[1].id === id)
-  console.log(allIds[0][1].subtasks);
   document.getElementById('subTaskForBigView').innerHTML = '';
   for (let subIndex = 0; subIndex < allIds[0][1].subtasks.length; subIndex++) {
     document.getElementById('subTaskForBigView').innerHTML +=
 
       `<div id="subtaskBigView1" class="subtaskImgDiv">  ${allIds[0][1].subtasks?.[subIndex] != null ? allIds[0][1]?.subtasks?.[subIndex].status === 'open' ?
-        `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${allIds, id})" src="/img/icons/normalCheckContact.svg">` :
-        `<img id="subtaskBigViewImg1" class="checkboxS1" onclick="confirmSubtask1(${id}); checkDone(${allIds, id})" src="/img/icons/normalCheckedContact.svg">` : ''}
+        `<img id="subtaskBigViewImg-${subIndex}" class="checkboxS1" onclick="confirmSubtask(${subIndex}, ${id}); checkDone(${allIds, id})" src="/img/icons/normalCheckContact.svg">` :
+        `<img id="subtaskBigViewImg-${subIndex}" class="checkboxS1" onclick="confirmSubtask(${subIndex}, ${id}); checkDone(${allIds, id})" src="/img/icons/normalCheckedContact.svg">` : ''}
         <p>${allIds[0][1]?.subtasks?.[subIndex] != null ? allIds[0][1]?.subtasks?.[subIndex].value : ''}</p></div>
   `
 

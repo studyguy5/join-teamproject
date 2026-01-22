@@ -74,6 +74,29 @@
     display:none;
 }
 
+.tor{
+    border: 2px solid orange;
+    box-shadow: 0 0 10px orange;
+    animation: shine 2s ease-in-out;
+}
+@keyframes shine {
+    0% {
+        box-shadow: 0 0 5px orange;
+    }
+    25% {
+        box-shadow: 0 0 15px orange;
+    }
+    50% {
+        box-shadow: 0 0 20px orange;
+    }
+    75% {
+        box-shadow: 0 0 15px orange;
+    }
+    100% {
+        box-shadow: 0 0 10px orange;
+    }
+}
+
 
 .miniMenüResponsiv{
         display: none;
@@ -261,7 +284,7 @@
 
 .additionalContactInfo{
     display:flex;
-    margin-left:-170px;
+    margin-left:-50px;
     align-items: center;
     font-size: 14px;
 }

@@ -4,14 +4,10 @@ const BAsE_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedata
 document.addEventListener('DOMContentLoaded', async () => {
     contacts = await getObject(path = '/contacts')
     contactsArray = objectToArray(contacts);
+    
 })
 
 
-let indexE0 = 0;
-let indexE1 = 1;
-let indexE2 = 2;
-let indexE3 = 3;
-let indexE4 = 4;
 
 async function getObject(path = '') {
     let response = await fetch(BAsE_URL + path + ".json")
@@ -84,27 +80,13 @@ function getCurrentValues(id) {
     document.getElementById('task-descriptionEdit').value = `${singleTask[1].description}`;
     document.getElementById("dueDateEdit").value = `${singleTask[1].DueDate}`;
     renderChoosenContactEdit(id);
-    if (singleTask[1].subtasks?.[0]) {
+    if(singleTask[1].subtasks?.[0])
+        for (let subEditIndex = 0; subEditIndex < singleTask[1].subtasks.length; subEditIndex++) {
         renderSubtaskEdit(id);
-        document.getElementById(`task-textEdit-${indexE0}`).innerHTML += `${singleTask[1]?.subtasks?.[0] ? singleTask[1]?.subtasks?.[0].value : ''}`;
-    }
-    if (singleTask[1].subtasks?.[1]) {
-        renderSubtaskEdit(id);
-        document.getElementById(`task-textEdit-${indexE1}`).innerHTML += `${singleTask[1]?.subtasks?.[1] ? singleTask[1]?.subtasks?.[1].value : ''}`;
-    }
-
-    if (singleTask[1].subtasks?.[2]) {
-        renderSubtaskEdit(id);
-        document.getElementById(`task-textEdit-${indexE2}`).innerHTML += `${singleTask[1]?.subtasks?.[2] ? singleTask[1]?.subtasks?.[2].value : ''}`;
-    }
-    if (singleTask[1].subtasks?.[3]) {
-        renderSubtaskEdit(id);
-        document.getElementById(`task-textEdit-${indexE3}`).innerHTML += `${singleTask[1]?.subtasks?.[3] ? singleTask[1]?.subtasks?.[3].value : ''}`;
-    }
-    if (singleTask[1].subtasks?.[4]) {
-        renderSubtaskEdit(id);
-        document.getElementById(`task-textEdit-${indexE4}`).innerHTML += `${singleTask[1]?.subtasks?.[4] ? singleTask[1]?.subtasks?.[4].value : ''}`;
-    }
+            let existingSubs = document.querySelectorAll(`.task-textEdit-${subEditIndex}`);
+            if(existingSubs)
+            existingSubs.forEach(sub => {sub.innerHTML = `${singleTask[1]?.subtasks?.[subEditIndex] ? singleTask[1]?.subtasks?.[subEditIndex].value : ''}`});
+        }
 }
 
 
@@ -230,24 +212,6 @@ function setContactAndPrioValueEdit(taskToEdit) {
     taskToEdit[1].prio = prioArray[0];
 }
 
-/**here we check if values are here and execute the function above to create and push */
-// function pushSubtaskIntoArray(taskToEdit, subtaskvalueEdit1, subtaskvalueEdit2, subtaskvalueEdit3, subtaskvalueEdit4, subtaskvalueEdit5) {
-//     if (subtaskvalueEdit1) {
-//         pushObjectEdit(taskToEdit, subtaskvalueEdit1);
-//     }
-//     if (subtaskvalueEdit2) {
-//         pushObjectEdit(taskToEdit, subtaskvalueEdit2);
-//     }
-//     if (subtaskvalueEdit3) {
-//         pushObjectEdit(taskToEdit, subtaskvalueEdit3);
-//     }
-//     if (subtaskvalueEdit4) {
-//         pushObjectEdit(taskToEdit, subtaskvalueEdit4);
-//     }
-//     if (subtaskvalueEdit5) {
-//         pushObjectEdit(taskToEdit, subtaskvalueEdit5);
-//     }
-// }
 
 /**taskes values and creates object with it and pushes it after that into subtasks */
 function pushObjectEdit(taskToEdit, subtaskvalueEdit) {
@@ -259,31 +223,15 @@ function pushObjectEdit(taskToEdit, subtaskvalueEdit) {
 }
 
 /**here we get the actual values out from innerHTML */
-// Variablen enthalten werte, die nicht im innerHTML angezeigt werde, daher löschproblem=====================================================================================
-function getSubtaskFromTemplateEdit(taskToEdit) {  //hole die Daten
-    if (document.getElementById(`task-textEdit-${indexE0}`)) {
-        taskToEdit[1].subtasks = []; // Ensure subtasks array exists
-        subtaskvalueEdit1 = document.getElementById(`task-textEdit-${indexE0}`).innerHTML
-        pushObjectEdit(taskToEdit, subtaskvalueEdit1);
-    };
-    if (document.getElementById(`task-textEdit-${indexE1}`)) {
-        subtaskvalueEdit2 = document.getElementById(`task-textEdit-${indexE1}`).innerHTML
-        pushObjectEdit(taskToEdit, subtaskvalueEdit2);
-    };
-    if (document.getElementById(`task-textEdit-${indexE2}`)) {
-        subtaskvalueEdit3 = document.getElementById(`task-textEdit-${indexE2}`).innerHTML
-        pushObjectEdit(taskToEdit, subtaskvalueEdit3);
-    };
-    if (document.getElementById(`task-textEdit-${indexE3}`)) {
-        subtaskvalueEdit4 = document.getElementById(`task-textEdit-${indexE3}`).innerHTML
-        pushObjectEdit(taskToEdit, subtaskvalueEdit4);
-    };
-    if (document.getElementById(`task-textEdit-${indexE4}`)) {
-        subtaskvalueEdit5 = document.getElementById(`task-textEdit-${indexE4}`).innerHTML
-        pushObjectEdit(taskToEdit, subtaskvalueEdit5);
-    };
-    // taskToEdit[1].subtasks = [];    // hier leere ich das Arry local, damit beide values aus dem Edit Modus eingefügt werden können, egal ob alt oder neu
-    // so entsteht kein doppelter Eintrag und es ist nach aktuellem Bearbeitungsstand im Edit-Mode
+function getSubtaskFromTemplateEdit(taskToEdit) {//hole die Daten
+    let changes = document.querySelectorAll('.ul-divEdit li p');
+    taskToEdit[1].subtasks = []; // hier leere ich das Arry local, damit beide values aus dem Edit Modus eingefügt werden können, egal ob alt oder neu
+    changes.forEach(changes => {
+        let subChange = changes.innerHTML.trim();
+        if(!subChange) return;
+        pushObjectEdit(taskToEdit, subChange);
+    })
+    
 }
 
 
@@ -302,20 +250,40 @@ async function getTaskInformationEdit(id) {
     for (let makeEmptyIndex = 0; makeEmptyIndex < existingFilledObjects.length; makeEmptyIndex++) {
         taskToEdit[1][existingFilledObjects[makeEmptyIndex]] = '';
     }
-
     for (let valueIndex = 0; valueIndex < editInputId.length; valueIndex++) { //Arrays überarbeiten
         taskToEdit[1][existingObjects[valueIndex]] = document.getElementById(`${editInputId[valueIndex]}`).value
     };
     setContactAndPrioValueEdit(taskToEdit);
     getSubtaskFromTemplateEdit(taskToEdit);
-    // pushSubtaskIntoArray(taskToEdit, subtaskvalueEdit1, subtaskvalueEdit2, subtaskvalueEdit3, subtaskvalueEdit4, subtaskvalueEdit5);
     await postData("task", taskToEdit[1]);
     tasks = [];
     tasks.push(...Object.entries(await getData('task')));
     filterAndShowTasksEdit();
     closeEditView();
     editFeedback();
+    letShineLastEditedTask(firebaseID, taskToEdit, id);
+    setTimeout(() => {
+        cleanBorder();
+    }, 2500);
 };
+// ===========hier den shiny effect einfügen==============================================
+function letShineLastEditedTask(firebaseID, taskToEdit, id) {
+    if(!firebaseID || !taskToEdit){
+      let taskToEdit = tasks.find(task => task[1].id === id);
+      let last = document.getElementById(`TaskDiv-${id}`);
+      last?.classList.add('tor');
+    }else{
+      let last = document.getElementById(`TaskDiv-${taskToEdit[1].id}`);
+      last?.classList.add('tor');
+    }
+}
+
+function cleanBorder(){
+    let last = document.querySelectorAll('.tor');
+    last.forEach(element => {
+        element.classList.remove('tor');
+    });
+}
 
 /**filter the task and display it into the board page */
 async function filterAndShowTasksEdit() {
@@ -463,7 +431,7 @@ function chooseContactEdit(id, index) {
         let countEditNormal = document.querySelectorAll('.contactBox .checkedEdit')
         if ((countEditNormal.length) > 6) {
             deleteOnetime = true;
-            document.getElementById('countInfoEdit').innerHTML = `+ ${(countEditNormal.length) - 6} Contact(s)`
+            document.getElementById('countInfoEdit').innerHTML = `+ ${(countEditNormal.length) - 6}`
         } else {
             renderChoosenContactEdit(id, index);
             choContact.src = "/img/icons/normalCheckedContact.svg"
@@ -484,6 +452,7 @@ let thisTask;
 function renderChoosenContactEdit(id, index) {
     let Choosen = document.getElementById('choosenContactsEdit')
     const RightTask = tasks.find(task => task[1].id === id);
+    if(!RightTask[1].assignedTo) RightTask[1].assignedTo = [];
     if (index && RightTask[1].assignedTo?.length < 5) {
         const list = contactsArray[index].name
         RightTask[1].assignedTo = [];

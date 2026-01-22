@@ -5,13 +5,7 @@ let taskContainerArray = ['title', 'task-description', 'dueDate'];
 let taskObjectKey = ['title', 'description', 'DueDate'];
 
 let currentDraggedElement;
-window.index0 = 0;
-window.index1 = 1;
-window.index2 = 2;
-window.index3 = 3;
-window.index4 = 4;
-window.index5 = 5;
-window.index6 = 6;
+
 
 let subtaskArray = [];
 
@@ -121,61 +115,16 @@ function pushObject(subtaskArray, subtaskvalue) {
         let subTaskObject1 = { "value": `${subtaskvalue}`, 'status': 'open' };
         subtaskArray.push(subTaskObject1)
     }
-    // if (subtaskvalue2) {
-    //     let subTaskObject2 = { "value": `${subtaskvalue2}`, 'status': 'open' };
-    //     subtaskArray.push(subTaskObject2);
-    // }
-    // if (subtaskvalue3) {
-    //     let subTaskObject3 = { "value": `${subtaskvalue3}`, 'status': 'open' };
-    //     subtaskArray.push(subTaskObject3);
-    // }
-    // if (subtaskvalue4) {
-    //     let subTaskObject4 = { "value": `${subtaskvalue4}`, 'status': 'open' };
-    //     subtaskArray.push(subTaskObject4);
-    // }
-    // if (subtaskvalue5) {
-    //     let subTaskObject5 = { "value": `${subtaskvalue5}`, 'status': 'open' };
-    //     subtaskArray.push(subTaskObject5);
-    // }
-    // if (subtaskvalue6) {
-    //     let subTaskObject6 = { "value": `${subtaskvalue6}`, 'status': 'open' };
-    //     subtaskArray.push(subTaskObject6);
-    // }
 }
 
 /**filter the subtask out of the div in order to work with and push it later */
 function getSubtaskFromTemplate(subtaskArray) {
         let inputs = document.querySelectorAll('.ul-div li p');
-        console.log(inputs.length);
         inputs.forEach(inputs => {
             let subInput = inputs.innerHTML.trim();
             if(!subInput) return;
             pushObject(subtaskArray, subInput);
         });      
-    // if (document.getElementById(`task-text-${index0}`)) {
-    //     subtaskvalue1 = document.getElementById(`task-text-${index0}`).innerHTML
-    //     pushObject(subtaskArray, subtaskvalue1);
-    // };
-    // if (document.getElementById(`task-text-${index1}`)) {
-    //     subtaskvalue2 = document.getElementById(`task-text-${index1}`).innerHTML
-    //     pushObject(subtaskArray, subtaskvalue2);
-    // }
-    // if (document.getElementById(`task-text-${index2}`)) {
-    //     subtaskvalue3 = document.getElementById(`task-text-${index2}`).innerHTML
-    //     pushObject(subtaskArray, subtaskvalue3);  
-    // }
-    // if (document.getElementById(`task-text-${index3}`)) {
-    //     subtaskvalue4 = document.getElementById(`task-text-${index3}`).innerHTML
-    //     pushObject(subtaskArray, subtaskvalue4);  
-    // }
-    // if (document.getElementById(`task-text-${index4}`)) {
-    //     subtaskvalue5 = document.getElementById(`task-text-${index4}`).innerHTML
-    //     pushObject(subtaskArray, subtaskvalue5);
-    // }
-    // if (document.getElementById(`task-text-${index5}`)) {
-    //     subtaskvalue6 = document.getElementById(`task-text-${index5}`).innerHTML
-    //     pushObject(subtaskArray, subtaskvalue6);
-    // }
 }
 
 /**filter the data from dataset and id and push it separate inot arrays to display and work with it later */
@@ -207,13 +156,34 @@ async function getTaskInformation(index) {
     subtaskArray = newTask.subtasks; //path from subtask Array where new subtasks should be pushed into
     getSubtaskFromTemplate(subtaskArray);
     createTemplate(); //create complete template of object with all data
-    // pushObject(subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5, subtaskvalue6); // subtasks template with variable is pushed into subtaskArray
     newTask.category = choosenCategory ? choosenCategory : 'Todo';
     await postData("task", newTask);
     tasks = [];
     tasks.push(...Object.entries(await getData('task')));
     filterAndShowTasks();
+     letShineLastEditedTask();
+    setTimeout(() => {
+        cleanBorder();
+    }, 2500);
 };
+
+function letShineLastEditedTask(firebaseID, taskToEdit, id) {
+    if(!firebaseID || !taskToEdit){
+      let taskToEdit = tasks.find(task => task[1].id === id);
+      let last = document.getElementById(`TaskDiv-${id}`);
+      last?.classList.add('tor');
+    }else{
+      let last = document.getElementById(`TaskDiv-${taskToEdit[1].id}`);
+      last?.classList.add('tor');
+    }
+}
+
+function cleanBorder(){
+    let last = document.querySelectorAll('.tor');
+    last.forEach(element => {
+        element.classList.remove('tor');
+    });
+}
 
 /**filter the results and sort it according to the category in each column */
 async function filterAndShowTasks() {
@@ -244,7 +214,7 @@ function checkDone(id) {
     let sort = tasks.filter(tasks => tasks[1].id === id);
     let firebaseIde = sort[0][0];
     TaskDone = document.querySelectorAll('.subTaskForBigView .subtaskImgDiv .checkedSubtask')
-    sort[0][1].progress = (TaskDone.length / sort[0][1].subtasks.length) * 128
+    sort[0][1].progress = ((TaskDone.length / sort[0][1].subtasks.length) * 128);
     putData(`task/${firebaseIde}/progress`, `${sort[0][1].progress}`)
     filterAndShowTasks(id);
 }
@@ -257,8 +227,6 @@ function bigViewOfTask(id) {
     } else {
         taskOption = 'türkisBigView';
     }
-    // let connectionToTaskWindow = document.getElementById('bigViewContent')
-    // connectionToTaskWindow.classList.remove('dont-Show')
     let connectionToTaskBackground = document.getElementById('bigViewOfTask')
     connectionToTaskBackground.classList.remove('dont-Show')
     connectionToTaskBackground.classList.add('flexClass')
@@ -336,12 +304,6 @@ async function deleteData(firebaseID) {
     return await response.json();
 };
 
-// async function deleteSubtaskOnFirebase(firebasId, index){
-//     let response = await fetch(`https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/task/${firebasId}/subtasks/${index}.json`, {
-//         method: "DELETE",
-//     });
-//     return await response.json();
-// }
 
 /**renders the Edit View in the same div as the BigView */
 function activateEditModus(id) {
@@ -355,91 +317,23 @@ function activateEditModus(id) {
 }
 
 /**changes the img if an user sets a Subtask as done in bigView */
-function confirmSubtask1(id) {
+function confirmSubtask(subIndex, id) {
     let RT1 = tasks.find(task => task[1].id === id)
     let firebaseId = RT1[0]
-    let choSubtask1 = document.getElementById(`subtaskBigViewImg1`)
+    let choSubtask1 = document.getElementById(`subtaskBigViewImg-${subIndex}`)
     if (choSubtask1.src.includes("/img/icons/normalCheckContact.svg")) {
         choSubtask1.classList.remove('checkboxS1')
         choSubtask1.classList.add('checkedSubtask')
         choSubtask1.src = "/img/icons/normalCheckedContact.svg"
-        putData(`task/${firebaseId}/subtasks/0/status`, 'closed')
+        putData(`task/${firebaseId}/subtasks/${subIndex}/status`, 'closed')
     } else {
         choSubtask1.classList.add('checkboxS1')
         choSubtask1.classList.remove('checkedSubtask')
         choSubtask1.src = "/img/icons/normalCheckContact.svg"
-        putData(`task/${firebaseId}/subtasks/0/status`, 'open')
+        putData(`task/${firebaseId}/subtasks/${subIndex}/status`, 'open')
     }
 }
 
-
-function confirmSubtask2(id) {
-    let RT2 = tasks.find(task => task[1].id === id)
-    let firebaseId = RT2[0]
-    let choSubtask2 = document.getElementById(`subtaskBigViewImg2`)
-    if (choSubtask2.src.includes("/img/icons/normalCheckContact.svg")) {
-        choSubtask2.classList.remove('checkboxS2')
-        choSubtask2.classList.add('checkedSubtask')
-        choSubtask2.src = "/img/icons/normalCheckedContact.svg"
-        putData(`task/${firebaseId}/subtasks/1/status`, 'closed')
-    } else {
-        choSubtask2.classList.add('checkboxS2')
-        choSubtask2.classList.remove('checkedSubtask')
-        choSubtask2.src = "/img/icons/normalCheckContact.svg"
-        putData(`task/${firebaseId}/subtasks/1/status`, 'open')
-    }
-}
-
-function confirmSubtask3(id) {
-    let RT2 = tasks.find(task => task[1].id === id)
-    let firebaseId = RT2[0]
-    let choSubtask2 = document.getElementById(`subtaskBigViewImg3`)
-    if (choSubtask2.src.includes("/img/icons/normalCheckContact.svg")) {
-        choSubtask2.classList.remove('checkboxS2')
-        choSubtask2.classList.add('checkedSubtask')
-        choSubtask2.src = "/img/icons/normalCheckedContact.svg"
-        putData(`task/${firebaseId}/subtasks/2/status`, 'closed')
-    } else {
-        choSubtask2.classList.add('checkboxS2')
-        choSubtask2.classList.remove('checkedSubtask')
-        choSubtask2.src = "/img/icons/normalCheckContact.svg"
-        putData(`task/${firebaseId}/subtasks/2/status`, 'open')
-    }
-}
-
-function confirmSubtask4(id) {
-    let RT2 = tasks.find(task => task[1].id === id)
-    let firebaseId = RT2[0]
-    let choSubtask2 = document.getElementById(`subtaskBigViewImg4`)
-    if (choSubtask2.src.includes("/img/icons/normalCheckContact.svg")) {
-        choSubtask2.classList.remove('checkboxS2')
-        choSubtask2.classList.add('checkedSubtask')
-        choSubtask2.src = "/img/icons/normalCheckedContact.svg"
-        putData(`task/${firebaseId}/subtasks/3/status`, 'closed')
-    } else {
-        choSubtask2.classList.add('checkboxS2')
-        choSubtask2.classList.remove('checkedSubtask')
-        choSubtask2.src = "/img/icons/normalCheckContact.svg"
-        putData(`task/${firebaseId}/subtasks/3/status`, 'open')
-    }
-}
-
-function confirmSubtask5(id) {
-    let RT2 = tasks.find(task => task[1].id === id)
-    let firebaseId = RT2[0]
-    let choSubtask2 = document.getElementById(`subtaskBigViewImg5`)
-    if (choSubtask2.src.includes("/img/icons/normalCheckContact.svg")) {
-        choSubtask2.classList.remove('checkboxS2')
-        choSubtask2.classList.add('checkedSubtask')
-        choSubtask2.src = "/img/icons/normalCheckedContact.svg"
-        putData(`task/${firebaseId}/subtasks/4/status`, 'closed')
-    } else {
-        choSubtask2.classList.add('checkboxS2')
-        choSubtask2.classList.remove('checkedSubtask')
-        choSubtask2.src = "/img/icons/normalCheckContact.svg"
-        putData(`task/${firebaseId}/subtasks/4/status`, 'open')
-    }
-}
 
 /**renders the Contacts into Tasks====*/
 function renderContact(element) {

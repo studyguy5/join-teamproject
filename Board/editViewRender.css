@@ -224,6 +224,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     min-height: 288px;
     transition: 100ms ease;
     background-color: white;
+    border: 1px solid rgb(212, 208, 208);
+    border-radius: 10px;
     overflow-y: scroll;
     transition: 500ms ease-in-out;
 }

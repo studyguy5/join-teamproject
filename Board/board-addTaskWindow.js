@@ -192,7 +192,6 @@ function createTaskTemplate() {
     } else {
         getTaskInformation();
         document.getElementById('creatButtonID').disabled = true;
-        console.log('executed')
         showReportAddedTaskTemplate();
     }
 }
@@ -306,7 +305,6 @@ function showInput() {
 
 /**here the Contact DropDown will open and the arrow makes an 180deg move */
 function openContactView() {
-    console.log('standard arbeitet')
     let contactDrop = document.getElementById('IdForContacts')
     if (contactDrop.classList.contains('availibleContactsClose')) {
         contactDrop.classList.remove('availibleContactsClose');
@@ -326,7 +324,6 @@ function openContactView() {
 }
 
 function closeContactView() {
-    console.log('arbeitet')
     let contactDrop = document.getElementById('IdForContacts')
     if (contactDrop.classList.contains('availableContactsOpen')) {
         contactDrop.classList.remove('availableContactsOpen');

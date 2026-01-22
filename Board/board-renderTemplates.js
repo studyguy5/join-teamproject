@@ -116,6 +116,8 @@ function renderTaskintoBoard(element) {
   if (element.taskType === 'User Story') {
     taskOption = 'darkblue';
   }
+  // TasksDone = tasks.find(t => t[1].id === element.id);
+  let done = element.subtasks.filter(st => st.status === 'closed')?.length || 0;
   return `<div draggable="true"  onmouseleave="closeMiniMenü(${element.id})" ondragstart="startDragging(${element['id']})" 
     id="TaskDiv-${element.id}" onclick="bigViewOfTask(${element.id}); renderContactForBigView(${element.id}); renderEditAndDeleteButton(${element.id}); checkSubtaskLenght(${element.id}); renderSubtaskHTMLForBigView(${element.id})" class="TaskDiv">
     <button onclick="event.stopPropagation(); renderMiniMenü(${element.id})" class="MiniMenüButton"><img src="/img/icons/miniMenüButton.svg"></button>
@@ -133,7 +135,7 @@ function renderTaskintoBoard(element) {
     <rect  width="128" height="8"  class="back"/>
     <rect  width="${element.progress}" height="8" class="fill"/>
     </svg>
-    <p class="progressDescription">${(element.progress / 128) * (element.subtasks.length)}/${(element.subtasks.length)} Subtasks </p>` : ''}
+    <p class="progressDescription">${done}/${(element.subtasks.length)} Subtasks </p>` : ''}
     </div>
     <div id="contacts-Priority-Container" class="contacts-Priority-Container" >
     <div id="${element.id}" class="contactsMiniView"></div>
@@ -216,7 +218,7 @@ function renderSubtaskHTMLForBigView(id) {
 
       `<div id="subtaskBigView1" class="subtaskImgDiv">  ${allIds[0][1].subtasks?.[subIndex] != null ? allIds[0][1]?.subtasks?.[subIndex].status === 'open' ?
         `<img id="subtaskBigViewImg-${subIndex}" class="checkboxS1" onclick="confirmSubtask(${subIndex}, ${id}); checkDone(${allIds, id})" src="/img/icons/normalCheckContact.svg">` :
-        `<img id="subtaskBigViewImg-${subIndex}" class="checkboxS1" onclick="confirmSubtask(${subIndex}, ${id}); checkDone(${allIds, id})" src="/img/icons/normalCheckedContact.svg">` : ''}
+        `<img id="subtaskBigViewImg-${subIndex}" class="checkedSubtask" onclick="confirmSubtask(${subIndex}, ${id}); checkDone(${allIds, id})" src="/img/icons/normalCheckedContact.svg">` : ''}
         <p>${allIds[0][1]?.subtasks?.[subIndex] != null ? allIds[0][1]?.subtasks?.[subIndex].value : ''}</p></div>
   `
 

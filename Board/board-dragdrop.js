@@ -209,10 +209,13 @@ let progress;
 let TaskDone;
 Taskavailable = document.querySelectorAll('.subTaskForBigView > subtaskImgDiv img')
 
+
+
 /**check if an subtask gets checked and update this on firebase in order to show it other Users in the world */
 function checkDone(id) {
     let sort = tasks.filter(tasks => tasks[1].id === id);
     let firebaseIde = sort[0][0];
+    // let closed = sort[0][1].subtasks.filter(st => st.status === 'closed');
     TaskDone = document.querySelectorAll('.subTaskForBigView .subtaskImgDiv .checkedSubtask')
     sort[0][1].progress = ((TaskDone.length / sort[0][1].subtasks.length) * 128);
     putData(`task/${firebaseIde}/progress`, `${sort[0][1].progress}`)

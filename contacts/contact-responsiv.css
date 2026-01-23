@@ -126,6 +126,56 @@
 
 }
 
+@media(max-width:1024px) and (max-height:768px) {
+    .detail-header {
+        display: flex;
+        flex-direction: column;
+        height: 132px;
+        gap: 10px;
+        padding-top: 12px;
+        padding-left: 32px;
+        padding-bottom: 15px;
+    }
+
+    .detail-body {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .floating-contact-body {
+        flex-direction: column;
+    }
+
+    .contact-body-detail {
+        height: 98%;
+    }
+}
+
+@media(max-width:1024px) and (max-height:600px) {
+    .detail-header {
+        display: flex;
+        flex-direction: column;
+        height: 132px;
+        gap: 10px;
+        padding-top: 12px;
+        padding-left: 32px;
+        padding-bottom: 15px;
+    }
+
+    .detail-body {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .floating-contact-body {
+        flex-direction: unset;
+    }
+
+    .contact-body-detail {
+        height: 98%;
+    }
+}
+
 
 @media (max-width: 1000px) {
 

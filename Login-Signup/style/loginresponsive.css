@@ -1,3 +1,10 @@
+
+@media(max-width: 1024px) {
+    .signup-container{
+        top:15px;
+    }
+}
+
 @media (max-width: 768px) {
     body {
         padding: 20px;

@@ -47,23 +47,7 @@ body {
   left: 60px;
 }
 
-@media (max-width: 1921px) {
-  body {
-    display: flex;
-    justify-content: center;
-    background-color: #F6F7F8;
-  }
-  .signup-card {
-    position: relative;
-    margin: auto;
-  }
-  .page-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    max-width: 1920px;
-  }
-}
+
 
 .page-logo img {
   width: 80px;

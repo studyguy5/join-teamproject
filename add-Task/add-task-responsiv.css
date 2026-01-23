@@ -45,6 +45,34 @@
     }
 }
 
+@media(max-width:1024px) and (max-height:768px) {
+    .mainAreaRight {
+        height: calc(100vh - 96px);
+        overflow-y: scroll;
+    }
+
+}
+
+@media(max-width:1024px) and (max-height:600px) {
+
+
+    .mainAreaRight h1 {
+        margin: 20px 0px 10px 40px;
+    }
+
+    .mainAreaRight {
+        height: calc(100vh - 96px);
+        overflow-y: scroll;
+    }
+
+    .input-container {
+        padding-bottom: 20px;
+        height: 345px;
+    }
+
+    
+}
+
 @media (max-width:1000px) {
     .mainAreaRight {
         overflow-x: hidden;

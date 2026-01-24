@@ -18,6 +18,19 @@
     .greetingAnimation {
         display: none;
     }
+
+    .greeting {
+        width:340px;
+        right:30px;
+    }
+
+    .greeting-name {
+        width:340px;
+    }
+
+    .greeting-time{
+        width:340px;
+    }
 }
 
 @media(max-width:1310px) {
@@ -37,6 +50,266 @@
         display: none;
     }
 
+}
+
+@media(min-width:1400px) and (max-width:1440px) and (min-height:900px) and (max-height:900px) {
+    .summary-header {
+        margin: 15px 20px 20px 40px;
+    }
+
+    .box-upper-left {
+        width:260px;
+        height:145px;
+    }
+
+    .box-upper-right {
+        width:260px;
+        height:145px;
+    }
+
+    .box-middle-text {
+        font-size: 47px;
+    }
+
+    .greeting {
+        top: 400px;
+        right: 70px;
+        width: 400px;
+    }
+
+    .summary-counter {       
+        padding-bottom: 0px;
+    }
+}
+
+@media(min-width:1300px) and (max-width:1366px) and (min-height:768px) and (max-height:768px) {
+    .summary-header {
+        margin: 15px 20px 20px 40px;
+    }
+
+    .summary-counter {
+        gap: 40px;
+        width: 500px;
+        padding-bottom: 0px;
+    }
+
+    .leftAria {
+        height: calc(100vh - 96px);
+        width: 500px;
+    }
+
+    .p-left {
+        margin: 15px 0px;
+        font-size: 54px;
+    }
+
+    .p-right {
+        font-size: 20px;
+    }
+
+    .box-upper {
+        width: 350px;
+        gap: 20px;
+    }
+
+    .box-upper-left {
+        padding: 20px 15px;
+        width: 140px;
+        height: 110px;
+    }
+
+    .box-upper-right {
+        padding: 20px 15px;
+        width: 140px;
+        height: 110px;
+    }
+
+    .box-upper-right img,
+    .box-upper-left img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .box-upper-text {
+        font-size: 47px;
+    }
+
+    .box-middle {
+        height: 120px;
+        width: 350px;
+        gap: 20px;
+    }
+
+    .box-middle-text {
+        font-size: 47px;
+    }
+
+    .box-lower {
+        width: 350px;
+        height: 136px;
+        gap: 20px;
+    }
+
+    .box-lower-content-num {
+        font-size: 47px;
+    }
+
+    .box-lower-content-text {
+        font-size: 16px;
+        margin-top: 5px;
+    }
+
+    .box-lower-content {
+        padding: 13px 12px;
+        height: 110px;
+        gap: 0px;
+    }
+
+    .date {
+        font-size: 18px;
+    }
+
+    .upcoming {
+        font-size: 16px;
+    }
+
+    .boxMiddleUrgent {
+        width: 30px;
+        height: 30px;
+    }
+
+    .greeting {
+        top: 360px;
+        right: 160px;
+        width: 345px;
+    }
+
+    .greeting-name {
+        width: 365px;
+    }
+
+    .greeting-time {
+        width: 365px;
+    }
+}
+
+@media(max-width:1250px){
+    .greeting{
+        display:none;
+    }
+}
+
+@media(min-width:1200px) and (max-width:1280px) and (min-height:800px) and (max-height:800px) {
+    .summary-header {
+        margin: 15px 20px 20px 40px;
+    }
+
+
+
+    .summary-counter {
+        gap: 40px;
+        width: 500px;
+        padding-bottom: 0px;
+    }
+
+    .leftAria {
+        height: calc(100vh - 96px);
+        width: 500px;
+    }
+
+    .p-left {
+        margin: 15px 0px;
+        font-size: 54px;
+    }
+
+    .p-right {
+        font-size: 20px;
+    }
+
+    .box-upper {
+        width: 350px;
+        gap: 20px;
+    }
+
+    .box-upper-left {
+        padding: 20px 15px;
+        width: 140px;
+        height: 110px;
+    }
+
+    .box-upper-right {
+        padding: 20px 15px;
+        width: 140px;
+        height: 110px;
+    }
+
+    .box-upper-right img,
+    .box-upper-left img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .box-upper-text {
+        font-size: 47px;
+    }
+
+    .box-middle {
+        height: 120px;
+        width: 350px;
+        gap: 20px;
+    }
+
+    .box-middle-text {
+        font-size: 47px;
+    }
+
+    .box-lower {
+        width: 350px;
+        height: 136px;
+        gap: 20px;
+    }
+
+    .box-lower-content-num {
+        font-size: 47px;
+    }
+
+    .box-lower-content-text {
+        font-size: 16px;
+        margin-top: 5px;
+    }
+
+    .box-lower-content {
+        padding: 13px 12px;
+        height: 110px;
+        gap: 0px;
+    }
+
+    .date {
+        font-size: 18px;
+    }
+
+    .upcoming {
+        font-size: 16px;
+    }
+
+    .boxMiddleUrgent {
+        width: 30px;
+        height: 30px;
+    }
+
+    .greeting {
+        top: 360px;
+        right: 160px;
+        width: 305px;
+    }
+
+    .greeting-name {
+        width: 305px;
+    }
+
+    .greeting-time {
+        width: 305px;
+    }
 }
 
 @media(max-width:1160px) {
@@ -117,15 +390,15 @@
         height: 157px;
     }
 
-    .summary-counter{
-        gap:35px;
-        width:500px;
+    .summary-counter {
+        gap: 35px;
+        width: 500px;
         padding-bottom: 0px;
     }
 
     .leftAria {
         height: calc(100vh - 96px);
-        width:500px;
+        width: 500px;
     }
 
     .p-left {
@@ -145,13 +418,13 @@
     .box-upper-left {
         padding: 15px 10px;
         width: 120px;
-        height:90px;
+        height: 90px;
     }
 
     .box-upper-right {
         padding: 15px 10px;
         width: 120px;
-        height:90px;
+        height: 90px;
     }
 
     .box-upper-right img,
@@ -160,40 +433,46 @@
         height: 40px;
     }
 
-    .box-upper-text  {
+    .box-upper-text {
         font-size: 47px;
     }
 
     .box-middle {
-        height:120px;
-        width:350px;
+        height: 120px;
+        width: 350px;
         gap: 20px;
     }
 
-    .box-lower{
-        width:350px;
+    .box-middle-text {
+        font-size: 47px;
+    }
+
+    .box-lower {
+        width: 350px;
         height: 136px;
         gap: 20px;
     }
 
-    .box-lower-content-num{
-        font-size:47px;
+    .box-lower-content-num {
+        font-size: 47px;
     }
 
-    .box-lower-content-text{
-        font-size:16px;
-        margin-top:5px;
+    .box-lower-content-text {
+        font-size: 16px;
+        margin-top: 5px;
     }
 
-    .box-lower-content{
+    .box-lower-content {
         padding: 13px 12px;
         height: 110px;
-        gap:0px;
+        gap: 0px;
     }
+
 
     .date {
         font-size: 18px;
     }
+
     .upcoming {
         font-size: 16px;
     }
@@ -203,18 +482,18 @@
         height: 30px;
     }
 
-    .greeting{
-        top:300px;
-        right:35px;
-        width:305px;
+    .greeting {
+        top: 300px;
+        right: 35px;
+        width: 305px;
     }
 
-    .greeting-name{
-        width:305px;
+    .greeting-name {
+        width: 305px;
     }
 
-    .greeting-time{
-        width:305px;
+    .greeting-time {
+        width: 305px;
     }
 }
 
@@ -223,15 +502,15 @@
         margin: 5px 20px 5px 40px;
     }
 
-    .summary-counter{
-        gap:15px;
-        width:500px;
+    .summary-counter {
+        gap: 15px;
+        width: 500px;
         padding-bottom: 0px;
     }
 
     .leftAria {
         height: calc(100vh - 96px);
-        width:500px;
+        width: 500px;
     }
 
     .p-left {
@@ -251,13 +530,13 @@
     .box-upper-left {
         padding: 15px 10px;
         width: 120px;
-        height:90px;
+        height: 90px;
     }
 
     .box-upper-right {
         padding: 15px 10px;
         width: 120px;
-        height:90px;
+        height: 90px;
     }
 
     .box-upper-right img,
@@ -266,40 +545,45 @@
         height: 40px;
     }
 
-    .box-upper-text  {
+    .box-upper-text {
         font-size: 47px;
     }
 
     .box-middle {
-        height:120px;
-        width:350px;
+        height: 120px;
+        width: 350px;
         gap: 20px;
     }
 
-    .box-lower{
-        width:350px;
+    .box-middle-text {
+        font-size: 47px;
+    }
+
+    .box-lower {
+        width: 350px;
         height: 136px;
         gap: 20px;
     }
 
-    .box-lower-content-num{
-        font-size:47px;
+    .box-lower-content-num {
+        font-size: 47px;
     }
 
-    .box-lower-content-text{
-        font-size:16px;
-        margin-top:5px;
+    .box-lower-content-text {
+        font-size: 16px;
+        margin-top: 5px;
     }
 
-    .box-lower-content{
+    .box-lower-content {
         padding: 13px 12px;
         height: 110px;
-        gap:0px;
+        gap: 0px;
     }
 
     .date {
         font-size: 18px;
     }
+
     .upcoming {
         font-size: 16px;
     }
@@ -309,18 +593,18 @@
         height: 30px;
     }
 
-    .greeting{
-        top:300px;
-        right:35px;
-        width:305px;
+    .greeting {
+        top: 300px;
+        right: 35px;
+        width: 305px;
     }
 
-    .greeting-name{
-        width:305px;
+    .greeting-name {
+        width: 305px;
     }
 
-    .greeting-time{
-        width:305px;
+    .greeting-time {
+        width: 305px;
     }
 }
 

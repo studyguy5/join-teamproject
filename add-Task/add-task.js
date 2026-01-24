@@ -406,7 +406,7 @@ function constantCheckDate() {
 }
 
 function validateTitleAddTaskNormal(title) {
-    const titleRegex = /^[A-Za-zÄÖÜäöüß\s]+$/;
+    const titleRegex = /^[A-Za-zÄÖÜäöüß\s1-9]+$/;
     return titleRegex.test(title.trim());
 }
 

@@ -52,9 +52,9 @@ function searchAndRender(searchField) {
                 return filteredTask
             })
             if (searchedTask.length === 0) {
-                taskNotFound()
+                taskNotFound();
             } else {
-                filterAndShowTasksAlternate(searchedTask)
+                filterAndShowTasksAlternate(searchedTask);
             }
         } else {
             filterAndShowTasks()
@@ -88,6 +88,9 @@ async function filterAndShowTasksAlternate(array) {
     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
         document.getElementById(`${categorys[idIndex]}`).innerHTML = '';
         let filteredTasks = array.filter(f => f[1].category == categorys[idIndex]);
+        if(filteredTasks.length === 0){
+            document.getElementById(`${categorys[idIndex]}`).innerHTML = setCardZero();
+        }
         for (let catIndex = 0; catIndex < filteredTasks.length; catIndex++) {
             let element = filteredTasks[catIndex];
             document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoardFilter(element);
@@ -156,6 +159,7 @@ function setCardZero() {
 function taskNotFound() {
     const parent = document.querySelector('.DragAndDropTaskAria')
     const divs = parent.querySelectorAll('div')
+    if(divs.length === 0)
     divs.forEach(div => {
         div.innerHTML = setCardZero()
     });

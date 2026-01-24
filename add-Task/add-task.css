@@ -219,7 +219,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 textarea {
     max-width: 1920px;
     height: 100%;
-    max-height:120px;
+    max-height:124px;
     border-radius: 7px;
     border: 1px solid #c8c8c8;
     padding: 12px 21px;
@@ -252,7 +252,7 @@ textarea:focus {
     flex-direction: column;
     margin-left: 96px;
     width: 440px;
-    height: 376px;
+    height: 433px;
 }
 
 .input-section-left label {

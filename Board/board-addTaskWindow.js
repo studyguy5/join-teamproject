@@ -83,6 +83,9 @@ function closePopup() {
     popup.classList.remove("show");
     document.getElementById("countInfoPopup").innerHTML = "";
     const buttons = document.querySelectorAll(".priority-section button");
+    document.getElementById('UserFeedbackTitle' ).innerHTML = "";
+    document.getElementById('UserFeedbackDate' ).innerHTML = "";
+    document.getElementById('UserFeedbackTaskType' ).innerHTML = "";
     let createdArray = Array.from(buttons)
     createdArray[1].classList.remove('Medium')
     clearTask();
@@ -134,7 +137,7 @@ function constantCheckDatePopup() {
 }
 
 function validateTitleAddTaskNormal(title) {
-    const titleRegex = /^[A-Za-zÄÖÜäöüß\s]+$/;
+    const titleRegex = /^[A-Za-zÄÖÜäöüß\s1-9]+$/;
 
     return titleRegex.test(title.trim());
 }

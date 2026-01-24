@@ -272,7 +272,7 @@ textarea:focus {
     display: flex;
     flex-direction: column;
     width: 440px;
-    height: 400px;
+    height: 430px;
     position: relative;
 }
 

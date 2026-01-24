@@ -471,8 +471,10 @@ function stopBubbling(event) {
 /** resets the typed values in the mask to zero or empty */
 function clearTask() {
     const title = document.getElementById("title").value = "";
+    document.getElementById("UserFeedbackTitle").innerHTML = "";
     const description = document.getElementById('task-description').value = "";
     const dueDate = document.getElementById("dueDate").value = "";
+    document.getElementById("UserFeedbackDate").innerHTML = "";
     let count = document.querySelectorAll('.contactBox .checked')
     count.forEach(ob => ob.classList.remove('checked')),
         count.forEach(ob => ob.classList.add('checkbox')),
@@ -483,6 +485,7 @@ function clearTask() {
     buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
     buttons[1].classList.add('Medium');
     const taskType = document.getElementById("selectedTask").innerText = "Select Task Category";
+    document.getElementById("UserFeedbackTaskType").innerHTML = "";
     document.getElementById("subtask").value = "";
     document.getElementById('subtask-list-1').classList.remove('scrollClass')
     document.getElementById('subtask-list-1').innerHTML = "";

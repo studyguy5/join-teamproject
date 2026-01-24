@@ -5,8 +5,10 @@
  */
 function clearTaskNormal() {
     const title = document.getElementById("title-add-task").value = "";
+    document.getElementById('UserFeedbackTitle').innerHTML = "";
     const description = document.getElementById('task-description').value = "";
     const dueDate = document.getElementById("date-add-task").value = "";
+    document.getElementById('UserFeedbackDate').innerHTML = "";
     let count = document.querySelectorAll('.contactBox .checked')
     count.forEach(ob => ob.classList.remove('checked')),
         count.forEach(ob => ob.classList.add('checkbox')),
@@ -18,6 +20,7 @@ function clearTaskNormal() {
     buttons[1].classList.add('Medium');
     prioArray.length = 0;
     const taskType = document.getElementById("selectedTaskNormal").innerText = "Select Task Category";
+    document.getElementById('UserFeedbackTaskType').innerHTML = "";
     document.getElementById("subtask").value = "";
     document.getElementById('subtask-list-1').classList.remove('scrollClass')
     document.getElementById('subtask-list-1').innerHTML = "";

@@ -97,7 +97,7 @@
     }
 
     .searchInputField {
-        min-width:424px;
+        min-width:304px;
     }
 }
 
@@ -116,7 +116,7 @@
     .inputBorder {
         margin-right: 22px;
         height: 48px;
-        width: 93vw;
+        width: 86vw;
         max-width: 396px;
         box-sizing: border-box;
     }

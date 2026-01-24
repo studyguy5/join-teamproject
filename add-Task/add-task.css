@@ -218,7 +218,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 textarea {
     max-width: 1920px;
-    height: 100px;
+    height: 100%;
+    max-height:120px;
     border-radius: 7px;
     border: 1px solid #c8c8c8;
     padding: 12px 21px;

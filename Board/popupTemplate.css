@@ -240,14 +240,14 @@
     flex-direction: column;
     margin-left: 74px;
     width: 440px;
-    height: 376px;
+    height: 400px;
 }
 
 .input-section-rightPopup {
     display: flex;
     flex-direction: column;
     width: 440px;
-    height: 400px;
+    height: 444px;
     position:relative;
 }
 

@@ -193,23 +193,25 @@ hr {
 }
 
 .card-zero {
-    max-width: 210px;
-    max-height: 182px;
-    height: 4vh;
-    width: 14vw;
-    border: 1px solid rgba(6, 0, 0, 0.251);
+    max-width: 232px;
+    max-height: 50px;
+    height: 50px;
+    width: 98%;
+    border-style: dotted;
+    border: 1px dashed #3f3b3b;
     box-shadow: #091931;
     border-radius: 10px;
     gap: 8px;
     padding: 10px;
-    background-color: #a8a8a89c;
+    background-color: #cecece9c;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    color: #a8a8a8;
+    color: #2b2a2a;
     font-weight: 400;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
 

@@ -354,7 +354,7 @@ textarea:focus {
     border: none;
 }
 
-.create-task-btn:hover {
+.create-task-btn:hover:not(:disabled) {
     background-color: #29ABE2;
 }
 

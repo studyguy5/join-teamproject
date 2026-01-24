@@ -465,7 +465,7 @@ padding:0px;
     border: none;
 }
 
-.create-task-btn:hover {
+.create-task-btnPopup:hover:not(:disabled) {
     background-color: #29ABE2;
 }
 

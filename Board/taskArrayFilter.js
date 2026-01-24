@@ -149,7 +149,7 @@ function renderContactFilter(element) {
 /**is displayed if durring filter task no results were found */
 function setCardZero() {
     let template;
-    template = `<div class="card-zero">No tasks found in this section</div>`;
+    template = `<div class="card-zero">No tasks found here</div>`;
     return template
 }
 //-----------------------------------------------------------------------------------------------------------------

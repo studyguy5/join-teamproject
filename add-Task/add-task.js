@@ -327,6 +327,7 @@ const selectedTask = document.getElementById("selectedTaskNormal");
  * @returns {boolean} True if valid, otherwise false.
  */
 function commonConstantCheck() {
+    document.getElementById('creatButtonIDForNormal').disabled = true;
     const title = document.getElementById("title-add-task").value;
     const dueDate = document.getElementById("date-add-task").value;
     const taskType = document.getElementById("selectedTaskNormal").innerText;
@@ -352,7 +353,6 @@ function commonConstantCheck() {
         document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
     } else {
         getTaskInformationNormal();
-        document.getElementById('creatButtonIDForNormal').disabled = true;
         console.log('executed normal')
         showSuccessMessage();
     }

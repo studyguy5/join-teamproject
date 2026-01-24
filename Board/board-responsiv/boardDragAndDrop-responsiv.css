@@ -529,8 +529,8 @@
         position: absolute;
         left: 0px;
         top: 222px;
-        width: 100%;
-        min-width: calc(100vw);
+        width: 98%;
+        min-width: calc(98vw);
         max-width: 828px;
         height: calc(100% - 160px -217px);
         max-height: calc(100% - 80px - 141px);
@@ -722,8 +722,8 @@
         position: absolute;
         left: 0px;
         top: 222px;
-        width: 100%;
-        min-width: calc(100vw);
+        width: 98%;
+        min-width: calc(98vw);
         max-width: 828px;
         height: calc(100% - 160px -217px);
         max-height: calc(100% - 80px - 141px);
@@ -883,8 +883,8 @@
         position: absolute;
         left: 0px;
         top: 222px;
-        width: 100%;
-        min-width: calc(100vw);
+        width: 98%;
+        min-width: calc(98vw);
         max-width: 828px;
         height: calc(100% - 160px -217px);
         max-height: calc(100% - 80px - 141px);

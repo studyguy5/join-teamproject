@@ -5,6 +5,12 @@
     }
 }
 
+@media(max-width:1024px) and (min-height: 598px) and (max-height:600px) {
+    .mainAria{
+        max-height:calc(100vh - 96px);
+    }
+}
+
 
 @media (max-width: 1135px) {
 

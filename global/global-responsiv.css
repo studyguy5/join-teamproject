@@ -83,17 +83,7 @@
 }
 
 @media(min-width:1005px) and (max-width:1024px) and (min-height:598px) and (max-height:600px) {
-    /* .header-fullsize {
-        height: 80px;
-        }
-        
-        .header-content {
-            height: 80px;
-            } */
-
-    /* body, html{
-                height: calc(100vh);
-                } */
+    
     .nav-container {
         width: 175px;
         height: 100vh;

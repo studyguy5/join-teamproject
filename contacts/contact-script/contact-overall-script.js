@@ -319,7 +319,7 @@ function sectionCheck(idsecTrue) {
  */
 function renderContactList(array, targetID = '') {
     document.getElementById(targetID).innerHTML = '';
-    for (let index = 0; index < array.length - 1; index++) {
+    for (let index = 0; index < array.length; index++) {
         document.getElementById(targetID).innerHTML += setContactList(array, index);
     }
 }

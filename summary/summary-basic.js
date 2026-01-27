@@ -5,18 +5,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   getUserNameForAnimation();
   toDoSummaryEventHandler();
   doneSummaryEventHandler();
-
-  /**loads all Task, Data and Numbers, which are needed to display the summary page correct */
   const data = await getData('task');
   const entries = data ? Object.entries(data) : [];
   tasks.push(...entries);
   deliverDataToSummary(tasks);
-
-  
   /**renders greeting of Users and current Date */
   renderUserInitials();
   updateGreetingAndDate();                 // setzt Greeting + Datum (nur wenn kein Urgent-Datum gefunden)
-
   /**updates the greeting and date function on certain intervall times to keep it updated */
   setInterval(updateGreetingAndDate, 60 * 1000);
 });
@@ -26,6 +21,7 @@ function sectionCheck(idsecTrue) {
   document.getElementById(idsecTrue)?.classList.add('active');
 }
 
+//**define firebase URL, define getData function for further use */
 const BASe_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/";
 
 async function getData(path = '') {
@@ -58,26 +54,19 @@ let hasUrgentDeadline = false;
 function parseDateSmart(input) {
   if (!input || typeof input !== 'string') return null;
   const s = input.trim();
-
   // dd/mm/yyyy oder dd.mm.yyyy
   let m = s.match(/^(\d{1,2})[\/.](\d{1,2})[\/.](\d{4})$/);
-  if (m) {
-    const [_, d, mo, y] = m;
-    const date = new Date(+y, +mo - 1, +d);
-    return isNaN(date) ? null : date;
-  }
+  if (m) {const [_, d, mo, y] = m; const date = new Date(+y, +mo - 1, +d);
+    return isNaN(date) ? null : date;}
   // yyyy-mm-dd
   m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
-  if (m) {
-    const [_, y, mo, d] = m;
-    const date = new Date(+y, +mo - 1, +d);
-    return isNaN(date) ? null : date;
-  }
+  if (m) {const [_, y, mo, d] = m; const date = new Date(+y, +mo - 1, +d);
+    return isNaN(date) ? null : date;}
   // Fallback: Date kann evtl. direkt parsen
   const date = new Date(s);
-  return isNaN(date) ? null : date;
-}
+  return isNaN(date) ? null : date;}
 
+/**sets the time to 00:00:00 for comparison purposes */
 function startOfDay(d) {
   const x = new Date(d);
   x.setHours(0,0,0,0);
@@ -89,18 +78,15 @@ function startOfDay(d) {
 function findNextUrgentDeadline(taskEntries) {
   const today = startOfDay(new Date());
   const urgentDates = [];
-
   for (const [, t] of taskEntries) {
     if (!t || t.prio !== 'Urgent') continue;
     const due = parseDateSmart(t.DueDate);
     if (!due) continue;
-    if (startOfDay(due) >= today) urgentDates.push(due);
-  }
-
+    if (startOfDay(due) >= today) urgentDates.push(due);}
   if (!urgentDates.length) return null;
   urgentDates.sort((a,b) => a - b);
-  return urgentDates[0];
-}
+  return urgentDates[0];}
+
 
 /**puts the format into a readable one for the user */
 function formatDateReadable(d, locale = 'en-US') {
@@ -117,25 +103,24 @@ function deliverDataToSummary(tasks) {
   document.getElementById('doneTask').innerHTML += done.length;
   let urgent = tasks.filter(td => td[1].prio === 'Urgent');
   document.getElementById('prioUrgent').innerHTML = urgent.length + `<span>Urgent</span>`;
-
   document.getElementById('allTaskInBoard').innerHTML = tasks.length;
   let inprogress = tasks.filter(td => td[1].category === 'Inprogress');
   document.getElementById('taskInProgress').innerHTML = inprogress.length;
   let awaitfeedback = tasks.filter(td => td[1].category === 'AwaitFeedback');
   document.getElementById('taskAwaitFeedback').innerHTML = awaitfeedback.length;
-
-  /** New: sets the urgent date (if available) */ 
-  const nextUrgent = findNextUrgentDeadline(tasks);
-  if (nextUrgent) {
-    setUpcomingDate(formatDateReadable(nextUrgent, 'en-US'));
-    hasUrgentDeadline = true;
-  } else {
-    hasUrgentDeadline = false; // UpdateGreeting setzt dann heute
-  }
+  findNextUrgentDeadline(tasks);
 }
 
-/* ===================== USERNAME & INITIALEN ===================== */
 
+  /** New: sets the urgent date (if available) */   
+  const nextUrgent = findNextUrgentDeadline(tasks);
+  if (nextUrgent) {setUpcomingDate(formatDateReadable(nextUrgent, 'en-US')); hasUrgentDeadline = true;}
+   else {hasUrgentDeadline = false; // UpdateGreeting setzt dann heute}
+    }
+
+
+  /* ===================== USERNAME & INITIALEN ===================== */
+  
 
 /**get the stored User name and return user */
 function getStoredUserName() {
@@ -190,12 +175,7 @@ function formatTodayDate(locale = 'en-US') {
 
 function setUpcomingDate(text) {
   // 1) Bevorzugte IDs
-  const idTargets = [
-    '#upcoming-deadline-date',
-    '#upcomingDate',
-    '#deadlineDate',
-    '#summaryUpcomingDate'
-  ];
+  const idTargets = ['#upcoming-deadline-date','#upcomingDate','#deadlineDate','#summaryUpcomingDate'];
   for (const sel of idTargets) {
     const el = document.querySelector(sel);
     if (el) { el.textContent = text; return true; }
@@ -205,7 +185,6 @@ function setUpcomingDate(text) {
   if (el1) { el1.textContent = text; return true; }
   const el2 = document.querySelector('.date');
   if (el2) { el2.textContent = text; return true; }
-  
   return false;
 }
 
@@ -219,12 +198,10 @@ function updateGreetingAndDate() {
   const fullName = getStoredUserName();
   let greeting = computeGreeting();
   const today = formatTodayDate('en-US');
-  
   const timeEl = document.getElementById('greeting-time');
   const nameEl = document.getElementById('greeting-name');
   if (timeEl) timeEl.textContent = greeting + ',';
   if (nameEl) { nameEl.textContent = fullName; nameEl.classList.remove('d-none'); }
-  
   // Nur heutiges Datum setzen, wenn kein Urgent-Datum angezeigt wird
   if (!hasUrgentDeadline) {
     setUpcomingDate(today);
@@ -242,12 +219,8 @@ function getUserNameForAnimation(){
   let userName = localStorage.getItem('userFullName')
   if(userName !== 'Guest User' || 'guest User'){
     let logUserName = document.getElementById('greetingUser')
-    logUserName.innerHTML += `
-    <h2>${time}</h2>
-    <h2>${userName}</h2>`
-  }
+    logUserName.innerHTML += `<h2>${time}</h2> <h2>${userName}</h2>`}
   localStorage.removeItem('signIn');
 }else{
   document.getElementById('greetingUser').style.display = "none";
-}
-}
+}}

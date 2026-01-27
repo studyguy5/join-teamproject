@@ -109,3 +109,86 @@ let overlayAnimationAttributeObjectFinish = {
     easing: 'ease-out'
 }
 
+/**
+ * Slides content out, updates details, then slides back in.
+ * @async
+ * @param {string} targetID 
+ * @param {string} id 
+ */
+async function switchContentWithSlide(targetID = '', id) {
+
+    const container = document.getElementById(targetID);
+    const slideOutAnimation = container.animate(transformArrayStart, animationAttributeObjectStart);
+    await slideOutAnimation.finished;
+    getContactsDetails(targetID, contacts, id = id);
+    container.animate(transformArrayFinish, animationAttributeObjectFinish);
+    return;
+}
+
+
+/**
+ * Switches the message content inside a container using slide-out and slide-in animations.
+ * @async
+ * @param {string} [targetQuerry=''] - CSS selector of the target container.
+ * @returns {Promise<void>}
+ */
+async function switchMessageContentWithSlide(targetQuerry = '') {
+
+    let size = window.innerWidth;
+    if (size > 428) {
+        const container = document.querySelector(targetQuerry)
+        const slideOutAnimation = container.animate(transformArrayStart, animationAttributeObjectStart);
+        await slideOutAnimation.finished;
+        container.innerHTML = setSucessMessage()
+        container.animate(transformArrayFinish, animationAttributeObjectFinish);
+        return;
+    } else {
+        const container = document.getElementById('messageVertical')
+        const slideOutAnimation = container.animate(transformArrayStartVertical, animationAttributeObjectStartVertical);
+        await slideOutAnimation.finished;
+        // container.innerHTML = setSucessMessage()
+        container.animate(transformArrayFinishVertical, animationAttributeObjectFinishVertical);
+    }
+}
+
+
+/**
+ * Resets the content of an element using a slide animation.
+ * @async
+ * @param {string} [targetID=''] - ID of the target element.
+ * @returns {Promise<void>}
+ */
+async function resetContentWithSlide(targetID = '') {
+    const container = document.getElementById(targetID)
+    const slideOutAnimation = container.animate(transformArrayStart, animationAttributeObjectStart);
+    await slideOutAnimation.finished;
+    document.getElementById(targetID).innerHTML = ''
+    container.animate(transformArrayFinish, animationAttributeObjectFinish);
+    return;
+}
+
+
+/**
+ * Replaces content inside an overlay with slide-out and slide-in animations.
+ * @async
+ * @param {string} [targetID=''] - ID of the overlay container.
+ * @param {string} htmlContent - HTML content to inject into the container.
+ * @returns {Promise<void>}
+ */
+async function switchOverlayContentWithSlide(targetID = '', htmlContent) {
+    let sizeOfWindow = window.innerWidth;
+    if (sizeOfWindow > 428) {
+        const container = document.getElementById(targetID)
+        const slideOutAnimation = container.animate(overlayTransformArrayStart, overlayAnimationAttributeObjectStart);
+        await slideOutAnimation.finished;
+        container.innerHTML = htmlContent
+        container.animate(overlayTransformArrayFinish, overlayAnimationAttributeObjectFinish);
+    } else {
+        const container = document.getElementById(targetID)
+        const slideOutAnimation = container.animate(overlayTransformArrayStartVertical, overlayAnimationAttributeObjectStart);
+        await slideOutAnimation.finished;
+        container.innerHTML = htmlContent
+        container.animate(overlayTransformArrayFinishVertical, overlayAnimationAttributeObjectFinish);
+    }
+}
+

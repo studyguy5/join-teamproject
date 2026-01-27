@@ -272,3 +272,79 @@ function renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterCon
         </div>`
 }
 
+
+/**here we check which Contacts have the checkbox img and change it into checked to make it visible */
+function chooseContact(index) {
+    let choContact = document.getElementById(`checkboxImg-${index}`)
+    if (choContact.classList.contains('checkbox')) {
+        choContact.classList.remove('checkbox')
+        choContact.classList.add('checked')
+        let countPopup = document.querySelectorAll('.contactBox .checked')
+        if ((countPopup.length) > 6) {
+            document.getElementById('countInfoPopup').innerHTML = `+ ${(countPopup.length) - 6}`;
+        }
+        else {
+            renderChoosenContact(index);
+            choContact.src = "/img/icons/normalCheckedContact.svg"
+        }
+    } else {
+      choContact.classList.add('checkbox')
+      choContact.classList.remove('checked')
+      deleteRenderedContact(index);
+      choContact.src = "/img/icons/normalCheckContact.svg"
+    }
+}
+
+/**her we make the choosen Contacts within the filtered Contacts visible */
+function chooseFilteredContact(filterContactIndex) {
+    let choContactF = document.getElementById(`checkboxImg-${filterContactIndex}`)
+    if (choContactF.classList.contains('checkbox')) {
+        choContactF.classList.remove('checkbox')
+        choContactF.classList.add('checked')
+        let countFilteredPopup = document.querySelectorAll('.contactBox .checked')
+        if ((countFilteredPopup.length) > 6) {
+            deleteOneTime = true;
+            document.getElementById('countInfoPopup').innerHTML = `+ ${(countFilteredPopup.length) - 6}`;
+        }
+        else {
+            renderFilteredChoosenContactPopup(filterContactIndex)
+            choContactF.src = "/img/icons/normalCheckedContact.svg"
+        }
+    } else {
+        deleteRenderedContact(filterContactIndex);
+        choContactF.classList.add('checkbox')
+        choContactF.classList.remove('checked')
+        choContactF.src = "/img/icons/normalCheckContact.svg"
+    }
+}
+
+/**the choosen Contacts are rendered on the below of the dropdown List  */
+function renderChoosenContact(index) {
+    let listContact = document.getElementById('choosenContacts')
+    listContact.innerHTML += `
+    <div id="contactCirclePopupRender-${index}" class="contactCirclePopupRender">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>`
+}
+
+/**here we render the filtered choosen Contacts below the dropdown */
+function renderFilteredChoosenContactPopup(filterContactIndex) {
+    let listContact = document.getElementById('choosenContacts')
+    listContact.innerHTML += `
+    <div id="contactCirclePopupRender-${filterContactIndex}" class="contactCirclePopupRender">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>`
+}
+
+let deleteOneTime = true;
+/**here we can delete a choosen Contacts if we decide we want another contact */
+function deleteRenderedContact(index) {
+    let countedPopup = document.querySelectorAll('.contactBox .checked')
+    if (countedPopup.length >= 7) {
+        document.getElementById(`countInfoPopup`).innerHTML = `+ ${(countedPopup.length) - 6}`;
+    } else if (countedPopup.length = 6 && document.getElementById('countInfoPopup').innerHTML !== "") 
+        { 
+          document.getElementById('countInfoPopup').innerHTML = ""; }
+    else {
+        let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
+        renderedContact.remove(`contactCirclePopupRender`)
+        renderedContact.innerHTML = '';
+    }
+}
+

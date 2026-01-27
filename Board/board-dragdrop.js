@@ -9,12 +9,8 @@ let currentDraggedElement;
 
 let subtaskArray = [];
 
-let subtaskvalue1;
-let subtaskvalue2;
-let subtaskvalue3;
-let subtaskvalue4;
-let subtaskvalue5;
-let subtaskvalue6;
+let subtaskvalue;
+
 
 /**basic function to post Data into firebase */
 async function postData(path = '', data = {}) {

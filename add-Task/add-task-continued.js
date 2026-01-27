@@ -43,6 +43,57 @@ async function filterAndShowTasks() {
 
 
 /**
+ * Toggles the task-type dropdown menu.
+ * @returns {void}
+*/
+function openTaskTypeDropDownNormal() {
+    let arrow = document.getElementById('arrowImgNormal')
+    arrow.classList.toggle('select-arrow-open')
+    let drop = document.getElementById('dropIdNormal')
+    if (drop.classList.contains('dropTasktypeClose')) {
+        drop.classList.remove('dropTasktypeClose')
+    } else {
+        drop.classList.add('dropTasktypeClose')
+    }
+}
+
+/** @type {HTMLElement | null} */
+const categoryDiv = document.getElementById("IdForTaskChoiseNormal");
+/** @type {HTMLElement | null} */
+const options = document.querySelectorAll("#dropIdNormal .taskOption");
+/** @type {HTMLElement | null} */
+const hiddenInput = document.getElementById("categoryValue");
+/** @type {HTMLElement | null} */
+const selectedTask = document.getElementById("selectedTaskNormal");
+
+
+
+/**
+ * Handles closing dropdowns when clicking outside.
+*/
+document.addEventListener('click', (e) => {
+    const contactBox = document.getElementById('IdForContactsNormal');
+    const contactTrigger = document.querySelector('.section-right-select');
+    const categoryDrop = document.getElementById('dropIdNormal');
+    const categoryTrigger = document.getElementById('IdForTaskChoiseNormal');
+    
+    
+    if (!contactTrigger.contains(e.target) && !contactBox.contains(e.target)) {
+        contactBox.classList.add('availibleContactsClose');
+        contactBox.classList.remove('availibleContactsOpen');
+        document.getElementById('placeholderptag').classList.remove('dont-Show');
+        document.getElementById('filterContactsNormal').classList.add('dont-Show');
+    }
+    
+    
+    if (!categoryTrigger.contains(e.target) && !categoryDrop.contains(e.target)) {
+        categoryDrop.classList.add('dropTasktypeClose');
+        document.getElementById('arrowImgNormal').classList.remove('select-arrow-open');
+    }
+});
+
+
+/**
  * Filters tasks by category and renders them on the board.
  */
 

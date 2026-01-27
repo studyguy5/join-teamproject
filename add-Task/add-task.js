@@ -29,7 +29,6 @@ let taskObjectKey = ['title', 'description', 'DueDate'];
  */
 const BASe_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/"
 
-
 document.addEventListener('DOMContentLoaded', async () => {
     /**
      * Initializes page content after DOM is loaded.
@@ -44,7 +43,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     let createdArray = Array.from(buttons)
     createdArray[1].classList.add('Medium')
 
-
     /**
      * Adds the 'active' class to a section by ID.
      * @param {string} idsecTrue - ID of the section to activate.
@@ -52,7 +50,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     function sectionCheck(idsecTrue) {
         document.getElementById(idsecTrue).classList.add('active')
     }
-
 
 })
 
@@ -62,7 +59,6 @@ document.addEventListener('DOMContentLoaded', async () => {
  * @type {NodeListOf<HTMLButtonElement>}
  */
 const buttons = document.querySelectorAll(".priority-section button");
-
 buttons.forEach(button => {
     button.addEventListener("click", () => {
         /**
@@ -103,41 +99,6 @@ function objectToArray(contacts) {
     })
     return arrayObject;
 }
-
-
-/**
- * Renders the contact list in the normal view.
- */
-function showContacts() {
-    let contacts = document.getElementById('IdForContactsNormal')
-    contacts.innerHTML = "";
-    for (let index = 1; index < contactsArray.length; index++) {
-        contacts.innerHTML += `<div onclick="chooseContactNormal(${index})" class="contactBox">
-        <div class="contactCircleNormal">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
-        <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
-        <img  id="checkboxImg-${index}"  class="checkbox" data-set="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
-        </div>`
-    }
-}
-
-
-/**
- * Renders filtered contacts in the normal view.
- * @param {Array<Object>} filteredContacts - Array of filtered contact objects.
- */
-function renderfilteredContactsInNormal(filteredContacts) {
-    let filtContactInPopup = document.getElementById('IdForContactsNormal')
-    filtContactInPopup.innerHTML = "";
-    for (let filterContactIndex = 0; filterContactIndex < filteredContacts.length; filterContactIndex++) {
-        filtContactInPopup.innerHTML += `
-   <div onclick="" class="contactBox">
-        <div class="contactCircleNormal">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>
-        <span for="contactName" class="contactName"> ${filteredContacts[filterContactIndex].name}</span> 
-        <img  id="checkboxImg-${filterContactIndex}" onclick="chooseFilteredContactNormal(${filterContactIndex})" class="checkbox" data-set="${filteredContacts[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
-        </div>
-   `}
-}
-
 
 /**
  * Toggles the input field for filtering contacts in the normal view.
@@ -212,41 +173,14 @@ function chooseFilteredContactNormal(filterContactIndex) {
             document.getElementById('countInfo').innerHTML = `+ ${(countFilter.length) - 6}`
         } else {
             renderFilteredChoosenContactNormal(filterContactIndex)
-            choContact.src = "/img/icons/normalCheckedContact.svg"
-        }
+            choContact.src = "/img/icons/normalCheckedContact.svg"}
     } else {
         choContact.classList.add('checkbox')
         choContact.classList.remove('checked')
         deleteRenderedContactNormal(filterContactIndex);
-        choContact.src = "/img/icons/normalCheckContact.svg"
-    }
+        choContact.src = "/img/icons/normalCheckContact.svg"}
 }
 
-
-/**
- * Renders a chosen contact (normal view) as a circle.
- * @param {number} index - Contact index.
- */
-function renderChoosenContactNormal(index) {
-    let listContact = document.getElementById('choosenContacts')
-
-    listContact.innerHTML += `
-    <div id="contactCircleNormalRender-${index}" class="contactCircleNormalRender">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
-    `
-}
-
-
-/**
- * Renders a chosen filtered contact.
- * @param {number} filterContactIndex - Filtered contact index.
- */
-function renderFilteredChoosenContactNormal(filterContactIndex) {
-    let listContact = document.getElementById('choosenContacts')
-
-    listContact.innerHTML += `
-    <div id="contactCircleNormalRender-${filterContactIndex}" class="contactCircleNormalRender">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>
-    `
-}
 
 let deleteONETime = true;
 /**
@@ -301,126 +235,6 @@ function showSuccessMessage() {
 }
 
 
-/** @type {HTMLElement | null} */
-const categoryDiv = document.getElementById("IdForTaskChoiseNormal");
-/** @type {HTMLElement | null} */
-const options = document.querySelectorAll("#dropIdNormal .taskOption");
-/** @type {HTMLElement | null} */
-const hiddenInput = document.getElementById("categoryValue");
-/** @type {HTMLElement | null} */
-const selectedTask = document.getElementById("selectedTaskNormal");
-
-/**
- * Handles selection of task category options.
- */
-// options.forEach(opt => {
-//     opt.addEventListener("click", () => {
-//         selectedTask.textContent = opt.dataset.value;
-//         hiddenInput.value = opt.dataset.value;
-//         document.getElementById("dropIdNormal").classList.remove("dropTasktypeOpen");
-//     });
-// });
-
-
-/**
- * Validates required fields for task creation.
- * @returns {boolean} True if valid, otherwise false.
- */
-function commonConstantCheck() {
-    document.getElementById('creatButtonIDForNormal').disabled = true;
-    const title = document.getElementById("title-add-task").value;
-    const dueDate = document.getElementById("date-add-task").value;
-    const taskType = document.getElementById("selectedTaskNormal").innerText;
-    if (title === "" && dueDate === "" && taskType === "Select Task Category") {
-        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
-        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
-        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
-    }
-    if (title === "" && dueDate === "") {
-        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
-        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
-    } else if (dueDate === "" && taskType === 'Select Task Category') {
-        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
-        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
-    } else if (title === "" && taskType === 'Select Task Category') {
-        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
-        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
-    } else if (taskType === 'Select Task Category') {
-        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
-    } else if (title === '') {
-        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
-    } else if (dueDate === '') {
-        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
-    } else {
-        getTaskInformationNormal();
-        console.log('executed normal')
-        showSuccessMessage();
-    }
-}
-
-function commonUserFeedback() {
-    document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
-    document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
-}
-
-
-/**
- * Continuously checks form inputs and enables the create button when valid.
- * @returns {void}
- */
-function constantCheckTitle() {
-    const title = document.getElementById("title-add-task").value;
-    if (title.length < 2)
-        return showUserFeedbackTitle(title);
-    document.getElementById('task-description').disabled = true, false;
-    document.getElementById("UserFeedbackTitle").innerHTML = "";
-    document.getElementById('task-description').disabled = false;
-
-    if (!validateTitleAddTaskNormal(title))
-        return showUserFeedbackTitleForm(title);
-    document.getElementById('task-description').disabled = true, false;
-    document.getElementById("UserFeedbackTitle").innerHTML = "";
-    document.getElementById('task-description').disabled = false;
-
-}
-
-let attribute = true;
-
-function constantCheckDate() {
-    const dueDate = document.getElementById("date-add-task").value;
-    let current = new Date();
-    let dateOb = new Date(dueDate);
-    if (dateOb < current) {
-        const dateField = document.getElementById("UserFeedbackDate");
-        dateField.innerHTML = `Date is in the past`;
-    }
-    else if (!validateDateAddTaskNormal(dueDate)) {
-        return showUserFeedbackDueDate();
-    }
-    else if (validateDateAddTaskNormal(dueDate)) {
-        document.getElementById('creatButtonIDForNormal').disabled = false;
-        clearUserFeedback = document.getElementById("UserFeedbackDate");
-        clearUserFeedback.innerHTML = '';
-    }
-
-}
-
-function validateTitleAddTaskNormal(title) {
-    const titleRegex = /^[A-Za-zÄÖÜäöüß\s1-9]+$/;
-    return titleRegex.test(title.trim());
-}
-
-function validateDateAddTaskNormal(dueDate) {
-    let dateOb = new Date(dueDate);
-    return isDateValid(dateOb);
-}
-
-function isDateValid(dateOb) {
-    return !isNaN(new Date(dateOb));
-}
-
-
-
 /** @type {any[]} */
 let filteredContacts;
 
@@ -437,30 +251,7 @@ function filterContactsInNormal() {
         filteredContacts = r.filter(fn => { return fn.name.toLowerCase().includes(typedValue.toLowerCase()) })
         renderfilteredContactsInNormal(filteredContacts);
     } else if (typedValue.length < 1) {
-        showContacts();
-    }
-}
-
-
-/**
- * Displays required field messages for task creation form.
- * @returns {void}
- */
-function showUserFeedbackTitle() {
-    const titleUserFeedbackLength = document.getElementById("UserFeedbackTitle");
-    titleUserFeedbackLength.innerHTML = `title is too short`;
-}
-
-function showUserFeedbackTitleForm() {
-    const titleUserFeedbackForm = document.getElementById("UserFeedbackTitle");
-    titleUserFeedbackForm.innerHTML = `form of Title is incorrect`
-}
-
-function showUserFeedbackDueDate() {
-    const dateInput = document.getElementById("UserFeedbackDate");
-    dateInput.innerHTML = `form of DueDate is incorrect`;
-    const categoryInput = document.getElementById("categoryValue");
-
+        showContacts();}
 }
 
 
@@ -483,65 +274,10 @@ async function postData(path = '', data = {}) {
 }
 
 
-let index0 = 0;
-let index1 = 1;
-let index2 = 2;
-let index3 = 3;
-let index4 = 4;
-let index5 = 5;
-
-let subtaskvalue1;
-let subtaskvalue2;
-let subtaskvalue3;
-let subtaskvalue4;
-let subtaskvalue5;
-let subtaskvalue6;
-
-/**
- * Toggles the task-type dropdown menu.
- * @returns {void}
- */
-function openTaskTypeDropDownNormal() {
-    let arrow = document.getElementById('arrowImgNormal')
-    arrow.classList.toggle('select-arrow-open')
-    let drop = document.getElementById('dropIdNormal')
-    if (drop.classList.contains('dropTasktypeClose')) {
-        drop.classList.remove('dropTasktypeClose')
-    } else {
-        drop.classList.add('dropTasktypeClose')
-    }
-}
-
-
-/**
- * Handles closing dropdowns when clicking outside.
- */
-document.addEventListener('click', (e) => {
-    const contactBox = document.getElementById('IdForContactsNormal');
-    const contactTrigger = document.querySelector('.section-right-select');
-    const categoryDrop = document.getElementById('dropIdNormal');
-    const categoryTrigger = document.getElementById('IdForTaskChoiseNormal');
-
-
-    if (!contactTrigger.contains(e.target) && !contactBox.contains(e.target)) {
-        contactBox.classList.add('availibleContactsClose');
-        contactBox.classList.remove('availibleContactsOpen');
-        document.getElementById('placeholderptag').classList.remove('dont-Show');
-        document.getElementById('filterContactsNormal').classList.add('dont-Show');
-    }
-
-
-    if (!categoryTrigger.contains(e.target) && !categoryDrop.contains(e.target)) {
-        categoryDrop.classList.add('dropTasktypeClose');
-        document.getElementById('arrowImgNormal').classList.remove('select-arrow-open');
-    }
-});
-
-
 /**
  * Creates a default task template.
  * @returns {object} New task object
- */
+*/
 function createTemplate() {
     return {
         'category': `Todo`,
@@ -557,80 +293,45 @@ function createTemplate() {
         'assignedTo': [
         ],
         'subtasks': [
-        ]
-    }
+        ]}
 }
-
-
-/**
- * Pushes up to two subtask objects into the global subtask array.
- * @param {string} subtaskvalue1 - First subtask value
- * @param {string} subtaskvalue2 - Second subtask value
- * @returns {void}
- */
-function pushObject(subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5, subtaskvalue6) {
-    if (subtaskvalue1) {
-        let subTaskObject1 = { "value": `${subtaskvalue1}`, 'status': 'open' };
-        subtaskArray.push(subTaskObject1)
-    }
-    if (subtaskvalue2) {
-        let subTaskObject2 = { "value": `${subtaskvalue2}`, 'status': 'open' };
-        subtaskArray.push(subTaskObject2);
-    }
-    if (subtaskvalue3) {
-        let subTaskObject3 = { "value": `${subtaskvalue3}`, 'status': 'open' };
-        subtaskArray.push(subTaskObject3);
-    }
-    if (subtaskvalue4) {
-        let subTaskObject4 = { "value": `${subtaskvalue4}`, 'status': 'open' };
-        subtaskArray.push(subTaskObject4);
-    }
-    if (subtaskvalue5) {
-        let subTaskObject5 = { "value": `${subtaskvalue5}`, 'status': 'open' };
-        subtaskArray.push(subTaskObject5);
-    }
-    if (subtaskvalue6) {
-        let subTaskObject6 = { "value": `${subtaskvalue6}`, 'status': 'open' };
-        subtaskArray.push(subTaskObject6);
-    }
-}
-
 
 /**
  * Retrieves data from backend.
  * @param {string} path - Database path
  * @returns {Promise<any>} Task data result
- */
+*/
 async function getData(path = '') {
     let response = await fetch(BASe_URL + path + ".json")
     return allTasks = await response.json();
 }
 
+let subtaskvalue;
+
+/**
+ * Pushes up to two subtask objects into the global subtask array.
+ * @param {string} subtaskvalue - First subtask value
+ * @param {string} subtaskvalue - Second subtask value
+ * @returns {void}
+*/
+function pushObject(subtaskArray, subtaskvalue) {
+    if (subtaskvalue) {
+        let subTaskObject1 = { "value": `${subtaskvalue}`, 'status': 'open' };
+        subtaskArray.push(subTaskObject1)} 
+}
 
 
 /**
  * Reads subtask values from the template by index.
  * @returns {void}
- */
-function getSubtaskFromTemplate() {
-    if (document.getElementById(`task-text-${index0}`)) {
-        subtaskvalue1 = document.getElementById(`task-text-${index0}`).innerHTML
-    }
-    if (document.getElementById(`task-text-${index1}`)) {
-        subtaskvalue2 = document.getElementById(`task-text-${index1}`).innerHTML
-    }
-    if (document.getElementById(`task-text-${index2}`)) {
-        subtaskvalue3 = document.getElementById(`task-text-${index2}`).innerHTML
-    }
-    if (document.getElementById(`task-text-${index3}`)) {
-        subtaskvalue4 = document.getElementById(`task-text-${index3}`).innerHTML
-    }
-    if (document.getElementById(`task-text-${index4}`)) {
-        subtaskvalue5 = document.getElementById(`task-text-${index4}`).innerHTML
-    }
-    if (document.getElementById(`task-text-${index5}`)) {
-        subtaskvalue6 = document.getElementById(`task-text-${index5}`).innerHTML
-    }
+*/
+function getSubtaskFromTemplate(subtaskArray) {
+    let inputs = document.querySelectorAll('.ul-div li p');
+    inputs.forEach(inputs => {
+        let subInput = inputs.innerHTML.trim();
+        if(!subInput) return;
+        pushObject(subtaskArray, subInput);
+    });      
 }
 
 
@@ -638,7 +339,7 @@ function getSubtaskFromTemplate() {
  * Sets assigned contacts and priority to a task object.
  * @param {object} newTask - Task object to modify
  * @returns {void}
- */
+*/
 function setContactAndPrioValue(newTask) {
     let checkedImg = document.querySelectorAll('#IdForContactsNormal img.checked')
     checkedImg.forEach(img => {
@@ -647,7 +348,7 @@ function setContactAndPrioValue(newTask) {
         names = img.dataset.set;
         newTask.assignedTo.push(names)
     })
-     newTask.prio = prioArray[0];
+    newTask.prio = prioArray[0];
 }
 
 
@@ -659,26 +360,45 @@ function setContactAndPrioValue(newTask) {
  */
 async function getTaskInformationNormal(index) {
     let newTask = createTemplate();
-    let allIds = tasks.map(ta => ta[1].id)
-    let rn = Math.floor(Math.random() * 55)
-    while (allIds.includes(rn)) {
-        rn = Math.floor(Math.random() * 13)
-    }
+    let allIds = [];
+    tasks.forEach(t => allIds.push(t[1].id));
+    let rn = Math.trunc(Math.floor(Math.random() * Math.random()));
     newTask.id = rn;
     for (let valueIndex = 0; valueIndex < taskObjectKey.length; valueIndex++) {
         newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value
     };
     newTask.taskType = document.getElementById('selectedTaskNormal').innerText
     setContactAndPrioValue(newTask, index);
-    getSubtaskFromTemplate();
-    createTemplate();
     subtaskArray = newTask.subtasks;
-    pushObject(subtaskvalue1, subtaskvalue2, subtaskvalue3, subtaskvalue4, subtaskvalue5, subtaskvalue6);
+    getSubtaskFromTemplate(subtaskArray);
+    createTemplate();
     newTask.category = 'Todo';
     await postData("task", newTask);
     tasks = [];
     tasks.push(...Object.entries(await getData('task')));
     filterAndShowTasks();
+    letShineLastEditedTask();
+    setTimeout(() => {
+        cleanBorder();
+    }, 2500);
 };
+
+function letShineLastEditedTask(firebaseID, taskToEdit, id) {
+    if(!firebaseID || !taskToEdit){
+      let taskToEdit = tasks.find(task => task[1].id === id);
+      let last = document.getElementById(`TaskDiv-${id}`);
+      last?.classList.add('tor');
+    }else{
+      let last = document.getElementById(`TaskDiv-${taskToEdit[1].id}`);
+      last?.classList.add('tor');
+    }
+}
+
+function cleanBorder(){
+    let last = document.querySelectorAll('.tor');
+    last.forEach(element => {
+        element.classList.remove('tor');
+    });
+}
 
 

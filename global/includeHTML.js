@@ -25,6 +25,8 @@ window.renderUserInitials = function renderUserInitials() {
     }
 };
 
+
+//**generates initials from full name */
 function getInitials(fullName) {
     const name = (fullName || '').trim().toLowerCase();
     // Wenn Gast-User, immer "G"!
@@ -38,6 +40,7 @@ function getInitials(fullName) {
     return (first + last).toUpperCase();
 }
 
+//**retrieves the stored user name from localStorage or sessionStorage */
 function getStoredUserName() {
     const name = localStorage.getItem('userFullName');
     if (name && name.trim()) return name.trim();
@@ -45,12 +48,14 @@ function getStoredUserName() {
     return 'User';
 }
 
+//**deletes session and local storage on logout */
 function deleteSession() {
     localStorage.removeItem('guest')
     sessionStorage.removeItem('guest')
     localStorage.removeItem('userFullName')
 }
 
+//**checks if user is signed up or guest and includes the correct nav and privacy links */
 function checkSignUpStatus() {
     let signUpStatus = sessionStorage.getItem('guest')
     let signUpStatus1 = localStorage.getItem('userFullName')
@@ -59,10 +64,6 @@ function checkSignUpStatus() {
         includePrivacyLinks();
         sectionCheckWithUser()
         let size = window.innerWidth;
-        // if (size < 428) {
-        //     let helpstyle = document.getElementById('helpImage')
-        //     helpstyle.style.display = "none";
-        // }
     } else {
         includeNavLinksWithoutUser();
         includePrivacyLinksWithoutUser();
@@ -71,6 +72,7 @@ function checkSignUpStatus() {
     }
 }
 
+//**checks login status and redirects to the right page */
 function checkLoginStatus(){
     let signUpStatus2 = sessionStorage.getItem('guest')
     let signUpStatus3 = localStorage.getItem('userFullName')
@@ -80,7 +82,7 @@ function checkLoginStatus(){
 }
 
 
-
+//**includes the nav links dynamically */
 function includeNavLinks() {
     let includeElements = document.getElementById('nav-container');
     for (let i = 0; i < links.length; i++) {
@@ -96,6 +98,7 @@ function includeNavLinks() {
     }
 }
 
+//**includes the nav links dynamically for not signed in users */
 function includeNavLinksWithoutUser() {
     let includeElements = document.getElementById('nav-container');
     includeElements.innerHTML += `
@@ -109,7 +112,7 @@ function includeNavLinksWithoutUser() {
         `
 }
 
-
+//**includes the privacy links dynamically */
 function includePrivacyLinks() {
     let include = document.getElementById('nav-container')
     include.innerHTML += `
@@ -119,6 +122,7 @@ function includePrivacyLinks() {
             </section>`
 }
 
+//**includes the privacy links dynamically for not signed in users */
 function includePrivacyLinksWithoutUser() {
     let include = document.getElementById('nav-container')
     include.innerHTML += `
@@ -128,7 +132,7 @@ function includePrivacyLinksWithoutUser() {
             </section>`
 }
 
-
+//**highlights the current section in nav for not signed in users */
 function sectionCheckWhitoutUser() {
     if (window.location.pathname == '/privacy-policy/privacy-policy.html') {
         let activeL = document.getElementById('privacyWhitoutUser')
@@ -138,6 +142,7 @@ function sectionCheckWhitoutUser() {
     }
 }
 
+//**highlights the current section in nav for signed in users */
 function sectionCheckWithUser() {
     if (window.location.pathname == '/privacy-policy/privacy-policy.html') {
         let active = document.getElementById('privacy-policy')
@@ -148,6 +153,7 @@ function sectionCheckWithUser() {
 }
 
 
+//**opens and closes the profile menu */
 let isOpen = false;
 function openMenu() {
     let menu = document.getElementById('profileMenu')

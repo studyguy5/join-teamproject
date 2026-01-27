@@ -5,7 +5,7 @@ function initHelp(){
 
 
 /**
- * Renders help text into the HTML element with the ID 'renderHelpText'.
+ * Renders help text into the DOM element with the ID 'renderHelpText'.
  *
  * This function selects the element with the given ID and updates
  * its innerHTML to display the help text.
@@ -16,7 +16,7 @@ function renderText() {
     `;
 }
 
-
+//**checks if user is signed up or guest and includes the correct nav and privacy links */
 function checkSignUpStatusHelp(){
     let signUpStatus = sessionStorage.getItem('guest')
     let signUpStatus1 = localStorage.getItem('userFullName')
@@ -33,6 +33,8 @@ function checkSignUpStatusHelp(){
     }
 }
 
+
+//**dynamic back button depending on sign-up status */
 function dynamicBackButton(){
     let signUpStatus = sessionStorage.getItem('guest')
     let signUpStatus1 = localStorage.getItem('userFullName')
@@ -41,6 +43,7 @@ function dynamicBackButton(){
     }else{window.location = '/login-signup/index.html'}
 }
 
+//**checks if on help page to adjust the profile help aria margin */
 function helpPageChecker(){
     if(window.location.pathname === "/help/help.html"){
         let custom = document.getElementsByClassName('profile_help-aria')

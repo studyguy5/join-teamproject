@@ -98,14 +98,12 @@ function validateEmailInput() {
     document.getElementById('password').disabled = true;
     setFieldError(emailInput, true);
     return false;
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  } if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     showElement(emailError, 'Bitte gib eine gültige Email ein.');
     document.getElementById('password').disabled = true;
     setFieldError(emailInput, true);
     return false;
-  }
-  hideElement(emailError);
+  } hideElement(emailError);
   setFieldError(emailInput, false);
   document.getElementById('password').disabled = false;
   return true;

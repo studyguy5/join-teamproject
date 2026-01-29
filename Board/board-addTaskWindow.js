@@ -171,11 +171,11 @@ function arraySorting(array) {
 function showContacts() {
     let contacts = document.getElementById('IdForContacts')
     contacts.innerHTML = "";
-    for (let index = 1; index < contactsArray.length; index++) {
+    for (let index = 0; index < contactsArray.length; index++) {
         contacts.innerHTML += `<div onclick="chooseContact(${index})" class="contactBox">
         <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
-        <img  id="checkboxImg-${index}"  class="checkbox" data-set="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
+        <img  id="checkboxImg-${index}"  class="checkbox" data-set="${contactsArray[index].name}" data-index="${index}" src="/img/icons/normalCheckContact.svg">
         </div>`
     }
 }
@@ -215,10 +215,10 @@ function renderfilteredContactsInPopup(filteredContacts) {
     filtContactInPopup.innerHTML = "";
     for (let filterContactIndex = 0; filterContactIndex < filteredContacts.length; filterContactIndex++) {
         filtContactInPopup.innerHTML += `
-        <div onclick="" class="contactBox">
+        <div onclick="chooseFilteredContact(${filterContactIndex})" class="contactBox">
         <div class="contactCirclePopup">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${filteredContacts[filterContactIndex].name}</span> 
-        <img  id="checkboxImg-${filterContactIndex}" onclick="chooseFilteredContact(${filterContactIndex})" class="checkbox" data-set="${filteredContacts[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
+        <img  id="checkboxImg-${filterContactIndex}" onclick="chooseFilteredContact(${filterContactIndex})" class="checkbox" data-set="${filteredContacts[filterContactIndex].name}" data-index="${filterContactIndex}" src="/img/icons/normalCheckContact.svg">
         </div>`}
 }
 
@@ -244,6 +244,13 @@ function openContactView() {
         contactDrop.classList.add('availibleContactsClose');
         let layer = document.getElementById('hiddenlayer2')
         layer.classList.toggle('hiddenlayer2')
+        let input = document.getElementById('filterContacts').value;
+        if(input.length > 0 ){
+            document.getElementById('filterContacts').value = "";
+            // showContacts();
+            console.log('hat funktioniert');
+
+        }
     }
     if (document.querySelectorAll('availableContactsOpen')) {
         let contact = document.getElementById('arrowImgC')

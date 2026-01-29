@@ -214,17 +214,18 @@ function checkSubtaskLenght(elements) {
 function renderSubtaskHTMLForBigView(id) {
   let allIds = tasks.filter(ta => ta[1].id === id)
   document.getElementById('subTaskForBigView').innerHTML = '';
-  if(allIds[0][1]?.subtasks){
-  for (let subIndex = 0; subIndex < allIds[0][1]?.subtasks?.length; subIndex++) {
-    document.getElementById('subTaskForBigView').innerHTML +=
+  if (allIds[0][1]?.subtasks) {
+    for (let subIndex = 0; subIndex < allIds[0][1]?.subtasks?.length; subIndex++) {
+      document.getElementById('subTaskForBigView').innerHTML +=
 
-      `<div id="subtaskBigView1" class="subtaskImgDiv">  ${allIds[0][1].subtasks?.[subIndex] != null ? allIds[0][1]?.subtasks?.[subIndex].status === 'open' ?
-        `<img id="subtaskBigViewImg-${subIndex}" class="checkboxS1" onclick="confirmSubtask(${subIndex}, ${id}); checkDone(${allIds, id})" src="/img/icons/normalCheckContact.svg">` :
-        `<img id="subtaskBigViewImg-${subIndex}" class="checkedSubtask" onclick="confirmSubtask(${subIndex}, ${id}); checkDone(${allIds, id})" src="/img/icons/normalCheckedContact.svg">` : ''}
+        `<div id="subtaskBigView1" class="subtaskImgDiv">  ${allIds[0][1].subtasks?.[subIndex] != null ? allIds[0][1]?.subtasks?.[subIndex].status === 'open' ?
+          `<img id="subtaskBigViewImg-${subIndex}" class="checkboxS1" onclick="confirmSubtask(${subIndex}, ${id}); checkDone(${allIds, id})" src="/img/icons/normalCheckContact.svg">` :
+          `<img id="subtaskBigViewImg-${subIndex}" class="checkedSubtask" onclick="confirmSubtask(${subIndex}, ${id}); checkDone(${allIds, id})" src="/img/icons/normalCheckedContact.svg">` : ''}
         <p>${allIds[0][1]?.subtasks?.[subIndex] != null ? allIds[0][1]?.subtasks?.[subIndex].value : ''}</p></div>
   `
 
-  }}else{}
+    }
+  } else { }
 }
 /**renders the Contacts into BigView */
 function renderContactHTMLForBigView(rightContacts, BVindex, short) {
@@ -273,78 +274,87 @@ function renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterCon
 }
 
 
-/**here we check which Contacts have the checkbox img and change it into checked to make it visible */
 function chooseContact(index) {
-    let choContact = document.getElementById(`checkboxImg-${index}`)
-    if (choContact.classList.contains('checkbox')) {
-        choContact.classList.remove('checkbox')
-        choContact.classList.add('checked')
-        let countPopup = document.querySelectorAll('.contactBox .checked')
-        if ((countPopup.length) > 6) {
-            document.getElementById('countInfoPopup').innerHTML = `+ ${(countPopup.length) - 6}`;
-        }
-        else {
-            renderChoosenContact(index);
-            choContact.src = "/img/icons/normalCheckedContact.svg"
-        }
-    } else {
-      choContact.classList.add('checkbox')
-      choContact.classList.remove('checked')
-      deleteRenderedContact(index);
-      choContact.src = "/img/icons/normalCheckContact.svg"
-    }
+  let choContact = document.getElementById(`checkboxImg-${index}`)
+  if (choContact.classList.contains('checkbox')) {
+    choContact.classList.remove('checkbox')
+    choContact.classList.add('checked')
+    choContact.src = "/img/icons/normalCheckedContact.svg"
+    renderCurrentContact()
+  } else {
+    choContact.classList.add('checkbox')
+    choContact.classList.remove('checked')
+    renderCurrentContact()
+    choContact.src = "/img/icons/normalCheckContact.svg"
+  }
 }
+
+function renderCurrentContact() {
+  let countPopup = document.querySelectorAll('.contactBox .checked')
+  if ((countPopup.length) > 6) {
+    document.getElementById('countInfoPopup').innerHTML = `+ ${(countPopup.length) - 6}`;
+  }
+  if ((countPopup.length) <= 6) {
+    document.getElementById('countInfoPopup').innerHTML = "";
+    document.getElementById('choosenContacts').innerHTML = "";
+    console.log(countPopup);
+    countPopup.forEach((img) => {
+      let indexNormal = img.dataset.index
+      console.log(indexNormal);
+      document.getElementById('choosenContacts').innerHTML += renderChoosenContact(indexNormal)
+    });
+  }
+}
+
+
 
 /**her we make the choosen Contacts within the filtered Contacts visible */
 function chooseFilteredContact(filterContactIndex) {
-    let choContactF = document.getElementById(`checkboxImg-${filterContactIndex}`)
-    if (choContactF.classList.contains('checkbox')) {
-        choContactF.classList.remove('checkbox')
-        choContactF.classList.add('checked')
-        let countFilteredPopup = document.querySelectorAll('.contactBox .checked')
-        if ((countFilteredPopup.length) > 6) {
-            deleteOneTime = true;
-            document.getElementById('countInfoPopup').innerHTML = `+ ${(countFilteredPopup.length) - 6}`;
-        }
-        else {
-            renderFilteredChoosenContactPopup(filterContactIndex)
-            choContactF.src = "/img/icons/normalCheckedContact.svg"
-        }
-    } else {
-        deleteRenderedContact(filterContactIndex);
-        choContactF.classList.add('checkbox')
-        choContactF.classList.remove('checked')
-        choContactF.src = "/img/icons/normalCheckContact.svg"
-    }
+  let choContactF = document.getElementById(`checkboxImg-${filterContactIndex}`)
+  if (choContactF.classList.contains('checkbox')) {
+    choContactF.classList.remove('checkbox')
+    choContactF.classList.add('checked')
+    choContactF.src = "/img/icons/normalCheckedContact.svg"
+    renderCurrentFilteredContact();
+  } else {
+    choContactF.classList.add('checkbox')
+    choContactF.classList.remove('checked')
+    renderCurrentFilteredContact();
+    choContactF.src = "/img/icons/normalCheckContact.svg"
+  }
 }
 
+function renderCurrentFilteredContact() {
+  let countFilteredPopup = document.querySelectorAll('.contactBox .checked')
+  if ((countFilteredPopup.length) > 6) {
+    document.getElementById('countInfoPopup').innerHTML = `+ ${(countFilteredPopup.length) - 6}`;
+  }
+  if ((countFilteredPopup.length) <= 6) {
+    document.getElementById('countInfoPopup').innerHTML = "";
+    document.getElementById('choosenContacts').innerHTML = "";
+    console.log(countFilteredPopup);
+    countFilteredPopup.forEach((img) => {
+      let indexFiltered = img.dataset.index
+      console.log(indexFiltered);
+      document.getElementById('choosenContacts').innerHTML += renderFilteredChoosenContactPopup(indexFiltered)
+    });
+  }
+}
+
+
+
 /**the choosen Contacts are rendered on the below of the dropdown List  */
-function renderChoosenContact(index) {
-    let listContact = document.getElementById('choosenContacts')
-    listContact.innerHTML += `
-    <div id="contactCirclePopupRender-${index}" class="contactCirclePopupRender">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>`
+function renderChoosenContact(indexNormal) {
+  return `
+    <div id="contactCirclePopupRender-${indexNormal}" class="contactCirclePopupRender">${contactsArray[indexNormal].firstLetter + contactsArray[indexNormal].secondFirstLetter}</div>`
 }
 
 /**here we render the filtered choosen Contacts below the dropdown */
-function renderFilteredChoosenContactPopup(filterContactIndex) {
-    let listContact = document.getElementById('choosenContacts')
-    listContact.innerHTML += `
-    <div id="contactCirclePopupRender-${filterContactIndex}" class="contactCirclePopupRender">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>`
+function renderFilteredChoosenContactPopup(indexFiltered) {
+  return `
+    <div id="contactCirclePopupRender-${indexFiltered}" class="contactCirclePopupRender">${filteredContacts[indexFiltered].firstLetter + filteredContacts[indexFiltered].secondFirstLetter}</div>`
 }
 
-let deleteOneTime = true;
-/**here we can delete a choosen Contacts if we decide we want another contact */
-function deleteRenderedContact(index) {
-    let countedPopup = document.querySelectorAll('.contactBox .checked')
-    if (countedPopup.length >= 7) {
-        document.getElementById(`countInfoPopup`).innerHTML = `+ ${(countedPopup.length) - 6}`;
-    } else if (countedPopup.length = 6 && document.getElementById('countInfoPopup').innerHTML !== "") 
-        { 
-          document.getElementById('countInfoPopup').innerHTML = ""; }
-    else {
-        let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
-        renderedContact.remove(`contactCirclePopupRender`)
-        renderedContact.innerHTML = '';
-    }
-}
+
+
 

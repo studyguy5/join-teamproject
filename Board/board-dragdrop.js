@@ -309,9 +309,11 @@ function activateEditModus(id) {
     let edit = document.getElementById('bigViewContent')
     edit.innerHTML = "";
     edit.innerHTML = renderBigEditView(id);
-    getCurrentValues(id);
+    renderCurrentContactEdit(id);
+    // getCurrentValues(id);
     prioButtonactivate(id);
     showContactsEdit(id);
+    renderCurrentContactEdit(id);
     scrollInfo(id);
 }
 

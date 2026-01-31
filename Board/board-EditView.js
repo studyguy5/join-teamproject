@@ -345,7 +345,7 @@ function showContactsEdit(id) {
         return parseInt(id.split('-')[1]);  // return the first number and split the delete the rest
     });
     contacts.innerHTML = "";
-    for (let index = 1; index < contactsArray.length; index++) {
+    for (let index = 0; index < contactsArray.length; index++) {
         contacts.innerHTML += renderContactsInEdit(id, contactsArray, index, onlyNumber);
     }
 }

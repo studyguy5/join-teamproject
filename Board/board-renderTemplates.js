@@ -258,7 +258,7 @@ function renderContactsInEdit(id, contactsArray, index, onlyNumber) {
         <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
         <img  id="checkboxImgEdit-${index}"  
-        class="${onlyNumber?.includes(index) ? 'checkedEdit' : 'checkboxEdit'}" data-set="${contactsArray[index].name}"
+        class="${onlyNumber?.includes(index) ? 'checkedEdit' : 'checkboxEdit'}" data-set="${contactsArray[index].name}" data-index="${index}"
          src="/img/icons/normalCheckContact.svg">
         </div>`
 }

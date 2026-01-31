@@ -79,7 +79,7 @@ function getCurrentValues(id) {
     document.getElementById("titleEdit").value = `${singleTask[1].title}`
     document.getElementById('task-descriptionEdit').value = `${singleTask[1].description}`;
     document.getElementById("dueDateEdit").value = `${singleTask[1].DueDate}`;
-    renderChoosenContactEdit(id);
+    // renderChoosenContactEdit(id);
     if(singleTask[1].subtasks?.[0])
         for (let subEditIndex = 0; subEditIndex < singleTask[1].subtasks.length; subEditIndex++) {
         renderSubtaskEdit(id);
@@ -346,7 +346,7 @@ function showContactsEdit(id) {
     });
     contacts.innerHTML = "";
     for (let index = 0; index < contactsArray.length; index++) {
-        contacts.innerHTML += renderContactsInEdit(id, contactsArray, index, onlyNumber);
+        contacts.innerHTML += renderContactsInEditDropDown(id, contactsArray, index, onlyNumber);
     }
 }
 

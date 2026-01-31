@@ -218,7 +218,7 @@ function renderfilteredContactsInPopup(filteredContacts) {
         <div onclick="chooseFilteredContact(${filterContactIndex})" class="contactBox">
         <div class="contactCirclePopup">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${filteredContacts[filterContactIndex].name}</span> 
-        <img  id="checkboxImg-${filterContactIndex}" onclick="chooseFilteredContact(${filterContactIndex})" class="checkbox" data-set="${filteredContacts[filterContactIndex].name}" data-index="${filterContactIndex}" src="/img/icons/normalCheckContact.svg">
+        <img  id="checkboxImg-${filterContactIndex}"  class="checkbox" data-set="${filteredContacts[filterContactIndex].name}" data-index="${filterContactIndex}" src="/img/icons/normalCheckContact.svg">
         </div>`}
 }
 

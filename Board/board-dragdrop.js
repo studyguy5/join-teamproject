@@ -125,14 +125,17 @@ function getSubtaskFromTemplate(subtaskArray) {
 
 /**filter the data from dataset and id and push it separate inot arrays to display and work with it later */
 function setContactAndPrioValue(newTask) {
-    let checkedImg = document.querySelectorAll('.contactBox .checked');
-    checkedImg.forEach((img) => {
+    // let checkedImg = document.querySelectorAll('.contactBox .checked');
+    let allCont = normalContactsArray.concat(filteredContacts);
+    allCont.forEach((img) => {
         let names = img.dataset.set;
         let id = img.id;
         newTask.cid.push(id);
         newTask.assignedTo.push(names);
     })
     newTask.prio = prioArray[0];
+    normalContactsArray = [];
+    filteredContacts = [];
 }
 
 /**get all the typed in Data and push it into the created object structure (called template) */
@@ -309,8 +312,7 @@ function activateEditModus(id) {
     let edit = document.getElementById('bigViewContent')
     edit.innerHTML = "";
     edit.innerHTML = renderBigEditView(id);
-    renderCurrentContactEdit(id);
-    // getCurrentValues(id);
+    getCurrentValues(id);
     prioButtonactivate(id);
     showContactsEdit(id);
     renderCurrentContactEdit(id);

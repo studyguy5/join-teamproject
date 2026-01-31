@@ -53,8 +53,7 @@ function renderBigEditView(id) {
             <div id="IdForContactsEdit" class="availibleContactsCloseEdit">
               
             </div>
-            <div id="choosenContactsEdit" class="choosenContactsEdit">
-            </div>
+            <div id="choosenContactsEdit" class="choosenContactsEdit"></div>
             <div id="countInfoEdit" class="countInfoEdit"></div>
 
             <p class="subtaskEdit">Subtask</p>
@@ -93,84 +92,8 @@ function renderBigEditView(id) {
     `
 }
 
-/**renders the filtered Contacts below the list the same as the non-filtered contacts
- * and checks if an index is involved and new contacts were choosen or just the old ones
- */
-function renderFilteredChoosenContact(id, filterContactIndex) {
-    let listContact = document.getElementById('choosenContactsEdit')
-    const filteredRightTask = tasks.find(task => task[1].id === id);
-    if (filterContactIndex && filteredRightTask[1].assignedTo.length < 5) {
-        const contFilterList = filteredContactsEdit[filterContactIndex]
-        filteredRightTask[1].assignedTo.push(contFilterList?.name);
-        let root = filteredRightTask[1].assignedTo;
-        for (let filterIndex = root.length - 1; filterIndex < root.length; filterIndex++) {
-            thisFilteredTask = root.map(c => c.split(" ").map(f => f.charAt(0)))
-            listContact.innerHTML += `
-        <div id="contactCirclePopupRender-${id}" class="contactCirclePopupRender">${thisFilteredTask[filterIndex][0] + thisFilteredTask[filterIndex][1]}</div>
-        `}
-    } else if (filterContactIndex && filteredRightTask[1].assignedTo.length >= 5) {
-        listContact.innerHTML += `<h6>max of length reached</h6>`
-    } else if (filteredRightTask[1].assignedTo.length < 5) {
-        for (let filterIndex = 0; filterIndex < filteredRightTask[1].assignedTo?.length; filterIndex++) {
-            thisFilteredTask = filteredRightTask[1].assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
-            listContact.innerHTML += `
-    <div id="contactCirclePopupRender-${id}" class="contactCirclePopupRender">${thisFilteredTask[filterIndex][0] + thisFilteredTask[filterIndex][1]}</div>`;
-        }
-    }
-}
-
-let preIndex;
-let thisTask;
-/**renders the choosen Contacts below the list and check if an index is involved
- * and new Contacts were choosen or just the old ones
- */
-function renderChoosenContactEdit(indexEditNormal) {
-     return `
-          <div id="contactCirclePopupRender-${indexEditNormal}" class="contactCirclePopupRender">${contactsArray[indexEditNormal].firstLetter + contactsArray[indexEditNormal].secondFirstLetter }</div>`;
-        }
-    
 
 
-// function renderChoosenContactEdit(id, indexEditNormal) {
-//     let Choosen = document.getElementById('choosenContactsEdit')
-//     const RightTask = tasks.find(task => task[1].id === id);
-//     if (!RightTask[1].assignedTo) RightTask[1].assignedTo = [];
-//     if (indexEditNormal && RightTask[1].assignedTo?.length < 5) {
-//         const list = contactsArray[index].name
-//         RightTask[1].assignedTo = [];
-//         RightTask[1].assignedTo.push(list);   // pushe ihn ins assignedTo array
-//         for (let preIndex = RightTask[1].assignedTo.length - 1; preIndex < RightTask[1].assignedTo.length; preIndex++) {
-//             thisTask = RightTask[1].assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
-//             Choosen.innerHTML += `
-//           <div id="contactCirclePopupRender-${index}" class="contactCirclePopupRender">${thisTask[preIndex][0] + thisTask[preIndex][1]}</div>`;
-//         }
-//     } else if (index && RightTask[1]?.assignedTo?.length >= 5) {
-//         Choosen.innerHTML += `<h6>max of length reached</h6>`
-//     } else if (RightTask[1].assignedTo?.length < 5) {
-//         for (let preIndex = 0; preIndex < RightTask[1].assignedTo?.length; preIndex++) {
-//             let num = parseInt(RightTask[1].cid[preIndex].split('-')[1]);
-//             thisTask = RightTask[1].assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
-//             Choosen.innerHTML += `
-//     <div id="contactCirclePopupRender-${num}" class="contactCirclePopupRender">${thisTask[preIndex][0] + thisTask[preIndex][1]}</div>`;
-//             index++
-//         }
-//     }
-// }
-
-let deleteOnetime = true;
-/**deletes a rendered Contact in Edit Mode */
-function deleteRenderedContactEdit(index) {
-    let counted = document.querySelectorAll('.contactBox .checkedEdit')
-    if (counted.length > 6) {
-        counted.length - 1
-        document.getElementById('countInfoEdit').innerHTML = `+ ${(counted.length) - 6}`
-    } else if (counted.length <= 6 && deleteOnetime && document.getElementById('countInfoEdit').innerHTML != "") { document.getElementById('countInfoEdit').innerHTML = ""; deleteOnetime = false }
-    else {
-        let renderedContact = document.getElementById(`contactCirclePopupRender-${index}`)
-        if (renderedContact) renderedContact.remove();
-        renderedContact.innerHTML = '';
-    }
-}
 
 
 
@@ -193,7 +116,7 @@ function chooseContactEdit(id, index) {
 
 function renderCurrentContactEdit(id) {
     let countEditNormal = document.querySelectorAll('.contactBox .checkedEdit')
-    if((countEditNormal.length) > 6 && document.getElementById('choosenContactsEdit').innerHTML == ""){
+    if ((countEditNormal.length) > 6 && document.getElementById('choosenContactsEdit').innerHTML == "") {
         let contactList = Array.from(countEditNormal);
         contactList.slice(0, 6).forEach((img) => {
             let indexEditNormal = img.dataset.index;
@@ -205,18 +128,25 @@ function renderCurrentContactEdit(id) {
         // deleteOnetime = true;
         document.getElementById('countInfoEdit').innerHTML = `+ ${(countEditNormal.length) - 6}`
     }
-    if((countEditNormal.length) <= 6){
+    if ((countEditNormal.length) <= 6) {
         document.getElementById('countInfoEdit').innerHTML = "";
         document.getElementById('choosenContactsEdit').innerHTML = "";
         console.log(countEditNormal);
         countEditNormal.forEach((img) => {
             let indexEditNormal = img.dataset.index;
             console.log(indexEditNormal);
-            document.getElementById('choosenContactsEdit').innerHTML += renderChoosenContactEdit(id, indexEditNormal);
+            document.getElementById('choosenContactsEdit').innerHTML += renderChoosenContactEdit(indexEditNormal);
         })
     }
 }
 
+/**renders the choosen Contacts below the list and check if an index is involved
+ * and new Contacts were choosen or just the old ones
+*/
+function renderChoosenContactEdit(indexEditNormal) {
+    return `
+    <div id="contactCirclePopupRender-${indexEditNormal}" class="contactCirclePopupRender">${contactsArray[indexEditNormal].firstLetter + contactsArray[indexEditNormal].secondFirstLetter}</div>`;
+}
 
 /**shows the choosen Contacts in the filtered list */
 function chooseFilteredContactEdit(id, filterContactIndex) {
@@ -224,16 +154,37 @@ function chooseFilteredContactEdit(id, filterContactIndex) {
     if (choContactFilter.classList.contains("checkboxEdit")) {
         choContactFilter.classList.remove('checkboxEdit')
         choContactFilter.classList.add('checkedEdit')
-        let countEditFiltered = document.querySelectorAll('.contactBox .checked')
-        if ((countEditFiltered.length) > 6) {
-            document.getElementById('countInfo').innerHTML = `+ ${(countEditFiltered.length) - 6} Contact(s)`
-            renderFilteredChoosenContact(id, filterContactIndex)
-        }
-        else { choContactFilter.src = "/img/icons/normalCheckedContact.svg" }
+        choContactFilter.src = "/img/icons/normalCheckedContact.svg" 
+        renderCurrentFilteredChoosenContact(id, filterContactIndex);
     } else {
         choContactFilter.classList.add('checkboxEdit')
         choContactFilter.classList.remove('checkedEdit')
-        deleteRenderedFilteredContactEdit(id, filterContactIndex);
+        renderCurrentFilteredChoosenContact(id, filterContactIndex);
         choContactFilter.src = "/img/icons/normalCheckContact.svg"
+    }
+}
+
+/**renders the filtered Contacts below the list the same as the non-filtered contacts
+ * and checks if an index is involved and new contacts were choosen or just the old ones
+*/
+function renderCurrentFilteredChoosenContact(id, filterContactIndex) {
+    let countEditFiltered = document.querySelectorAll('.contactBox .checkedEdit')
+    let listContact = document.getElementById('choosenContactsEdit');
+    const filteredRightTask = tasks.find(task => task[1].id === id);
+    if ((countEditFiltered.length) > 6  && document.getElementById('choosenContactsEdit') == "") {
+        const contFilterList = filteredContactsEdit[filterContactIndex]
+        filteredRightTask[1].assignedTo.push(contFilterList?.name);
+        let root = filteredRightTask[1].assignedTo;
+        for (let filterIndex = root.length - 1; filterIndex < root.length; filterIndex++) {
+            thisFilteredTask = root.map(c => c.split(" ").map(f => f.charAt(0)))
+            listContact.innerHTML += `
+            <div id="contactCirclePopupRender-${id}" class="contactCirclePopupRender">${thisFilteredTask[filterIndex][0] + thisFilteredTask[filterIndex][1]}</div>
+            `}
+    } else if (filteredRightTask[1].assignedTo.length < 5) {
+        for (let filterIndex = 0; filterIndex < filteredRightTask[1].assignedTo?.length; filterIndex++) {
+            thisFilteredTask = filteredRightTask[1].assignedTo.map(c => c.split(" ").map(f => f.charAt(0)))
+            listContact.innerHTML += `
+        <div id="contactCirclePopupRender-${id}" class="contactCirclePopupRender">${thisFilteredTask[filterIndex][0] + thisFilteredTask[filterIndex][1]}</div>`;
+        }
     }
 }

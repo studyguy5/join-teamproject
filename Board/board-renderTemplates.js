@@ -252,8 +252,8 @@ function renderHTMLForEditandDeleteButton(id) {
 }
 
 
-/**renders the contacts in Edit-Mode */
-function renderContactsInEdit(id, contactsArray, index, onlyNumber) {
+/**renders the contacts in Edit-Mode dropDown */
+function renderContactsInEditDropDown(id, contactsArray, index, onlyNumber) {
   return `<div onclick="chooseContactEdit(${id}, ${index})" class="contactBox">
         <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
@@ -264,15 +264,17 @@ function renderContactsInEdit(id, contactsArray, index, onlyNumber) {
 }
 
 
-/**renders the filtered Contacts HTML into the div */
+/**renders the filtered Contacts HTML into the dropDonw */
 function renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterContactIndex) {
-  return `<div  class="contactBox">
+  return `<div onclick="chooseFilteredContactEdit(${id}, ${filterContactIndex})" class="contactBox">
         <div class="contactCirclePopup">${filteredContactsEdit[filterContactIndex].firstLetter + filteredContactsEdit[filterContactIndex].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${filteredContactsEdit[filterContactIndex].name}</span> 
-        <img  id="checkboxImgEdit-${filterContactIndex}" onclick="chooseFilteredContactEdit(${id}, ${filterContactIndex})" class="checkboxEdit" data-set="${filteredContactsEdit[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
+        <img  id="checkboxImgEdit-${filterContactIndex}"  
+        class="checkboxEdit" data-set="${filteredContactsEdit[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
         </div>`
 }
 
+let normalContactsArray = [];
 
 function chooseContact(index) {
   let choContact = document.getElementById(`checkboxImg-${index}`)
@@ -280,14 +282,21 @@ function chooseContact(index) {
     choContact.classList.remove('checkbox')
     choContact.classList.add('checked')
     choContact.src = "/img/icons/normalCheckedContact.svg"
+    let name = choContact.dataset.set
+    normalContactsArray.push(name);
     renderCurrentContact()
   } else {
     choContact.classList.add('checkbox')
     choContact.classList.remove('checked')
+    let name = choContact.dataset.set;
+    const indexToRemove = normalContactsArray.indexOf(name);
+  if (indexToRemove !== -1) {
+    normalContactsArray.splice(indexToRemove, 1);}
     renderCurrentContact()
     choContact.src = "/img/icons/normalCheckContact.svg"
   }
 }
+
 
 function renderCurrentContact() {
   let countPopup = document.querySelectorAll('.contactBox .checked')
@@ -299,13 +308,15 @@ function renderCurrentContact() {
     document.getElementById('choosenContacts').innerHTML = "";
     console.log(countPopup);
     countPopup.forEach((img) => {
-      let indexNormal = img.dataset.index
+      let indexNormal = img.dataset.index;
       console.log(indexNormal);
       document.getElementById('choosenContacts').innerHTML += renderChoosenContact(indexNormal)
     });
   }
 }
 
+
+let filteredContactsArray = [];
 
 
 /**her we make the choosen Contacts within the filtered Contacts visible */
@@ -314,17 +325,24 @@ function chooseFilteredContact(filterContactIndex) {
   if (choContactF.classList.contains('checkbox')) {
     choContactF.classList.remove('checkbox')
     choContactF.classList.add('checked')
-    choContactF.src = "/img/icons/normalCheckedContact.svg"
-    renderCurrentFilteredContact();
-  } else {
+    choContactF.src = "/img/icons/normalCheckedContact.svg";
+    let name = choContactF.dataset.set
+    filteredContactsArray.push(name);
+    processCurrentFilteredContact();
+  }else {
     choContactF.classList.add('checkbox')
     choContactF.classList.remove('checked')
-    renderCurrentFilteredContact();
-    choContactF.src = "/img/icons/normalCheckContact.svg"
+    let name = choContactF.dataset.set;
+    const indexToRemove = filteredContactsArray.indexOf(name);
+  if (indexToRemove !== -1) {
+    filteredContactsArray.splice(indexToRemove, 1);}
+    processCurrentFilteredContact();
+    choContactF.src = "/img/icons/normalCheckContact.svg";
   }
 }
 
-function renderCurrentFilteredContact() {
+function processCurrentFilteredContact() {
+  document.getElementById('choosenContacts').innerHTML = "";
   let countFilteredPopup = document.querySelectorAll('.contactBox .checked')
   if ((countFilteredPopup.length) > 6) {
     document.getElementById('countInfoPopup').innerHTML = `+ ${(countFilteredPopup.length) - 6}`;
@@ -333,10 +351,12 @@ function renderCurrentFilteredContact() {
     document.getElementById('countInfoPopup').innerHTML = "";
     document.getElementById('choosenContacts').innerHTML = "";
     console.log(countFilteredPopup);
-    countFilteredPopup.forEach((img) => {
-      let indexFiltered = img.dataset.index
-      console.log(indexFiltered);
-      document.getElementById('choosenContacts').innerHTML += renderFilteredChoosenContactPopup(indexFiltered)
+    let result = filteredContactsArray.slice(0, 6);
+    result.forEach((filteredContactsArray) => {
+      // let indexFiltered = img.dataset.index; 
+      // console.log(indexFiltered);
+      let compare = contactsArray.findIndex(contactsArray => filteredContactsArray == contactsArray.name);
+      document.getElementById('choosenContacts').innerHTML += renderFilteredChoosenContactPopup(compare)
     });
   }
 }
@@ -350,9 +370,9 @@ function renderChoosenContact(indexNormal) {
 }
 
 /**here we render the filtered choosen Contacts below the dropdown */
-function renderFilteredChoosenContactPopup(indexFiltered) {
+function renderFilteredChoosenContactPopup(compare) {
   return `
-    <div id="contactCirclePopupRender-${indexFiltered}" class="contactCirclePopupRender">${filteredContacts[indexFiltered].firstLetter + filteredContacts[indexFiltered].secondFirstLetter}</div>`
+    <div id="contactCirclePopupRender-${compare}" class="contactCirclePopupRender">${contactsArray[compare].firstLetter + contactsArray[compare].secondFirstLetter}</div>`
 }
 
 

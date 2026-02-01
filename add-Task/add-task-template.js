@@ -41,59 +41,57 @@ function taskTemplate(element, taskOption){
 
 
 /**
- * Renders the contact list in the normal view.
+ * Renders normal contact list in the dropdown div
  */
 function showContacts() {
     let contacts = document.getElementById('IdForContactsNormal')
+    let alreadyShoosen = addTaskNormalFilteredContactArray.concat(addTaskNormalContactArray);
     contacts.innerHTML = "";
     for (let index = 1; index < contactsArray.length; index++) {
         contacts.innerHTML += `<div onclick="chooseContactNormal(${index})" class="contactBox">
         <div class="contactCircleNormal">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
-        <img  id="checkboxImg-${index}"  class="checkbox" data-set="${contactsArray[index].name}" src="/img/icons/normalCheckContact.svg">
+        <img  id="checkboxImg-${index}" class="${alreadyShoosen.includes(contactsArray[index].name) ? 'checked' : 'checkbox'}"  data-set="${contactsArray[index].name}" data-index="${index}" src="/img/icons/normalCheckContact.svg">
         </div>`
     }
 }
 
 
 /**
- * Renders filtered contacts in the normal view.
+ * Renders filtered contacts into the dropdown div
  * @param {Array<Object>} filteredContacts - Array of filtered contact objects.
  */
 function renderfilteredContactsInNormal(filteredContacts) {
     let filtContactInPopup = document.getElementById('IdForContactsNormal')
+    let alreadyShoosen = addTaskNormalFilteredContactArray.concat(addTaskNormalContactArray);
     filtContactInPopup.innerHTML = "";
     for (let filterContactIndex = 0; filterContactIndex < filteredContacts.length; filterContactIndex++) {
         filtContactInPopup.innerHTML += `
-   <div onclick="" class="contactBox">
+   <div onclick="chooseFilteredContactNormal(${filterContactIndex})" class="contactBox">
         <div class="contactCircleNormal">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${filteredContacts[filterContactIndex].name}</span> 
-        <img  id="checkboxImg-${filterContactIndex}" onclick="chooseFilteredContactNormal(${filterContactIndex})" class="checkbox" data-set="${filteredContacts[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
+        <img  id="checkboxImg-${filterContactIndex}"  class="${alreadyShoosen.includes(filteredContacts[filterContactIndex]?.name) ? 'checked' : 'checkbox'}" data-set="${filteredContacts[filterContactIndex].name}" data-index="${filterContactIndex}" src="/img/icons/normalCheckContact.svg">
         </div>
    `}
 }
 
-/**
- * Renders a chosen contact (normal view) as a circle.
- * @param {number} index - Contact index.
- */
-function renderChoosenContactNormal(index) {
-    let listContact = document.getElementById('choosenContacts')
-
-    listContact.innerHTML += `
-    <div id="contactCircleNormalRender-${index}" class="contactCircleNormalRender">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
-    `
-}
+// /**
+//  * Renders a chosen contact (normal view) as a circle under the dropdown div
+//  * @param {number} index - Contact index.
+//  */
+// function renderChoosenContactNormal(compareIndexNormal) {
+//     return `
+//     <div id="contactCircleNormalRender-${compareIndexNormal}" class="contactCircleNormalRender">${contactsArray[compareIndexNormal].firstLetter + contactsArray[compareIndexNormal].secondFirstLetter}</div>
+//     `
+// }
 
 
 /**
- * Renders a chosen filtered contact.
+ * Renders a choosen filtered contact under the dropdown div 
  * @param {number} filterContactIndex - Filtered contact index.
  */
-function renderFilteredChoosenContactNormal(filterContactIndex) {
-    let listContact = document.getElementById('choosenContacts')
-
-    listContact.innerHTML += `
-    <div id="contactCircleNormalRender-${filterContactIndex}" class="contactCircleNormalRender">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>
+function renderFilteredChoosenContactNormal(compareIndexFiltered) {
+    return `
+    <div id="contactCircleNormalRender-${compareIndexFiltered}" class="contactCircleNormalRender">${contactsArray[compareIndexFiltered].firstLetter + contactsArray[compareIndexFiltered].secondFirstLetter}</div>
     `
 }

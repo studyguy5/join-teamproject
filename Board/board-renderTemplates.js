@@ -284,7 +284,7 @@ function chooseContact(index) {
     choContact.src = "/img/icons/normalCheckedContact.svg"
     let name = choContact.dataset.set
     normalContactsArray.push(name);
-    renderCurrentContact()
+    processCurrentContact()
   } else {
     choContact.classList.add('checkbox')
     choContact.classList.remove('checked')
@@ -292,13 +292,13 @@ function chooseContact(index) {
     const indexToRemove = normalContactsArray.indexOf(name);
   if (indexToRemove !== -1) {
     normalContactsArray.splice(indexToRemove, 1);}
-    renderCurrentContact()
+    processCurrentContact()
     choContact.src = "/img/icons/normalCheckContact.svg"
   }
 }
 
 
-function renderCurrentContact() {
+function processCurrentContact() {
   let countPopup = document.querySelectorAll('.contactBox .checked')
   if ((countPopup.length) > 6) {
     document.getElementById('countInfoPopup').innerHTML = `+ ${(countPopup.length) - 6}`;
@@ -306,11 +306,11 @@ function renderCurrentContact() {
   if ((countPopup.length) <= 6) {
     document.getElementById('countInfoPopup').innerHTML = "";
     document.getElementById('choosenContacts').innerHTML = "";
-    console.log(countPopup);
-    countPopup.forEach((img) => {
-      let indexNormal = img.dataset.index;
-      console.log(indexNormal);
-      document.getElementById('choosenContacts').innerHTML += renderChoosenContact(indexNormal)
+    let result = normalContactsArray.slice(0, 6);
+    result.forEach((normalContactsArray) => {
+      // let indexNormal = img.dataset.index;
+      let compareIndex = contactsArray.findIndex(contactsArray => normalContactsArray == contactsArray.name);
+      document.getElementById('choosenContacts').innerHTML += renderChoosenContact(compareIndex)
     });
   }
 }
@@ -364,9 +364,9 @@ function processCurrentFilteredContact() {
 
 
 /**the choosen Contacts are rendered on the below of the dropdown List  */
-function renderChoosenContact(indexNormal) {
+function renderChoosenContact(compareIndex) {
   return `
-    <div id="contactCirclePopupRender-${indexNormal}" class="contactCirclePopupRender">${contactsArray[indexNormal].firstLetter + contactsArray[indexNormal].secondFirstLetter}</div>`
+    <div id="contactCirclePopupRender-${compareIndex}" class="contactCirclePopupRender">${contactsArray[compareIndex].firstLetter + contactsArray[compareIndex].secondFirstLetter}</div>`
 }
 
 /**here we render the filtered choosen Contacts below the dropdown */

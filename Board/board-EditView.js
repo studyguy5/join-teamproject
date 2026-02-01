@@ -340,9 +340,9 @@ function showInputFilter() {
 function showContactsEdit(id) {
     const thisT = tasks.find(task => task[1].id === id);
     let contacts = document.getElementById('IdForContactsEdit')
-    let result = thisT[1]?.cid //ever Image path hier in result
+    let result = thisT[1]?.cid //every Image path hier in result
     let onlyNumber = result?.map(id => {    //change the entrys here
-        return parseInt(id.split('-')[1]);  // return the first number and split the delete the rest
+        return parseInt(id.split('-')[1]);  // split the value on the - and return the number behind it on index 1
     });
     contacts.innerHTML = "";
     for (let index = 0; index < contactsArray.length; index++) {

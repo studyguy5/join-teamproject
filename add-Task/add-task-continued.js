@@ -24,6 +24,8 @@ function clearTaskNormal() {
     document.getElementById("subtask").value = "";
     document.getElementById('subtask-list-1').classList.remove('scrollClass')
     document.getElementById('subtask-list-1').innerHTML = "";
+    addTaskNormalFilteredContactArray = [];
+    addTaskNormalContactArray = [];
 }
 
 async function filterAndShowTasks() {

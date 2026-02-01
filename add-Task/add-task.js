@@ -131,6 +131,8 @@ function openContactViewNormal() {
     }
 }
 
+let addTaskNormalContactArray = [];
+let indexArray = [];
 
 /**
  * Toggles selection of a contact in the normal view.
@@ -141,23 +143,48 @@ function chooseContactNormal(index) {
     if (choContact.classList.contains('checkbox')) {
         choContact.classList.remove('checkbox')
         choContact.classList.add('checked')
-        let count = document.querySelectorAll('.contactBox .checked')
-        if ((count.length) > 6) {
-            deleteONETime = true;
-            document.getElementById('countInfo').innerHTML = `+ ${(count.length) - 6}`
-        } else {
-            renderChoosenContactNormal(index);
-            choContact.src = "/img/icons/normalCheckedContact.svg"
-        }
+        choContact.src = "/img/icons/normalCheckedContact.svg"
+        let name = choContact.dataset.set
+        addTaskNormalContactArray.push(name);
+        let i = choContact.dataset.index;
+        indexArray.push(i);
+        processCurrentCombinedContacts();
     } else {
         choContact.classList.add('checkbox')
         choContact.classList.remove('checked')
-        deleteRenderedContactNormal(index);
+        let name = choContact.dataset.set;
+        const indexToRemove = addTaskNormalContactArray.indexOf(name);
+        if (indexToRemove !== -1) {
+            addTaskNormalContactArray.splice(indexToRemove, 1);
+        }
+        let i = choContact.dataset.index;
+        const indexOfIndex = indexArray.indexOf(i);
+        if(indexOfIndex !== -1){
+            indexArray.splice(indexOfIndex, 1);
+        }
+        processCurrentCombinedContacts();
         choContact.src = "/img/icons/normalCheckContact.svg"
     }
 }
 
 
+// function processCurrentContactNormal() {
+//     let countNormal = document.querySelectorAll('.contactBox .checked')
+//     if ((countNormal.length) > 6) {
+//         document.getElementById('countInfo').innerHTML = `+ ${(countNormal.length) - 6}`
+//     }
+//     if ((countNormal.length) <= 6) {
+//         document.getElementById('countInfo').innerHTML = "";
+//         document.getElementById('choosenContacts').innerHTML = "";
+//         let resultNormal = addTaskNormalContactArray.slice(0, 6);
+//         resultNormal.forEach((addTaskNormalContactArray) => {
+//             let compareIndexNormal = contactsArray.findIndex(contactsArray => addTaskNormalContactArray == contactsArray.name);
+//             document.getElementById('choosenContacts').innerHTML += renderChoosenContactNormal(compareIndexNormal)
+//         })
+//     }
+// }
+
+let addTaskNormalFilteredContactArray = [];
 /**
  * Toggles selection of a filtered contact.
  * @param {number} filterContactIndex - Index of filtered contact.
@@ -167,39 +194,60 @@ function chooseFilteredContactNormal(filterContactIndex) {
     if (choContact.classList.contains('checkbox')) {
         choContact.classList.remove('checkbox')
         choContact.classList.add('checked')
-        let countFilter = document.querySelectorAll('.contactBox .checked')
-        if ((countFilter.length) > 6) {
-            deleteONETime = true;
-            document.getElementById('countInfo').innerHTML = `+ ${(countFilter.length) - 6}`
-        } else {
-            renderFilteredChoosenContactNormal(filterContactIndex)
-            choContact.src = "/img/icons/normalCheckedContact.svg"}
+        choContact.src = "/img/icons/normalCheckedContact.svg"
+        let name = choContact.dataset.set
+        addTaskNormalFilteredContactArray.push(name);
+        processCurrentCombinedContacts()
     } else {
         choContact.classList.add('checkbox')
         choContact.classList.remove('checked')
-        deleteRenderedContactNormal(filterContactIndex);
-        choContact.src = "/img/icons/normalCheckContact.svg"}
-}
-
-
-let deleteONETime = true;
-/**
- * Removes a rendered chosen contact circle.
- * @param {number} index - Contact index.
- */
-function deleteRenderedContactNormal(index) {
-    let countedInNormal = document.querySelectorAll('.contactBox .checked')
-    if (countedInNormal.length > 6) {
-        countedInNormal.length - 1
-        document.getElementById('countInfo').innerHTML = `+ ${(countedInNormal.length) - 6}`;
-    } else if (countedInNormal.length <= 6 && deleteONETime && document.getElementById('countInfo').innerHTML != "") {
-        document.getElementById('countInfo').innerHTML = ""; deleteONETime = false;
-    } else {
-        let renderedContact = document.getElementById(`contactCircleNormalRender-${index}`)
-        renderedContact.remove(`contactCircleNormalRender-${index}`)
-        renderedContact.innerHTML = '';
+        let name = choContact.dataset.set;
+        const indexToRemove = addTaskNormalFilteredContactArray.indexOf(name);
+        if (indexToRemove !== -1) {
+            addTaskNormalFilteredContactArray.splice(indexToRemove, 1);
+        }
+        processCurrentCombinedContacts();
+        choContact.src = "/img/icons/normalCheckContact.svg"
     }
 }
+
+
+
+function processCurrentCombinedContacts() {
+    let countFilter = document.querySelectorAll('.contactBox .checked')
+    if ((countFilter.length) > 6) {
+        document.getElementById('countInfo').innerHTML = `+ ${(countFilter.length) - 6}`
+    }
+    if ((countFilter.length) <= 6) {
+    document.getElementById('countInfo').innerHTML = "";
+    document.getElementById('choosenContacts').innerHTML = "";
+    let combo = addTaskNormalFilteredContactArray.concat(addTaskNormalContactArray);
+    let result = combo.slice(0, 6);
+    result.forEach((addTaskNormalFilteredContactArray) => {
+        let compareIndexFiltered = contactsArray.findIndex(contactsArray => addTaskNormalFilteredContactArray == contactsArray.name);
+        document.getElementById('choosenContacts').innerHTML += renderFilteredChoosenContactNormal(compareIndexFiltered)
+    })
+}
+}
+
+// let deleteONETime = true;
+// /**
+//  * Removes a rendered chosen contact circle.
+//  * @param {number} index - Contact index.
+//  */
+// function deleteRenderedContactNormal(index) {
+//     let countedInNormal = document.querySelectorAll('.contactBox .checked')
+//     if (countedInNormal.length > 6) {
+//         countedInNormal.length - 1
+//         document.getElementById('countInfo').innerHTML = `+ ${(countedInNormal.length) - 6}`;
+//     } else if (countedInNormal.length <= 6 && deleteONETime && document.getElementById('countInfo').innerHTML != "") {
+//         document.getElementById('countInfo').innerHTML = ""; deleteONETime = false;
+//     } else {
+//         let renderedContact = document.getElementById(`contactCircleNormalRender-${index}`)
+//         renderedContact.remove(`contactCircleNormalRender-${index}`)
+//         renderedContact.innerHTML = '';
+//     }
+// }
 
 
 /**
@@ -251,7 +299,8 @@ function filterContactsInNormal() {
         filteredContacts = r.filter(fn => { return fn.name.toLowerCase().includes(typedValue.toLowerCase()) })
         renderfilteredContactsInNormal(filteredContacts);
     } else if (typedValue.length < 1) {
-        showContacts();}
+        showContacts();
+    }
 }
 
 
@@ -293,7 +342,8 @@ function createTemplate() {
         'assignedTo': [
         ],
         'subtasks': [
-        ]}
+        ]
+    }
 }
 
 /**
@@ -317,7 +367,8 @@ let subtaskvalue;
 function pushObject(subtaskArray, subtaskvalue) {
     if (subtaskvalue) {
         let subTaskObject1 = { "value": `${subtaskvalue}`, 'status': 'open' };
-        subtaskArray.push(subTaskObject1)} 
+        subtaskArray.push(subTaskObject1)
+    }
 }
 
 
@@ -329,9 +380,9 @@ function getSubtaskFromTemplate(subtaskArray) {
     let inputs = document.querySelectorAll('.ul-div li p');
     inputs.forEach(inputs => {
         let subInput = inputs.innerHTML.trim();
-        if(!subInput) return;
+        if (!subInput) return;
         pushObject(subtaskArray, subInput);
-    });      
+    });
 }
 
 
@@ -342,7 +393,9 @@ function getSubtaskFromTemplate(subtaskArray) {
 */
 function setContactAndPrioValue(newTask) {
     let checkedImg = document.querySelectorAll('#IdForContactsNormal img.checked')
-    checkedImg.forEach(img => {
+    let contactsCombined = addTaskNormalFilteredContactArray.concat(addTaskNormalContactArray);
+    contactsCombined.forEach(img => {
+        // let compareIndexFiltered = contactsArray.findIndex(contactsArray => addTaskNormalFilteredContactArray == contactsArray.name);
         let id = img.id;
         newTask.cid.push(id);
         names = img.dataset.set;
@@ -384,17 +437,17 @@ async function getTaskInformationNormal(index) {
 };
 
 function letShineLastEditedTask(firebaseID, taskToEdit, id) {
-    if(!firebaseID || !taskToEdit){
-      let taskToEdit = tasks.find(task => task[1].id === id);
-      let last = document.getElementById(`TaskDiv-${id}`);
-      last?.classList.add('tor');
-    }else{
-      let last = document.getElementById(`TaskDiv-${taskToEdit[1].id}`);
-      last?.classList.add('tor');
+    if (!firebaseID || !taskToEdit) {
+        let taskToEdit = tasks.find(task => task[1].id === id);
+        let last = document.getElementById(`TaskDiv-${id}`);
+        last?.classList.add('tor');
+    } else {
+        let last = document.getElementById(`TaskDiv-${taskToEdit[1].id}`);
+        last?.classList.add('tor');
     }
 }
 
-function cleanBorder(){
+function cleanBorder() {
     let last = document.querySelectorAll('.tor');
     last.forEach(element => {
         element.classList.remove('tor');

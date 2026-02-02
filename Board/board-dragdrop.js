@@ -96,8 +96,6 @@ function createTemplate() {
         'DueDate': '',
         'prio': '',
         'progress': '0',
-        'cid': [
-        ],
         'assignedTo': [
         ],
         'subtasks': [
@@ -127,11 +125,11 @@ function getSubtaskFromTemplate(subtaskArray) {
 function setContactAndPrioValue(newTask) {
     // let checkedImg = document.querySelectorAll('.contactBox .checked');
     let allCont = normalContactsArray.concat(filteredContacts);
-    allCont.forEach((img) => {
-        let names = img.dataset.set;
-        let id = img.id;
-        newTask.cid.push(id);
-        newTask.assignedTo.push(names);
+    allCont.forEach((item) => {
+        // let names = img.dataset.set;
+        // let id = img.id;
+        // newTask.cid.push(id);
+        newTask.assignedTo.push(item);
     })
     newTask.prio = prioArray[0];
     normalContactsArray = [];

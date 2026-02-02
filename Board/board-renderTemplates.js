@@ -253,24 +253,24 @@ function renderHTMLForEditandDeleteButton(id) {
 
 
 /**renders the contacts in Edit-Mode dropDown */
-function renderContactsInEditDropDown(id, contactsArray, index, onlyNumber) {
+function renderContactsInEditDropDown(id, contactsArray, index, thisT) {
   return `<div onclick="chooseContactEdit(${id}, ${index})" class="contactBox">
         <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
         <img  id="checkboxImgEdit-${index}"  
-        class="${onlyNumber?.includes(index) ? 'checkedEdit' : 'checkboxEdit'}" data-set="${contactsArray[index].name}" data-index="${index}"
+        class="${thisT[1].assignedTo?.includes(contactsArray[index].name) ? 'checkedEdit' : 'checkboxEdit'}" data-set="${contactsArray[index].name}" data-index="${index}"
          src="/img/icons/normalCheckContact.svg">
         </div>`
 }
 
 
 /**renders the filtered Contacts HTML into the dropDonw */
-function renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterContactIndex) {
+function renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterContactIndex, thisTFilter) {
   return `<div onclick="chooseFilteredContactEdit(${id}, ${filterContactIndex})" class="contactBox">
         <div class="contactCirclePopup">${filteredContactsEdit[filterContactIndex].firstLetter + filteredContactsEdit[filterContactIndex].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${filteredContactsEdit[filterContactIndex].name}</span> 
         <img  id="checkboxImgEdit-${filterContactIndex}"  
-        class="checkboxEdit" data-set="${filteredContactsEdit[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
+        class="${thisTFilter[1].assignedTo?.includes(filteredContactsEdit[filterContactIndex].name) ? 'checkedEdit' : 'checkboxEdit'}" data-set="${filteredContactsEdit[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
         </div>`
 }
 

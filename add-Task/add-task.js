@@ -337,8 +337,6 @@ function createTemplate() {
         'DueDate': '',
         'prio': '',
         'progress': '0',
-        'cid': [
-        ],
         'assignedTo': [
         ],
         'subtasks': [
@@ -392,14 +390,14 @@ function getSubtaskFromTemplate(subtaskArray) {
  * @returns {void}
 */
 function setContactAndPrioValue(newTask) {
-    let checkedImg = document.querySelectorAll('#IdForContactsNormal img.checked')
+    // let checkedImg = document.querySelectorAll('#IdForContactsNormal img.checked')
     let contactsCombined = addTaskNormalFilteredContactArray.concat(addTaskNormalContactArray);
-    contactsCombined.forEach(img => {
+    contactsCombined.forEach((item) => {
         // let compareIndexFiltered = contactsArray.findIndex(contactsArray => addTaskNormalFilteredContactArray == contactsArray.name);
-        let id = img.id;
-        newTask.cid.push(id);
-        names = img.dataset.set;
-        newTask.assignedTo.push(names)
+        // let id = img.id;
+        // newTask.cid.push(id);
+        // names = img.dataset.set;
+        newTask.assignedTo.push(item)
     })
     newTask.prio = prioArray[0];
 }

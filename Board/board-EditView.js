@@ -200,7 +200,7 @@ function editFeedback() {
 */
 function setContactAndPrioValueEdit(taskToEdit) {
     let checkedImg = document.querySelectorAll('#IdForContactsEdit img.checkedEdit')
-    taskToEdit[1].cid = [];
+    // taskToEdit[1].cid = [];
     taskToEdit[1].assignedTo = [];
     // taskToEdit[1].subtasks = [];
     checkedImg.forEach(img => {
@@ -340,13 +340,9 @@ function showInputFilter() {
 function showContactsEdit(id) {
     const thisT = tasks.find(task => task[1].id === id);
     let contacts = document.getElementById('IdForContactsEdit')
-    let result = thisT[1]?.cid //every Image path hier in result
-    let onlyNumber = result?.map(id => {    //change the entrys here
-        return parseInt(id.split('-')[1]);  // split the value on the - and return the number behind it on index 1
-    });
     contacts.innerHTML = "";
     for (let index = 0; index < contactsArray.length; index++) {
-        contacts.innerHTML += renderContactsInEditDropDown(id, contactsArray, index, onlyNumber);
+        contacts.innerHTML += renderContactsInEditDropDown(id, contactsArray, index, thisT);
     }
 }
 
@@ -367,10 +363,11 @@ function filterContactsInPopupEdit(id) {
 
 /**renders the filtered Contacts inot the list */
 function renderfilteredContactsInPopupEdit(id, filteredContactsEdit) {
+    const thisTFilter = tasks.find(task => task[1].id === id);
     let filtContactInPopupEdit = document.getElementById('IdForContactsEdit')
     filtContactInPopupEdit.innerHTML = "";
     for (let filterContactIndex = 0; filterContactIndex < filteredContactsEdit.length; filterContactIndex++) {
-        filtContactInPopupEdit.innerHTML += renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterContactIndex);
+        filtContactInPopupEdit.innerHTML += renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterContactIndex, thisTFilter);
     }
 }
 

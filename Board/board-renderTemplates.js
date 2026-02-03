@@ -253,24 +253,24 @@ function renderHTMLForEditandDeleteButton(id) {
 
 
 /**renders the contacts in Edit-Mode dropDown */
-function renderContactsInEditDropDown(id, contactsArray, index, thisT) {
+function renderContactsInEditDropDown(id, contactsArray, index, preselectedEdit) {
   return `<div onclick="chooseContactEdit(${id}, ${index})" class="contactBox">
         <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
         <img  id="checkboxImgEdit-${index}"  
-        class="${thisT[1].assignedTo?.includes(contactsArray[index].name) ? 'checkedEdit' : 'checkboxEdit'}" data-set="${contactsArray[index].name}" data-index="${index}"
+        class="${preselectedEdit.includes(contactsArray[index].name) ? 'checkedEdit' : 'checkboxEdit'}" data-set="${contactsArray[index].name}" data-index="${index}"
          src="/img/icons/normalCheckContact.svg">
         </div>`
 }
 
 
 /**renders the filtered Contacts HTML into the dropDonw */
-function renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterContactIndex, thisTFilter) {
+function renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterContactIndex, preselectedFilterEdit) {
   return `<div onclick="chooseFilteredContactEdit(${id}, ${filterContactIndex})" class="contactBox">
         <div class="contactCirclePopup">${filteredContactsEdit[filterContactIndex].firstLetter + filteredContactsEdit[filterContactIndex].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${filteredContactsEdit[filterContactIndex].name}</span> 
         <img  id="checkboxImgEdit-${filterContactIndex}"  
-        class="${thisTFilter[1].assignedTo?.includes(filteredContactsEdit[filterContactIndex].name) ? 'checkedEdit' : 'checkboxEdit'}" data-set="${filteredContactsEdit[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
+        class="${preselectedFilterEdit.includes(filteredContactsEdit[filterContactIndex].name) ? 'checkedEdit' : 'checkboxEdit'}" data-set="${filteredContactsEdit[filterContactIndex].name}" src="/img/icons/normalCheckContact.svg">
         </div>`
 }
 
@@ -298,24 +298,6 @@ function chooseContact(index) {
 }
 
 
-function processCurrentContact() {
-  let countPopup = document.querySelectorAll('.contactBox .checked')
-  if ((countPopup.length) > 6) {
-    document.getElementById('countInfoPopup').innerHTML = `+ ${(countPopup.length) - 6}`;
-  }
-  if ((countPopup.length) <= 6) {
-    document.getElementById('countInfoPopup').innerHTML = "";
-    document.getElementById('choosenContacts').innerHTML = "";
-    let result = normalContactsArray.slice(0, 6);
-    result.forEach((normalContactsArray) => {
-      // let indexNormal = img.dataset.index;
-      let compareIndex = contactsArray.findIndex(contactsArray => normalContactsArray == contactsArray.name);
-      document.getElementById('choosenContacts').innerHTML += renderChoosenContact(compareIndex)
-    });
-  }
-}
-
-
 let filteredContactsArray = [];
 
 
@@ -328,38 +310,53 @@ function chooseFilteredContact(filterContactIndex) {
     choContactF.src = "/img/icons/normalCheckedContact.svg";
     let name = choContactF.dataset.set
     filteredContactsArray.push(name);
-    processCurrentFilteredContact();
+    processCurrentContact();
   }else {
     choContactF.classList.add('checkbox')
     choContactF.classList.remove('checked')
     let name = choContactF.dataset.set;
     const indexToRemove = filteredContactsArray.indexOf(name);
-  if (indexToRemove !== -1) {
-    filteredContactsArray.splice(indexToRemove, 1);}
-    processCurrentFilteredContact();
-    choContactF.src = "/img/icons/normalCheckContact.svg";
-  }
+    if (indexToRemove !== -1) {
+      filteredContactsArray.splice(indexToRemove, 1);}
+      processCurrentContact();
+      choContactF.src = "/img/icons/normalCheckContact.svg";
+    }
 }
 
-function processCurrentFilteredContact() {
-  document.getElementById('choosenContacts').innerHTML = "";
-  let countFilteredPopup = document.querySelectorAll('.contactBox .checked')
-  if ((countFilteredPopup.length) > 6) {
-    document.getElementById('countInfoPopup').innerHTML = `+ ${(countFilteredPopup.length) - 6}`;
-  }
-  if ((countFilteredPopup.length) <= 6) {
+function processCurrentContact() {
+  let comboPopup = normalContactsArray.concat(filteredContactsArray);
+  if ((comboPopup.length) > 6) {
+    document.getElementById('countInfoPopup').innerHTML = `+ ${(countPopup.length) - 6}`;}
+  if ((comboPopup.length) <= 6) {
     document.getElementById('countInfoPopup').innerHTML = "";
     document.getElementById('choosenContacts').innerHTML = "";
-    console.log(countFilteredPopup);
-    let result = filteredContactsArray.slice(0, 6);
-    result.forEach((filteredContactsArray) => {
-      // let indexFiltered = img.dataset.index; 
-      // console.log(indexFiltered);
-      let compare = contactsArray.findIndex(contactsArray => filteredContactsArray == contactsArray.name);
-      document.getElementById('choosenContacts').innerHTML += renderFilteredChoosenContactPopup(compare)
+    let combo = normalContactsArray.concat(filteredContactsArray);
+    let result = combo.slice(0, 6);
+    result.forEach((result) => {
+      let compareIndex = contactsArray.findIndex(contactsArray => result == contactsArray.name);
+      document.getElementById('choosenContacts').innerHTML += renderChoosenContact(compareIndex)
     });
   }
 }
+// function processCurrentFilteredContact() {
+//   document.getElementById('choosenContacts').innerHTML = "";
+//   let countFilteredPopup = document.querySelectorAll('.contactBox .checked')
+//   if ((countFilteredPopup.length) > 6) {
+//     document.getElementById('countInfoPopup').innerHTML = `+ ${(countFilteredPopup.length) - 6}`;
+//   }
+//   if ((countFilteredPopup.length) <= 6) {
+//     document.getElementById('countInfoPopup').innerHTML = "";
+//     document.getElementById('choosenContacts').innerHTML = "";
+//     console.log(countFilteredPopup);
+//     let result = filteredContactsArray.slice(0, 6);
+//     result.forEach((filteredContactsArray) => {
+//       // let indexFiltered = img.dataset.index; 
+//       // console.log(indexFiltered);
+//       let compare = contactsArray.findIndex(contactsArray => filteredContactsArray == contactsArray.name);
+//       document.getElementById('choosenContacts').innerHTML += renderFilteredChoosenContactPopup(compare)
+//     });
+//   }
+// }
 
 
 

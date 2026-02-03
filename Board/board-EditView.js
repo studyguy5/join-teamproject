@@ -70,6 +70,7 @@ function prioButtonactivate(id) {
 function closeEditView() {
     const popup = document.getElementById('bigViewOfTask');
     popup.classList.add("dont-Show");
+    normalContactEditModeArray = [];
     first = true;
 }
 
@@ -199,15 +200,11 @@ function editFeedback() {
  * in order to keep it up to date and prevent double pushing 
 */
 function setContactAndPrioValueEdit(taskToEdit) {
-    let checkedImg = document.querySelectorAll('#IdForContactsEdit img.checkedEdit')
-    // taskToEdit[1].cid = [];
+    let allContact = normalContactEditModeArray.concat(filteredContactEditModeArray);
     taskToEdit[1].assignedTo = [];
-    // taskToEdit[1].subtasks = [];
-    checkedImg.forEach(img => {
-        names = img.dataset.set;
-        let id = img.id;
-        taskToEdit[1].cid.push(id);
-        taskToEdit[1].assignedTo.push(names)
+    allContact.forEach(item => {
+        // names = img.dataset.set;
+        taskToEdit[1].assignedTo.push(item)
     })
     taskToEdit[1].prio = prioArray[0];
 }
@@ -215,7 +212,6 @@ function setContactAndPrioValueEdit(taskToEdit) {
 
 /**taskes values and creates object with it and pushes it after that into subtasks */
 function pushObjectEdit(taskToEdit, subtaskvalueEdit) {
-
     if (subtaskvalueEdit) {
         let subTaskObject = { "value": `${subtaskvalueEdit}`, 'status': 'open' };
         taskToEdit[1].subtasks.push(subTaskObject);
@@ -231,7 +227,6 @@ function getSubtaskFromTemplateEdit(taskToEdit) {//hole die Daten
         if(!subChange) return;
         pushObjectEdit(taskToEdit, subChange);
     })
-    
 }
 
 
@@ -336,17 +331,19 @@ function showInputFilter() {
     };
 }
 
-/**renders the Contacts in Edit Mode */
+/**renders the Contacts in Edit Mode DropDown */
 function showContactsEdit(id) {
     const thisT = tasks.find(task => task[1].id === id);
+    thisT[1].assignedTo.forEach((item) => normalContactEditModeArray.push(item));
+    let preselectedEdit = normalContactEditModeArray.concat(filteredContactEditModeArray);
     let contacts = document.getElementById('IdForContactsEdit')
     contacts.innerHTML = "";
     for (let index = 0; index < contactsArray.length; index++) {
-        contacts.innerHTML += renderContactsInEditDropDown(id, contactsArray, index, thisT);
+        contacts.innerHTML += renderContactsInEditDropDown(id, contactsArray, index, preselectedEdit);
     }
 }
 
-/**filters the contacts accordingly to your inputs in the input-field */
+/**filters the contacts accordingly into the DropDown window */
 let filteredContactsEdit = [];
 function filterContactsInPopupEdit(id) {
     let r;
@@ -363,20 +360,21 @@ function filterContactsInPopupEdit(id) {
 
 /**renders the filtered Contacts inot the list */
 function renderfilteredContactsInPopupEdit(id, filteredContactsEdit) {
-    const thisTFilter = tasks.find(task => task[1].id === id);
+    // const thisTFilter = tasks.find(task => task[1].id === id);
+    let preselectedFilterEdit = normalContactEditModeArray.concat(filteredContactEditModeArray);
     let filtContactInPopupEdit = document.getElementById('IdForContactsEdit')
     filtContactInPopupEdit.innerHTML = "";
     for (let filterContactIndex = 0; filterContactIndex < filteredContactsEdit.length; filterContactIndex++) {
-        filtContactInPopupEdit.innerHTML += renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterContactIndex, thisTFilter);
+        filtContactInPopupEdit.innerHTML += renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterContactIndex, preselectedFilterEdit);
     }
 }
 
 
 
 
-/**deletes a filtered Contacts in Edit-Mode */
-function deleteRenderedFilteredContactEdit(filterIndex) {
-    let renderedContactFilter = document.getElementById(`contactCirclePopupRender-${filterIndex}`)
-    if (renderedContactFilter) renderedContactFilter.remove();
-    renderedContactFilter.innerHTML = '';
-}
+// /**deletes a filtered Contacts in Edit-Mode */
+// function deleteRenderedFilteredContactEdit(filterIndex) {
+//     let renderedContactFilter = document.getElementById(`contactCirclePopupRender-${filterIndex}`)
+//     if (renderedContactFilter) renderedContactFilter.remove();
+//     renderedContactFilter.innerHTML = '';
+// }

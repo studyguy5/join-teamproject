@@ -168,22 +168,6 @@ function chooseContactNormal(index) {
 }
 
 
-// function processCurrentContactNormal() {
-//     let countNormal = document.querySelectorAll('.contactBox .checked')
-//     if ((countNormal.length) > 6) {
-//         document.getElementById('countInfo').innerHTML = `+ ${(countNormal.length) - 6}`
-//     }
-//     if ((countNormal.length) <= 6) {
-//         document.getElementById('countInfo').innerHTML = "";
-//         document.getElementById('choosenContacts').innerHTML = "";
-//         let resultNormal = addTaskNormalContactArray.slice(0, 6);
-//         resultNormal.forEach((addTaskNormalContactArray) => {
-//             let compareIndexNormal = contactsArray.findIndex(contactsArray => addTaskNormalContactArray == contactsArray.name);
-//             document.getElementById('choosenContacts').innerHTML += renderChoosenContactNormal(compareIndexNormal)
-//         })
-//     }
-// }
-
 let addTaskNormalFilteredContactArray = [];
 /**
  * Toggles selection of a filtered contact.
@@ -223,8 +207,8 @@ function processCurrentCombinedContacts() {
     document.getElementById('choosenContacts').innerHTML = "";
     let combo = addTaskNormalFilteredContactArray.concat(addTaskNormalContactArray);
     let result = combo.slice(0, 6);
-    result.forEach((addTaskNormalFilteredContactArray) => {
-        let compareIndexFiltered = contactsArray.findIndex(contactsArray => addTaskNormalFilteredContactArray == contactsArray.name);
+    result.forEach((result) => {
+        let compareIndexFiltered = contactsArray.findIndex(contactsArray => result == contactsArray.name);
         document.getElementById('choosenContacts').innerHTML += renderFilteredChoosenContactNormal(compareIndexFiltered)
     })
 }

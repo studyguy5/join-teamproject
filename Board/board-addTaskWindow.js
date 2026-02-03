@@ -170,12 +170,13 @@ function arraySorting(array) {
 /**show the contacts in the reserved place within the dropdown Menü */
 function showContacts() {
     let contacts = document.getElementById('IdForContacts')
+    let preselected = normalContactsArray.concat(filteredContactsArray); // Arrays müssen noch angepasst werden
     contacts.innerHTML = "";
     for (let index = 0; index < contactsArray.length; index++) {
         contacts.innerHTML += `<div onclick="chooseContact(${index})" class="contactBox">
         <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
-        <img  id="checkboxImg-${index}"  class="checkbox" data-set="${contactsArray[index].name}" data-index="${index}" src="/img/icons/normalCheckContact.svg">
+        <img  id="checkboxImg-${index}"  class="${preselected.includes(contactsArray[index].name) ? 'checked' : 'checkbox'}" data-set="${contactsArray[index].name}" data-index="${index}" src="/img/icons/normalCheckContact.svg">
         </div>`
     }
 }
@@ -212,13 +213,14 @@ function filterContactsInPopup() {
 /**the filtered Contacts are rendered here */
 function renderfilteredContactsInPopup(filteredContacts) {
     let filtContactInPopup = document.getElementById('IdForContacts')
+    let preselected = normalContactsArray.concat(filteredContactsArray);
     filtContactInPopup.innerHTML = "";
     for (let filterContactIndex = 0; filterContactIndex < filteredContacts.length; filterContactIndex++) {
         filtContactInPopup.innerHTML += `
         <div onclick="chooseFilteredContact(${filterContactIndex})" class="contactBox">
         <div class="contactCirclePopup">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>
         <span for="contactName" class="contactName"> ${filteredContacts[filterContactIndex].name}</span> 
-        <img  id="checkboxImg-${filterContactIndex}"  class="checkbox" data-set="${filteredContacts[filterContactIndex].name}" data-index="${filterContactIndex}" src="/img/icons/normalCheckContact.svg">
+        <img  id="checkboxImg-${filterContactIndex}"  class="${preselected.includes(filteredContacts[filterContactIndex].name) ? 'checked' : 'checkbox'}" data-set="${filteredContacts[filterContactIndex].name}" data-index="${filterContactIndex}" src="/img/icons/normalCheckContact.svg">
         </div>`}
 }
 

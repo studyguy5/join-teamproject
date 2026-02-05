@@ -369,12 +369,3 @@ function renderfilteredContactsInPopupEdit(id, filteredContactsEdit) {
     }
 }
 
-
-
-
-// /**deletes a filtered Contacts in Edit-Mode */
-// function deleteRenderedFilteredContactEdit(filterIndex) {
-//     let renderedContactFilter = document.getElementById(`contactCirclePopupRender-${filterIndex}`)
-//     if (renderedContactFilter) renderedContactFilter.remove();
-//     renderedContactFilter.innerHTML = '';
-// }

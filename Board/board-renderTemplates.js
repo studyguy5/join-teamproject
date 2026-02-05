@@ -153,19 +153,6 @@ function renderTaskintoBoard(element) {
 }
 
 
-/**renders the mini Menü for changing the category in Responsiv View */
-function renderMiniMenü(id) {
-  miniMenu = document.getElementById(`miniMenüResponsiv-${id}`)
-  miniMenu.classList.toggle('miniMenüResponsiv')
-}
-
-
-/**closes the Mini Menü if you leave a Task */
-function closeMiniMenü(id) {
-  closeM = document.getElementById(`miniMenüResponsiv-${id}`)
-  closeM.classList.remove('miniMenüResponsiv')
-}
-
 
 /**renders the html for the BigView */
 function renderBigViewHTML(elements, id) {
@@ -200,15 +187,7 @@ function renderBigViewHTML(elements, id) {
             <div class="editeDeleteArea" id="editeDeleteArea"></div>`
 };
 
-function checkSubtaskLenght(elements) {
-  let elementsOfTask = tasks.find(t => t[1].id === elements);
-  if (elementsOfTask[1].subtasks?.length > 3) {
-    let ele = document.getElementById('subTaskForBigView')
-    ele.style.overflowY = 'scroll';
-  } else {
 
-  }
-}
 
 // render Each Subtask into BigView
 function renderSubtaskHTMLForBigView(id) {
@@ -274,89 +253,6 @@ function renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterCon
         </div>`
 }
 
-let normalContactsArray = [];
-
-function chooseContact(index) {
-  let choContact = document.getElementById(`checkboxImg-${index}`)
-  if (choContact.classList.contains('checkbox')) {
-    choContact.classList.remove('checkbox')
-    choContact.classList.add('checked')
-    choContact.src = "/img/icons/normalCheckedContact.svg"
-    let name = choContact.dataset.set
-    normalContactsArray.push(name);
-    processCurrentContact()
-  } else {
-    choContact.classList.add('checkbox')
-    choContact.classList.remove('checked')
-    let name = choContact.dataset.set;
-    const indexToRemove = normalContactsArray.indexOf(name);
-  if (indexToRemove !== -1) {
-    normalContactsArray.splice(indexToRemove, 1);}
-    processCurrentContact()
-    choContact.src = "/img/icons/normalCheckContact.svg"
-  }
-}
-
-
-let filteredContactsArray = [];
-
-
-/**her we make the choosen Contacts within the filtered Contacts visible */
-function chooseFilteredContact(filterContactIndex) {
-  let choContactF = document.getElementById(`checkboxImg-${filterContactIndex}`)
-  if (choContactF.classList.contains('checkbox')) {
-    choContactF.classList.remove('checkbox')
-    choContactF.classList.add('checked')
-    choContactF.src = "/img/icons/normalCheckedContact.svg";
-    let name = choContactF.dataset.set
-    filteredContactsArray.push(name);
-    processCurrentContact();
-  }else {
-    choContactF.classList.add('checkbox')
-    choContactF.classList.remove('checked')
-    let name = choContactF.dataset.set;
-    const indexToRemove = filteredContactsArray.indexOf(name);
-    if (indexToRemove !== -1) {
-      filteredContactsArray.splice(indexToRemove, 1);}
-      processCurrentContact();
-      choContactF.src = "/img/icons/normalCheckContact.svg";
-    }
-}
-
-function processCurrentContact() {
-  let comboPopup = normalContactsArray.concat(filteredContactsArray);
-  if ((comboPopup.length) > 6) {
-    document.getElementById('countInfoPopup').innerHTML = `+ ${(countPopup.length) - 6}`;}
-  if ((comboPopup.length) <= 6) {
-    document.getElementById('countInfoPopup').innerHTML = "";
-    document.getElementById('choosenContacts').innerHTML = "";
-    let combo = normalContactsArray.concat(filteredContactsArray);
-    let result = combo.slice(0, 6);
-    result.forEach((result) => {
-      let compareIndex = contactsArray.findIndex(contactsArray => result == contactsArray.name);
-      document.getElementById('choosenContacts').innerHTML += renderChoosenContact(compareIndex)
-    });
-  }
-}
-// function processCurrentFilteredContact() {
-//   document.getElementById('choosenContacts').innerHTML = "";
-//   let countFilteredPopup = document.querySelectorAll('.contactBox .checked')
-//   if ((countFilteredPopup.length) > 6) {
-//     document.getElementById('countInfoPopup').innerHTML = `+ ${(countFilteredPopup.length) - 6}`;
-//   }
-//   if ((countFilteredPopup.length) <= 6) {
-//     document.getElementById('countInfoPopup').innerHTML = "";
-//     document.getElementById('choosenContacts').innerHTML = "";
-//     console.log(countFilteredPopup);
-//     let result = filteredContactsArray.slice(0, 6);
-//     result.forEach((filteredContactsArray) => {
-//       // let indexFiltered = img.dataset.index; 
-//       // console.log(indexFiltered);
-//       let compare = contactsArray.findIndex(contactsArray => filteredContactsArray == contactsArray.name);
-//       document.getElementById('choosenContacts').innerHTML += renderFilteredChoosenContactPopup(compare)
-//     });
-//   }
-// }
 
 
 

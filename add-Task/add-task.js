@@ -214,25 +214,6 @@ function processCurrentCombinedContacts() {
 }
 }
 
-// let deleteONETime = true;
-// /**
-//  * Removes a rendered chosen contact circle.
-//  * @param {number} index - Contact index.
-//  */
-// function deleteRenderedContactNormal(index) {
-//     let countedInNormal = document.querySelectorAll('.contactBox .checked')
-//     if (countedInNormal.length > 6) {
-//         countedInNormal.length - 1
-//         document.getElementById('countInfo').innerHTML = `+ ${(countedInNormal.length) - 6}`;
-//     } else if (countedInNormal.length <= 6 && deleteONETime && document.getElementById('countInfo').innerHTML != "") {
-//         document.getElementById('countInfo').innerHTML = ""; deleteONETime = false;
-//     } else {
-//         let renderedContact = document.getElementById(`contactCircleNormalRender-${index}`)
-//         renderedContact.remove(`contactCircleNormalRender-${index}`)
-//         renderedContact.innerHTML = '';
-//     }
-// }
-
 
 /**
  * Adds click listeners to task option elements and sets the chosen value.
@@ -281,7 +262,7 @@ function filterContactsInNormal() {
         let val = Object.values(contactsArray);
         r = val.slice(1)
         filteredContacts = r.filter(fn => { return fn.name.toLowerCase().includes(typedValue.toLowerCase()) })
-        renderfilteredContactsInNormal(filteredContacts);
+        renderfilteredContactsInNormal(filteredContacts); // hier schauen ob name der Funktion passt
     } else if (typedValue.length < 1) {
         showContacts();
     }
@@ -374,13 +355,8 @@ function getSubtaskFromTemplate(subtaskArray) {
  * @returns {void}
 */
 function setContactAndPrioValue(newTask) {
-    // let checkedImg = document.querySelectorAll('#IdForContactsNormal img.checked')
     let contactsCombined = addTaskNormalFilteredContactArray.concat(addTaskNormalContactArray);
     contactsCombined.forEach((item) => {
-        // let compareIndexFiltered = contactsArray.findIndex(contactsArray => addTaskNormalFilteredContactArray == contactsArray.name);
-        // let id = img.id;
-        // newTask.cid.push(id);
-        // names = img.dataset.set;
         newTask.assignedTo.push(item)
     })
     newTask.prio = prioArray[0];

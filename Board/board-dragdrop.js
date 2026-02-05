@@ -123,12 +123,8 @@ function getSubtaskFromTemplate(subtaskArray) {
 
 /**filter the data from dataset and id and push it separate inot arrays to display and work with it later */
 function setContactAndPrioValue(newTask) {
-    // let checkedImg = document.querySelectorAll('.contactBox .checked');
     let allCont = normalContactsArray.concat(filteredContactsArray);
     allCont.forEach((item) => {
-        // let names = img.dataset.set;
-        // let id = img.id;
-        // newTask.cid.push(id);
         newTask.assignedTo.push(item);
     })
     newTask.prio = prioArray[0];

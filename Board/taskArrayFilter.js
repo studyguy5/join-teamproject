@@ -145,6 +145,29 @@ function renderContactFilter(element) {
     <div id="contactscircle" class="contactsCircle">${slim[ContactIndex][0] + slim[ContactIndex][1]} </div>`} else { contact.innerHTML = '' };
 }
 
+/**renders the mini Menü for changing the category in Responsiv View */
+function renderMiniMenü(id) {
+  miniMenu = document.getElementById(`miniMenüResponsiv-${id}`)
+  miniMenu.classList.toggle('miniMenüResponsiv')
+}
+
+function checkSubtaskLenght(elements) {
+  let elementsOfTask = tasks.find(t => t[1].id === elements);
+  if (elementsOfTask[1].subtasks?.length > 3) {
+    let ele = document.getElementById('subTaskForBigView')
+    ele.style.overflowY = 'scroll';
+  } else {
+
+  }
+}
+
+
+/**closes the Mini Menü if you leave a Task */
+function closeMiniMenü(id) {
+  closeM = document.getElementById(`miniMenüResponsiv-${id}`)
+  closeM.classList.remove('miniMenüResponsiv')
+}
+
 
 /**is displayed if durring filter task no results were found */
 function setCardZero() {

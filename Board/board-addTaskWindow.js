@@ -125,7 +125,6 @@ function createTaskTemplate() {
 }
 
 
-
 /**show the User some feedback, that the Task has been created */
 function showReportAddedTaskTemplate() {
     const popup = document.getElementById("report");
@@ -281,7 +280,6 @@ function resetTaskType() {
 }
 
 
-
 /**here the dropdown Menü for the taskType will be opened */
 function openTasktypeDropDown() {
     let drop = document.getElementById('dropId')
@@ -350,7 +348,6 @@ function clearTask() {
     document.getElementById('subtask-list-1').classList.remove('scrollClass')
     document.getElementById('subtask-list-1').innerHTML = "";
 }
-
 
 /* ===================== USERNAME & INITIALEN (wie in summary) ===================== */
 /**we check the local storage and fetch the username */

@@ -212,14 +212,9 @@ function validateEmail() {
     showElement(emailErr);
     hideElement(emailFormatErr);
     ok = false;
-  } else if (!isEmailFormatOk(val)) {
-    hideElement(emailErr);
-    showElement(emailFormatErr);
-    ok = false;
-  } else {
-    hideElement(emailErr);
-    hideElement(emailFormatErr);
-  }
+  } else if (!isEmailFormatOk(val)) {hideElement(emailErr); showElement(emailFormatErr);
+    ok = false;} 
+    else {hideElement(emailErr); hideElement(emailFormatErr);}
   setFieldError(emailInput, !ok);
   return ok;
 }
@@ -241,11 +236,9 @@ function validatePassword() {
     validationFunctionSet3();
     ok = false;
   } else {
-    validationFunctionSet4();
-  }
+    validationFunctionSet4();}
   setFieldError(passwordInput, !ok);
-  return ok;
-}
+  return ok;}
 
 
 //**Hilfsfunktion für die Validation */
@@ -295,8 +288,7 @@ function validateConfirm() {
     hideElement(confirmErr);
     hideElement(pwdMatchErr);
   } setFieldError(confirmInput, !ok);
-  return ok;
-}
+  return ok;}
 
 /**
  * Validiert die Checkbox für Datenschutz.
@@ -316,13 +308,10 @@ function validatePrivacy() {
 function updateStepAccessSilent() {
   const nameValid = isNameValid(nameInput.value);
   emailInput.disabled = !nameValid;
-
   const emailValid = nameValid && isEmailProvided(emailInput.value) && isEmailFormatOk(emailInput.value);
   passwordInput.disabled = !emailValid;
-
   const pwdValid = emailValid && isPasswordStrong(passwordInput.value);
   confirmInput.disabled = !pwdValid;
-
   const confirmValid = pwdValid && isConfirmProvided(confirmInput.value) && (passwordInput.value === confirmInput.value);
   const allInputsValid = nameValid && emailValid && pwdValid && confirmValid;
   signupButton.disabled = !(allInputsValid && privacyCheckbox.checked);

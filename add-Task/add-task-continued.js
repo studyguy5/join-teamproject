@@ -4,29 +4,55 @@
  * Clears the input fields and resets the task form for normal tasks.
  */
 function clearTaskNormal() {
+    clearLeftSide();
+    clearContacts();
+    clearPrio();
+    clearTaskType();
+    clearSubtasks();
+}
+
+
+function clearLeftSide(){
     const title = document.getElementById("title-add-task").value = "";
     document.getElementById('UserFeedbackTitle').innerHTML = "";
     const description = document.getElementById('task-description').value = "";
     const dueDate = document.getElementById("date-add-task").value = "";
     document.getElementById('UserFeedbackDate').innerHTML = "";
+}
+
+
+function clearContacts(){
     let count = document.querySelectorAll('.contactBox .checked')
     count.forEach(ob => ob.classList.remove('checked')),
         count.forEach(ob => ob.classList.add('checkbox')),
         count.forEach(ob => ob.src = "/img/icons/normalCheckContact.svg");
     document.getElementById('choosenContacts').innerHTML = "";
     document.getElementById('countInfo').innerHTML = "";
+    addTaskNormalFilteredContactArray = [];
+    addTaskNormalContactArray = [];
+}
+
+
+function clearPrio(){
     const buttons = document.querySelectorAll(".priority-section button");
     buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
     buttons[1].classList.add('Medium');
     prioArray.length = 0;
+}
+
+
+function clearTaskType(){
     const taskType = document.getElementById("selectedTaskNormal").innerText = "Select Task Category";
     document.getElementById('UserFeedbackTaskType').innerHTML = "";
+}
+
+
+function clearSubtasks(){
     document.getElementById("subtask").value = "";
     document.getElementById('subtask-list-1').classList.remove('scrollClass')
     document.getElementById('subtask-list-1').innerHTML = "";
-    addTaskNormalFilteredContactArray = [];
-    addTaskNormalContactArray = [];
 }
+
 
 async function filterAndShowTasks() {
     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
@@ -59,6 +85,7 @@ function openTaskTypeDropDownNormal() {
     }
 }
 
+
 /** @type {HTMLElement | null} */
 const categoryDiv = document.getElementById("IdForTaskChoiseNormal");
 /** @type {HTMLElement | null} */
@@ -78,21 +105,22 @@ document.addEventListener('click', (e) => {
     const contactTrigger = document.querySelector('.section-right-select');
     const categoryDrop = document.getElementById('dropIdNormal');
     const categoryTrigger = document.getElementById('IdForTaskChoiseNormal');
-    
-    
     if (!contactTrigger.contains(e.target) && !contactBox.contains(e.target)) {
-        contactBox.classList.add('availibleContactsClose');
-        contactBox.classList.remove('availibleContactsOpen');
-        document.getElementById('placeholderptag').classList.remove('dont-Show');
-        document.getElementById('filterContactsNormal').classList.add('dont-Show');
+       closeContactDropDown(contactBox);
     }
-    
-    
     if (!categoryTrigger.contains(e.target) && !categoryDrop.contains(e.target)) {
         categoryDrop.classList.add('dropTasktypeClose');
         document.getElementById('arrowImgNormal').classList.remove('select-arrow-open');
     }
 });
+
+
+function closeContactDropDown(contactBox){
+     contactBox.classList.add('availibleContactsClose');
+        contactBox.classList.remove('availibleContactsOpen');
+        document.getElementById('placeholderptag').classList.remove('dont-Show');
+        document.getElementById('filterContactsNormal').classList.add('dont-Show');
+}
 
 
 /**
@@ -128,7 +156,6 @@ function renderTaskintoBoardAddTask(element) {
     if (element.taskType === 'User Story') {
         taskOption = 'darkblue';
     }
-
     taskTemplate(element);
 }
 
@@ -150,6 +177,7 @@ function getStoredUserName() {
     return 'User';
 }
 
+
 function dateInspectNormal() {
     document.getElementById('date-add-task').min = new Date().toISOString().split('T')[0];
 }
@@ -162,7 +190,6 @@ function dateInspectNormal() {
  */
 function getInitials(fullName) {
     const name = (fullName || '').trim().toLowerCase();
-
     if (name === 'guest user' || name === 'guest') {
         return 'G';
     }
@@ -187,6 +214,7 @@ window.renderUserInitials = function renderUserInitials() {
         el.setAttribute('aria-label', fullName);
     }
 };
+
 
 document.addEventListener('DOMContentLoaded', () => {
     try { renderUserInitials(); } catch (e) { }

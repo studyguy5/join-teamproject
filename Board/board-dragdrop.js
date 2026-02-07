@@ -6,9 +6,7 @@ let taskObjectKey = ['title', 'description', 'DueDate'];
 
 let currentDraggedElement;
 
-
 let subtaskArray = [];
-
 let subtaskvalue;
 
 

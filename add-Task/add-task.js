@@ -124,94 +124,10 @@ function openContactViewNormal() {
         contactDrop.classList.remove('availibleContactsOpen');
         contactDrop.classList.add('availibleContactsClose');
     }
-
     if (document.querySelectorAll('availibleContactsOpen')) {
         let contact = document.getElementById('arrowImgC')
         contact.classList.toggle('select-arrow-open')
     }
-}
-
-let addTaskNormalContactArray = [];
-let indexArray = [];
-
-/**
- * Toggles selection of a contact in the normal view.
- * @param {number} index - Contact index.
- */
-function chooseContactNormal(index) {
-    let choContact = document.getElementById(`checkboxImg-${index}`)
-    if (choContact.classList.contains('checkbox')) {
-        choContact.classList.remove('checkbox')
-        choContact.classList.add('checked')
-        choContact.src = "/img/icons/normalCheckedContact.svg"
-        let name = choContact.dataset.set
-        addTaskNormalContactArray.push(name);
-        let i = choContact.dataset.index;
-        indexArray.push(i);
-        processCurrentCombinedContacts();
-    } else {
-        choContact.classList.add('checkbox')
-        choContact.classList.remove('checked')
-        let name = choContact.dataset.set;
-        const indexToRemove = addTaskNormalContactArray.indexOf(name);
-        if (indexToRemove !== -1) {
-            addTaskNormalContactArray.splice(indexToRemove, 1);
-        }
-        let i = choContact.dataset.index;
-        const indexOfIndex = indexArray.indexOf(i);
-        if(indexOfIndex !== -1){
-            indexArray.splice(indexOfIndex, 1);
-        }
-        processCurrentCombinedContacts();
-        choContact.src = "/img/icons/normalCheckContact.svg"
-    }
-}
-
-
-let addTaskNormalFilteredContactArray = [];
-/**
- * Toggles selection of a filtered contact.
- * @param {number} filterContactIndex - Index of filtered contact.
- */
-function chooseFilteredContactNormal(filterContactIndex) {
-    let choContact = document.getElementById(`checkboxImg-${filterContactIndex}`)
-    if (choContact.classList.contains('checkbox')) {
-        choContact.classList.remove('checkbox')
-        choContact.classList.add('checked')
-        choContact.src = "/img/icons/normalCheckedContact.svg"
-        let name = choContact.dataset.set
-        addTaskNormalFilteredContactArray.push(name);
-        processCurrentCombinedContacts()
-    } else {
-        choContact.classList.add('checkbox')
-        choContact.classList.remove('checked')
-        let name = choContact.dataset.set;
-        const indexToRemove = addTaskNormalFilteredContactArray.indexOf(name);
-        if (indexToRemove !== -1) {
-            addTaskNormalFilteredContactArray.splice(indexToRemove, 1);
-        }
-        processCurrentCombinedContacts();
-        choContact.src = "/img/icons/normalCheckContact.svg"
-    }
-}
-
-
-
-function processCurrentCombinedContacts() {
-    let countFilter = document.querySelectorAll('.contactBox .checked')
-    if ((countFilter.length) > 6) {
-        document.getElementById('countInfo').innerHTML = `+ ${(countFilter.length) - 6}`
-    }
-    if ((countFilter.length) <= 6) {
-    document.getElementById('countInfo').innerHTML = "";
-    document.getElementById('choosenContacts').innerHTML = "";
-    let combo = addTaskNormalFilteredContactArray.concat(addTaskNormalContactArray);
-    let result = combo.slice(0, 6);
-    result.forEach((result) => {
-        let compareIndexFiltered = contactsArray.findIndex(contactsArray => result == contactsArray.name);
-        document.getElementById('choosenContacts').innerHTML += renderFilteredChoosenContactNormal(compareIndexFiltered)
-    })
-}
 }
 
 
@@ -220,7 +136,6 @@ function processCurrentCombinedContacts() {
  */
 function chooseValueNormal() {
     let choise = document.querySelectorAll('.taskOption')
-
     choise.forEach(b => b.addEventListener('click', () => {
         const choiseOfTask = b.dataset.value
         document.getElementById('selectedTaskNormal').innerHTML = choiseOfTask;
@@ -237,11 +152,9 @@ function chooseValueNormal() {
 function showSuccessMessage() {
     const popup = document.getElementById("report");
     popup.classList.add("show");
-
     setTimeout(() => {
         window.location.href = "../board/board.html";
     }, 3500);
-
     setTimeout(() => {
         popup.classList.remove("show");
     }, 2250);

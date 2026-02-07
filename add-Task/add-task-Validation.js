@@ -4,34 +4,47 @@
  * @returns {boolean} True if valid, otherwise false.
  */
 function commonConstantCheck() {
-    document.getElementById('creatButtonIDForNormal').disabled = true;
-    const title = document.getElementById("title-add-task").value;
-    const dueDate = document.getElementById("date-add-task").value;
-    const taskType = document.getElementById("selectedTaskNormal").innerText;
-    if (title === "" && dueDate === "" && taskType === "Select Task Category") {
-        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
-        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
-        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
-    }
-    if (title === "" && dueDate === "") {
-        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
-        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
-    } else if (dueDate === "" && taskType === 'Select Task Category') {
-        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
-        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
-    } else if (title === "" && taskType === 'Select Task Category') {
-        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
-        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
-    } else if (taskType === 'Select Task Category') {
-        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
-    } else if (title === '') {
+    const { title, dueDate, taskType } =  getConnectionAndDisableButton();
+    if (title === "" && dueDate === "" && taskType === "Select Task Category") { showCompleteFeedback(); }
+    if (title === "" && dueDate === "") { showTitleDateFeedback(); } 
+    else if(dueDate === "" && taskType === 'Select Task Category') { showDateTaskTypeFeedback(); } 
+    else if(title === "" && taskType === 'Select Task Category') { showTitleTaskTypeFeedback(); }
+    else if(taskType === 'Select Task Category') {document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;} else if (title === '') {
         document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
     } else if (dueDate === '') {
         document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
     } else {
         getTaskInformationNormal();
-        showSuccessMessage();
+        showSuccessMessage();}
     }
+
+function getConnectionAndDisableButton() {
+    document.getElementById('creatButtonIDForNormal').disabled = true;
+    const title = document.getElementById("title-add-task").value;
+    const dueDate = document.getElementById("date-add-task").value;
+    const taskType = document.getElementById("selectedTaskNormal").innerText;
+    return { title, dueDate, taskType };
+}
+
+function showCompleteFeedback() {
+    document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
+    document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
+    document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
+}
+
+function showTitleDateFeedback() {
+    document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
+    document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
+}
+
+function showDateTaskTypeFeedback() {
+    docuument.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
+    document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
+}
+
+function showTitleTaskTypeFeedback() {
+    document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
+    document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
 }
 
 function commonUserFeedback() {
@@ -51,13 +64,11 @@ function constantCheckTitle() {
     document.getElementById('task-description').disabled = true, false;
     document.getElementById("UserFeedbackTitle").innerHTML = "";
     document.getElementById('task-description').disabled = false;
-
     if (!validateTitleAddTaskNormal(title))
         return showUserFeedbackTitleForm(title);
     document.getElementById('task-description').disabled = true, false;
     document.getElementById("UserFeedbackTitle").innerHTML = "";
     document.getElementById('task-description').disabled = false;
-
 }
 
 let attribute = true;
@@ -69,16 +80,13 @@ function constantCheckDate() {
     if (dateOb < current) {
         const dateField = document.getElementById("UserFeedbackDate");
         dateField.innerHTML = `Date is in the past`;
-    }
-    else if (!validateDateAddTaskNormal(dueDate)) {
+    } else if (!validateDateAddTaskNormal(dueDate)) {
         return showUserFeedbackDueDate();
-    }
-    else if (validateDateAddTaskNormal(dueDate)) {
+    } else if (validateDateAddTaskNormal(dueDate)) {
         document.getElementById('creatButtonIDForNormal').disabled = false;
         clearUserFeedback = document.getElementById("UserFeedbackDate");
         clearUserFeedback.innerHTML = '';
     }
-
 }
 
 function validateTitleAddTaskNormal(title) {

@@ -49,14 +49,7 @@ function deleteBulletpointEdit(index, id) {
     // filterAndShowTasks();
 }
 
-// let fireURL = 'https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/task/';
 
-// async function deleteSubtaskOnFirebase(firebasId){
-//     let response = await fetch(`https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/task/${firebasId}/subtasks/${index}.json`, {
-//         method: "DELETE",
-//     });
-//     return await response.json();
-// }
 
 
 /**sets an allready rendered pulletpoint back into edit mode in order to change him before pushing*/

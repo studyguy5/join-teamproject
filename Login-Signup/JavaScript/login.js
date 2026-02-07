@@ -201,12 +201,17 @@ form?.addEventListener('submit', async (e) => {
   clearFormErrors();
   if (!isFormValid()) return;
   if (!navigator.onLine) return;
-
   const email = emailInput.value.trim();
   const password = passwordInput.value;
-
   try {
-    const cred = await signInWithEmailAndPassword(auth, email, password);
+    signInandResetError();
+  } catch (error) {
+    catchError();
+  }
+});
+
+async function signInandResetError(){
+  const cred = await signInWithEmailAndPassword(auth, email, password);
     let fullName = cred.user?.displayName || '';
     try {
       const profile = await database.getUser(email);
@@ -214,29 +219,23 @@ form?.addEventListener('submit', async (e) => {
     } catch {}
     if (!fullName) fullName = email.split('@')[0];
     storeSummaryName(fullName);
-
     hideElement(generalError);
     setFieldError(emailInput, false);
     setFieldError(passwordInput, false);
-
     const redirectUrl = getRedirectUrl('../summary/summary.html');
     window.location.href = redirectUrl;
+}
 
-  } catch (error) {
-    let msg = 'Email oder Passwort ist falsch.';
-
+function catchError(){
+  let msg = 'Email oder Passwort ist falsch.';
     if (error.code === 'auth/too-many-requests') {
-        msg = 'Zu viele Versuche. Bitte später erneut versuchen.';
-    }
+        msg = 'Zu viele Versuche. Bitte später erneut versuchen.';}
     if (error.code === 'auth/invalid-email') {
-        msg = 'Ungültige Email-Adresse.';
-    }
-
+        msg = 'Ungültige Email-Adresse.';}
     showGeneralErrorMessage(msg);
     setFieldError(emailInput, true);
     setFieldError(passwordInput, true);
-  }
-});
+}
 
 guestBtn?.addEventListener('click', () => {
   clearFormErrors();

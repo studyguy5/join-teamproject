@@ -38,7 +38,6 @@ function constantCheckDatePopup() {
         clearUserFeedback = document.getElementById("UserFeedbackDate");
         clearUserFeedback.innerHTML = '';
     }
-
 }
 
 function validateTitleAddTaskNormal(title) {

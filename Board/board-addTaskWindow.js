@@ -13,22 +13,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     createaddTaskPopup();
     sectionCheck('board');
     tasks.push(...Object.entries(await getData('task')));
-    const allIds = tasks.map(ta => ta[1].id)
-    let rn = Math.floor(Math.random() * 50)
-    while (allIds.includes(rn)) {
-        rn = Math.floor(Math.random() * 10)
-    }
     filterAndShowTasks();
     searchTaskEventHandling();
     contacts = await getObject(path = '/contacts')
     contactsArray = objectToArray(contacts)
     showContacts();
-    /**checks which subwebsite is currently active on display */
     function sectionCheck(idsecTrue) {
         document.getElementById(idsecTrue).classList.add('active')
     }
-    const buttons = document.querySelectorAll(".priority-section button");
+    getPrioButtonsReactive();
+})
 
+function getPrioButtonsReactive() {
+    const buttons = document.querySelectorAll(".priority-section button");
     if (buttons) {
         buttons.forEach(button => {
             button.addEventListener("click", () => {
@@ -40,9 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         })
     };
-})
-
-
+}
 async function getData(path = '') {
     let response = await fetch(BASe_URL + path + ".json")
     return allTasks = await response.json();
@@ -83,9 +78,9 @@ function closePopup() {
     popup.classList.remove("show");
     document.getElementById("countInfoPopup").innerHTML = "";
     const buttons = document.querySelectorAll(".priority-section button");
-    document.getElementById('UserFeedbackTitle' ).innerHTML = "";
-    document.getElementById('UserFeedbackDate' ).innerHTML = "";
-    document.getElementById('UserFeedbackTaskType' ).innerHTML = "";
+    document.getElementById('UserFeedbackTitle').innerHTML = "";
+    document.getElementById('UserFeedbackDate').innerHTML = "";
+    document.getElementById('UserFeedbackTaskType').innerHTML = "";
     let createdArray = Array.from(buttons)
     createdArray[1].classList.remove('Medium')
     clearTask();
@@ -97,20 +92,14 @@ function createTaskTemplate() {
     const title = document.getElementById("title").value;
     const dueDate = document.getElementById("dueDate").value;
     const taskType = document.getElementById("selectedTask").innerText;
-    if (title === "" && dueDate === "" && taskType === "Select Task Category") {
-        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
-        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
-        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
-    }
-    if (title === "" && dueDate === "") {
-        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
-        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
-    } else if (dueDate === "" && taskType === 'Select Task Category') {
-        document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
-        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
-    } else if (title === "" && taskType === 'Select Task Category') {
-        document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
-        document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
+    decideFeedback(title, dueDate, taskType);
+}
+
+function decideFeedback(title, dueDate, taskType) {
+    if (title === "" && dueDate === "" && taskType === "Select Task Category") { showTitleDateTaskTypeFeedback(); }
+    if (title === "" && dueDate === "") {showTitleDateFeedback();}
+    else if (dueDate === "" && taskType === 'Select Task Category') {showDateTasktypeFeedback();
+    } else if (title === "" && taskType === 'Select Task Category') {showTitleTasktypeFeedback();
     } else if (taskType === 'Select Task Category') {
         document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
     } else if (title === '') {
@@ -121,7 +110,39 @@ function createTaskTemplate() {
         getTaskInformation();
         document.getElementById('creatButtonID').disabled = true;
         showReportAddedTaskTemplate();
+        setTimeout(() => {
+            enableButton();
+        }, 3500);
     }
+}
+
+function enableButton(){
+    document.getElementById('creatButtonID').disabled = false;
+}
+
+
+function showTitleDateTaskTypeFeedback() {
+    document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
+    document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
+    document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
+}
+
+
+function showTitleDateFeedback() {
+    document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
+    document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
+}
+
+
+function showDateTasktypeFeedback() {
+    document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
+    document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
+}
+
+
+function showTitleTasktypeFeedback() {
+    document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
+    document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
 }
 
 
@@ -145,6 +166,7 @@ async function getObject(path = '') {
     return responseToJson = await response.json()
 }
 
+
 /**trasform the json based Contacts into an array */
 function objectToArray(contacts) {
     const object = Object.entries(contacts)
@@ -157,6 +179,7 @@ function objectToArray(contacts) {
     return arrayObject;
 }
 
+
 /**sort it cronologic from A to Z */
 function arraySorting(array) {
     const sortedArray = array
@@ -166,19 +189,17 @@ function arraySorting(array) {
     return sortedArray
 }
 
+
 /**show the contacts in the reserved place within the dropdown Menü */
 function showContacts() {
     let contacts = document.getElementById('IdForContacts')
     let preselected = normalContactsArray.concat(filteredContactsArray); // Arrays müssen noch angepasst werden
     contacts.innerHTML = "";
     for (let index = 0; index < contactsArray.length; index++) {
-        contacts.innerHTML += `<div onclick="chooseContact(${index})" class="contactBox">
-        <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
-        <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
-        <img  id="checkboxImg-${index}"  class="${preselected.includes(contactsArray[index].name) ? 'checked' : 'checkbox'}" data-set="${contactsArray[index].name}" data-index="${index}" src="/img/icons/normalCheckContact.svg">
-        </div>`
+        contacts.innerHTML += renderHTMLForContactsInPopup(index, contactsArray, preselected);
     }
 }
+
 
 /**checks if the Contacts have been rendered allready or not to save the choosen ones in the list */
 let firstTime = true;
@@ -193,6 +214,7 @@ function openContactWithCounterForPopup(id) {
         showInput();
     }
 }
+
 
 /**it filters Contacts regarding to your specific typed letters*/
 let filteredContacts;
@@ -209,19 +231,16 @@ function filterContactsInPopup() {
     }
 }
 
+
 /**the filtered Contacts are rendered here */
 function renderfilteredContactsInPopup(filteredContacts) {
     let filtContactInPopup = document.getElementById('IdForContacts')
     let preselected = normalContactsArray.concat(filteredContactsArray);
     filtContactInPopup.innerHTML = "";
     for (let filterContactIndex = 0; filterContactIndex < filteredContacts.length; filterContactIndex++) {
-        filtContactInPopup.innerHTML += `
-        <div onclick="chooseFilteredContact(${filterContactIndex})" class="contactBox">
-        <div class="contactCirclePopup">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>
-        <span for="contactName" class="contactName"> ${filteredContacts[filterContactIndex].name}</span> 
-        <img  id="checkboxImg-${filterContactIndex}"  class="${preselected.includes(filteredContacts[filterContactIndex].name) ? 'checked' : 'checkbox'}" data-set="${filteredContacts[filterContactIndex].name}" data-index="${filterContactIndex}" src="/img/icons/normalCheckContact.svg">
-        </div>`}
+        filtContactInPopup.innerHTML += renderHTMLForFilteredContactsInPopup(filteredContacts, filterContactIndex, preselected); }
 }
+
 
 /**if you click, the p-tag will be resplaced with an inputfield to filter */
 function showInput() {
@@ -232,48 +251,7 @@ function showInput() {
     };
 }
 
-/**here the Contact DropDown will open and the arrow makes an 180deg move */
-function openContactView() {
-    let contactDrop = document.getElementById('IdForContacts')
-    if (contactDrop.classList.contains('availibleContactsClose')) {
-        contactDrop.classList.remove('availibleContactsClose');
-        contactDrop.classList.add('availableContactsOpen');
-        let layer = document.getElementById('hiddenlayer2')
-        layer.classList.toggle('hiddenlayer2')
-    } else if (contactDrop.classList.contains('availableContactsOpen')) {
-        contactDrop.classList.remove('availableContactsOpen');
-        contactDrop.classList.add('availibleContactsClose');
-        let layer = document.getElementById('hiddenlayer2')
-        layer.classList.toggle('hiddenlayer2')
-        let input = document.getElementById('filterContacts').value;
-        if(input.length > 0 ){
-            document.getElementById('filterContacts').value = "";
-            // showContacts();
-            console.log('hat funktioniert');
 
-        }
-    }
-    if (document.querySelectorAll('availableContactsOpen')) {
-        let contact = document.getElementById('arrowImgC')
-        contact.classList.toggle('select-arrow-open')
-    }
-}
-
-function closeContactView() {
-    let contactDrop = document.getElementById('IdForContacts')
-    if (contactDrop.classList.contains('availableContactsOpen')) {
-        contactDrop.classList.remove('availableContactsOpen');
-        contactDrop.classList.add('availibleContactsClose');
-        showInput();
-        let layer = document.getElementById('hiddenlayer2')
-        layer.classList.toggle('hiddenlayer2')
-    } else if (contactDrop.classList.contains('availibleContactsClose')) {
-    }
-    if (document.querySelectorAll('availableContactsOpen')) {
-        let contact = document.getElementById('arrowImgC')
-        contact.classList.toggle('select-arrow-open')
-    }
-}
 
 function resetTaskType() {
     resetTasktypeDropDown();
@@ -328,17 +306,29 @@ function stopBubbling(event) {
 
 /** resets the typed values in the mask to zero or empty */
 function clearTask() {
+    clearLeftSide();
+    clearContacts();
+    clearPrioTasktypeAndSub();
+}
+
+function clearLeftSide() {
     const title = document.getElementById("title").value = "";
     document.getElementById("UserFeedbackTitle").innerHTML = "";
     const description = document.getElementById('task-description').value = "";
     const dueDate = document.getElementById("dueDate").value = "";
     document.getElementById("UserFeedbackDate").innerHTML = "";
+}
+
+function clearContacts() {
     let count = document.querySelectorAll('.contactBox .checked')
     count.forEach(ob => ob.classList.remove('checked')),
         count.forEach(ob => ob.classList.add('checkbox')),
         count.forEach(ob => ob.src = "/img/icons/normalCheckContact.svg");
     document.getElementById(`choosenContacts`).innerHTML = "";
     document.getElementById("countInfoPopup").innerHTML = "";
+}
+
+function clearPrioTasktypeAndSub() {
     const buttons = document.querySelectorAll(".priority-section button");
     buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
     buttons[1].classList.add('Medium');
@@ -398,4 +388,25 @@ function prioButton() {
             button.classList.add('Urgent')
         }
     })
+}
+
+// let currentCount;
+// let index = currentCount;
+
+
+/**
+ * Renders a new subtask list item if the input is valid.
+ * Adds the subtask to the HTML list and resets the input field.
+ */
+function renderSubtaskInPopup(){
+    let subtask = document.getElementById("subtask"); 
+    let list = document.getElementById("subtask-list-1"); //ul list (unorganised list)
+    let currentCount = list.getElementsByClassName("listed").length; 
+    index = currentCount;
+    if (subtask.value.trim() !==""){
+        list.innerHTML += renderHTMLForSubtasks(index, subtask); 
+        subtask.value = "";}
+    if(currentCount > 2 ){
+        document.getElementById('subtask-list-1').classList.add('scrollClass')
+    }
 }

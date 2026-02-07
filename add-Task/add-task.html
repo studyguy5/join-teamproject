@@ -53,15 +53,15 @@
                 <div class="input-container">
 
                     <section class="input-section-left">
-                        <label>Title<span class="requiredStar">*</span></label>
+                        <label for="title-add-task">Title<span class="requiredStar">*</span></label>
                         <input onchange="constantCheckTitle()" id="title-add-task" class="input-section-left-input"
                             type="text" placeholder="Enter a title">
                         <p id="UserFeedbackTitle" class="required"></p>
 
-                        <label for="">Description</label>
+                        <label for="task-description">Description</label>
                         <textarea rows="5" id="task-description" placeholder="Enter a description"></textarea>
 
-                        <label for="date">Due Date<span class="requiredStar">*</span></label>
+                        <label for="date-add-task">Due Date<span class="requiredStar">*</span></label>
                         <input onchange="constantCheckDate()" onclick="dateInspectNormal()" id="date-add-task"
                             type="date" placeholder="dd/mm/yyyy" class="input-section-left-input date-input">
                         <p id="UserFeedbackDate" class="requiredDate"></p>
@@ -71,8 +71,8 @@
                     <div class="line"></div>
 
                     <div class="input-section-right">
-                        <label for="prio">Priority</label>
-                        <section class="priority-section">
+                        <label for="priority-section">Priority</label>
+                        <section id="priority-section" class="priority-section">
                             <button data-priority="Urgent" type="button">Urgent<img
                                     src="/img/icons/urgent.svg"></button>
 
@@ -82,8 +82,8 @@
                             <button data-priority="Low" type="button">Low<img src="/img/icons/low.svg"></button>
                         </section>
 
-                        <label for="contactSelection">Assigned to</label>
-                        <div class="section-right-select" required tabindex="0"
+                        <label for="section-right-select">Assigned to</label>
+                        <div id="section-right-select" class="section-right-select" required tabindex="0"
                             onclick="openContactViewNormal(); showInputNormal()">
                             <p id="placeholderptag">Select contacts to assign</p>
                             <input oninput="filterContactsInNormal()" type="text" id="filterContactsNormal"
@@ -101,7 +101,7 @@
                         </div>
                         <div id="countInfo" class="countInfo"></div>
 
-                        <label>Category<span class="requiredStar">*</span></label>
+                        <label for="IdForTaskChoiseNormal">Category<span class="requiredStar">*</span></label>
                         <div onclick="event.stopPropagation(); openTaskTypeDropDownNormal()" class="ForTaskChoise"
                             id="IdForTaskChoiseNormal">
                             <p id="selectedTaskNormal" class="selectedTaskNormal">Select Task Category</p>

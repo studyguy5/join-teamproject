@@ -108,6 +108,7 @@
 @media (max-width:1000px) {
     .mainAreaRight {
         overflow-x: hidden;
+        height: calc(100vh - 160px);
     }
 
     .mainAreaRight h1 {
@@ -156,7 +157,7 @@
 @media (max-width:680px) {
     .footer {
         flex-direction: column;
-        margin-top: 68px;
+        margin-top: 98px;
     }
 
     .footer-buttons-section {
@@ -225,7 +226,7 @@
     }
 
     .footer {
-        margin-top: 68px;
+        margin-top: 98px;
     }
 
     .countInfo {

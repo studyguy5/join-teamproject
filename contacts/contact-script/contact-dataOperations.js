@@ -124,19 +124,20 @@ function getNewContactData(id) {
  * @returns {Promise<void>}
  */
 async function addContact(nameId, emailId, phoneNumberId) {
-    // const validation = formValidation();
-    // if (!validation) return formValidation();
-
+    if(contactCreateValidation()) {    
     const newContact = getObjectFromContactForm(nameId, emailId, phoneNumberId);
     const newContactId = await postData('/contacts', newContact);
-
     await refreshContactList();
-
     waitForDOM(() => document.getElementById(newContactId))
         .then(() => scrollIntoView(newContactId));
-
     closeOverlay();
-    showSuccessMessage(1000, 1000);
+    showSuccessMessage(1000, 1000);}else{}
+}
+
+function contactCreateValidation(){
+    if(formValidationName() && formValidationEmail() && formValidationPhone()){
+       return true; 
+    }else{}
 }
 
 
@@ -198,9 +199,10 @@ async function saveChanges(id) {
  * @returns {void}
  */
 function showCurrentValue(id) {
-    document.getElementById('nameEdit').value = contacts[id].name
-    document.getElementById('emailEdit').value = contacts[id].email
-    document.getElementById('phoneEdit').value = contacts[id].telefon
+    if(document.getElementById('nameEdit'))
+   document.getElementById('nameEdit').value = contacts[id].name
+   document.getElementById('emailEdit').value = contacts[id].email
+   document.getElementById('phoneEdit').value = contacts[id].telefon
     return
 }
 

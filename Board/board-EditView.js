@@ -4,7 +4,7 @@ const BAsE_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedata
 document.addEventListener('DOMContentLoaded', async () => {
     contacts = await getObject(path = '/contacts')
     contactsArray = objectToArray(contacts);
-    
+
 })
 
 
@@ -53,6 +53,11 @@ function prioButtonactivate(id) {
             button.classList.add(thisprio)
         }
     })
+    setPrioButtonActive(buttonsEdit);
+
+}
+
+function setPrioButtonActive(buttonsEdit) {
     if (buttonsEdit) {
         buttonsEdit.forEach(button => {
             button.addEventListener("click", () => {
@@ -65,7 +70,6 @@ function prioButtonactivate(id) {
         })
     };
 }
-
 
 function closeEditView() {
     const popup = document.getElementById('bigViewOfTask');
@@ -81,12 +85,12 @@ function getCurrentValues(id) {
     document.getElementById('task-descriptionEdit').value = `${singleTask[1].description}`;
     document.getElementById("dueDateEdit").value = `${singleTask[1].DueDate}`;
     // renderChoosenContactEdit(id);
-    if(singleTask[1].subtasks?.[0])
+    if (singleTask[1].subtasks?.[0])
         for (let subEditIndex = 0; subEditIndex < singleTask[1].subtasks.length; subEditIndex++) {
-        renderSubtaskEdit(id);
+            renderSubtaskEdit(id);
             let existingSubs = document.querySelectorAll(`.task-textEdit-${subEditIndex}`);
-            if(existingSubs)
-            existingSubs.forEach(sub => {sub.innerHTML = `${singleTask[1]?.subtasks?.[subEditIndex] ? singleTask[1]?.subtasks?.[subEditIndex].value : ''}`});
+            if (existingSubs)
+                existingSubs.forEach(sub => { sub.innerHTML = `${singleTask[1]?.subtasks?.[subEditIndex] ? singleTask[1]?.subtasks?.[subEditIndex].value : ''}` });
         }
 }
 
@@ -135,7 +139,6 @@ function setContactAndPrioValueEdit(taskToEdit) {
     let allContact = normalContactEditModeArray.concat(filteredContactEditModeArray);
     taskToEdit[1].assignedTo = [];
     allContact.forEach(item => {
-        // names = img.dataset.set;
         taskToEdit[1].assignedTo.push(item)
     })
     taskToEdit[1].prio = prioArray[0];
@@ -156,7 +159,7 @@ function getSubtaskFromTemplateEdit(taskToEdit) {//hole die Daten
     taskToEdit[1].subtasks = []; // hier leere ich das Arry local, damit beide values aus dem Edit Modus eingefügt werden können, egal ob alt oder neu
     changes.forEach(changes => {
         let subChange = changes.innerHTML.trim();
-        if(!subChange) return;
+        if (!subChange) return;
         pushObjectEdit(taskToEdit, subChange);
     })
 }
@@ -174,12 +177,7 @@ async function getTaskInformationEdit(id) {
     const taskToEdit = tasks.find(task => task[1].id === id);
     let firebaseID = [taskToEdit[0]];
     await deleteData(firebaseID);
-    for (let makeEmptyIndex = 0; makeEmptyIndex < existingFilledObjects.length; makeEmptyIndex++) {
-        taskToEdit[1][existingFilledObjects[makeEmptyIndex]] = '';
-    }
-    for (let valueIndex = 0; valueIndex < editInputId.length; valueIndex++) { //Arrays überarbeiten
-        taskToEdit[1][existingObjects[valueIndex]] = document.getElementById(`${editInputId[valueIndex]}`).value
-    };
+    iterateAboveExistingValues(taskToEdit);
     setContactAndPrioValueEdit(taskToEdit);
     getSubtaskFromTemplateEdit(taskToEdit);
     await postData("task", taskToEdit[1]);
@@ -188,24 +186,41 @@ async function getTaskInformationEdit(id) {
     filterAndShowTasksEdit();
     closeEditView();
     editFeedback();
+    shinePackage();
+};
+
+function iterateAboveExistingValues(taskToEdit){
+    for (let makeEmptyIndex = 0; makeEmptyIndex < existingFilledObjects.length; makeEmptyIndex++) {
+        taskToEdit[1][existingFilledObjects[makeEmptyIndex]] = '';
+    }
+    for (let valueIndex = 0; valueIndex < editInputId.length; valueIndex++) { //Arrays überarbeiten
+        taskToEdit[1][existingObjects[valueIndex]] = document.getElementById(`${editInputId[valueIndex]}`).value
+    };
+}
+
+
+// ===========hier den shiny effect einfügen==============================================
+
+function shinePackage(){
     letShineLastEditedTask(firebaseID, taskToEdit, id);
     setTimeout(() => {
         cleanBorder();
     }, 2500);
-};
-// ===========hier den shiny effect einfügen==============================================
+}
+
+
 function letShineLastEditedTask(firebaseID, taskToEdit, id) {
-    if(!firebaseID || !taskToEdit){
-      let taskToEdit = tasks.find(task => task[1].id === id);
-      let last = document.getElementById(`TaskDiv-${id}`);
-      last?.classList.add('tor');
-    }else{
-      let last = document.getElementById(`TaskDiv-${taskToEdit[1].id}`);
-      last?.classList.add('tor');
+    if (!firebaseID || !taskToEdit) {
+        let taskToEdit = tasks.find(task => task[1].id === id);
+        let last = document.getElementById(`TaskDiv-${id}`);
+        last?.classList.add('tor');
+    } else {
+        let last = document.getElementById(`TaskDiv-${taskToEdit[1].id}`);
+        last?.classList.add('tor');
     }
 }
 
-function cleanBorder(){
+function cleanBorder() {
     let last = document.querySelectorAll('.tor');
     last.forEach(element => {
         element.classList.remove('tor');
@@ -238,66 +253,9 @@ function openContactWithCounter() {
 }
 
 
-function openContactViewEdit() {
-    let contactDrop = document.getElementById('IdForContactsEdit')
-    if (contactDrop.classList.contains('availibleContactsCloseEdit')) {
-        contactDrop.classList.remove('availibleContactsCloseEdit');
-        contactDrop.classList.add('availibleContactsOpenEdit');
-    } else if (contactDrop.classList.contains('availibleContactsOpenEdit')) {
-        contactDrop.classList.remove('availibleContactsOpenEdit');
-        contactDrop.classList.add('availibleContactsCloseEdit');
-    }
-
-    if (document.querySelectorAll('availibleContactsOpenEdit')) {
-        let contact = document.getElementById('arrowImgCEdit')
-        contact.classList.toggle('select-arrow-openEdit')
-    }
-}
 
 
-function showInputFilter() {
-    if (document.getElementById('placeholderpTagEdit')) {
-        document.getElementById('placeholderpTagEdit').classList.toggle('dont-Show');
-        document.getElementById('filterContactsEdit').classList.toggle('dont-Show');
-        document.getElementById('filterContactsEdit').focus()
-    };
-}
 
-/**renders the Contacts in Edit Mode DropDown */
-function showContactsEdit(id) {
-    const thisT = tasks.find(task => task[1].id === id);
-    thisT[1].assignedTo.forEach((item) => normalContactEditModeArray.push(item));
-    let preselectedEdit = normalContactEditModeArray.concat(filteredContactEditModeArray);
-    let contacts = document.getElementById('IdForContactsEdit')
-    contacts.innerHTML = "";
-    for (let index = 0; index < contactsArray.length; index++) {
-        contacts.innerHTML += renderContactsInEditDropDown(id, contactsArray, index, preselectedEdit);
-    }
-}
 
-/**filters the contacts accordingly into the DropDown window */
-let filteredContactsEdit = [];
-function filterContactsInPopupEdit(id) {
-    let r;
-    let typedValue = document.getElementById('filterContactsEdit').value
-    if (typedValue.length > 0) {
-        let val = Object.values(contactsArray);
-        r = val.slice(1)
-        filteredContactsEdit = r.filter(fn => { return fn.name.toLowerCase().includes(typedValue.toLowerCase()) })
-        renderfilteredContactsInPopupEdit(id, filteredContactsEdit);
-    } else if (typedValue.length < 1) {
-        showContactsEdit(id);
-    }
-}
 
-/**renders the filtered Contacts inot the list */
-function renderfilteredContactsInPopupEdit(id, filteredContactsEdit) {
-    // const thisTFilter = tasks.find(task => task[1].id === id);
-    let preselectedFilterEdit = normalContactEditModeArray.concat(filteredContactEditModeArray);
-    let filtContactInPopupEdit = document.getElementById('IdForContactsEdit')
-    filtContactInPopupEdit.innerHTML = "";
-    for (let filterContactIndex = 0; filterContactIndex < filteredContactsEdit.length; filterContactIndex++) {
-        filtContactInPopupEdit.innerHTML += renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterContactIndex, preselectedFilterEdit);
-    }
-}
 

@@ -102,39 +102,6 @@ async function filterAndShowTasksAlternate(array) {
 }
 
 
-/**renders the filtered Task into the board page */
-function renderTaskintoBoardFilter(element) {
-    let taskOption = 'türkis';
-    if (element.taskType === 'User Story') {
-        taskOption = 'darkblue';
-    }
-    return `<div draggable="true" ondragstart="startDragging(${element['id']})" 
-    id="TaskDiv-${element[1].id}" onclick="bigViewOfTask(${element[1].id}); renderContactForBigView(${element[1].id}); renderEditAndDeleteButton(${element[1].id})" class="TaskDiv">
-    <div id="taskType" class="${taskOption}">${element[1].taskType}</div>
-    <div class="taskTitle"><p>${element[1].title}</p></div>
-    <div class="taskDescription"><p>${element[1].description}</p></div>
-    <div class="subTasks">
-    ${element[1].subtasks != null ? `
-    <svg role="progress subtask">
-    <rect  width="128" height="8"  class="back"/>
-    <rect  width="${element[1].progress}" height="8" class="fill"/>
-    </svg>
-    <p class="progressDescription">${(element[1].progress / 128) * (element[1].subtasks.length)}/${(element[1].subtasks.length)} Subtasks </p>` : ''}
-    </div>
-    <div id="contacts-Priority-Container" class="contacts-Priority-Container" >
-    <div id="${element[1].id}" class="contactsMiniView"></div>
-    <div class="taskPriority">${element[1].prio == 'Urgent' ?
-            `<img src="/img/icons/urgent.svg">` :
-            element[1].prio == 'Medium' ?
-                `<img src="/img/icons/medium.svg">` :
-                element[1].prio == 'Low' ?
-                    `<img src="/img/icons/low.svg">` : ''}</div>
-        </div>
-        <div></div>
-        </div>`
-}
-
-
 
 function renderContactFilter(element) {
     let contact = document.getElementById(`${element[1].id}`)

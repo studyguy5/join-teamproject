@@ -51,6 +51,10 @@
         display: none;
     }
 
+    .box-middle:hover {
+        transform: scale(1.05);
+    }
+
 }
 
 @media(min-width:1400px) and (max-width:1440px) and (min-height:900px) and (max-height:900px) {
@@ -676,9 +680,10 @@
     .summary-counter {
         max-width: 570px;
         padding-left: 10px;
-        padding-top: 40px;
+        padding-top: 50px;
         width: 133%;
         gap: 30px;
+        margin-left: 5px;
     }
 
     .box-upper-left {
@@ -819,13 +824,13 @@
         height: 720px;
     }
 
-    .summary-header{
+    .summary-header {
         margin: 10px 169px 28px 40px;
     }
 
     .summary-header img {
         top: 145px;
-        left:130px;
+        left: 130px;
     }
 
     .summary-counter {
@@ -866,7 +871,7 @@
 
     .summary-counter {
         margin-top: 70px;
-        margin-left:10px;
+        margin-left: 10px;
         gap: 25px;
     }
 }

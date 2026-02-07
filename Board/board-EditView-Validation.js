@@ -27,15 +27,13 @@ function constantCheckDateEdit() {
     let dateOb = new Date(dueDateEdit);
     if (dateOb < current) {
         const dateField = document.getElementById("UserFeedbackDateEditMode");
-        dateField.innerHTML = `Date is in the past`;
-    }
+        dateField.innerHTML = `Date is in the past`;}
     else if (!validateDateEdit(dueDateEdit)) {
         return showUserFeedbackDueDateEdit();
     } else if (validateDateEdit(dueDateEdit)) {
         document.getElementById('creatButtonIDEdit').disabled = false;
         clearUserFeedback = document.getElementById("UserFeedbackDateEditMode");
-        clearUserFeedback.innerHTML = '';
-    }
+        clearUserFeedback.innerHTML = '';}
 }
 
 function validateTitleEdit(title) {

@@ -40,6 +40,7 @@ function formValidationName() {
         return getErrorLogicNewNameLength(name), document.getElementById('email').disabled = true, document.getElementById('phone').disabled = true;
     removeErrorMark(name);
     document.getElementById('email').disabled = false;
+    return true;
 }
 
 function formValidationEmail() {
@@ -50,6 +51,7 @@ function formValidationEmail() {
         return getErrorLogicNewEmailLength(email), document.getElementById('phone').disabled = true;
     removeErrorMark(email);
     document.getElementById('phone').disabled = false;
+    return true;
 }
 
 function formValidationPhone() {
@@ -59,6 +61,7 @@ function formValidationPhone() {
     if (phone.value.length < 12)
         return getErrorLogicPhoneLength(phone), false;
     removeErrorMark(phone);
+    return true;
 }
 
 function formValidation() {

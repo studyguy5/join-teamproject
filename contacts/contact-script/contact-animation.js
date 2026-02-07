@@ -133,22 +133,29 @@ async function switchContentWithSlide(targetID = '', id) {
  * @returns {Promise<void>}
  */
 async function switchMessageContentWithSlide(targetQuerry = '') {
-
     let size = window.innerWidth;
     if (size > 428) {
-        const container = document.querySelector(targetQuerry)
+        slideHorizontalSuccess(targetQuerry);
+        return;
+    } else {
+        slideVertical();
+        }
+}
+
+async function slideHorizontalSuccess(targetQuerry){
+    const container = document.querySelector(targetQuerry)
         const slideOutAnimation = container.animate(transformArrayStart, animationAttributeObjectStart);
         await slideOutAnimation.finished;
         container.innerHTML = setSucessMessage()
         container.animate(transformArrayFinish, animationAttributeObjectFinish);
-        return;
-    } else {
-        const container = document.getElementById('messageVertical')
+}
+
+async function slideVertical(){
+    const container = document.getElementById('messageVertical')
         const slideOutAnimation = container.animate(transformArrayStartVertical, animationAttributeObjectStartVertical);
         await slideOutAnimation.finished;
         // container.innerHTML = setSucessMessage()
         container.animate(transformArrayFinishVertical, animationAttributeObjectFinishVertical);
-    }
 }
 
 
@@ -178,17 +185,25 @@ async function resetContentWithSlide(targetID = '') {
 async function switchOverlayContentWithSlide(targetID = '', htmlContent) {
     let sizeOfWindow = window.innerWidth;
     if (sizeOfWindow > 428) {
-        const container = document.getElementById(targetID)
-        const slideOutAnimation = container.animate(overlayTransformArrayStart, overlayAnimationAttributeObjectStart);
-        await slideOutAnimation.finished;
-        container.innerHTML = htmlContent
-        container.animate(overlayTransformArrayFinish, overlayAnimationAttributeObjectFinish);
+        slideHorizontal(targetID, htmlContent);
     } else {
-        const container = document.getElementById(targetID)
+        slideVertical(targetID, htmlContent);
+    }
+}
+
+async function slideHorizontal(targetID, htmlContent){
+    const container = document.getElementById(targetID)
+    container.innerHTML = htmlContent
+        let slideOutAnimation = container.animate(overlayTransformArrayStart, overlayAnimationAttributeObjectStart);
+        await slideOutAnimation.finished;
+        container.animate(overlayTransformArrayFinish, overlayAnimationAttributeObjectFinish);
+}
+
+async function slideVertical(targetID, htmlContent){
+    const container = document.getElementById(targetID)
         const slideOutAnimation = container.animate(overlayTransformArrayStartVertical, overlayAnimationAttributeObjectStart);
         await slideOutAnimation.finished;
         container.innerHTML = htmlContent
         container.animate(overlayTransformArrayFinishVertical, overlayAnimationAttributeObjectFinish);
-    }
 }
 

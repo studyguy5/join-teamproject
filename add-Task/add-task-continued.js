@@ -9,6 +9,7 @@ function clearTaskNormal() {
     clearPrio();
     clearTaskType();
     clearSubtasks();
+    document.getElementById('creatButtonIDForNormal').disabled = false;
 }
 
 
@@ -126,9 +127,6 @@ function closeContactDropDown(contactBox){
 /**
  * Filters tasks by category and renders them on the board.
  */
-
-
-
 let progress;
 let TaskDone;
 Taskavailable = document.querySelectorAll('.subTaskForBigView > subtaskImgDiv img');

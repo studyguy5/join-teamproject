@@ -133,11 +133,7 @@ function setContactAndPrioValue(newTask) {
 /**get all the typed in Data and push it into the created object structure (called template) */
 async function getTaskInformation(index) {
     let newTask = createTemplate();
-    let allIds = tasks.map(ta => ta[1].id)
-    let rn = Math.floor(Math.random() * 50)
-    while (allIds.includes(rn)) {
-        rn = Math.floor(Math.random() * 10)
-    }
+    let rn = getRandomID()
     newTask.id = rn;
     for (let valueIndex = 0; valueIndex < taskObjectKey.length; valueIndex++) {
         newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value
@@ -151,16 +147,28 @@ async function getTaskInformation(index) {
     await postData("task", newTask);
     tasks = [];
     tasks.push(...Object.entries(await getData('task')));
+    shinePackage();
+};
+
+function getRandomID(){
+    let allIds = tasks.map(ta => ta[1].id)
+    let rn = Math.floor(Math.random() * 50)
+    while (allIds.includes(rn)) {
+        rn = Math.trunc(Math.floor(Math.random()) * 150) +1
+    }
+    return rn;
+}
+
+function shinePackage(){
     filterAndShowTasks();
      letShineLastEditedTask();
     setTimeout(() => {
         cleanBorder();
     }, 2500);
-};
+}
 
 function letShineLastEditedTask(firebaseID, taskToEdit, id) {
     if(!firebaseID || !taskToEdit){
-      let taskToEdit = tasks.find(task => task[1].id === id);
       let last = document.getElementById(`TaskDiv-${id}`);
       last?.classList.add('tor');
     }else{
@@ -188,9 +196,7 @@ async function filterAndShowTasks() {
                 let element = filteredTasks[catIndex][1];
                 document.getElementById(`${categorys[idIndex]}`).innerHTML += renderTaskintoBoard(element);
                 if (document.getElementById(`${categorys[idIndex]}`)) {
-                    renderContact(element);
-                }
-            }
+                    renderContact(element);}}
         }
     }
 }

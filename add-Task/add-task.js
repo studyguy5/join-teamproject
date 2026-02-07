@@ -284,13 +284,10 @@ function setContactAndPrioValue(newTask) {
  */
 async function getTaskInformationNormal(index) {
     let newTask = createTemplate();
-    let allIds = [];
-    tasks.forEach(t => allIds.push(t[1].id));
-    let rn = Math.trunc(Math.floor(Math.random() * Math.random()));
+    let rn = getRandomNumber();
     newTask.id = rn;
     for (let valueIndex = 0; valueIndex < taskObjectKey.length; valueIndex++) {
-        newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value
-    };
+        newTask[taskObjectKey[valueIndex]] = document.getElementById(`${taskContainerArray[valueIndex]}`).value};
     newTask.taskType = document.getElementById('selectedTaskNormal').innerText
     setContactAndPrioValue(newTask, index);
     subtaskArray = newTask.subtasks;
@@ -301,11 +298,24 @@ async function getTaskInformationNormal(index) {
     tasks = [];
     tasks.push(...Object.entries(await getData('task')));
     filterAndShowTasks();
+    shinePackageAddTaskNormal();
+};
+
+function getRandomNumber(){
+    let allIds = tasks.forEach(t => allIds.push(t[1].id));
+    let rn = Math.trunc(Math.floor(Math.random() * 150)) +1;
+    while (allIds.includes(rn)) {
+        rn = Math.trunc(Math.floor(Math.random() * 150)) +1;
+    }
+    return rn;
+}
+
+function shinePackageAddTaskNormal(){
     letShineLastEditedTask();
     setTimeout(() => {
         cleanBorder();
     }, 2500);
-};
+}
 
 function letShineLastEditedTask(firebaseID, taskToEdit, id) {
     if (!firebaseID || !taskToEdit) {

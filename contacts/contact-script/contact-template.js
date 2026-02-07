@@ -310,7 +310,7 @@ function setEditOverlayContent(id) {
                         </div>
                     </div>
                 </div>`;
-    return template
+    return template;
 }
 
 
@@ -335,7 +335,7 @@ function setBadgeColor() {
  */
 function setFirstLetter(string) {
     const nameArray = string;
-    let firstLetter = nameArray[0][0].toUpperCase()
+    let firstLetter = nameArray[0]?.[0]?.toUpperCase()
     return firstLetter
 }
 
@@ -348,7 +348,7 @@ function setFirstLetter(string) {
  */
 function setSecondFirstLetter(string) {
     const nameArray = string.split(" ");
-    const secondName = nameArray[1][0]
+    const secondName = nameArray[1]?.[0]
     let secondFirstLetter;
     if (secondName) {
         secondFirstLetter = nameArray[1][0].toUpperCase()

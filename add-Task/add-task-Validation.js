@@ -38,7 +38,7 @@ function showTitleDateFeedback() {
 }
 
 function showDateTaskTypeFeedback() {
-    docuument.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
+    document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
     document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
 }
 

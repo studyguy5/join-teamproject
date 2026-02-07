@@ -78,7 +78,7 @@ function renderHTMLOfPopup() {  //Zeile 47 select Contacts
                             <span class="subtask-icon">
                                 <img onmousedown="clearSubtask()" class="x" src="/img/icons/subtasks-X.svg">
                                 <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
-                                <img onmousedown="renderSubtask()" class="hook" src="/img/icons/subtasks-icon.svg">
+                                <img onmousedown="renderSubtaskInPopup()" class="hook" src="/img/icons/subtasks-icon.svg">
                             </span>
               </div>
                     <ul class="ul-div" id="subtask-list-1" class="subtask-list">
@@ -188,6 +188,18 @@ function renderBigViewHTML(elements, id) {
 };
 
 
+function renderHTMLForSubtasks(index, subtask){
+ return `<li onclick="editBulletpoint(${index})" id="listed-${index}" class="listed"> 
+                              <span class="dot">•</span><p class="task-text-${index}" id="task-text-${index}">${subtask.value}</p>
+                                <span class="list-icon">
+                                    <img onmousedown="clearSubtask()" class="pencil" src="/img/icons/pencil-edit.svg">
+                                    <img class="delimiter" src="../img/icons/delimiter-vertical.svg">
+                                    <img onmousedown="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
+                                </span>
+                            </li>`;
+}
+
+
 
 // render Each Subtask into BigView
 function renderSubtaskHTMLForBigView(id) {
@@ -230,6 +242,23 @@ function renderHTMLForEditandDeleteButton(id) {
     </div>`
 }
 
+function renderHTMLForContactsInPopup(index, contactsArray, preselected){
+  return `<div onclick="chooseContact(${index})" class="contactBox">
+        <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
+        <span for="contactName" class="contactName"> ${contactsArray[index].name}</span> 
+        <img  id="checkboxImg-${index}"  class="${preselected.includes(contactsArray[index].name) ? 'checked' : 'checkbox'}" data-set="${contactsArray[index].name}" data-index="${index}" src="/img/icons/normalCheckContact.svg">
+        </div>`
+}
+
+function renderHTMLForFilteredContactsInPopup(filteredContacts, filterContactIndex, preselected){
+  return `
+        <div onclick="chooseFilteredContact(${filterContactIndex})" class="contactBox">
+        <div class="contactCirclePopup">${filteredContacts[filterContactIndex].firstLetter + filteredContacts[filterContactIndex].secondFirstLetter}</div>
+        <span for="contactName" class="contactName"> ${filteredContacts[filterContactIndex].name}</span> 
+        <img  id="checkboxImg-${filterContactIndex}"  class="${preselected.includes(filteredContacts[filterContactIndex].name) ? 'checked' : 'checkbox'}" data-set="${filteredContacts[filterContactIndex].name}" data-index="${filterContactIndex}" src="/img/icons/normalCheckContact.svg">
+        </div>`
+}
+
 
 /**renders the contacts in Edit-Mode dropDown */
 function renderContactsInEditDropDown(id, contactsArray, index, preselectedEdit) {
@@ -269,5 +298,36 @@ function renderFilteredChoosenContactPopup(compare) {
 }
 
 
+/**renders the filtered Task into the board page */
+function renderTaskintoBoardFilter(element) {
+    let taskOption = 'türkis';
+    if (element.taskType === 'User Story') {
+        taskOption = 'darkblue';
+    }
+    return `<div draggable="true" ondragstart="startDragging(${element['id']})" 
+    id="TaskDiv-${element[1].id}" onclick="bigViewOfTask(${element[1].id}); renderContactForBigView(${element[1].id}); renderEditAndDeleteButton(${element[1].id})" class="TaskDiv">
+    <div id="taskType" class="${taskOption}">${element[1].taskType}</div>
+    <div class="taskTitle"><p>${element[1].title}</p></div>
+    <div class="taskDescription"><p>${element[1].description}</p></div>
+    <div class="subTasks">
+    ${element[1].subtasks != null ? `
+    <svg role="progress subtask">
+    <rect  width="128" height="8"  class="back"/>
+    <rect  width="${element[1].progress}" height="8" class="fill"/>
+    </svg>
+    <p class="progressDescription">${(element[1].progress / 128) * (element[1].subtasks.length)}/${(element[1].subtasks.length)} Subtasks </p>` : ''}
+    </div>
+    <div id="contacts-Priority-Container" class="contacts-Priority-Container" >
+    <div id="${element[1].id}" class="contactsMiniView"></div>
+    <div class="taskPriority">${element[1].prio == 'Urgent' ?
+            `<img src="/img/icons/urgent.svg">` :
+            element[1].prio == 'Medium' ?
+                `<img src="/img/icons/medium.svg">` :
+                element[1].prio == 'Low' ?
+                    `<img src="/img/icons/low.svg">` : ''}</div>
+        </div>
+        <div></div>
+        </div>`
+}
 
 

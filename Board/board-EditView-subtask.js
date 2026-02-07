@@ -1,30 +1,4 @@
-function renderSubtaskEdit(id) {
-    let subtask = document.getElementById("subtaskEdit"); // der standard input
-    let list = document.getElementById("subtaskEdit-list-1"); // das zusätzliche <ul> element
-    let currentCount = list.getElementsByClassName("listedEdit").length; //klasse von li element
-    index = currentCount;
-    if (subtask.value.trim() === "") {
-        list.innerHTML += `<li onclick="editBulletpointEditView(${index}, ${id})" id="listed-${index}" class="listedEdit"> 
-        <span class="dot">•</span><p class="task-textEdit-${index}">${subtask.value}</p>
-        <span onclick="event.stopPropagation()" class="list-icon">
-                                    <img onmousedown="editBulletpointEditView(${index}, ${id})" class="pencil" src="/img/icons/pencil-edit.svg">
-                                    <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
-                                    <img onclick="deleteBulletpointEdit(${index}, ${id})" class="trash" src="/img/icons/trash.svg">
-                                    </span>
-                                    </li>`;
-        subtask.value = "";
-    } else if (subtask.value.trim() !== "") {
-        list.innerHTML += `<li onclick="editBulletpointEditView(${index})" id="listed-${index}" class="listedEdit"> 
-        <span class="dot">•</span><p class="task-textEdit-${index}">${subtask.value}</p>
-        <span class="list-icon">
-                                    <img onmousedown="editBulletpointEditView(${index}, ${id})" class="pencil" src="/img/icons/pencil-edit.svg">
-                                    <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
-                                    <img onclick="deleteBulletpointEdit(${index}, ${id})" class="trash" src="/img/icons/trash.svg">
-                                    </span>
-                                    </li>`;
-        subtask.value = "";
-    }
-}
+
 
 function scrollInfo(id){
     let info = tasks.find(inf => inf[1].id === id)
@@ -45,8 +19,6 @@ function deleteBulletpointEdit(index, id) {
     presentTask[1].subtasks.splice(index, 1);
     let el = document.getElementById(`listed-${index}`);
     if (el) el.remove();
-    // deleteSubtaskOnFirebase(firebasId);
-    // filterAndShowTasks();
 }
 
 
@@ -65,13 +37,7 @@ function editBulletpointEditView(index, id) {
     let currentText = [];
     textEl.forEach((e) => currentText.push(e.textContent)); 
     if(li)
-    li.innerHTML = `
-    <input class="edit-input" type="text" id="edit-input-${index}" value="${currentText[0]}">
-    <span class="list-icon">
-    <img onmousedown="deleteBulletpointEdit(${index}, ${id})" class="trash" src="/img/icons/trash.svg">
-    <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
-    <img onmousedown="saveBulletpointEdit(${index}, ${id})" class="hook" src="/img/icons/subtasks-icon.svg">
-        </span>`;
+    li.innerHTML = renderHTMLForeditBullentPoint(index, currentText); 
     document.getElementById(`edit-input-${index}`)?.focus();
 }
 
@@ -83,12 +49,7 @@ function saveBulletpointEdit(index, id) {
     ;
     if (newValue !== "") {
         let li = document.getElementById(`listed-${index}`);
-        li.innerHTML = `<span class="dot">•</span><p class="task-textEdit-${index}">${newValue[0]}</p>
-        <span class="list-icon">
-        <img onmousedown="clearSubtask()" class="pencil" src="/img/icons/pencil-edit.svg">
-        <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
-        <img onmousedown="deleteBulletpointEdit(${id}, ${index})" class="trash" src="/img/icons/trash.svg">
-        </span>`;
+        li.innerHTML = renderHTMLForSavingBulletPoint(index, id, newValue);
         li.setAttribute("onclick", `editBulletpointEditView(${index})`);
     }
 }

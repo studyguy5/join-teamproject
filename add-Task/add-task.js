@@ -100,36 +100,6 @@ function objectToArray(contacts) {
     return arrayObject;
 }
 
-/**
- * Toggles the input field for filtering contacts in the normal view.
- */
-function showInputNormal() {
-    if (document.getElementById('placeholderptag')) {
-        document.getElementById('placeholderptag').classList.toggle('dont-Show');
-        document.getElementById('filterContactsNormal').classList.toggle('dont-Show');
-        document.getElementById('filterContactsNormal').focus()
-    };
-}
-
-
-/**
- * Opens or closes the contact dropdown list in the normal view.
- */
-function openContactViewNormal() {
-    let contactDrop = document.getElementById('IdForContactsNormal')
-    if (contactDrop.classList.contains('availibleContactsClose')) {
-        contactDrop.classList.remove('availibleContactsClose');
-        contactDrop.classList.add('availibleContactsOpen');
-    } else if (contactDrop.classList.contains('availibleContactsOpen')) {
-        contactDrop.classList.remove('availibleContactsOpen');
-        contactDrop.classList.add('availibleContactsClose');
-    }
-    if (document.querySelectorAll('availibleContactsOpen')) {
-        let contact = document.getElementById('arrowImgC')
-        contact.classList.toggle('select-arrow-open')
-    }
-}
-
 
 /**
  * Adds click listeners to task option elements and sets the chosen value.

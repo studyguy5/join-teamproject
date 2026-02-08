@@ -276,3 +276,48 @@ window.renderUserInitials = function renderUserInitials() {
 document.addEventListener('DOMContentLoaded', () => {
     try { renderUserInitials(); } catch (e) { }
 });
+
+/**
+ * Generates a random RGB color to be used for a contact badge.
+ * 
+ * @returns {number[]} Array containing [R, G, B] values.
+ */
+function setBadgeColor() {
+    const positionR = Math.floor(Math.random() * 256)
+    const positionG = Math.floor(Math.random() * 256)
+    const positionB = Math.floor(Math.random() * 256)
+    return ([positionR, positionG, positionB]);
+}
+
+
+/**
+ * Extracts and returns the first letter of the first name.
+ * 
+ * @param {string} string - Full name of the contact.
+ * @returns {string} The first letter in uppercase.
+ */
+function setFirstLetter(string) {
+    const nameArray = string;
+    let firstLetter = nameArray[0]?.[0]?.toUpperCase()
+    return firstLetter
+}
+
+
+/**
+ * Extracts the first letter of the second name if available.
+ * 
+ * @param {string} string - Full name of the contact.
+ * @returns {string} The first letter of the second name, or a space if none exists.
+ */
+function setSecondFirstLetter(string) {
+    const nameArray = string.split(" ");
+    const secondName = nameArray[1]?.[0]
+    let secondFirstLetter;
+    if (secondName) {
+        secondFirstLetter = nameArray[1][0].toUpperCase()
+
+    } else {
+        secondFirstLetter = ' '
+    }
+    return secondFirstLetter
+}

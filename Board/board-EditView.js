@@ -162,6 +162,15 @@ function getSubtaskFromTemplateEdit(taskToEdit) {//hole die Daten
         if (!subChange) return;
         pushObjectEdit(taskToEdit, subChange);
     })
+    updateProgress(taskToEdit);
+}
+
+function updateProgress(taskToEdit){
+    console.log(taskToEdit[1].subtasks);
+    let firebaseIde = taskToEdit[0];
+    let done = taskToEdit[1].subtasks.filter((item) => item.status === "closed");
+    taskToEdit[1].progress = ((done.length / taskToEdit[1].subtasks.length) * 128);
+    putData(`task/${firebaseIde}/progress`, `${taskToEdit[1].progress}`)
 }
 
 

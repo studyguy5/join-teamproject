@@ -161,40 +161,63 @@ function showInputFilter() {
 }
 
 
-/**renders the Contacts in Edit Mode DropDown */
-function showContactsEdit(id) {
-    const thisT = tasks.find(task => task[1].id === id);
-    thisT[1].assignedTo.forEach((item) => normalContactEditModeArray.push(item));
-    let preselectedEdit = normalContactEditModeArray.concat(filteredContactEditModeArray);
-    let contacts = document.getElementById('IdForContactsEdit')
+/**show the contacts in the reserved place within the dropdown Menü */
+function showContacts() {
+    let contacts = document.getElementById('IdForContacts')
+    let preselected = normalContactsArray.concat(filteredContactsArray); // Arrays müssen noch angepasst werden
     contacts.innerHTML = "";
     for (let index = 0; index < contactsArray.length; index++) {
-        contacts.innerHTML += renderContactsInEditDropDown(id, contactsArray, index, preselectedEdit);
+        contacts.innerHTML += renderHTMLForContactsInPopup(index, contactsArray, preselected);
     }
 }
 
-/**filters the contacts accordingly into the DropDown window */
-let filteredContactsEdit = [];
-function filterContactsInPopupEdit(id) {
+
+/**checks if the Contacts have been rendered allready or not to save the choosen ones in the list */
+let firstTime = true;
+function openContactWithCounterForPopup(id) {
+    if (firstTime) {
+        showContacts(id);
+        openContactView();
+        showInput();
+        firstTime = false;
+    } else {
+        openContactView();
+        showInput();
+    }
+}
+
+
+/**it filters Contacts regarding to your specific typed letters*/
+let filteredContacts;
+function filterContactsInPopup() {
     let r;
-    let typedValue = document.getElementById('filterContactsEdit').value
+    let typedValue = document.getElementById('filterContacts').value
     if (typedValue.length > 0) {
         let val = Object.values(contactsArray);
         r = val.slice(1)
-        filteredContactsEdit = r.filter(fn => { return fn.name.toLowerCase().includes(typedValue.toLowerCase()) })
-        renderfilteredContactsInPopupEdit(id, filteredContactsEdit);
+        filteredContacts = r.filter(fn => { return fn.name.toLowerCase().includes(typedValue.toLowerCase()) })
+        renderfilteredContactsInPopup(filteredContacts);
     } else if (typedValue.length < 1) {
-        showContactsEdit(id);
+        showContacts();
     }
 }
 
-/**renders the filtered Contacts inot the list */
-function renderfilteredContactsInPopupEdit(id, filteredContactsEdit) {
-    // const thisTFilter = tasks.find(task => task[1].id === id);
-    let preselectedFilterEdit = normalContactEditModeArray.concat(filteredContactEditModeArray);
-    let filtContactInPopupEdit = document.getElementById('IdForContactsEdit')
-    filtContactInPopupEdit.innerHTML = "";
-    for (let filterContactIndex = 0; filterContactIndex < filteredContactsEdit.length; filterContactIndex++) {
-        filtContactInPopupEdit.innerHTML += renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterContactIndex, preselectedFilterEdit);
-    }
+
+/**the filtered Contacts are rendered here */
+function renderfilteredContactsInPopup(filteredContacts) {
+    let filtContactInPopup = document.getElementById('IdForContacts')
+    let preselected = normalContactsArray.concat(filteredContactsArray);
+    filtContactInPopup.innerHTML = "";
+    for (let filterContactIndex = 0; filterContactIndex < filteredContacts.length; filterContactIndex++) {
+        filtContactInPopup.innerHTML += renderHTMLForFilteredContactsInPopup(filteredContacts, filterContactIndex, preselected); }
+}
+
+
+/**if you click, the p-tag will be resplaced with an inputfield to filter */
+function showInput() {
+    if (document.getElementById('placeholderpTag')) {
+        document.getElementById('placeholderpTag').classList.toggle('dont-Show');
+        document.getElementById('filterContacts').classList.toggle('dont-Show');
+        document.getElementById('filterContacts').focus()
+    };
 }

@@ -192,12 +192,32 @@ function renderHTMLForSubtasks(index, subtask){
  return `<li onclick="editBulletpoint(${index})" id="listed-${index}" class="listed"> 
                               <span class="dot">•</span><p class="task-text-${index}" id="task-text-${index}">${subtask.value}</p>
                                 <span class="list-icon">
-                                    <img onmousedown="clearSubtask()" class="pencil" src="/img/icons/pencil-edit.svg">
+                                    <img onmousedown="editBulletpoint(${index})" class="pencil" src="/img/icons/pencil-edit.svg">
                                     <img class="delimiter" src="../img/icons/delimiter-vertical.svg">
                                     <img onmousedown="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
                                 </span>
                             </li>`;
 }
+
+function renderEditModeForBulletPoint(currentText, index){
+    return `
+        <input class="edit-input" type="text" id="edit-input-${index}" value="${currentText}">
+        <span class="list-icon">
+            <img onmousedown="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
+            <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
+            <img onmousedown="saveBulletpoint(${index})" class="hook" src="/img/icons/subtasks-icon.svg">
+        </span>`;
+}
+
+function renderHTMLForSavingBulletPoint(index, newValue){
+    return `<span class="dot">•</span><p id="task-text-${index}">${newValue}</p>
+                        <span class="list-icon">
+                            <img onmousedown="editBulletpoint(${index})" class="pencil" src="/img/icons/pencil-edit.svg">
+                            <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
+                            <img onmousedown="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
+                        </span>`;
+}
+
 
 
 

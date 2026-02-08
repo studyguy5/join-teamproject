@@ -122,7 +122,7 @@ function renderSubtaskEdit(id) {
     }
 }
 
-function renderHTMLForeditBullentPoint(index, currentText){
+function renderHTMLForEditBullentPoint(index, currentText, id){
   return `
     <input class="edit-input" type="text" id="edit-input-${index}" value="${currentText[0]}">
     <span class="list-icon">

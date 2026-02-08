@@ -147,7 +147,8 @@ async function getTaskInformation(index) {
     await postData("task", newTask);
     tasks = [];
     tasks.push(...Object.entries(await getData('task')));
-    shinePackage();
+    filterAndShowTasks();
+    shinePackage(newTask.id);
 };
 
 function getRandomID(){
@@ -159,25 +160,21 @@ function getRandomID(){
     return rn;
 }
 
-function shinePackage(){
-    filterAndShowTasks();
-     letShineLastEditedTask();
+function shinePackage(id){
+     letShineLastEditedTask(id);
     setTimeout(() => {
-        cleanBorder();
+        cleanBorder(id);
     }, 2500);
 }
 
-function letShineLastEditedTask(firebaseID, taskToEdit, id) {
-    if(!firebaseID || !taskToEdit){
+function letShineLastEditedTask(id) {
+    if(id){
       let last = document.getElementById(`TaskDiv-${id}`);
-      last?.classList.add('tor');
-    }else{
-      let last = document.getElementById(`TaskDiv-${taskToEdit[1].id}`);
       last?.classList.add('tor');
     }
 }
 
-function cleanBorder(){
+function cleanBorder(id){
     let last = document.querySelectorAll('.tor');
     last.forEach(element => {
         element.classList.remove('tor');

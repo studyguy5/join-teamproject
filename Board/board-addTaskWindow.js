@@ -190,69 +190,6 @@ function arraySorting(array) {
 }
 
 
-/**show the contacts in the reserved place within the dropdown Menü */
-function showContacts() {
-    let contacts = document.getElementById('IdForContacts')
-    let preselected = normalContactsArray.concat(filteredContactsArray); // Arrays müssen noch angepasst werden
-    contacts.innerHTML = "";
-    for (let index = 0; index < contactsArray.length; index++) {
-        contacts.innerHTML += renderHTMLForContactsInPopup(index, contactsArray, preselected);
-    }
-}
-
-
-/**checks if the Contacts have been rendered allready or not to save the choosen ones in the list */
-let firstTime = true;
-function openContactWithCounterForPopup(id) {
-    if (firstTime) {
-        showContacts(id);
-        openContactView();
-        showInput();
-        firstTime = false;
-    } else {
-        openContactView();
-        showInput();
-    }
-}
-
-
-/**it filters Contacts regarding to your specific typed letters*/
-let filteredContacts;
-function filterContactsInPopup() {
-    let r;
-    let typedValue = document.getElementById('filterContacts').value
-    if (typedValue.length > 0) {
-        let val = Object.values(contactsArray);
-        r = val.slice(1)
-        filteredContacts = r.filter(fn => { return fn.name.toLowerCase().includes(typedValue.toLowerCase()) })
-        renderfilteredContactsInPopup(filteredContacts);
-    } else if (typedValue.length < 1) {
-        showContacts();
-    }
-}
-
-
-/**the filtered Contacts are rendered here */
-function renderfilteredContactsInPopup(filteredContacts) {
-    let filtContactInPopup = document.getElementById('IdForContacts')
-    let preselected = normalContactsArray.concat(filteredContactsArray);
-    filtContactInPopup.innerHTML = "";
-    for (let filterContactIndex = 0; filterContactIndex < filteredContacts.length; filterContactIndex++) {
-        filtContactInPopup.innerHTML += renderHTMLForFilteredContactsInPopup(filteredContacts, filterContactIndex, preselected); }
-}
-
-
-/**if you click, the p-tag will be resplaced with an inputfield to filter */
-function showInput() {
-    if (document.getElementById('placeholderpTag')) {
-        document.getElementById('placeholderpTag').classList.toggle('dont-Show');
-        document.getElementById('filterContacts').classList.toggle('dont-Show');
-        document.getElementById('filterContacts').focus()
-    };
-}
-
-
-
 function resetTaskType() {
     resetTasktypeDropDown();
 }
@@ -410,3 +347,66 @@ function renderSubtaskInPopup(){
         document.getElementById('subtask-list-1').classList.add('scrollClass')
     }
 }
+
+function clearSubtask() {
+    document.getElementById("subtask").value = "";
+}
+
+/**
+ * Deletes a bullet point (subtask) by its index.
+ * @param {number} index - Index of the bullet point to delete.
+ */
+function deleteBulletpoint(index) {
+    let el = document.getElementById(`listed-${index}`);
+    if (el) el.remove();
+}
+
+/**
+ * Turns a bullet point into an editable input field.
+ * @param {number} index - Index of the bullet point to edit.
+ */
+function editBulletpoint(index) {
+    const li = document.getElementById(`listed-${index}`);
+    const textEl = document.getElementById(`task-text-${index}`);
+    const inputEl = document.getElementById(`edit-input-${index}`);
+    if (inputEl) {
+        inputEl.focus();
+        return;}
+    const currentText = textEl ? textEl.textContent : ""; 
+    li.innerHTML = renderEditModeForBulletPoint(currentText, index);
+    document.getElementById(`edit-input-${index}`).focus();
+}
+
+
+/**
+ * Saves the edited bullet point text back into the list item.
+ * @param {number} index - Index of the bullet point to save.
+ */
+function saveBulletpoint(index) {
+    const input = document.getElementById(`edit-input-${index}`);
+    const newValue = input.value.trim();
+    if (newValue !== "") {
+        const li = document.getElementById(`listed-${index}`);
+        li.innerHTML = renderHTMLForSavingBulletPoint(index, newValue);
+        li.setAttribute("onclick", `editBulletpoint(${index})`);
+    }
+}
+
+/**
+ * Enables pressing "Enter" in the subtask input field to trigger subtask creation.
+ */
+function enableEnterForSubtask() {
+    let subtask = document.getElementById("subtask");
+    subtask.addEventListener("keydown", e => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            renderSubtask();
+        }
+    });
+}
+
+/**
+ * Initializes event listeners when the DOM is fully loaded.
+ */
+window.addEventListener("DOMContentLoaded", enableEnterForSubtask);
+

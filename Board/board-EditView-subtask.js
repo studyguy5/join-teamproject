@@ -37,7 +37,7 @@ function editBulletpointEditView(index, id) {
     let currentText = [];
     textEl.forEach((e) => currentText.push(e.textContent)); 
     if(li)
-    li.innerHTML = renderHTMLForeditBullentPoint(index, currentText); 
+    li.innerHTML = renderHTMLForEditBullentPoint(index, currentText); 
     document.getElementById(`edit-input-${index}`)?.focus();
 }
 
@@ -46,10 +46,9 @@ function saveBulletpointEdit(index, id) {
     let input = document.querySelectorAll(`.edit-input`);
     let newValue = [];
     input.forEach((e) => newValue.push(e.value.trim()));
-    ;
     if (newValue !== "") {
         let li = document.getElementById(`listed-${index}`);
-        li.innerHTML = renderHTMLForSavingBulletPoint(index, id, newValue);
-        li.setAttribute("onclick", `editBulletpointEditView(${index})`);
+        li.innerHTML = renderHTMLForSavingBulletPoint(index, newValue);
+        // li.setAttribute("onclick", `editBulletpointEditView(${index})`);
     }
 }

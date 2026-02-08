@@ -77,7 +77,7 @@
 .tor{
     border: 2px solid orange;
     box-shadow: 0 0 10px orange;
-    animation: shine 2s ease-in-out;
+    animation: shine 5s ease-in-out;
 }
 @keyframes shine {
     0% {

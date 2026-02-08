@@ -3,6 +3,14 @@ let prioArray = ['Medium'];
 window.contactsArray = [];
 document.addEventListener('DOMContentLoaded', () => {
     try { renderUserInitials(); } catch (e) { }
+     const taskId = sessionStorage.getItem("shineTaskId");
+  if (taskId) {
+    setTimeout(() => letShineLastEditedTask(taskId), 500);
+    setTimeout(() => cleanBorder(taskId), 6500);
+    // Aufräumen
+    sessionStorage.removeItem("shineTaskId");
+    sessionStorage.removeItem("shineStartTime");
+  }
 });
 
 /**

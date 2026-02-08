@@ -170,7 +170,7 @@ function updateProgress(taskToEdit){
     let firebaseIde = taskToEdit[0];
     let done = taskToEdit[1].subtasks.filter((item) => item.status === "closed");
     taskToEdit[1].progress = ((done.length / taskToEdit[1].subtasks.length) * 128);
-    putData(`task/${firebaseIde}/progress`, `${taskToEdit[1].progress}`)
+    // putData(`task/${firebaseIde}/progress`, `${taskToEdit[1].progress}`)
 }
 
 
@@ -195,7 +195,7 @@ async function getTaskInformationEdit(id) {
     filterAndShowTasksEdit();
     closeEditView();
     editFeedback();
-    shinePackage();
+    shinePackage(id);
 };
 
 function iterateAboveExistingValues(taskToEdit){
@@ -210,21 +210,17 @@ function iterateAboveExistingValues(taskToEdit){
 
 // ===========hier den shiny effect einfügen==============================================
 
-function shinePackage(){
-    letShineLastEditedTask(firebaseID, taskToEdit, id);
+function shinePackage(id){
+    letShineLastEditedTask(id);
     setTimeout(() => {
         cleanBorder();
     }, 2500);
 }
 
 
-function letShineLastEditedTask(firebaseID, taskToEdit, id) {
-    if (!firebaseID || !taskToEdit) {
-        let taskToEdit = tasks.find(task => task[1].id === id);
+function letShineLastEditedTask(id) {
+    if (id) {
         let last = document.getElementById(`TaskDiv-${id}`);
-        last?.classList.add('tor');
-    } else {
-        let last = document.getElementById(`TaskDiv-${taskToEdit[1].id}`);
         last?.classList.add('tor');
     }
 }

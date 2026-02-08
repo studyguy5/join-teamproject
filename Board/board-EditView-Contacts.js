@@ -1,10 +1,26 @@
 
-
-
 let normalContactEditModeArray = [];
 let filteredContactEditModeArray = [];
+
+
+/**renders the Contacts in Edit Mode DropDown */
+function showContactsEdit(id) {
+    const thisT = tasks.find(task => task[1].id === id);
+    thisT[1].assignedTo.forEach((item) => normalContactEditModeArray.push(item));
+    thisT[1].assignedTo = [];
+    let preselectedEdit = normalContactEditModeArray.concat(filteredContactEditModeArray);
+    let contacts = document.getElementById('IdForContactsEdit')
+    contacts.innerHTML = "";
+    for (let index = 0; index < contactsArray.length; index++) {
+        contacts.innerHTML += renderContactsInEditDropDown(id, contactsArray, index, preselectedEdit);
+    }
+}
+
+
 /**shows the non-filtered choosen Contacts in the list */
 function chooseContactEdit(id, index) {
+    // let presentTask = tasks.find(inf => inf[1].id === id)
+    // presentTask[1].assignedTo.forEach((item) => normalContactEditModeArray.push(item));
     let choContact = document.getElementById(`checkboxImgEdit-${index}`)
     if (choContact.classList.contains("checkboxEdit")) {
         setAsChecked(choContact);
@@ -56,15 +72,15 @@ function processCurrentContactEdit(id) {
 function chooseFilteredContactEdit(id, filterContactIndex) {
     let choContactFilter = document.getElementById(`checkboxImgEdit-${filterContactIndex}`)
     if (choContactFilter.classList.contains("checkboxEdit")) {
-        setAsChecked(choContactFilter);
+        setAsCheckedFilter(choContactFilter);
         processCurrentContactEdit(id, filterContactIndex);
     } else {
-        returnToUnchecked(choContactFilter);
+        returnToUncheckedFilter(choContactFilter);
         processCurrentContactEdit(id, filterContactIndex);
     }
 }
 
-function setAsChecked(choContactFilter) {
+function setAsCheckedFilter(choContactFilter) {
     choContactFilter.classList.remove('checkboxEdit')
     choContactFilter.classList.add('checkedEdit')
     choContactFilter.src = "/img/icons/normalCheckedContact.svg"
@@ -72,10 +88,10 @@ function setAsChecked(choContactFilter) {
     filteredContactEditModeArray.push(name);
 }
 
-function returnToUnchecked(choContactFilter) {
+function returnToUncheckedFilter(choContactFilter) {
     choContactFilter.classList.add('checkboxEdit')
     choContactFilter.classList.remove('checkedEdit')
-    let name = choContact.dataset.set;
+    let name = choContactFilter.dataset.set;
     const indexToRemove = filteredContactEditModeArray.indexOf(name);
     if (indexToRemove !== -1) {
         filteredContactEditModeArray.splice(indexToRemove, 1);
@@ -83,17 +99,6 @@ function returnToUnchecked(choContactFilter) {
     choContactFilter.src = "/img/icons/normalCheckContact.svg"
 }
 
-/**renders the Contacts in Edit Mode DropDown */
-function showContactsEdit(id) {
-    const thisT = tasks.find(task => task[1].id === id);
-    thisT[1].assignedTo.forEach((item) => normalContactEditModeArray.push(item));
-    let preselectedEdit = normalContactEditModeArray.concat(filteredContactEditModeArray);
-    let contacts = document.getElementById('IdForContactsEdit')
-    contacts.innerHTML = "";
-    for (let index = 0; index < contactsArray.length; index++) {
-        contacts.innerHTML += renderContactsInEditDropDown(id, contactsArray, index, preselectedEdit);
-    }
-}
 
 /**filters the contacts accordingly into the DropDown window */
 let filteredContactsEdit = [];

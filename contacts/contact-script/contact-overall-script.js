@@ -12,7 +12,7 @@ let contacts;
 let contactsArray;
 
 
-
+/**this event Listener executes the init function, the section check and pullls the contacts from firebase */
 document.addEventListener('DOMContentLoaded', async () => {
     init();
     sectionCheck('contacts');
@@ -43,6 +43,7 @@ function formValidationName() {
     return true;
 }
 
+/**this validates the email while creating a new Contact */
 function formValidationEmail() {
     const email = document.getElementById('email');
     if (!validateEmail(email.value))
@@ -54,6 +55,7 @@ function formValidationEmail() {
     return true;
 }
 
+/**this validates the phone number while creating a new Contact */
 function formValidationPhone() {
     const phone = document.getElementById('phone');
     if (!validatePhone(phone.value))
@@ -64,6 +66,7 @@ function formValidationPhone() {
     return true;
 }
 
+/**this validates all in one function */
 function formValidation() {
     const name = document.getElementById('name');
     const email = document.getElementById('email');
@@ -77,20 +80,25 @@ function formValidation() {
     return true;
 }
 
+/**the regex for the actuall Name check */
 function validateName(value) {
     const regex = /^[A-Za-zÄÖÜäöüß\s]+$/;
     return regex.test(value.trim());
 }
 
+/**the regex for the actuall First-Second Name check */
 function validateFirstSecondName(value) {
     const regex1 = /^\S+\s+\S+$/;  //validate first and lastname"
     return regex1.test(value.trim());
 }
 
+/**the regex for the actuall Email check */
 function validateEmail(value) {
     const regex = /^[^\s@]+@[^\s@]{3,}\.[^\s@]{2,}$/;
     return regex.test(value.trim());
 }
+
+/**the regex for the actuall Phone check */
 function validatePhone(value) {
     const regex = /^[0-9]{3,20}$/;
     return regex.test(value.trim());
@@ -98,10 +106,7 @@ function validatePhone(value) {
 
 
 
-/**
- * Sets placeholder and marks input as empty.
- * @param {HTMLInputElement} inputField 
-*/
+/**here we get the Error Logic if hte form of the name is incorrect */
 function getErrorLogicNewName(inputField) {
     let userFeedback = document.getElementById(`${inputField.id}UserFeedback`)
     userFeedback.innerText = ('form of ' + `${inputField.id}- Field is incorrect`);
@@ -110,6 +115,7 @@ function getErrorLogicNewName(inputField) {
     return;
 }
 
+/**here we get the First and Sure name Error Logic if there is missing something */
 function getErrorLogicFirstSureName(inputField) {
     let userFeedback = document.getElementById(`${inputField.id}UserFeedback`)
     userFeedback.innerText = ('please enter your full Name');
@@ -118,6 +124,7 @@ function getErrorLogicFirstSureName(inputField) {
     return;
 }
 
+/**here we get the Error Logic if the lenght of the Name is to short or incorrect */
 function getErrorLogicNewNameLength(inputField) {
     let userFeedback = document.getElementById(`${inputField.id}UserFeedback`)
     userFeedback.innerText = ('length of ' + `${inputField.id} - Field is too short`);
@@ -126,6 +133,7 @@ function getErrorLogicNewNameLength(inputField) {
     return;
 }
 
+/**here we get the Error Logic if the form of a new Email is incorrect */
 function getErrorLogicNewEmail(inputField) {
     let userFeedback = document.getElementById(`${inputField.id}UserFeedback`)
     userFeedback.innerText = 'form of ' + `${inputField.id} incorrect`;
@@ -134,6 +142,7 @@ function getErrorLogicNewEmail(inputField) {
     return;
 }
 
+/**here we get the Error Logic if the length of the new Email is to short or incorrect */
 function getErrorLogicNewEmailLength(inputField) {
     let userFeedback = document.getElementById(`${inputField.id}UserFeedback`)
     userFeedback.innerText = 'length of ' + `${inputField.id} too short`;
@@ -142,10 +151,7 @@ function getErrorLogicNewEmailLength(inputField) {
     return;
 }
 
-/**
- * Error logic specifically for phone number
- * @param {HTMLInputElement} inputField 
-*/
+/** Error logic specifically for phone number*/
 function getErrorLogicPhone(inputField) {
     let userFeedback = document.getElementById(`${inputField.id}UserFeedback`)
     userFeedback.innerText = 'form of Phone Number incorrect';
@@ -153,6 +159,7 @@ function getErrorLogicPhone(inputField) {
     errorContainer.classList.add('input-empty');
 }
 
+/**Error logic if the length of the phone number is too short or incorrect */
 function getErrorLogicPhoneLength(inputField) {
     let userFeedback = document.getElementById(`${inputField.id}UserFeedback`)
     userFeedback.innerText = 'length of Phone Number too short';
@@ -160,8 +167,9 @@ function getErrorLogicPhoneLength(inputField) {
     errorContainer.classList.add('input-empty');
 }
 
-// hier für Edit-Mode die Error-Logic//
 //===================== Validation for Edit-Mode ========================//
+
+// hier für Edit-Mode die Error-Logic//
 
 function formValidationNameEdit() {
     const name = document.getElementById('nameEdit');
@@ -175,6 +183,7 @@ function formValidationNameEdit() {
     document.getElementById('emailEdit').disabled = false;
 }
 
+/**here the Error logic for the Email in the Edit Mode */
 function formValidationEmailEdit() {
     const email = document.getElementById('emailEdit');
     if (!validateEmail(email.value))
@@ -185,6 +194,7 @@ function formValidationEmailEdit() {
     document.getElementById('phoneEdit').disabled = false;
 }
 
+/**here the Error logic for the Phone Number in the Edit Mode */
 function formValidationPhoneEdit() {
     const phone = document.getElementById('phoneEdit');
     if (!validatePhone(phone.value)) return getErrorLogicPhoneEdit(phone), false;
@@ -193,7 +203,7 @@ function formValidationPhoneEdit() {
 }
 
 
-
+/**this check if any user Feedback is still active, if so it stops the editing Process */
 function formValidationEdit() {
     const nameFeedback = document.getElementById('nameEditFeedback').innerHTML;
     const emailFeedback = document.getElementById('emailEditFeedback').innerHTML;
@@ -204,9 +214,12 @@ function formValidationEdit() {
         return true;
     }
 }
-// ==================== Validatiion for Edit-Mode Ende==============================//
 
 // ==================== Validatiion Error Logic Start==============================//
+
+/**here we get the Error Logic as above but for editing existing contacts
+ * here the Error Logic for the Name the User types in
+  */
 function getErrorLogicNameEdit(inputField) {
     let userFeedbackEdit = document.getElementById(`${inputField.id}Feedback`)
     userFeedbackEdit.style.display = "block";
@@ -216,6 +229,7 @@ function getErrorLogicNameEdit(inputField) {
     return;
 }
 
+/**here we check the legnth of the Name the User wants to type in */
 function getErrorLogicNameLengthEdit(inputField) {
     let userFeedbackEdit = document.getElementById(`${inputField.id}Feedback`)
     userFeedbackEdit.style.display = "block";
@@ -225,6 +239,7 @@ function getErrorLogicNameLengthEdit(inputField) {
     return;
 }
 
+/**here we get the Error Logic if First and Sure Name is not existing or someting is missing */
 function getErrorLogicFirstSureNameEdit(inputField) {
     let userFeedbackEdit = document.getElementById(`${inputField.id}Feedback`)
     userFeedbackEdit.style.display = "block";
@@ -234,6 +249,7 @@ function getErrorLogicFirstSureNameEdit(inputField) {
     return;
 }
 
+/**here we get the Error Logic for the Email input */
 function getErrorLogicEmailEdit(inputField) {
     let userFeedbackEdit1 = document.getElementById(`${inputField.id}Feedback`)
     userFeedbackEdit1.style.display = "block";
@@ -243,6 +259,7 @@ function getErrorLogicEmailEdit(inputField) {
     return;
 }
 
+/**here we get the Error Logic for the lenght of the Email */
 function getErrorLogicEmailLengthEdit(inputField) {
     let userFeedbackEdit1 = document.getElementById(`${inputField.id}Feedback`)
     userFeedbackEdit1.style.display = "block";
@@ -252,6 +269,7 @@ function getErrorLogicEmailLengthEdit(inputField) {
     return;
 }
 
+/**here we get the Error Logic for the Phone Number */
 function getErrorLogicPhoneEdit(inputField) {
     let userFeedbackEdit2 = document.getElementById(`${inputField.id}Feedback`)
     userFeedbackEdit2.innerText = 'form of phone-number is incorrect';
@@ -259,6 +277,7 @@ function getErrorLogicPhoneEdit(inputField) {
     errorContainer.classList.add('input-empty');
 }
 
+/**here we get the Error Logic for the lenght of the Phone Number */
 function getErrorLogicPhoneLengthEdit(inputField) {
     let userFeedbackEdit2 = document.getElementById(`${inputField.id}Feedback`)
     userFeedbackEdit2.innerText = 'length of phone-number is too short';
@@ -281,6 +300,7 @@ function removeErrorMark(inputField) {
     container.classList.remove('input-empty');
 }
 
+/**here the Errors get removed in the Edit Mode */
 function removeErrorMarkEdit(inputField) {
     let userFeedback1 = document.getElementById(`${inputField.id}Feedback`)
     userFeedback1.innerText = "";

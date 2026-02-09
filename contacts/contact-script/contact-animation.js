@@ -116,7 +116,6 @@ let overlayAnimationAttributeObjectFinish = {
  * @param {string} id 
  */
 async function switchContentWithSlide(targetID = '', id) {
-
     const container = document.getElementById(targetID);
     const slideOutAnimation = container.animate(transformArrayStart, animationAttributeObjectStart);
     await slideOutAnimation.finished;
@@ -142,6 +141,7 @@ async function switchMessageContentWithSlide(targetQuerry = '') {
         }
 }
 
+/**this function makes the successWindow slide in horizontaly and */
 async function slideHorizontalSuccess(targetQuerry){
     const container = document.querySelector(targetQuerry)
         const slideOutAnimation = container.animate(transformArrayStart, animationAttributeObjectStart);
@@ -149,7 +149,7 @@ async function slideHorizontalSuccess(targetQuerry){
         container.innerHTML = setSucessMessage()
         container.animate(transformArrayFinish, animationAttributeObjectFinish);
 }
-
+/**this here makes the successWindow slide in verticaly  */
 async function slideVertical(){
     const container = document.getElementById('messageVertical')
         const slideOutAnimation = container.animate(transformArrayStartVertical, animationAttributeObjectStartVertical);
@@ -191,6 +191,7 @@ async function switchOverlayContentWithSlide(targetID = '', htmlContent) {
     }
 }
 
+/**this function makes the content Window slide in horizontaly and */
 async function slideHorizontal(targetID, htmlContent){
     const container = document.getElementById(targetID)
     container.innerHTML = htmlContent
@@ -199,6 +200,7 @@ async function slideHorizontal(targetID, htmlContent){
         container.animate(overlayTransformArrayFinish, overlayAnimationAttributeObjectFinish);
 }
 
+/**this here makes the content Window slide in verticaly  */
 async function slideVertical(targetID, htmlContent){
     const container = document.getElementById(targetID)
         const slideOutAnimation = container.animate(overlayTransformArrayStartVertical, overlayAnimationAttributeObjectStart);

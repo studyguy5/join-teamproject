@@ -12,7 +12,9 @@ function clearTaskNormal() {
     document.getElementById('creatButtonIDForNormal').disabled = false;
 }
 
-
+/**
+ * here we reset/clear the left side of the mask and delete all values
+ */
 function clearLeftSide(){
     const title = document.getElementById("title-add-task").value = "";
     document.getElementById('UserFeedbackTitle').innerHTML = "";
@@ -21,7 +23,9 @@ function clearLeftSide(){
     document.getElementById('UserFeedbackDate').innerHTML = "";
 }
 
-
+/**
+ * here we clear all choosen contacts from the dropdown list and under the list
+ */
 function clearContacts(){
     let count = document.querySelectorAll('.contactBox .checked')
     count.forEach(ob => ob.classList.remove('checked')),
@@ -33,7 +37,9 @@ function clearContacts(){
     addTaskNormalContactArray = [];
 }
 
-
+/**
+ * here we reset the choosen prio for this task
+ */
 function clearPrio(){
     const buttons = document.querySelectorAll(".priority-section button");
     buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
@@ -41,20 +47,26 @@ function clearPrio(){
     prioArray.length = 0;
 }
 
-
+/**
+ * here we reset the choosen Task Type to neutral "Select your TaskType"
+ */
 function clearTaskType(){
     const taskType = document.getElementById("selectedTaskNormal").innerText = "Select Task Category";
     document.getElementById('UserFeedbackTaskType').innerHTML = "";
 }
 
-
+/**
+ * here we clear all rendered subtasks from the list
+ */
 function clearSubtasks(){
     document.getElementById("subtask").value = "";
     document.getElementById('subtask-list-1').classList.remove('scrollClass')
     document.getElementById('subtask-list-1').innerHTML = "";
 }
 
-
+/**
+ * here all Task in different categorys get sortet and rendered in the right column
+ */
 async function filterAndShowTasks() {
     for (let idIndex = 0; idIndex < categorys.length; idIndex++) {
        let col =  document.getElementById(`${categorys[idIndex]}`)?.innerHTML;
@@ -116,6 +128,10 @@ document.addEventListener('click', (e) => {
 });
 
 
+/**
+ * here the Contact DropDown gets Closed
+ * @param {id} contactBox 
+ */
 function closeContactDropDown(contactBox){
      contactBox.classList.add('availibleContactsClose');
         contactBox.classList.remove('availibleContactsOpen');
@@ -175,7 +191,9 @@ function getStoredUserName() {
     return 'User';
 }
 
-
+/**
+ * this is to choose a Date (the day specificly) only in the future, as this says min
+ */
 function dateInspectNormal() {
     document.getElementById('date-add-task').min = new Date().toISOString().split('T')[0];
 }
@@ -213,7 +231,7 @@ window.renderUserInitials = function renderUserInitials() {
     }
 };
 
-
+/**here we try to catch any errors when fetching user Initials for the menu cirlce in the header */
 document.addEventListener('DOMContentLoaded', () => {
     try { renderUserInitials(); } catch (e) { }
 });

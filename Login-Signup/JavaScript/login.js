@@ -171,31 +171,37 @@ function storeSummaryName(nameLike) {
 
 // EVENTS
 
+/**sets an eventlistener for User Feedback on Email */
 emailInput?.addEventListener('input', () => {
   hideElement(emailError);
   setFieldError(emailInput, false);
   hideElement(generalError);
 });
 
+/**sets an event Listener for bluring the Email Input */
 emailInput?.addEventListener('blur', () => {
   validateEmailInput();
 });
 
+/**sets an event Listener, if the password field has focus the email is under validation*/
 passwordInput?.addEventListener('focus', () => {
   validateEmailInput();
 });
 
+/**sets an event Listener, if the first password field is filled, the password gets validated and hides */
 passwordInput?.addEventListener('input', () => {
   validatePasswordInput();
   hideElement(generalError);
 });
-
+/**checks if the network is online */
 window.addEventListener('online', updateNetworkUi);
 
 window.addEventListener('offline', updateNetworkUi);
 
+/**updates the network UI */
 updateNetworkUi();
 
+/**if the User clicks sign In this chain on function is executed */
 form?.addEventListener('submit', async (e) => {
   e.preventDefault();
   clearFormErrors();
@@ -210,6 +216,7 @@ form?.addEventListener('submit', async (e) => {
   }
 });
 
+/**if the User clicks sign In, the Errors are reseted and values are saved for successfully login */
 async function signInandResetError(){
   const cred = await signInWithEmailAndPassword(auth, email, password);
     let fullName = cred.user?.displayName || '';
@@ -226,6 +233,7 @@ async function signInandResetError(){
     window.location.href = redirectUrl;
 }
 
+/**if anything goes wrong, the Error will be catched here */
 function catchError(){
   let msg = 'Email oder Passwort ist falsch.';
     if (error.code === 'auth/too-many-requests') {
@@ -237,6 +245,7 @@ function catchError(){
     setFieldError(passwordInput, true);
 }
 
+/**if the User uses the Guest Login, then a preset is activated */
 guestBtn?.addEventListener('click', () => {
   clearFormErrors();
   if (!navigator.onLine) return;

@@ -2,11 +2,8 @@
 
 let links = ['summary', 'add-task', 'board', 'contacts'];
 
-document.addEventListener('DOMContentLoaded', async () => {
-    
-}
-)
 
+/**executes the init function check if signed Up and render the User Initials in the header */
 function init() {
     checkSignUpStatus();
     renderUserInitials();

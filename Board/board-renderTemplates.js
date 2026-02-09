@@ -1,4 +1,5 @@
-function renderHTMLOfPopup() {  //Zeile 47 select Contacts
+/**here we render the Popup to create a new Task */
+function renderHTMLOfPopup() {
   return `
     <section   class="addTaskPopupMain">
     <div onclick="openTasktypeDropDown()" id="hiddenlayer" class="hiddenlayer show" ></div>
@@ -187,7 +188,7 @@ function renderBigViewHTML(elements, id) {
             <div class="editeDeleteArea" id="editeDeleteArea"></div>`
 };
 
-
+/**this renders the html of a new Subtask into the Popup Mask */
 function renderHTMLForSubtasks(index, subtask){
  return `<li onclick="editBulletpoint(${index})" id="listed-${index}" class="listed"> 
                               <span class="dot">•</span><p class="task-text-${index}" id="task-text-${index}">${subtask.value}</p>
@@ -199,6 +200,7 @@ function renderHTMLForSubtasks(index, subtask){
                             </li>`;
 }
 
+/**this renders the edit Mode for any Pullet Point, which the User wants to edit */
 function renderEditModeForBulletPoint(currentText, index){
     return `
         <input class="edit-input" type="text" id="edit-input-${index}" value="${currentText}">
@@ -209,6 +211,7 @@ function renderEditModeForBulletPoint(currentText, index){
         </span>`;
 }
 
+/**this renders the saved version of an edited Pullet Point, if you click save after editing it */
 function renderHTMLForSavingBulletPoint(index, newValue){
     return `<span class="dot">•</span><p id="task-text-${index}">${newValue}</p>
                         <span class="list-icon">
@@ -262,6 +265,7 @@ function renderHTMLForEditandDeleteButton(id) {
     </div>`
 }
 
+/**this renders the contacts in the drop Down list within the Popup Mask */
 function renderHTMLForContactsInPopup(index, contactsArray, preselected){
   return `<div onclick="chooseContact(${index})" class="contactBox">
         <div class="contactCirclePopup">${contactsArray[index].firstLetter + contactsArray[index].secondFirstLetter}</div>
@@ -270,6 +274,7 @@ function renderHTMLForContactsInPopup(index, contactsArray, preselected){
         </div>`
 }
 
+/**this renders the filtered Contacts within the dropDown in the Popup Mask */
 function renderHTMLForFilteredContactsInPopup(filteredContacts, filterContactIndex, preselected){
   return `
         <div onclick="chooseFilteredContact(${filterContactIndex})" class="contactBox">

@@ -93,7 +93,7 @@ function renderBigEditView(id) {
 }
 
 
-
+/**this renderes all created subtask in  Edit Mode */
 function renderSubtaskEdit(id) {
     let subtask = document.getElementById("subtaskEdit"); // der standard input
     let list = document.getElementById("subtaskEdit-list-1"); // das zusätzliche <ul> element
@@ -122,6 +122,7 @@ function renderSubtaskEdit(id) {
     }
 }
 
+/**this renders the edit Mode of subtasks in the Edit Mode Mask */
 function renderHTMLForEditBullentPoint(index, currentText, id){
   return `
     <input class="edit-input" type="text" id="edit-input-${index}" value="${currentText[0]}">
@@ -132,6 +133,9 @@ function renderHTMLForEditBullentPoint(index, currentText, id){
         </span>`;
 }
 
+/**this renders allready edited Pullet Points in the Edit Mode into saved ones
+ * like if you edit a subtask in the Edit Mode and click save
+ */
 function renderHTMLForSavingBulletPoint(index, id, newValue){
   return `<span class="dot">•</span><p class="task-textEdit-${index}">${newValue[0]}</p>
         <span class="list-icon">

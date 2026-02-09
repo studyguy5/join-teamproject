@@ -7,6 +7,7 @@ function constantCheck() {
     const taskType = document.getElementById("selectedTask").innerText;
 }
 
+/**checks or validates the title in the Popup Mask */
 function constantCheckTitlePopup() {
     const title = document.getElementById("title").value;
     if (title.length < 2)
@@ -15,7 +16,7 @@ function constantCheckTitlePopup() {
     document.getElementById("UserFeedbackTitle").innerHTML = "";
     document.getElementById('task-description').disabled = false;
 
-    if (!validateTitleAddTaskNormal(title))
+    if (!validateTitleAddTaskPopup(title))
         return showUserFeedbackTitleFormPopup(title);
     document.getElementById('task-description').disabled = true, false;
     document.getElementById("UserFeedbackTitle").innerHTML = "";
@@ -23,6 +24,7 @@ function constantCheckTitlePopup() {
 
 }
 
+/** checks the choosen date - is it in the past? if so Userfeedback will be shown */
 function constantCheckDatePopup() {
     const dueDate = document.getElementById("dueDate").value;
     let current = new Date();
@@ -40,32 +42,35 @@ function constantCheckDatePopup() {
     }
 }
 
-function validateTitleAddTaskNormal(title) {
+/**this validates the title in the Popup Mask */
+function validateTitleAddTaskPopup(title) {
     const titleRegex = /^[A-Za-zÄÖÜäöüß\s1-9]+$/;
-
     return titleRegex.test(title.trim());
 }
 
+/**this validates the date in the Popup Mask */
 function validateDateAddTaskPopup(dueDate) {
     return isDateValid(dueDate);
 }
 
-
+/**this is a help function to validate the date itself */
 function isDateValid(dueDate) {
     return !isNaN(new Date(dueDate));
 }
 
-
+/**shows the user Feedback under the title field if the lenght is to short*/
 function showUserFeedbackTitlePopup() {
     const titleUserFeedbackLength = document.getElementById("UserFeedbackTitle");
     titleUserFeedbackLength.innerHTML = `title is too short`;
 }
 
+/**shows the user Feedback under the title if the form is incorrect */
 function showUserFeedbackTitleFormPopup() {
     const titleUserFeedbackForm = document.getElementById("UserFeedbackTitle");
     titleUserFeedbackForm.innerHTML = `form of Title is incorrect`
 }
 
+/**shows the user Feedback under the date field, if the form is incorrect */
 function showUserFeedbackDueDatePopup() {
     const dateInput = document.getElementById("UserFeedbackDate");
     dateInput.innerHTML = `form of DueDate is incorrect`;

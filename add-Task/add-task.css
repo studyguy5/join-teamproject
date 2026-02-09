@@ -91,9 +91,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 0px;
 }
 
-.section-right-select img:hover {
+/* .section-right-select img:hover {
     content: url(/img/icons/select-arrow-downHover.svg);
-}
+} */
 
 .input-section-left-input:focus,
 .input-section-right-input:focus,

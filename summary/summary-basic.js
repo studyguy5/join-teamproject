@@ -167,12 +167,13 @@ function computeGreeting() {
   return 'Good evening';
 }
 
-
+/**creates a format for the date */
 function formatTodayDate(locale = 'en-US') {
   const d = new Date();
   return new Intl.DateTimeFormat(locale, { month: 'long', day: 'numeric', year: 'numeric' }).format(d);
 }
 
+/**looks for any words matching the list in this function */
 function setUpcomingDate(text) {
   // 1) Bevorzugte IDs
   const idTargets = ['#upcoming-deadline-date','#upcomingDate','#deadlineDate','#summaryUpcomingDate'];
@@ -209,6 +210,7 @@ function updateGreetingAndDate() {
 }
 let signIn;
 
+/**here we get the User Name for the Animation on the summary page */
 function getUserNameForAnimation(){
   if(localStorage.getItem('signIn') === 'false'){
   let time;

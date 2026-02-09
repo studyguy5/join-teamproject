@@ -31,6 +31,7 @@ function chooseContactEdit(id, index) {
     }
 }
 
+/**this sets contact as checked in the edit Mode */
 function setAsChecked(choContact) {
     choContact.classList.remove('checkboxEdit')
     choContact.classList.add('checkedEdit')
@@ -39,6 +40,7 @@ function setAsChecked(choContact) {
     normalContactEditModeArray.push(name);
 }
 
+/**this sets contact back to unchecked in the edit Mode */
 function returnToUnchecked(choContact) {
     choContact.classList.add('checkboxEdit')
     choContact.classList.remove('checkedEdit')
@@ -50,7 +52,9 @@ function returnToUnchecked(choContact) {
     choContact.src = "/img/icons/normalCheckContact.svg"
 }
 
-
+/**this function is needed for collecting all choosen contacts and
+ * render it under the dropDown menu
+ */
 function processCurrentContactEdit(id) {
     let combo = normalContactEditModeArray.concat(filteredContactEditModeArray);
     console.log(combo.length);
@@ -80,6 +84,7 @@ function chooseFilteredContactEdit(id, filterContactIndex) {
     }
 }
 
+/**this sets choosen contacts, which were filtered before, as checked */
 function setAsCheckedFilter(choContactFilter) {
     choContactFilter.classList.remove('checkboxEdit')
     choContactFilter.classList.add('checkedEdit')
@@ -88,6 +93,7 @@ function setAsCheckedFilter(choContactFilter) {
     filteredContactEditModeArray.push(name);
 }
 
+/**this sets choosen contacts, which were filtered before, back as unchecked */
 function returnToUncheckedFilter(choContactFilter) {
     choContactFilter.classList.add('checkboxEdit')
     choContactFilter.classList.remove('checkedEdit')
@@ -124,4 +130,29 @@ function renderfilteredContactsInPopupEdit(id, filteredContactsEdit) {
     for (let filterContactIndex = 0; filterContactIndex < filteredContactsEdit.length; filterContactIndex++) {
         filtContactInPopupEdit.innerHTML += renderHTMLForFilteredContactsInEdit(id, filteredContactsEdit, filterContactIndex, preselectedFilterEdit);
     }
+}
+
+/**this opens or closes the contact dropdown, according the current status */
+function openContactViewEdit() {
+    let contactDrop = document.getElementById('IdForContactsEdit')
+    if (contactDrop.classList.contains('availibleContactsCloseEdit')) {
+        contactDrop.classList.remove('availibleContactsCloseEdit');
+        contactDrop.classList.add('availibleContactsOpenEdit');
+    } else if (contactDrop.classList.contains('availibleContactsOpenEdit')) {
+        contactDrop.classList.remove('availibleContactsOpenEdit');
+        contactDrop.classList.add('availibleContactsCloseEdit');
+    }
+    if (document.querySelectorAll('availibleContactsOpenEdit')) {
+        let contact = document.getElementById('arrowImgCEdit')
+        contact.classList.toggle('select-arrow-openEdit')
+    }
+}
+
+/**this makes the input field for filtering contacts visible, if an User clicks */
+function showInputFilter() {
+    if (document.getElementById('placeholderpTagEdit')) {
+        document.getElementById('placeholderpTagEdit').classList.toggle('dont-Show');
+        document.getElementById('filterContactsEdit').classList.toggle('dont-Show');
+        document.getElementById('filterContactsEdit').focus()
+    };
 }

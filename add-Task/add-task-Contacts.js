@@ -18,6 +18,10 @@ function chooseContactNormal(index) {
     }
 }
 
+/**
+ * sets this Contact as choosen in the list
+ * @param {id} choContact 
+ */
 function setOnCheckedNormal(choContact) {
     choContact.classList.remove('checkbox')
     choContact.classList.add('checked')
@@ -28,6 +32,10 @@ function setOnCheckedNormal(choContact) {
     indexArray.push(i);
 }
 
+/**
+ * sets this Contact back from choosen to unchoosen
+ * @param {id} choContact 
+ */
 function returnToUncheckedNormal(choContact) {
     choContact.classList.add('checkbox')
     choContact.classList.remove('checked')
@@ -61,6 +69,10 @@ function chooseFilteredContactNormal(filterContactIndex) {
     }
 }
 
+/**
+ * sets this contact as choosen in the list
+ * @param {id} choContact 
+ */
 function setOnChecked(choContact) {
     choContact.classList.remove('checkbox')
     choContact.classList.add('checked')
@@ -69,6 +81,10 @@ function setOnChecked(choContact) {
     addTaskNormalFilteredContactArray.push(name);
 }
 
+/**
+ * sets this Contact back from choosen to unchoosen
+ * @param {id} choContact 
+ */
 function returnToUnchecked(choContact) {
     choContact.classList.add('checkbox')
     choContact.classList.remove('checked')
@@ -81,7 +97,9 @@ function returnToUnchecked(choContact) {
 }
 
 
-
+/**
+ * here we collect all choosen in one array and render these under the dropdown List
+ */
 function processCurrentCombinedContacts() {
     let countFilter = addTaskNormalFilteredContactArray.concat(addTaskNormalContactArray);
     if ((countFilter.length) > 6) {

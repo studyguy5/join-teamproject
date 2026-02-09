@@ -6,7 +6,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstat
 //**
 // Submit handler validiert die Eingaben im Inputfeld und setzt einen Focus und scrollt an den Eingabeort
 //  */ ========== Submit Handler ==========
-
+/**this here sets up a pre defined setting for the sign Up Mask in order to create a good UX */
 form?.addEventListener('submit', async (e) => {
   e.preventDefault();
   clearGeneralErrors();
@@ -27,6 +27,8 @@ form?.addEventListener('submit', async (e) => {
     updateStepAccessSilent();}
 });
 
+
+/**validates all fields from the sign Up Mask */
 function validateSignUpData(){
   const checks = [
     () => [validateName(), nameInput],
@@ -37,6 +39,7 @@ function validateSignUpData(){
   ];
 }
 
+/**handels the behaviour if any Error occurs */
 function behaviourIfError(){
   for (const fn of checks) {
     const [ok, el] = fn();
@@ -49,6 +52,7 @@ function behaviourIfError(){
   }
 }
 
+/**disables the sign Up button if needed */
 function disableSignUpButton(){
   signupButton.disabled = true;
   const name = nameInput.value.trim();
@@ -56,6 +60,7 @@ function disableSignUpButton(){
   const password = passwordInput.value;
 }
 
+/**here we create a new User with the data filled in from the Sign Up Mask */
 async function createUserWithGivenData(){
   const cred = await createUserWithEmailAndPassword(auth, email, password);
     try { await updateProfile(cred.user, { displayName: name }); } catch { }
@@ -65,6 +70,7 @@ async function createUserWithGivenData(){
     setTimeout(() => { window.location.href = 'index.html'; }, 1800);
 }
 
+/**we also have to catch any Errors during the SignIN process */
 function catchErrorfromSignIn(error){
   let msg = 'Registrierung fehlgeschlagen.';
     if (error.code === 'auth/email-already-in-use') msg = 'Diese Email wird bereits verwendet.';

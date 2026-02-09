@@ -10,60 +10,6 @@ let subtaskArray = [];
 let subtaskvalue;
 
 
-/**basic function to post Data into firebase */
-async function postData(path = '', data = {}) {
-    let response = await fetch(BASe_URL + path + ".json", {
-        method: "POST",
-        headers: {
-            "content-type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    let responseToJson = await response.json();
-    return responseToJson.name
-}
-
-/**basic function to replace Data within firebase */
-async function putData(path = '', data = {}) {
-    let response = await fetch(BASe_URL + path + ".json", {
-        method: "PUT",
-        header: {
-            "content-type": "application/json",
-        },
-        body: JSON.stringify(data)
-    })
-    return responseToJson = await response.json();
-}
-
-/**basic function to update Data within firebase */
-async function patchData(path = '', data = {}) {
-    const response = await fetch(BASe_URL + path + ".json", {
-        method: "PATCH",
-        mode: 'cors',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    return await response.json();
-}
-
-
-/**basic function to get Data from firebase */
-async function getData(path = '') {
-    let response = await fetch(BASe_URL + path + ".json")
-    return allTasks = await response.json();
-
-}
-
-/**send all Data into firebase as the name says */
-async function sendAlltoFirebase(contactsArray, path = 'contact') {
-    for (let index = 0; index < contactsArray.length; index++) {
-        await postData(path = path, data = array[index])
-    }
-}
-
-
 let choosenCategory;
 /**this eventListener chanes the category if you add a Task on Inprogress or AwaitFeedback */
 let rightColumn = document.querySelectorAll('.categorys > div img')
@@ -151,6 +97,7 @@ async function getTaskInformation(index) {
     shinePackage(newTask.id);
 };
 
+/**this sets a random Id Number for the task keep choosing if it allready exists */
 function getRandomID(){
     let allIds = tasks.map(ta => ta[1].id)
     let rn = Math.floor(Math.random() * 50)
@@ -160,6 +107,7 @@ function getRandomID(){
     return rn;
 }
 
+/**also here the higllightning after creating it in order do not get lost under the other tasks */
 function shinePackage(id){
      letShineLastEditedTask(id);
     setTimeout(() => {
@@ -167,6 +115,7 @@ function shinePackage(id){
     }, 2500);
 }
 
+/**here the actuall function for the shine effect with a special class */
 function letShineLastEditedTask(id) {
     if(id){
       let last = document.getElementById(`TaskDiv-${id}`);
@@ -174,6 +123,7 @@ function letShineLastEditedTask(id) {
     }
 }
 
+/**after a few seconds it removes the special class to end the effect */
 function cleanBorder(id){
     let last = document.querySelectorAll('.tor');
     last.forEach(element => {
@@ -249,7 +199,7 @@ function moveUpCategory(id) {
 
 }
 
-
+/**switches down in the next category if the click comes from the mini menu */
 function moveDownCategory(id) {
     let CurTask = tasks.filter(tasks => tasks[1].id === id);
     switch (CurTask[0][1].category) {
@@ -399,7 +349,7 @@ function leaveCategory(category) {
     }
 }
 
-
+/**this makes an array from the original object and maps it the right way */
 function objectToArray(contacts) {
     const object = Object.entries(contacts)
     const arrayObject = object.map((member) => {

@@ -1,6 +1,7 @@
 /**
  * This module handles all local and Firestore database operations for users, tasks, and contacts.
  * @module database
+ * here we inport data from firebase for authentification and more
  */
 
 import { auth, db } from './firebase.js';

@@ -75,6 +75,12 @@ function renderfilteredContactsInNormal(filteredContacts) {
    `}
 }
 
+/**
+ * here we get the html for normal subtasks in the creating mask
+ * @param {index} index 
+ * @param {value} subtask 
+ * @returns html
+ */
 function renderHTMLForSubtasks(index, subtask){
  return `<li onclick="editBulletpoint(${index})" id="listed-${index}" class="listed"> 
                               <span class="dot">•</span><p class="task-text-${index}" id="task-text-${index}">${subtask.value}</p>
@@ -86,6 +92,7 @@ function renderHTMLForSubtasks(index, subtask){
                             </li>`;
 }
 
+/** here we render it, if the user has edited a subtask and is saving again */
 function renderHTMLForSavingBulletPoint(index, newValue){
     return `<span class="dot">•</span><p id="task-text-${index}">${newValue}</p>
                         <span class="list-icon">
@@ -95,7 +102,7 @@ function renderHTMLForSavingBulletPoint(index, newValue){
                         </span>`;
 }
 
-
+/**here we render the edit Mode, when the user wants to edit an subtask */
 function renderEditModeForBulletPoint(currentText, index){
     return `
         <input class="edit-input" type="text" id="edit-input-${index}" value="${currentText}">

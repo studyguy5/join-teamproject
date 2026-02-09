@@ -18,6 +18,7 @@ function commonConstantCheck() {
         showSuccessMessage();}
     }
 
+/**this sets up the fundamental connection and disables the createButton after click once */
 function getConnectionAndDisableButton() {
     document.getElementById('creatButtonIDForNormal').disabled = true;
     const title = document.getElementById("title-add-task").value;
@@ -26,27 +27,32 @@ function getConnectionAndDisableButton() {
     return { title, dueDate, taskType };
 }
 
+/**if all required fields are empty, complete Feedback is shown */
 function showCompleteFeedback() {
     document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
     document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
     document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
 }
 
+/**if the Title and the Date field is empty/not choosen this feedback is shown */
 function showTitleDateFeedback() {
     document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
     document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
 }
 
+/**if the Date isnt choosen and the Tasktype is not selected, this feedback is shown */
 function showDateTaskTypeFeedback() {
     document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
     document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
 }
 
+/**if the title is empty and the Tasktype is not selected, this Feedback is shown */
 function showTitleTaskTypeFeedback() {
     document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
     document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
 }
 
+/** if title is empty and no Date is choosen, this feedback is shown */
 function commonUserFeedback() {
     document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
     document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
@@ -73,6 +79,7 @@ function constantCheckTitle() {
 
 let attribute = true;
 
+/**if the date is in the past, it tells the user to select an oder Date */
 function constantCheckDate() {
     const dueDate = document.getElementById("date-add-task").value;
     let current = new Date();
@@ -89,16 +96,19 @@ function constantCheckDate() {
     }
 }
 
+/**this checks letters from A to Z, from a to z, special vocals whitespaces and numbers in the title */
 function validateTitleAddTaskNormal(title) {
     const titleRegex = /^[A-Za-zÄÖÜäöüß\s1-9]+$/;
     return titleRegex.test(title.trim());
 }
 
+/**this get the value from the choosen date, and checks if valid*/
 function validateDateAddTaskNormal(dueDate) {
     let dateOb = new Date(dueDate);
     return isDateValid(dateOb);
 }
 
+/**this is the validation function for the date */
 function isDateValid(dateOb) {
     return !isNaN(new Date(dateOb));
 }
@@ -112,11 +122,13 @@ function showUserFeedbackTitle() {
     titleUserFeedbackLength.innerHTML = `title is too short`;
 }
 
+/**shows the feedback under the title field */
 function showUserFeedbackTitleForm() {
     const titleUserFeedbackForm = document.getElementById("UserFeedbackTitle");
     titleUserFeedbackForm.innerHTML = `form of Title is incorrect`
 }
 
+/**shows the feedback under the date field */
 function showUserFeedbackDueDate() {
     const dateInput = document.getElementById("UserFeedbackDate");
     dateInput.innerHTML = `form of DueDate is incorrect`;

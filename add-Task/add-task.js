@@ -271,6 +271,7 @@ async function getTaskInformationNormal(index) {
     shinePackageAddTaskNormal(newTask.id);
 };
 
+/**creates a random number and checks if it allready exist, if so another number will be created */
 function getRandomNumber(){
     let allIds = tasks.map(t => allIds.push(t[1].id));
     let rn = Math.trunc(Math.floor(Math.random() * 150)) +1;
@@ -280,11 +281,13 @@ function getRandomNumber(){
     return rn;
 }
 
+/**the id of the new Task will be saved in the session Storage for later access */
 function shinePackageAddTaskNormal(id){
     sessionStorage.setItem('shineTaskId', id.toString())
     sessionStorage.setItem("shineStartTime", Date.now().toString());
 }
 
+/** the new Task get an extra class in order to make itself more visible to the user */
 function letShineLastEditedTask(id) {
     if (id) {
         let last = document.getElementById(`TaskDiv-${id}`)
@@ -292,6 +295,7 @@ function letShineLastEditedTask(id) {
     }
 }
 
+/**after a few seconds the higlightning will be deactivated */
 function cleanBorder() {
     let last = document.querySelectorAll('.tor');
     last.forEach(element => {

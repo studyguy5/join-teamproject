@@ -1,9 +1,7 @@
 
 
-
  window.tasks = [
-    
-    
+
 ];
 
 window.tasks
@@ -101,8 +99,9 @@ async function filterAndShowTasksAlternate(array) {
     }
 }
 
-
-
+// ===============here are function for the board or BigView========================
+ 
+/**this renders the filtered Contacts into the board as Task if there are any contacts */
 function renderContactFilter(element) {
     let contact = document.getElementById(`${element[1].id}`)
     if (element[1].assignedTo)
@@ -118,6 +117,7 @@ function renderMiniMenü(id) {
   miniMenu.classList.toggle('miniMenüResponsiv')
 }
 
+/**this checks the length of subtasks for the bigView - if there is a length above 3 than it is scrollable*/
 function checkSubtaskLenght(elements) {
   let elementsOfTask = tasks.find(t => t[1].id === elements);
   if (elementsOfTask[1].subtasks?.length > 3) {

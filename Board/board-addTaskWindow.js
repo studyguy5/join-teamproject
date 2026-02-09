@@ -1,6 +1,7 @@
 
 let prioArray = ['Medium'];
 window.contactsArray = [];
+/**here we use an eventlistener to get the id of the latest Task to mark the task for visibility */
 document.addEventListener('DOMContentLoaded', () => {
     try { renderUserInitials(); } catch (e) { }
      const taskId = sessionStorage.getItem("shineTaskId");
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     getPrioButtonsReactive();
 })
 
+/**this sets the pio Buttons to to listen on a clickevent*/
 function getPrioButtonsReactive() {
     const buttons = document.querySelectorAll(".priority-section button");
     if (buttons) {
@@ -46,6 +48,8 @@ function getPrioButtonsReactive() {
         })
     };
 }
+
+/**this gets any Data from firebase and represents the definition of it for further use*/
 async function getData(path = '') {
     let response = await fetch(BASe_URL + path + ".json")
     return allTasks = await response.json();
@@ -103,6 +107,7 @@ function createTaskTemplate() {
     decideFeedback(title, dueDate, taskType);
 }
 
+/**this checks validation before creating a task and shows user Feedback in neccessary */
 function decideFeedback(title, dueDate, taskType) {
     if (title === "" && dueDate === "" && taskType === "Select Task Category") { showTitleDateTaskTypeFeedback(); }
     if (title === "" && dueDate === "") {showTitleDateFeedback();}
@@ -124,30 +129,31 @@ function decideFeedback(title, dueDate, taskType) {
     }
 }
 
+/**this reactivates the button after the task has been created and few seconds has been passed */
 function enableButton(){
     document.getElementById('creatButtonID').disabled = false;
 }
 
-
+/**this shows user Feedback under the Title, Date and Tasktype field */
 function showTitleDateTaskTypeFeedback() {
     document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
     document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
     document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
 }
 
-
+/**this shows the user Feedback under the Title and Date field */
 function showTitleDateFeedback() {
     document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
     document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
 }
 
-
+/**this shows the user Feedback under the Date and Tasktype Field */
 function showDateTasktypeFeedback() {
     document.getElementById("UserFeedbackDate").innerHTML = `This Field is required`;
     document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
 }
 
-
+/**this shows the user Feedback under the title and Tasktype Field */
 function showTitleTasktypeFeedback() {
     document.getElementById("UserFeedbackTitle").innerHTML = `This Field is required`;
     document.getElementById("UserFeedbackTaskType").innerHTML = `This Field is required`;
@@ -197,7 +203,7 @@ function arraySorting(array) {
     return sortedArray
 }
 
-
+/**this resets the Tasktype drop down and closes it */
 function resetTaskType() {
     resetTasktypeDropDown();
 }
@@ -215,6 +221,7 @@ function openTasktypeDropDown() {
     }
 }
 
+/**this is the help function to close the Tasktype drop Down  */
 function resetTasktypeDropDown() {
     let drop = document.getElementById('dropId')
     if (drop.classList.contains('dropTasktypeClose')) {
@@ -240,6 +247,7 @@ function chooseValue() {
     }))
 }
 
+/**this checks if the date is in the past in the Popup Mask */
 function dateInspectPopup() {
     document.getElementById('dueDate').min = new Date().toISOString().split('T')[0];
 }
@@ -256,6 +264,7 @@ function clearTask() {
     clearPrioTasktypeAndSub();
 }
 
+/**this clears the left side of the popup Mask if the user clicks on the clear button */
 function clearLeftSide() {
     const title = document.getElementById("title").value = "";
     document.getElementById("UserFeedbackTitle").innerHTML = "";
@@ -264,6 +273,7 @@ function clearLeftSide() {
     document.getElementById("UserFeedbackDate").innerHTML = "";
 }
 
+/**this clears or resets the contacts dropDown and deletes the list under the dropDown, which was rendered */
 function clearContacts() {
     let count = document.querySelectorAll('.contactBox .checked')
     count.forEach(ob => ob.classList.remove('checked')),
@@ -273,6 +283,7 @@ function clearContacts() {
     document.getElementById("countInfoPopup").innerHTML = "";
 }
 
+/**this resets the prio buttons, the Tasktype and the subtasks to standard */
 function clearPrioTasktypeAndSub() {
     const buttons = document.querySelectorAll(".priority-section button");
     buttons.forEach(b => b.classList.remove("Urgent", "Medium", "Low"));
@@ -305,6 +316,7 @@ function getInitials(fullName) {
     return (first + last).toUpperCase();
 }
 
+/**this gets the stored user Name and renders it as Initials in the header circle */
 window.renderUserInitials = function renderUserInitials() {
     const fullName = getStoredUserName();
     const initials = getInitials(fullName);
@@ -335,86 +347,4 @@ function prioButton() {
     })
 }
 
-// let currentCount;
-// let index = currentCount;
-
-
-/**
- * Renders a new subtask list item if the input is valid.
- * Adds the subtask to the HTML list and resets the input field.
- */
-function renderSubtaskInPopup(){
-    let subtask = document.getElementById("subtask"); 
-    let list = document.getElementById("subtask-list-1"); //ul list (unorganised list)
-    let currentCount = list.getElementsByClassName("listed").length; 
-    index = currentCount;
-    if (subtask.value.trim() !==""){
-        list.innerHTML += renderHTMLForSubtasks(index, subtask); 
-        subtask.value = "";}
-    if(currentCount > 2 ){
-        document.getElementById('subtask-list-1').classList.add('scrollClass')
-    }
-}
-
-function clearSubtask() {
-    document.getElementById("subtask").value = "";
-}
-
-/**
- * Deletes a bullet point (subtask) by its index.
- * @param {number} index - Index of the bullet point to delete.
- */
-function deleteBulletpoint(index) {
-    let el = document.getElementById(`listed-${index}`);
-    if (el) el.remove();
-}
-
-/**
- * Turns a bullet point into an editable input field.
- * @param {number} index - Index of the bullet point to edit.
- */
-function editBulletpoint(index) {
-    const li = document.getElementById(`listed-${index}`);
-    const textEl = document.getElementById(`task-text-${index}`);
-    const inputEl = document.getElementById(`edit-input-${index}`);
-    if (inputEl) {
-        inputEl.focus();
-        return;}
-    const currentText = textEl ? textEl.textContent : ""; 
-    li.innerHTML = renderEditModeForBulletPoint(currentText, index);
-    document.getElementById(`edit-input-${index}`).focus();
-}
-
-
-/**
- * Saves the edited bullet point text back into the list item.
- * @param {number} index - Index of the bullet point to save.
- */
-function saveBulletpoint(index) {
-    const input = document.getElementById(`edit-input-${index}`);
-    const newValue = input.value.trim();
-    if (newValue !== "") {
-        const li = document.getElementById(`listed-${index}`);
-        li.innerHTML = renderHTMLForSavingBulletPoint(index, newValue);
-        li.setAttribute("onclick", `editBulletpoint(${index})`);
-    }
-}
-
-/**
- * Enables pressing "Enter" in the subtask input field to trigger subtask creation.
- */
-function enableEnterForSubtask() {
-    let subtask = document.getElementById("subtask");
-    subtask.addEventListener("keydown", e => {
-        if (e.key === "Enter") {
-            e.preventDefault();
-            renderSubtask();
-        }
-    });
-}
-
-/**
- * Initializes event listeners when the DOM is fully loaded.
- */
-window.addEventListener("DOMContentLoaded", enableEnterForSubtask);
 

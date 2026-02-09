@@ -1,5 +1,5 @@
 
-
+/**if the subtask array is not empty, this info is shown to inform the User were to find the subtasks */
 function scrollInfo(id){
     let info = tasks.find(inf => inf[1].id === id)
     if(info[1].subtasks){

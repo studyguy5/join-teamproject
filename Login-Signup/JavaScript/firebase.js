@@ -76,11 +76,14 @@ function enableFirestorePersistence(dbInstance) {
     });
 }
 
+/**initialised a presetted file on firebase */
 const app = createApp(firebaseConfig);
 
+/**handels the authentification */
 const auth = createAuth(app);
 setAuthPersistence(auth);
 
+/**enables firestore validation */
 const db = createFirestore(app);
 enableFirestorePersistence(db);
 

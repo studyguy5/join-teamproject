@@ -1,6 +1,7 @@
 
 const BAsE_URL = "https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app"
 
+/**these two functions under the eventlistener gets executed automaticly when the page loads */
 document.addEventListener('DOMContentLoaded', async () => {
     contacts = await getObject(path = '/contacts')
     contactsArray = objectToArray(contacts);
@@ -8,13 +9,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 
 
-
+/**this is the definition to get an Object from firebase */
 async function getObject(path = '') {
     let response = await fetch(BAsE_URL + path + ".json")
     return responseToJson = await response.json()
 }
 
-
+/**this makes it possible to delete specific Tasks */
 async function deleteData(firebaseID) {
     const response = await fetch(`https://join-kanban-app-default-rtdb.europe-west1.firebasedatabase.app/task/${firebaseID[0]}.json`, {
         method: "DELETE",
@@ -22,7 +23,7 @@ async function deleteData(firebaseID) {
     return await response.json();
 };
 
-
+/**this makes a structured array from an object */
 function objectToArray(contacts) {
     const object = Object.entries(contacts)
     const arrayObject = object.map((member) => {
@@ -34,7 +35,7 @@ function objectToArray(contacts) {
     return arrayObject;
 }
 
-
+/**this sort the list of contacts from A to Z */
 function arraySorting(array) {
     const sortedArray = array
     sortedArray.sort((memberA, memberB) => {
@@ -43,7 +44,7 @@ function arraySorting(array) {
     return sortedArray
 }
 
-
+/**this looks for the allready seted prio in the Task and marks this Prio */
 function prioButtonactivate(id) {
     const buttonsEdit = document.querySelectorAll(".priority-sectionEdit button");
     let rightTask = tasks.find(r => r[1].id === id);
@@ -57,6 +58,7 @@ function prioButtonactivate(id) {
 
 }
 
+/**here we set an eventListener to every Prio button, in order to react on clicks */
 function setPrioButtonActive(buttonsEdit) {
     if (buttonsEdit) {
         buttonsEdit.forEach(button => {
@@ -71,6 +73,7 @@ function setPrioButtonActive(buttonsEdit) {
     };
 }
 
+/**this closes the Edit Mode and resets the array to work probarly next time */
 function closeEditView() {
     const popup = document.getElementById('bigViewOfTask');
     popup.classList.add("dont-Show");
@@ -94,7 +97,9 @@ function getCurrentValues(id) {
         }
 }
 
-
+/**here we make a last validate check (is it empty) and gatter the information if it passes the test 
+ * in case a User clicks create whitout filling in any information, this shows the User a feedback
+*/
 function createTaskTemplateEdit(id) {
     const title = document.getElementById("titleEdit").value;
     const dueDate = document.getElementById("dueDateEdit").value;
@@ -113,7 +118,7 @@ function createTaskTemplateEdit(id) {
 
 
 
-
+/**this is the success notification for the User if he/she has edited a Task successfully */
 function showReportAddedTaskTemplateEdit() {
     const popup = document.getElementById("report");
     popup.classList.add("show");
@@ -165,6 +170,7 @@ function getSubtaskFromTemplateEdit(taskToEdit) {//hole die Daten
     updateProgress(taskToEdit);
 }
 
+/**if a subtask gets marked as done and deleted, this function updates the status in the board */
 function updateProgress(taskToEdit){
     console.log(taskToEdit[1].subtasks);
     let firebaseIde = taskToEdit[0];
@@ -198,6 +204,9 @@ async function getTaskInformationEdit(id) {
     shinePackage(id);
 };
 
+/**this clears the existing objects and fills it with the 
+ * present values in the Edit Mode open Mask (second loop)
+ */
 function iterateAboveExistingValues(taskToEdit){
     for (let makeEmptyIndex = 0; makeEmptyIndex < existingFilledObjects.length; makeEmptyIndex++) {
         taskToEdit[1][existingFilledObjects[makeEmptyIndex]] = '';
@@ -210,6 +219,9 @@ function iterateAboveExistingValues(taskToEdit){
 
 // ===========hier den shiny effect einfügen==============================================
 
+/**this is a package for leting the latest task shine in order to find it after creating
+ * if case there are 10 Task or more
+ */
 function shinePackage(id){
     letShineLastEditedTask(id);
     setTimeout(() => {
@@ -217,7 +229,7 @@ function shinePackage(id){
     }, 2500);
 }
 
-
+/**this gets the latest id and adds a new class with a border to it, in order to find it after creating */
 function letShineLastEditedTask(id) {
     if (id) {
         let last = document.getElementById(`TaskDiv-${id}`);
@@ -225,6 +237,7 @@ function letShineLastEditedTask(id) {
     }
 }
 
+/**the border of the latest task needs to be removed after a few seconds */
 function cleanBorder() {
     let last = document.querySelectorAll('.tor');
     last.forEach(element => {

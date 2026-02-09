@@ -2,6 +2,7 @@
 
 let normalContactsArray = [];
 
+/** tis sets a choosen contact as choosen in the dropdown list */
 function chooseContact(index) {
   let choContact = document.getElementById(`checkboxImg-${index}`)
   if (choContact.classList.contains('checkbox')) {
@@ -13,7 +14,7 @@ function chooseContact(index) {
   }
 }
 
-
+/**this is the help function to set the contact as choosen */
 function setOnCheckedPopupNormal(choContact) {
   choContact.classList.remove('checkbox')
   choContact.classList.add('checked')
@@ -22,7 +23,7 @@ function setOnCheckedPopupNormal(choContact) {
   normalContactsArray.push(name);
 }
 
-
+/**this is the help function to set the contact back to unchoosen */
 function returnToUncheckedPopupNormal(choContact) {
   choContact.classList.add('checkbox')
   choContact.classList.remove('checked')
@@ -50,7 +51,7 @@ function chooseFilteredContact(filterContactIndex) {
   }
 }
 
-
+/**here the help function to set filtered contact as choosen */
 function setOnCheckedPopupFilter(choContactF) {
   choContactF.classList.remove('checkbox')
   choContactF.classList.add('checked')
@@ -59,7 +60,7 @@ function setOnCheckedPopupFilter(choContactF) {
   filteredContactsArray.push(name);
 }
 
-
+/**here the help function to set filtered contacts as unchoosen */
 function returnToUncheckedPopupFilter(choContactF) {
   choContactF.classList.add('checkbox')
   choContactF.classList.remove('checked')
@@ -71,7 +72,7 @@ function returnToUncheckedPopupFilter(choContactF) {
   choContactF.src = "/img/icons/normalCheckContact.svg";
 }
 
-
+/**this function collects all choosen contacts and renders it unter the drop down list */
 function processCurrentContact() {
   let comboPopup = normalContactsArray.concat(filteredContactsArray);
   if ((comboPopup.length) > 6) {
@@ -103,6 +104,7 @@ function openContactView() {
     }
 }
 
+/**this funciton opens the drop down list */
 function openContactWindow(contactDrop){
   contactDrop.classList.remove('availibleContactsClose');
         contactDrop.classList.add('availableContactsOpen');
@@ -110,6 +112,7 @@ function openContactWindow(contactDrop){
         layer.classList.toggle('hiddenlayer2')
 }
 
+/**this function closes the drop down list */
 function closeContactWindow(contactDrop){
   contactDrop.classList.remove('availableContactsOpen');
         contactDrop.classList.add('availibleContactsClose');
@@ -121,6 +124,9 @@ function closeContactWindow(contactDrop){
         }
 }
 
+/**this function closes the contact dropDown if the whole Popup gets closed
+ * in order to reset it for next time
+ */
 function closeContactView() {
     let contactDrop = document.getElementById('IdForContacts')
     if (contactDrop.classList.contains('availableContactsOpen')) {
@@ -137,28 +143,7 @@ function closeContactView() {
     }
 }
 
-function openContactViewEdit() {
-    let contactDrop = document.getElementById('IdForContactsEdit')
-    if (contactDrop.classList.contains('availibleContactsCloseEdit')) {
-        contactDrop.classList.remove('availibleContactsCloseEdit');
-        contactDrop.classList.add('availibleContactsOpenEdit');
-    } else if (contactDrop.classList.contains('availibleContactsOpenEdit')) {
-        contactDrop.classList.remove('availibleContactsOpenEdit');
-        contactDrop.classList.add('availibleContactsCloseEdit');
-    }
-    if (document.querySelectorAll('availibleContactsOpenEdit')) {
-        let contact = document.getElementById('arrowImgCEdit')
-        contact.classList.toggle('select-arrow-openEdit')
-    }
-}
 
-function showInputFilter() {
-    if (document.getElementById('placeholderpTagEdit')) {
-        document.getElementById('placeholderpTagEdit').classList.toggle('dont-Show');
-        document.getElementById('filterContactsEdit').classList.toggle('dont-Show');
-        document.getElementById('filterContactsEdit').focus()
-    };
-}
 
 
 /**show the contacts in the reserved place within the dropdown Menü */

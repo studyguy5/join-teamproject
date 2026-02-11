@@ -282,6 +282,7 @@ textarea:focus {
     flex-direction: column;
     width: 440px;
     height: 430px;
+    /* overflow-y: scroll; */
     position: relative;
 }
 

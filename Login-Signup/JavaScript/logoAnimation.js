@@ -5,12 +5,12 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   const mainContent = document.querySelector('.main-content');
-  const splashScreen = document.querySelector('.splash-screen');
-  if (isIndexPage()) {
-    loadIndexPage(mainContent, splashScreen);
-  } else {
-    showMainContent(mainContent, splashScreen);
-  }
+  // const splashScreen = document.querySelector('.splash-screen');
+  // if (isIndexPage()) {
+  //   loadIndexPage(mainContent, splashScreen);
+  // } else {
+  //   showMainContent(mainContent, splashScreen);
+  // }
   localStorage.setItem('signIn', false)
 });
 
@@ -33,57 +33,69 @@ function isInternalNavigation() {
   return referrer.startsWith(currentDomain) && referrer !== '';
 }
 
-/**
- * Lädt den Splash-Screen beim Seitenaufruf.
- * @param {HTMLElement} mainContent
- * @param {HTMLElement} splashScreen
- */
-function loadIndexPage(mainContent, splashScreen) {
-  if (isInternalNavigation()) {
-    showMainContent(mainContent, splashScreen);
-  } else {
-    playSplashAnimation(mainContent, splashScreen);
-  }
+// /**
+//  * Lädt den Splash-Screen beim Seitenaufruf.
+//  * @param {HTMLElement} mainContent
+//  * @param {HTMLElement} splashScreen
+//  */
+// function loadIndexPage(mainContent, splashScreen) {
+//   if (isInternalNavigation()) {
+//     showMainContent(mainContent, splashScreen);
+//   } else {
+//     playSplashAnimation(mainContent, splashScreen);
+//   }
+// }
+
+// /**
+//  * Spielt die Animation für Splash-Screen.
+//  * @param {HTMLElement} mainContent
+//  * @param {HTMLElement} splashScreen
+//  */
+// function playSplashAnimation(mainContent, splashScreen) {
+//   setTimeout(() => {
+//     fadeOutSplash(splashScreen);
+//     setTimeout(() => {
+//       changeOpacityForMainLogo();
+//       hideSplashShowContent(mainContent, splashScreen);
+//     }, 600);
+//   }, 200);
+// }
+
+setTimeout(() => {
+  hideMainElementShortTime();
+}, 300);
+function hideMainElementShortTime(){
+  let signUpCorner = document.querySelector('.login-container');
+  let mainLoginMask = document.querySelector('.signup-container');
+  signUpCorner.style.opacity = "1";
+  mainLoginMask.style.opacity = "1";
 }
 
-/**
- * Spielt die Animation für Splash-Screen.
- * @param {HTMLElement} mainContent
- * @param {HTMLElement} splashScreen
- */
-function playSplashAnimation(mainContent, splashScreen) {
-  setTimeout(() => {
-    fadeOutSplash(splashScreen);
-    setTimeout(() => {
-      hideSplashShowContent(mainContent, splashScreen);
-    }, 500);
-  }, 1000);
-}
+// /**
+//  * Blendet den Splash-Screen aus.
+//  * @param {HTMLElement} splashScreen
+//  */
+// function fadeOutSplash(splashScreen) {
+//   if (splashScreen) splashScreen.style.opacity = '0';
+//   if(splashScreen) splashScreen.style.backgroundColor = 'unset'
+// }
 
-/**
- * Blendet den Splash-Screen aus.
- * @param {HTMLElement} splashScreen
- */
-function fadeOutSplash(splashScreen) {
-  if (splashScreen) splashScreen.style.opacity = '0';
-}
+// /**
+//  * Versteckt den Splash-Screen und zeigt das Haupt-Element.
+//  * @param {HTMLElement} mainContent
+//  * @param {HTMLElement} splashScreen
+//  */
+// function hideSplashShowContent(mainContent, splashScreen) {
+//   if (splashScreen) splashScreen.style.display = 'none';
+//   if (mainContent) mainContent.classList.add('visible');
+// }
 
-/**
- * Versteckt den Splash-Screen und zeigt das Haupt-Element.
- * @param {HTMLElement} mainContent
- * @param {HTMLElement} splashScreen
- */
-function hideSplashShowContent(mainContent, splashScreen) {
-  if (splashScreen) splashScreen.style.display = 'none';
-  if (mainContent) mainContent.classList.add('visible');
-}
-
-/**
- * Zeigt das Haupt-Element dauerhaft an.
- * @param {HTMLElement} mainContent
- * @param {HTMLElement} splashScreen
- */
-function showMainContent(mainContent, splashScreen) {
-  if (splashScreen) splashScreen.style.display = 'none';
-  if (mainContent) mainContent.classList.add('visible');
-}
+// /**
+//  * Zeigt das Haupt-Element dauerhaft an.
+//  * @param {HTMLElement} mainContent
+//  * @param {HTMLElement} splashScreen
+//  */
+// function showMainContent(mainContent, splashScreen) {
+//   if (splashScreen) splashScreen.style.display = 'none';
+//   if (mainContent) mainContent.classList.add('visible');
+// }

@@ -3,7 +3,7 @@
  * @module database
  * here we inport data from firebase for authentification and more
  */
-
+// export { database } from './firebase.js'
 import { auth, db } from './firebase.js';
 import {
   doc,

@@ -40,18 +40,20 @@ body {
   width: -webkit-fill-available;
 }
 
+/* signUp Logo fo the SignUP Mask */
 .signup-page-logo {
   padding: 0 20px;
   position: absolute;
-  top: 0;
-  left: 60px;
+  top: 56px;
+  left: 56px;
 }
 
 
 
 .page-logo img {
-  width: 80px;
+  width: 115px;
   height: auto;
+  opacity: 1;
 }
 
 /* =================== Card / Form =================== */
@@ -133,7 +135,7 @@ body {
 .input-icon {
   position: absolute;
   right: 15px;
-  top: 23px;
+  top: 20px;
   transform: translateY(-50%);
   width: 20px;
   height: auto;

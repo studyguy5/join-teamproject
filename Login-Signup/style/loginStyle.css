@@ -12,6 +12,8 @@ body {
 }
 
 
+
+
 .content-wrapper {
     max-width: 1920px;
     margin: 0 auto;
@@ -23,16 +25,7 @@ body {
     align-items: center;
 }
 
-.page-logo {
-    position: absolute;
-    top: 80px;
-    left: 77px;
-}
 
-.page-logo img {
-    width: 70px;
-    height: auto;
-}
 
 .signup-container {
     position: absolute;
@@ -41,6 +34,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+    opacity: 0;
 }
 
 .signup-text {
@@ -80,6 +74,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position:relative;
+    opacity: 0;
 }
 
 .page-footer {

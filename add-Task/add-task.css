@@ -160,9 +160,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     list-style: none;
     width:100%;
     max-width:440px;
-    min-height:140px;
+    min-height:133px;
     height:100%;
-    max-height:50px;
+    max-height:133px;
     overflow-y: scroll;
     scrollbar-width: none;
 }
@@ -186,10 +186,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
     background: #e6e6e6;
     border-radius: 10px;
+}
 
-    .list-icon {
-        display: flex !important;
-    }
+.listed:hover .list-icon{
+    display:flex;
 }
 
 .dot {

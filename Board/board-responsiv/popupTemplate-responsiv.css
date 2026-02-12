@@ -134,6 +134,42 @@
     }
 }
 
+/* Dimension: Desktop 1366x768 */
+@media(min-width:1360px) and (max-width:1366px) and (min-height:760px) and (max-height:770px){
+    .addTaskPopupMain{
+        height:85%;
+        overflow-y: scroll;
+    }
+
+    .popup-header{
+        padding: 44px 40px 32px 74px;
+    }
+
+    .input-containerPopup {
+        height:640px;
+    }
+
+    .input-section-leftPopup{
+        height:640px;
+    }
+
+    .input-section-rightPopup{
+        height:640px;
+    }
+
+    .footerPopup{
+        position:fixed;
+        bottom:10px;
+    }
+
+    .line {
+    margin-top: -180px;
+    background-color: #c8c8c8;
+    height: 362px;
+    width: 2px;
+}
+}
+
 @media(max-width: 1300px) {
     .add-task-popup.show {
         max-width: 100vw;
@@ -173,27 +209,27 @@
         background-color: rgb(0, 0, 0, 0.5);
         transform: unset;
     }
-
+    
     .countInfoPopup {
         right: 40px;
         width: 30px;
     }
-
+    
     .addTaskPopupMain {
         max-width: 960px;
         margin: auto auto;
     }
-
+    
     .dropTasktypeOpenPopup {
         width: 100%;
         max-width: 340px;
     }
-
+    
     .taskOption:hover {
         width: 100%;
         max-width: 315px;
     }
-
+    
     .popup-header {
         align-items: center;
         max-width: 1002px;
@@ -201,13 +237,13 @@
         justify-content: space-between;
         padding: 64px 40px 32px 74px;
     }
-
+    
     .input-containerPopup {
         display: flex;
         align-items: center;
         gap: 48.12px;
     }
-
+    
     .footerPopup {
         gap: 537.75px;
         width: 100%;
@@ -219,35 +255,35 @@
         display: flex;
         align-items: center;
     }
-
+    
     .input-section-leftPopup {
         width: 340px;
         margin-left: unset;
     }
-
+    
     .input-section-rightPopup {
         width: 340px;
     }
-
+    
     .input-containerPopup {
         justify-content: center;
     }
-
+    
     /* .add-task-popup{
         width: auto;
-    } */
-    .footerPopup {
-        width: auto;
-        gap: 400px;
+        } */
+        .footerPopup {
+            width: auto;
+            gap: 400px;
+        }
+        
+        .inputPopup {
+            width: 295px;
+        }
     }
-
-    .inputPopup {
-        width: 295px;
-    }
-}
-
-@media(max-width: 1060px) {
-    .add-task-popup.show {
+    
+    @media(max-width: 1060px) {
+        .add-task-popup.show {
         max-width: 100vw;
         width: 100%;
         height: 100%;
@@ -260,7 +296,7 @@
         background-color: rgb(0, 0, 0, 0.5);
         transform: unset;
     }
-
+    
     .addTaskPopupMain {
         max-width: 900px;
         margin: auto auto;
@@ -270,7 +306,7 @@
         width: 800px;
         gap: 370px;
     }
-
+    
     .dropTasktypeOpenPopup {
         max-width: 340px;
     }
@@ -280,6 +316,43 @@
     }
 }
 
+/* Dimension: Desktop 1024x768 */
+@media(min-width:1020px) and (max-width:1030px) and (min-height:760px) and (max-height:770px){
+    .popup-header{
+        padding: 44px 40px 32px 74px;
+    }
+
+    .addTaskPopupMain{
+        height:85%;
+        overflow-y: scroll;
+    }
+
+    .input-containerPopup {
+        height:640px;
+    }
+
+    .input-section-leftPopup {
+        height:640px;
+    }
+
+    .input-section-rightPopup{
+        height:640px;
+    }
+
+    .footerPopup{
+        margin:145px 0px 20px 0px;
+        padding:10px 0px;
+        width:100%;
+        max-width:900px;
+        justify-content: center;
+        position:fixed;
+        bottom:38px;
+        background-color: #f8f5f5;
+        /* background-color: red; */
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+    }
+}
 
 @media (max-width: 1000px) {
     .add-task-popup.show {

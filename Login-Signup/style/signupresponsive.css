@@ -147,7 +147,17 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 12px 0;
+    padding: 20px 0;
     background-color: #F6F7F8;
   }
+
+  .signUpLogo {
+  /* padding: 0 20px; */
+  position: absolute;
+  top: 41px;
+  left: 28px;
+  width: 64px;
+  height: 78px;
+  opacity: 1;
+}
 }

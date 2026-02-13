@@ -16,7 +16,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   position: relative;
-  max-width: 1440px;
+  max-width: 1920px;
 }
 
 .content-wrapper {
@@ -41,20 +41,17 @@ body {
 }
 
 /* signUp Logo fo the SignUP Mask */
-.signup-page-logo {
-  padding: 0 20px;
+.signUpLogo {
+  /* padding: 0 20px; */
   position: absolute;
-  top: 56px;
-  left: 56px;
-}
-
-
-
-.page-logo img {
-  width: 115px;
-  height: auto;
+  top: 41px;
+  left: 28px;
+  width: 120px;
+  height: 180px;
   opacity: 1;
 }
+
+
 
 /* =================== Card / Form =================== */
 .signup-card {

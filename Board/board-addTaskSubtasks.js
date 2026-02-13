@@ -57,7 +57,7 @@ function saveBulletpoint(index) {
     if (newValue !== "") {
         const li = document.getElementById(`listed-${index}`);
         li.innerHTML = renderHTMLForSavingBulletPoint(index, newValue);
-        li.setAttribute("onclick", `editBulletpoint(${index})`);
+        // li.setAttribute("onclick", `editBulletpoint(${index})`);
     }
 }
 

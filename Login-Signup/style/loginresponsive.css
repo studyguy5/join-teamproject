@@ -14,7 +14,7 @@
 
     .login-container {
         width: 440px;
-        margin-top: 180px;
+        margin-top: 250px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         border-radius: 20px;
         background-color: white;
@@ -39,7 +39,7 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 560px) {
     body {
         padding: 16px;
         justify-content: flex-start;
@@ -52,7 +52,7 @@
 
     .login-container{
         width: 300px;
-        margin-top: 15px;
+        margin-top: 185px;
         padding: 20px 20px 0px 20px;
     }
 

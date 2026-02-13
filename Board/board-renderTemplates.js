@@ -190,12 +190,12 @@ function renderBigViewHTML(elements, id) {
 
 /**this renders the html of a new Subtask into the Popup Mask */
 function renderHTMLForSubtasks(index, subtask){
- return `<li onclick="editBulletpoint(${index})" id="listed-${index}" class="listed"> 
+ return `<li onclick="editBulletpoint(${index}); event.stopPropagation()" id="listed-${index}" class="listed"> 
                               <span class="dot">•</span><p class="task-text-${index}" id="task-text-${index}">${subtask.value}</p>
                                 <span class="list-icon">
-                                    <img onmousedown="editBulletpoint(${index})" class="pencil" src="/img/icons/pencil-edit.svg">
+                                    <img onclick="editBulletpoint(${index}); event.stopPropagation()" class="pencil" src="/img/icons/pencil-edit.svg">
                                     <img class="delimiter" src="../img/icons/delimiter-vertical.svg">
-                                    <img onmousedown="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
+                                    <img onclick="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
                                 </span>
                             </li>`;
 }
@@ -203,11 +203,11 @@ function renderHTMLForSubtasks(index, subtask){
 /**this renders the edit Mode for any Pullet Point, which the User wants to edit */
 function renderEditModeForBulletPoint(currentText, index){
     return `
-        <input class="edit-input" type="text" id="edit-input-${index}" value="${currentText}">
+        <input onblur="resetOrDeleteBulletSubtask(${index})" class="edit-input" type="text" id="edit-input-${index}" value="${currentText}">
         <span class="list-icon">
-            <img onmousedown="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
+            <img onclick="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
             <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
-            <img onmousedown="saveBulletpoint(${index})" class="hook" src="/img/icons/subtasks-icon.svg">
+            <img onclick="saveBulletpoint(${index})" class="hook" src="/img/icons/subtasks-icon.svg">
         </span>`;
 }
 
@@ -215,9 +215,9 @@ function renderEditModeForBulletPoint(currentText, index){
 function renderHTMLForSavingBulletPoint(index, newValue){
     return `<span class="dot">•</span><p id="task-text-${index}">${newValue}</p>
                         <span class="list-icon">
-                            <img onmousedown="editBulletpoint(${index})" class="pencil" src="/img/icons/pencil-edit.svg">
+                            <img onclick="editBulletpoint(${index})" class="pencil" src="/img/icons/pencil-edit.svg">
                             <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
-                            <img onmousedown="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
+                            <img onclick="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
                         </span>`;
 }
 

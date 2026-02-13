@@ -1,75 +1,22 @@
-
 /* position of the Logo */
-.page-logoLogin {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1.2);
-    animation: slide 1.5s forwards;
-    z-index: 10;
-}
-
-/* size of the Logo */
-.page-logoLogin img {
-    width: 390px;
-    height: auto;
-}
-
-
-
-
-
-@keyframes slide {
-    0% {transform: scale(0.5) translateX(-430px) translateY(-460px);
-        opacity: 1;
-    }
-
-    10% {
-        transform: scale(0.5) translateX(-430px) translateY(-460px);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(0.3) translateX(-2600px) translateY(-2492px);
-        opacity: 1;
-
-    }
-}
-
-
-
-.main-content {
-    opacity: 0;
-    
-}
-
-.main-content.visible {
-    opacity: 1;
-}
-
-
-/* 
-/* position of the Logo */
-/* .page-logoLogin {
+.page-logoLogin, .page-logoLogin img {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: 1500ms ease -12.0077ms 1 normal forwards running slide;
+    animation: slide 1.5s forwards;
     z-index: 10;
+    width: max-content;
 }
 
 /* size of the Logo */
-/* .page-logoLogin img { */
-    /* width: 390px; */
-    /* height: auto; */
-/* } */ 
+.page-logoLogin img {
+    width: 300px;
+    height: auto;
+}
 
 
-
-
-
-/* @keyframes slide {
+@keyframes slide {
     0% {
         width: 300px;
         height: 350px;
@@ -89,12 +36,61 @@
     }
 
     100% {
-        width: 100px;
-        height: 150px;
-        top: 250px;
-        left: 250px;
+        width: 120px;
+        height: 180px;
+        top: 120px;
+        left: 100px;
         transform: translateY(-50%) translateX(-50%);
         opacity: 1;
 
     }
-} *
+}
+
+
+
+    /* @keyframes slide {
+        0% {
+            transform: scale(0.5) translateX(-430px) translateY(-460px);
+            opacity: 1;
+        }
+
+        10% {
+            transform: scale(0.5) translateX(-430px) translateY(-460px);
+            opacity: 1;
+        }
+
+        100% {
+            transform: scale(0.3) translateX(-2600px) translateY(-2492px);
+            opacity: 1;
+
+        }
+    } */
+
+
+
+    .main-content {
+        opacity: 0;
+
+    }
+
+    .main-content.visible {
+        opacity: 1;
+    }
+
+
+    /* 
+/* position of the Logo */
+    /* .page-logoLogin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: 1500ms ease -12.0077ms 1 normal forwards running slide;
+    z-index: 10;
+}
+
+/* size of the Logo */
+    /* .page-logoLogin img { */
+    /* width: 390px; */
+    /* height: auto; */
+    /* } */

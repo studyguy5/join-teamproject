@@ -92,6 +92,10 @@ function renderBigEditView(id) {
     `
 }
 
+/**in order to not affect all onclicks by one click we need a tool to stop the recognition in a specific div */
+function stopBubbling(event) {
+    event.stopPropagation()
+}
 
 /**this renderes all created subtask in  Edit Mode */
 function renderSubtaskEdit(id) {
@@ -100,20 +104,20 @@ function renderSubtaskEdit(id) {
     let currentCount = list.getElementsByClassName("listedEdit").length; //klasse von li element
     index = currentCount;
     if (subtask.value.trim() === "") {
-        list.innerHTML += `<li onclick="editBulletpointEditView(${index}, ${id})" id="listed-${index}" class="listedEdit"> 
+        list.innerHTML += `<li onclick="editBulletpointEditView(${index}, ${id}); event.stopPropagation()" id="listed-${index}" class="listedEdit"> 
         <span class="dot">•</span><p class="task-textEdit-${index}">${subtask.value}</p>
         <span onclick="event.stopPropagation()" class="list-icon">
-                                    <img onmousedown="editBulletpointEditView(${index}, ${id})" class="pencil" src="/img/icons/pencil-edit.svg">
+                                    <img onclick="editBulletpointEditView(${index}, ${id}); event.stopPropagation()" class="pencil" src="/img/icons/pencil-edit.svg">
                                     <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
                                     <img onclick="deleteBulletpointEdit(${index}, ${id})" class="trash" src="/img/icons/trash.svg">
                                     </span>
                                     </li>`;
         subtask.value = "";
     } else if (subtask.value.trim() !== "") {
-        list.innerHTML += `<li onclick="editBulletpointEditView(${index})" id="listed-${index}" class="listedEdit"> 
+        list.innerHTML += `<li onclick="editBulletpointEditView(${index}); event.stopPropagation()" id="listed-${index}" class="listedEdit"> 
         <span class="dot">•</span><p class="task-textEdit-${index}">${subtask.value}</p>
         <span class="list-icon">
-                                    <img onmousedown="editBulletpointEditView(${index}, ${id})" class="pencil" src="/img/icons/pencil-edit.svg">
+                                    <img onclick="editBulletpointEditView(${index}, ${id}); event.stopPropagation()" class="pencil" src="/img/icons/pencil-edit.svg">
                                     <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
                                     <img onclick="deleteBulletpointEdit(${index}, ${id})" class="trash" src="/img/icons/trash.svg">
                                     </span>
@@ -122,26 +126,28 @@ function renderSubtaskEdit(id) {
     }
 }
 
+
 /**this renders the edit Mode of subtasks in the Edit Mode Mask */
 function renderHTMLForEditBullentPoint(index, currentText, id){
+  console.log('same function renders');
   return `
-    <input class="edit-input" type="text" id="edit-input-${index}" value="${currentText[0]}">
-    <span class="list-icon">
-    <img onmousedown="deleteBulletpointEdit(${index}, ${id})" class="trash" src="/img/icons/trash.svg">
-    <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
-    <img onmousedown="saveBulletpointEdit(${index}, ${id})" class="hook" src="/img/icons/subtasks-icon.svg">
-        </span>`;
+  <input onblur="resetOrDeleteBulletSubtaskEdit(${index})" class="edit-input" type="text" id="edit-input-${index}" value="${currentText[0]}">
+  <span class="list-icon">
+  <img onclick="deleteBulletpointEdit(${index}, ${id})" class="trash" src="/img/icons/trash.svg">
+  <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
+  <img onclick="saveBulletpointEdit(${index}, ${id})" class="hook" src="/img/icons/subtasks-icon.svg">
+  </span>`;
 }
 
 /**this renders allready edited Pullet Points in the Edit Mode into saved ones
  * like if you edit a subtask in the Edit Mode and click save
  */
-function renderHTMLForSavingBulletPoint(index, id, newValue){
+function renderHTMLForSavingBulletPointEdit(index, id, newValue){
   return `<span class="dot">•</span><p class="task-textEdit-${index}">${newValue[0]}</p>
         <span class="list-icon">
-        <img onmousedown="clearSubtask()" class="pencil" src="/img/icons/pencil-edit.svg">
+        <img onclick="editBulletpointEditView(${index}, ${id}); event.stopPropagation()" class="pencil" src="/img/icons/pencil-edit.svg">
         <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
-        <img onmousedown="deleteBulletpointEdit(${id}, ${index})" class="trash" src="/img/icons/trash.svg">
+        <img onclick="deleteBulletpointEdit(${id}, ${index})" class="trash" src="/img/icons/trash.svg">
         </span>`;
 }
 
@@ -154,6 +160,7 @@ function renderChoosenContactEdit(compareIndexFilteredEdit) {
     ${contactsArray[compareIndexFilteredEdit]?.firstLetter  + contactsArray[compareIndexFilteredEdit]?.secondFirstLetter
          ? contactsArray[compareIndexFilteredEdit]?.firstLetter + contactsArray[compareIndexFilteredEdit].secondFirstLetter :  '😀'}</div>`;
 }
+
 
 
 

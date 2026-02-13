@@ -78,3 +78,18 @@ function enableEnterForSubtask() {
  * Initializes event listeners when the DOM is fully loaded.
  */
 window.addEventListener("DOMContentLoaded", enableEnterForSubtask);
+
+/**this function checks if the input field is empty or not
+ * if empty, it deletes the task entirely, if not, it save the task as he allready exists
+ */
+function resetOrDeleteBulletSubtask(index){
+    console.log('reset Funktion from addTask')
+    let input = document.getElementById(`edit-input-${index}`)
+    console.log(input);
+    let value = input.value.trim();
+    if(value.length < 1){
+    deleteBulletpoint(index)
+    }else{
+        saveBulletpoint(index)}
+    
+}

@@ -105,7 +105,7 @@ function renderHTMLForSavingBulletPoint(index, newValue){
 /**here we render the edit Mode, when the user wants to edit an subtask */
 function renderEditModeForBulletPoint(currentText, index){
     return `
-        <input class="edit-input" type="text" id="edit-input-${index}" value="${currentText}">
+        <input onblur="resetOrDeleteBulletSubtask(${index})" class="edit-input" type="text" id="edit-input-${index}" value="${currentText}">
         <span class="list-icon">
             <img onmousedown="deleteBulletpoint(${index})" class="trash" src="/img/icons/trash.svg">
             <img class="delimiter" src="/img/icons/delimiter-vertical.svg">
@@ -122,3 +122,5 @@ function renderFilteredChoosenContactNormal(compareIndexFiltered) {
     <div id="contactCircleNormalRender-${compareIndexFiltered}" class="contactCircleNormalRender">${contactsArray[compareIndexFiltered].firstLetter + contactsArray[compareIndexFiltered].secondFirstLetter}</div>
     `
 }
+
+

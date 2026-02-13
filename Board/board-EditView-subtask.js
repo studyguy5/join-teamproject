@@ -26,6 +26,7 @@ function deleteBulletpointEdit(index, id) {
 
 /**sets an allready rendered pulletpoint back into edit mode in order to change him before pushing*/
 function editBulletpointEditView(index, id) {
+    console.log('EditBulletPoint Funciton')
     const li = document.getElementById(`listed-${index}`);
     const textEl = document.querySelectorAll(`.task-textEdit-${index}`);
     const inputEl = document.getElementById(`edit-input-${index}`);
@@ -48,7 +49,23 @@ function saveBulletpointEdit(index, id) {
     input.forEach((e) => newValue.push(e.value.trim()));
     if (newValue !== "") {
         let li = document.getElementById(`listed-${index}`);
-        li.innerHTML = renderHTMLForSavingBulletPoint(index, newValue);
+        li.innerHTML = renderHTMLForSavingBulletPointEdit(index, id, newValue);
         // li.setAttribute("onclick", `editBulletpointEditView(${index})`);
     }
 }
+
+/**this function checks if the input field is empty or not
+ * if empty, it deletes the task entirely, if not, it save the task as he allready exists
+ */
+function resetOrDeleteBulletSubtaskEdit(index){
+    console.log('resetDelete Function')
+    let input = document.getElementById(`edit-input-${index}`)
+    console.log(input);
+    let value = input.value.trim();
+    if(value.length < 1){
+    deleteBulletpoint(index)
+    }else{
+        saveBulletpointEdit(index)}
+    
+}
+

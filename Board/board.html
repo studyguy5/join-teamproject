@@ -75,7 +75,7 @@
                         </div>
                         
                     </div>
-                    <div id="add-task-popup" class="add-task-popup"></div>
+                    <div onclick="popupCloseFunctionPackage(); event.stopPropagation()" id="add-task-popup" class="add-task-popup"></div>
                     
                     <div class="categorys">
                         <div  class="TodoHeadline">
@@ -93,7 +93,7 @@
                             <p>Done</p>
                         </div>
                     </div>
-                    <div class="bigViewOfTask dont-Show" id="bigViewOfTask">
+                    <div onclick="closeBigView()" class="bigViewOfTask dont-Show" id="bigViewOfTask">
                         <div class="bigViewContent" id="bigViewContent"></div>
                     </div>
                     <div class="DragAndDropTaskAria"> 

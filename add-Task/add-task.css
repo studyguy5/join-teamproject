@@ -249,7 +249,6 @@ textarea:focus {
 
 .input-container {
     width: 100%;
-    max-width: 976, 25px;
     display: flex;
     align-items: center;
     gap: 30px;

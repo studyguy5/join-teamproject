@@ -18,7 +18,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     contacts = await getObject(path = '/contacts');
     contactsArray = objectToArray(contacts);
     renderContactList(arraySorting(contactsArray), targetID = 'contactList');
+    checkLoginStatus();
+    blockPropagation();
 });
+
+function checkLoginStatus(){
+    let signUpStatus2 = sessionStorage.getItem('guest')
+    let signUpStatus3 = localStorage.getItem('userFullName')
+    if(!signUpStatus2 || !signUpStatus3){
+        window.location = "/login-signup/index.html";
+    }else {}
+}
 
 
 /**
@@ -43,7 +53,7 @@ function contentCheck(inputField) {
  * @param {string} idsecTrue 
  */
 function sectionCheck(idsecTrue) {
-    document.getElementById(idsecTrue).classList.add('active');
+    document.getElementById(idsecTrue)?.classList.add('active');
 }
 
 
@@ -70,6 +80,13 @@ function getContactsDetails(targetID = '', object, id = '') {
     document.getElementById(targetID).innerHTML = setContactDetails(object, id);
 }
 
+
+function blockPropagation(){
+   let connection =  document.querySelector('.overlay-content')
+    connection.addEventListener('click', (event) => {
+        event.stopPropagation();
+    })
+}
 
 /**
  * Shows Add Contact overlay content.

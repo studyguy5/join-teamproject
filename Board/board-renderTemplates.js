@@ -1,12 +1,12 @@
 /**here we render the Popup to create a new Task */
 function renderHTMLOfPopup() {
   return `
-    <section   class="addTaskPopupMain">
+    <section onclick="event.stopPropagation()"  class="addTaskPopupMain">
     <div onclick="openTasktypeDropDown()" id="hiddenlayer" class="hiddenlayer show" ></div>
     <div onclick="openContactView(); showInput()" id="hiddenlayer2" class="hiddenlayer2 show2" ></div>
         <div class="popup-header">
           <h1>Add Task</h1>
-          <img onclick="closePopup(); closeContactView(); resetTaskType()" src="/img/icons/close-icon.svg" />
+          <img onclick="popupCloseFunctionPackage()" src="/img/icons/close-icon.svg" />
         </div>
 
         <div class="input-containerPopup">
@@ -160,9 +160,9 @@ function renderBigViewHTML(elements, id) {
   let newD = new Date(elements[1]['DueDate']);
   formatedDate = newD.toLocaleDateString('de-DE');
   return `
-  <div class="bigViewHeadlineCloseArea" id="bigViewHeadlineCloseArea">
+  <div  class="bigViewHeadlineCloseArea" id="bigViewHeadlineCloseArea">
   <div class="${taskOption}">${elements[1].taskType}</div>
-  <div class="closeIcon" id="closeIcon"><img onclick="closeBigView()" src="/img/icons/closeFrame.svg" alt="closeButton"></div>
+  <div class="closeIcon" id="closeIcon"><img onclick="closeBigView(); event.stopPropagation()" src="/img/icons/closeFrame.svg" alt="closeButton"></div>
   </div>
   <div class="titleBigView"><h2>${elements[1].title}</h2></div>
   <div class="descriptionBigView"><p>${elements[1].description}</p></div>

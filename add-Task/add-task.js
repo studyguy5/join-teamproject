@@ -42,16 +42,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     const buttons = document.querySelectorAll(".priority-section button");
     let createdArray = Array.from(buttons)
     createdArray[1].classList.add('Medium')
+    checkLoginStatus();
 
     /**
      * Adds the 'active' class to a section by ID.
      * @param {string} idsecTrue - ID of the section to activate.
      */
     function sectionCheck(idsecTrue) {
-        document.getElementById(idsecTrue).classList.add('active')
+        document.getElementById(idsecTrue)?.classList.add('active')
     }
-
 })
+
+function checkLoginStatus(){
+    let signUpStatus2 = sessionStorage.getItem('guest')
+    let signUpStatus3 = localStorage.getItem('userFullName')
+    if(!signUpStatus2 || !signUpStatus3){
+        window.location = "/login-signup/index.html";
+    }else {}
+}
 
 
 /**

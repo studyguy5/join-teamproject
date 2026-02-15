@@ -14,7 +14,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateGreetingAndDate();                 // setzt Greeting + Datum (nur wenn kein Urgent-Datum gefunden)
   /**updates the greeting and date function on certain intervall times to keep it updated */
   setInterval(updateGreetingAndDate, 60 * 1000);
+  checkLoginStatus();
 });
+
+function checkLoginStatus(){
+    let signUpStatus2 = sessionStorage.getItem('guest')
+    let signUpStatus3 = localStorage.getItem('userFullName')
+    if(!signUpStatus2 || !signUpStatus3){
+        window.location = "/login-signup/index.html";
+    }else {}
+}
 
 /**set the current displayed page on active to show visually which page is opened */
 function sectionCheck(idsecTrue) {

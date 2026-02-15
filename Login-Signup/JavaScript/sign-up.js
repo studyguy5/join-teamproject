@@ -6,8 +6,8 @@
  */
 
 import { auth } from './firebase.js';
-import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import { database } from './database.js';
+// import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import database from './database.js';
 
 export {auth, database};
 

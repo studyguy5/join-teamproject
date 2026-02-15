@@ -12,7 +12,17 @@ document.addEventListener('DOMContentLoaded', () => {
     sessionStorage.removeItem("shineTaskId");
     sessionStorage.removeItem("shineStartTime");
   }
+  checkLoginStatus();
 });
+
+//**checks login status and redirects to the right page */
+function checkLoginStatus(){
+    let signUpStatus2 = sessionStorage.getItem('guest')
+    let signUpStatus3 = localStorage.getItem('userFullName')
+    if(!signUpStatus2 || !signUpStatus3){
+        window.location = "/login-signup/index.html";
+    }else {}
+}
 
 /**
  * DomContentLoaded initiates Popup, fills local Array, sort it and renders Contacts
@@ -83,6 +93,10 @@ function addTask() {
     createdArray[1].classList.add('Medium')
 }
 
+/**this resets the Tasktype drop down and closes it */
+function resetTaskType() {
+    resetTasktypeDropDown();
+}
 
 /**close the AddTask Popup */
 function closePopup() {
@@ -96,6 +110,12 @@ function closePopup() {
     let createdArray = Array.from(buttons)
     createdArray[1].classList.remove('Medium')
     clearTask();
+}
+
+function popupCloseFunctionPackage(){
+    closePopup();
+    closeContactView();
+    resetTaskType();
 }
 
 
@@ -203,10 +223,6 @@ function arraySorting(array) {
     return sortedArray
 }
 
-/**this resets the Tasktype drop down and closes it */
-function resetTaskType() {
-    resetTasktypeDropDown();
-}
 
 
 /**here the dropdown Menü for the taskType will be opened */

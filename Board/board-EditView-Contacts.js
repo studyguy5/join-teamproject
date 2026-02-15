@@ -57,7 +57,6 @@ function returnToUnchecked(choContact) {
  */
 function processCurrentContactEdit(id) {
     let combo = normalContactEditModeArray.concat(filteredContactEditModeArray);
-    console.log(combo.length);
     if ((combo.length) > 6) {
         document.getElementById('countInfoEdit').innerHTML = `+ ${(combo.length) - 6}`
     }

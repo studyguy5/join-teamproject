@@ -5,12 +5,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   const mainContent = document.querySelector('.main-content');
-  // const splashScreen = document.querySelector('.splash-screen');
-  // if (isIndexPage()) {
-  //   loadIndexPage(mainContent, splashScreen);
-  // } else {
-  //   showMainContent(mainContent, splashScreen);
-  // }
   localStorage.setItem('signIn', false)
 });
 
@@ -50,7 +44,7 @@ function hideMainElementShortTime(){
   let signUpCorner = document.querySelector('.login-container');
   let mainLoginMask = document.querySelector('.signup-container');
   let overlay = document.querySelector('.logoOverlayResponsiv');
-  overlay.classList.add('animateOpacity');
+  overlay?.classList.add('animateOpacity');
   signUpCorner.style.opacity = "1";
   mainLoginMask.style.opacity = "1";
 }

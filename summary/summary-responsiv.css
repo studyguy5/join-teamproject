@@ -57,6 +57,25 @@
 
 }
 
+@media(max-height:940px){
+    .summary-counter{
+        height:calc(100% - 175px);
+    }
+
+    .box-lower-content{
+        height:125px;
+    }
+
+    .box-upper-left,
+    .box-upper-right{
+        height:135px;
+    }
+
+    /* .leftAria{
+        height:calc(100% - 30px);
+    } */
+}
+
 @media(min-width:1400px) and (max-width:1440px) and (min-height:900px) and (max-height:900px) {
     .summary-header {
         margin: 15px 20px 20px 40px;

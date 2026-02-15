@@ -178,6 +178,9 @@ function bigViewOfTask(id) {
     connectionToTaskBackground.classList.remove('dont-Show')
     connectionToTaskBackground.classList.add('flexClass')
     let connectionToTaskWindow = document.getElementById('bigViewContent')
+    connectionToTaskWindow.addEventListener('click', (event) => {
+        event.stopPropagation();
+    })
     connectionToTaskWindow.innerHTML = renderBigViewHTML(elements, id);
 }
 

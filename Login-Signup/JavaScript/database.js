@@ -3,7 +3,7 @@
  * @module database
  * here we inport data from firebase for authentification and more
 */
-// export { database } ;
+export { database } from './firebase.js'; //wenn ausgeklammert, dann form in sign-up-submitHandler is not defined
 import { auth, db } from './firebase.js';
 import {
   doc,

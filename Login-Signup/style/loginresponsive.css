@@ -7,7 +7,7 @@
 
 @media (max-width: 768px) {
     body {
-        padding: 20px;
+        padding: 0px;
         justify-content: space-between;
         min-height: 100vh;
     }
@@ -41,7 +41,7 @@
 
 @media (max-width: 560px) {
     body {
-        padding: 16px;
+        padding: 0px;
         justify-content: flex-start;
         background-color: #F6F7F8;
         display: flex;

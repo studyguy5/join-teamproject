@@ -83,7 +83,7 @@ window.addEventListener("DOMContentLoaded", enableEnterForSubtask);
  * if empty, it deletes the task entirely, if not, it save the task as he allready exists
  */
 function resetOrDeleteBulletSubtask(index){
-    console.log('reset Funktion from addTask')
+    // console.log('reset Funktion from addTask')
     let input = document.getElementById(`edit-input-${index}`)
     console.log(input);
     let value = input.value.trim();

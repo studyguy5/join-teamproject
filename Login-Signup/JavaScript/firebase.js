@@ -87,4 +87,4 @@ setAuthPersistence(auth);
 const db = createFirestore(app);
 enableFirestorePersistence(db);
 
-export { app, auth, db };
+export  { app, auth, db };

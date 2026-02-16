@@ -208,9 +208,9 @@ form?.addEventListener('submit', async (e) => {
   if (!isFormValid()) return;
   if (!navigator.onLine) return;
   const email = emailInput.value.trim();
-  const password = passwordInput.value;
+  const password = passwordInput.value.trim();
   try {
-    signInandResetError();
+    signInandResetError(email, password);
   } catch (error) {
     catchError();
   }
@@ -218,6 +218,8 @@ form?.addEventListener('submit', async (e) => {
 
 /**if the User clicks sign In, the Errors are reseted and values are saved for successfully login */
 async function signInandResetError(){
+  // const email = emailInput.value;
+  // const password = passwordInput.value;
   const cred = await signInWithEmailAndPassword(auth, email, password);
     let fullName = cred.user?.displayName || '';
     try {

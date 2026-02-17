@@ -209,6 +209,8 @@
 
     .header-fullsize {
         height: 80px;
+        position:relative;
+        z-index: 2;
     }
 
     .joinMobile {

@@ -1,16 +1,12 @@
 /**
  * Registrierungs-Formular für neuen Benutzer, mit Validierung und UI-Fehleranzeige.
  * Erstellt anschließend einen neuen Benutzer über Firebase und speichert die Daten lokal.
- * 
  * @module sign-up
  */
 
 import { auth } from './firebase.js';
 import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 import database from './database.js';
-
-// export {auth, database};
-// export { showGeneralError, clearGeneralErrors };
 
 /** @type {HTMLFormElement|null} */
 const form = document.getElementById('signupForm');
@@ -51,9 +47,6 @@ const networkError = document.getElementById('network-error');
 /** @type {HTMLElement|null} */
 const successMessage = document.getElementById('success-message');
 
-
-// let form = document.getElementById('signupForm');
-
 //**
 // Submit handler validiert die Eingaben im Inputfeld und setzt einen Focus und scrollt an den Eingabeort
 //  */ ========== Submit Handler ==========
@@ -67,7 +60,6 @@ form?.addEventListener('submit', async (e) => {
     showElement(networkError);
     return;}
   disableSignUpButton();
-//**
 // hier ein try/catch für die SingUp Datenverarbeitung - Daten sind Validiert, werden in firebase angelegt und es wird ein User angelegt
 // sollte das nicht funktioneren, fängt das Catch diesen Fehler ab und zeigt dann das Userfeedback, dass die Registrierung
 // fehlgeschlagen ist - weiters wird genau angezeigt, ob Daten bereits in Verwendung sind oder was das Problem ist */
@@ -79,7 +71,6 @@ form?.addEventListener('submit', async (e) => {
 });
 
 
-
 /**
  * Blendet alle generellen Fehlermeldungen aus.
 */
@@ -87,7 +78,6 @@ function clearGeneralErrors() {
   hideElement(generalError);
   hideElement(networkError);
 }
-
 
 
 /**validates all fields from the sign Up Mask */
@@ -115,8 +105,8 @@ function behaviourIfError(){
     }
   }
 }
-// ========== Network Status ==========
 
+// ========== Network Status ==========
 /**
  * Prüft Netzwerkstatus und zeigt ggf. Hinweis an.
  */
@@ -162,7 +152,6 @@ function catchErrorfromSignIn(error){
 }
 
 // ========== Helpers ==========
-
 /**
  * Zeigt ein Element an (macht sichtbar, entfernt hidden und setzt opacity).
  * @param {HTMLElement} element
@@ -190,8 +179,7 @@ function hideElement(element) {
 }
 
 
-/**
- * Markiert ein Eingabefeld als Fehler/valide, setzt aria-invalid entsprechend.
+/*** Markiert ein Eingabefeld als Fehler/valide, setzt aria-invalid entsprechend.
  * @param {HTMLInputElement} input
  * @param {boolean} isError
 */
@@ -202,8 +190,7 @@ function setFieldError(input, isError) {
   input.setAttribute('aria-invalid', isError ? 'true' : 'false');
 }
 
-/**
- * Zeigt eine allgemeine Fehlermeldung an.
+/*** Zeigt eine allgemeine Fehlermeldung an.
  * @param {string} msg
 */
 function showGeneralError(msg) {
@@ -213,12 +200,8 @@ function showGeneralError(msg) {
   }
 }
 
-
-
 // ========== Pure Checks ==========
-
-/**
- * Prüfung ob Name gültig ist (nicht leer).
+/*** Prüfung ob Name gültig ist (nicht leer).
  * @param {string} val
  * @returns {boolean}
 */
@@ -226,8 +209,7 @@ function isNameValid(val) {
   return (val?.trim()?.length ?? 0) >= 5;
 }
 
-/**
- * Prüfung ob Email angegeben ist.
+/** * Prüfung ob Email angegeben ist.
  * @param {string} val
  * @returns {boolean}
 */
@@ -235,8 +217,7 @@ function isEmailProvided(val) {
   return (val?.trim()?.length ?? 0) > 10;
 }
 
-/**
- * Prüfung ob Email-Format gültig ist.
+/*** Prüfung ob Email-Format gültig ist.
  * @param {string} val
  * @returns {boolean}
 */
@@ -244,8 +225,7 @@ function isEmailFormatOk(val) {
   return /^[^\s@]+@[^\s@]+$/.test(val?.trim() || '');
 }
 
-/**
- * Mindestlänge eines Strings prüfen.
+/*** Mindestlänge eines Strings prüfen.
  * @param {string} val
  * @param {number} [min=6]
  * @returns {boolean}
@@ -254,8 +234,7 @@ function hasMinLen(val, min = 6) {
   return (val?.length ?? 0) >= min;
 }
 
-/**
- * Prüft, ob Zeichen im Passwort enthalten sind.
+/*** Prüft, ob Zeichen im Passwort enthalten sind.
  * @param {string} val
  * @returns {boolean}
 */
@@ -263,8 +242,7 @@ function hasLetters(val) {
   return /[A-Za-z]/.test(val || '');
 }
 
-/**
- * Prüft, ob Zahlen im Passwort enthalten sind.
+/*** Prüft, ob Zahlen im Passwort enthalten sind.
  * @param {string} val
  * @returns {boolean}
 */
@@ -272,8 +250,7 @@ function hasNumbers(val) {
   return /\d/.test(val || '');
 }
 
-/**
- * Prüft, ob das Passwort stark genug ist.
+/*** Prüft, ob das Passwort stark genug ist.
  * @param {string} val
  * @returns {boolean}
  */
@@ -281,8 +258,7 @@ function isPasswordStrong(val) {
   return hasMinLen(val, 6) && hasLetters(val) && hasNumbers(val);
 }
 
-/**
- * Bestätigungsfeld muss ausgefüllt sein.
+/*** Bestätigungsfeld muss ausgefüllt sein.
  * @param {string} val
  * @returns {boolean}
 */
@@ -291,9 +267,7 @@ function isConfirmProvided(val) {
 }
 
 // ========== Validations ==========
-
-/**
- * Validiert das Name-Feld und zeigt ggf. Fehlermeldung.
+/*** Validiert das Name-Feld und zeigt ggf. Fehlermeldung.
  * @returns {boolean}
 */
 function validateName() {
@@ -304,8 +278,7 @@ function validateName() {
   return ok;
 }
 
-/**
- * Validiert das Email-Feld und zeigt ggf. Fehlermeldung/Format-Fehler.
+/*** Validiert das Email-Feld und zeigt ggf. Fehlermeldung/Format-Fehler.
  * @returns {boolean}
 */
 function validateEmail() {
@@ -322,8 +295,7 @@ function validateEmail() {
   return ok;
 }
 
-/**
- * Validiert das Passwortfeld und zeigt ggf. Fehlermeldungen zu Länge/Stärke.
+/*** Validiert das Passwortfeld und zeigt ggf. Fehlermeldungen zu Länge/Stärke.
  * @returns {boolean}
 */
 function validatePassword() {
@@ -370,9 +342,7 @@ function validationFunctionSet4(){
 }
 
 
-
-/**
- * Validiert das Bestätigungsfeld für das Passwort.
+/** * Validiert das Bestätigungsfeld für das Passwort.
  * @returns {boolean}
  */
 function validateConfirm() {
@@ -393,8 +363,7 @@ function validateConfirm() {
   } setFieldError(confirmInput, !ok);
   return ok;}
 
-/**
- * Validiert die Checkbox für Datenschutz.
+/*** Validiert die Checkbox für Datenschutz.
  * @returns {boolean}
  */
 function validatePrivacy() {
@@ -404,9 +373,7 @@ function validatePrivacy() {
 }
 
 // ========== Step Access (Silent) ==========
-
-/**
- * Erlaubt/verbietet die nächsten Schritte je nach Formstatus.
+/*** Erlaubt/verbietet die nächsten Schritte je nach Formstatus.
  */
 function updateStepAccessSilent() {
   const nameValid = isNameValid(nameInput.value);
@@ -420,10 +387,8 @@ function updateStepAccessSilent() {
   signupButton.disabled = !(allInputsValid && privacyCheckbox.checked);
 }
 
-
 //**========== Events ==========
 // Ist für die Logik in der SignUp Maske zuständig */ 
-
 nameInput?.addEventListener('input', () => {
   hideElement(nameErr);
   setFieldError(nameInput, false);
@@ -477,16 +442,12 @@ privacyCheckbox?.addEventListener('change', () => {
   updateStepAccessSilent();
 });
 
-
-
 window.addEventListener('online', updateNetworkStatus);
 window.addEventListener('offline', updateNetworkStatus);
 updateNetworkStatus();
 
-
 //**========== Initial Button States ==========
 // setzt die Input Felder Standardmäßig auf disabled */ 
-
 emailInput.disabled = true;
 passwordInput.disabled = true;
 confirmInput.disabled = true;

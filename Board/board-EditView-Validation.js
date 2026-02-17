@@ -12,6 +12,7 @@ function constantCheckTitleEdit() {
             document.getElementById('task-descriptionEdit').disabled = true, false;
     document.getElementById("UserFeedbackTitleEditMode").innerHTML = "";
     document.getElementById('task-descriptionEdit').disabled = false;
+    return true;
 }
 
 /**here it sets a minimum for the date, it must be in the future */
@@ -28,16 +29,16 @@ function constantCheckDateEdit() {
         const dateField = document.getElementById("UserFeedbackDateEditMode");
         dateField.innerHTML = `Date is in the past`;}
     else if (!validateDateEdit(dueDateEdit)) {
-        return showUserFeedbackDueDateEdit();
+        return showUserFeedbackDueDateEdit(), false;
     } else if (validateDateEdit(dueDateEdit)) {
         document.getElementById('creatButtonIDEdit').disabled = false;
         clearUserFeedback = document.getElementById("UserFeedbackDateEditMode");
-        clearUserFeedback.innerHTML = '';}
+        clearUserFeedback.innerHTML = ''; return true;}
 }
 
 /**this is the actual validation with regex = regular expression who checks the chars */
 function validateTitleEdit(title) {
-    const titleRegex = /^[A-Za-zÄÖÜäöüß\s1-9]+$/;
+    const titleRegex = /^[A-Za-zÄÖÜäöüß\s1-9.-]+$/;
     return titleRegex.test(title.trim());
 }
 

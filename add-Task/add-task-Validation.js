@@ -98,7 +98,7 @@ function constantCheckDate() {
 
 /**this checks letters from A to Z, from a to z, special vocals whitespaces and numbers in the title */
 function validateTitleAddTaskNormal(title) {
-    const titleRegex = /^[A-Za-zÄÖÜäöüß\s1-9]+$/;
+    const titleRegex = /^[A-Za-zÄÖÜäöüß\s1-9.-]+$/;
     return titleRegex.test(title.trim());
 }
 

@@ -44,7 +44,7 @@ function constantCheckDatePopup() {
 
 /**this validates the title in the Popup Mask */
 function validateTitleAddTaskPopup(title) {
-    const titleRegex = /^[A-Za-zÄÖÜäöüß\s1-9]+$/;
+    const titleRegex = /^[A-Za-zÄÖÜäöüß\s1-9.-]+$/;
     return titleRegex.test(title.trim());
 }
 

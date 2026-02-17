@@ -110,12 +110,19 @@ function createTaskTemplateEdit(id) {
         document.getElementById("UserFeedbackTitleEditMode").innerHTML = `This Field is required`;
     } else if (dueDate === '') {
         document.getElementById("UserFeedbackDateEditMode").innerHTML = `This Field is required`;
+    } else if(!checkInputs()){
+        return false;
     } else {
         showReportAddedTaskTemplateEdit();
         getTaskInformationEdit(id);
     }
 }
 
+function checkInputs(){
+    if(constantCheckTitleEdit() && constantCheckDateEdit()){
+        return true;
+    };
+}
 
 
 /**this is the success notification for the User if he/she has edited a Task successfully */

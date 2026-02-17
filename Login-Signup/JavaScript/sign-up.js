@@ -80,6 +80,13 @@ form?.addEventListener('submit', async (e) => {
 
 
 
+/**
+ * Blendet alle generellen Fehlermeldungen aus.
+*/
+function clearGeneralErrors() {
+  hideElement(generalError);
+  hideElement(networkError);
+}
 
 
 
@@ -108,18 +115,32 @@ function behaviourIfError(){
     }
   }
 }
+// ========== Network Status ==========
+
+/**
+ * Prüft Netzwerkstatus und zeigt ggf. Hinweis an.
+ */
+function updateNetworkStatus() {
+  if (!navigator.onLine) {
+    showElement(networkError);
+  } else {
+    hideElement(networkError);
+  }
+}
 
 /**disables the sign Up button if needed */
 function disableSignUpButton(){
   signupButton.disabled = true;
   const name = nameInput.value.trim();
   const email = emailInput.value.trim();
-  const password = passwordInput.value;
+  const password = passwordInput.value.trim();
   return {name, email, password};
 }
 
+const { name, email, password } = disableSignUpButton();
 /**here we create a new User with the data filled in from the Sign Up Mask */
 async function createUserWithGivenData(){
+  const { name, email, password } = disableSignUpButton();
   // const email = emailInput.value; //übernommen aus dem Feedback
   // const password = passwordInput.value; //übernommen aus dem Feedback
   const cred = await createUserWithEmailAndPassword(auth, email, password);
@@ -192,13 +213,6 @@ function showGeneralError(msg) {
   }
 }
 
-/**
- * Blendet alle generellen Fehlermeldungen aus.
-*/
-function clearGeneralErrors() {
-  hideElement(generalError);
-  hideElement(networkError);
-}
 
 
 // ========== Pure Checks ==========
@@ -464,18 +478,6 @@ privacyCheckbox?.addEventListener('change', () => {
 });
 
 
-// ========== Network Status ==========
-
-/**
- * Prüft Netzwerkstatus und zeigt ggf. Hinweis an.
- */
-function updateNetworkStatus() {
-  if (!navigator.onLine) {
-    showElement(networkError);
-  } else {
-    hideElement(networkError);
-  }
-}
 
 window.addEventListener('online', updateNetworkStatus);
 window.addEventListener('offline', updateNetworkStatus);

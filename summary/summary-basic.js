@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 function checkLoginStatus(){
     let signUpStatus2 = sessionStorage.getItem('guest')
     let signUpStatus3 = localStorage.getItem('userFullName')
-    if(!signUpStatus2 || !signUpStatus3){
+    if(!signUpStatus2 && !signUpStatus3){
         window.location = "/login-signup/index.html";
     }else {}
 }

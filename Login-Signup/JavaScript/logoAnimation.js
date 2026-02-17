@@ -32,7 +32,7 @@ function isInternalNavigation() {
 setTimeout(() => {
   hideMainElementShortTime();
   hideOverlay();
-}, 450);
+}, 300);
 
 
 function hideOverlay(){

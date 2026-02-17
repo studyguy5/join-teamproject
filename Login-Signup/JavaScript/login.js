@@ -160,14 +160,6 @@ function getRedirectUrl(defaultTarget = '../summary/summary.html') {
   }
 }
 
-/**
- * Speichert den Namen für die Summary-Anzeige.
- * @param {string} nameLike
- */
-function storeSummaryName(nameLike) {
-  const cleaned = (nameLike || '').toString().trim();
-  if (cleaned) localStorage.setItem('userFullName', cleaned);
-}
 
 // EVENTS
 
@@ -210,24 +202,41 @@ form?.addEventListener('submit', async (e) => {
   const email = emailInput.value.trim();
   const password = passwordInput.value.trim();
   try {
-    signInandResetError(email, password);
+    signInandResetError(auth, email, password);
   } catch (error) {
     catchError();
   }
 });
 
+/**
+ * Speichert den Namen für die Summary-Anzeige.
+ * @param {string} nameLike
+ */
+function storeSummaryName(fullName, final) {
+  const cleaned = (`${fullName}` || `${final}` || '').toString().trim();
+  if (cleaned) localStorage.setItem('userFullName', cleaned);
+}
+
+
 /**if the User clicks sign In, the Errors are reseted and values are saved for successfully login */
-async function signInandResetError(){
+async function signInandResetError(auth, email, password){
   // const email = emailInput.value;
   // const password = passwordInput.value;
+  let final;
   const cred = await signInWithEmailAndPassword(auth, email, password);
     let fullName = cred.user?.displayName || '';
     try {
       const profile = await database.getUser(email);
       if (profile?.name) fullName = profile.name;
     } catch {}
-    if (!fullName) fullName = email.split('@')[0];
-    storeSummaryName(fullName);
+    if (!fullName){ let NameFromEmail = email.split('@')[0];
+      let finalName = NameFromEmail.split('.')
+      
+      let FirstName = finalName[0].charAt(0).toUpperCase() + finalName[0].slice(1);
+      let LastName = finalName[1].charAt(0).toUpperCase() + finalName[1].slice(1);
+      final = `${FirstName} ${LastName}`;
+    }else{fullName}
+    storeSummaryName(fullName, final);
     hideElement(generalError);
     setFieldError(emailInput, false);
     setFieldError(passwordInput, false);
